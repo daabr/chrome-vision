@@ -14,7 +14,10 @@ This approach is similar to other products such as:
 The first two are more popular, but only the last one offers integration with
 [Go](https://golang.org) without heavy non-Go dependencies.
 
-This is an experimental project, aiming to minimize dependencies and simplify
-the API even more than ChromeDP, but even more importantly: add support for the
-[WebDriver API specification](https://www.w3.org/TR/webdriver), and integration
-with Computer Vision (CV) and Optical Character Recognition (OCR) capabilities.
+This is an experimental project, aiming to:
+
+* Learn more about the Chrome DevTools Protocol
+* Simplify the low-level API even more than ChromeDP?
+* Support the [WebDriver API specification](https://www.w3.org/TR/webdriver)
+  as a higher-level API layer
+* Add Computer Vision (CV) and Optical Character Recognition (OCR) capabilities
