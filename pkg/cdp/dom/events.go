@@ -1,0 +1,151 @@
+package dom
+
+// Fired when `Element`'s attribute is modified.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-attributeModified
+type AttributeModified struct {
+	// Id of the node that has changed.
+	NodeID NodeID `json:"nodeId"`
+	// Attribute name.
+	Name string `json:"name"`
+	// Attribute value.
+	Value string `json:"value"`
+}
+
+// Fired when `Element`'s attribute is removed.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-attributeRemoved
+type AttributeRemoved struct {
+	// Id of the node that has changed.
+	NodeID NodeID `json:"nodeId"`
+	// A ttribute name.
+	Name string `json:"name"`
+}
+
+// Mirrors `DOMCharacterDataModified` event.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-characterDataModified
+type CharacterDataModified struct {
+	// Id of the node that has changed.
+	NodeID NodeID `json:"nodeId"`
+	// New text value.
+	CharacterData string `json:"characterData"`
+}
+
+// Fired when `Container`'s child node count has changed.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-childNodeCountUpdated
+type ChildNodeCountUpdated struct {
+	// Id of the node that has changed.
+	NodeID NodeID `json:"nodeId"`
+	// New node count.
+	ChildNodeCount int64 `json:"childNodeCount"`
+}
+
+// Mirrors `DOMNodeInserted` event.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-childNodeInserted
+type ChildNodeInserted struct {
+	// Id of the node that has changed.
+	ParentNodeID NodeID `json:"parentNodeId"`
+	// If of the previous siblint.
+	PreviousNodeID NodeID `json:"previousNodeId"`
+	// Inserted node data.
+	Node Node `json:"node"`
+}
+
+// Mirrors `DOMNodeRemoved` event.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-childNodeRemoved
+type ChildNodeRemoved struct {
+	// Parent id.
+	ParentNodeID NodeID `json:"parentNodeId"`
+	// Id of the node that has been removed.
+	NodeID NodeID `json:"nodeId"`
+}
+
+// Called when distrubution is changed.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-distributedNodesUpdated
+//
+// This CDP event is experimental.
+type DistributedNodesUpdated struct {
+	// Insertion point where distrubuted nodes were updated.
+	InsertionPointID NodeID `json:"insertionPointId"`
+	// Distributed nodes for given insertion point.
+	DistributedNodes []BackendNode `json:"distributedNodes"`
+}
+
+// Fired when `Document` has been totally updated. Node ids are no longer valid.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-documentUpdated
+type DocumentUpdated struct{}
+
+// Fired when `Element`'s inline style is modified via a CSS property modification.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-inlineStyleInvalidated
+//
+// This CDP event is experimental.
+type InlineStyleInvalidated struct {
+	// Ids of the nodes for which the inline styles have been invalidated.
+	NodeIds []NodeID `json:"nodeIds"`
+}
+
+// Called when a pseudo element is added to an element.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-pseudoElementAdded
+//
+// This CDP event is experimental.
+type PseudoElementAdded struct {
+	// Pseudo element's parent element id.
+	ParentID NodeID `json:"parentId"`
+	// The added pseudo element.
+	PseudoElement Node `json:"pseudoElement"`
+}
+
+// Called when a pseudo element is removed from an element.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-pseudoElementRemoved
+//
+// This CDP event is experimental.
+type PseudoElementRemoved struct {
+	// Pseudo element's parent element id.
+	ParentID NodeID `json:"parentId"`
+	// The removed pseudo element id.
+	PseudoElementID NodeID `json:"pseudoElementId"`
+}
+
+// Fired when backend wants to provide client with the missing DOM structure. This happens upon
+// most of the calls requesting node ids.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-setChildNodes
+type SetChildNodes struct {
+	// Parent node id to populate with children.
+	ParentID NodeID `json:"parentId"`
+	// Child nodes array.
+	Nodes []Node `json:"nodes"`
+}
+
+// Called when shadow root is popped from the element.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-shadowRootPopped
+//
+// This CDP event is experimental.
+type ShadowRootPopped struct {
+	// Host element id.
+	HostID NodeID `json:"hostId"`
+	// Shadow root id.
+	RootID NodeID `json:"rootId"`
+}
+
+// Called when shadow root is pushed into the element.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-shadowRootPushed
+//
+// This CDP event is experimental.
+type ShadowRootPushed struct {
+	// Host element id.
+	HostID NodeID `json:"hostId"`
+	// Shadow root.
+	Root Node `json:"root"`
+}
