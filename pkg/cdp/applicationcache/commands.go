@@ -16,7 +16,7 @@ import (
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#method-enable
@@ -43,7 +43,7 @@ type GetApplicationCacheForFrame struct {
 }
 
 // NewGetApplicationCacheForFrame constructs a new GetApplicationCacheForFrame struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#method-getApplicationCacheForFrame
@@ -77,7 +77,7 @@ func (t *GetApplicationCacheForFrame) Do(ctx context.Context) (*GetApplicationCa
 type GetFramesWithManifests struct{}
 
 // NewGetFramesWithManifests constructs a new GetFramesWithManifests struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#method-getFramesWithManifests
@@ -112,7 +112,7 @@ type GetManifestForFrame struct {
 }
 
 // NewGetManifestForFrame constructs a new GetManifestForFrame struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#method-getManifestForFrame

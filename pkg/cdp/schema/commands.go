@@ -14,7 +14,7 @@ import (
 type GetDomains struct{}
 
 // NewGetDomains constructs a new GetDomains struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Schema/#method-getDomains

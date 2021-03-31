@@ -14,7 +14,7 @@ import (
 type ClearDeviceOrientationOverride struct{}
 
 // NewClearDeviceOrientationOverride constructs a new ClearDeviceOrientationOverride struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DeviceOrientation/#method-clearDeviceOrientationOverride
@@ -45,7 +45,7 @@ type SetDeviceOrientationOverride struct {
 }
 
 // NewSetDeviceOrientationOverride constructs a new SetDeviceOrientationOverride struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DeviceOrientation/#method-setDeviceOrientationOverride

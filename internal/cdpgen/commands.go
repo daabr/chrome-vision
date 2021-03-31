@@ -35,7 +35,7 @@ func generateCommands(d Domain) string {
 
 		// Constructor function.
 		fmt.Fprintf(b, "\n// New%s constructs a new %s struct instance, with\n", cmd, cmd)
-		fmt.Fprintln(b, "// all the required parameters, and only them. Optional parameters")
+		fmt.Fprintln(b, "// all (but only) the required parameters. Optional parameters")
 		fmt.Fprintln(b, "// may be added using the builder-like methods below.")
 		fmt.Fprintf(b, "//\n// %s/%s/#method-%s\n", cdpURL, d.Domain, c.Name)
 		if c.Deprecated || c.Experimental || c.Redirect != nil {
@@ -67,6 +67,8 @@ func generateCommands(d Domain) string {
 				fmt.Fprint(b, ", ")
 			}
 		}
+
+		// Constructor method body.
 		fmt.Fprintf(b, ") *%s {\n", cmd)
 		fmt.Fprintf(b, "\treturn &%s{", cmd)
 		if len(required) > 0 {

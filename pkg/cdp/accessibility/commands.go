@@ -17,7 +17,7 @@ import (
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#method-disable
@@ -42,7 +42,7 @@ func (t *Disable) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#method-enable
@@ -77,7 +77,7 @@ type GetPartialAXTree struct {
 }
 
 // NewGetPartialAXTree constructs a new GetPartialAXTree struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#method-getPartialAXTree
@@ -153,7 +153,7 @@ type GetFullAXTree struct {
 }
 
 // NewGetFullAXTree constructs a new GetFullAXTree struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#method-getFullAXTree
@@ -200,7 +200,7 @@ type GetChildAXNodes struct {
 }
 
 // NewGetChildAXNodes constructs a new GetChildAXNodes struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#method-getChildAXNodes
@@ -251,7 +251,7 @@ type QueryAXTree struct {
 }
 
 // NewQueryAXTree constructs a new QueryAXTree struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#method-queryAXTree

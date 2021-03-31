@@ -19,7 +19,7 @@ type Close struct {
 }
 
 // NewClose constructs a new Close struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IO/#method-close
@@ -53,7 +53,7 @@ type Read struct {
 }
 
 // NewRead constructs a new Read struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IO/#method-read
@@ -112,7 +112,7 @@ type ResolveBlob struct {
 }
 
 // NewResolveBlob constructs a new ResolveBlob struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IO/#method-resolveBlob

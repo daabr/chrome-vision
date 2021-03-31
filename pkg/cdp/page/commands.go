@@ -25,7 +25,7 @@ type AddScriptToEvaluateOnLoad struct {
 }
 
 // NewAddScriptToEvaluateOnLoad constructs a new AddScriptToEvaluateOnLoad struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-addScriptToEvaluateOnLoad
@@ -69,7 +69,7 @@ type AddScriptToEvaluateOnNewDocument struct {
 }
 
 // NewAddScriptToEvaluateOnNewDocument constructs a new AddScriptToEvaluateOnNewDocument struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-addScriptToEvaluateOnNewDocument
@@ -115,7 +115,7 @@ func (t *AddScriptToEvaluateOnNewDocument) Do(ctx context.Context) (*AddScriptTo
 type BringToFront struct{}
 
 // NewBringToFront constructs a new BringToFront struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-bringToFront
@@ -154,7 +154,7 @@ type CaptureScreenshot struct {
 }
 
 // NewCaptureScreenshot constructs a new CaptureScreenshot struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-captureScreenshot
@@ -240,7 +240,7 @@ type CaptureSnapshot struct {
 }
 
 // NewCaptureSnapshot constructs a new CaptureSnapshot struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-captureSnapshot
@@ -290,7 +290,7 @@ type CreateIsolatedWorld struct {
 }
 
 // NewCreateIsolatedWorld constructs a new CreateIsolatedWorld struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-createIsolatedWorld
@@ -342,7 +342,7 @@ func (t *CreateIsolatedWorld) Do(ctx context.Context) (*CreateIsolatedWorldRespo
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-disable
@@ -366,7 +366,7 @@ func (t *Disable) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-enable
@@ -388,7 +388,7 @@ func (t *Enable) Do(ctx context.Context) error {
 type GetAppManifest struct{}
 
 // NewGetAppManifest constructs a new GetAppManifest struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getAppManifest
@@ -426,7 +426,7 @@ func (t *GetAppManifest) Do(ctx context.Context) (*GetAppManifestResponse, error
 type GetInstallabilityErrors struct{}
 
 // NewGetInstallabilityErrors constructs a new GetInstallabilityErrors struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getInstallabilityErrors
@@ -458,7 +458,7 @@ func (t *GetInstallabilityErrors) Do(ctx context.Context) (*GetInstallabilityErr
 type GetManifestIcons struct{}
 
 // NewGetManifestIcons constructs a new GetManifestIcons struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getManifestIcons
@@ -490,7 +490,7 @@ func (t *GetManifestIcons) Do(ctx context.Context) (*GetManifestIconsResponse, e
 type GetFrameTree struct{}
 
 // NewGetFrameTree constructs a new GetFrameTree struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getFrameTree
@@ -521,7 +521,7 @@ func (t *GetFrameTree) Do(ctx context.Context) (*GetFrameTreeResponse, error) {
 type GetLayoutMetrics struct{}
 
 // NewGetLayoutMetrics constructs a new GetLayoutMetrics struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getLayoutMetrics
@@ -568,7 +568,7 @@ func (t *GetLayoutMetrics) Do(ctx context.Context) (*GetLayoutMetricsResponse, e
 type GetNavigationHistory struct{}
 
 // NewGetNavigationHistory constructs a new GetNavigationHistory struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getNavigationHistory
@@ -601,7 +601,7 @@ func (t *GetNavigationHistory) Do(ctx context.Context) (*GetNavigationHistoryRes
 type ResetNavigationHistory struct{}
 
 // NewResetNavigationHistory constructs a new ResetNavigationHistory struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-resetNavigationHistory
@@ -632,7 +632,7 @@ type GetResourceContent struct {
 }
 
 // NewGetResourceContent constructs a new GetResourceContent struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getResourceContent
@@ -672,7 +672,7 @@ func (t *GetResourceContent) Do(ctx context.Context) (*GetResourceContentRespons
 type GetResourceTree struct{}
 
 // NewGetResourceTree constructs a new GetResourceTree struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getResourceTree
@@ -711,7 +711,7 @@ type HandleJavaScriptDialog struct {
 }
 
 // NewHandleJavaScriptDialog constructs a new HandleJavaScriptDialog struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-handleJavaScriptDialog
@@ -760,7 +760,7 @@ type Navigate struct {
 }
 
 // NewNavigate constructs a new Navigate struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-navigate
@@ -838,7 +838,7 @@ type NavigateToHistoryEntry struct {
 }
 
 // NewNavigateToHistoryEntry constructs a new NavigateToHistoryEntry struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-navigateToHistoryEntry
@@ -910,7 +910,7 @@ type PrintToPDF struct {
 }
 
 // NewPrintToPDF constructs a new PrintToPDF struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-printToPDF
@@ -1108,7 +1108,7 @@ type Reload struct {
 }
 
 // NewReload constructs a new Reload struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-reload
@@ -1156,7 +1156,7 @@ type RemoveScriptToEvaluateOnLoad struct {
 }
 
 // NewRemoveScriptToEvaluateOnLoad constructs a new RemoveScriptToEvaluateOnLoad struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-removeScriptToEvaluateOnLoad
@@ -1187,7 +1187,7 @@ type RemoveScriptToEvaluateOnNewDocument struct {
 }
 
 // NewRemoveScriptToEvaluateOnNewDocument constructs a new RemoveScriptToEvaluateOnNewDocument struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-removeScriptToEvaluateOnNewDocument
@@ -1218,7 +1218,7 @@ type ScreencastFrameAck struct {
 }
 
 // NewScreencastFrameAck constructs a new ScreencastFrameAck struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-screencastFrameAck
@@ -1259,7 +1259,7 @@ type SearchInResource struct {
 }
 
 // NewSearchInResource constructs a new SearchInResource struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-searchInResource
@@ -1319,7 +1319,7 @@ type SetAdBlockingEnabled struct {
 }
 
 // NewSetAdBlockingEnabled constructs a new SetAdBlockingEnabled struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setAdBlockingEnabled
@@ -1352,7 +1352,7 @@ type SetBypassCSP struct {
 }
 
 // NewSetBypassCSP constructs a new SetBypassCSP struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setBypassCSP
@@ -1384,7 +1384,7 @@ type GetPermissionsPolicyState struct {
 }
 
 // NewGetPermissionsPolicyState constructs a new GetPermissionsPolicyState struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getPermissionsPolicyState
@@ -1423,7 +1423,7 @@ type SetFontFamilies struct {
 }
 
 // NewSetFontFamilies constructs a new SetFontFamilies struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setFontFamilies
@@ -1456,7 +1456,7 @@ type SetFontSizes struct {
 }
 
 // NewSetFontSizes constructs a new SetFontSizes struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setFontSizes
@@ -1489,7 +1489,7 @@ type SetDocumentContent struct {
 }
 
 // NewSetDocumentContent constructs a new SetDocumentContent struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setDocumentContent
@@ -1525,7 +1525,7 @@ type SetDownloadBehavior struct {
 }
 
 // NewSetDownloadBehavior constructs a new SetDownloadBehavior struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setDownloadBehavior
@@ -1568,7 +1568,7 @@ type SetLifecycleEventsEnabled struct {
 }
 
 // NewSetLifecycleEventsEnabled constructs a new SetLifecycleEventsEnabled struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setLifecycleEventsEnabled
@@ -1609,7 +1609,7 @@ type StartScreencast struct {
 }
 
 // NewStartScreencast constructs a new StartScreencast struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-startScreencast
@@ -1680,7 +1680,7 @@ func (t *StartScreencast) Do(ctx context.Context) error {
 type StopLoading struct{}
 
 // NewStopLoading constructs a new StopLoading struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-stopLoading
@@ -1706,7 +1706,7 @@ func (t *StopLoading) Do(ctx context.Context) error {
 type Crash struct{}
 
 // NewCrash constructs a new Crash struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-crash
@@ -1734,7 +1734,7 @@ func (t *Crash) Do(ctx context.Context) error {
 type Close struct{}
 
 // NewClose constructs a new Close struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-close
@@ -1767,7 +1767,7 @@ type SetWebLifecycleState struct {
 }
 
 // NewSetWebLifecycleState constructs a new SetWebLifecycleState struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setWebLifecycleState
@@ -1797,7 +1797,7 @@ func (t *SetWebLifecycleState) Do(ctx context.Context) error {
 type StopScreencast struct{}
 
 // NewStopScreencast constructs a new StopScreencast struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-stopScreencast
@@ -1828,7 +1828,7 @@ type SetProduceCompilationCache struct {
 }
 
 // NewSetProduceCompilationCache constructs a new SetProduceCompilationCache struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setProduceCompilationCache
@@ -1868,7 +1868,7 @@ type ProduceCompilationCache struct {
 }
 
 // NewProduceCompilationCache constructs a new ProduceCompilationCache struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-produceCompilationCache
@@ -1903,7 +1903,7 @@ type AddCompilationCache struct {
 }
 
 // NewAddCompilationCache constructs a new AddCompilationCache struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-addCompilationCache
@@ -1934,7 +1934,7 @@ func (t *AddCompilationCache) Do(ctx context.Context) error {
 type ClearCompilationCache struct{}
 
 // NewClearCompilationCache constructs a new ClearCompilationCache struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-clearCompilationCache
@@ -1967,7 +1967,7 @@ type GenerateTestReport struct {
 }
 
 // NewGenerateTestReport constructs a new GenerateTestReport struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-generateTestReport
@@ -2006,7 +2006,7 @@ func (t *GenerateTestReport) Do(ctx context.Context) error {
 type WaitForDebugger struct{}
 
 // NewWaitForDebugger constructs a new WaitForDebugger struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-waitForDebugger
@@ -2038,7 +2038,7 @@ type SetInterceptFileChooserDialog struct {
 }
 
 // NewSetInterceptFileChooserDialog constructs a new SetInterceptFileChooserDialog struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setInterceptFileChooserDialog

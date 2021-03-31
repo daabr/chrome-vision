@@ -20,7 +20,7 @@ type ContinueToLocation struct {
 }
 
 // NewContinueToLocation constructs a new ContinueToLocation struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-continueToLocation
@@ -53,7 +53,7 @@ func (t *ContinueToLocation) Do(ctx context.Context) error {
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-disable
@@ -84,7 +84,7 @@ type Enable struct {
 }
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-enable
@@ -155,7 +155,7 @@ type EvaluateOnCallFrame struct {
 }
 
 // NewEvaluateOnCallFrame constructs a new EvaluateOnCallFrame struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-evaluateOnCallFrame
@@ -270,7 +270,7 @@ type GetPossibleBreakpoints struct {
 }
 
 // NewGetPossibleBreakpoints constructs a new GetPossibleBreakpoints struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-getPossibleBreakpoints
@@ -325,7 +325,7 @@ type GetScriptSource struct {
 }
 
 // NewGetScriptSource constructs a new GetScriptSource struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-getScriptSource
@@ -365,7 +365,7 @@ type GetWasmBytecode struct {
 }
 
 // NewGetWasmBytecode constructs a new GetWasmBytecode struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-getWasmBytecode
@@ -404,7 +404,7 @@ type GetStackTrace struct {
 }
 
 // NewGetStackTrace constructs a new GetStackTrace struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-getStackTrace
@@ -438,7 +438,7 @@ func (t *GetStackTrace) Do(ctx context.Context) (*GetStackTraceResponse, error) 
 type Pause struct{}
 
 // NewPause constructs a new Pause struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-pause
@@ -466,7 +466,7 @@ type PauseOnAsyncCall struct {
 }
 
 // NewPauseOnAsyncCall constructs a new PauseOnAsyncCall struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-pauseOnAsyncCall
@@ -497,7 +497,7 @@ type RemoveBreakpoint struct {
 }
 
 // NewRemoveBreakpoint constructs a new RemoveBreakpoint struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-removeBreakpoint
@@ -526,7 +526,7 @@ type RestartFrame struct {
 }
 
 // NewRestartFrame constructs a new RestartFrame struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-restartFrame
@@ -572,7 +572,7 @@ type Resume struct {
 }
 
 // NewResume constructs a new Resume struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-resume
@@ -618,7 +618,7 @@ type SearchInContent struct {
 }
 
 // NewSearchInContent constructs a new SearchInContent struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-searchInContent
@@ -674,7 +674,7 @@ type SetAsyncCallStackDepth struct {
 }
 
 // NewSetAsyncCallStackDepth constructs a new SetAsyncCallStackDepth struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setAsyncCallStackDepth
@@ -707,7 +707,7 @@ type SetBlackboxPatterns struct {
 }
 
 // NewSetBlackboxPatterns constructs a new SetBlackboxPatterns struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setBlackboxPatterns
@@ -744,7 +744,7 @@ type SetBlackboxedRanges struct {
 }
 
 // NewSetBlackboxedRanges constructs a new SetBlackboxedRanges struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setBlackboxedRanges
@@ -779,7 +779,7 @@ type SetBreakpoint struct {
 }
 
 // NewSetBreakpoint constructs a new SetBreakpoint struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setBreakpoint
@@ -827,7 +827,7 @@ type SetInstrumentationBreakpoint struct {
 }
 
 // NewSetInstrumentationBreakpoint constructs a new SetInstrumentationBreakpoint struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setInstrumentationBreakpoint
@@ -878,7 +878,7 @@ type SetBreakpointByURL struct {
 }
 
 // NewSetBreakpointByURL constructs a new SetBreakpointByURL struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setBreakpointByUrl
@@ -970,7 +970,7 @@ type SetBreakpointOnFunctionCall struct {
 }
 
 // NewSetBreakpointOnFunctionCall constructs a new SetBreakpointOnFunctionCall struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setBreakpointOnFunctionCall
@@ -1018,7 +1018,7 @@ type SetBreakpointsActive struct {
 }
 
 // NewSetBreakpointsActive constructs a new SetBreakpointsActive struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setBreakpointsActive
@@ -1048,7 +1048,7 @@ type SetPauseOnExceptions struct {
 }
 
 // NewSetPauseOnExceptions constructs a new SetPauseOnExceptions struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setPauseOnExceptions
@@ -1079,7 +1079,7 @@ type SetReturnValue struct {
 }
 
 // NewSetReturnValue constructs a new SetReturnValue struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setReturnValue
@@ -1115,7 +1115,7 @@ type SetScriptSource struct {
 }
 
 // NewSetScriptSource constructs a new SetScriptSource struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setScriptSource
@@ -1172,7 +1172,7 @@ type SetSkipAllPauses struct {
 }
 
 // NewSetSkipAllPauses constructs a new SetSkipAllPauses struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setSkipAllPauses
@@ -1209,7 +1209,7 @@ type SetVariableValue struct {
 }
 
 // NewSetVariableValue constructs a new SetVariableValue struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setVariableValue
@@ -1248,7 +1248,7 @@ type StepInto struct {
 }
 
 // NewStepInto constructs a new StepInto struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-stepInto
@@ -1295,7 +1295,7 @@ func (t *StepInto) Do(ctx context.Context) error {
 type StepOut struct{}
 
 // NewStepOut constructs a new StepOut struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-stepOut
@@ -1324,7 +1324,7 @@ type StepOver struct {
 }
 
 // NewStepOver constructs a new StepOver struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-stepOver

@@ -18,7 +18,7 @@ type ActivateTarget struct {
 }
 
 // NewActivateTarget constructs a new ActivateTarget struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-activateTarget
@@ -50,7 +50,7 @@ type AttachToTarget struct {
 }
 
 // NewAttachToTarget constructs a new AttachToTarget struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-attachToTarget
@@ -96,7 +96,7 @@ func (t *AttachToTarget) Do(ctx context.Context) (*AttachToTargetResponse, error
 type AttachToBrowserTarget struct{}
 
 // NewAttachToBrowserTarget constructs a new AttachToBrowserTarget struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-attachToBrowserTarget
@@ -131,7 +131,7 @@ type CloseTarget struct {
 }
 
 // NewCloseTarget constructs a new CloseTarget struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-closeTarget
@@ -179,7 +179,7 @@ type ExposeDevToolsProtocol struct {
 }
 
 // NewExposeDevToolsProtocol constructs a new ExposeDevToolsProtocol struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-exposeDevToolsProtocol
@@ -226,7 +226,7 @@ type CreateBrowserContext struct {
 }
 
 // NewCreateBrowserContext constructs a new CreateBrowserContext struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-createBrowserContext
@@ -288,7 +288,7 @@ func (t *CreateBrowserContext) Do(ctx context.Context) (*CreateBrowserContextRes
 type GetBrowserContexts struct{}
 
 // NewGetBrowserContexts constructs a new GetBrowserContexts struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-getBrowserContexts
@@ -340,7 +340,7 @@ type CreateTarget struct {
 }
 
 // NewCreateTarget constructs a new CreateTarget struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-createTarget
@@ -438,7 +438,7 @@ type DetachFromTarget struct {
 }
 
 // NewDetachFromTarget constructs a new DetachFromTarget struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-detachFromTarget
@@ -487,7 +487,7 @@ type DisposeBrowserContext struct {
 }
 
 // NewDisposeBrowserContext constructs a new DisposeBrowserContext struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-disposeBrowserContext
@@ -519,7 +519,7 @@ type GetTargetInfo struct {
 }
 
 // NewGetTargetInfo constructs a new GetTargetInfo struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-getTargetInfo
@@ -558,7 +558,7 @@ func (t *GetTargetInfo) Do(ctx context.Context) (*GetTargetInfoResponse, error) 
 type GetTargets struct{}
 
 // NewGetTargets constructs a new GetTargets struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-getTargets
@@ -601,7 +601,7 @@ type SendMessageToTarget struct {
 }
 
 // NewSendMessageToTarget constructs a new SendMessageToTarget struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-sendMessageToTarget
@@ -663,7 +663,7 @@ type SetAutoAttach struct {
 }
 
 // NewSetAutoAttach constructs a new SetAutoAttach struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-setAutoAttach
@@ -707,7 +707,7 @@ type SetDiscoverTargets struct {
 }
 
 // NewSetDiscoverTargets constructs a new SetDiscoverTargets struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-setDiscoverTargets
@@ -739,7 +739,7 @@ type SetRemoteLocations struct {
 }
 
 // NewSetRemoteLocations constructs a new SetRemoteLocations struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-setRemoteLocations

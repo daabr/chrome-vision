@@ -20,7 +20,7 @@ type Enable struct {
 }
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Cast/#method-enable
@@ -51,7 +51,7 @@ func (t *Enable) Do(ctx context.Context) error {
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Cast/#method-disable
@@ -78,7 +78,7 @@ type SetSinkToUse struct {
 }
 
 // NewSetSinkToUse constructs a new SetSinkToUse struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Cast/#method-setSinkToUse
@@ -106,7 +106,7 @@ type StartTabMirroring struct {
 }
 
 // NewStartTabMirroring constructs a new StartTabMirroring struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Cast/#method-startTabMirroring
@@ -134,7 +134,7 @@ type StopCasting struct {
 }
 
 // NewStopCasting constructs a new StopCasting struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Cast/#method-stopCasting

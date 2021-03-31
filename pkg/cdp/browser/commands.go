@@ -27,7 +27,7 @@ type SetPermission struct {
 }
 
 // NewSetPermission constructs a new SetPermission struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-setPermission
@@ -82,7 +82,7 @@ type GrantPermissions struct {
 }
 
 // NewGrantPermissions constructs a new GrantPermissions struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-grantPermissions
@@ -133,7 +133,7 @@ type ResetPermissions struct {
 }
 
 // NewResetPermissions constructs a new ResetPermissions struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-resetPermissions
@@ -180,7 +180,7 @@ type SetDownloadBehavior struct {
 }
 
 // NewSetDownloadBehavior constructs a new SetDownloadBehavior struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-setDownloadBehavior
@@ -234,7 +234,7 @@ type CancelDownload struct {
 }
 
 // NewCancelDownload constructs a new CancelDownload struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-cancelDownload
@@ -271,7 +271,7 @@ func (t *CancelDownload) Do(ctx context.Context) error {
 type Close struct{}
 
 // NewClose constructs a new Close struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-close
@@ -297,7 +297,7 @@ func (t *Close) Do(ctx context.Context) error {
 type Crash struct{}
 
 // NewCrash constructs a new Crash struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-crash
@@ -325,7 +325,7 @@ func (t *Crash) Do(ctx context.Context) error {
 type CrashGpuProcess struct{}
 
 // NewCrashGpuProcess constructs a new CrashGpuProcess struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-crashGpuProcess
@@ -351,7 +351,7 @@ func (t *CrashGpuProcess) Do(ctx context.Context) error {
 type GetVersion struct{}
 
 // NewGetVersion constructs a new GetVersion struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-getVersion
@@ -393,7 +393,7 @@ func (t *GetVersion) Do(ctx context.Context) (*GetVersionResponse, error) {
 type GetBrowserCommandLine struct{}
 
 // NewGetBrowserCommandLine constructs a new GetBrowserCommandLine struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-getBrowserCommandLine
@@ -435,7 +435,7 @@ type GetHistograms struct {
 }
 
 // NewGetHistograms constructs a new GetHistograms struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-getHistograms
@@ -495,7 +495,7 @@ type GetHistogram struct {
 }
 
 // NewGetHistogram constructs a new GetHistogram struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-getHistogram
@@ -544,7 +544,7 @@ type GetWindowBounds struct {
 }
 
 // NewGetWindowBounds constructs a new GetWindowBounds struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-getWindowBounds
@@ -585,7 +585,7 @@ type GetWindowForTarget struct {
 }
 
 // NewGetWindowForTarget constructs a new GetWindowForTarget struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-getWindowForTarget
@@ -638,7 +638,7 @@ type SetWindowBounds struct {
 }
 
 // NewSetWindowBounds constructs a new SetWindowBounds struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-setWindowBounds
@@ -673,7 +673,7 @@ type SetDockTile struct {
 }
 
 // NewSetDockTile constructs a new SetDockTile struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-setDockTile
@@ -719,7 +719,7 @@ type ExecuteBrowserCommand struct {
 }
 
 // NewExecuteBrowserCommand constructs a new ExecuteBrowserCommand struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-executeBrowserCommand

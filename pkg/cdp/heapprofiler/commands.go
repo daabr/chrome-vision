@@ -20,7 +20,7 @@ type AddInspectedHeapObject struct {
 }
 
 // NewAddInspectedHeapObject constructs a new AddInspectedHeapObject struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-addInspectedHeapObject
@@ -44,7 +44,7 @@ func (t *AddInspectedHeapObject) Do(ctx context.Context) error {
 type CollectGarbage struct{}
 
 // NewCollectGarbage constructs a new CollectGarbage struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-collectGarbage
@@ -66,7 +66,7 @@ func (t *CollectGarbage) Do(ctx context.Context) error {
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-disable
@@ -88,7 +88,7 @@ func (t *Disable) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-enable
@@ -113,7 +113,7 @@ type GetHeapObjectID struct {
 }
 
 // NewGetHeapObjectID constructs a new GetHeapObjectID struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-getHeapObjectId
@@ -148,7 +148,7 @@ type GetObjectByHeapObjectID struct {
 }
 
 // NewGetObjectByHeapObjectID constructs a new GetObjectByHeapObjectID struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-getObjectByHeapObjectId
@@ -188,7 +188,7 @@ func (t *GetObjectByHeapObjectID) Do(ctx context.Context) (*GetObjectByHeapObjec
 type GetSamplingProfile struct{}
 
 // NewGetSamplingProfile constructs a new GetSamplingProfile struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-getSamplingProfile
@@ -221,7 +221,7 @@ type StartSampling struct {
 }
 
 // NewStartSampling constructs a new StartSampling struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-startSampling
@@ -255,7 +255,7 @@ type StartTrackingHeapObjects struct {
 }
 
 // NewStartTrackingHeapObjects constructs a new StartTrackingHeapObjects struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-startTrackingHeapObjects
@@ -284,7 +284,7 @@ func (t *StartTrackingHeapObjects) Do(ctx context.Context) error {
 type StopSampling struct{}
 
 // NewStopSampling constructs a new StopSampling struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-stopSampling
@@ -318,7 +318,7 @@ type StopTrackingHeapObjects struct {
 }
 
 // NewStopTrackingHeapObjects constructs a new StopTrackingHeapObjects struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-stopTrackingHeapObjects
@@ -362,7 +362,7 @@ type TakeHeapSnapshot struct {
 }
 
 // NewTakeHeapSnapshot constructs a new TakeHeapSnapshot struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-takeHeapSnapshot

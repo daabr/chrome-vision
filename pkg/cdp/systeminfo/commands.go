@@ -14,7 +14,7 @@ import (
 type GetInfo struct{}
 
 // NewGetInfo constructs a new GetInfo struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/SystemInfo/#method-getInfo
@@ -54,7 +54,7 @@ func (t *GetInfo) Do(ctx context.Context) (*GetInfoResponse, error) {
 type GetProcessInfo struct{}
 
 // NewGetProcessInfo constructs a new GetProcessInfo struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/SystemInfo/#method-getProcessInfo

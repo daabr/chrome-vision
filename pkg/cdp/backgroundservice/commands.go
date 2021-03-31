@@ -16,7 +16,7 @@ type StartObserving struct {
 }
 
 // NewStartObserving constructs a new StartObserving struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#method-startObserving
@@ -44,7 +44,7 @@ type StopObserving struct {
 }
 
 // NewStopObserving constructs a new StopObserving struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#method-stopObserving
@@ -73,7 +73,7 @@ type SetRecording struct {
 }
 
 // NewSetRecording constructs a new SetRecording struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#method-setRecording
@@ -102,7 +102,7 @@ type ClearEvents struct {
 }
 
 // NewClearEvents constructs a new ClearEvents struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#method-clearEvents

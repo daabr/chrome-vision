@@ -22,7 +22,7 @@ type CollectClassNamesFromSubtree struct {
 }
 
 // NewCollectClassNamesFromSubtree constructs a new CollectClassNamesFromSubtree struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-collectClassNamesFromSubtree
@@ -68,7 +68,7 @@ type CopyTo struct {
 }
 
 // NewCopyTo constructs a new CopyTo struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-copyTo
@@ -128,7 +128,7 @@ type DescribeNode struct {
 }
 
 // NewDescribeNode constructs a new DescribeNode struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-describeNode
@@ -220,7 +220,7 @@ type ScrollIntoViewIfNeeded struct {
 }
 
 // NewScrollIntoViewIfNeeded constructs a new ScrollIntoViewIfNeeded struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-scrollIntoViewIfNeeded
@@ -283,7 +283,7 @@ func (t *ScrollIntoViewIfNeeded) Do(ctx context.Context) error {
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-disable
@@ -313,7 +313,7 @@ type DiscardSearchResults struct {
 }
 
 // NewDiscardSearchResults constructs a new DiscardSearchResults struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-discardSearchResults
@@ -341,7 +341,7 @@ func (t *DiscardSearchResults) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-enable
@@ -372,7 +372,7 @@ type Focus struct {
 }
 
 // NewFocus constructs a new Focus struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-focus
@@ -426,7 +426,7 @@ type GetAttributes struct {
 }
 
 // NewGetAttributes constructs a new GetAttributes struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getAttributes
@@ -466,7 +466,7 @@ type GetBoxModel struct {
 }
 
 // NewGetBoxModel constructs a new GetBoxModel struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getBoxModel
@@ -534,7 +534,7 @@ type GetContentQuads struct {
 }
 
 // NewGetContentQuads constructs a new GetContentQuads struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getContentQuads
@@ -601,7 +601,7 @@ type GetDocument struct {
 }
 
 // NewGetDocument constructs a new GetDocument struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getDocument
@@ -663,7 +663,7 @@ type GetFlattenedDocument struct {
 }
 
 // NewGetFlattenedDocument constructs a new GetFlattenedDocument struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getFlattenedDocument
@@ -726,7 +726,7 @@ type GetNodesForSubtreeByStyle struct {
 }
 
 // NewGetNodesForSubtreeByStyle constructs a new GetNodesForSubtreeByStyle struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getNodesForSubtreeByStyle
@@ -782,7 +782,7 @@ type GetNodeForLocation struct {
 }
 
 // NewGetNodeForLocation constructs a new GetNodeForLocation struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getNodeForLocation
@@ -845,7 +845,7 @@ type GetOuterHTML struct {
 }
 
 // NewGetOuterHTML constructs a new GetOuterHTML struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getOuterHTML
@@ -908,7 +908,7 @@ type GetRelayoutBoundary struct {
 }
 
 // NewGetRelayoutBoundary constructs a new GetRelayoutBoundary struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getRelayoutBoundary
@@ -953,7 +953,7 @@ type GetSearchResults struct {
 }
 
 // NewGetSearchResults constructs a new GetSearchResults struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getSearchResults
@@ -992,7 +992,7 @@ func (t *GetSearchResults) Do(ctx context.Context) (*GetSearchResultsResponse, e
 type MarkUndoableState struct{}
 
 // NewMarkUndoableState constructs a new MarkUndoableState struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-markUndoableState
@@ -1026,7 +1026,7 @@ type MoveTo struct {
 }
 
 // NewMoveTo constructs a new MoveTo struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-moveTo
@@ -1078,7 +1078,7 @@ type PerformSearch struct {
 }
 
 // NewPerformSearch constructs a new PerformSearch struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-performSearch
@@ -1129,7 +1129,7 @@ type PushNodeByPathToFrontend struct {
 }
 
 // NewPushNodeByPathToFrontend constructs a new PushNodeByPathToFrontend struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-pushNodeByPathToFrontend
@@ -1169,7 +1169,7 @@ type PushNodesByBackendIdsToFrontend struct {
 }
 
 // NewPushNodesByBackendIdsToFrontend constructs a new PushNodesByBackendIdsToFrontend struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-pushNodesByBackendIdsToFrontend
@@ -1210,7 +1210,7 @@ type QuerySelector struct {
 }
 
 // NewQuerySelector constructs a new QuerySelector struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-querySelector
@@ -1249,7 +1249,7 @@ type QuerySelectorAll struct {
 }
 
 // NewQuerySelectorAll constructs a new QuerySelectorAll struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-querySelectorAll
@@ -1285,7 +1285,7 @@ func (t *QuerySelectorAll) Do(ctx context.Context) (*QuerySelectorAllResponse, e
 type Redo struct{}
 
 // NewRedo constructs a new Redo struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-redo
@@ -1316,7 +1316,7 @@ type RemoveAttribute struct {
 }
 
 // NewRemoveAttribute constructs a new RemoveAttribute struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-removeAttribute
@@ -1346,7 +1346,7 @@ type RemoveNode struct {
 }
 
 // NewRemoveNode constructs a new RemoveNode struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-removeNode
@@ -1383,7 +1383,7 @@ type RequestChildNodes struct {
 }
 
 // NewRequestChildNodes constructs a new RequestChildNodes struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-requestChildNodes
@@ -1434,7 +1434,7 @@ type RequestNode struct {
 }
 
 // NewRequestNode constructs a new RequestNode struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-requestNode
@@ -1476,7 +1476,7 @@ type ResolveNode struct {
 }
 
 // NewResolveNode constructs a new ResolveNode struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-resolveNode
@@ -1550,7 +1550,7 @@ type SetAttributeValue struct {
 }
 
 // NewSetAttributeValue constructs a new SetAttributeValue struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setAttributeValue
@@ -1587,7 +1587,7 @@ type SetAttributesAsText struct {
 }
 
 // NewSetAttributesAsText constructs a new SetAttributesAsText struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setAttributesAsText
@@ -1633,7 +1633,7 @@ type SetFileInputFiles struct {
 }
 
 // NewSetFileInputFiles constructs a new SetFileInputFiles struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setFileInputFiles
@@ -1691,7 +1691,7 @@ type SetNodeStackTracesEnabled struct {
 }
 
 // NewSetNodeStackTracesEnabled constructs a new SetNodeStackTracesEnabled struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setNodeStackTracesEnabled
@@ -1724,7 +1724,7 @@ type GetNodeStackTraces struct {
 }
 
 // NewGetNodeStackTraces constructs a new GetNodeStackTraces struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getNodeStackTraces
@@ -1765,7 +1765,7 @@ type GetFileInfo struct {
 }
 
 // NewGetFileInfo constructs a new GetFileInfo struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getFileInfo
@@ -1805,7 +1805,7 @@ type SetInspectedNode struct {
 }
 
 // NewSetInspectedNode constructs a new SetInspectedNode struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setInspectedNode
@@ -1838,7 +1838,7 @@ type SetNodeName struct {
 }
 
 // NewSetNodeName constructs a new SetNodeName struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setNodeName
@@ -1877,7 +1877,7 @@ type SetNodeValue struct {
 }
 
 // NewSetNodeValue constructs a new SetNodeValue struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setNodeValue
@@ -1909,7 +1909,7 @@ type SetOuterHTML struct {
 }
 
 // NewSetOuterHTML constructs a new SetOuterHTML struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setOuterHTML
@@ -1938,7 +1938,7 @@ func (t *SetOuterHTML) Do(ctx context.Context) error {
 type Undo struct{}
 
 // NewUndo constructs a new Undo struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-undo
@@ -1968,7 +1968,7 @@ type GetFrameOwner struct {
 }
 
 // NewGetFrameOwner constructs a new GetFrameOwner struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getFrameOwner

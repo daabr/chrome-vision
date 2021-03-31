@@ -14,7 +14,7 @@ import (
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#method-disable
@@ -38,7 +38,7 @@ func (t *Disable) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#method-enable
@@ -76,7 +76,7 @@ type GetSnapshot struct {
 }
 
 // NewGetSnapshot constructs a new GetSnapshot struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#method-getSnapshot
@@ -152,7 +152,7 @@ type CaptureSnapshot struct {
 }
 
 // NewCaptureSnapshot constructs a new CaptureSnapshot struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#method-captureSnapshot

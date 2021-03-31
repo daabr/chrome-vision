@@ -14,7 +14,7 @@ import (
 type Clear struct{}
 
 // NewClear constructs a new Clear struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Log/#method-clear
@@ -38,7 +38,7 @@ func (t *Clear) Do(ctx context.Context) error {
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Log/#method-disable
@@ -63,7 +63,7 @@ func (t *Disable) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Log/#method-enable
@@ -90,7 +90,7 @@ type StartViolationsReport struct {
 }
 
 // NewStartViolationsReport constructs a new StartViolationsReport struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Log/#method-startViolationsReport
@@ -116,7 +116,7 @@ func (t *StartViolationsReport) Do(ctx context.Context) error {
 type StopViolationsReport struct{}
 
 // NewStopViolationsReport constructs a new StopViolationsReport struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Log/#method-stopViolationsReport

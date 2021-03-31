@@ -14,7 +14,7 @@ import (
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#method-disable
@@ -38,7 +38,7 @@ func (t *Disable) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#method-enable
@@ -67,7 +67,7 @@ type SetIgnoreCertificateErrors struct {
 }
 
 // NewSetIgnoreCertificateErrors constructs a new SetIgnoreCertificateErrors struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#method-setIgnoreCertificateErrors
@@ -102,7 +102,7 @@ type HandleCertificateError struct {
 }
 
 // NewHandleCertificateError constructs a new HandleCertificateError struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#method-handleCertificateError
@@ -137,7 +137,7 @@ type SetOverrideCertificateErrors struct {
 }
 
 // NewSetOverrideCertificateErrors constructs a new SetOverrideCertificateErrors struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#method-setOverrideCertificateErrors

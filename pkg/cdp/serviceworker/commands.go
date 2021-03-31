@@ -16,7 +16,7 @@ type DeliverPushMessage struct {
 }
 
 // NewDeliverPushMessage constructs a new DeliverPushMessage struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-deliverPushMessage
@@ -42,7 +42,7 @@ func (t *DeliverPushMessage) Do(ctx context.Context) error {
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-disable
@@ -69,7 +69,7 @@ type DispatchSyncEvent struct {
 }
 
 // NewDispatchSyncEvent constructs a new DispatchSyncEvent struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-dispatchSyncEvent
@@ -100,7 +100,7 @@ type DispatchPeriodicSyncEvent struct {
 }
 
 // NewDispatchPeriodicSyncEvent constructs a new DispatchPeriodicSyncEvent struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-dispatchPeriodicSyncEvent
@@ -126,7 +126,7 @@ func (t *DispatchPeriodicSyncEvent) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-enable
@@ -150,7 +150,7 @@ type InspectWorker struct {
 }
 
 // NewInspectWorker constructs a new InspectWorker struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-inspectWorker
@@ -176,7 +176,7 @@ type SetForceUpdateOnPageLoad struct {
 }
 
 // NewSetForceUpdateOnPageLoad constructs a new SetForceUpdateOnPageLoad struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-setForceUpdateOnPageLoad
@@ -202,7 +202,7 @@ type SkipWaiting struct {
 }
 
 // NewSkipWaiting constructs a new SkipWaiting struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-skipWaiting
@@ -228,7 +228,7 @@ type StartWorker struct {
 }
 
 // NewStartWorker constructs a new StartWorker struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-startWorker
@@ -252,7 +252,7 @@ func (t *StartWorker) Do(ctx context.Context) error {
 type StopAllWorkers struct{}
 
 // NewStopAllWorkers constructs a new StopAllWorkers struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-stopAllWorkers
@@ -276,7 +276,7 @@ type StopWorker struct {
 }
 
 // NewStopWorker constructs a new StopWorker struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-stopWorker
@@ -302,7 +302,7 @@ type Unregister struct {
 }
 
 // NewUnregister constructs a new Unregister struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-unregister
@@ -328,7 +328,7 @@ type UpdateRegistration struct {
 }
 
 // NewUpdateRegistration constructs a new UpdateRegistration struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-updateRegistration

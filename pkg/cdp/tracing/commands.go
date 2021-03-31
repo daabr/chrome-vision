@@ -14,7 +14,7 @@ import (
 type End struct{}
 
 // NewEnd constructs a new End struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#method-end
@@ -38,7 +38,7 @@ func (t *End) Do(ctx context.Context) error {
 type GetCategories struct{}
 
 // NewGetCategories constructs a new GetCategories struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#method-getCategories
@@ -72,7 +72,7 @@ type RecordClockSyncMarker struct {
 }
 
 // NewRecordClockSyncMarker constructs a new RecordClockSyncMarker struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#method-recordClockSyncMarker
@@ -103,7 +103,7 @@ type RequestMemoryDump struct {
 }
 
 // NewRequestMemoryDump constructs a new RequestMemoryDump struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#method-requestMemoryDump
@@ -181,7 +181,7 @@ type Start struct {
 }
 
 // NewStart constructs a new Start struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#method-start

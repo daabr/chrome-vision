@@ -26,7 +26,7 @@ type GetEventListeners struct {
 }
 
 // NewGetEventListeners constructs a new GetEventListeners struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-getEventListeners
@@ -84,7 +84,7 @@ type RemoveDOMBreakpoint struct {
 }
 
 // NewRemoveDOMBreakpoint constructs a new RemoveDOMBreakpoint struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-removeDOMBreakpoint
@@ -118,7 +118,7 @@ type RemoveEventListenerBreakpoint struct {
 }
 
 // NewRemoveEventListenerBreakpoint constructs a new RemoveEventListenerBreakpoint struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-removeEventListenerBreakpoint
@@ -160,7 +160,7 @@ type RemoveInstrumentationBreakpoint struct {
 }
 
 // NewRemoveInstrumentationBreakpoint constructs a new RemoveInstrumentationBreakpoint struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-removeInstrumentationBreakpoint
@@ -191,7 +191,7 @@ type RemoveXHRBreakpoint struct {
 }
 
 // NewRemoveXHRBreakpoint constructs a new RemoveXHRBreakpoint struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-removeXHRBreakpoint
@@ -222,7 +222,7 @@ type SetBreakOnCSPViolation struct {
 }
 
 // NewSetBreakOnCSPViolation constructs a new SetBreakOnCSPViolation struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-setBreakOnCSPViolation
@@ -255,7 +255,7 @@ type SetDOMBreakpoint struct {
 }
 
 // NewSetDOMBreakpoint constructs a new SetDOMBreakpoint struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-setDOMBreakpoint
@@ -290,7 +290,7 @@ type SetEventListenerBreakpoint struct {
 }
 
 // NewSetEventListenerBreakpoint constructs a new SetEventListenerBreakpoint struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-setEventListenerBreakpoint
@@ -333,7 +333,7 @@ type SetInstrumentationBreakpoint struct {
 }
 
 // NewSetInstrumentationBreakpoint constructs a new SetInstrumentationBreakpoint struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-setInstrumentationBreakpoint
@@ -364,7 +364,7 @@ type SetXHRBreakpoint struct {
 }
 
 // NewSetXHRBreakpoint constructs a new SetXHRBreakpoint struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-setXHRBreakpoint

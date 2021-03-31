@@ -17,7 +17,7 @@ import (
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-disable
@@ -50,7 +50,7 @@ type Enable struct {
 }
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-enable
@@ -100,7 +100,7 @@ type FailRequest struct {
 }
 
 // NewFailRequest constructs a new FailRequest struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-failRequest
@@ -144,7 +144,7 @@ type FulfillRequest struct {
 }
 
 // NewFulfillRequest constructs a new FulfillRequest struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-fulfillRequest
@@ -222,7 +222,7 @@ type ContinueRequest struct {
 }
 
 // NewContinueRequest constructs a new ContinueRequest struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-continueRequest
@@ -289,7 +289,7 @@ type ContinueWithAuth struct {
 }
 
 // NewContinueWithAuth constructs a new ContinueWithAuth struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-continueWithAuth
@@ -324,7 +324,7 @@ type GetResponseBody struct {
 }
 
 // NewGetResponseBody constructs a new GetResponseBody struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-getResponseBody
@@ -370,7 +370,7 @@ type TakeResponseBodyAsStream struct {
 }
 
 // NewTakeResponseBodyAsStream constructs a new TakeResponseBodyAsStream struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-takeResponseBodyAsStream

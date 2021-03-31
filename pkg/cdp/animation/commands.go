@@ -16,7 +16,7 @@ import (
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-disable
@@ -40,7 +40,7 @@ func (t *Disable) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-enable
@@ -67,7 +67,7 @@ type GetCurrentTime struct {
 }
 
 // NewGetCurrentTime constructs a new GetCurrentTime struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-getCurrentTime
@@ -100,7 +100,7 @@ func (t *GetCurrentTime) Do(ctx context.Context) (*GetCurrentTimeResponse, error
 type GetPlaybackRate struct{}
 
 // NewGetPlaybackRate constructs a new GetPlaybackRate struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-getPlaybackRate
@@ -134,7 +134,7 @@ type ReleaseAnimations struct {
 }
 
 // NewReleaseAnimations constructs a new ReleaseAnimations struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-releaseAnimations
@@ -163,7 +163,7 @@ type ResolveAnimation struct {
 }
 
 // NewResolveAnimation constructs a new ResolveAnimation struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-resolveAnimation
@@ -201,7 +201,7 @@ type SeekAnimations struct {
 }
 
 // NewSeekAnimations constructs a new SeekAnimations struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-seekAnimations
@@ -233,7 +233,7 @@ type SetPaused struct {
 }
 
 // NewSetPaused constructs a new SetPaused struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-setPaused
@@ -263,7 +263,7 @@ type SetPlaybackRate struct {
 }
 
 // NewSetPlaybackRate constructs a new SetPlaybackRate struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-setPlaybackRate
@@ -296,7 +296,7 @@ type SetTiming struct {
 }
 
 // NewSetTiming constructs a new SetTiming struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-setTiming

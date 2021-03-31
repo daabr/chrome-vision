@@ -32,7 +32,7 @@ type BeginFrame struct {
 }
 
 // NewBeginFrame constructs a new BeginFrame struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeadlessExperimental/#method-beginFrame
@@ -108,7 +108,7 @@ func (t *BeginFrame) Do(ctx context.Context) (*BeginFrameResponse, error) {
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeadlessExperimental/#method-disable
@@ -132,7 +132,7 @@ func (t *Disable) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeadlessExperimental/#method-enable

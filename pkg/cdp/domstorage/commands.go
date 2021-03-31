@@ -14,7 +14,7 @@ type Clear struct {
 }
 
 // NewClear constructs a new Clear struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#method-clear
@@ -40,7 +40,7 @@ func (t *Clear) Do(ctx context.Context) error {
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#method-disable
@@ -64,7 +64,7 @@ func (t *Disable) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#method-enable
@@ -88,7 +88,7 @@ type GetDOMStorageItems struct {
 }
 
 // NewGetDOMStorageItems constructs a new GetDOMStorageItems struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#method-getDOMStorageItems
@@ -121,7 +121,7 @@ type RemoveDOMStorageItem struct {
 }
 
 // NewRemoveDOMStorageItem constructs a new RemoveDOMStorageItem struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#method-removeDOMStorageItem
@@ -150,7 +150,7 @@ type SetDOMStorageItem struct {
 }
 
 // NewSetDOMStorageItem constructs a new SetDOMStorageItem struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#method-setDOMStorageItem

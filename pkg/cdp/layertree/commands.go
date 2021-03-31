@@ -20,7 +20,7 @@ type CompositingReasons struct {
 }
 
 // NewCompositingReasons constructs a new CompositingReasons struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-compositingReasons
@@ -57,7 +57,7 @@ func (t *CompositingReasons) Do(ctx context.Context) (*CompositingReasonsRespons
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-disable
@@ -81,7 +81,7 @@ func (t *Disable) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-enable
@@ -108,7 +108,7 @@ type LoadSnapshot struct {
 }
 
 // NewLoadSnapshot constructs a new LoadSnapshot struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-loadSnapshot
@@ -144,7 +144,7 @@ type MakeSnapshot struct {
 }
 
 // NewMakeSnapshot constructs a new MakeSnapshot struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-makeSnapshot
@@ -184,7 +184,7 @@ type ProfileSnapshot struct {
 }
 
 // NewProfileSnapshot constructs a new ProfileSnapshot struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-profileSnapshot
@@ -247,7 +247,7 @@ type ReleaseSnapshot struct {
 }
 
 // NewReleaseSnapshot constructs a new ReleaseSnapshot struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-releaseSnapshot
@@ -282,7 +282,7 @@ type ReplaySnapshot struct {
 }
 
 // NewReplaySnapshot constructs a new ReplaySnapshot struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-replaySnapshot
@@ -345,7 +345,7 @@ type SnapshotCommandLog struct {
 }
 
 // NewSnapshotCommandLog constructs a new SnapshotCommandLog struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-snapshotCommandLog

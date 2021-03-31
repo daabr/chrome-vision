@@ -25,7 +25,7 @@ type AddRule struct {
 }
 
 // NewAddRule constructs a new AddRule struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-addRule
@@ -62,7 +62,7 @@ type CollectClassNames struct {
 }
 
 // NewCollectClassNames constructs a new CollectClassNames struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-collectClassNames
@@ -98,7 +98,7 @@ type CreateStyleSheet struct {
 }
 
 // NewCreateStyleSheet constructs a new CreateStyleSheet struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-createStyleSheet
@@ -131,7 +131,7 @@ func (t *CreateStyleSheet) Do(ctx context.Context) (*CreateStyleSheetResponse, e
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-disable
@@ -156,7 +156,7 @@ func (t *Disable) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-enable
@@ -186,7 +186,7 @@ type ForcePseudoState struct {
 }
 
 // NewForcePseudoState constructs a new ForcePseudoState struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-forcePseudoState
@@ -214,7 +214,7 @@ type GetBackgroundColors struct {
 }
 
 // NewGetBackgroundColors constructs a new GetBackgroundColors struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getBackgroundColors
@@ -258,7 +258,7 @@ type GetComputedStyleForNode struct {
 }
 
 // NewGetComputedStyleForNode constructs a new GetComputedStyleForNode struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getComputedStyleForNode
@@ -294,7 +294,7 @@ type GetInlineStylesForNode struct {
 }
 
 // NewGetInlineStylesForNode constructs a new GetInlineStylesForNode struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getInlineStylesForNode
@@ -331,7 +331,7 @@ type GetMatchedStylesForNode struct {
 }
 
 // NewGetMatchedStylesForNode constructs a new GetMatchedStylesForNode struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getMatchedStylesForNode
@@ -374,7 +374,7 @@ func (t *GetMatchedStylesForNode) Do(ctx context.Context) (*GetMatchedStylesForN
 type GetMediaQueries struct{}
 
 // NewGetMediaQueries constructs a new GetMediaQueries struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getMediaQueries
@@ -407,7 +407,7 @@ type GetPlatformFontsForNode struct {
 }
 
 // NewGetPlatformFontsForNode constructs a new GetPlatformFontsForNode struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getPlatformFontsForNode
@@ -442,7 +442,7 @@ type GetStyleSheetText struct {
 }
 
 // NewGetStyleSheetText constructs a new GetStyleSheetText struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getStyleSheetText
@@ -484,7 +484,7 @@ type TrackComputedStyleUpdates struct {
 }
 
 // NewTrackComputedStyleUpdates constructs a new TrackComputedStyleUpdates struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-trackComputedStyleUpdates
@@ -514,7 +514,7 @@ func (t *TrackComputedStyleUpdates) Do(ctx context.Context) error {
 type TakeComputedStyleUpdates struct{}
 
 // NewTakeComputedStyleUpdates constructs a new TakeComputedStyleUpdates struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-takeComputedStyleUpdates
@@ -553,7 +553,7 @@ type SetEffectivePropertyValueForNode struct {
 }
 
 // NewSetEffectivePropertyValueForNode constructs a new SetEffectivePropertyValueForNode struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setEffectivePropertyValueForNode
@@ -585,7 +585,7 @@ type SetKeyframeKey struct {
 }
 
 // NewSetKeyframeKey constructs a new SetKeyframeKey struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setKeyframeKey
@@ -624,7 +624,7 @@ type SetMediaText struct {
 }
 
 // NewSetMediaText constructs a new SetMediaText struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setMediaText
@@ -663,7 +663,7 @@ type SetRuleSelector struct {
 }
 
 // NewSetRuleSelector constructs a new SetRuleSelector struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setRuleSelector
@@ -701,7 +701,7 @@ type SetStyleSheetText struct {
 }
 
 // NewSetStyleSheetText constructs a new SetStyleSheetText struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setStyleSheetText
@@ -737,7 +737,7 @@ type SetStyleTexts struct {
 }
 
 // NewSetStyleTexts constructs a new SetStyleTexts struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setStyleTexts
@@ -770,7 +770,7 @@ func (t *SetStyleTexts) Do(ctx context.Context) (*SetStyleTextsResponse, error) 
 type StartRuleUsageTracking struct{}
 
 // NewStartRuleUsageTracking constructs a new StartRuleUsageTracking struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-startRuleUsageTracking
@@ -795,7 +795,7 @@ func (t *StartRuleUsageTracking) Do(ctx context.Context) error {
 type StopRuleUsageTracking struct{}
 
 // NewStopRuleUsageTracking constructs a new StopRuleUsageTracking struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-stopRuleUsageTracking
@@ -826,7 +826,7 @@ func (t *StopRuleUsageTracking) Do(ctx context.Context) (*StopRuleUsageTrackingR
 type TakeCoverageDelta struct{}
 
 // NewTakeCoverageDelta constructs a new TakeCoverageDelta struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-takeCoverageDelta
@@ -863,7 +863,7 @@ type SetLocalFontsEnabled struct {
 }
 
 // NewSetLocalFontsEnabled constructs a new SetLocalFontsEnabled struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setLocalFontsEnabled

@@ -14,7 +14,7 @@ import (
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Performance/#method-disable
@@ -41,7 +41,7 @@ type Enable struct {
 }
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Performance/#method-enable
@@ -82,7 +82,7 @@ type SetTimeDomain struct {
 }
 
 // NewSetTimeDomain constructs a new SetTimeDomain struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Performance/#method-setTimeDomain
@@ -111,7 +111,7 @@ func (t *SetTimeDomain) Do(ctx context.Context) error {
 type GetMetrics struct{}
 
 // NewGetMetrics constructs a new GetMetrics struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Performance/#method-getMetrics

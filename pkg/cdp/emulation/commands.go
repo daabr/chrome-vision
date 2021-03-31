@@ -18,7 +18,7 @@ import (
 type CanEmulate struct{}
 
 // NewCanEmulate constructs a new CanEmulate struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-canEmulate
@@ -49,7 +49,7 @@ func (t *CanEmulate) Do(ctx context.Context) (*CanEmulateResponse, error) {
 type ClearDeviceMetricsOverride struct{}
 
 // NewClearDeviceMetricsOverride constructs a new ClearDeviceMetricsOverride struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-clearDeviceMetricsOverride
@@ -73,7 +73,7 @@ func (t *ClearDeviceMetricsOverride) Do(ctx context.Context) error {
 type ClearGeolocationOverride struct{}
 
 // NewClearGeolocationOverride constructs a new ClearGeolocationOverride struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-clearGeolocationOverride
@@ -99,7 +99,7 @@ func (t *ClearGeolocationOverride) Do(ctx context.Context) error {
 type ResetPageScaleFactor struct{}
 
 // NewResetPageScaleFactor constructs a new ResetPageScaleFactor struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-resetPageScaleFactor
@@ -130,7 +130,7 @@ type SetFocusEmulationEnabled struct {
 }
 
 // NewSetFocusEmulationEnabled constructs a new SetFocusEmulationEnabled struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setFocusEmulationEnabled
@@ -163,7 +163,7 @@ type SetCPUThrottlingRate struct {
 }
 
 // NewSetCPUThrottlingRate constructs a new SetCPUThrottlingRate struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setCPUThrottlingRate
@@ -196,7 +196,7 @@ type SetDefaultBackgroundColorOverride struct {
 }
 
 // NewSetDefaultBackgroundColorOverride constructs a new SetDefaultBackgroundColorOverride struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setDefaultBackgroundColorOverride
@@ -278,7 +278,7 @@ type SetDeviceMetricsOverride struct {
 }
 
 // NewSetDeviceMetricsOverride constructs a new SetDeviceMetricsOverride struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setDeviceMetricsOverride
@@ -409,7 +409,7 @@ type SetScrollbarsHidden struct {
 }
 
 // NewSetScrollbarsHidden constructs a new SetScrollbarsHidden struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setScrollbarsHidden
@@ -440,7 +440,7 @@ type SetDocumentCookieDisabled struct {
 }
 
 // NewSetDocumentCookieDisabled constructs a new SetDocumentCookieDisabled struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setDocumentCookieDisabled
@@ -473,7 +473,7 @@ type SetEmitTouchEventsForMouse struct {
 }
 
 // NewSetEmitTouchEventsForMouse constructs a new SetEmitTouchEventsForMouse struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setEmitTouchEventsForMouse
@@ -515,7 +515,7 @@ type SetEmulatedMedia struct {
 }
 
 // NewSetEmulatedMedia constructs a new SetEmulatedMedia struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setEmulatedMedia
@@ -562,7 +562,7 @@ type SetEmulatedVisionDeficiency struct {
 }
 
 // NewSetEmulatedVisionDeficiency constructs a new SetEmulatedVisionDeficiency struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setEmulatedVisionDeficiency
@@ -598,7 +598,7 @@ type SetGeolocationOverride struct {
 }
 
 // NewSetGeolocationOverride constructs a new SetGeolocationOverride struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setGeolocationOverride
@@ -656,7 +656,7 @@ type SetIdleOverride struct {
 }
 
 // NewSetIdleOverride constructs a new SetIdleOverride struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setIdleOverride
@@ -687,7 +687,7 @@ func (t *SetIdleOverride) Do(ctx context.Context) error {
 type ClearIdleOverride struct{}
 
 // NewClearIdleOverride constructs a new ClearIdleOverride struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-clearIdleOverride
@@ -719,7 +719,7 @@ type SetNavigatorOverrides struct {
 }
 
 // NewSetNavigatorOverrides constructs a new SetNavigatorOverrides struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setNavigatorOverrides
@@ -753,7 +753,7 @@ type SetPageScaleFactor struct {
 }
 
 // NewSetPageScaleFactor constructs a new SetPageScaleFactor struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setPageScaleFactor
@@ -784,7 +784,7 @@ type SetScriptExecutionDisabled struct {
 }
 
 // NewSetScriptExecutionDisabled constructs a new SetScriptExecutionDisabled struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setScriptExecutionDisabled
@@ -815,7 +815,7 @@ type SetTouchEmulationEnabled struct {
 }
 
 // NewSetTouchEmulationEnabled constructs a new SetTouchEmulationEnabled struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setTouchEmulationEnabled
@@ -866,7 +866,7 @@ type SetVirtualTimePolicy struct {
 }
 
 // NewSetVirtualTimePolicy constructs a new SetVirtualTimePolicy struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setVirtualTimePolicy
@@ -946,7 +946,7 @@ type SetLocaleOverride struct {
 }
 
 // NewSetLocaleOverride constructs a new SetLocaleOverride struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setLocaleOverride
@@ -988,7 +988,7 @@ type SetTimezoneOverride struct {
 }
 
 // NewSetTimezoneOverride constructs a new SetTimezoneOverride struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setTimezoneOverride
@@ -1026,7 +1026,7 @@ type SetVisibleSize struct {
 }
 
 // NewSetVisibleSize constructs a new SetVisibleSize struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setVisibleSize
@@ -1059,7 +1059,7 @@ type SetDisabledImageTypes struct {
 }
 
 // NewSetDisabledImageTypes constructs a new SetDisabledImageTypes struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setDisabledImageTypes
@@ -1098,7 +1098,7 @@ type SetUserAgentOverride struct {
 }
 
 // NewSetUserAgentOverride constructs a new SetUserAgentOverride struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setUserAgentOverride

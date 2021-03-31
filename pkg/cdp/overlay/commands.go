@@ -19,7 +19,7 @@ import (
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-disable
@@ -43,7 +43,7 @@ func (t *Disable) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-enable
@@ -78,7 +78,7 @@ type GetHighlightObjectForTest struct {
 }
 
 // NewGetHighlightObjectForTest constructs a new GetHighlightObjectForTest struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-getHighlightObjectForTest
@@ -150,7 +150,7 @@ type GetGridHighlightObjectsForTest struct {
 }
 
 // NewGetGridHighlightObjectsForTest constructs a new GetGridHighlightObjectsForTest struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-getGridHighlightObjectsForTest
@@ -186,7 +186,7 @@ type GetSourceOrderHighlightObjectForTest struct {
 }
 
 // NewGetSourceOrderHighlightObjectForTest constructs a new GetSourceOrderHighlightObjectForTest struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-getSourceOrderHighlightObjectForTest
@@ -219,7 +219,7 @@ func (t *GetSourceOrderHighlightObjectForTest) Do(ctx context.Context) (*GetSour
 type HideHighlight struct{}
 
 // NewHideHighlight constructs a new HideHighlight struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-hideHighlight
@@ -250,7 +250,7 @@ type HighlightFrame struct {
 }
 
 // NewHighlightFrame constructs a new HighlightFrame struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightFrame
@@ -306,7 +306,7 @@ type HighlightNode struct {
 }
 
 // NewHighlightNode constructs a new HighlightNode struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightNode
@@ -375,7 +375,7 @@ type HighlightQuad struct {
 }
 
 // NewHighlightQuad constructs a new HighlightQuad struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightQuad
@@ -432,7 +432,7 @@ type HighlightRect struct {
 }
 
 // NewHighlightRect constructs a new HighlightRect struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightRect
@@ -489,7 +489,7 @@ type HighlightSourceOrder struct {
 }
 
 // NewHighlightSourceOrder constructs a new HighlightSourceOrder struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightSourceOrder
@@ -549,7 +549,7 @@ type SetInspectMode struct {
 }
 
 // NewSetInspectMode constructs a new SetInspectMode struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setInspectMode
@@ -588,7 +588,7 @@ type SetShowAdHighlights struct {
 }
 
 // NewSetShowAdHighlights constructs a new SetShowAdHighlights struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowAdHighlights
@@ -615,7 +615,7 @@ type SetPausedInDebuggerMessage struct {
 }
 
 // NewSetPausedInDebuggerMessage constructs a new SetPausedInDebuggerMessage struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setPausedInDebuggerMessage
@@ -651,7 +651,7 @@ type SetShowDebugBorders struct {
 }
 
 // NewSetShowDebugBorders constructs a new SetShowDebugBorders struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowDebugBorders
@@ -680,7 +680,7 @@ type SetShowFPSCounter struct {
 }
 
 // NewSetShowFPSCounter constructs a new SetShowFPSCounter struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowFPSCounter
@@ -709,7 +709,7 @@ type SetShowGridOverlays struct {
 }
 
 // NewSetShowGridOverlays constructs a new SetShowGridOverlays struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowGridOverlays
@@ -736,7 +736,7 @@ type SetShowFlexOverlays struct {
 }
 
 // NewSetShowFlexOverlays constructs a new SetShowFlexOverlays struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowFlexOverlays
@@ -765,7 +765,7 @@ type SetShowPaintRects struct {
 }
 
 // NewSetShowPaintRects constructs a new SetShowPaintRects struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowPaintRects
@@ -794,7 +794,7 @@ type SetShowLayoutShiftRegions struct {
 }
 
 // NewSetShowLayoutShiftRegions constructs a new SetShowLayoutShiftRegions struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowLayoutShiftRegions
@@ -823,7 +823,7 @@ type SetShowScrollBottleneckRects struct {
 }
 
 // NewSetShowScrollBottleneckRects constructs a new SetShowScrollBottleneckRects struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowScrollBottleneckRects
@@ -852,7 +852,7 @@ type SetShowHitTestBorders struct {
 }
 
 // NewSetShowHitTestBorders constructs a new SetShowHitTestBorders struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowHitTestBorders
@@ -880,7 +880,7 @@ type SetShowWebVitals struct {
 }
 
 // NewSetShowWebVitals constructs a new SetShowWebVitals struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowWebVitals
@@ -909,7 +909,7 @@ type SetShowViewportSizeOnResize struct {
 }
 
 // NewSetShowViewportSizeOnResize constructs a new SetShowViewportSizeOnResize struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowViewportSizeOnResize
@@ -938,7 +938,7 @@ type SetShowHinge struct {
 }
 
 // NewSetShowHinge constructs a new SetShowHinge struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowHinge

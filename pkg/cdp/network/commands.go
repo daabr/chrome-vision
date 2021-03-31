@@ -23,7 +23,7 @@ type SetAcceptedEncodings struct {
 }
 
 // NewSetAcceptedEncodings constructs a new SetAcceptedEncodings struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-setAcceptedEncodings
@@ -53,7 +53,7 @@ func (t *SetAcceptedEncodings) Do(ctx context.Context) error {
 type ClearAcceptedEncodingsOverride struct{}
 
 // NewClearAcceptedEncodingsOverride constructs a new ClearAcceptedEncodingsOverride struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-clearAcceptedEncodingsOverride
@@ -81,7 +81,7 @@ func (t *ClearAcceptedEncodingsOverride) Do(ctx context.Context) error {
 type CanClearBrowserCache struct{}
 
 // NewCanClearBrowserCache constructs a new CanClearBrowserCache struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-canClearBrowserCache
@@ -116,7 +116,7 @@ func (t *CanClearBrowserCache) Do(ctx context.Context) (*CanClearBrowserCacheRes
 type CanClearBrowserCookies struct{}
 
 // NewCanClearBrowserCookies constructs a new CanClearBrowserCookies struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-canClearBrowserCookies
@@ -151,7 +151,7 @@ func (t *CanClearBrowserCookies) Do(ctx context.Context) (*CanClearBrowserCookie
 type CanEmulateNetworkConditions struct{}
 
 // NewCanEmulateNetworkConditions constructs a new CanEmulateNetworkConditions struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-canEmulateNetworkConditions
@@ -184,7 +184,7 @@ func (t *CanEmulateNetworkConditions) Do(ctx context.Context) (*CanEmulateNetwor
 type ClearBrowserCache struct{}
 
 // NewClearBrowserCache constructs a new ClearBrowserCache struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-clearBrowserCache
@@ -208,7 +208,7 @@ func (t *ClearBrowserCache) Do(ctx context.Context) error {
 type ClearBrowserCookies struct{}
 
 // NewClearBrowserCookies constructs a new ClearBrowserCookies struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-clearBrowserCookies
@@ -261,7 +261,7 @@ type ContinueInterceptedRequest struct {
 }
 
 // NewContinueInterceptedRequest constructs a new ContinueInterceptedRequest struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-continueInterceptedRequest
@@ -369,7 +369,7 @@ type DeleteCookies struct {
 }
 
 // NewDeleteCookies constructs a new DeleteCookies struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-deleteCookies
@@ -423,7 +423,7 @@ func (t *DeleteCookies) Do(ctx context.Context) error {
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-disable
@@ -458,7 +458,7 @@ type EmulateNetworkConditions struct {
 }
 
 // NewEmulateNetworkConditions constructs a new EmulateNetworkConditions struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-emulateNetworkConditions
@@ -507,7 +507,7 @@ type Enable struct {
 }
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-enable
@@ -563,7 +563,7 @@ func (t *Enable) Do(ctx context.Context) error {
 type GetAllCookies struct{}
 
 // NewGetAllCookies constructs a new GetAllCookies struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getAllCookies
@@ -599,7 +599,7 @@ type GetCertificate struct {
 }
 
 // NewGetCertificate constructs a new GetCertificate struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getCertificate
@@ -639,7 +639,7 @@ type GetCookies struct {
 }
 
 // NewGetCookies constructs a new GetCookies struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getCookies
@@ -684,7 +684,7 @@ type GetResponseBody struct {
 }
 
 // NewGetResponseBody constructs a new GetResponseBody struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getResponseBody
@@ -722,7 +722,7 @@ type GetRequestPostData struct {
 }
 
 // NewGetRequestPostData constructs a new GetRequestPostData struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getRequestPostData
@@ -760,7 +760,7 @@ type GetResponseBodyForInterception struct {
 }
 
 // NewGetResponseBodyForInterception constructs a new GetResponseBodyForInterception struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getResponseBodyForInterception
@@ -804,7 +804,7 @@ type TakeResponseBodyForInterceptionAsStream struct {
 }
 
 // NewTakeResponseBodyForInterceptionAsStream constructs a new TakeResponseBodyForInterceptionAsStream struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-takeResponseBodyForInterceptionAsStream
@@ -845,7 +845,7 @@ type ReplayXHR struct {
 }
 
 // NewReplayXHR constructs a new ReplayXHR struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-replayXHR
@@ -884,7 +884,7 @@ type SearchInResponseBody struct {
 }
 
 // NewSearchInResponseBody constructs a new SearchInResponseBody struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-searchInResponseBody
@@ -943,7 +943,7 @@ type SetBlockedURLs struct {
 }
 
 // NewSetBlockedURLs constructs a new SetBlockedURLs struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-setBlockedURLs
@@ -976,7 +976,7 @@ type SetBypassServiceWorker struct {
 }
 
 // NewSetBypassServiceWorker constructs a new SetBypassServiceWorker struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-setBypassServiceWorker
@@ -1007,7 +1007,7 @@ type SetCacheDisabled struct {
 }
 
 // NewSetCacheDisabled constructs a new SetCacheDisabled struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-setCacheDisabled
@@ -1071,7 +1071,7 @@ type SetCookie struct {
 }
 
 // NewSetCookie constructs a new SetCookie struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-setCookie
@@ -1220,7 +1220,7 @@ type SetCookies struct {
 }
 
 // NewSetCookies constructs a new SetCookies struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-setCookies
@@ -1253,7 +1253,7 @@ type SetDataSizeLimitsForTest struct {
 }
 
 // NewSetDataSizeLimitsForTest constructs a new SetDataSizeLimitsForTest struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-setDataSizeLimitsForTest
@@ -1285,7 +1285,7 @@ type SetExtraHTTPHeaders struct {
 }
 
 // NewSetExtraHTTPHeaders constructs a new SetExtraHTTPHeaders struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-setExtraHTTPHeaders
@@ -1316,7 +1316,7 @@ type SetAttachDebugStack struct {
 }
 
 // NewSetAttachDebugStack constructs a new SetAttachDebugStack struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-setAttachDebugStack
@@ -1352,7 +1352,7 @@ type SetRequestInterception struct {
 }
 
 // NewSetRequestInterception constructs a new SetRequestInterception struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-setRequestInterception
@@ -1386,7 +1386,7 @@ type GetSecurityIsolationStatus struct {
 }
 
 // NewGetSecurityIsolationStatus constructs a new GetSecurityIsolationStatus struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getSecurityIsolationStatus
@@ -1436,7 +1436,7 @@ type LoadNetworkResource struct {
 }
 
 // NewLoadNetworkResource constructs a new LoadNetworkResource struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-loadNetworkResource

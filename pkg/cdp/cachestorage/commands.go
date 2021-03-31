@@ -17,7 +17,7 @@ type DeleteCache struct {
 }
 
 // NewDeleteCache constructs a new DeleteCache struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-deleteCache
@@ -48,7 +48,7 @@ type DeleteEntry struct {
 }
 
 // NewDeleteEntry constructs a new DeleteEntry struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-deleteEntry
@@ -78,7 +78,7 @@ type RequestCacheNames struct {
 }
 
 // NewRequestCacheNames constructs a new RequestCacheNames struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-requestCacheNames
@@ -118,7 +118,7 @@ type RequestCachedResponse struct {
 }
 
 // NewRequestCachedResponse constructs a new RequestCachedResponse struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-requestCachedResponse
@@ -162,7 +162,7 @@ type RequestEntries struct {
 }
 
 // NewRequestEntries constructs a new RequestEntries struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-requestEntries

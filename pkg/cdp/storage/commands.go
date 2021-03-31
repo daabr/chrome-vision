@@ -22,7 +22,7 @@ type ClearDataForOrigin struct {
 }
 
 // NewClearDataForOrigin constructs a new ClearDataForOrigin struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-clearDataForOrigin
@@ -52,7 +52,7 @@ type GetCookies struct {
 }
 
 // NewGetCookies constructs a new GetCookies struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-getCookies
@@ -97,7 +97,7 @@ type SetCookies struct {
 }
 
 // NewSetCookies constructs a new SetCookies struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-setCookies
@@ -135,7 +135,7 @@ type ClearCookies struct {
 }
 
 // NewClearCookies constructs a new ClearCookies struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-clearCookies
@@ -171,7 +171,7 @@ type GetUsageAndQuota struct {
 }
 
 // NewGetUsageAndQuota constructs a new GetUsageAndQuota struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-getUsageAndQuota
@@ -223,7 +223,7 @@ type OverrideQuotaForOrigin struct {
 }
 
 // NewOverrideQuotaForOrigin constructs a new OverrideQuotaForOrigin struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-overrideQuotaForOrigin
@@ -269,7 +269,7 @@ type TrackCacheStorageForOrigin struct {
 }
 
 // NewTrackCacheStorageForOrigin constructs a new TrackCacheStorageForOrigin struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-trackCacheStorageForOrigin
@@ -298,7 +298,7 @@ type TrackIndexedDBForOrigin struct {
 }
 
 // NewTrackIndexedDBForOrigin constructs a new TrackIndexedDBForOrigin struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-trackIndexedDBForOrigin
@@ -327,7 +327,7 @@ type UntrackCacheStorageForOrigin struct {
 }
 
 // NewUntrackCacheStorageForOrigin constructs a new UntrackCacheStorageForOrigin struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-untrackCacheStorageForOrigin
@@ -356,7 +356,7 @@ type UntrackIndexedDBForOrigin struct {
 }
 
 // NewUntrackIndexedDBForOrigin constructs a new UntrackIndexedDBForOrigin struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-untrackIndexedDBForOrigin
@@ -385,7 +385,7 @@ func (t *UntrackIndexedDBForOrigin) Do(ctx context.Context) error {
 type GetTrustTokens struct{}
 
 // NewGetTrustTokens constructs a new GetTrustTokens struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-getTrustTokens
@@ -422,7 +422,7 @@ type ClearTrustTokens struct {
 }
 
 // NewClearTrustTokens constructs a new ClearTrustTokens struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-clearTrustTokens

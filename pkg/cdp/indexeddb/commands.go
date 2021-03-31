@@ -21,7 +21,7 @@ type ClearObjectStore struct {
 }
 
 // NewClearObjectStore constructs a new ClearObjectStore struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#method-clearObjectStore
@@ -54,7 +54,7 @@ type DeleteDatabase struct {
 }
 
 // NewDeleteDatabase constructs a new DeleteDatabase struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#method-deleteDatabase
@@ -87,7 +87,7 @@ type DeleteObjectStoreEntries struct {
 }
 
 // NewDeleteObjectStoreEntries constructs a new DeleteObjectStoreEntries struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#method-deleteObjectStoreEntries
@@ -116,7 +116,7 @@ func (t *DeleteObjectStoreEntries) Do(ctx context.Context) error {
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#method-disable
@@ -140,7 +140,7 @@ func (t *Disable) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#method-enable
@@ -179,7 +179,7 @@ type RequestData struct {
 }
 
 // NewRequestData constructs a new RequestData struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#method-requestData
@@ -235,7 +235,7 @@ type GetMetadata struct {
 }
 
 // NewGetMetadata constructs a new GetMetadata struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#method-getMetadata
@@ -279,7 +279,7 @@ type RequestDatabase struct {
 }
 
 // NewRequestDatabase constructs a new RequestDatabase struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#method-requestDatabase
@@ -316,7 +316,7 @@ type RequestDatabaseNames struct {
 }
 
 // NewRequestDatabaseNames constructs a new RequestDatabaseNames struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#method-requestDatabaseNames

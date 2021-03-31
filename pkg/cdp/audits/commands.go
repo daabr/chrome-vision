@@ -26,7 +26,7 @@ type GetEncodedResponse struct {
 }
 
 // NewGetEncodedResponse constructs a new GetEncodedResponse struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#method-getEncodedResponse
@@ -82,7 +82,7 @@ func (t *GetEncodedResponse) Do(ctx context.Context) (*GetEncodedResponseRespons
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#method-disable
@@ -107,7 +107,7 @@ func (t *Disable) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#method-enable
@@ -135,7 +135,7 @@ type CheckContrast struct {
 }
 
 // NewCheckContrast constructs a new CheckContrast struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#method-checkContrast

@@ -54,7 +54,7 @@ type DispatchKeyEvent struct {
 }
 
 // NewDispatchKeyEvent constructs a new DispatchKeyEvent struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-dispatchKeyEvent
@@ -221,7 +221,7 @@ type InsertText struct {
 }
 
 // NewInsertText constructs a new InsertText struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-insertText
@@ -295,7 +295,7 @@ type DispatchMouseEvent struct {
 }
 
 // NewDispatchMouseEvent constructs a new DispatchMouseEvent struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-dispatchMouseEvent
@@ -465,7 +465,7 @@ type DispatchTouchEvent struct {
 }
 
 // NewDispatchTouchEvent constructs a new DispatchTouchEvent struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-dispatchTouchEvent
@@ -533,7 +533,7 @@ type EmulateTouchFromMouseEvent struct {
 }
 
 // NewEmulateTouchFromMouseEvent constructs a new EmulateTouchFromMouseEvent struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-emulateTouchFromMouseEvent
@@ -613,7 +613,7 @@ type SetIgnoreInputEvents struct {
 }
 
 // NewSetIgnoreInputEvents constructs a new SetIgnoreInputEvents struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-setIgnoreInputEvents
@@ -653,7 +653,7 @@ type SynthesizePinchGesture struct {
 }
 
 // NewSynthesizePinchGesture constructs a new SynthesizePinchGesture struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-synthesizePinchGesture
@@ -732,7 +732,7 @@ type SynthesizeScrollGesture struct {
 }
 
 // NewSynthesizeScrollGesture constructs a new SynthesizeScrollGesture struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-synthesizeScrollGesture
@@ -868,7 +868,7 @@ type SynthesizeTapGesture struct {
 }
 
 // NewSynthesizeTapGesture constructs a new SynthesizeTapGesture struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-synthesizeTapGesture

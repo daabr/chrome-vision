@@ -17,7 +17,7 @@ type Bind struct {
 }
 
 // NewBind constructs a new Bind struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tethering/#method-bind
@@ -46,7 +46,7 @@ type Unbind struct {
 }
 
 // NewUnbind constructs a new Unbind struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tethering/#method-unbind

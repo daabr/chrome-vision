@@ -159,7 +159,7 @@ func generateImport(b *strings.Builder, n int, s string) {
 func adjust(s string) string {
 	// "-" enables word capitalization by string.Title(), "_" doesn't.
 	s = strings.Title(strings.ReplaceAll(s, "_", "-"))
-	// https://golang.org/doc/effective_go#mixed-caps
+	// See https://golang.org/doc/effective_go#mixed-caps.
 	s = strings.ReplaceAll(s, "-", "")
 
 	re := regexp.MustCompile(`(Id)$`)

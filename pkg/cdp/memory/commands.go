@@ -12,7 +12,7 @@ import (
 type GetDOMCounters struct{}
 
 // NewGetDOMCounters constructs a new GetDOMCounters struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#method-getDOMCounters
@@ -42,7 +42,7 @@ func (t *GetDOMCounters) Do(ctx context.Context) (*GetDOMCountersResponse, error
 type PrepareForLeakDetection struct{}
 
 // NewPrepareForLeakDetection constructs a new PrepareForLeakDetection struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#method-prepareForLeakDetection
@@ -66,7 +66,7 @@ func (t *PrepareForLeakDetection) Do(ctx context.Context) error {
 type ForciblyPurgeJavaScriptMemory struct{}
 
 // NewForciblyPurgeJavaScriptMemory constructs a new ForciblyPurgeJavaScriptMemory struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#method-forciblyPurgeJavaScriptMemory
@@ -93,7 +93,7 @@ type SetPressureNotificationsSuppressed struct {
 }
 
 // NewSetPressureNotificationsSuppressed constructs a new SetPressureNotificationsSuppressed struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#method-setPressureNotificationsSuppressed
@@ -122,7 +122,7 @@ type SimulatePressureNotification struct {
 }
 
 // NewSimulatePressureNotification constructs a new SimulatePressureNotification struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#method-simulatePressureNotification
@@ -153,7 +153,7 @@ type StartSampling struct {
 }
 
 // NewStartSampling constructs a new StartSampling struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#method-startSampling
@@ -195,7 +195,7 @@ func (t *StartSampling) Do(ctx context.Context) error {
 type StopSampling struct{}
 
 // NewStopSampling constructs a new StopSampling struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#method-stopSampling
@@ -220,7 +220,7 @@ func (t *StopSampling) Do(ctx context.Context) error {
 type GetAllTimeSamplingProfile struct{}
 
 // NewGetAllTimeSamplingProfile constructs a new GetAllTimeSamplingProfile struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#method-getAllTimeSamplingProfile
@@ -251,7 +251,7 @@ func (t *GetAllTimeSamplingProfile) Do(ctx context.Context) (*GetAllTimeSampling
 type GetBrowserSamplingProfile struct{}
 
 // NewGetBrowserSamplingProfile constructs a new GetBrowserSamplingProfile struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#method-getBrowserSamplingProfile
@@ -282,7 +282,7 @@ func (t *GetBrowserSamplingProfile) Do(ctx context.Context) (*GetBrowserSampling
 type GetSamplingProfile struct{}
 
 // NewGetSamplingProfile constructs a new GetSamplingProfile struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#method-getSamplingProfile

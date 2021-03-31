@@ -15,7 +15,7 @@ import (
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-enable
@@ -39,7 +39,7 @@ func (t *Enable) Do(ctx context.Context) error {
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-disable
@@ -65,7 +65,7 @@ type AddVirtualAuthenticator struct {
 }
 
 // NewAddVirtualAuthenticator constructs a new AddVirtualAuthenticator struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-addVirtualAuthenticator
@@ -99,7 +99,7 @@ type RemoveVirtualAuthenticator struct {
 }
 
 // NewRemoveVirtualAuthenticator constructs a new RemoveVirtualAuthenticator struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-removeVirtualAuthenticator
@@ -128,7 +128,7 @@ type AddCredential struct {
 }
 
 // NewAddCredential constructs a new AddCredential struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-addCredential
@@ -159,7 +159,7 @@ type GetCredential struct {
 }
 
 // NewGetCredential constructs a new GetCredential struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-getCredential
@@ -194,7 +194,7 @@ type GetCredentials struct {
 }
 
 // NewGetCredentials constructs a new GetCredentials struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-getCredentials
@@ -229,7 +229,7 @@ type RemoveCredential struct {
 }
 
 // NewRemoveCredential constructs a new RemoveCredential struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-removeCredential
@@ -258,7 +258,7 @@ type ClearCredentials struct {
 }
 
 // NewClearCredentials constructs a new ClearCredentials struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-clearCredentials
@@ -288,7 +288,7 @@ type SetUserVerified struct {
 }
 
 // NewSetUserVerified constructs a new SetUserVerified struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-setUserVerified
@@ -319,7 +319,7 @@ type SetAutomaticPresenceSimulation struct {
 }
 
 // NewSetAutomaticPresenceSimulation constructs a new SetAutomaticPresenceSimulation struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-setAutomaticPresenceSimulation

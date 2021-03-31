@@ -12,7 +12,7 @@ import (
 type Disable struct{}
 
 // NewDisable constructs a new Disable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-disable
@@ -34,7 +34,7 @@ func (t *Disable) Do(ctx context.Context) error {
 type Enable struct{}
 
 // NewEnable constructs a new Enable struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-enable
@@ -59,7 +59,7 @@ func (t *Enable) Do(ctx context.Context) error {
 type GetBestEffortCoverage struct{}
 
 // NewGetBestEffortCoverage constructs a new GetBestEffortCoverage struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-getBestEffortCoverage
@@ -93,7 +93,7 @@ type SetSamplingInterval struct {
 }
 
 // NewSetSamplingInterval constructs a new SetSamplingInterval struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-setSamplingInterval
@@ -117,7 +117,7 @@ func (t *SetSamplingInterval) Do(ctx context.Context) error {
 type Start struct{}
 
 // NewStart constructs a new Start struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-start
@@ -150,7 +150,7 @@ type StartPreciseCoverage struct {
 }
 
 // NewStartPreciseCoverage constructs a new StartPreciseCoverage struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-startPreciseCoverage
@@ -210,7 +210,7 @@ func (t *StartPreciseCoverage) Do(ctx context.Context) (*StartPreciseCoverageRes
 type StartTypeProfile struct{}
 
 // NewStartTypeProfile constructs a new StartTypeProfile struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-startTypeProfile
@@ -234,7 +234,7 @@ func (t *StartTypeProfile) Do(ctx context.Context) error {
 type Stop struct{}
 
 // NewStop constructs a new Stop struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-stop
@@ -266,7 +266,7 @@ func (t *Stop) Do(ctx context.Context) (*StopResponse, error) {
 type StopPreciseCoverage struct{}
 
 // NewStopPreciseCoverage constructs a new StopPreciseCoverage struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-stopPreciseCoverage
@@ -292,7 +292,7 @@ func (t *StopPreciseCoverage) Do(ctx context.Context) error {
 type StopTypeProfile struct{}
 
 // NewStopTypeProfile constructs a new StopTypeProfile struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-stopTypeProfile
@@ -319,7 +319,7 @@ func (t *StopTypeProfile) Do(ctx context.Context) error {
 type TakePreciseCoverage struct{}
 
 // NewTakePreciseCoverage constructs a new TakePreciseCoverage struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-takePreciseCoverage
@@ -354,7 +354,7 @@ func (t *TakePreciseCoverage) Do(ctx context.Context) (*TakePreciseCoverageRespo
 type TakeTypeProfile struct{}
 
 // NewTakeTypeProfile constructs a new TakeTypeProfile struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-takeTypeProfile
@@ -389,7 +389,7 @@ func (t *TakeTypeProfile) Do(ctx context.Context) (*TakeTypeProfileResponse, err
 type EnableCounters struct{}
 
 // NewEnableCounters constructs a new EnableCounters struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-enableCounters
@@ -417,7 +417,7 @@ func (t *EnableCounters) Do(ctx context.Context) error {
 type DisableCounters struct{}
 
 // NewDisableCounters constructs a new DisableCounters struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-disableCounters
@@ -445,7 +445,7 @@ func (t *DisableCounters) Do(ctx context.Context) error {
 type GetCounters struct{}
 
 // NewGetCounters constructs a new GetCounters struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-getCounters
@@ -480,7 +480,7 @@ func (t *GetCounters) Do(ctx context.Context) (*GetCountersResponse, error) {
 type EnableRuntimeCallStats struct{}
 
 // NewEnableRuntimeCallStats constructs a new EnableRuntimeCallStats struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-enableRuntimeCallStats
@@ -508,7 +508,7 @@ func (t *EnableRuntimeCallStats) Do(ctx context.Context) error {
 type DisableRuntimeCallStats struct{}
 
 // NewDisableRuntimeCallStats constructs a new DisableRuntimeCallStats struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-disableRuntimeCallStats
@@ -536,7 +536,7 @@ func (t *DisableRuntimeCallStats) Do(ctx context.Context) error {
 type GetRuntimeCallStats struct{}
 
 // NewGetRuntimeCallStats constructs a new GetRuntimeCallStats struct instance, with
-// all the required parameters, and only them. Optional parameters
+// all (but only) the required parameters. Optional parameters
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-getRuntimeCallStats
