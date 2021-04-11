@@ -20,7 +20,7 @@ import (
 )
 
 func main() {
-	files := []string{"browser_protocol.json", "js_protocol.json"}
+	files := [...]string{"browser_protocol.json", "js_protocol.json"}
 	for _, f := range files {
 		bytes, err := os.ReadFile(f)
 		if err != nil {

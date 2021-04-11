@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"regexp"
 	"sort"
 	"strings"
@@ -106,7 +107,7 @@ func writeFile(dir, file, content string) {
 	if err := os.MkdirAll(dir, 0755); err != nil {
 		log.Fatal(err)
 	}
-	f, err := os.OpenFile(dir+"/"+file, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0644)
+	f, err := os.Create(filepath.Join(dir, file))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -153,9 +154,8 @@ func generateImport(b *strings.Builder, n int, s string) {
 	fmt.Fprintf(b, "%q\n", s)
 }
 
-// adjust applies Go naming conventions to CDP types and
-// struct field names, and resolves circular dependencies
-// (https://bugs.chromium.org/p/chromium/issues/detail?id=1193242).
+// adjust applies Go naming conventions to CDP types and struct field names,
+// and resolves circular dependencies (https://crbug.com/1193242).
 func adjust(s string) string {
 	// "-" enables word capitalization by string.Title(), "_" doesn't.
 	s = strings.Title(strings.ReplaceAll(s, "_", "-"))
@@ -171,8 +171,7 @@ func adjust(s string) string {
 		re := regexp.MustCompile(`^(.*)\.`)
 		s = re.ReplaceAllStringFunc(s, strings.ToLower)
 
-		// Resolve circular dependencies
-		// (https://bugs.chromium.org/p/chromium/issues/detail?id=1193242).
+		// Resolve circular dependencies (https://crbug.com/1193242).
 		s = strings.ReplaceAll(s, "network.TimeSinceEpoch", "cdp.TimeSinceEpoch")
 		s = strings.ReplaceAll(s, "page.FrameID", "cdp.FrameID")
 		s = strings.ReplaceAll(s, "target.TargetID", "cdp.TargetID")
