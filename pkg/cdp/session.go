@@ -33,7 +33,7 @@ type Session struct {
 
 	msgLog *log.Logger
 	msgID  int64
-	msgQ   chan asyncMessage
+	msgQ   chan asyncMessage // https://blog.golang.org/codelab-share
 }
 
 type sessionKey struct{}

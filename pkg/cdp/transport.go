@@ -36,8 +36,8 @@ type Message struct {
 }
 
 type asyncMessage struct {
-	m Message
-	c chan<- Message
+	msg Message
+	out chan<- Message
 }
 
 // Called as a goroutine in browser.go.
@@ -71,24 +71,24 @@ func scanMessages(data []byte, atEOF bool) (int, []byte, error) {
 	return 0, nil, nil
 }
 
-// Called in a goroutine in session.go.
-func sendToPipe(s *Session, a asyncMessage) {
+// Called in a goroutine in session.go (https://blog.golang.org/codelab-share).
+func sendToPipe(s *Session, async asyncMessage) {
 	// Discard malformed data.
-	if len(a.m.Method) == 0 {
-		log.Printf("Discarding malformed message: %v\n", a.m)
-		if a.c != nil {
+	if len(async.msg.Method) == 0 {
+		log.Printf("Discarding malformed message: %v\n", async.msg)
+		if async.out != nil {
 			m := Message{ID: s.msgID, Error: &Error{}}
-			m.Error.Message = fmt.Sprintf("malformed message: %v", a.m)
-			a.c <- m
+			m.Error.Message = fmt.Sprintf("malformed message: %v", async.msg)
+			async.out <- m
 		}
 		return
 	}
 	// Construct the JSON message.
-	a.m.ID = s.msgID
-	b, err := json.Marshal(a.m)
+	async.msg.ID = s.msgID
+	b, err := json.Marshal(async.msg)
 	if err != nil {
 		m := Message{ID: s.msgID, Error: &Error{Message: err.Error()}}
-		a.c <- m
+		async.out <- m
 		return
 	}
 	// Send the JSON message.
@@ -96,31 +96,35 @@ func sendToPipe(s *Session, a asyncMessage) {
 	n, err := s.browserInputWriter.Write(b)
 	if err != nil {
 		m := Message{ID: s.msgID, Error: &Error{Message: err.Error()}}
-		a.c <- m
+		async.out <- m
 		return
 	}
 	if n < len(b) {
 		m := Message{ID: s.msgID, Error: &Error{}}
 		m.Error.Message = fmt.Sprintf("sent %d bytes instead of %d", n, len(b))
+		// Don't return like other errors - send \0 and expect an error result.
 	}
 	// Send \0 to mark the end of the message.
 	n, err = s.browserInputWriter.Write([]byte("\000"))
 	if err != nil {
 		m := Message{ID: s.msgID, Error: &Error{Message: err.Error()}}
-		a.c <- m
+		async.out <- m
 		return
 	}
 	if n != 1 {
 		m := Message{ID: s.msgID, Error: &Error{}}
-		m.Error.Message = fmt.Sprintf("sent %d bytes instead of 1", n)
+		m.Error.Message = fmt.Sprintf(`sent %d bytes instead of one \0`, n)
+		async.out <- m
+		return
 	}
 	// Success
 	s.msgLog.Printf("-> %s\n", b)
-	a.c <- Message{ID: s.msgID}
+	async.out <- Message{ID: s.msgID}
 }
 
 // Send constructs and sends a JSON message to the browser associated with the
-// given context, and returns the auto-assigned ID used for that message.
+// given context, and returns the auto-assigned ID used for that message. This
+// is guaranteed to be thread-safe.
 //
 // TODO: block and return result message?
 func Send(ctx context.Context, method string, params json.RawMessage) (int64, error) {
@@ -128,12 +132,10 @@ func Send(ctx context.Context, method string, params json.RawMessage) (int64, er
 	if !ok {
 		return 0, errors.New("context not initialized with cdp.NewContext")
 	}
-	m := Message{Method: method}
-	if len(params) > 0 {
-		m.Params = params
-	}
-	c := make(chan Message)
-	session.msgQ <- asyncMessage{m: m, c: c}
-	m = <-c
+	m := Message{Method: method, Params: params}
+	out := make(chan Message)
+	// https://blog.golang.org/codelab-share
+	session.msgQ <- asyncMessage{msg: m, out: out}
+	m = <-out
 	return m.ID, nil
 }
