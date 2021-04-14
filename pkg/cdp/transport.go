@@ -26,7 +26,7 @@ func (e *Error) Error() string {
 	return fmt.Sprintf("%s (%d)", e.Message, e.Code)
 }
 
-// CDP message sent to or received from the browser.
+// Message is a CDP message sent to or received from the browser.
 type Message struct {
 	ID     int64           `json:"id,omitempty"`
 	Method string          `json:"method,omitempty"`
@@ -117,7 +117,7 @@ func sendToPipe(s *Session, async asyncMessage) {
 		async.out <- m
 		return
 	}
-	// Success
+	// Success.
 	s.msgLog.Printf("-> %s\n", b)
 	async.out <- Message{ID: s.msgID}
 }
