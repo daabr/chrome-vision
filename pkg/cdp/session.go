@@ -26,10 +26,14 @@ type Session struct {
 
 	browserPath  *string
 	browserFlags map[string]interface{}
-	// TODO: environment variables
-	BrowserDone chan struct{}
+	// TODO: environment variables.
+	browserDone chan struct{}
 
-	browserInputWrite, browserOutputRead *os.File
+	browserInputWriter, browserOutputReader *os.File
+
+	msgLog *log.Logger
+	msgID  int64
+	msgQ   chan asyncMessage
 }
 
 type sessionKey struct{}
@@ -72,9 +76,12 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 		session.cancel = ps.cancel
 		session.OutputDir = ps.OutputDir
 		session.UserDataDir = ps.UserDataDir
-		session.BrowserDone = ps.BrowserDone
-		session.browserInputWrite = ps.browserInputWrite
-		session.browserOutputRead = ps.browserOutputRead
+		session.browserDone = ps.browserDone
+		session.browserInputWriter = ps.browserInputWriter
+		session.browserOutputReader = ps.browserOutputReader
+		session.msgLog = ps.msgLog
+		session.msgID = ps.msgID
+		session.msgQ = ps.msgQ
 	} else {
 		// Construct a new session.
 
@@ -89,6 +96,37 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 			return parent, err
 		}
 		session.OutputDir = &path
+		// Initialize a new log file for incoming/outgoing JSON messages.
+		f, err := os.Create(filepath.Join(path, "cdp_json.log"))
+		if err != nil {
+			return parent, fmt.Errorf("failed to initialize CDP log file: %v", err)
+		}
+		session.msgLog = log.New(f, "", log.Ldate|log.Ltime|log.Lmicroseconds)
+		// Start a new browser.
+		if err := start(ctx, session); err != nil {
+			return parent, err
+		}
+		// Initialize channel to send JSON messages to the browser.
+		session.msgID = 1
+		session.msgQ = make(chan asyncMessage)
+		go func(s *Session) {
+			for {
+				asyncMsg, ok := <-s.msgQ
+				if !ok {
+					return
+				}
+				sendToPipe(s, asyncMsg)
+				s.msgID++
+			}
+		}(session)
+		// Report when the context will be canceled. No need to clean-up
+		// anything: the cancelation of the context automatically kills the
+		// browser, which triggers its own cleanup: see the goroutine at the
+		// bottom of the start function in browser.go.
+		go func() {
+			<-ctx.Done()
+			log.Printf("CDP context ending reason: %v\n", ctx.Err())
+		}()
 	}
 
 	return ctx, nil

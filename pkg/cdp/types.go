@@ -1,9 +1,3 @@
-// Package cdp provides Go bindings for all the commands, events and
-// types in the Chrome DevTools Protocol (CDP) - from the latest Chromium
-// "tip-of-tree" (tot) definitions (see the details and API documentation
-// in https://chromedevtools.github.io/devtools-protocol/tot, mirrored in
-// https://github.com/ChromeDevTools/devtools-protocol). Each sub-package
-// here corresponds to a single "domain" in the CDP.
 package cdp
 
 // UTC time in seconds, counted from January 1, 1970.
