@@ -20,13 +20,17 @@ const OutputRootEnv = "CDP_OUTPUT_ROOT"
 // Session contains CDP runtime details, stored in a context.Context,
 // and retrievable with the cdp.FromContext function.
 type Session struct {
+	// For immediate canceling of the context returned by cdp.NewContext,
+	// and any descendant contexts, when the browser process ends.
 	cancel context.CancelFunc
 
 	OutputDir, UserDataDir *string
 
+	// Browser execution details.
 	browserPath  *string
 	browserFlags map[string]interface{}
 	// TODO: environment variables.
+
 	browserDone chan struct{}
 
 	browserInputWriter, browserOutputReader *os.File
@@ -34,6 +38,8 @@ type Session struct {
 	msgLog *log.Logger
 	msgID  int64
 	msgQ   chan asyncMessage // https://blog.golang.org/codelab-share
+
+	responseSubscribers map[int64]chan *Message
 }
 
 type sessionKey struct{}
@@ -74,14 +80,19 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 	if ps, ok := FromContext(parent); ok {
 		// Reuse the existing session stored in the parent context.
 		session.cancel = ps.cancel
+
 		session.OutputDir = ps.OutputDir
 		session.UserDataDir = ps.UserDataDir
+
 		session.browserDone = ps.browserDone
 		session.browserInputWriter = ps.browserInputWriter
 		session.browserOutputReader = ps.browserOutputReader
+
 		session.msgLog = ps.msgLog
 		session.msgID = ps.msgID
 		session.msgQ = ps.msgQ
+
+		session.responseSubscribers = ps.responseSubscribers
 	} else {
 		// Construct a new session.
 
@@ -106,13 +117,16 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 		if err := start(ctx, session); err != nil {
 			return parent, err
 		}
-		// Initialize channel to send JSON messages to the browser.
+		// Initialize a channel to send JSON messages to the browser.
 		session.msgID = 1
 		session.msgQ = make(chan asyncMessage)
+		session.responseSubscribers = make(map[int64]chan *Message)
 		go func(s *Session) {
 			for {
 				asyncMsg, ok := <-s.msgQ
 				if !ok {
+					// s.msgQ is closed when the browser process ends (see the
+					// goroutine at the bottom of the start function in browser.go).
 					return
 				}
 				sendToPipe(s, asyncMsg)
