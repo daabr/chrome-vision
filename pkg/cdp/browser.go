@@ -90,7 +90,7 @@ func start(ctx context.Context, s *Session) error {
 	// On POSIX-compliant operating systems, start using the
 	// previously-prepared pipes to communicate with the browser.
 	if runtime.GOOS != "windows" {
-		go receiveFromPipe(s.browserOutputReader, s.msgLog)
+		go receiveFromPipe(s)
 	}
 	// TODO: use websockets otherwise.
 
@@ -104,11 +104,13 @@ func start(ctx context.Context, s *Session) error {
 		} else {
 			log.Println("Browser process has ended without an error")
 		}
+
 		close(s.msgQ)
 		s.browserInputWriter.Close()
 		s.browserOutputReader.Close()
 		s.msgLog.Writer().(*os.File).Sync()
 		s.msgLog.Writer().(*os.File).Close()
+
 		close(s.browserDone)
 		s.cancel()
 	}(s, cmd)
