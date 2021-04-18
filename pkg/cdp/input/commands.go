@@ -2,8 +2,76 @@ package input
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
+
+// DispatchDragEvent contains the parameters, and acts as
+// a Go receiver, for the CDP command `dispatchDragEvent`.
+//
+// Dispatches a drag event into the page.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-dispatchDragEvent
+//
+// This CDP method is experimental.
+type DispatchDragEvent struct {
+	// Type of the drag event.
+	Type string `json:"type"`
+	// X coordinate of the event relative to the main frame's viewport in CSS pixels.
+	X float64 `json:"x"`
+	// Y coordinate of the event relative to the main frame's viewport in CSS pixels. 0 refers to
+	// the top of the viewport and Y increases as it proceeds towards the bottom of the viewport.
+	Y    float64  `json:"y"`
+	Data DragData `json:"data"`
+	// Bit field representing pressed modifier keys. Alt=1, Ctrl=2, Meta/Command=4, Shift=8
+	// (default: 0).
+	Modifiers int64 `json:"modifiers,omitempty"`
+}
+
+// NewDispatchDragEvent constructs a new DispatchDragEvent struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-dispatchDragEvent
+//
+// This CDP method is experimental.
+func NewDispatchDragEvent(t string, x float64, y float64, data DragData) *DispatchDragEvent {
+	return &DispatchDragEvent{
+		Type: t,
+		X:    x,
+		Y:    y,
+		Data: data,
+	}
+}
+
+// SetModifiers adds or modifies the value of the optional
+// parameter `modifiers` in the DispatchDragEvent CDP command.
+//
+// Bit field representing pressed modifier keys. Alt=1, Ctrl=2, Meta/Command=4, Shift=8
+// (default: 0).
+func (t *DispatchDragEvent) SetModifiers(v int64) *DispatchDragEvent {
+	t.Modifiers = v
+	return t
+}
+
+// Do sends the DispatchDragEvent CDP command to a browser,
+// and returns the browser's response.
+func (t *DispatchDragEvent) Do(ctx context.Context) error {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "DispatchDragEvent", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
+	return nil
+}
 
 // DispatchKeyEvent contains the parameters, and acts as
 // a Go receiver, for the CDP command `dispatchKeyEvent`.
@@ -202,7 +270,17 @@ func (t *DispatchKeyEvent) SetCommands(v []string) *DispatchKeyEvent {
 // Do sends the DispatchKeyEvent CDP command to a browser,
 // and returns the browser's response.
 func (t *DispatchKeyEvent) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "DispatchKeyEvent", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -236,7 +314,17 @@ func NewInsertText(text string) *InsertText {
 // Do sends the InsertText CDP command to a browser,
 // and returns the browser's response.
 func (t *InsertText) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "InsertText", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -439,7 +527,17 @@ func (t *DispatchMouseEvent) SetPointerType(v string) *DispatchMouseEvent {
 // Do sends the DispatchMouseEvent CDP command to a browser,
 // and returns the browser's response.
 func (t *DispatchMouseEvent) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "DispatchMouseEvent", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -498,7 +596,17 @@ func (t *DispatchTouchEvent) SetTimestamp(v TimeSinceEpoch) *DispatchTouchEvent 
 // Do sends the DispatchTouchEvent CDP command to a browser,
 // and returns the browser's response.
 func (t *DispatchTouchEvent) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "DispatchTouchEvent", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -597,7 +705,17 @@ func (t *EmulateTouchFromMouseEvent) SetClickCount(v int64) *EmulateTouchFromMou
 // Do sends the EmulateTouchFromMouseEvent CDP command to a browser,
 // and returns the browser's response.
 func (t *EmulateTouchFromMouseEvent) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "EmulateTouchFromMouseEvent", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -626,7 +744,60 @@ func NewSetIgnoreInputEvents(ignore bool) *SetIgnoreInputEvents {
 // Do sends the SetIgnoreInputEvents CDP command to a browser,
 // and returns the browser's response.
 func (t *SetIgnoreInputEvents) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetIgnoreInputEvents", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
+	return nil
+}
+
+// SetInterceptDrags contains the parameters, and acts as
+// a Go receiver, for the CDP command `setInterceptDrags`.
+//
+// Prevents default drag and drop behavior and instead emits `Input.dragIntercepted` events.
+// Drag and drop behavior can be directly controlled via `Input.dispatchDragEvent`.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-setInterceptDrags
+//
+// This CDP method is experimental.
+type SetInterceptDrags struct {
+	Enabled bool `json:"enabled"`
+}
+
+// NewSetInterceptDrags constructs a new SetInterceptDrags struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-setInterceptDrags
+//
+// This CDP method is experimental.
+func NewSetInterceptDrags(enabled bool) *SetInterceptDrags {
+	return &SetInterceptDrags{
+		Enabled: enabled,
+	}
+}
+
+// Do sends the SetInterceptDrags CDP command to a browser,
+// and returns the browser's response.
+func (t *SetInterceptDrags) Do(ctx context.Context) error {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetInterceptDrags", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -689,7 +860,17 @@ func (t *SynthesizePinchGesture) SetGestureSourceType(v GestureSourceType) *Synt
 // Do sends the SynthesizePinchGesture CDP command to a browser,
 // and returns the browser's response.
 func (t *SynthesizePinchGesture) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SynthesizePinchGesture", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -841,7 +1022,17 @@ func (t *SynthesizeScrollGesture) SetInteractionMarkerName(v string) *Synthesize
 // Do sends the SynthesizeScrollGesture CDP command to a browser,
 // and returns the browser's response.
 func (t *SynthesizeScrollGesture) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SynthesizeScrollGesture", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -912,6 +1103,16 @@ func (t *SynthesizeTapGesture) SetGestureSourceType(v GestureSourceType) *Synthe
 // Do sends the SynthesizeTapGesture CDP command to a browser,
 // and returns the browser's response.
 func (t *SynthesizeTapGesture) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SynthesizeTapGesture", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

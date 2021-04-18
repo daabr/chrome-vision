@@ -2,7 +2,8 @@ package browser
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
 
 	"github.com/daabr/chrome-vision/pkg/cdp"
 )
@@ -61,7 +62,17 @@ func (t *SetPermission) SetBrowserContextID(v BrowserContextID) *SetPermission {
 // Do sends the SetPermission CDP command to a browser,
 // and returns the browser's response.
 func (t *SetPermission) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetPermission", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -115,7 +126,17 @@ func (t *GrantPermissions) SetBrowserContextID(v BrowserContextID) *GrantPermiss
 // Do sends the GrantPermissions CDP command to a browser,
 // and returns the browser's response.
 func (t *GrantPermissions) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "GrantPermissions", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -155,7 +176,17 @@ func (t *ResetPermissions) SetBrowserContextID(v BrowserContextID) *ResetPermiss
 // Do sends the ResetPermissions CDP command to a browser,
 // and returns the browser's response.
 func (t *ResetPermissions) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ResetPermissions", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -177,6 +208,8 @@ type SetDownloadBehavior struct {
 	// The default path to save downloaded files to. This is requred if behavior is set to 'allow'
 	// or 'allowAndName'.
 	DownloadPath string `json:"downloadPath,omitempty"`
+	// Whether to emit download events (defaults to false).
+	EventsEnabled bool `json:"eventsEnabled,omitempty"`
 }
 
 // NewSetDownloadBehavior constructs a new SetDownloadBehavior struct instance, with
@@ -211,10 +244,29 @@ func (t *SetDownloadBehavior) SetDownloadPath(v string) *SetDownloadBehavior {
 	return t
 }
 
+// SetEventsEnabled adds or modifies the value of the optional
+// parameter `eventsEnabled` in the SetDownloadBehavior CDP command.
+//
+// Whether to emit download events (defaults to false).
+func (t *SetDownloadBehavior) SetEventsEnabled(v bool) *SetDownloadBehavior {
+	t.EventsEnabled = v
+	return t
+}
+
 // Do sends the SetDownloadBehavior CDP command to a browser,
 // and returns the browser's response.
 func (t *SetDownloadBehavior) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetDownloadBehavior", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -258,7 +310,17 @@ func (t *CancelDownload) SetBrowserContextID(v BrowserContextID) *CancelDownload
 // Do sends the CancelDownload CDP command to a browser,
 // and returns the browser's response.
 func (t *CancelDownload) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "CancelDownload", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -282,7 +344,13 @@ func NewClose() *Close {
 // Do sends the Close CDP command to a browser,
 // and returns the browser's response.
 func (t *Close) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Close", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -310,7 +378,13 @@ func NewCrash() *Crash {
 // Do sends the Crash CDP command to a browser,
 // and returns the browser's response.
 func (t *Crash) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Crash", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -338,7 +412,13 @@ func NewCrashGpuProcess() *CrashGpuProcess {
 // Do sends the CrashGpuProcess CDP command to a browser,
 // and returns the browser's response.
 func (t *CrashGpuProcess) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "CrashGpuProcess", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -377,8 +457,18 @@ type GetVersionResponse struct {
 // Do sends the GetVersion CDP command to a browser,
 // and returns the browser's response.
 func (t *GetVersion) Do(ctx context.Context) (*GetVersionResponse, error) {
-	fmt.Println(ctx)
-	return new(GetVersionResponse), nil
+	response, err := cdp.Send(ctx, "GetVersion", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetVersionResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetBrowserCommandLine contains the parameters, and acts as
@@ -413,8 +503,18 @@ type GetBrowserCommandLineResponse struct {
 // Do sends the GetBrowserCommandLine CDP command to a browser,
 // and returns the browser's response.
 func (t *GetBrowserCommandLine) Do(ctx context.Context) (*GetBrowserCommandLineResponse, error) {
-	fmt.Println(ctx)
-	return new(GetBrowserCommandLineResponse), nil
+	response, err := cdp.Send(ctx, "GetBrowserCommandLine", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetBrowserCommandLineResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetHistograms contains the parameters, and acts as
@@ -475,8 +575,22 @@ type GetHistogramsResponse struct {
 // Do sends the GetHistograms CDP command to a browser,
 // and returns the browser's response.
 func (t *GetHistograms) Do(ctx context.Context) (*GetHistogramsResponse, error) {
-	fmt.Println(ctx)
-	return new(GetHistogramsResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetHistograms", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetHistogramsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetHistogram contains the parameters, and acts as
@@ -526,8 +640,22 @@ type GetHistogramResponse struct {
 // Do sends the GetHistogram CDP command to a browser,
 // and returns the browser's response.
 func (t *GetHistogram) Do(ctx context.Context) (*GetHistogramResponse, error) {
-	fmt.Println(ctx)
-	return new(GetHistogramResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetHistogram", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetHistogramResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetWindowBounds contains the parameters, and acts as
@@ -567,8 +695,22 @@ type GetWindowBoundsResponse struct {
 // Do sends the GetWindowBounds CDP command to a browser,
 // and returns the browser's response.
 func (t *GetWindowBounds) Do(ctx context.Context) (*GetWindowBoundsResponse, error) {
-	fmt.Println(ctx)
-	return new(GetWindowBoundsResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetWindowBounds", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetWindowBoundsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetWindowForTarget contains the parameters, and acts as
@@ -617,8 +759,22 @@ type GetWindowForTargetResponse struct {
 // Do sends the GetWindowForTarget CDP command to a browser,
 // and returns the browser's response.
 func (t *GetWindowForTarget) Do(ctx context.Context) (*GetWindowForTargetResponse, error) {
-	fmt.Println(ctx)
-	return new(GetWindowForTargetResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetWindowForTarget", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetWindowForTargetResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetWindowBounds contains the parameters, and acts as
@@ -654,7 +810,17 @@ func NewSetWindowBounds(windowId WindowID, bounds Bounds) *SetWindowBounds {
 // Do sends the SetWindowBounds CDP command to a browser,
 // and returns the browser's response.
 func (t *SetWindowBounds) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetWindowBounds", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -702,7 +868,17 @@ func (t *SetDockTile) SetImage(v string) *SetDockTile {
 // Do sends the SetDockTile CDP command to a browser,
 // and returns the browser's response.
 func (t *SetDockTile) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetDockTile", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -734,6 +910,16 @@ func NewExecuteBrowserCommand(commandId BrowserCommandID) *ExecuteBrowserCommand
 // Do sends the ExecuteBrowserCommand CDP command to a browser,
 // and returns the browser's response.
 func (t *ExecuteBrowserCommand) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ExecuteBrowserCommand", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

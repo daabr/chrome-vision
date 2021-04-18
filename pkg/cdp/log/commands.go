@@ -2,7 +2,10 @@ package log
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // Clear contains the parameters, and acts as
@@ -25,7 +28,13 @@ func NewClear() *Clear {
 // Do sends the Clear CDP command to a browser,
 // and returns the browser's response.
 func (t *Clear) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Clear", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -49,7 +58,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -74,7 +89,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -103,7 +124,17 @@ func NewStartViolationsReport(config []ViolationSetting) *StartViolationsReport 
 // Do sends the StartViolationsReport CDP command to a browser,
 // and returns the browser's response.
 func (t *StartViolationsReport) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "StartViolationsReport", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -127,6 +158,12 @@ func NewStopViolationsReport() *StopViolationsReport {
 // Do sends the StopViolationsReport CDP command to a browser,
 // and returns the browser's response.
 func (t *StopViolationsReport) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "StopViolationsReport", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

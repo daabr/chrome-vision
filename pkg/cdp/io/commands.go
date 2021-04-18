@@ -2,8 +2,10 @@ package io
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
 
+	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
 )
 
@@ -32,7 +34,17 @@ func NewClose(handle StreamHandle) *Close {
 // Do sends the Close CDP command to a browser,
 // and returns the browser's response.
 func (t *Close) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "Close", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -96,8 +108,22 @@ type ReadResponse struct {
 // Do sends the Read CDP command to a browser,
 // and returns the browser's response.
 func (t *Read) Do(ctx context.Context) (*ReadResponse, error) {
-	fmt.Println(ctx)
-	return new(ReadResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "Read", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &ReadResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ResolveBlob contains the parameters, and acts as
@@ -132,6 +158,20 @@ type ResolveBlobResponse struct {
 // Do sends the ResolveBlob CDP command to a browser,
 // and returns the browser's response.
 func (t *ResolveBlob) Do(ctx context.Context) (*ResolveBlobResponse, error) {
-	fmt.Println(ctx)
-	return new(ResolveBlobResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "ResolveBlob", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &ResolveBlobResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

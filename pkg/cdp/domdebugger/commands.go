@@ -2,8 +2,10 @@ package domdebugger
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
 
+	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/dom"
 	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
 )
@@ -66,8 +68,22 @@ type GetEventListenersResponse struct {
 // Do sends the GetEventListeners CDP command to a browser,
 // and returns the browser's response.
 func (t *GetEventListeners) Do(ctx context.Context) (*GetEventListenersResponse, error) {
-	fmt.Println(ctx)
-	return new(GetEventListenersResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetEventListeners", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetEventListenersResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // RemoveDOMBreakpoint contains the parameters, and acts as
@@ -98,7 +114,17 @@ func NewRemoveDOMBreakpoint(nodeId dom.NodeID, t DOMBreakpointType) *RemoveDOMBr
 // Do sends the RemoveDOMBreakpoint CDP command to a browser,
 // and returns the browser's response.
 func (t *RemoveDOMBreakpoint) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "RemoveDOMBreakpoint", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -142,7 +168,17 @@ func (t *RemoveEventListenerBreakpoint) SetTargetName(v string) *RemoveEventList
 // Do sends the RemoveEventListenerBreakpoint CDP command to a browser,
 // and returns the browser's response.
 func (t *RemoveEventListenerBreakpoint) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "RemoveEventListenerBreakpoint", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -175,7 +211,17 @@ func NewRemoveInstrumentationBreakpoint(eventName string) *RemoveInstrumentation
 // Do sends the RemoveInstrumentationBreakpoint CDP command to a browser,
 // and returns the browser's response.
 func (t *RemoveInstrumentationBreakpoint) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "RemoveInstrumentationBreakpoint", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -204,7 +250,17 @@ func NewRemoveXHRBreakpoint(url string) *RemoveXHRBreakpoint {
 // Do sends the RemoveXHRBreakpoint CDP command to a browser,
 // and returns the browser's response.
 func (t *RemoveXHRBreakpoint) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "RemoveXHRBreakpoint", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -237,7 +293,17 @@ func NewSetBreakOnCSPViolation(violationTypes []CSPViolationType) *SetBreakOnCSP
 // Do sends the SetBreakOnCSPViolation CDP command to a browser,
 // and returns the browser's response.
 func (t *SetBreakOnCSPViolation) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetBreakOnCSPViolation", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -269,7 +335,17 @@ func NewSetDOMBreakpoint(nodeId dom.NodeID, t DOMBreakpointType) *SetDOMBreakpoi
 // Do sends the SetDOMBreakpoint CDP command to a browser,
 // and returns the browser's response.
 func (t *SetDOMBreakpoint) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetDOMBreakpoint", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -315,7 +391,17 @@ func (t *SetEventListenerBreakpoint) SetTargetName(v string) *SetEventListenerBr
 // Do sends the SetEventListenerBreakpoint CDP command to a browser,
 // and returns the browser's response.
 func (t *SetEventListenerBreakpoint) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetEventListenerBreakpoint", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -348,7 +434,17 @@ func NewSetInstrumentationBreakpoint(eventName string) *SetInstrumentationBreakp
 // Do sends the SetInstrumentationBreakpoint CDP command to a browser,
 // and returns the browser's response.
 func (t *SetInstrumentationBreakpoint) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetInstrumentationBreakpoint", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -377,6 +473,16 @@ func NewSetXHRBreakpoint(url string) *SetXHRBreakpoint {
 // Do sends the SetXHRBreakpoint CDP command to a browser,
 // and returns the browser's response.
 func (t *SetXHRBreakpoint) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetXHRBreakpoint", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

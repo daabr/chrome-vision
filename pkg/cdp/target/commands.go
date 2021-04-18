@@ -2,8 +2,10 @@ package target
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
 
+	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/browser"
 )
 
@@ -31,7 +33,17 @@ func NewActivateTarget(targetId TargetID) *ActivateTarget {
 // Do sends the ActivateTarget CDP command to a browser,
 // and returns the browser's response.
 func (t *ActivateTarget) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ActivateTarget", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -81,8 +93,22 @@ type AttachToTargetResponse struct {
 // Do sends the AttachToTarget CDP command to a browser,
 // and returns the browser's response.
 func (t *AttachToTarget) Do(ctx context.Context) (*AttachToTargetResponse, error) {
-	fmt.Println(ctx)
-	return new(AttachToTargetResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "AttachToTarget", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &AttachToTargetResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // AttachToBrowserTarget contains the parameters, and acts as
@@ -116,8 +142,18 @@ type AttachToBrowserTargetResponse struct {
 // Do sends the AttachToBrowserTarget CDP command to a browser,
 // and returns the browser's response.
 func (t *AttachToBrowserTarget) Do(ctx context.Context) (*AttachToBrowserTargetResponse, error) {
-	fmt.Println(ctx)
-	return new(AttachToBrowserTargetResponse), nil
+	response, err := cdp.Send(ctx, "AttachToBrowserTarget", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &AttachToBrowserTargetResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CloseTarget contains the parameters, and acts as
@@ -153,8 +189,22 @@ type CloseTargetResponse struct {
 // Do sends the CloseTarget CDP command to a browser,
 // and returns the browser's response.
 func (t *CloseTarget) Do(ctx context.Context) (*CloseTargetResponse, error) {
-	fmt.Println(ctx)
-	return new(CloseTargetResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "CloseTarget", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &CloseTargetResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ExposeDevToolsProtocol contains the parameters, and acts as
@@ -203,7 +253,17 @@ func (t *ExposeDevToolsProtocol) SetBindingName(v string) *ExposeDevToolsProtoco
 // Do sends the ExposeDevToolsProtocol CDP command to a browser,
 // and returns the browser's response.
 func (t *ExposeDevToolsProtocol) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ExposeDevToolsProtocol", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -273,8 +333,22 @@ type CreateBrowserContextResponse struct {
 // Do sends the CreateBrowserContext CDP command to a browser,
 // and returns the browser's response.
 func (t *CreateBrowserContext) Do(ctx context.Context) (*CreateBrowserContextResponse, error) {
-	fmt.Println(ctx)
-	return new(CreateBrowserContextResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "CreateBrowserContext", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &CreateBrowserContextResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetBrowserContexts contains the parameters, and acts as
@@ -308,8 +382,18 @@ type GetBrowserContextsResponse struct {
 // Do sends the GetBrowserContexts CDP command to a browser,
 // and returns the browser's response.
 func (t *GetBrowserContexts) Do(ctx context.Context) (*GetBrowserContextsResponse, error) {
-	fmt.Println(ctx)
-	return new(GetBrowserContextsResponse), nil
+	response, err := cdp.Send(ctx, "GetBrowserContexts", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetBrowserContextsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CreateTarget contains the parameters, and acts as
@@ -418,8 +502,22 @@ type CreateTargetResponse struct {
 // Do sends the CreateTarget CDP command to a browser,
 // and returns the browser's response.
 func (t *CreateTarget) Do(ctx context.Context) (*CreateTargetResponse, error) {
-	fmt.Println(ctx)
-	return new(CreateTargetResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "CreateTarget", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &CreateTargetResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // DetachFromTarget contains the parameters, and acts as
@@ -469,7 +567,17 @@ func (t *DetachFromTarget) SetTargetID(v TargetID) *DetachFromTarget {
 // Do sends the DetachFromTarget CDP command to a browser,
 // and returns the browser's response.
 func (t *DetachFromTarget) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "DetachFromTarget", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -502,7 +610,17 @@ func NewDisposeBrowserContext(browserContextId browser.BrowserContextID) *Dispos
 // Do sends the DisposeBrowserContext CDP command to a browser,
 // and returns the browser's response.
 func (t *DisposeBrowserContext) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "DisposeBrowserContext", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -545,8 +663,22 @@ type GetTargetInfoResponse struct {
 // Do sends the GetTargetInfo CDP command to a browser,
 // and returns the browser's response.
 func (t *GetTargetInfo) Do(ctx context.Context) (*GetTargetInfoResponse, error) {
-	fmt.Println(ctx)
-	return new(GetTargetInfoResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetTargetInfo", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetTargetInfoResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetTargets contains the parameters, and acts as
@@ -576,8 +708,18 @@ type GetTargetsResponse struct {
 // Do sends the GetTargets CDP command to a browser,
 // and returns the browser's response.
 func (t *GetTargets) Do(ctx context.Context) (*GetTargetsResponse, error) {
-	fmt.Println(ctx)
-	return new(GetTargetsResponse), nil
+	response, err := cdp.Send(ctx, "GetTargets", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetTargetsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SendMessageToTarget contains the parameters, and acts as
@@ -636,7 +778,17 @@ func (t *SendMessageToTarget) SetTargetID(v TargetID) *SendMessageToTarget {
 // Do sends the SendMessageToTarget CDP command to a browser,
 // and returns the browser's response.
 func (t *SendMessageToTarget) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SendMessageToTarget", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -690,7 +842,17 @@ func (t *SetAutoAttach) SetFlatten(v bool) *SetAutoAttach {
 // Do sends the SetAutoAttach CDP command to a browser,
 // and returns the browser's response.
 func (t *SetAutoAttach) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetAutoAttach", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -720,7 +882,17 @@ func NewSetDiscoverTargets(discover bool) *SetDiscoverTargets {
 // Do sends the SetDiscoverTargets CDP command to a browser,
 // and returns the browser's response.
 func (t *SetDiscoverTargets) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetDiscoverTargets", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -754,6 +926,16 @@ func NewSetRemoteLocations(locations []RemoteLocation) *SetRemoteLocations {
 // Do sends the SetRemoteLocations CDP command to a browser,
 // and returns the browser's response.
 func (t *SetRemoteLocations) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetRemoteLocations", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

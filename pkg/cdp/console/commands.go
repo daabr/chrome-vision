@@ -2,7 +2,9 @@ package console
 
 import (
 	"context"
-	"fmt"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // ClearMessages contains the parameters, and acts as
@@ -25,7 +27,13 @@ func NewClearMessages() *ClearMessages {
 // Do sends the ClearMessages CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearMessages) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "ClearMessages", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -49,7 +57,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -74,6 +88,12 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

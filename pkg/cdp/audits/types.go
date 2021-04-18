@@ -304,6 +304,25 @@ type CorsIssueDetails struct {
 	ClientSecurityState    *network.ClientSecurityState `json:"clientSecurityState,omitempty"`
 }
 
+// https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-AttributionReportingIssueType
+type AttributionReportingIssueType string
+
+// AttributionReportingIssueType valid values.
+const (
+	AttributionReportingIssueTypePermissionPolicyDisabled AttributionReportingIssueType = "PermissionPolicyDisabled"
+)
+
+// Details for issues around "Attribution Reporting API" usage.
+// Explainer: https://github.com/WICG/conversion-measurement-api
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-AttributionReportingIssueDetails
+type AttributionReportingIssueDetails struct {
+	ViolationType   AttributionReportingIssueType `json:"violationType"`
+	Frame           *AffectedFrame                `json:"frame,omitempty"`
+	Request         *AffectedRequest              `json:"request,omitempty"`
+	ViolatingNodeID *dom.BackendNodeID            `json:"violatingNodeId,omitempty"`
+}
+
 // A unique identifier for the type of issue. Each type may use one of the
 // optional fields in InspectorIssueDetails to convey more specific
 // information about the kind of issue.
@@ -322,6 +341,7 @@ const (
 	InspectorIssueCodeTrustedWebActivityIssue    InspectorIssueCode = "TrustedWebActivityIssue"
 	InspectorIssueCodeLowTextContrastIssue       InspectorIssueCode = "LowTextContrastIssue"
 	InspectorIssueCodeCorsIssue                  InspectorIssueCode = "CorsIssue"
+	InspectorIssueCodeAttributionReportingIssue  InspectorIssueCode = "AttributionReportingIssue"
 )
 
 // This struct holds a list of optional fields with additional information
@@ -339,6 +359,7 @@ type InspectorIssueDetails struct {
 	TwaQualityEnforcementDetails      *TrustedWebActivityIssueDetails    `json:"twaQualityEnforcementDetails,omitempty"`
 	LowTextContrastIssueDetails       *LowTextContrastIssueDetails       `json:"lowTextContrastIssueDetails,omitempty"`
 	CorsIssueDetails                  *CorsIssueDetails                  `json:"corsIssueDetails,omitempty"`
+	AttributionReportingIssueDetails  *AttributionReportingIssueDetails  `json:"attributionReportingIssueDetails,omitempty"`
 }
 
 // An inspector issue reported from the back-end.

@@ -2,7 +2,10 @@ package tethering
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // Bind contains the parameters, and acts as
@@ -30,7 +33,17 @@ func NewBind(port int64) *Bind {
 // Do sends the Bind CDP command to a browser,
 // and returns the browser's response.
 func (t *Bind) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "Bind", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -59,6 +72,16 @@ func NewUnbind(port int64) *Unbind {
 // Do sends the Unbind CDP command to a browser,
 // and returns the browser's response.
 func (t *Unbind) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "Unbind", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

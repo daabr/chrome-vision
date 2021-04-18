@@ -2,7 +2,10 @@ package systeminfo
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // GetInfo contains the parameters, and acts as
@@ -41,8 +44,18 @@ type GetInfoResponse struct {
 // Do sends the GetInfo CDP command to a browser,
 // and returns the browser's response.
 func (t *GetInfo) Do(ctx context.Context) (*GetInfoResponse, error) {
-	fmt.Println(ctx)
-	return new(GetInfoResponse), nil
+	response, err := cdp.Send(ctx, "GetInfo", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetInfoResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetProcessInfo contains the parameters, and acts as
@@ -72,6 +85,16 @@ type GetProcessInfoResponse struct {
 // Do sends the GetProcessInfo CDP command to a browser,
 // and returns the browser's response.
 func (t *GetProcessInfo) Do(ctx context.Context) (*GetProcessInfoResponse, error) {
-	fmt.Println(ctx)
-	return new(GetProcessInfoResponse), nil
+	response, err := cdp.Send(ctx, "GetProcessInfo", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetProcessInfoResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

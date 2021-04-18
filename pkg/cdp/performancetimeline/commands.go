@@ -2,7 +2,10 @@ package performancetimeline
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // Enable contains the parameters, and acts as
@@ -35,6 +38,16 @@ func NewEnable(eventTypes []string) *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "Enable", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

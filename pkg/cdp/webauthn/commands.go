@@ -2,7 +2,10 @@ package webauthn
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // Enable contains the parameters, and acts as
@@ -26,7 +29,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -50,7 +59,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -84,8 +99,22 @@ type AddVirtualAuthenticatorResponse struct {
 // Do sends the AddVirtualAuthenticator CDP command to a browser,
 // and returns the browser's response.
 func (t *AddVirtualAuthenticator) Do(ctx context.Context) (*AddVirtualAuthenticatorResponse, error) {
-	fmt.Println(ctx)
-	return new(AddVirtualAuthenticatorResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "AddVirtualAuthenticator", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &AddVirtualAuthenticatorResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // RemoveVirtualAuthenticator contains the parameters, and acts as
@@ -112,7 +141,17 @@ func NewRemoveVirtualAuthenticator(authenticatorId AuthenticatorID) *RemoveVirtu
 // Do sends the RemoveVirtualAuthenticator CDP command to a browser,
 // and returns the browser's response.
 func (t *RemoveVirtualAuthenticator) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "RemoveVirtualAuthenticator", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -142,7 +181,17 @@ func NewAddCredential(authenticatorId AuthenticatorID, credential Credential) *A
 // Do sends the AddCredential CDP command to a browser,
 // and returns the browser's response.
 func (t *AddCredential) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "AddCredential", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -179,8 +228,22 @@ type GetCredentialResponse struct {
 // Do sends the GetCredential CDP command to a browser,
 // and returns the browser's response.
 func (t *GetCredential) Do(ctx context.Context) (*GetCredentialResponse, error) {
-	fmt.Println(ctx)
-	return new(GetCredentialResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetCredential", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetCredentialResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetCredentials contains the parameters, and acts as
@@ -213,8 +276,22 @@ type GetCredentialsResponse struct {
 // Do sends the GetCredentials CDP command to a browser,
 // and returns the browser's response.
 func (t *GetCredentials) Do(ctx context.Context) (*GetCredentialsResponse, error) {
-	fmt.Println(ctx)
-	return new(GetCredentialsResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetCredentials", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetCredentialsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // RemoveCredential contains the parameters, and acts as
@@ -243,7 +320,17 @@ func NewRemoveCredential(authenticatorId AuthenticatorID, credentialId string) *
 // Do sends the RemoveCredential CDP command to a browser,
 // and returns the browser's response.
 func (t *RemoveCredential) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "RemoveCredential", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -271,7 +358,17 @@ func NewClearCredentials(authenticatorId AuthenticatorID) *ClearCredentials {
 // Do sends the ClearCredentials CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearCredentials) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ClearCredentials", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -302,7 +399,17 @@ func NewSetUserVerified(authenticatorId AuthenticatorID, isUserVerified bool) *S
 // Do sends the SetUserVerified CDP command to a browser,
 // and returns the browser's response.
 func (t *SetUserVerified) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetUserVerified", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -333,6 +440,16 @@ func NewSetAutomaticPresenceSimulation(authenticatorId AuthenticatorID, enabled 
 // Do sends the SetAutomaticPresenceSimulation CDP command to a browser,
 // and returns the browser's response.
 func (t *SetAutomaticPresenceSimulation) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetAutomaticPresenceSimulation", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

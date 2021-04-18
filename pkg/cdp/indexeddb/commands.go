@@ -2,7 +2,10 @@ package indexeddb
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // ClearObjectStore contains the parameters, and acts as
@@ -36,7 +39,17 @@ func NewClearObjectStore(securityOrigin string, databaseName string, objectStore
 // Do sends the ClearObjectStore CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearObjectStore) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ClearObjectStore", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -68,7 +81,17 @@ func NewDeleteDatabase(securityOrigin string, databaseName string) *DeleteDataba
 // Do sends the DeleteDatabase CDP command to a browser,
 // and returns the browser's response.
 func (t *DeleteDatabase) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "DeleteDatabase", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -103,7 +126,17 @@ func NewDeleteObjectStoreEntries(securityOrigin string, databaseName string, obj
 // Do sends the DeleteObjectStoreEntries CDP command to a browser,
 // and returns the browser's response.
 func (t *DeleteObjectStoreEntries) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "DeleteObjectStoreEntries", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -127,7 +160,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -151,7 +190,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -215,8 +260,22 @@ type RequestDataResponse struct {
 // Do sends the RequestData CDP command to a browser,
 // and returns the browser's response.
 func (t *RequestData) Do(ctx context.Context) (*RequestDataResponse, error) {
-	fmt.Println(ctx)
-	return new(RequestDataResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "RequestData", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &RequestDataResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetMetadata contains the parameters, and acts as
@@ -261,8 +320,22 @@ type GetMetadataResponse struct {
 // Do sends the GetMetadata CDP command to a browser,
 // and returns the browser's response.
 func (t *GetMetadata) Do(ctx context.Context) (*GetMetadataResponse, error) {
-	fmt.Println(ctx)
-	return new(GetMetadataResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetMetadata", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetMetadataResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // RequestDatabase contains the parameters, and acts as
@@ -300,8 +373,22 @@ type RequestDatabaseResponse struct {
 // Do sends the RequestDatabase CDP command to a browser,
 // and returns the browser's response.
 func (t *RequestDatabase) Do(ctx context.Context) (*RequestDatabaseResponse, error) {
-	fmt.Println(ctx)
-	return new(RequestDatabaseResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "RequestDatabase", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &RequestDatabaseResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // RequestDatabaseNames contains the parameters, and acts as
@@ -336,6 +423,20 @@ type RequestDatabaseNamesResponse struct {
 // Do sends the RequestDatabaseNames CDP command to a browser,
 // and returns the browser's response.
 func (t *RequestDatabaseNames) Do(ctx context.Context) (*RequestDatabaseNamesResponse, error) {
-	fmt.Println(ctx)
-	return new(RequestDatabaseNamesResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "RequestDatabaseNames", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &RequestDatabaseNamesResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

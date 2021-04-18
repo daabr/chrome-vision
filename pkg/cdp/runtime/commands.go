@@ -2,7 +2,10 @@ package runtime
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // AwaitPromise contains the parameters, and acts as
@@ -61,8 +64,22 @@ type AwaitPromiseResponse struct {
 // Do sends the AwaitPromise CDP command to a browser,
 // and returns the browser's response.
 func (t *AwaitPromise) Do(ctx context.Context) (*AwaitPromiseResponse, error) {
-	fmt.Println(ctx)
-	return new(AwaitPromiseResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "AwaitPromise", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &AwaitPromiseResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CallFunctionOn contains the parameters, and acts as
@@ -215,8 +232,22 @@ type CallFunctionOnResponse struct {
 // Do sends the CallFunctionOn CDP command to a browser,
 // and returns the browser's response.
 func (t *CallFunctionOn) Do(ctx context.Context) (*CallFunctionOnResponse, error) {
-	fmt.Println(ctx)
-	return new(CallFunctionOnResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "CallFunctionOn", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &CallFunctionOnResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CompileScript contains the parameters, and acts as
@@ -272,8 +303,22 @@ type CompileScriptResponse struct {
 // Do sends the CompileScript CDP command to a browser,
 // and returns the browser's response.
 func (t *CompileScript) Do(ctx context.Context) (*CompileScriptResponse, error) {
-	fmt.Println(ctx)
-	return new(CompileScriptResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "CompileScript", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &CompileScriptResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // Disable contains the parameters, and acts as
@@ -296,7 +341,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -320,7 +371,13 @@ func NewDiscardConsoleEntries() *DiscardConsoleEntries {
 // Do sends the DiscardConsoleEntries CDP command to a browser,
 // and returns the browser's response.
 func (t *DiscardConsoleEntries) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "DiscardConsoleEntries", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -346,7 +403,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -600,8 +663,22 @@ type EvaluateResponse struct {
 // Do sends the Evaluate CDP command to a browser,
 // and returns the browser's response.
 func (t *Evaluate) Do(ctx context.Context) (*EvaluateResponse, error) {
-	fmt.Println(ctx)
-	return new(EvaluateResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "Evaluate", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &EvaluateResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetIsolateID contains the parameters, and acts as
@@ -635,8 +712,18 @@ type GetIsolateIDResponse struct {
 // Do sends the GetIsolateID CDP command to a browser,
 // and returns the browser's response.
 func (t *GetIsolateID) Do(ctx context.Context) (*GetIsolateIDResponse, error) {
-	fmt.Println(ctx)
-	return new(GetIsolateIDResponse), nil
+	response, err := cdp.Send(ctx, "GetIsolateID", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetIsolateIDResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetHeapUsage contains the parameters, and acts as
@@ -673,8 +760,18 @@ type GetHeapUsageResponse struct {
 // Do sends the GetHeapUsage CDP command to a browser,
 // and returns the browser's response.
 func (t *GetHeapUsage) Do(ctx context.Context) (*GetHeapUsageResponse, error) {
-	fmt.Println(ctx)
-	return new(GetHeapUsageResponse), nil
+	response, err := cdp.Send(ctx, "GetHeapUsage", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetHeapUsageResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetProperties contains the parameters, and acts as
@@ -763,8 +860,22 @@ type GetPropertiesResponse struct {
 // Do sends the GetProperties CDP command to a browser,
 // and returns the browser's response.
 func (t *GetProperties) Do(ctx context.Context) (*GetPropertiesResponse, error) {
-	fmt.Println(ctx)
-	return new(GetPropertiesResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetProperties", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetPropertiesResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GlobalLexicalScopeNames contains the parameters, and acts as
@@ -805,8 +916,22 @@ type GlobalLexicalScopeNamesResponse struct {
 // Do sends the GlobalLexicalScopeNames CDP command to a browser,
 // and returns the browser's response.
 func (t *GlobalLexicalScopeNames) Do(ctx context.Context) (*GlobalLexicalScopeNamesResponse, error) {
-	fmt.Println(ctx)
-	return new(GlobalLexicalScopeNamesResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GlobalLexicalScopeNames", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GlobalLexicalScopeNamesResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // QueryObjects contains the parameters, and acts as
@@ -850,8 +975,22 @@ type QueryObjectsResponse struct {
 // Do sends the QueryObjects CDP command to a browser,
 // and returns the browser's response.
 func (t *QueryObjects) Do(ctx context.Context) (*QueryObjectsResponse, error) {
-	fmt.Println(ctx)
-	return new(QueryObjectsResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "QueryObjects", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &QueryObjectsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ReleaseObject contains the parameters, and acts as
@@ -879,7 +1018,17 @@ func NewReleaseObject(objectId RemoteObjectID) *ReleaseObject {
 // Do sends the ReleaseObject CDP command to a browser,
 // and returns the browser's response.
 func (t *ReleaseObject) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ReleaseObject", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -908,7 +1057,17 @@ func NewReleaseObjectGroup(objectGroup string) *ReleaseObjectGroup {
 // Do sends the ReleaseObjectGroup CDP command to a browser,
 // and returns the browser's response.
 func (t *ReleaseObjectGroup) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ReleaseObjectGroup", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -932,7 +1091,13 @@ func NewRunIfWaitingForDebugger() *RunIfWaitingForDebugger {
 // Do sends the RunIfWaitingForDebugger CDP command to a browser,
 // and returns the browser's response.
 func (t *RunIfWaitingForDebugger) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "RunIfWaitingForDebugger", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1053,8 +1218,22 @@ type RunScriptResponse struct {
 // Do sends the RunScript CDP command to a browser,
 // and returns the browser's response.
 func (t *RunScript) Do(ctx context.Context) (*RunScriptResponse, error) {
-	fmt.Println(ctx)
-	return new(RunScriptResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "RunScript", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &RunScriptResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetCustomObjectFormatterEnabled contains the parameters, and acts as
@@ -1083,7 +1262,17 @@ func NewSetCustomObjectFormatterEnabled(enabled bool) *SetCustomObjectFormatterE
 // Do sends the SetCustomObjectFormatterEnabled CDP command to a browser,
 // and returns the browser's response.
 func (t *SetCustomObjectFormatterEnabled) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetCustomObjectFormatterEnabled", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1113,7 +1302,17 @@ func NewSetMaxCallStackSizeToCapture(size int64) *SetMaxCallStackSizeToCapture {
 // Do sends the SetMaxCallStackSizeToCapture CDP command to a browser,
 // and returns the browser's response.
 func (t *SetMaxCallStackSizeToCapture) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetMaxCallStackSizeToCapture", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1142,7 +1341,13 @@ func NewTerminateExecution() *TerminateExecution {
 // Do sends the TerminateExecution CDP command to a browser,
 // and returns the browser's response.
 func (t *TerminateExecution) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "TerminateExecution", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1219,7 +1424,17 @@ func (t *AddBinding) SetExecutionContextName(v string) *AddBinding {
 // Do sends the AddBinding CDP command to a browser,
 // and returns the browser's response.
 func (t *AddBinding) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "AddBinding", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1252,6 +1467,16 @@ func NewRemoveBinding(name string) *RemoveBinding {
 // Do sends the RemoveBinding CDP command to a browser,
 // and returns the browser's response.
 func (t *RemoveBinding) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "RemoveBinding", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

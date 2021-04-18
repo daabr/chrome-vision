@@ -3,7 +3,9 @@ package database
 import (
 	"context"
 	"encoding/json"
-	"fmt"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // Disable contains the parameters, and acts as
@@ -26,7 +28,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -50,7 +58,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -86,8 +100,22 @@ type ExecuteSQLResponse struct {
 // Do sends the ExecuteSQL CDP command to a browser,
 // and returns the browser's response.
 func (t *ExecuteSQL) Do(ctx context.Context) (*ExecuteSQLResponse, error) {
-	fmt.Println(ctx)
-	return new(ExecuteSQLResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "ExecuteSQL", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &ExecuteSQLResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetDatabaseTableNames contains the parameters, and acts as
@@ -118,6 +146,20 @@ type GetDatabaseTableNamesResponse struct {
 // Do sends the GetDatabaseTableNames CDP command to a browser,
 // and returns the browser's response.
 func (t *GetDatabaseTableNames) Do(ctx context.Context) (*GetDatabaseTableNamesResponse, error) {
-	fmt.Println(ctx)
-	return new(GetDatabaseTableNamesResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetDatabaseTableNames", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetDatabaseTableNamesResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

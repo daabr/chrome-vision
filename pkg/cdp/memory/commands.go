@@ -2,7 +2,10 @@ package memory
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // GetDOMCounters contains the parameters, and acts as
@@ -31,8 +34,18 @@ type GetDOMCountersResponse struct {
 // Do sends the GetDOMCounters CDP command to a browser,
 // and returns the browser's response.
 func (t *GetDOMCounters) Do(ctx context.Context) (*GetDOMCountersResponse, error) {
-	fmt.Println(ctx)
-	return new(GetDOMCountersResponse), nil
+	response, err := cdp.Send(ctx, "GetDOMCounters", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetDOMCountersResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // PrepareForLeakDetection contains the parameters, and acts as
@@ -53,7 +66,13 @@ func NewPrepareForLeakDetection() *PrepareForLeakDetection {
 // Do sends the PrepareForLeakDetection CDP command to a browser,
 // and returns the browser's response.
 func (t *PrepareForLeakDetection) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "PrepareForLeakDetection", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -77,7 +96,13 @@ func NewForciblyPurgeJavaScriptMemory() *ForciblyPurgeJavaScriptMemory {
 // Do sends the ForciblyPurgeJavaScriptMemory CDP command to a browser,
 // and returns the browser's response.
 func (t *ForciblyPurgeJavaScriptMemory) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "ForciblyPurgeJavaScriptMemory", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -106,7 +131,17 @@ func NewSetPressureNotificationsSuppressed(suppressed bool) *SetPressureNotifica
 // Do sends the SetPressureNotificationsSuppressed CDP command to a browser,
 // and returns the browser's response.
 func (t *SetPressureNotificationsSuppressed) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetPressureNotificationsSuppressed", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -135,7 +170,17 @@ func NewSimulatePressureNotification(level PressureLevel) *SimulatePressureNotif
 // Do sends the SimulatePressureNotification CDP command to a browser,
 // and returns the browser's response.
 func (t *SimulatePressureNotification) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SimulatePressureNotification", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -182,7 +227,17 @@ func (t *StartSampling) SetSuppressRandomness(v bool) *StartSampling {
 // Do sends the StartSampling CDP command to a browser,
 // and returns the browser's response.
 func (t *StartSampling) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "StartSampling", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -206,7 +261,13 @@ func NewStopSampling() *StopSampling {
 // Do sends the StopSampling CDP command to a browser,
 // and returns the browser's response.
 func (t *StopSampling) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "StopSampling", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -237,8 +298,18 @@ type GetAllTimeSamplingProfileResponse struct {
 // Do sends the GetAllTimeSamplingProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *GetAllTimeSamplingProfile) Do(ctx context.Context) (*GetAllTimeSamplingProfileResponse, error) {
-	fmt.Println(ctx)
-	return new(GetAllTimeSamplingProfileResponse), nil
+	response, err := cdp.Send(ctx, "GetAllTimeSamplingProfile", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetAllTimeSamplingProfileResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetBrowserSamplingProfile contains the parameters, and acts as
@@ -268,8 +339,18 @@ type GetBrowserSamplingProfileResponse struct {
 // Do sends the GetBrowserSamplingProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *GetBrowserSamplingProfile) Do(ctx context.Context) (*GetBrowserSamplingProfileResponse, error) {
-	fmt.Println(ctx)
-	return new(GetBrowserSamplingProfileResponse), nil
+	response, err := cdp.Send(ctx, "GetBrowserSamplingProfile", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetBrowserSamplingProfileResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetSamplingProfile contains the parameters, and acts as
@@ -299,6 +380,16 @@ type GetSamplingProfileResponse struct {
 // Do sends the GetSamplingProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *GetSamplingProfile) Do(ctx context.Context) (*GetSamplingProfileResponse, error) {
-	fmt.Println(ctx)
-	return new(GetSamplingProfileResponse), nil
+	response, err := cdp.Send(ctx, "GetSamplingProfile", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetSamplingProfileResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

@@ -198,6 +198,26 @@ type FlexNodeHighlightConfig struct {
 	NodeID dom.NodeID `json:"nodeId"`
 }
 
+// https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ScrollSnapContainerHighlightConfig
+type ScrollSnapContainerHighlightConfig struct {
+	// The style of the snapport border (default: transparent)
+	SnapportBorder *LineStyle `json:"snapportBorder,omitempty"`
+	// The style of the snap area border (default: transparent)
+	SnapAreaBorder *LineStyle `json:"snapAreaBorder,omitempty"`
+	// The margin highlight fill color (default: transparent).
+	ScrollMarginColor *dom.RGBA `json:"scrollMarginColor,omitempty"`
+	// The padding highlight fill color (default: transparent).
+	ScrollPaddingColor *dom.RGBA `json:"scrollPaddingColor,omitempty"`
+}
+
+// https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ScrollSnapHighlightConfig
+type ScrollSnapHighlightConfig struct {
+	// A descriptor for the highlight appearance of scroll snap containers.
+	ScrollSnapContainerHighlightConfig ScrollSnapContainerHighlightConfig `json:"scrollSnapContainerHighlightConfig"`
+	// Identifier of the node to highlight.
+	NodeID dom.NodeID `json:"nodeId"`
+}
+
 // Configuration for dual screen hinge
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-HingeConfig

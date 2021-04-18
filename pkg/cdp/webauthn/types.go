@@ -47,6 +47,10 @@ type VirtualAuthenticatorOptions struct {
 	// https://w3c.github.io/webauthn#largeBlob
 	// Defaults to false.
 	HasLargeBlob bool `json:"hasLargeBlob,omitempty"`
+	// If set to true, the authenticator will support the credBlob extension.
+	// https://fidoalliance.org/specs/fido-v2.1-rd-20201208/fido-client-to-authenticator-protocol-v2.1-rd-20201208.html#sctn-credBlob-extension
+	// Defaults to false.
+	HasCredBlob bool `json:"hasCredBlob,omitempty"`
 	// If set to true, tests of user presence will succeed immediately.
 	// Otherwise, they will not be resolved. Defaults to true.
 	AutomaticPresenceSimulation bool `json:"automaticPresenceSimulation,omitempty"`

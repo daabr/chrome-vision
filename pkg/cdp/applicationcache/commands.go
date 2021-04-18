@@ -2,7 +2,8 @@ package applicationcache
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
 
 	"github.com/daabr/chrome-vision/pkg/cdp"
 )
@@ -27,7 +28,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -63,8 +70,22 @@ type GetApplicationCacheForFrameResponse struct {
 // Do sends the GetApplicationCacheForFrame CDP command to a browser,
 // and returns the browser's response.
 func (t *GetApplicationCacheForFrame) Do(ctx context.Context) (*GetApplicationCacheForFrameResponse, error) {
-	fmt.Println(ctx)
-	return new(GetApplicationCacheForFrameResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetApplicationCacheForFrame", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetApplicationCacheForFrameResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetFramesWithManifests contains the parameters, and acts as
@@ -96,8 +117,18 @@ type GetFramesWithManifestsResponse struct {
 // Do sends the GetFramesWithManifests CDP command to a browser,
 // and returns the browser's response.
 func (t *GetFramesWithManifests) Do(ctx context.Context) (*GetFramesWithManifestsResponse, error) {
-	fmt.Println(ctx)
-	return new(GetFramesWithManifestsResponse), nil
+	response, err := cdp.Send(ctx, "GetFramesWithManifests", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetFramesWithManifestsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetManifestForFrame contains the parameters, and acts as
@@ -132,6 +163,20 @@ type GetManifestForFrameResponse struct {
 // Do sends the GetManifestForFrame CDP command to a browser,
 // and returns the browser's response.
 func (t *GetManifestForFrame) Do(ctx context.Context) (*GetManifestForFrameResponse, error) {
-	fmt.Println(ctx)
-	return new(GetManifestForFrameResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetManifestForFrame", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetManifestForFrameResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

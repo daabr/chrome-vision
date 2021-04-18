@@ -3,8 +3,9 @@ package layertree
 import (
 	"context"
 	"encoding/json"
-	"fmt"
+	"errors"
 
+	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/dom"
 )
 
@@ -44,8 +45,22 @@ type CompositingReasonsResponse struct {
 // Do sends the CompositingReasons CDP command to a browser,
 // and returns the browser's response.
 func (t *CompositingReasons) Do(ctx context.Context) (*CompositingReasonsResponse, error) {
-	fmt.Println(ctx)
-	return new(CompositingReasonsResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "CompositingReasons", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &CompositingReasonsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // Disable contains the parameters, and acts as
@@ -68,7 +83,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -92,7 +113,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -128,8 +155,22 @@ type LoadSnapshotResponse struct {
 // Do sends the LoadSnapshot CDP command to a browser,
 // and returns the browser's response.
 func (t *LoadSnapshot) Do(ctx context.Context) (*LoadSnapshotResponse, error) {
-	fmt.Println(ctx)
-	return new(LoadSnapshotResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "LoadSnapshot", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &LoadSnapshotResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // MakeSnapshot contains the parameters, and acts as
@@ -164,8 +205,22 @@ type MakeSnapshotResponse struct {
 // Do sends the MakeSnapshot CDP command to a browser,
 // and returns the browser's response.
 func (t *MakeSnapshot) Do(ctx context.Context) (*MakeSnapshotResponse, error) {
-	fmt.Println(ctx)
-	return new(MakeSnapshotResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "MakeSnapshot", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &MakeSnapshotResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ProfileSnapshot contains the parameters, and acts as
@@ -231,8 +286,22 @@ type ProfileSnapshotResponse struct {
 // Do sends the ProfileSnapshot CDP command to a browser,
 // and returns the browser's response.
 func (t *ProfileSnapshot) Do(ctx context.Context) (*ProfileSnapshotResponse, error) {
-	fmt.Println(ctx)
-	return new(ProfileSnapshotResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "ProfileSnapshot", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &ProfileSnapshotResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ReleaseSnapshot contains the parameters, and acts as
@@ -260,7 +329,17 @@ func NewReleaseSnapshot(snapshotId SnapshotID) *ReleaseSnapshot {
 // Do sends the ReleaseSnapshot CDP command to a browser,
 // and returns the browser's response.
 func (t *ReleaseSnapshot) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ReleaseSnapshot", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -329,8 +408,22 @@ type ReplaySnapshotResponse struct {
 // Do sends the ReplaySnapshot CDP command to a browser,
 // and returns the browser's response.
 func (t *ReplaySnapshot) Do(ctx context.Context) (*ReplaySnapshotResponse, error) {
-	fmt.Println(ctx)
-	return new(ReplaySnapshotResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "ReplaySnapshot", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &ReplaySnapshotResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SnapshotCommandLog contains the parameters, and acts as
@@ -365,6 +458,20 @@ type SnapshotCommandLogResponse struct {
 // Do sends the SnapshotCommandLog CDP command to a browser,
 // and returns the browser's response.
 func (t *SnapshotCommandLog) Do(ctx context.Context) (*SnapshotCommandLogResponse, error) {
-	fmt.Println(ctx)
-	return new(SnapshotCommandLogResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "SnapshotCommandLog", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SnapshotCommandLogResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

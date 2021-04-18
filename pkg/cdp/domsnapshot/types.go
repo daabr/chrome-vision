@@ -258,6 +258,14 @@ type LayoutTreeSnapshot struct {
 	ScrollRects []Rectangle `json:"scrollRects,omitempty"`
 	// The client rect of nodes. Only available when includeDOMRects is set to true
 	ClientRects []Rectangle `json:"clientRects,omitempty"`
+	// The list of background colors that are blended with colors of overlapping elements.
+	//
+	// This CDP property is experimental.
+	BlendedBackgroundColors []StringIndex `json:"blendedBackgroundColors,omitempty"`
+	// The list of computed text opacities.
+	//
+	// This CDP property is experimental.
+	TextColorOpacities []float64 `json:"textColorOpacities,omitempty"`
 }
 
 // Table of details of the post layout rendered text positions. The exact layout should not be regarded as

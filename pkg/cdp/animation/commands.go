@@ -2,8 +2,10 @@ package animation
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
 
+	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
 )
 
@@ -27,7 +29,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -51,7 +59,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -87,8 +101,22 @@ type GetCurrentTimeResponse struct {
 // Do sends the GetCurrentTime CDP command to a browser,
 // and returns the browser's response.
 func (t *GetCurrentTime) Do(ctx context.Context) (*GetCurrentTimeResponse, error) {
-	fmt.Println(ctx)
-	return new(GetCurrentTimeResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetCurrentTime", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetCurrentTimeResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetPlaybackRate contains the parameters, and acts as
@@ -118,8 +146,18 @@ type GetPlaybackRateResponse struct {
 // Do sends the GetPlaybackRate CDP command to a browser,
 // and returns the browser's response.
 func (t *GetPlaybackRate) Do(ctx context.Context) (*GetPlaybackRateResponse, error) {
-	fmt.Println(ctx)
-	return new(GetPlaybackRateResponse), nil
+	response, err := cdp.Send(ctx, "GetPlaybackRate", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetPlaybackRateResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ReleaseAnimations contains the parameters, and acts as
@@ -147,7 +185,17 @@ func NewReleaseAnimations(animations []string) *ReleaseAnimations {
 // Do sends the ReleaseAnimations CDP command to a browser,
 // and returns the browser's response.
 func (t *ReleaseAnimations) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ReleaseAnimations", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -183,8 +231,22 @@ type ResolveAnimationResponse struct {
 // Do sends the ResolveAnimation CDP command to a browser,
 // and returns the browser's response.
 func (t *ResolveAnimation) Do(ctx context.Context) (*ResolveAnimationResponse, error) {
-	fmt.Println(ctx)
-	return new(ResolveAnimationResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "ResolveAnimation", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &ResolveAnimationResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SeekAnimations contains the parameters, and acts as
@@ -215,7 +277,17 @@ func NewSeekAnimations(animations []string, currentTime float64) *SeekAnimations
 // Do sends the SeekAnimations CDP command to a browser,
 // and returns the browser's response.
 func (t *SeekAnimations) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SeekAnimations", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -247,7 +319,17 @@ func NewSetPaused(animations []string, paused bool) *SetPaused {
 // Do sends the SetPaused CDP command to a browser,
 // and returns the browser's response.
 func (t *SetPaused) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetPaused", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -276,7 +358,17 @@ func NewSetPlaybackRate(playbackRate float64) *SetPlaybackRate {
 // Do sends the SetPlaybackRate CDP command to a browser,
 // and returns the browser's response.
 func (t *SetPlaybackRate) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetPlaybackRate", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -311,6 +403,16 @@ func NewSetTiming(animationId string, duration float64, delay float64) *SetTimin
 // Do sends the SetTiming CDP command to a browser,
 // and returns the browser's response.
 func (t *SetTiming) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetTiming", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

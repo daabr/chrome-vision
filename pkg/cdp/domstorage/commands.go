@@ -2,7 +2,10 @@ package domstorage
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // Clear contains the parameters, and acts as
@@ -27,7 +30,17 @@ func NewClear(storageId StorageID) *Clear {
 // Do sends the Clear CDP command to a browser,
 // and returns the browser's response.
 func (t *Clear) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "Clear", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -51,7 +64,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -75,7 +94,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -107,8 +132,22 @@ type GetDOMStorageItemsResponse struct {
 // Do sends the GetDOMStorageItems CDP command to a browser,
 // and returns the browser's response.
 func (t *GetDOMStorageItems) Do(ctx context.Context) (*GetDOMStorageItemsResponse, error) {
-	fmt.Println(ctx)
-	return new(GetDOMStorageItemsResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetDOMStorageItems", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetDOMStorageItemsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // RemoveDOMStorageItem contains the parameters, and acts as
@@ -135,7 +174,17 @@ func NewRemoveDOMStorageItem(storageId StorageID, key string) *RemoveDOMStorageI
 // Do sends the RemoveDOMStorageItem CDP command to a browser,
 // and returns the browser's response.
 func (t *RemoveDOMStorageItem) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "RemoveDOMStorageItem", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -165,6 +214,16 @@ func NewSetDOMStorageItem(storageId StorageID, key string, value string) *SetDOM
 // Do sends the SetDOMStorageItem CDP command to a browser,
 // and returns the browser's response.
 func (t *SetDOMStorageItem) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetDOMStorageItem", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

@@ -2,7 +2,8 @@ package emulation
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
 
 	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/dom"
@@ -36,8 +37,18 @@ type CanEmulateResponse struct {
 // Do sends the CanEmulate CDP command to a browser,
 // and returns the browser's response.
 func (t *CanEmulate) Do(ctx context.Context) (*CanEmulateResponse, error) {
-	fmt.Println(ctx)
-	return new(CanEmulateResponse), nil
+	response, err := cdp.Send(ctx, "CanEmulate", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &CanEmulateResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ClearDeviceMetricsOverride contains the parameters, and acts as
@@ -60,7 +71,13 @@ func NewClearDeviceMetricsOverride() *ClearDeviceMetricsOverride {
 // Do sends the ClearDeviceMetricsOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearDeviceMetricsOverride) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "ClearDeviceMetricsOverride", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -84,7 +101,13 @@ func NewClearGeolocationOverride() *ClearGeolocationOverride {
 // Do sends the ClearGeolocationOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearGeolocationOverride) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "ClearGeolocationOverride", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -112,7 +135,13 @@ func NewResetPageScaleFactor() *ResetPageScaleFactor {
 // Do sends the ResetPageScaleFactor CDP command to a browser,
 // and returns the browser's response.
 func (t *ResetPageScaleFactor) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "ResetPageScaleFactor", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -145,7 +174,17 @@ func NewSetFocusEmulationEnabled(enabled bool) *SetFocusEmulationEnabled {
 // Do sends the SetFocusEmulationEnabled CDP command to a browser,
 // and returns the browser's response.
 func (t *SetFocusEmulationEnabled) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetFocusEmulationEnabled", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -178,7 +217,17 @@ func NewSetCPUThrottlingRate(rate float64) *SetCPUThrottlingRate {
 // Do sends the SetCPUThrottlingRate CDP command to a browser,
 // and returns the browser's response.
 func (t *SetCPUThrottlingRate) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetCPUThrottlingRate", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -217,7 +266,17 @@ func (t *SetDefaultBackgroundColorOverride) SetColor(v dom.RGBA) *SetDefaultBack
 // Do sends the SetDefaultBackgroundColorOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *SetDefaultBackgroundColorOverride) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetDefaultBackgroundColorOverride", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -393,7 +452,17 @@ func (t *SetDeviceMetricsOverride) SetDisplayFeature(v DisplayFeature) *SetDevic
 // Do sends the SetDeviceMetricsOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *SetDeviceMetricsOverride) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetDeviceMetricsOverride", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -424,7 +493,17 @@ func NewSetScrollbarsHidden(hidden bool) *SetScrollbarsHidden {
 // Do sends the SetScrollbarsHidden CDP command to a browser,
 // and returns the browser's response.
 func (t *SetScrollbarsHidden) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetScrollbarsHidden", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -455,7 +534,17 @@ func NewSetDocumentCookieDisabled(disabled bool) *SetDocumentCookieDisabled {
 // Do sends the SetDocumentCookieDisabled CDP command to a browser,
 // and returns the browser's response.
 func (t *SetDocumentCookieDisabled) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetDocumentCookieDisabled", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -497,7 +586,17 @@ func (t *SetEmitTouchEventsForMouse) SetConfiguration(v string) *SetEmitTouchEve
 // Do sends the SetEmitTouchEventsForMouse CDP command to a browser,
 // and returns the browser's response.
 func (t *SetEmitTouchEventsForMouse) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetEmitTouchEventsForMouse", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -544,7 +643,17 @@ func (t *SetEmulatedMedia) SetFeatures(v []MediaFeature) *SetEmulatedMedia {
 // Do sends the SetEmulatedMedia CDP command to a browser,
 // and returns the browser's response.
 func (t *SetEmulatedMedia) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetEmulatedMedia", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -577,7 +686,17 @@ func NewSetEmulatedVisionDeficiency(t string) *SetEmulatedVisionDeficiency {
 // Do sends the SetEmulatedVisionDeficiency CDP command to a browser,
 // and returns the browser's response.
 func (t *SetEmulatedVisionDeficiency) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetEmulatedVisionDeficiency", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -636,7 +755,17 @@ func (t *SetGeolocationOverride) SetAccuracy(v float64) *SetGeolocationOverride 
 // Do sends the SetGeolocationOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *SetGeolocationOverride) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetGeolocationOverride", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -672,7 +801,17 @@ func NewSetIdleOverride(isUserActive bool, isScreenUnlocked bool) *SetIdleOverri
 // Do sends the SetIdleOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *SetIdleOverride) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetIdleOverride", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -700,7 +839,13 @@ func NewClearIdleOverride() *ClearIdleOverride {
 // Do sends the ClearIdleOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearIdleOverride) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "ClearIdleOverride", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -735,7 +880,17 @@ func NewSetNavigatorOverrides(platform string) *SetNavigatorOverrides {
 // Do sends the SetNavigatorOverrides CDP command to a browser,
 // and returns the browser's response.
 func (t *SetNavigatorOverrides) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetNavigatorOverrides", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -768,7 +923,17 @@ func NewSetPageScaleFactor(pageScaleFactor float64) *SetPageScaleFactor {
 // Do sends the SetPageScaleFactor CDP command to a browser,
 // and returns the browser's response.
 func (t *SetPageScaleFactor) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetPageScaleFactor", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -797,7 +962,17 @@ func NewSetScriptExecutionDisabled(value bool) *SetScriptExecutionDisabled {
 // Do sends the SetScriptExecutionDisabled CDP command to a browser,
 // and returns the browser's response.
 func (t *SetScriptExecutionDisabled) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetScriptExecutionDisabled", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -837,7 +1012,17 @@ func (t *SetTouchEmulationEnabled) SetMaxTouchPoints(v int64) *SetTouchEmulation
 // Do sends the SetTouchEmulationEnabled CDP command to a browser,
 // and returns the browser's response.
 func (t *SetTouchEmulationEnabled) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetTouchEmulationEnabled", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -927,8 +1112,22 @@ type SetVirtualTimePolicyResponse struct {
 // Do sends the SetVirtualTimePolicy CDP command to a browser,
 // and returns the browser's response.
 func (t *SetVirtualTimePolicy) Do(ctx context.Context) (*SetVirtualTimePolicyResponse, error) {
-	fmt.Println(ctx)
-	return new(SetVirtualTimePolicyResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "SetVirtualTimePolicy", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SetVirtualTimePolicyResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetLocaleOverride contains the parameters, and acts as
@@ -969,7 +1168,17 @@ func (t *SetLocaleOverride) SetLocale(v string) *SetLocaleOverride {
 // Do sends the SetLocaleOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *SetLocaleOverride) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetLocaleOverride", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1003,7 +1212,17 @@ func NewSetTimezoneOverride(timezoneId string) *SetTimezoneOverride {
 // Do sends the SetTimezoneOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *SetTimezoneOverride) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetTimezoneOverride", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1043,7 +1262,17 @@ func NewSetVisibleSize(width int64, height int64) *SetVisibleSize {
 // Do sends the SetVisibleSize CDP command to a browser,
 // and returns the browser's response.
 func (t *SetVisibleSize) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetVisibleSize", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1074,7 +1303,17 @@ func NewSetDisabledImageTypes(imageTypes []DisabledImageType) *SetDisabledImageT
 // Do sends the SetDisabledImageTypes CDP command to a browser,
 // and returns the browser's response.
 func (t *SetDisabledImageTypes) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetDisabledImageTypes", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1140,6 +1379,16 @@ func (t *SetUserAgentOverride) SetUserAgentMetadata(v UserAgentMetadata) *SetUse
 // Do sends the SetUserAgentOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *SetUserAgentOverride) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetUserAgentOverride", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
