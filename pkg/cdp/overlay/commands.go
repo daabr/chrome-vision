@@ -3,7 +3,7 @@ package overlay
 import (
 	"context"
 	"encoding/json"
-	"fmt"
+	"errors"
 
 	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/dom"
@@ -30,7 +30,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -54,7 +60,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -134,8 +146,22 @@ type GetHighlightObjectForTestResponse struct {
 // Do sends the GetHighlightObjectForTest CDP command to a browser,
 // and returns the browser's response.
 func (t *GetHighlightObjectForTest) Do(ctx context.Context) (*GetHighlightObjectForTestResponse, error) {
-	fmt.Println(ctx)
-	return new(GetHighlightObjectForTestResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetHighlightObjectForTest", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetHighlightObjectForTestResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetGridHighlightObjectsForTest contains the parameters, and acts as
@@ -170,8 +196,22 @@ type GetGridHighlightObjectsForTestResponse struct {
 // Do sends the GetGridHighlightObjectsForTest CDP command to a browser,
 // and returns the browser's response.
 func (t *GetGridHighlightObjectsForTest) Do(ctx context.Context) (*GetGridHighlightObjectsForTestResponse, error) {
-	fmt.Println(ctx)
-	return new(GetGridHighlightObjectsForTestResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetGridHighlightObjectsForTest", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetGridHighlightObjectsForTestResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetSourceOrderHighlightObjectForTest contains the parameters, and acts as
@@ -206,8 +246,22 @@ type GetSourceOrderHighlightObjectForTestResponse struct {
 // Do sends the GetSourceOrderHighlightObjectForTest CDP command to a browser,
 // and returns the browser's response.
 func (t *GetSourceOrderHighlightObjectForTest) Do(ctx context.Context) (*GetSourceOrderHighlightObjectForTestResponse, error) {
-	fmt.Println(ctx)
-	return new(GetSourceOrderHighlightObjectForTestResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetSourceOrderHighlightObjectForTest", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetSourceOrderHighlightObjectForTestResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // HideHighlight contains the parameters, and acts as
@@ -230,7 +284,13 @@ func NewHideHighlight() *HideHighlight {
 // Do sends the HideHighlight CDP command to a browser,
 // and returns the browser's response.
 func (t *HideHighlight) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "HideHighlight", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -281,7 +341,17 @@ func (t *HighlightFrame) SetContentOutlineColor(v dom.RGBA) *HighlightFrame {
 // Do sends the HighlightFrame CDP command to a browser,
 // and returns the browser's response.
 func (t *HighlightFrame) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "HighlightFrame", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -355,7 +425,17 @@ func (t *HighlightNode) SetSelector(v string) *HighlightNode {
 // Do sends the HighlightNode CDP command to a browser,
 // and returns the browser's response.
 func (t *HighlightNode) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "HighlightNode", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -406,7 +486,17 @@ func (t *HighlightQuad) SetOutlineColor(v dom.RGBA) *HighlightQuad {
 // Do sends the HighlightQuad CDP command to a browser,
 // and returns the browser's response.
 func (t *HighlightQuad) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "HighlightQuad", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -466,7 +556,17 @@ func (t *HighlightRect) SetOutlineColor(v dom.RGBA) *HighlightRect {
 // Do sends the HighlightRect CDP command to a browser,
 // and returns the browser's response.
 func (t *HighlightRect) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "HighlightRect", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -529,7 +629,17 @@ func (t *HighlightSourceOrder) SetObjectID(v runtime.RemoteObjectID) *HighlightS
 // Do sends the HighlightSourceOrder CDP command to a browser,
 // and returns the browser's response.
 func (t *HighlightSourceOrder) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "HighlightSourceOrder", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -572,7 +682,17 @@ func (t *SetInspectMode) SetHighlightConfig(v HighlightConfig) *SetInspectMode {
 // Do sends the SetInspectMode CDP command to a browser,
 // and returns the browser's response.
 func (t *SetInspectMode) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetInspectMode", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -601,7 +721,17 @@ func NewSetShowAdHighlights(show bool) *SetShowAdHighlights {
 // Do sends the SetShowAdHighlights CDP command to a browser,
 // and returns the browser's response.
 func (t *SetShowAdHighlights) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetShowAdHighlights", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -635,7 +765,17 @@ func (t *SetPausedInDebuggerMessage) SetMessage(v string) *SetPausedInDebuggerMe
 // Do sends the SetPausedInDebuggerMessage CDP command to a browser,
 // and returns the browser's response.
 func (t *SetPausedInDebuggerMessage) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetPausedInDebuggerMessage", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -664,7 +804,17 @@ func NewSetShowDebugBorders(show bool) *SetShowDebugBorders {
 // Do sends the SetShowDebugBorders CDP command to a browser,
 // and returns the browser's response.
 func (t *SetShowDebugBorders) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetShowDebugBorders", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -693,7 +843,17 @@ func NewSetShowFPSCounter(show bool) *SetShowFPSCounter {
 // Do sends the SetShowFPSCounter CDP command to a browser,
 // and returns the browser's response.
 func (t *SetShowFPSCounter) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetShowFPSCounter", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -722,7 +882,17 @@ func NewSetShowGridOverlays(gridNodeHighlightConfigs []GridNodeHighlightConfig) 
 // Do sends the SetShowGridOverlays CDP command to a browser,
 // and returns the browser's response.
 func (t *SetShowGridOverlays) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetShowGridOverlays", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -749,7 +919,54 @@ func NewSetShowFlexOverlays(flexNodeHighlightConfigs []FlexNodeHighlightConfig) 
 // Do sends the SetShowFlexOverlays CDP command to a browser,
 // and returns the browser's response.
 func (t *SetShowFlexOverlays) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetShowFlexOverlays", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
+	return nil
+}
+
+// SetShowScrollSnapOverlays contains the parameters, and acts as
+// a Go receiver, for the CDP command `setShowScrollSnapOverlays`.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowScrollSnapOverlays
+type SetShowScrollSnapOverlays struct {
+	// An array of node identifiers and descriptors for the highlight appearance.
+	ScrollSnapHighlightConfigs []ScrollSnapHighlightConfig `json:"scrollSnapHighlightConfigs"`
+}
+
+// NewSetShowScrollSnapOverlays constructs a new SetShowScrollSnapOverlays struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowScrollSnapOverlays
+func NewSetShowScrollSnapOverlays(scrollSnapHighlightConfigs []ScrollSnapHighlightConfig) *SetShowScrollSnapOverlays {
+	return &SetShowScrollSnapOverlays{
+		ScrollSnapHighlightConfigs: scrollSnapHighlightConfigs,
+	}
+}
+
+// Do sends the SetShowScrollSnapOverlays CDP command to a browser,
+// and returns the browser's response.
+func (t *SetShowScrollSnapOverlays) Do(ctx context.Context) error {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetShowScrollSnapOverlays", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -778,7 +995,17 @@ func NewSetShowPaintRects(result bool) *SetShowPaintRects {
 // Do sends the SetShowPaintRects CDP command to a browser,
 // and returns the browser's response.
 func (t *SetShowPaintRects) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetShowPaintRects", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -807,7 +1034,17 @@ func NewSetShowLayoutShiftRegions(result bool) *SetShowLayoutShiftRegions {
 // Do sends the SetShowLayoutShiftRegions CDP command to a browser,
 // and returns the browser's response.
 func (t *SetShowLayoutShiftRegions) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetShowLayoutShiftRegions", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -836,7 +1073,17 @@ func NewSetShowScrollBottleneckRects(show bool) *SetShowScrollBottleneckRects {
 // Do sends the SetShowScrollBottleneckRects CDP command to a browser,
 // and returns the browser's response.
 func (t *SetShowScrollBottleneckRects) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetShowScrollBottleneckRects", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -865,7 +1112,17 @@ func NewSetShowHitTestBorders(show bool) *SetShowHitTestBorders {
 // Do sends the SetShowHitTestBorders CDP command to a browser,
 // and returns the browser's response.
 func (t *SetShowHitTestBorders) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetShowHitTestBorders", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -893,7 +1150,17 @@ func NewSetShowWebVitals(show bool) *SetShowWebVitals {
 // Do sends the SetShowWebVitals CDP command to a browser,
 // and returns the browser's response.
 func (t *SetShowWebVitals) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetShowWebVitals", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -922,7 +1189,17 @@ func NewSetShowViewportSizeOnResize(show bool) *SetShowViewportSizeOnResize {
 // Do sends the SetShowViewportSizeOnResize CDP command to a browser,
 // and returns the browser's response.
 func (t *SetShowViewportSizeOnResize) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetShowViewportSizeOnResize", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -958,6 +1235,16 @@ func (t *SetShowHinge) SetHingeConfig(v HingeConfig) *SetShowHinge {
 // Do sends the SetShowHinge CDP command to a browser,
 // and returns the browser's response.
 func (t *SetShowHinge) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetShowHinge", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

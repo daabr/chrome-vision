@@ -2,8 +2,10 @@ package accessibility
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
 
+	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/dom"
 	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
 )
@@ -28,7 +30,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -53,7 +61,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -134,8 +148,22 @@ type GetPartialAXTreeResponse struct {
 // Do sends the GetPartialAXTree CDP command to a browser,
 // and returns the browser's response.
 func (t *GetPartialAXTree) Do(ctx context.Context) (*GetPartialAXTreeResponse, error) {
-	fmt.Println(ctx)
-	return new(GetPartialAXTreeResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetPartialAXTree", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetPartialAXTreeResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetFullAXTree contains the parameters, and acts as
@@ -182,8 +210,22 @@ type GetFullAXTreeResponse struct {
 // Do sends the GetFullAXTree CDP command to a browser,
 // and returns the browser's response.
 func (t *GetFullAXTree) Do(ctx context.Context) (*GetFullAXTreeResponse, error) {
-	fmt.Println(ctx)
-	return new(GetFullAXTreeResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetFullAXTree", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetFullAXTreeResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetChildAXNodes contains the parameters, and acts as
@@ -221,8 +263,22 @@ type GetChildAXNodesResponse struct {
 // Do sends the GetChildAXNodes CDP command to a browser,
 // and returns the browser's response.
 func (t *GetChildAXNodes) Do(ctx context.Context) (*GetChildAXNodesResponse, error) {
-	fmt.Println(ctx)
-	return new(GetChildAXNodesResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetChildAXNodes", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetChildAXNodesResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // QueryAXTree contains the parameters, and acts as
@@ -317,6 +373,20 @@ type QueryAXTreeResponse struct {
 // Do sends the QueryAXTree CDP command to a browser,
 // and returns the browser's response.
 func (t *QueryAXTree) Do(ctx context.Context) (*QueryAXTreeResponse, error) {
-	fmt.Println(ctx)
-	return new(QueryAXTreeResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "QueryAXTree", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &QueryAXTreeResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

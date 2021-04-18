@@ -2,7 +2,10 @@ package domsnapshot
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // Disable contains the parameters, and acts as
@@ -25,7 +28,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -49,7 +58,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -129,8 +144,22 @@ type GetSnapshotResponse struct {
 // Do sends the GetSnapshot CDP command to a browser,
 // and returns the browser's response.
 func (t *GetSnapshot) Do(ctx context.Context) (*GetSnapshotResponse, error) {
-	fmt.Println(ctx)
-	return new(GetSnapshotResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetSnapshot", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetSnapshotResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CaptureSnapshot contains the parameters, and acts as
@@ -149,6 +178,18 @@ type CaptureSnapshot struct {
 	IncludePaintOrder bool `json:"includePaintOrder,omitempty"`
 	// Whether to include DOM rectangles (offsetRects, clientRects, scrollRects) into the snapshot
 	IncludeDOMRects bool `json:"includeDOMRects,omitempty"`
+	// Whether to include blended background colors in the snapshot (default: false).
+	// Blended background color is achieved by blending background colors of all elements
+	// that overlap with the current element.
+	//
+	// This CDP parameter is experimental.
+	IncludeBlendedBackgroundColors bool `json:"includeBlendedBackgroundColors,omitempty"`
+	// Whether to include text color opacity in the snapshot (default: false).
+	// An element might have the opacity property set that affects the text color of the element.
+	// The final text color opacity is computed based on the opacity of all overlapping elements.
+	//
+	// This CDP parameter is experimental.
+	IncludeTextColorOpacities bool `json:"includeTextColorOpacities,omitempty"`
 }
 
 // NewCaptureSnapshot constructs a new CaptureSnapshot struct instance, with
@@ -180,6 +221,32 @@ func (t *CaptureSnapshot) SetIncludeDOMRects(v bool) *CaptureSnapshot {
 	return t
 }
 
+// SetIncludeBlendedBackgroundColors adds or modifies the value of the optional
+// parameter `includeBlendedBackgroundColors` in the CaptureSnapshot CDP command.
+//
+// Whether to include blended background colors in the snapshot (default: false).
+// Blended background color is achieved by blending background colors of all elements
+// that overlap with the current element.
+//
+// This CDP parameter is experimental.
+func (t *CaptureSnapshot) SetIncludeBlendedBackgroundColors(v bool) *CaptureSnapshot {
+	t.IncludeBlendedBackgroundColors = v
+	return t
+}
+
+// SetIncludeTextColorOpacities adds or modifies the value of the optional
+// parameter `includeTextColorOpacities` in the CaptureSnapshot CDP command.
+//
+// Whether to include text color opacity in the snapshot (default: false).
+// An element might have the opacity property set that affects the text color of the element.
+// The final text color opacity is computed based on the opacity of all overlapping elements.
+//
+// This CDP parameter is experimental.
+func (t *CaptureSnapshot) SetIncludeTextColorOpacities(v bool) *CaptureSnapshot {
+	t.IncludeTextColorOpacities = v
+	return t
+}
+
 // CaptureSnapshotResponse contains the browser's response
 // to calling the CaptureSnapshot CDP command with Do().
 type CaptureSnapshotResponse struct {
@@ -192,6 +259,20 @@ type CaptureSnapshotResponse struct {
 // Do sends the CaptureSnapshot CDP command to a browser,
 // and returns the browser's response.
 func (t *CaptureSnapshot) Do(ctx context.Context) (*CaptureSnapshotResponse, error) {
-	fmt.Println(ctx)
-	return new(CaptureSnapshotResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "CaptureSnapshot", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &CaptureSnapshotResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

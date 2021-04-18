@@ -529,3 +529,16 @@ type CompilationCacheParams struct {
 	// (the actual compilation mode used is upon backend discretion).
 	Eager bool `json:"eager,omitempty"`
 }
+
+// The type of a frameNavigated event.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-NavigationType
+//
+// This CDP type is experimental.
+type NavigationType string
+
+// NavigationType valid values.
+const (
+	NavigationTypeNavigation              NavigationType = "Navigation"
+	NavigationTypeBackForwardCacheRestore NavigationType = "BackForwardCacheRestore"
+)

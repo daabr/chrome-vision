@@ -2,8 +2,10 @@ package heapprofiler
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
 
+	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
 )
 
@@ -33,7 +35,17 @@ func NewAddInspectedHeapObject(heapObjectId HeapSnapshotObjectID) *AddInspectedH
 // Do sends the AddInspectedHeapObject CDP command to a browser,
 // and returns the browser's response.
 func (t *AddInspectedHeapObject) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "AddInspectedHeapObject", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -55,7 +67,13 @@ func NewCollectGarbage() *CollectGarbage {
 // Do sends the CollectGarbage CDP command to a browser,
 // and returns the browser's response.
 func (t *CollectGarbage) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "CollectGarbage", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -77,7 +95,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -99,7 +123,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -133,8 +163,22 @@ type GetHeapObjectIDResponse struct {
 // Do sends the GetHeapObjectID CDP command to a browser,
 // and returns the browser's response.
 func (t *GetHeapObjectID) Do(ctx context.Context) (*GetHeapObjectIDResponse, error) {
-	fmt.Println(ctx)
-	return new(GetHeapObjectIDResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetHeapObjectID", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetHeapObjectIDResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetObjectByHeapObjectID contains the parameters, and acts as
@@ -177,8 +221,22 @@ type GetObjectByHeapObjectIDResponse struct {
 // Do sends the GetObjectByHeapObjectID CDP command to a browser,
 // and returns the browser's response.
 func (t *GetObjectByHeapObjectID) Do(ctx context.Context) (*GetObjectByHeapObjectIDResponse, error) {
-	fmt.Println(ctx)
-	return new(GetObjectByHeapObjectIDResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetObjectByHeapObjectID", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetObjectByHeapObjectIDResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetSamplingProfile contains the parameters, and acts as
@@ -206,8 +264,18 @@ type GetSamplingProfileResponse struct {
 // Do sends the GetSamplingProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *GetSamplingProfile) Do(ctx context.Context) (*GetSamplingProfileResponse, error) {
-	fmt.Println(ctx)
-	return new(GetSamplingProfileResponse), nil
+	response, err := cdp.Send(ctx, "GetSamplingProfile", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetSamplingProfileResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // StartSampling contains the parameters, and acts as
@@ -242,7 +310,17 @@ func (t *StartSampling) SetSamplingInterval(v float64) *StartSampling {
 // Do sends the StartSampling CDP command to a browser,
 // and returns the browser's response.
 func (t *StartSampling) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "StartSampling", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -273,7 +351,17 @@ func (t *StartTrackingHeapObjects) SetTrackAllocations(v bool) *StartTrackingHea
 // Do sends the StartTrackingHeapObjects CDP command to a browser,
 // and returns the browser's response.
 func (t *StartTrackingHeapObjects) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "StartTrackingHeapObjects", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -302,8 +390,18 @@ type StopSamplingResponse struct {
 // Do sends the StopSampling CDP command to a browser,
 // and returns the browser's response.
 func (t *StopSampling) Do(ctx context.Context) (*StopSamplingResponse, error) {
-	fmt.Println(ctx)
-	return new(StopSamplingResponse), nil
+	response, err := cdp.Send(ctx, "StopSampling", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &StopSamplingResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // StopTrackingHeapObjects contains the parameters, and acts as
@@ -346,7 +444,17 @@ func (t *StopTrackingHeapObjects) SetTreatGlobalObjectsAsRoots(v bool) *StopTrac
 // Do sends the StopTrackingHeapObjects CDP command to a browser,
 // and returns the browser's response.
 func (t *StopTrackingHeapObjects) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "StopTrackingHeapObjects", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -391,6 +499,16 @@ func (t *TakeHeapSnapshot) SetTreatGlobalObjectsAsRoots(v bool) *TakeHeapSnapsho
 // Do sends the TakeHeapSnapshot CDP command to a browser,
 // and returns the browser's response.
 func (t *TakeHeapSnapshot) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "TakeHeapSnapshot", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

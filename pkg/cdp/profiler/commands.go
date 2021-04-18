@@ -2,7 +2,10 @@ package profiler
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // Disable contains the parameters, and acts as
@@ -23,7 +26,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -45,7 +54,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -77,8 +92,18 @@ type GetBestEffortCoverageResponse struct {
 // Do sends the GetBestEffortCoverage CDP command to a browser,
 // and returns the browser's response.
 func (t *GetBestEffortCoverage) Do(ctx context.Context) (*GetBestEffortCoverageResponse, error) {
-	fmt.Println(ctx)
-	return new(GetBestEffortCoverageResponse), nil
+	response, err := cdp.Send(ctx, "GetBestEffortCoverage", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetBestEffortCoverageResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetSamplingInterval contains the parameters, and acts as
@@ -106,7 +131,17 @@ func NewSetSamplingInterval(interval int64) *SetSamplingInterval {
 // Do sends the SetSamplingInterval CDP command to a browser,
 // and returns the browser's response.
 func (t *SetSamplingInterval) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetSamplingInterval", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -128,7 +163,13 @@ func NewStart() *Start {
 // Do sends the Start CDP command to a browser,
 // and returns the browser's response.
 func (t *Start) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Start", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -195,8 +236,22 @@ type StartPreciseCoverageResponse struct {
 // Do sends the StartPreciseCoverage CDP command to a browser,
 // and returns the browser's response.
 func (t *StartPreciseCoverage) Do(ctx context.Context) (*StartPreciseCoverageResponse, error) {
-	fmt.Println(ctx)
-	return new(StartPreciseCoverageResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "StartPreciseCoverage", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &StartPreciseCoverageResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // StartTypeProfile contains the parameters, and acts as
@@ -223,7 +278,13 @@ func NewStartTypeProfile() *StartTypeProfile {
 // Do sends the StartTypeProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *StartTypeProfile) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "StartTypeProfile", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -252,8 +313,18 @@ type StopResponse struct {
 // Do sends the Stop CDP command to a browser,
 // and returns the browser's response.
 func (t *Stop) Do(ctx context.Context) (*StopResponse, error) {
-	fmt.Println(ctx)
-	return new(StopResponse), nil
+	response, err := cdp.Send(ctx, "Stop", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &StopResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // StopPreciseCoverage contains the parameters, and acts as
@@ -277,7 +348,13 @@ func NewStopPreciseCoverage() *StopPreciseCoverage {
 // Do sends the StopPreciseCoverage CDP command to a browser,
 // and returns the browser's response.
 func (t *StopPreciseCoverage) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "StopPreciseCoverage", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -305,7 +382,13 @@ func NewStopTypeProfile() *StopTypeProfile {
 // Do sends the StopTypeProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *StopTypeProfile) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "StopTypeProfile", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -339,8 +422,18 @@ type TakePreciseCoverageResponse struct {
 // Do sends the TakePreciseCoverage CDP command to a browser,
 // and returns the browser's response.
 func (t *TakePreciseCoverage) Do(ctx context.Context) (*TakePreciseCoverageResponse, error) {
-	fmt.Println(ctx)
-	return new(TakePreciseCoverageResponse), nil
+	response, err := cdp.Send(ctx, "TakePreciseCoverage", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &TakePreciseCoverageResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // TakeTypeProfile contains the parameters, and acts as
@@ -374,8 +467,18 @@ type TakeTypeProfileResponse struct {
 // Do sends the TakeTypeProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *TakeTypeProfile) Do(ctx context.Context) (*TakeTypeProfileResponse, error) {
-	fmt.Println(ctx)
-	return new(TakeTypeProfileResponse), nil
+	response, err := cdp.Send(ctx, "TakeTypeProfile", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &TakeTypeProfileResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // EnableCounters contains the parameters, and acts as
@@ -402,7 +505,13 @@ func NewEnableCounters() *EnableCounters {
 // Do sends the EnableCounters CDP command to a browser,
 // and returns the browser's response.
 func (t *EnableCounters) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "EnableCounters", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -430,7 +539,13 @@ func NewDisableCounters() *DisableCounters {
 // Do sends the DisableCounters CDP command to a browser,
 // and returns the browser's response.
 func (t *DisableCounters) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "DisableCounters", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -465,8 +580,18 @@ type GetCountersResponse struct {
 // Do sends the GetCounters CDP command to a browser,
 // and returns the browser's response.
 func (t *GetCounters) Do(ctx context.Context) (*GetCountersResponse, error) {
-	fmt.Println(ctx)
-	return new(GetCountersResponse), nil
+	response, err := cdp.Send(ctx, "GetCounters", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetCountersResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // EnableRuntimeCallStats contains the parameters, and acts as
@@ -493,7 +618,13 @@ func NewEnableRuntimeCallStats() *EnableRuntimeCallStats {
 // Do sends the EnableRuntimeCallStats CDP command to a browser,
 // and returns the browser's response.
 func (t *EnableRuntimeCallStats) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "EnableRuntimeCallStats", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -521,7 +652,13 @@ func NewDisableRuntimeCallStats() *DisableRuntimeCallStats {
 // Do sends the DisableRuntimeCallStats CDP command to a browser,
 // and returns the browser's response.
 func (t *DisableRuntimeCallStats) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "DisableRuntimeCallStats", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -556,6 +693,16 @@ type GetRuntimeCallStatsResponse struct {
 // Do sends the GetRuntimeCallStats CDP command to a browser,
 // and returns the browser's response.
 func (t *GetRuntimeCallStats) Do(ctx context.Context) (*GetRuntimeCallStatsResponse, error) {
-	fmt.Println(ctx)
-	return new(GetRuntimeCallStatsResponse), nil
+	response, err := cdp.Send(ctx, "GetRuntimeCallStats", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetRuntimeCallStatsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

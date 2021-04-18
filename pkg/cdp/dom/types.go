@@ -125,7 +125,11 @@ type Node struct {
 	TemplateContent *Node `json:"templateContent,omitempty"`
 	// Pseudo elements associated with this node.
 	PseudoElements []Node `json:"pseudoElements,omitempty"`
-	// Import document for the HTMLImport links.
+	// Deprecated, as the HTML Imports API has been removed (crbug.com/937746).
+	// This property used to return the imported document for the HTMLImport links.
+	// The property is always undefined now.
+	//
+	// This CDP property is deprecated.
 	ImportedDocument *Node `json:"importedDocument,omitempty"`
 	// Distributed nodes for given insertion point.
 	DistributedNodes []BackendNode `json:"distributedNodes,omitempty"`

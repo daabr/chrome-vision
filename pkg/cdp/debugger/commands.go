@@ -2,8 +2,10 @@ package debugger
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
 
+	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
 )
 
@@ -40,7 +42,17 @@ func (t *ContinueToLocation) SetTargetCallFrames(v string) *ContinueToLocation {
 // Do sends the ContinueToLocation CDP command to a browser,
 // and returns the browser's response.
 func (t *ContinueToLocation) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ContinueToLocation", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -64,7 +76,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -116,8 +134,22 @@ type EnableResponse struct {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) (*EnableResponse, error) {
-	fmt.Println(ctx)
-	return new(EnableResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "Enable", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &EnableResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // EvaluateOnCallFrame contains the parameters, and acts as
@@ -248,8 +280,22 @@ type EvaluateOnCallFrameResponse struct {
 // Do sends the EvaluateOnCallFrame CDP command to a browser,
 // and returns the browser's response.
 func (t *EvaluateOnCallFrame) Do(ctx context.Context) (*EvaluateOnCallFrameResponse, error) {
-	fmt.Println(ctx)
-	return new(EvaluateOnCallFrameResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "EvaluateOnCallFrame", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &EvaluateOnCallFrameResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetPossibleBreakpoints contains the parameters, and acts as
@@ -309,8 +355,22 @@ type GetPossibleBreakpointsResponse struct {
 // Do sends the GetPossibleBreakpoints CDP command to a browser,
 // and returns the browser's response.
 func (t *GetPossibleBreakpoints) Do(ctx context.Context) (*GetPossibleBreakpointsResponse, error) {
-	fmt.Println(ctx)
-	return new(GetPossibleBreakpointsResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetPossibleBreakpoints", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetPossibleBreakpointsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetScriptSource contains the parameters, and acts as
@@ -347,8 +407,22 @@ type GetScriptSourceResponse struct {
 // Do sends the GetScriptSource CDP command to a browser,
 // and returns the browser's response.
 func (t *GetScriptSource) Do(ctx context.Context) (*GetScriptSourceResponse, error) {
-	fmt.Println(ctx)
-	return new(GetScriptSourceResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetScriptSource", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetScriptSourceResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetWasmBytecode contains the parameters, and acts as
@@ -387,8 +461,22 @@ type GetWasmBytecodeResponse struct {
 // Do sends the GetWasmBytecode CDP command to a browser,
 // and returns the browser's response.
 func (t *GetWasmBytecode) Do(ctx context.Context) (*GetWasmBytecodeResponse, error) {
-	fmt.Println(ctx)
-	return new(GetWasmBytecodeResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetWasmBytecode", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetWasmBytecodeResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetStackTrace contains the parameters, and acts as
@@ -425,8 +513,22 @@ type GetStackTraceResponse struct {
 // Do sends the GetStackTrace CDP command to a browser,
 // and returns the browser's response.
 func (t *GetStackTrace) Do(ctx context.Context) (*GetStackTraceResponse, error) {
-	fmt.Println(ctx)
-	return new(GetStackTraceResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetStackTrace", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetStackTraceResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // Pause contains the parameters, and acts as
@@ -449,7 +551,13 @@ func NewPause() *Pause {
 // Do sends the Pause CDP command to a browser,
 // and returns the browser's response.
 func (t *Pause) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Pause", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -482,7 +590,17 @@ func NewPauseOnAsyncCall(parentStackTraceId runtime.StackTraceID) *PauseOnAsyncC
 // Do sends the PauseOnAsyncCall CDP command to a browser,
 // and returns the browser's response.
 func (t *PauseOnAsyncCall) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "PauseOnAsyncCall", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -510,7 +628,17 @@ func NewRemoveBreakpoint(breakpointId BreakpointID) *RemoveBreakpoint {
 // Do sends the RemoveBreakpoint CDP command to a browser,
 // and returns the browser's response.
 func (t *RemoveBreakpoint) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "RemoveBreakpoint", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -552,8 +680,22 @@ type RestartFrameResponse struct {
 // Do sends the RestartFrame CDP command to a browser,
 // and returns the browser's response.
 func (t *RestartFrame) Do(ctx context.Context) (*RestartFrameResponse, error) {
-	fmt.Println(ctx)
-	return new(RestartFrameResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "RestartFrame", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &RestartFrameResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // Resume contains the parameters, and acts as
@@ -596,7 +738,17 @@ func (t *Resume) SetTerminateOnResume(v bool) *Resume {
 // Do sends the Resume CDP command to a browser,
 // and returns the browser's response.
 func (t *Resume) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "Resume", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -657,8 +809,22 @@ type SearchInContentResponse struct {
 // Do sends the SearchInContent CDP command to a browser,
 // and returns the browser's response.
 func (t *SearchInContent) Do(ctx context.Context) (*SearchInContentResponse, error) {
-	fmt.Println(ctx)
-	return new(SearchInContentResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "SearchInContent", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SearchInContentResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetAsyncCallStackDepth contains the parameters, and acts as
@@ -687,7 +853,17 @@ func NewSetAsyncCallStackDepth(maxDepth int64) *SetAsyncCallStackDepth {
 // Do sends the SetAsyncCallStackDepth CDP command to a browser,
 // and returns the browser's response.
 func (t *SetAsyncCallStackDepth) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetAsyncCallStackDepth", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -722,7 +898,17 @@ func NewSetBlackboxPatterns(patterns []string) *SetBlackboxPatterns {
 // Do sends the SetBlackboxPatterns CDP command to a browser,
 // and returns the browser's response.
 func (t *SetBlackboxPatterns) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetBlackboxPatterns", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -760,7 +946,17 @@ func NewSetBlackboxedRanges(scriptId runtime.ScriptID, positions []ScriptPositio
 // Do sends the SetBlackboxedRanges CDP command to a browser,
 // and returns the browser's response.
 func (t *SetBlackboxedRanges) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetBlackboxedRanges", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -811,8 +1007,22 @@ type SetBreakpointResponse struct {
 // Do sends the SetBreakpoint CDP command to a browser,
 // and returns the browser's response.
 func (t *SetBreakpoint) Do(ctx context.Context) (*SetBreakpointResponse, error) {
-	fmt.Println(ctx)
-	return new(SetBreakpointResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "SetBreakpoint", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SetBreakpointResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetInstrumentationBreakpoint contains the parameters, and acts as
@@ -847,8 +1057,22 @@ type SetInstrumentationBreakpointResponse struct {
 // Do sends the SetInstrumentationBreakpoint CDP command to a browser,
 // and returns the browser's response.
 func (t *SetInstrumentationBreakpoint) Do(ctx context.Context) (*SetInstrumentationBreakpointResponse, error) {
-	fmt.Println(ctx)
-	return new(SetInstrumentationBreakpointResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "SetInstrumentationBreakpoint", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SetInstrumentationBreakpointResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetBreakpointByURL contains the parameters, and acts as
@@ -947,8 +1171,22 @@ type SetBreakpointByURLResponse struct {
 // Do sends the SetBreakpointByURL CDP command to a browser,
 // and returns the browser's response.
 func (t *SetBreakpointByURL) Do(ctx context.Context) (*SetBreakpointByURLResponse, error) {
-	fmt.Println(ctx)
-	return new(SetBreakpointByURLResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "SetBreakpointByURL", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SetBreakpointByURLResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetBreakpointOnFunctionCall contains the parameters, and acts as
@@ -1002,8 +1240,22 @@ type SetBreakpointOnFunctionCallResponse struct {
 // Do sends the SetBreakpointOnFunctionCall CDP command to a browser,
 // and returns the browser's response.
 func (t *SetBreakpointOnFunctionCall) Do(ctx context.Context) (*SetBreakpointOnFunctionCallResponse, error) {
-	fmt.Println(ctx)
-	return new(SetBreakpointOnFunctionCallResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "SetBreakpointOnFunctionCall", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SetBreakpointOnFunctionCallResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetBreakpointsActive contains the parameters, and acts as
@@ -1031,7 +1283,17 @@ func NewSetBreakpointsActive(active bool) *SetBreakpointsActive {
 // Do sends the SetBreakpointsActive CDP command to a browser,
 // and returns the browser's response.
 func (t *SetBreakpointsActive) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetBreakpointsActive", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1061,7 +1323,17 @@ func NewSetPauseOnExceptions(state string) *SetPauseOnExceptions {
 // Do sends the SetPauseOnExceptions CDP command to a browser,
 // and returns the browser's response.
 func (t *SetPauseOnExceptions) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetPauseOnExceptions", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1094,7 +1366,17 @@ func NewSetReturnValue(newValue runtime.CallArgument) *SetReturnValue {
 // Do sends the SetReturnValue CDP command to a browser,
 // and returns the browser's response.
 func (t *SetReturnValue) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetReturnValue", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1156,8 +1438,22 @@ type SetScriptSourceResponse struct {
 // Do sends the SetScriptSource CDP command to a browser,
 // and returns the browser's response.
 func (t *SetScriptSource) Do(ctx context.Context) (*SetScriptSourceResponse, error) {
-	fmt.Println(ctx)
-	return new(SetScriptSourceResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "SetScriptSource", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SetScriptSourceResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetSkipAllPauses contains the parameters, and acts as
@@ -1185,7 +1481,17 @@ func NewSetSkipAllPauses(skip bool) *SetSkipAllPauses {
 // Do sends the SetSkipAllPauses CDP command to a browser,
 // and returns the browser's response.
 func (t *SetSkipAllPauses) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetSkipAllPauses", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1225,7 +1531,17 @@ func NewSetVariableValue(scopeNumber int64, variableName string, newValue runtim
 // Do sends the SetVariableValue CDP command to a browser,
 // and returns the browser's response.
 func (t *SetVariableValue) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetVariableValue", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1282,7 +1598,17 @@ func (t *StepInto) SetSkipList(v []LocationRange) *StepInto {
 // Do sends the StepInto CDP command to a browser,
 // and returns the browser's response.
 func (t *StepInto) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "StepInto", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1306,7 +1632,13 @@ func NewStepOut() *StepOut {
 // Do sends the StepOut CDP command to a browser,
 // and returns the browser's response.
 func (t *StepOut) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "StepOut", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1346,6 +1678,16 @@ func (t *StepOver) SetSkipList(v []LocationRange) *StepOver {
 // Do sends the StepOver CDP command to a browser,
 // and returns the browser's response.
 func (t *StepOver) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "StepOver", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

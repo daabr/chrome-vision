@@ -2,7 +2,10 @@ package schema
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // GetDomains contains the parameters, and acts as
@@ -32,6 +35,16 @@ type GetDomainsResponse struct {
 // Do sends the GetDomains CDP command to a browser,
 // and returns the browser's response.
 func (t *GetDomains) Do(ctx context.Context) (*GetDomainsResponse, error) {
-	fmt.Println(ctx)
-	return new(GetDomainsResponse), nil
+	response, err := cdp.Send(ctx, "GetDomains", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetDomainsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

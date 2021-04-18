@@ -65,6 +65,8 @@ type FrameDetached struct {
 type FrameNavigated struct {
 	// Frame object.
 	Frame Frame `json:"frame"`
+	// This CDP parameter is experimental.
+	Type NavigationType `json:"type"`
 }
 
 // Fired when opening document to write to.
@@ -137,9 +139,11 @@ type FrameStoppedLoading struct {
 }
 
 // Fired when page is about to start a download.
+// Deprecated. Use Browser.downloadWillBegin instead.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-downloadWillBegin
 //
+// This CDP event is deprecated.
 // This CDP event is experimental.
 type DownloadWillBegin struct {
 	// Id of the frame that caused download to begin.
@@ -153,9 +157,11 @@ type DownloadWillBegin struct {
 }
 
 // Fired when download makes progress. Last call has |done| == true.
+// Deprecated. Use Browser.downloadProgress instead.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-downloadProgress
 //
+// This CDP event is deprecated.
 // This CDP event is experimental.
 type DownloadProgress struct {
 	// Global unique identifier of the download.
@@ -218,6 +224,21 @@ type LifecycleEvent struct {
 	LoaderID  network.LoaderID      `json:"loaderId"`
 	Name      string                `json:"name"`
 	Timestamp network.MonotonicTime `json:"timestamp"`
+}
+
+// Fired for failed bfcache history navigations if BackForwardCache feature is enabled. Do
+// not assume any ordering with the Page.frameNavigated event. This event is fired only for
+// main-frame history navigation where the document changes (non-same-document navigations),
+// when bfcache navigation fails.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-backForwardCacheNotUsed
+//
+// This CDP event is experimental.
+type BackForwardCacheNotUsed struct {
+	// The loader id for the associated navgation.
+	LoaderID network.LoaderID `json:"loaderId"`
+	// The frame id of the associated frame.
+	FrameID FrameID `json:"frameId"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-loadEventFired

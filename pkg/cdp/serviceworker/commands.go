@@ -2,7 +2,10 @@ package serviceworker
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // DeliverPushMessage contains the parameters, and acts as
@@ -31,7 +34,17 @@ func NewDeliverPushMessage(origin string, registrationId RegistrationID, data st
 // Do sends the DeliverPushMessage CDP command to a browser,
 // and returns the browser's response.
 func (t *DeliverPushMessage) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "DeliverPushMessage", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -53,7 +66,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -85,7 +104,17 @@ func NewDispatchSyncEvent(origin string, registrationId RegistrationID, tag stri
 // Do sends the DispatchSyncEvent CDP command to a browser,
 // and returns the browser's response.
 func (t *DispatchSyncEvent) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "DispatchSyncEvent", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -115,7 +144,17 @@ func NewDispatchPeriodicSyncEvent(origin string, registrationId RegistrationID, 
 // Do sends the DispatchPeriodicSyncEvent CDP command to a browser,
 // and returns the browser's response.
 func (t *DispatchPeriodicSyncEvent) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "DispatchPeriodicSyncEvent", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -137,7 +176,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -163,7 +208,17 @@ func NewInspectWorker(versionId string) *InspectWorker {
 // Do sends the InspectWorker CDP command to a browser,
 // and returns the browser's response.
 func (t *InspectWorker) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "InspectWorker", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -189,7 +244,17 @@ func NewSetForceUpdateOnPageLoad(forceUpdateOnPageLoad bool) *SetForceUpdateOnPa
 // Do sends the SetForceUpdateOnPageLoad CDP command to a browser,
 // and returns the browser's response.
 func (t *SetForceUpdateOnPageLoad) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetForceUpdateOnPageLoad", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -215,7 +280,17 @@ func NewSkipWaiting(scopeURL string) *SkipWaiting {
 // Do sends the SkipWaiting CDP command to a browser,
 // and returns the browser's response.
 func (t *SkipWaiting) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SkipWaiting", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -241,7 +316,17 @@ func NewStartWorker(scopeURL string) *StartWorker {
 // Do sends the StartWorker CDP command to a browser,
 // and returns the browser's response.
 func (t *StartWorker) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "StartWorker", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -263,7 +348,13 @@ func NewStopAllWorkers() *StopAllWorkers {
 // Do sends the StopAllWorkers CDP command to a browser,
 // and returns the browser's response.
 func (t *StopAllWorkers) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "StopAllWorkers", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -289,7 +380,17 @@ func NewStopWorker(versionId string) *StopWorker {
 // Do sends the StopWorker CDP command to a browser,
 // and returns the browser's response.
 func (t *StopWorker) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "StopWorker", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -315,7 +416,17 @@ func NewUnregister(scopeURL string) *Unregister {
 // Do sends the Unregister CDP command to a browser,
 // and returns the browser's response.
 func (t *Unregister) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "Unregister", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -341,6 +452,16 @@ func NewUpdateRegistration(scopeURL string) *UpdateRegistration {
 // Do sends the UpdateRegistration CDP command to a browser,
 // and returns the browser's response.
 func (t *UpdateRegistration) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "UpdateRegistration", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

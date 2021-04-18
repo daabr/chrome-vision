@@ -82,5 +82,6 @@ type DisabledImageType string
 // DisabledImageType valid values.
 const (
 	DisabledImageTypeAvif DisabledImageType = "avif"
+	DisabledImageTypeJxl  DisabledImageType = "jxl"
 	DisabledImageTypeWebp DisabledImageType = "webp"
 )

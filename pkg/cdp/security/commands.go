@@ -2,7 +2,10 @@ package security
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // Disable contains the parameters, and acts as
@@ -25,7 +28,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -49,7 +58,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -82,7 +97,17 @@ func NewSetIgnoreCertificateErrors(ignore bool) *SetIgnoreCertificateErrors {
 // Do sends the SetIgnoreCertificateErrors CDP command to a browser,
 // and returns the browser's response.
 func (t *SetIgnoreCertificateErrors) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetIgnoreCertificateErrors", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -118,7 +143,17 @@ func NewHandleCertificateError(eventId int64, action CertificateErrorAction) *Ha
 // Do sends the HandleCertificateError CDP command to a browser,
 // and returns the browser's response.
 func (t *HandleCertificateError) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "HandleCertificateError", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -152,6 +187,16 @@ func NewSetOverrideCertificateErrors(override bool) *SetOverrideCertificateError
 // Do sends the SetOverrideCertificateErrors CDP command to a browser,
 // and returns the browser's response.
 func (t *SetOverrideCertificateErrors) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetOverrideCertificateErrors", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

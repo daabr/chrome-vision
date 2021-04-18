@@ -2,8 +2,10 @@ package storage
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
 
+	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/browser"
 	"github.com/daabr/chrome-vision/pkg/cdp/network"
 )
@@ -36,7 +38,17 @@ func NewClearDataForOrigin(origin string, storageTypes string) *ClearDataForOrig
 // Do sends the ClearDataForOrigin CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearDataForOrigin) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ClearDataForOrigin", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -79,8 +91,22 @@ type GetCookiesResponse struct {
 // Do sends the GetCookies CDP command to a browser,
 // and returns the browser's response.
 func (t *GetCookies) Do(ctx context.Context) (*GetCookiesResponse, error) {
-	fmt.Println(ctx)
-	return new(GetCookiesResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetCookies", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetCookiesResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetCookies contains the parameters, and acts as
@@ -119,7 +145,17 @@ func (t *SetCookies) SetBrowserContextID(v browser.BrowserContextID) *SetCookies
 // Do sends the SetCookies CDP command to a browser,
 // and returns the browser's response.
 func (t *SetCookies) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetCookies", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -155,7 +191,17 @@ func (t *ClearCookies) SetBrowserContextID(v browser.BrowserContextID) *ClearCoo
 // Do sends the ClearCookies CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearCookies) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ClearCookies", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -197,8 +243,22 @@ type GetUsageAndQuotaResponse struct {
 // Do sends the GetUsageAndQuota CDP command to a browser,
 // and returns the browser's response.
 func (t *GetUsageAndQuota) Do(ctx context.Context) (*GetUsageAndQuotaResponse, error) {
-	fmt.Println(ctx)
-	return new(GetUsageAndQuotaResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetUsageAndQuota", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetUsageAndQuotaResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // OverrideQuotaForOrigin contains the parameters, and acts as
@@ -253,7 +313,17 @@ func (t *OverrideQuotaForOrigin) SetQuotaSize(v float64) *OverrideQuotaForOrigin
 // Do sends the OverrideQuotaForOrigin CDP command to a browser,
 // and returns the browser's response.
 func (t *OverrideQuotaForOrigin) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "OverrideQuotaForOrigin", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -282,7 +352,17 @@ func NewTrackCacheStorageForOrigin(origin string) *TrackCacheStorageForOrigin {
 // Do sends the TrackCacheStorageForOrigin CDP command to a browser,
 // and returns the browser's response.
 func (t *TrackCacheStorageForOrigin) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "TrackCacheStorageForOrigin", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -311,7 +391,17 @@ func NewTrackIndexedDBForOrigin(origin string) *TrackIndexedDBForOrigin {
 // Do sends the TrackIndexedDBForOrigin CDP command to a browser,
 // and returns the browser's response.
 func (t *TrackIndexedDBForOrigin) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "TrackIndexedDBForOrigin", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -340,7 +430,17 @@ func NewUntrackCacheStorageForOrigin(origin string) *UntrackCacheStorageForOrigi
 // Do sends the UntrackCacheStorageForOrigin CDP command to a browser,
 // and returns the browser's response.
 func (t *UntrackCacheStorageForOrigin) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "UntrackCacheStorageForOrigin", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -369,7 +469,17 @@ func NewUntrackIndexedDBForOrigin(origin string) *UntrackIndexedDBForOrigin {
 // Do sends the UntrackIndexedDBForOrigin CDP command to a browser,
 // and returns the browser's response.
 func (t *UntrackIndexedDBForOrigin) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "UntrackIndexedDBForOrigin", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -404,8 +514,18 @@ type GetTrustTokensResponse struct {
 // Do sends the GetTrustTokens CDP command to a browser,
 // and returns the browser's response.
 func (t *GetTrustTokens) Do(ctx context.Context) (*GetTrustTokensResponse, error) {
-	fmt.Println(ctx)
-	return new(GetTrustTokensResponse), nil
+	response, err := cdp.Send(ctx, "GetTrustTokens", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetTrustTokensResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ClearTrustTokens contains the parameters, and acts as
@@ -444,6 +564,20 @@ type ClearTrustTokensResponse struct {
 // Do sends the ClearTrustTokens CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearTrustTokens) Do(ctx context.Context) (*ClearTrustTokensResponse, error) {
-	fmt.Println(ctx)
-	return new(ClearTrustTokensResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "ClearTrustTokens", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &ClearTrustTokensResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

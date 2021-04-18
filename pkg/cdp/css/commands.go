@@ -2,7 +2,8 @@ package css
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
 
 	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/dom"
@@ -47,8 +48,22 @@ type AddRuleResponse struct {
 // Do sends the AddRule CDP command to a browser,
 // and returns the browser's response.
 func (t *AddRule) Do(ctx context.Context) (*AddRuleResponse, error) {
-	fmt.Println(ctx)
-	return new(AddRuleResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "AddRule", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &AddRuleResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CollectClassNames contains the parameters, and acts as
@@ -82,8 +97,22 @@ type CollectClassNamesResponse struct {
 // Do sends the CollectClassNames CDP command to a browser,
 // and returns the browser's response.
 func (t *CollectClassNames) Do(ctx context.Context) (*CollectClassNamesResponse, error) {
-	fmt.Println(ctx)
-	return new(CollectClassNamesResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "CollectClassNames", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &CollectClassNamesResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CreateStyleSheet contains the parameters, and acts as
@@ -118,8 +147,22 @@ type CreateStyleSheetResponse struct {
 // Do sends the CreateStyleSheet CDP command to a browser,
 // and returns the browser's response.
 func (t *CreateStyleSheet) Do(ctx context.Context) (*CreateStyleSheetResponse, error) {
-	fmt.Println(ctx)
-	return new(CreateStyleSheetResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "CreateStyleSheet", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &CreateStyleSheetResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // Disable contains the parameters, and acts as
@@ -142,7 +185,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -167,7 +216,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -200,7 +255,17 @@ func NewForcePseudoState(nodeId dom.NodeID, forcedPseudoClasses []string) *Force
 // Do sends the ForcePseudoState CDP command to a browser,
 // and returns the browser's response.
 func (t *ForcePseudoState) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ForcePseudoState", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -243,8 +308,22 @@ type GetBackgroundColorsResponse struct {
 // Do sends the GetBackgroundColors CDP command to a browser,
 // and returns the browser's response.
 func (t *GetBackgroundColors) Do(ctx context.Context) (*GetBackgroundColorsResponse, error) {
-	fmt.Println(ctx)
-	return new(GetBackgroundColorsResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetBackgroundColors", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetBackgroundColorsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetComputedStyleForNode contains the parameters, and acts as
@@ -278,8 +357,22 @@ type GetComputedStyleForNodeResponse struct {
 // Do sends the GetComputedStyleForNode CDP command to a browser,
 // and returns the browser's response.
 func (t *GetComputedStyleForNode) Do(ctx context.Context) (*GetComputedStyleForNodeResponse, error) {
-	fmt.Println(ctx)
-	return new(GetComputedStyleForNodeResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetComputedStyleForNode", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetComputedStyleForNodeResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetInlineStylesForNode contains the parameters, and acts as
@@ -316,8 +409,22 @@ type GetInlineStylesForNodeResponse struct {
 // Do sends the GetInlineStylesForNode CDP command to a browser,
 // and returns the browser's response.
 func (t *GetInlineStylesForNode) Do(ctx context.Context) (*GetInlineStylesForNodeResponse, error) {
-	fmt.Println(ctx)
-	return new(GetInlineStylesForNodeResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetInlineStylesForNode", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetInlineStylesForNodeResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetMatchedStylesForNode contains the parameters, and acts as
@@ -361,8 +468,22 @@ type GetMatchedStylesForNodeResponse struct {
 // Do sends the GetMatchedStylesForNode CDP command to a browser,
 // and returns the browser's response.
 func (t *GetMatchedStylesForNode) Do(ctx context.Context) (*GetMatchedStylesForNodeResponse, error) {
-	fmt.Println(ctx)
-	return new(GetMatchedStylesForNodeResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetMatchedStylesForNode", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetMatchedStylesForNodeResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetMediaQueries contains the parameters, and acts as
@@ -391,8 +512,18 @@ type GetMediaQueriesResponse struct {
 // Do sends the GetMediaQueries CDP command to a browser,
 // and returns the browser's response.
 func (t *GetMediaQueries) Do(ctx context.Context) (*GetMediaQueriesResponse, error) {
-	fmt.Println(ctx)
-	return new(GetMediaQueriesResponse), nil
+	response, err := cdp.Send(ctx, "GetMediaQueries", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetMediaQueriesResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetPlatformFontsForNode contains the parameters, and acts as
@@ -427,8 +558,22 @@ type GetPlatformFontsForNodeResponse struct {
 // Do sends the GetPlatformFontsForNode CDP command to a browser,
 // and returns the browser's response.
 func (t *GetPlatformFontsForNode) Do(ctx context.Context) (*GetPlatformFontsForNodeResponse, error) {
-	fmt.Println(ctx)
-	return new(GetPlatformFontsForNodeResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetPlatformFontsForNode", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetPlatformFontsForNodeResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetStyleSheetText contains the parameters, and acts as
@@ -462,8 +607,22 @@ type GetStyleSheetTextResponse struct {
 // Do sends the GetStyleSheetText CDP command to a browser,
 // and returns the browser's response.
 func (t *GetStyleSheetText) Do(ctx context.Context) (*GetStyleSheetTextResponse, error) {
-	fmt.Println(ctx)
-	return new(GetStyleSheetTextResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetStyleSheetText", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetStyleSheetTextResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // TrackComputedStyleUpdates contains the parameters, and acts as
@@ -499,7 +658,17 @@ func NewTrackComputedStyleUpdates(propertiesToTrack []CSSComputedStyleProperty) 
 // Do sends the TrackComputedStyleUpdates CDP command to a browser,
 // and returns the browser's response.
 func (t *TrackComputedStyleUpdates) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "TrackComputedStyleUpdates", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -534,8 +703,18 @@ type TakeComputedStyleUpdatesResponse struct {
 // Do sends the TakeComputedStyleUpdates CDP command to a browser,
 // and returns the browser's response.
 func (t *TakeComputedStyleUpdates) Do(ctx context.Context) (*TakeComputedStyleUpdatesResponse, error) {
-	fmt.Println(ctx)
-	return new(TakeComputedStyleUpdatesResponse), nil
+	response, err := cdp.Send(ctx, "TakeComputedStyleUpdates", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &TakeComputedStyleUpdatesResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetEffectivePropertyValueForNode contains the parameters, and acts as
@@ -568,7 +747,17 @@ func NewSetEffectivePropertyValueForNode(nodeId dom.NodeID, propertyName string,
 // Do sends the SetEffectivePropertyValueForNode CDP command to a browser,
 // and returns the browser's response.
 func (t *SetEffectivePropertyValueForNode) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetEffectivePropertyValueForNode", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -607,8 +796,22 @@ type SetKeyframeKeyResponse struct {
 // Do sends the SetKeyframeKey CDP command to a browser,
 // and returns the browser's response.
 func (t *SetKeyframeKey) Do(ctx context.Context) (*SetKeyframeKeyResponse, error) {
-	fmt.Println(ctx)
-	return new(SetKeyframeKeyResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "SetKeyframeKey", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SetKeyframeKeyResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetMediaText contains the parameters, and acts as
@@ -646,8 +849,22 @@ type SetMediaTextResponse struct {
 // Do sends the SetMediaText CDP command to a browser,
 // and returns the browser's response.
 func (t *SetMediaText) Do(ctx context.Context) (*SetMediaTextResponse, error) {
-	fmt.Println(ctx)
-	return new(SetMediaTextResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "SetMediaText", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SetMediaTextResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetRuleSelector contains the parameters, and acts as
@@ -685,8 +902,22 @@ type SetRuleSelectorResponse struct {
 // Do sends the SetRuleSelector CDP command to a browser,
 // and returns the browser's response.
 func (t *SetRuleSelector) Do(ctx context.Context) (*SetRuleSelectorResponse, error) {
-	fmt.Println(ctx)
-	return new(SetRuleSelectorResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "SetRuleSelector", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SetRuleSelectorResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetStyleSheetText contains the parameters, and acts as
@@ -722,8 +953,22 @@ type SetStyleSheetTextResponse struct {
 // Do sends the SetStyleSheetText CDP command to a browser,
 // and returns the browser's response.
 func (t *SetStyleSheetText) Do(ctx context.Context) (*SetStyleSheetTextResponse, error) {
-	fmt.Println(ctx)
-	return new(SetStyleSheetTextResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "SetStyleSheetText", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SetStyleSheetTextResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetStyleTexts contains the parameters, and acts as
@@ -757,8 +1002,22 @@ type SetStyleTextsResponse struct {
 // Do sends the SetStyleTexts CDP command to a browser,
 // and returns the browser's response.
 func (t *SetStyleTexts) Do(ctx context.Context) (*SetStyleTextsResponse, error) {
-	fmt.Println(ctx)
-	return new(SetStyleTextsResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "SetStyleTexts", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SetStyleTextsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // StartRuleUsageTracking contains the parameters, and acts as
@@ -781,7 +1040,13 @@ func NewStartRuleUsageTracking() *StartRuleUsageTracking {
 // Do sends the StartRuleUsageTracking CDP command to a browser,
 // and returns the browser's response.
 func (t *StartRuleUsageTracking) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "StartRuleUsageTracking", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -812,8 +1077,18 @@ type StopRuleUsageTrackingResponse struct {
 // Do sends the StopRuleUsageTracking CDP command to a browser,
 // and returns the browser's response.
 func (t *StopRuleUsageTracking) Do(ctx context.Context) (*StopRuleUsageTrackingResponse, error) {
-	fmt.Println(ctx)
-	return new(StopRuleUsageTrackingResponse), nil
+	response, err := cdp.Send(ctx, "StopRuleUsageTracking", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &StopRuleUsageTrackingResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // TakeCoverageDelta contains the parameters, and acts as
@@ -845,8 +1120,18 @@ type TakeCoverageDeltaResponse struct {
 // Do sends the TakeCoverageDelta CDP command to a browser,
 // and returns the browser's response.
 func (t *TakeCoverageDelta) Do(ctx context.Context) (*TakeCoverageDeltaResponse, error) {
-	fmt.Println(ctx)
-	return new(TakeCoverageDeltaResponse), nil
+	response, err := cdp.Send(ctx, "TakeCoverageDelta", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &TakeCoverageDeltaResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetLocalFontsEnabled contains the parameters, and acts as
@@ -878,6 +1163,16 @@ func NewSetLocalFontsEnabled(enabled bool) *SetLocalFontsEnabled {
 // Do sends the SetLocalFontsEnabled CDP command to a browser,
 // and returns the browser's response.
 func (t *SetLocalFontsEnabled) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetLocalFontsEnabled", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

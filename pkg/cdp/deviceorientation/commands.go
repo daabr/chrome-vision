@@ -2,7 +2,10 @@ package deviceorientation
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // ClearDeviceOrientationOverride contains the parameters, and acts as
@@ -25,7 +28,13 @@ func NewClearDeviceOrientationOverride() *ClearDeviceOrientationOverride {
 // Do sends the ClearDeviceOrientationOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearDeviceOrientationOverride) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "ClearDeviceOrientationOverride", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -60,6 +69,16 @@ func NewSetDeviceOrientationOverride(alpha float64, beta float64, gamma float64)
 // Do sends the SetDeviceOrientationOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *SetDeviceOrientationOverride) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetDeviceOrientationOverride", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

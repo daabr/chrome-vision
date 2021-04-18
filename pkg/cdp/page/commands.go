@@ -2,8 +2,10 @@ package page
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
 
+	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/debugger"
 	"github.com/daabr/chrome-vision/pkg/cdp/dom"
 	"github.com/daabr/chrome-vision/pkg/cdp/io"
@@ -48,8 +50,22 @@ type AddScriptToEvaluateOnLoadResponse struct {
 // Do sends the AddScriptToEvaluateOnLoad CDP command to a browser,
 // and returns the browser's response.
 func (t *AddScriptToEvaluateOnLoad) Do(ctx context.Context) (*AddScriptToEvaluateOnLoadResponse, error) {
-	fmt.Println(ctx)
-	return new(AddScriptToEvaluateOnLoadResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "AddScriptToEvaluateOnLoad", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &AddScriptToEvaluateOnLoadResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // AddScriptToEvaluateOnNewDocument contains the parameters, and acts as
@@ -102,8 +118,22 @@ type AddScriptToEvaluateOnNewDocumentResponse struct {
 // Do sends the AddScriptToEvaluateOnNewDocument CDP command to a browser,
 // and returns the browser's response.
 func (t *AddScriptToEvaluateOnNewDocument) Do(ctx context.Context) (*AddScriptToEvaluateOnNewDocumentResponse, error) {
-	fmt.Println(ctx)
-	return new(AddScriptToEvaluateOnNewDocumentResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "AddScriptToEvaluateOnNewDocument", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &AddScriptToEvaluateOnNewDocumentResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // BringToFront contains the parameters, and acts as
@@ -126,7 +156,13 @@ func NewBringToFront() *BringToFront {
 // Do sends the BringToFront CDP command to a browser,
 // and returns the browser's response.
 func (t *BringToFront) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "BringToFront", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -221,8 +257,22 @@ type CaptureScreenshotResponse struct {
 // Do sends the CaptureScreenshot CDP command to a browser,
 // and returns the browser's response.
 func (t *CaptureScreenshot) Do(ctx context.Context) (*CaptureScreenshotResponse, error) {
-	fmt.Println(ctx)
-	return new(CaptureScreenshotResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "CaptureScreenshot", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &CaptureScreenshotResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CaptureSnapshot contains the parameters, and acts as
@@ -269,8 +319,22 @@ type CaptureSnapshotResponse struct {
 // Do sends the CaptureSnapshot CDP command to a browser,
 // and returns the browser's response.
 func (t *CaptureSnapshot) Do(ctx context.Context) (*CaptureSnapshotResponse, error) {
-	fmt.Println(ctx)
-	return new(CaptureSnapshotResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "CaptureSnapshot", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &CaptureSnapshotResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CreateIsolatedWorld contains the parameters, and acts as
@@ -329,8 +393,22 @@ type CreateIsolatedWorldResponse struct {
 // Do sends the CreateIsolatedWorld CDP command to a browser,
 // and returns the browser's response.
 func (t *CreateIsolatedWorld) Do(ctx context.Context) (*CreateIsolatedWorldResponse, error) {
-	fmt.Println(ctx)
-	return new(CreateIsolatedWorldResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "CreateIsolatedWorld", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &CreateIsolatedWorldResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // Disable contains the parameters, and acts as
@@ -353,7 +431,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -377,7 +461,13 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Enable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -413,8 +503,18 @@ type GetAppManifestResponse struct {
 // Do sends the GetAppManifest CDP command to a browser,
 // and returns the browser's response.
 func (t *GetAppManifest) Do(ctx context.Context) (*GetAppManifestResponse, error) {
-	fmt.Println(ctx)
-	return new(GetAppManifestResponse), nil
+	response, err := cdp.Send(ctx, "GetAppManifest", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetAppManifestResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetInstallabilityErrors contains the parameters, and acts as
@@ -445,8 +545,18 @@ type GetInstallabilityErrorsResponse struct {
 // Do sends the GetInstallabilityErrors CDP command to a browser,
 // and returns the browser's response.
 func (t *GetInstallabilityErrors) Do(ctx context.Context) (*GetInstallabilityErrorsResponse, error) {
-	fmt.Println(ctx)
-	return new(GetInstallabilityErrorsResponse), nil
+	response, err := cdp.Send(ctx, "GetInstallabilityErrors", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetInstallabilityErrorsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetManifestIcons contains the parameters, and acts as
@@ -477,8 +587,18 @@ type GetManifestIconsResponse struct {
 // Do sends the GetManifestIcons CDP command to a browser,
 // and returns the browser's response.
 func (t *GetManifestIcons) Do(ctx context.Context) (*GetManifestIconsResponse, error) {
-	fmt.Println(ctx)
-	return new(GetManifestIconsResponse), nil
+	response, err := cdp.Send(ctx, "GetManifestIcons", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetManifestIconsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetFrameTree contains the parameters, and acts as
@@ -508,8 +628,18 @@ type GetFrameTreeResponse struct {
 // Do sends the GetFrameTree CDP command to a browser,
 // and returns the browser's response.
 func (t *GetFrameTree) Do(ctx context.Context) (*GetFrameTreeResponse, error) {
-	fmt.Println(ctx)
-	return new(GetFrameTreeResponse), nil
+	response, err := cdp.Send(ctx, "GetFrameTree", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetFrameTreeResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetLayoutMetrics contains the parameters, and acts as
@@ -555,8 +685,18 @@ type GetLayoutMetricsResponse struct {
 // Do sends the GetLayoutMetrics CDP command to a browser,
 // and returns the browser's response.
 func (t *GetLayoutMetrics) Do(ctx context.Context) (*GetLayoutMetricsResponse, error) {
-	fmt.Println(ctx)
-	return new(GetLayoutMetricsResponse), nil
+	response, err := cdp.Send(ctx, "GetLayoutMetrics", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetLayoutMetricsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetNavigationHistory contains the parameters, and acts as
@@ -588,8 +728,18 @@ type GetNavigationHistoryResponse struct {
 // Do sends the GetNavigationHistory CDP command to a browser,
 // and returns the browser's response.
 func (t *GetNavigationHistory) Do(ctx context.Context) (*GetNavigationHistoryResponse, error) {
-	fmt.Println(ctx)
-	return new(GetNavigationHistoryResponse), nil
+	response, err := cdp.Send(ctx, "GetNavigationHistory", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetNavigationHistoryResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ResetNavigationHistory contains the parameters, and acts as
@@ -612,7 +762,13 @@ func NewResetNavigationHistory() *ResetNavigationHistory {
 // Do sends the ResetNavigationHistory CDP command to a browser,
 // and returns the browser's response.
 func (t *ResetNavigationHistory) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "ResetNavigationHistory", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -657,8 +813,22 @@ type GetResourceContentResponse struct {
 // Do sends the GetResourceContent CDP command to a browser,
 // and returns the browser's response.
 func (t *GetResourceContent) Do(ctx context.Context) (*GetResourceContentResponse, error) {
-	fmt.Println(ctx)
-	return new(GetResourceContentResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetResourceContent", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetResourceContentResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetResourceTree contains the parameters, and acts as
@@ -692,8 +862,18 @@ type GetResourceTreeResponse struct {
 // Do sends the GetResourceTree CDP command to a browser,
 // and returns the browser's response.
 func (t *GetResourceTree) Do(ctx context.Context) (*GetResourceTreeResponse, error) {
-	fmt.Println(ctx)
-	return new(GetResourceTreeResponse), nil
+	response, err := cdp.Send(ctx, "GetResourceTree", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetResourceTreeResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // HandleJavaScriptDialog contains the parameters, and acts as
@@ -734,7 +914,17 @@ func (t *HandleJavaScriptDialog) SetPromptText(v string) *HandleJavaScriptDialog
 // Do sends the HandleJavaScriptDialog CDP command to a browser,
 // and returns the browser's response.
 func (t *HandleJavaScriptDialog) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "HandleJavaScriptDialog", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -822,8 +1012,22 @@ type NavigateResponse struct {
 // Do sends the Navigate CDP command to a browser,
 // and returns the browser's response.
 func (t *Navigate) Do(ctx context.Context) (*NavigateResponse, error) {
-	fmt.Println(ctx)
-	return new(NavigateResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "Navigate", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &NavigateResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // NavigateToHistoryEntry contains the parameters, and acts as
@@ -851,7 +1055,17 @@ func NewNavigateToHistoryEntry(entryId int64) *NavigateToHistoryEntry {
 // Do sends the NavigateToHistoryEntry CDP command to a browser,
 // and returns the browser's response.
 func (t *NavigateToHistoryEntry) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "NavigateToHistoryEntry", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1089,8 +1303,22 @@ type PrintToPDFResponse struct {
 // Do sends the PrintToPDF CDP command to a browser,
 // and returns the browser's response.
 func (t *PrintToPDF) Do(ctx context.Context) (*PrintToPDFResponse, error) {
-	fmt.Println(ctx)
-	return new(PrintToPDFResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "PrintToPDF", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &PrintToPDFResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // Reload contains the parameters, and acts as
@@ -1138,7 +1366,17 @@ func (t *Reload) SetScriptToEvaluateOnLoad(v string) *Reload {
 // Do sends the Reload CDP command to a browser,
 // and returns the browser's response.
 func (t *Reload) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "Reload", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1172,7 +1410,17 @@ func NewRemoveScriptToEvaluateOnLoad(identifier ScriptIdentifier) *RemoveScriptT
 // Do sends the RemoveScriptToEvaluateOnLoad CDP command to a browser,
 // and returns the browser's response.
 func (t *RemoveScriptToEvaluateOnLoad) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "RemoveScriptToEvaluateOnLoad", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1200,7 +1448,17 @@ func NewRemoveScriptToEvaluateOnNewDocument(identifier ScriptIdentifier) *Remove
 // Do sends the RemoveScriptToEvaluateOnNewDocument CDP command to a browser,
 // and returns the browser's response.
 func (t *RemoveScriptToEvaluateOnNewDocument) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "RemoveScriptToEvaluateOnNewDocument", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1233,7 +1491,17 @@ func NewScreencastFrameAck(sessionId int64) *ScreencastFrameAck {
 // Do sends the ScreencastFrameAck CDP command to a browser,
 // and returns the browser's response.
 func (t *ScreencastFrameAck) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ScreencastFrameAck", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1301,8 +1569,22 @@ type SearchInResourceResponse struct {
 // Do sends the SearchInResource CDP command to a browser,
 // and returns the browser's response.
 func (t *SearchInResource) Do(ctx context.Context) (*SearchInResourceResponse, error) {
-	fmt.Println(ctx)
-	return new(SearchInResourceResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "SearchInResource", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SearchInResourceResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetAdBlockingEnabled contains the parameters, and acts as
@@ -1334,7 +1616,17 @@ func NewSetAdBlockingEnabled(enabled bool) *SetAdBlockingEnabled {
 // Do sends the SetAdBlockingEnabled CDP command to a browser,
 // and returns the browser's response.
 func (t *SetAdBlockingEnabled) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetAdBlockingEnabled", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1367,7 +1659,17 @@ func NewSetBypassCSP(enabled bool) *SetBypassCSP {
 // Do sends the SetBypassCSP CDP command to a browser,
 // and returns the browser's response.
 func (t *SetBypassCSP) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetBypassCSP", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1405,8 +1707,22 @@ type GetPermissionsPolicyStateResponse struct {
 // Do sends the GetPermissionsPolicyState CDP command to a browser,
 // and returns the browser's response.
 func (t *GetPermissionsPolicyState) Do(ctx context.Context) (*GetPermissionsPolicyStateResponse, error) {
-	fmt.Println(ctx)
-	return new(GetPermissionsPolicyStateResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetPermissionsPolicyState", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetPermissionsPolicyStateResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetFontFamilies contains the parameters, and acts as
@@ -1438,7 +1754,17 @@ func NewSetFontFamilies(fontFamilies FontFamilies) *SetFontFamilies {
 // Do sends the SetFontFamilies CDP command to a browser,
 // and returns the browser's response.
 func (t *SetFontFamilies) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetFontFamilies", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1471,7 +1797,17 @@ func NewSetFontSizes(fontSizes FontSizes) *SetFontSizes {
 // Do sends the SetFontSizes CDP command to a browser,
 // and returns the browser's response.
 func (t *SetFontSizes) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetFontSizes", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1503,7 +1839,17 @@ func NewSetDocumentContent(frameId FrameID, html string) *SetDocumentContent {
 // Do sends the SetDocumentContent CDP command to a browser,
 // and returns the browser's response.
 func (t *SetDocumentContent) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetDocumentContent", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1550,7 +1896,17 @@ func (t *SetDownloadBehavior) SetDownloadPath(v string) *SetDownloadBehavior {
 // Do sends the SetDownloadBehavior CDP command to a browser,
 // and returns the browser's response.
 func (t *SetDownloadBehavior) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetDownloadBehavior", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1583,7 +1939,17 @@ func NewSetLifecycleEventsEnabled(enabled bool) *SetLifecycleEventsEnabled {
 // Do sends the SetLifecycleEventsEnabled CDP command to a browser,
 // and returns the browser's response.
 func (t *SetLifecycleEventsEnabled) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetLifecycleEventsEnabled", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1667,7 +2033,17 @@ func (t *StartScreencast) SetEveryNthFrame(v int64) *StartScreencast {
 // Do sends the StartScreencast CDP command to a browser,
 // and returns the browser's response.
 func (t *StartScreencast) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "StartScreencast", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1691,7 +2067,13 @@ func NewStopLoading() *StopLoading {
 // Do sends the StopLoading CDP command to a browser,
 // and returns the browser's response.
 func (t *StopLoading) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "StopLoading", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1719,7 +2101,13 @@ func NewCrash() *Crash {
 // Do sends the Crash CDP command to a browser,
 // and returns the browser's response.
 func (t *Crash) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Crash", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1747,7 +2135,13 @@ func NewClose() *Close {
 // Do sends the Close CDP command to a browser,
 // and returns the browser's response.
 func (t *Close) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Close", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1782,7 +2176,17 @@ func NewSetWebLifecycleState(state string) *SetWebLifecycleState {
 // Do sends the SetWebLifecycleState CDP command to a browser,
 // and returns the browser's response.
 func (t *SetWebLifecycleState) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetWebLifecycleState", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1810,7 +2214,13 @@ func NewStopScreencast() *StopScreencast {
 // Do sends the StopScreencast CDP command to a browser,
 // and returns the browser's response.
 func (t *StopScreencast) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "StopScreencast", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1843,7 +2253,17 @@ func NewSetProduceCompilationCache(enabled bool) *SetProduceCompilationCache {
 // Do sends the SetProduceCompilationCache CDP command to a browser,
 // and returns the browser's response.
 func (t *SetProduceCompilationCache) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetProduceCompilationCache", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1883,7 +2303,17 @@ func NewProduceCompilationCache(scripts []CompilationCacheParams) *ProduceCompil
 // Do sends the ProduceCompilationCache CDP command to a browser,
 // and returns the browser's response.
 func (t *ProduceCompilationCache) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ProduceCompilationCache", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1919,7 +2349,17 @@ func NewAddCompilationCache(url string, data string) *AddCompilationCache {
 // Do sends the AddCompilationCache CDP command to a browser,
 // and returns the browser's response.
 func (t *AddCompilationCache) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "AddCompilationCache", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1947,7 +2387,13 @@ func NewClearCompilationCache() *ClearCompilationCache {
 // Do sends the ClearCompilationCache CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearCompilationCache) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "ClearCompilationCache", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1991,7 +2437,17 @@ func (t *GenerateTestReport) SetGroup(v string) *GenerateTestReport {
 // Do sends the GenerateTestReport CDP command to a browser,
 // and returns the browser's response.
 func (t *GenerateTestReport) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "GenerateTestReport", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -2019,7 +2475,13 @@ func NewWaitForDebugger() *WaitForDebugger {
 // Do sends the WaitForDebugger CDP command to a browser,
 // and returns the browser's response.
 func (t *WaitForDebugger) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "WaitForDebugger", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -2053,6 +2515,16 @@ func NewSetInterceptFileChooserDialog(enabled bool) *SetInterceptFileChooserDial
 // Do sends the SetInterceptFileChooserDialog CDP command to a browser,
 // and returns the browser's response.
 func (t *SetInterceptFileChooserDialog) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetInterceptFileChooserDialog", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

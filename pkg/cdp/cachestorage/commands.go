@@ -2,7 +2,10 @@ package cachestorage
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // DeleteCache contains the parameters, and acts as
@@ -30,7 +33,17 @@ func NewDeleteCache(cacheId CacheID) *DeleteCache {
 // Do sends the DeleteCache CDP command to a browser,
 // and returns the browser's response.
 func (t *DeleteCache) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "DeleteCache", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -62,7 +75,17 @@ func NewDeleteEntry(cacheId CacheID, request string) *DeleteEntry {
 // Do sends the DeleteEntry CDP command to a browser,
 // and returns the browser's response.
 func (t *DeleteEntry) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "DeleteEntry", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -98,8 +121,22 @@ type RequestCacheNamesResponse struct {
 // Do sends the RequestCacheNames CDP command to a browser,
 // and returns the browser's response.
 func (t *RequestCacheNames) Do(ctx context.Context) (*RequestCacheNamesResponse, error) {
-	fmt.Println(ctx)
-	return new(RequestCacheNamesResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "RequestCacheNames", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &RequestCacheNamesResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // RequestCachedResponse contains the parameters, and acts as
@@ -140,8 +177,22 @@ type RequestCachedResponseResponse struct {
 // Do sends the RequestCachedResponse CDP command to a browser,
 // and returns the browser's response.
 func (t *RequestCachedResponse) Do(ctx context.Context) (*RequestCachedResponseResponse, error) {
-	fmt.Println(ctx)
-	return new(RequestCachedResponseResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "RequestCachedResponse", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &RequestCachedResponseResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // RequestEntries contains the parameters, and acts as
@@ -212,6 +263,20 @@ type RequestEntriesResponse struct {
 // Do sends the RequestEntries CDP command to a browser,
 // and returns the browser's response.
 func (t *RequestEntries) Do(ctx context.Context) (*RequestEntriesResponse, error) {
-	fmt.Println(ctx)
-	return new(RequestEntriesResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "RequestEntries", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &RequestEntriesResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

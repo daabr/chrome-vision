@@ -2,8 +2,10 @@ package fetch
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
 
+	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/io"
 	"github.com/daabr/chrome-vision/pkg/cdp/network"
 )
@@ -28,7 +30,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -82,7 +90,17 @@ func (t *Enable) SetHandleAuthRequests(v bool) *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "Enable", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -114,7 +132,17 @@ func NewFailRequest(requestId RequestID, errorReason network.ErrorReason) *FailR
 // Do sends the FailRequest CDP command to a browser,
 // and returns the browser's response.
 func (t *FailRequest) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "FailRequest", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -198,7 +226,17 @@ func (t *FulfillRequest) SetResponsePhrase(v string) *FulfillRequest {
 // Do sends the FulfillRequest CDP command to a browser,
 // and returns the browser's response.
 func (t *FulfillRequest) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "FulfillRequest", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -271,7 +309,17 @@ func (t *ContinueRequest) SetHeaders(v []HeaderEntry) *ContinueRequest {
 // Do sends the ContinueRequest CDP command to a browser,
 // and returns the browser's response.
 func (t *ContinueRequest) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ContinueRequest", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -303,7 +351,17 @@ func NewContinueWithAuth(requestId RequestID, authChallengeResponse AuthChalleng
 // Do sends the ContinueWithAuth CDP command to a browser,
 // and returns the browser's response.
 func (t *ContinueWithAuth) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ContinueWithAuth", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -346,8 +404,22 @@ type GetResponseBodyResponse struct {
 // Do sends the GetResponseBody CDP command to a browser,
 // and returns the browser's response.
 func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResponse, error) {
-	fmt.Println(ctx)
-	return new(GetResponseBodyResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetResponseBody", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetResponseBodyResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // TakeResponseBodyAsStream contains the parameters, and acts as
@@ -389,6 +461,20 @@ type TakeResponseBodyAsStreamResponse struct {
 // Do sends the TakeResponseBodyAsStream CDP command to a browser,
 // and returns the browser's response.
 func (t *TakeResponseBodyAsStream) Do(ctx context.Context) (*TakeResponseBodyAsStreamResponse, error) {
-	fmt.Println(ctx)
-	return new(TakeResponseBodyAsStreamResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "TakeResponseBodyAsStream", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &TakeResponseBodyAsStreamResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

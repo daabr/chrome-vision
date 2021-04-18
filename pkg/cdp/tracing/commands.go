@@ -2,7 +2,10 @@ package tracing
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // End contains the parameters, and acts as
@@ -25,7 +28,13 @@ func NewEnd() *End {
 // Do sends the End CDP command to a browser,
 // and returns the browser's response.
 func (t *End) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "End", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -56,8 +65,18 @@ type GetCategoriesResponse struct {
 // Do sends the GetCategories CDP command to a browser,
 // and returns the browser's response.
 func (t *GetCategories) Do(ctx context.Context) (*GetCategoriesResponse, error) {
-	fmt.Println(ctx)
-	return new(GetCategoriesResponse), nil
+	response, err := cdp.Send(ctx, "GetCategories", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetCategoriesResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // RecordClockSyncMarker contains the parameters, and acts as
@@ -85,7 +104,17 @@ func NewRecordClockSyncMarker(syncId string) *RecordClockSyncMarker {
 // Do sends the RecordClockSyncMarker CDP command to a browser,
 // and returns the browser's response.
 func (t *RecordClockSyncMarker) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "RecordClockSyncMarker", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -141,8 +170,22 @@ type RequestMemoryDumpResponse struct {
 // Do sends the RequestMemoryDump CDP command to a browser,
 // and returns the browser's response.
 func (t *RequestMemoryDump) Do(ctx context.Context) (*RequestMemoryDumpResponse, error) {
-	fmt.Println(ctx)
-	return new(RequestMemoryDumpResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "RequestMemoryDump", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &RequestMemoryDumpResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // Start contains the parameters, and acts as
@@ -280,6 +323,16 @@ func (t *Start) SetTracingBackend(v TracingBackend) *Start {
 // Do sends the Start CDP command to a browser,
 // and returns the browser's response.
 func (t *Start) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "Start", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

@@ -2,7 +2,8 @@ package network
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
 
 	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/debugger"
@@ -38,7 +39,17 @@ func NewSetAcceptedEncodings(encodings []ContentEncoding) *SetAcceptedEncodings 
 // Do sends the SetAcceptedEncodings CDP command to a browser,
 // and returns the browser's response.
 func (t *SetAcceptedEncodings) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetAcceptedEncodings", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -66,7 +77,13 @@ func NewClearAcceptedEncodingsOverride() *ClearAcceptedEncodingsOverride {
 // Do sends the ClearAcceptedEncodingsOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearAcceptedEncodingsOverride) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "ClearAcceptedEncodingsOverride", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -101,8 +118,18 @@ type CanClearBrowserCacheResponse struct {
 // Do sends the CanClearBrowserCache CDP command to a browser,
 // and returns the browser's response.
 func (t *CanClearBrowserCache) Do(ctx context.Context) (*CanClearBrowserCacheResponse, error) {
-	fmt.Println(ctx)
-	return new(CanClearBrowserCacheResponse), nil
+	response, err := cdp.Send(ctx, "CanClearBrowserCache", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &CanClearBrowserCacheResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CanClearBrowserCookies contains the parameters, and acts as
@@ -136,8 +163,18 @@ type CanClearBrowserCookiesResponse struct {
 // Do sends the CanClearBrowserCookies CDP command to a browser,
 // and returns the browser's response.
 func (t *CanClearBrowserCookies) Do(ctx context.Context) (*CanClearBrowserCookiesResponse, error) {
-	fmt.Println(ctx)
-	return new(CanClearBrowserCookiesResponse), nil
+	response, err := cdp.Send(ctx, "CanClearBrowserCookies", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &CanClearBrowserCookiesResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CanEmulateNetworkConditions contains the parameters, and acts as
@@ -171,8 +208,18 @@ type CanEmulateNetworkConditionsResponse struct {
 // Do sends the CanEmulateNetworkConditions CDP command to a browser,
 // and returns the browser's response.
 func (t *CanEmulateNetworkConditions) Do(ctx context.Context) (*CanEmulateNetworkConditionsResponse, error) {
-	fmt.Println(ctx)
-	return new(CanEmulateNetworkConditionsResponse), nil
+	response, err := cdp.Send(ctx, "CanEmulateNetworkConditions", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &CanEmulateNetworkConditionsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ClearBrowserCache contains the parameters, and acts as
@@ -195,7 +242,13 @@ func NewClearBrowserCache() *ClearBrowserCache {
 // Do sends the ClearBrowserCache CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearBrowserCache) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "ClearBrowserCache", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -219,7 +272,13 @@ func NewClearBrowserCookies() *ClearBrowserCookies {
 // Do sends the ClearBrowserCookies CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearBrowserCookies) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "ClearBrowserCookies", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -346,7 +405,17 @@ func (t *ContinueInterceptedRequest) SetAuthChallengeResponse(v AuthChallengeRes
 // Do sends the ContinueInterceptedRequest CDP command to a browser,
 // and returns the browser's response.
 func (t *ContinueInterceptedRequest) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ContinueInterceptedRequest", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -410,7 +479,17 @@ func (t *DeleteCookies) SetPath(v string) *DeleteCookies {
 // Do sends the DeleteCookies CDP command to a browser,
 // and returns the browser's response.
 func (t *DeleteCookies) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "DeleteCookies", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -434,7 +513,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -483,7 +568,17 @@ func (t *EmulateNetworkConditions) SetConnectionType(v ConnectionType) *EmulateN
 // Do sends the EmulateNetworkConditions CDP command to a browser,
 // and returns the browser's response.
 func (t *EmulateNetworkConditions) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "EmulateNetworkConditions", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -549,7 +644,17 @@ func (t *Enable) SetMaxPostDataSize(v int64) *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "Enable", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -581,8 +686,18 @@ type GetAllCookiesResponse struct {
 // Do sends the GetAllCookies CDP command to a browser,
 // and returns the browser's response.
 func (t *GetAllCookies) Do(ctx context.Context) (*GetAllCookiesResponse, error) {
-	fmt.Println(ctx)
-	return new(GetAllCookiesResponse), nil
+	response, err := cdp.Send(ctx, "GetAllCookies", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetAllCookiesResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetCertificate contains the parameters, and acts as
@@ -620,8 +735,22 @@ type GetCertificateResponse struct {
 // Do sends the GetCertificate CDP command to a browser,
 // and returns the browser's response.
 func (t *GetCertificate) Do(ctx context.Context) (*GetCertificateResponse, error) {
-	fmt.Println(ctx)
-	return new(GetCertificateResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetCertificate", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetCertificateResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetCookies contains the parameters, and acts as
@@ -668,8 +797,22 @@ type GetCookiesResponse struct {
 // Do sends the GetCookies CDP command to a browser,
 // and returns the browser's response.
 func (t *GetCookies) Do(ctx context.Context) (*GetCookiesResponse, error) {
-	fmt.Println(ctx)
-	return new(GetCookiesResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetCookies", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetCookiesResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetResponseBody contains the parameters, and acts as
@@ -706,8 +849,22 @@ type GetResponseBodyResponse struct {
 // Do sends the GetResponseBody CDP command to a browser,
 // and returns the browser's response.
 func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResponse, error) {
-	fmt.Println(ctx)
-	return new(GetResponseBodyResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetResponseBody", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetResponseBodyResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetRequestPostData contains the parameters, and acts as
@@ -742,8 +899,22 @@ type GetRequestPostDataResponse struct {
 // Do sends the GetRequestPostData CDP command to a browser,
 // and returns the browser's response.
 func (t *GetRequestPostData) Do(ctx context.Context) (*GetRequestPostDataResponse, error) {
-	fmt.Println(ctx)
-	return new(GetRequestPostDataResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetRequestPostData", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetRequestPostDataResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetResponseBodyForInterception contains the parameters, and acts as
@@ -784,8 +955,22 @@ type GetResponseBodyForInterceptionResponse struct {
 // Do sends the GetResponseBodyForInterception CDP command to a browser,
 // and returns the browser's response.
 func (t *GetResponseBodyForInterception) Do(ctx context.Context) (*GetResponseBodyForInterceptionResponse, error) {
-	fmt.Println(ctx)
-	return new(GetResponseBodyForInterceptionResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetResponseBodyForInterception", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetResponseBodyForInterceptionResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // TakeResponseBodyForInterceptionAsStream contains the parameters, and acts as
@@ -825,8 +1010,22 @@ type TakeResponseBodyForInterceptionAsStreamResponse struct {
 // Do sends the TakeResponseBodyForInterceptionAsStream CDP command to a browser,
 // and returns the browser's response.
 func (t *TakeResponseBodyForInterceptionAsStream) Do(ctx context.Context) (*TakeResponseBodyForInterceptionAsStreamResponse, error) {
-	fmt.Println(ctx)
-	return new(TakeResponseBodyForInterceptionAsStreamResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "TakeResponseBodyForInterceptionAsStream", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &TakeResponseBodyForInterceptionAsStreamResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ReplayXHR contains the parameters, and acts as
@@ -860,7 +1059,17 @@ func NewReplayXHR(requestId RequestID) *ReplayXHR {
 // Do sends the ReplayXHR CDP command to a browser,
 // and returns the browser's response.
 func (t *ReplayXHR) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ReplayXHR", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -925,8 +1134,22 @@ type SearchInResponseBodyResponse struct {
 // Do sends the SearchInResponseBody CDP command to a browser,
 // and returns the browser's response.
 func (t *SearchInResponseBody) Do(ctx context.Context) (*SearchInResponseBodyResponse, error) {
-	fmt.Println(ctx)
-	return new(SearchInResponseBodyResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "SearchInResponseBody", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SearchInResponseBodyResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetBlockedURLs contains the parameters, and acts as
@@ -958,7 +1181,17 @@ func NewSetBlockedURLs(urls []string) *SetBlockedURLs {
 // Do sends the SetBlockedURLs CDP command to a browser,
 // and returns the browser's response.
 func (t *SetBlockedURLs) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetBlockedURLs", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -991,7 +1224,17 @@ func NewSetBypassServiceWorker(bypass bool) *SetBypassServiceWorker {
 // Do sends the SetBypassServiceWorker CDP command to a browser,
 // and returns the browser's response.
 func (t *SetBypassServiceWorker) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetBypassServiceWorker", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1020,7 +1263,17 @@ func NewSetCacheDisabled(cacheDisabled bool) *SetCacheDisabled {
 // Do sends the SetCacheDisabled CDP command to a browser,
 // and returns the browser's response.
 func (t *SetCacheDisabled) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetCacheDisabled", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1204,8 +1457,22 @@ type SetCookieResponse struct {
 // Do sends the SetCookie CDP command to a browser,
 // and returns the browser's response.
 func (t *SetCookie) Do(ctx context.Context) (*SetCookieResponse, error) {
-	fmt.Println(ctx)
-	return new(SetCookieResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "SetCookie", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SetCookieResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SetCookies contains the parameters, and acts as
@@ -1233,7 +1500,17 @@ func NewSetCookies(cookies []CookieParam) *SetCookies {
 // Do sends the SetCookies CDP command to a browser,
 // and returns the browser's response.
 func (t *SetCookies) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetCookies", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1269,7 +1546,17 @@ func NewSetDataSizeLimitsForTest(maxTotalSize int64, maxResourceSize int64) *Set
 // Do sends the SetDataSizeLimitsForTest CDP command to a browser,
 // and returns the browser's response.
 func (t *SetDataSizeLimitsForTest) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetDataSizeLimitsForTest", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1298,7 +1585,17 @@ func NewSetExtraHTTPHeaders(headers Headers) *SetExtraHTTPHeaders {
 // Do sends the SetExtraHTTPHeaders CDP command to a browser,
 // and returns the browser's response.
 func (t *SetExtraHTTPHeaders) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetExtraHTTPHeaders", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1331,7 +1628,17 @@ func NewSetAttachDebugStack(enabled bool) *SetAttachDebugStack {
 // Do sends the SetAttachDebugStack CDP command to a browser,
 // and returns the browser's response.
 func (t *SetAttachDebugStack) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetAttachDebugStack", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1368,7 +1675,17 @@ func NewSetRequestInterception(patterns []RequestPattern) *SetRequestInterceptio
 // Do sends the SetRequestInterception CDP command to a browser,
 // and returns the browser's response.
 func (t *SetRequestInterception) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetRequestInterception", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -1414,8 +1731,22 @@ type GetSecurityIsolationStatusResponse struct {
 // Do sends the GetSecurityIsolationStatus CDP command to a browser,
 // and returns the browser's response.
 func (t *GetSecurityIsolationStatus) Do(ctx context.Context) (*GetSecurityIsolationStatusResponse, error) {
-	fmt.Println(ctx)
-	return new(GetSecurityIsolationStatusResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "GetSecurityIsolationStatus", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetSecurityIsolationStatusResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // LoadNetworkResource contains the parameters, and acts as
@@ -1459,6 +1790,20 @@ type LoadNetworkResourceResponse struct {
 // Do sends the LoadNetworkResource CDP command to a browser,
 // and returns the browser's response.
 func (t *LoadNetworkResource) Do(ctx context.Context) (*LoadNetworkResourceResponse, error) {
-	fmt.Println(ctx)
-	return new(LoadNetworkResourceResponse), nil
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := cdp.Send(ctx, "LoadNetworkResource", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &LoadNetworkResourceResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }

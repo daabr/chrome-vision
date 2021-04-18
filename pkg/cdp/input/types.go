@@ -64,3 +64,28 @@ const (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#type-TimeSinceEpoch
 type TimeSinceEpoch float64
+
+// https://chromedevtools.github.io/devtools-protocol/tot/Input/#type-DragDataItem
+//
+// This CDP type is experimental.
+type DragDataItem struct {
+	// Mime type of the dragged data.
+	MimeType string `json:"mimeType"`
+	// Depending of the value of `mimeType`, it contains the dragged link,
+	// text, HTML markup or any other data.
+	Data string `json:"data"`
+	// Title associated with a link. Only valid when `mimeType` == "text/uri-list".
+	Title string `json:"title,omitempty"`
+	// Stores the base URL for the contained markup. Only valid when `mimeType`
+	// == "text/html".
+	BaseURL string `json:"baseURL,omitempty"`
+}
+
+// https://chromedevtools.github.io/devtools-protocol/tot/Input/#type-DragData
+//
+// This CDP type is experimental.
+type DragData struct {
+	Items []DragDataItem `json:"items"`
+	// Bit field representing allowed drag operations. Copy = 1, Link = 2, Move = 16
+	DragOperationsMask int64 `json:"dragOperationsMask"`
+}

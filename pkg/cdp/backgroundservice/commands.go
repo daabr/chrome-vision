@@ -2,7 +2,10 @@ package backgroundservice
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // StartObserving contains the parameters, and acts as
@@ -29,7 +32,17 @@ func NewStartObserving(service ServiceName) *StartObserving {
 // Do sends the StartObserving CDP command to a browser,
 // and returns the browser's response.
 func (t *StartObserving) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "StartObserving", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -57,7 +70,17 @@ func NewStopObserving(service ServiceName) *StopObserving {
 // Do sends the StopObserving CDP command to a browser,
 // and returns the browser's response.
 func (t *StopObserving) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "StopObserving", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -87,7 +110,17 @@ func NewSetRecording(shouldRecord bool, service ServiceName) *SetRecording {
 // Do sends the SetRecording CDP command to a browser,
 // and returns the browser's response.
 func (t *SetRecording) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetRecording", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -115,6 +148,16 @@ func NewClearEvents(service ServiceName) *ClearEvents {
 // Do sends the ClearEvents CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearEvents) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "ClearEvents", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }

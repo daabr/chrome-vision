@@ -2,7 +2,10 @@ package performance
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"errors"
+
+	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // Disable contains the parameters, and acts as
@@ -25,7 +28,13 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	response, err := cdp.Send(ctx, "Disable", nil)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -61,7 +70,17 @@ func (t *Enable) SetTimeDomain(v string) *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "Enable", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -98,7 +117,17 @@ func NewSetTimeDomain(timeDomain string) *SetTimeDomain {
 // Do sends the SetTimeDomain CDP command to a browser,
 // and returns the browser's response.
 func (t *SetTimeDomain) Do(ctx context.Context) error {
-	fmt.Println(ctx)
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	response, err := cdp.Send(ctx, "SetTimeDomain", b)
+	if err != nil {
+		return err
+	}
+	if response.Error != nil {
+		return errors.New(response.Error.Error())
+	}
 	return nil
 }
 
@@ -129,6 +158,16 @@ type GetMetricsResponse struct {
 // Do sends the GetMetrics CDP command to a browser,
 // and returns the browser's response.
 func (t *GetMetrics) Do(ctx context.Context) (*GetMetricsResponse, error) {
-	fmt.Println(ctx)
-	return new(GetMetricsResponse), nil
+	response, err := cdp.Send(ctx, "GetMetrics", nil)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetMetricsResponse{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
