@@ -8,8 +8,7 @@ import (
 func generateCommands(d Domain) string {
 	b := new(strings.Builder)
 	fmt.Fprintf(b, "package %s\n", strings.ToLower(d.Domain))
-	// TODO: remove "fmt" once Do() is implemented below.
-	generateImports(b, []string{"context", "encoding/json", "fmt"}, d.Dependencies)
+	generateImports(b, []string{"context", "encoding/json", "errors"}, d.Dependencies)
 
 	for _, c := range d.Commands {
 		// Don't ignore commands which are merely marked as deprecated,
@@ -115,12 +114,41 @@ func generateCommands(d Domain) string {
 		} else {
 			fmt.Fprintf(b, "(*%sResponse, error) {\n", cmd)
 		}
-		// TODO: method implementation.
-		fmt.Fprintln(b, "\tfmt.Println(ctx)")
+		if len(required)+len(optional) == 0 {
+			fmt.Fprintf(b, "\tresponse, err := cdp.Send(ctx, %q, nil)\n", cmd)
+		} else {
+			fmt.Fprintln(b, "\tb, err := json.Marshal(t)")
+			fmt.Fprintln(b, "\tif err != nil {")
+			if len(c.Returns) == 0 {
+				fmt.Fprintln(b, "\t\treturn err")
+			} else {
+				fmt.Fprintln(b, "\t\treturn nil, err")
+			}
+			fmt.Fprintln(b, "\t}")
+			fmt.Fprintf(b, "\tresponse, err := cdp.Send(ctx, %q, b)\n", cmd)
+		}
+		fmt.Fprintln(b, "\tif err != nil {")
+		if len(c.Returns) == 0 {
+			fmt.Fprintln(b, "\t\treturn err")
+		} else {
+			fmt.Fprintln(b, "\t\treturn nil, err")
+		}
+		fmt.Fprintln(b, "\t}")
+		fmt.Fprintln(b, "\tif response.Error != nil {")
+		if len(c.Returns) == 0 {
+			fmt.Fprintln(b, "\t\treturn errors.New(response.Error.Error())")
+		} else {
+			fmt.Fprintln(b, "\t\treturn nil, errors.New(response.Error.Error())")
+		}
+		fmt.Fprintln(b, "\t}")
 		if len(c.Returns) == 0 {
 			fmt.Fprintln(b, "\treturn nil")
 		} else {
-			fmt.Fprintf(b, "\treturn new(%sResponse), nil\n", cmd)
+			fmt.Fprintf(b, "\tresult := &%sResponse{}\n", cmd)
+			fmt.Fprintln(b, "\tif err := json.Unmarshal(response.Result, result); err != nil {")
+			fmt.Fprintln(b, "\t\treturn nil, err")
+			fmt.Fprintln(b, "\t}")
+			fmt.Fprintln(b, "\treturn result, nil")
 		}
 		fmt.Fprintln(b, "}")
 	}
