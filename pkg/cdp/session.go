@@ -39,7 +39,10 @@ type Session struct {
 	msgID  int64
 	msgQ   chan asyncMessage // https://blog.golang.org/codelab-share
 
+	// Exactly one subscriber per response (created and used in cdp.Send).
 	responseSubscribers map[int64]chan *Message
+	// Zero or more subscribers per event.
+	eventSubscribers map[string][]chan *Message
 }
 
 type sessionKey struct{}
@@ -93,6 +96,7 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 		session.msgQ = ps.msgQ
 
 		session.responseSubscribers = ps.responseSubscribers
+		session.eventSubscribers = ps.eventSubscribers
 	} else {
 		// Construct a new session.
 
@@ -117,10 +121,11 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 		if err := start(ctx, session); err != nil {
 			return parent, err
 		}
-		// Initialize a channel to send JSON messages to the browser.
+		// Initialize channels to send JSON messages to and from the browser.
 		session.msgID = 1
 		session.msgQ = make(chan asyncMessage)
 		session.responseSubscribers = make(map[int64]chan *Message)
+		session.eventSubscribers = make(map[string][]chan *Message)
 		go func(s *Session) {
 			for {
 				asyncMsg, ok := <-s.msgQ

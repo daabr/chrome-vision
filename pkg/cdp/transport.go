@@ -38,10 +38,9 @@ type asyncMessage struct {
 	responseChan chan<- *Message
 }
 
-// Parse and route incoming CDP messages (solicited responses or unsolicited
-// events), received from the browser through a POSIX pipe on non-Windows
-// operating systems, as long as the pipe is open. Called as a goroutine
-// in browser.go.
+// Parse and relay incoming CDP messages (solicited responses or unsolicited events),
+// received from the browser through a POSIX pipe on non-Windows operating systems,
+// as long as the pipe is open. Called as a goroutine in browser.go.
 func receiveFromPipe(s *Session) {
 	// This scanner wraps the browser's POSIX pipe, which is closed when the browser
 	// process ends (see the goroutine at the bottom of the start function in browser.go).
@@ -58,17 +57,25 @@ func receiveFromPipe(s *Session) {
 			continue
 		}
 		if len(m.Method) == 0 {
-			// Solicited responses.
+			// Solicited response.
 			log.Printf("Received response: ID %d (%d bytes)\n", m.ID, len(b))
 			if ch, ok := s.responseSubscribers[m.ID]; ok {
 				ch <- m
-				delete(s.responseSubscribers, m.ID)
 			}
 		} else {
-			// Unsolicited events.
+			// Unsolicited event.
 			log.Printf("Received event: %q (%d bytes)\n", m.Method, len(b))
-			// TODO: pass to a channel to actually use this.
-			log.Printf("Received: %s\n", b) // TODO: delete this debug line.
+			if subscribers, ok := s.eventSubscribers[m.Method]; ok {
+				for _, ch := range subscribers {
+					ch <- m
+				}
+				switch len(subscribers) {
+				case 1:
+					log.Printf("Relayed to %d subscribers", len(subscribers))
+				default:
+					log.Printf("Relayed to 1 subscriber")
+				}
+			}
 		}
 	}
 }
@@ -100,7 +107,7 @@ func sendToPipe(s *Session, async asyncMessage) {
 		log.Printf("Discarding malformed message: %#v\n", async.requestMsg)
 		if async.responseChan != nil {
 			m := &Message{ID: s.msgID, Error: &Error{}}
-			m.Error.Message = fmt.Sprintf("malformed message: %v", async.requestMsg)
+			m.Error.Message = fmt.Sprintf("malformed message: %#v", async.requestMsg)
 			async.responseChan <- m
 		}
 		return
@@ -140,9 +147,13 @@ func sendToPipe(s *Session, async asyncMessage) {
 		async.responseChan <- m
 		return
 	}
-	// Wait for the response, and pass it back to the caller of cdp.Send.
+	// Wait for the response, clean-up, and relay back to the caller of cdp.Send.
 	s.msgLog.Printf("-> %s\n", b)
 	m := <-s.responseSubscribers[s.msgID]
+
+	close(s.responseSubscribers[s.msgID])
+	delete(s.responseSubscribers, m.ID)
+
 	async.responseChan <- m
 }
 
@@ -159,5 +170,20 @@ func Send(ctx context.Context, method string, params json.RawMessage) (*Message,
 	// https://blog.golang.org/codelab-share
 	session.msgQ <- asyncMessage{requestMsg: *m, responseChan: ch}
 	m = <-ch
+	close(ch)
 	return m, nil
 }
+
+// Subscribe returns a channel to receive event messages of the
+// given type from the browser associated with the given context.
+func SubscribeEvent(ctx context.Context, name string) (chan *Message, error) {
+	session, ok := FromContext(ctx)
+	if !ok {
+		return nil, errors.New("context not initialized with cdp.NewContext")
+	}
+	ch := make(chan *Message)
+	session.eventSubscribers[name] = append(session.eventSubscribers[name], ch)
+	return ch, nil
+}
+
+// TODO: ubsubscribe.
