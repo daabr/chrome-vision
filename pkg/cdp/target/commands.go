@@ -37,7 +37,7 @@ func (t *ActivateTarget) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ActivateTarget", b)
+	response, err := cdp.Send(ctx, "Target.activateTarget", b)
 	if err != nil {
 		return err
 	}
@@ -97,7 +97,7 @@ func (t *AttachToTarget) Do(ctx context.Context) (*AttachToTargetResponse, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "AttachToTarget", b)
+	response, err := cdp.Send(ctx, "Target.attachToTarget", b)
 	if err != nil {
 		return nil, err
 	}
@@ -142,7 +142,7 @@ type AttachToBrowserTargetResponse struct {
 // Do sends the AttachToBrowserTarget CDP command to a browser,
 // and returns the browser's response.
 func (t *AttachToBrowserTarget) Do(ctx context.Context) (*AttachToBrowserTargetResponse, error) {
-	response, err := cdp.Send(ctx, "AttachToBrowserTarget", nil)
+	response, err := cdp.Send(ctx, "Target.attachToBrowserTarget", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -193,7 +193,7 @@ func (t *CloseTarget) Do(ctx context.Context) (*CloseTargetResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "CloseTarget", b)
+	response, err := cdp.Send(ctx, "Target.closeTarget", b)
 	if err != nil {
 		return nil, err
 	}
@@ -257,7 +257,7 @@ func (t *ExposeDevToolsProtocol) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ExposeDevToolsProtocol", b)
+	response, err := cdp.Send(ctx, "Target.exposeDevToolsProtocol", b)
 	if err != nil {
 		return err
 	}
@@ -337,7 +337,7 @@ func (t *CreateBrowserContext) Do(ctx context.Context) (*CreateBrowserContextRes
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "CreateBrowserContext", b)
+	response, err := cdp.Send(ctx, "Target.createBrowserContext", b)
 	if err != nil {
 		return nil, err
 	}
@@ -382,7 +382,7 @@ type GetBrowserContextsResponse struct {
 // Do sends the GetBrowserContexts CDP command to a browser,
 // and returns the browser's response.
 func (t *GetBrowserContexts) Do(ctx context.Context) (*GetBrowserContextsResponse, error) {
-	response, err := cdp.Send(ctx, "GetBrowserContexts", nil)
+	response, err := cdp.Send(ctx, "Target.getBrowserContexts", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -506,7 +506,7 @@ func (t *CreateTarget) Do(ctx context.Context) (*CreateTargetResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "CreateTarget", b)
+	response, err := cdp.Send(ctx, "Target.createTarget", b)
 	if err != nil {
 		return nil, err
 	}
@@ -571,7 +571,7 @@ func (t *DetachFromTarget) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "DetachFromTarget", b)
+	response, err := cdp.Send(ctx, "Target.detachFromTarget", b)
 	if err != nil {
 		return err
 	}
@@ -614,7 +614,7 @@ func (t *DisposeBrowserContext) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "DisposeBrowserContext", b)
+	response, err := cdp.Send(ctx, "Target.disposeBrowserContext", b)
 	if err != nil {
 		return err
 	}
@@ -667,7 +667,7 @@ func (t *GetTargetInfo) Do(ctx context.Context) (*GetTargetInfoResponse, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetTargetInfo", b)
+	response, err := cdp.Send(ctx, "Target.getTargetInfo", b)
 	if err != nil {
 		return nil, err
 	}
@@ -708,7 +708,7 @@ type GetTargetsResponse struct {
 // Do sends the GetTargets CDP command to a browser,
 // and returns the browser's response.
 func (t *GetTargets) Do(ctx context.Context) (*GetTargetsResponse, error) {
-	response, err := cdp.Send(ctx, "GetTargets", nil)
+	response, err := cdp.Send(ctx, "Target.getTargets", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -782,7 +782,7 @@ func (t *SendMessageToTarget) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SendMessageToTarget", b)
+	response, err := cdp.Send(ctx, "Target.sendMessageToTarget", b)
 	if err != nil {
 		return err
 	}
@@ -846,7 +846,7 @@ func (t *SetAutoAttach) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetAutoAttach", b)
+	response, err := cdp.Send(ctx, "Target.setAutoAttach", b)
 	if err != nil {
 		return err
 	}
@@ -886,7 +886,7 @@ func (t *SetDiscoverTargets) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetDiscoverTargets", b)
+	response, err := cdp.Send(ctx, "Target.setDiscoverTargets", b)
 	if err != nil {
 		return err
 	}
@@ -930,7 +930,7 @@ func (t *SetRemoteLocations) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetRemoteLocations", b)
+	response, err := cdp.Send(ctx, "Target.setRemoteLocations", b)
 	if err != nil {
 		return err
 	}

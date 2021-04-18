@@ -49,7 +49,7 @@ func (t *CollectClassNamesFromSubtree) Do(ctx context.Context) (*CollectClassNam
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "CollectClassNamesFromSubtree", b)
+	response, err := cdp.Send(ctx, "DOM.collectClassNamesFromSubtree", b)
 	if err != nil {
 		return nil, err
 	}
@@ -120,7 +120,7 @@ func (t *CopyTo) Do(ctx context.Context) (*CopyToResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "CopyTo", b)
+	response, err := cdp.Send(ctx, "DOM.copyTo", b)
 	if err != nil {
 		return nil, err
 	}
@@ -226,7 +226,7 @@ func (t *DescribeNode) Do(ctx context.Context) (*DescribeNodeResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "DescribeNode", b)
+	response, err := cdp.Send(ctx, "DOM.describeNode", b)
 	if err != nil {
 		return nil, err
 	}
@@ -317,7 +317,7 @@ func (t *ScrollIntoViewIfNeeded) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ScrollIntoViewIfNeeded", b)
+	response, err := cdp.Send(ctx, "DOM.scrollIntoViewIfNeeded", b)
 	if err != nil {
 		return err
 	}
@@ -347,7 +347,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "DOM.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -391,7 +391,7 @@ func (t *DiscardSearchResults) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "DiscardSearchResults", b)
+	response, err := cdp.Send(ctx, "DOM.discardSearchResults", b)
 	if err != nil {
 		return err
 	}
@@ -421,7 +421,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Enable", nil)
+	response, err := cdp.Send(ctx, "DOM.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -489,7 +489,7 @@ func (t *Focus) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "Focus", b)
+	response, err := cdp.Send(ctx, "DOM.focus", b)
 	if err != nil {
 		return err
 	}
@@ -535,7 +535,7 @@ func (t *GetAttributes) Do(ctx context.Context) (*GetAttributesResponse, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetAttributes", b)
+	response, err := cdp.Send(ctx, "DOM.getAttributes", b)
 	if err != nil {
 		return nil, err
 	}
@@ -614,7 +614,7 @@ func (t *GetBoxModel) Do(ctx context.Context) (*GetBoxModelResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetBoxModel", b)
+	response, err := cdp.Send(ctx, "DOM.getBoxModel", b)
 	if err != nil {
 		return nil, err
 	}
@@ -698,7 +698,7 @@ func (t *GetContentQuads) Do(ctx context.Context) (*GetContentQuadsResponse, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetContentQuads", b)
+	response, err := cdp.Send(ctx, "DOM.getContentQuads", b)
 	if err != nil {
 		return nil, err
 	}
@@ -770,7 +770,7 @@ func (t *GetDocument) Do(ctx context.Context) (*GetDocumentResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetDocument", b)
+	response, err := cdp.Send(ctx, "DOM.getDocument", b)
 	if err != nil {
 		return nil, err
 	}
@@ -848,7 +848,7 @@ func (t *GetFlattenedDocument) Do(ctx context.Context) (*GetFlattenedDocumentRes
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetFlattenedDocument", b)
+	response, err := cdp.Send(ctx, "DOM.getFlattenedDocument", b)
 	if err != nil {
 		return nil, err
 	}
@@ -918,7 +918,7 @@ func (t *GetNodesForSubtreeByStyle) Do(ctx context.Context) (*GetNodesForSubtree
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetNodesForSubtreeByStyle", b)
+	response, err := cdp.Send(ctx, "DOM.getNodesForSubtreeByStyle", b)
 	if err != nil {
 		return nil, err
 	}
@@ -998,7 +998,7 @@ func (t *GetNodeForLocation) Do(ctx context.Context) (*GetNodeForLocationRespons
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetNodeForLocation", b)
+	response, err := cdp.Send(ctx, "DOM.getNodeForLocation", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1077,7 +1077,7 @@ func (t *GetOuterHTML) Do(ctx context.Context) (*GetOuterHTMLResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetOuterHTML", b)
+	response, err := cdp.Send(ctx, "DOM.getOuterHTML", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1131,7 +1131,7 @@ func (t *GetRelayoutBoundary) Do(ctx context.Context) (*GetRelayoutBoundaryRespo
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetRelayoutBoundary", b)
+	response, err := cdp.Send(ctx, "DOM.getRelayoutBoundary", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1192,7 +1192,7 @@ func (t *GetSearchResults) Do(ctx context.Context) (*GetSearchResultsResponse, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetSearchResults", b)
+	response, err := cdp.Send(ctx, "DOM.getSearchResults", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1230,7 +1230,7 @@ func NewMarkUndoableState() *MarkUndoableState {
 // Do sends the MarkUndoableState CDP command to a browser,
 // and returns the browser's response.
 func (t *MarkUndoableState) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "MarkUndoableState", nil)
+	response, err := cdp.Send(ctx, "DOM.markUndoableState", nil)
 	if err != nil {
 		return err
 	}
@@ -1292,7 +1292,7 @@ func (t *MoveTo) Do(ctx context.Context) (*MoveToResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "MoveTo", b)
+	response, err := cdp.Send(ctx, "DOM.moveTo", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1360,7 +1360,7 @@ func (t *PerformSearch) Do(ctx context.Context) (*PerformSearchResponse, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "PerformSearch", b)
+	response, err := cdp.Send(ctx, "DOM.performSearch", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1414,7 +1414,7 @@ func (t *PushNodeByPathToFrontend) Do(ctx context.Context) (*PushNodeByPathToFro
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "PushNodeByPathToFrontend", b)
+	response, err := cdp.Send(ctx, "DOM.pushNodeByPathToFrontend", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1469,7 +1469,7 @@ func (t *PushNodesByBackendIdsToFrontend) Do(ctx context.Context) (*PushNodesByB
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "PushNodesByBackendIdsToFrontend", b)
+	response, err := cdp.Send(ctx, "DOM.pushNodesByBackendIdsToFrontend", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1522,7 +1522,7 @@ func (t *QuerySelector) Do(ctx context.Context) (*QuerySelectorResponse, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "QuerySelector", b)
+	response, err := cdp.Send(ctx, "DOM.querySelector", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1575,7 +1575,7 @@ func (t *QuerySelectorAll) Do(ctx context.Context) (*QuerySelectorAllResponse, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "QuerySelectorAll", b)
+	response, err := cdp.Send(ctx, "DOM.querySelectorAll", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1613,7 +1613,7 @@ func NewRedo() *Redo {
 // Do sends the Redo CDP command to a browser,
 // and returns the browser's response.
 func (t *Redo) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Redo", nil)
+	response, err := cdp.Send(ctx, "DOM.redo", nil)
 	if err != nil {
 		return err
 	}
@@ -1655,7 +1655,7 @@ func (t *RemoveAttribute) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "RemoveAttribute", b)
+	response, err := cdp.Send(ctx, "DOM.removeAttribute", b)
 	if err != nil {
 		return err
 	}
@@ -1694,7 +1694,7 @@ func (t *RemoveNode) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "RemoveNode", b)
+	response, err := cdp.Send(ctx, "DOM.removeNode", b)
 	if err != nil {
 		return err
 	}
@@ -1761,7 +1761,7 @@ func (t *RequestChildNodes) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "RequestChildNodes", b)
+	response, err := cdp.Send(ctx, "DOM.requestChildNodes", b)
 	if err != nil {
 		return err
 	}
@@ -1809,7 +1809,7 @@ func (t *RequestNode) Do(ctx context.Context) (*RequestNodeResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "RequestNode", b)
+	response, err := cdp.Send(ctx, "DOM.requestNode", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1899,7 +1899,7 @@ func (t *ResolveNode) Do(ctx context.Context) (*ResolveNodeResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "ResolveNode", b)
+	response, err := cdp.Send(ctx, "DOM.resolveNode", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1948,7 +1948,7 @@ func (t *SetAttributeValue) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetAttributeValue", b)
+	response, err := cdp.Send(ctx, "DOM.setAttributeValue", b)
 	if err != nil {
 		return err
 	}
@@ -2004,7 +2004,7 @@ func (t *SetAttributesAsText) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetAttributesAsText", b)
+	response, err := cdp.Send(ctx, "DOM.setAttributesAsText", b)
 	if err != nil {
 		return err
 	}
@@ -2076,7 +2076,7 @@ func (t *SetFileInputFiles) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetFileInputFiles", b)
+	response, err := cdp.Send(ctx, "DOM.setFileInputFiles", b)
 	if err != nil {
 		return err
 	}
@@ -2119,7 +2119,7 @@ func (t *SetNodeStackTracesEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetNodeStackTracesEnabled", b)
+	response, err := cdp.Send(ctx, "DOM.setNodeStackTracesEnabled", b)
 	if err != nil {
 		return err
 	}
@@ -2169,7 +2169,7 @@ func (t *GetNodeStackTraces) Do(ctx context.Context) (*GetNodeStackTracesRespons
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetNodeStackTraces", b)
+	response, err := cdp.Send(ctx, "DOM.getNodeStackTraces", b)
 	if err != nil {
 		return nil, err
 	}
@@ -2223,7 +2223,7 @@ func (t *GetFileInfo) Do(ctx context.Context) (*GetFileInfoResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetFileInfo", b)
+	response, err := cdp.Send(ctx, "DOM.getFileInfo", b)
 	if err != nil {
 		return nil, err
 	}
@@ -2271,7 +2271,7 @@ func (t *SetInspectedNode) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetInspectedNode", b)
+	response, err := cdp.Send(ctx, "DOM.setInspectedNode", b)
 	if err != nil {
 		return err
 	}
@@ -2320,7 +2320,7 @@ func (t *SetNodeName) Do(ctx context.Context) (*SetNodeNameResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "SetNodeName", b)
+	response, err := cdp.Send(ctx, "DOM.setNodeName", b)
 	if err != nil {
 		return nil, err
 	}
@@ -2366,7 +2366,7 @@ func (t *SetNodeValue) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetNodeValue", b)
+	response, err := cdp.Send(ctx, "DOM.setNodeValue", b)
 	if err != nil {
 		return err
 	}
@@ -2408,7 +2408,7 @@ func (t *SetOuterHTML) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetOuterHTML", b)
+	response, err := cdp.Send(ctx, "DOM.setOuterHTML", b)
 	if err != nil {
 		return err
 	}
@@ -2442,7 +2442,7 @@ func NewUndo() *Undo {
 // Do sends the Undo CDP command to a browser,
 // and returns the browser's response.
 func (t *Undo) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Undo", nil)
+	response, err := cdp.Send(ctx, "DOM.undo", nil)
 	if err != nil {
 		return err
 	}
@@ -2493,7 +2493,7 @@ func (t *GetFrameOwner) Do(ctx context.Context) (*GetFrameOwnerResponse, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetFrameOwner", b)
+	response, err := cdp.Send(ctx, "DOM.getFrameOwner", b)
 	if err != nil {
 		return nil, err
 	}

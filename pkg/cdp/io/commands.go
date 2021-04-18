@@ -38,7 +38,7 @@ func (t *Close) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "Close", b)
+	response, err := cdp.Send(ctx, "IO.close", b)
 	if err != nil {
 		return err
 	}
@@ -112,7 +112,7 @@ func (t *Read) Do(ctx context.Context) (*ReadResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "Read", b)
+	response, err := cdp.Send(ctx, "IO.read", b)
 	if err != nil {
 		return nil, err
 	}
@@ -162,7 +162,7 @@ func (t *ResolveBlob) Do(ctx context.Context) (*ResolveBlobResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "ResolveBlob", b)
+	response, err := cdp.Send(ctx, "IO.resolveBlob", b)
 	if err != nil {
 		return nil, err
 	}

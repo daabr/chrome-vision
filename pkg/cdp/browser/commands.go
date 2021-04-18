@@ -66,7 +66,7 @@ func (t *SetPermission) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetPermission", b)
+	response, err := cdp.Send(ctx, "Browser.setPermission", b)
 	if err != nil {
 		return err
 	}
@@ -130,7 +130,7 @@ func (t *GrantPermissions) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "GrantPermissions", b)
+	response, err := cdp.Send(ctx, "Browser.grantPermissions", b)
 	if err != nil {
 		return err
 	}
@@ -180,7 +180,7 @@ func (t *ResetPermissions) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ResetPermissions", b)
+	response, err := cdp.Send(ctx, "Browser.resetPermissions", b)
 	if err != nil {
 		return err
 	}
@@ -260,7 +260,7 @@ func (t *SetDownloadBehavior) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetDownloadBehavior", b)
+	response, err := cdp.Send(ctx, "Browser.setDownloadBehavior", b)
 	if err != nil {
 		return err
 	}
@@ -314,7 +314,7 @@ func (t *CancelDownload) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "CancelDownload", b)
+	response, err := cdp.Send(ctx, "Browser.cancelDownload", b)
 	if err != nil {
 		return err
 	}
@@ -344,7 +344,7 @@ func NewClose() *Close {
 // Do sends the Close CDP command to a browser,
 // and returns the browser's response.
 func (t *Close) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Close", nil)
+	response, err := cdp.Send(ctx, "Browser.close", nil)
 	if err != nil {
 		return err
 	}
@@ -378,7 +378,7 @@ func NewCrash() *Crash {
 // Do sends the Crash CDP command to a browser,
 // and returns the browser's response.
 func (t *Crash) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Crash", nil)
+	response, err := cdp.Send(ctx, "Browser.crash", nil)
 	if err != nil {
 		return err
 	}
@@ -412,7 +412,7 @@ func NewCrashGpuProcess() *CrashGpuProcess {
 // Do sends the CrashGpuProcess CDP command to a browser,
 // and returns the browser's response.
 func (t *CrashGpuProcess) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "CrashGpuProcess", nil)
+	response, err := cdp.Send(ctx, "Browser.crashGpuProcess", nil)
 	if err != nil {
 		return err
 	}
@@ -457,7 +457,7 @@ type GetVersionResponse struct {
 // Do sends the GetVersion CDP command to a browser,
 // and returns the browser's response.
 func (t *GetVersion) Do(ctx context.Context) (*GetVersionResponse, error) {
-	response, err := cdp.Send(ctx, "GetVersion", nil)
+	response, err := cdp.Send(ctx, "Browser.getVersion", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -503,7 +503,7 @@ type GetBrowserCommandLineResponse struct {
 // Do sends the GetBrowserCommandLine CDP command to a browser,
 // and returns the browser's response.
 func (t *GetBrowserCommandLine) Do(ctx context.Context) (*GetBrowserCommandLineResponse, error) {
-	response, err := cdp.Send(ctx, "GetBrowserCommandLine", nil)
+	response, err := cdp.Send(ctx, "Browser.getBrowserCommandLine", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -579,7 +579,7 @@ func (t *GetHistograms) Do(ctx context.Context) (*GetHistogramsResponse, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetHistograms", b)
+	response, err := cdp.Send(ctx, "Browser.getHistograms", b)
 	if err != nil {
 		return nil, err
 	}
@@ -644,7 +644,7 @@ func (t *GetHistogram) Do(ctx context.Context) (*GetHistogramResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetHistogram", b)
+	response, err := cdp.Send(ctx, "Browser.getHistogram", b)
 	if err != nil {
 		return nil, err
 	}
@@ -699,7 +699,7 @@ func (t *GetWindowBounds) Do(ctx context.Context) (*GetWindowBoundsResponse, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetWindowBounds", b)
+	response, err := cdp.Send(ctx, "Browser.getWindowBounds", b)
 	if err != nil {
 		return nil, err
 	}
@@ -763,7 +763,7 @@ func (t *GetWindowForTarget) Do(ctx context.Context) (*GetWindowForTargetRespons
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetWindowForTarget", b)
+	response, err := cdp.Send(ctx, "Browser.getWindowForTarget", b)
 	if err != nil {
 		return nil, err
 	}
@@ -814,7 +814,7 @@ func (t *SetWindowBounds) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetWindowBounds", b)
+	response, err := cdp.Send(ctx, "Browser.setWindowBounds", b)
 	if err != nil {
 		return err
 	}
@@ -872,7 +872,7 @@ func (t *SetDockTile) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetDockTile", b)
+	response, err := cdp.Send(ctx, "Browser.setDockTile", b)
 	if err != nil {
 		return err
 	}
@@ -914,7 +914,7 @@ func (t *ExecuteBrowserCommand) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ExecuteBrowserCommand", b)
+	response, err := cdp.Send(ctx, "Browser.executeBrowserCommand", b)
 	if err != nil {
 		return err
 	}

@@ -42,7 +42,7 @@ func (t *Enable) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "Enable", b)
+	response, err := cdp.Send(ctx, "PerformanceTimeline.enable", b)
 	if err != nil {
 		return err
 	}

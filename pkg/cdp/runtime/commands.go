@@ -68,7 +68,7 @@ func (t *AwaitPromise) Do(ctx context.Context) (*AwaitPromiseResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "AwaitPromise", b)
+	response, err := cdp.Send(ctx, "Runtime.awaitPromise", b)
 	if err != nil {
 		return nil, err
 	}
@@ -236,7 +236,7 @@ func (t *CallFunctionOn) Do(ctx context.Context) (*CallFunctionOnResponse, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "CallFunctionOn", b)
+	response, err := cdp.Send(ctx, "Runtime.callFunctionOn", b)
 	if err != nil {
 		return nil, err
 	}
@@ -307,7 +307,7 @@ func (t *CompileScript) Do(ctx context.Context) (*CompileScriptResponse, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "CompileScript", b)
+	response, err := cdp.Send(ctx, "Runtime.compileScript", b)
 	if err != nil {
 		return nil, err
 	}
@@ -341,7 +341,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "Runtime.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -371,7 +371,7 @@ func NewDiscardConsoleEntries() *DiscardConsoleEntries {
 // Do sends the DiscardConsoleEntries CDP command to a browser,
 // and returns the browser's response.
 func (t *DiscardConsoleEntries) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "DiscardConsoleEntries", nil)
+	response, err := cdp.Send(ctx, "Runtime.discardConsoleEntries", nil)
 	if err != nil {
 		return err
 	}
@@ -403,7 +403,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Enable", nil)
+	response, err := cdp.Send(ctx, "Runtime.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -667,7 +667,7 @@ func (t *Evaluate) Do(ctx context.Context) (*EvaluateResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "Evaluate", b)
+	response, err := cdp.Send(ctx, "Runtime.evaluate", b)
 	if err != nil {
 		return nil, err
 	}
@@ -712,7 +712,7 @@ type GetIsolateIDResponse struct {
 // Do sends the GetIsolateID CDP command to a browser,
 // and returns the browser's response.
 func (t *GetIsolateID) Do(ctx context.Context) (*GetIsolateIDResponse, error) {
-	response, err := cdp.Send(ctx, "GetIsolateID", nil)
+	response, err := cdp.Send(ctx, "Runtime.getIsolateId", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -760,7 +760,7 @@ type GetHeapUsageResponse struct {
 // Do sends the GetHeapUsage CDP command to a browser,
 // and returns the browser's response.
 func (t *GetHeapUsage) Do(ctx context.Context) (*GetHeapUsageResponse, error) {
-	response, err := cdp.Send(ctx, "GetHeapUsage", nil)
+	response, err := cdp.Send(ctx, "Runtime.getHeapUsage", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -864,7 +864,7 @@ func (t *GetProperties) Do(ctx context.Context) (*GetPropertiesResponse, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetProperties", b)
+	response, err := cdp.Send(ctx, "Runtime.getProperties", b)
 	if err != nil {
 		return nil, err
 	}
@@ -920,7 +920,7 @@ func (t *GlobalLexicalScopeNames) Do(ctx context.Context) (*GlobalLexicalScopeNa
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GlobalLexicalScopeNames", b)
+	response, err := cdp.Send(ctx, "Runtime.globalLexicalScopeNames", b)
 	if err != nil {
 		return nil, err
 	}
@@ -979,7 +979,7 @@ func (t *QueryObjects) Do(ctx context.Context) (*QueryObjectsResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "QueryObjects", b)
+	response, err := cdp.Send(ctx, "Runtime.queryObjects", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1022,7 +1022,7 @@ func (t *ReleaseObject) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ReleaseObject", b)
+	response, err := cdp.Send(ctx, "Runtime.releaseObject", b)
 	if err != nil {
 		return err
 	}
@@ -1061,7 +1061,7 @@ func (t *ReleaseObjectGroup) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ReleaseObjectGroup", b)
+	response, err := cdp.Send(ctx, "Runtime.releaseObjectGroup", b)
 	if err != nil {
 		return err
 	}
@@ -1091,7 +1091,7 @@ func NewRunIfWaitingForDebugger() *RunIfWaitingForDebugger {
 // Do sends the RunIfWaitingForDebugger CDP command to a browser,
 // and returns the browser's response.
 func (t *RunIfWaitingForDebugger) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "RunIfWaitingForDebugger", nil)
+	response, err := cdp.Send(ctx, "Runtime.runIfWaitingForDebugger", nil)
 	if err != nil {
 		return err
 	}
@@ -1222,7 +1222,7 @@ func (t *RunScript) Do(ctx context.Context) (*RunScriptResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "RunScript", b)
+	response, err := cdp.Send(ctx, "Runtime.runScript", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1266,7 +1266,7 @@ func (t *SetCustomObjectFormatterEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetCustomObjectFormatterEnabled", b)
+	response, err := cdp.Send(ctx, "Runtime.setCustomObjectFormatterEnabled", b)
 	if err != nil {
 		return err
 	}
@@ -1306,7 +1306,7 @@ func (t *SetMaxCallStackSizeToCapture) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetMaxCallStackSizeToCapture", b)
+	response, err := cdp.Send(ctx, "Runtime.setMaxCallStackSizeToCapture", b)
 	if err != nil {
 		return err
 	}
@@ -1341,7 +1341,7 @@ func NewTerminateExecution() *TerminateExecution {
 // Do sends the TerminateExecution CDP command to a browser,
 // and returns the browser's response.
 func (t *TerminateExecution) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "TerminateExecution", nil)
+	response, err := cdp.Send(ctx, "Runtime.terminateExecution", nil)
 	if err != nil {
 		return err
 	}
@@ -1428,7 +1428,7 @@ func (t *AddBinding) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "AddBinding", b)
+	response, err := cdp.Send(ctx, "Runtime.addBinding", b)
 	if err != nil {
 		return err
 	}
@@ -1471,7 +1471,7 @@ func (t *RemoveBinding) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "RemoveBinding", b)
+	response, err := cdp.Send(ctx, "Runtime.removeBinding", b)
 	if err != nil {
 		return err
 	}

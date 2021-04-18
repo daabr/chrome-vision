@@ -28,7 +28,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "Database.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -58,7 +58,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Enable", nil)
+	response, err := cdp.Send(ctx, "Database.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -104,7 +104,7 @@ func (t *ExecuteSQL) Do(ctx context.Context) (*ExecuteSQLResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "ExecuteSQL", b)
+	response, err := cdp.Send(ctx, "Database.executeSQL", b)
 	if err != nil {
 		return nil, err
 	}
@@ -150,7 +150,7 @@ func (t *GetDatabaseTableNames) Do(ctx context.Context) (*GetDatabaseTableNamesR
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetDatabaseTableNames", b)
+	response, err := cdp.Send(ctx, "Database.getDatabaseTableNames", b)
 	if err != nil {
 		return nil, err
 	}

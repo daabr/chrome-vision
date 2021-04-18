@@ -52,7 +52,7 @@ func (t *AddRule) Do(ctx context.Context) (*AddRuleResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "AddRule", b)
+	response, err := cdp.Send(ctx, "CSS.addRule", b)
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +101,7 @@ func (t *CollectClassNames) Do(ctx context.Context) (*CollectClassNamesResponse,
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "CollectClassNames", b)
+	response, err := cdp.Send(ctx, "CSS.collectClassNames", b)
 	if err != nil {
 		return nil, err
 	}
@@ -151,7 +151,7 @@ func (t *CreateStyleSheet) Do(ctx context.Context) (*CreateStyleSheetResponse, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "CreateStyleSheet", b)
+	response, err := cdp.Send(ctx, "CSS.createStyleSheet", b)
 	if err != nil {
 		return nil, err
 	}
@@ -185,7 +185,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "CSS.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -216,7 +216,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Enable", nil)
+	response, err := cdp.Send(ctx, "CSS.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -259,7 +259,7 @@ func (t *ForcePseudoState) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ForcePseudoState", b)
+	response, err := cdp.Send(ctx, "CSS.forcePseudoState", b)
 	if err != nil {
 		return err
 	}
@@ -312,7 +312,7 @@ func (t *GetBackgroundColors) Do(ctx context.Context) (*GetBackgroundColorsRespo
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetBackgroundColors", b)
+	response, err := cdp.Send(ctx, "CSS.getBackgroundColors", b)
 	if err != nil {
 		return nil, err
 	}
@@ -361,7 +361,7 @@ func (t *GetComputedStyleForNode) Do(ctx context.Context) (*GetComputedStyleForN
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetComputedStyleForNode", b)
+	response, err := cdp.Send(ctx, "CSS.getComputedStyleForNode", b)
 	if err != nil {
 		return nil, err
 	}
@@ -413,7 +413,7 @@ func (t *GetInlineStylesForNode) Do(ctx context.Context) (*GetInlineStylesForNod
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetInlineStylesForNode", b)
+	response, err := cdp.Send(ctx, "CSS.getInlineStylesForNode", b)
 	if err != nil {
 		return nil, err
 	}
@@ -472,7 +472,7 @@ func (t *GetMatchedStylesForNode) Do(ctx context.Context) (*GetMatchedStylesForN
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetMatchedStylesForNode", b)
+	response, err := cdp.Send(ctx, "CSS.getMatchedStylesForNode", b)
 	if err != nil {
 		return nil, err
 	}
@@ -512,7 +512,7 @@ type GetMediaQueriesResponse struct {
 // Do sends the GetMediaQueries CDP command to a browser,
 // and returns the browser's response.
 func (t *GetMediaQueries) Do(ctx context.Context) (*GetMediaQueriesResponse, error) {
-	response, err := cdp.Send(ctx, "GetMediaQueries", nil)
+	response, err := cdp.Send(ctx, "CSS.getMediaQueries", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -562,7 +562,7 @@ func (t *GetPlatformFontsForNode) Do(ctx context.Context) (*GetPlatformFontsForN
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetPlatformFontsForNode", b)
+	response, err := cdp.Send(ctx, "CSS.getPlatformFontsForNode", b)
 	if err != nil {
 		return nil, err
 	}
@@ -611,7 +611,7 @@ func (t *GetStyleSheetText) Do(ctx context.Context) (*GetStyleSheetTextResponse,
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetStyleSheetText", b)
+	response, err := cdp.Send(ctx, "CSS.getStyleSheetText", b)
 	if err != nil {
 		return nil, err
 	}
@@ -662,7 +662,7 @@ func (t *TrackComputedStyleUpdates) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "TrackComputedStyleUpdates", b)
+	response, err := cdp.Send(ctx, "CSS.trackComputedStyleUpdates", b)
 	if err != nil {
 		return err
 	}
@@ -703,7 +703,7 @@ type TakeComputedStyleUpdatesResponse struct {
 // Do sends the TakeComputedStyleUpdates CDP command to a browser,
 // and returns the browser's response.
 func (t *TakeComputedStyleUpdates) Do(ctx context.Context) (*TakeComputedStyleUpdatesResponse, error) {
-	response, err := cdp.Send(ctx, "TakeComputedStyleUpdates", nil)
+	response, err := cdp.Send(ctx, "CSS.takeComputedStyleUpdates", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -751,7 +751,7 @@ func (t *SetEffectivePropertyValueForNode) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetEffectivePropertyValueForNode", b)
+	response, err := cdp.Send(ctx, "CSS.setEffectivePropertyValueForNode", b)
 	if err != nil {
 		return err
 	}
@@ -800,7 +800,7 @@ func (t *SetKeyframeKey) Do(ctx context.Context) (*SetKeyframeKeyResponse, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "SetKeyframeKey", b)
+	response, err := cdp.Send(ctx, "CSS.setKeyframeKey", b)
 	if err != nil {
 		return nil, err
 	}
@@ -853,7 +853,7 @@ func (t *SetMediaText) Do(ctx context.Context) (*SetMediaTextResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "SetMediaText", b)
+	response, err := cdp.Send(ctx, "CSS.setMediaText", b)
 	if err != nil {
 		return nil, err
 	}
@@ -906,7 +906,7 @@ func (t *SetRuleSelector) Do(ctx context.Context) (*SetRuleSelectorResponse, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "SetRuleSelector", b)
+	response, err := cdp.Send(ctx, "CSS.setRuleSelector", b)
 	if err != nil {
 		return nil, err
 	}
@@ -957,7 +957,7 @@ func (t *SetStyleSheetText) Do(ctx context.Context) (*SetStyleSheetTextResponse,
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "SetStyleSheetText", b)
+	response, err := cdp.Send(ctx, "CSS.setStyleSheetText", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1006,7 +1006,7 @@ func (t *SetStyleTexts) Do(ctx context.Context) (*SetStyleTextsResponse, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "SetStyleTexts", b)
+	response, err := cdp.Send(ctx, "CSS.setStyleTexts", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1040,7 +1040,7 @@ func NewStartRuleUsageTracking() *StartRuleUsageTracking {
 // Do sends the StartRuleUsageTracking CDP command to a browser,
 // and returns the browser's response.
 func (t *StartRuleUsageTracking) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "StartRuleUsageTracking", nil)
+	response, err := cdp.Send(ctx, "CSS.startRuleUsageTracking", nil)
 	if err != nil {
 		return err
 	}
@@ -1077,7 +1077,7 @@ type StopRuleUsageTrackingResponse struct {
 // Do sends the StopRuleUsageTracking CDP command to a browser,
 // and returns the browser's response.
 func (t *StopRuleUsageTracking) Do(ctx context.Context) (*StopRuleUsageTrackingResponse, error) {
-	response, err := cdp.Send(ctx, "StopRuleUsageTracking", nil)
+	response, err := cdp.Send(ctx, "CSS.stopRuleUsageTracking", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1120,7 +1120,7 @@ type TakeCoverageDeltaResponse struct {
 // Do sends the TakeCoverageDelta CDP command to a browser,
 // and returns the browser's response.
 func (t *TakeCoverageDelta) Do(ctx context.Context) (*TakeCoverageDeltaResponse, error) {
-	response, err := cdp.Send(ctx, "TakeCoverageDelta", nil)
+	response, err := cdp.Send(ctx, "CSS.takeCoverageDelta", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1167,7 +1167,7 @@ func (t *SetLocalFontsEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetLocalFontsEnabled", b)
+	response, err := cdp.Send(ctx, "CSS.setLocalFontsEnabled", b)
 	if err != nil {
 		return err
 	}

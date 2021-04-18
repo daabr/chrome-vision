@@ -37,7 +37,7 @@ type CanEmulateResponse struct {
 // Do sends the CanEmulate CDP command to a browser,
 // and returns the browser's response.
 func (t *CanEmulate) Do(ctx context.Context) (*CanEmulateResponse, error) {
-	response, err := cdp.Send(ctx, "CanEmulate", nil)
+	response, err := cdp.Send(ctx, "Emulation.canEmulate", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ func NewClearDeviceMetricsOverride() *ClearDeviceMetricsOverride {
 // Do sends the ClearDeviceMetricsOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearDeviceMetricsOverride) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "ClearDeviceMetricsOverride", nil)
+	response, err := cdp.Send(ctx, "Emulation.clearDeviceMetricsOverride", nil)
 	if err != nil {
 		return err
 	}
@@ -101,7 +101,7 @@ func NewClearGeolocationOverride() *ClearGeolocationOverride {
 // Do sends the ClearGeolocationOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearGeolocationOverride) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "ClearGeolocationOverride", nil)
+	response, err := cdp.Send(ctx, "Emulation.clearGeolocationOverride", nil)
 	if err != nil {
 		return err
 	}
@@ -135,7 +135,7 @@ func NewResetPageScaleFactor() *ResetPageScaleFactor {
 // Do sends the ResetPageScaleFactor CDP command to a browser,
 // and returns the browser's response.
 func (t *ResetPageScaleFactor) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "ResetPageScaleFactor", nil)
+	response, err := cdp.Send(ctx, "Emulation.resetPageScaleFactor", nil)
 	if err != nil {
 		return err
 	}
@@ -178,7 +178,7 @@ func (t *SetFocusEmulationEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetFocusEmulationEnabled", b)
+	response, err := cdp.Send(ctx, "Emulation.setFocusEmulationEnabled", b)
 	if err != nil {
 		return err
 	}
@@ -221,7 +221,7 @@ func (t *SetCPUThrottlingRate) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetCPUThrottlingRate", b)
+	response, err := cdp.Send(ctx, "Emulation.setCPUThrottlingRate", b)
 	if err != nil {
 		return err
 	}
@@ -270,7 +270,7 @@ func (t *SetDefaultBackgroundColorOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetDefaultBackgroundColorOverride", b)
+	response, err := cdp.Send(ctx, "Emulation.setDefaultBackgroundColorOverride", b)
 	if err != nil {
 		return err
 	}
@@ -456,7 +456,7 @@ func (t *SetDeviceMetricsOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetDeviceMetricsOverride", b)
+	response, err := cdp.Send(ctx, "Emulation.setDeviceMetricsOverride", b)
 	if err != nil {
 		return err
 	}
@@ -497,7 +497,7 @@ func (t *SetScrollbarsHidden) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetScrollbarsHidden", b)
+	response, err := cdp.Send(ctx, "Emulation.setScrollbarsHidden", b)
 	if err != nil {
 		return err
 	}
@@ -538,7 +538,7 @@ func (t *SetDocumentCookieDisabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetDocumentCookieDisabled", b)
+	response, err := cdp.Send(ctx, "Emulation.setDocumentCookieDisabled", b)
 	if err != nil {
 		return err
 	}
@@ -590,7 +590,7 @@ func (t *SetEmitTouchEventsForMouse) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetEmitTouchEventsForMouse", b)
+	response, err := cdp.Send(ctx, "Emulation.setEmitTouchEventsForMouse", b)
 	if err != nil {
 		return err
 	}
@@ -647,7 +647,7 @@ func (t *SetEmulatedMedia) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetEmulatedMedia", b)
+	response, err := cdp.Send(ctx, "Emulation.setEmulatedMedia", b)
 	if err != nil {
 		return err
 	}
@@ -690,7 +690,7 @@ func (t *SetEmulatedVisionDeficiency) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetEmulatedVisionDeficiency", b)
+	response, err := cdp.Send(ctx, "Emulation.setEmulatedVisionDeficiency", b)
 	if err != nil {
 		return err
 	}
@@ -759,7 +759,7 @@ func (t *SetGeolocationOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetGeolocationOverride", b)
+	response, err := cdp.Send(ctx, "Emulation.setGeolocationOverride", b)
 	if err != nil {
 		return err
 	}
@@ -805,7 +805,7 @@ func (t *SetIdleOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetIdleOverride", b)
+	response, err := cdp.Send(ctx, "Emulation.setIdleOverride", b)
 	if err != nil {
 		return err
 	}
@@ -839,7 +839,7 @@ func NewClearIdleOverride() *ClearIdleOverride {
 // Do sends the ClearIdleOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearIdleOverride) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "ClearIdleOverride", nil)
+	response, err := cdp.Send(ctx, "Emulation.clearIdleOverride", nil)
 	if err != nil {
 		return err
 	}
@@ -884,7 +884,7 @@ func (t *SetNavigatorOverrides) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetNavigatorOverrides", b)
+	response, err := cdp.Send(ctx, "Emulation.setNavigatorOverrides", b)
 	if err != nil {
 		return err
 	}
@@ -927,7 +927,7 @@ func (t *SetPageScaleFactor) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetPageScaleFactor", b)
+	response, err := cdp.Send(ctx, "Emulation.setPageScaleFactor", b)
 	if err != nil {
 		return err
 	}
@@ -966,7 +966,7 @@ func (t *SetScriptExecutionDisabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetScriptExecutionDisabled", b)
+	response, err := cdp.Send(ctx, "Emulation.setScriptExecutionDisabled", b)
 	if err != nil {
 		return err
 	}
@@ -1016,7 +1016,7 @@ func (t *SetTouchEmulationEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetTouchEmulationEnabled", b)
+	response, err := cdp.Send(ctx, "Emulation.setTouchEmulationEnabled", b)
 	if err != nil {
 		return err
 	}
@@ -1116,7 +1116,7 @@ func (t *SetVirtualTimePolicy) Do(ctx context.Context) (*SetVirtualTimePolicyRes
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "SetVirtualTimePolicy", b)
+	response, err := cdp.Send(ctx, "Emulation.setVirtualTimePolicy", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1172,7 +1172,7 @@ func (t *SetLocaleOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetLocaleOverride", b)
+	response, err := cdp.Send(ctx, "Emulation.setLocaleOverride", b)
 	if err != nil {
 		return err
 	}
@@ -1216,7 +1216,7 @@ func (t *SetTimezoneOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetTimezoneOverride", b)
+	response, err := cdp.Send(ctx, "Emulation.setTimezoneOverride", b)
 	if err != nil {
 		return err
 	}
@@ -1266,7 +1266,7 @@ func (t *SetVisibleSize) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetVisibleSize", b)
+	response, err := cdp.Send(ctx, "Emulation.setVisibleSize", b)
 	if err != nil {
 		return err
 	}
@@ -1307,7 +1307,7 @@ func (t *SetDisabledImageTypes) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetDisabledImageTypes", b)
+	response, err := cdp.Send(ctx, "Emulation.setDisabledImageTypes", b)
 	if err != nil {
 		return err
 	}
@@ -1383,7 +1383,7 @@ func (t *SetUserAgentOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetUserAgentOverride", b)
+	response, err := cdp.Send(ctx, "Emulation.setUserAgentOverride", b)
 	if err != nil {
 		return err
 	}

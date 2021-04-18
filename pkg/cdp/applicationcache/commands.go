@@ -28,7 +28,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Enable", nil)
+	response, err := cdp.Send(ctx, "ApplicationCache.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -74,7 +74,7 @@ func (t *GetApplicationCacheForFrame) Do(ctx context.Context) (*GetApplicationCa
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetApplicationCacheForFrame", b)
+	response, err := cdp.Send(ctx, "ApplicationCache.getApplicationCacheForFrame", b)
 	if err != nil {
 		return nil, err
 	}
@@ -117,7 +117,7 @@ type GetFramesWithManifestsResponse struct {
 // Do sends the GetFramesWithManifests CDP command to a browser,
 // and returns the browser's response.
 func (t *GetFramesWithManifests) Do(ctx context.Context) (*GetFramesWithManifestsResponse, error) {
-	response, err := cdp.Send(ctx, "GetFramesWithManifests", nil)
+	response, err := cdp.Send(ctx, "ApplicationCache.getFramesWithManifests", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -167,7 +167,7 @@ func (t *GetManifestForFrame) Do(ctx context.Context) (*GetManifestForFrameRespo
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetManifestForFrame", b)
+	response, err := cdp.Send(ctx, "ApplicationCache.getManifestForFrame", b)
 	if err != nil {
 		return nil, err
 	}

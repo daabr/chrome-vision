@@ -30,7 +30,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "Fetch.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -94,7 +94,7 @@ func (t *Enable) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "Enable", b)
+	response, err := cdp.Send(ctx, "Fetch.enable", b)
 	if err != nil {
 		return err
 	}
@@ -136,7 +136,7 @@ func (t *FailRequest) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "FailRequest", b)
+	response, err := cdp.Send(ctx, "Fetch.failRequest", b)
 	if err != nil {
 		return err
 	}
@@ -230,7 +230,7 @@ func (t *FulfillRequest) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "FulfillRequest", b)
+	response, err := cdp.Send(ctx, "Fetch.fulfillRequest", b)
 	if err != nil {
 		return err
 	}
@@ -313,7 +313,7 @@ func (t *ContinueRequest) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ContinueRequest", b)
+	response, err := cdp.Send(ctx, "Fetch.continueRequest", b)
 	if err != nil {
 		return err
 	}
@@ -355,7 +355,7 @@ func (t *ContinueWithAuth) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ContinueWithAuth", b)
+	response, err := cdp.Send(ctx, "Fetch.continueWithAuth", b)
 	if err != nil {
 		return err
 	}
@@ -408,7 +408,7 @@ func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResponse, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetResponseBody", b)
+	response, err := cdp.Send(ctx, "Fetch.getResponseBody", b)
 	if err != nil {
 		return nil, err
 	}
@@ -465,7 +465,7 @@ func (t *TakeResponseBodyAsStream) Do(ctx context.Context) (*TakeResponseBodyAsS
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "TakeResponseBodyAsStream", b)
+	response, err := cdp.Send(ctx, "Fetch.takeResponseBodyAsStream", b)
 	if err != nil {
 		return nil, err
 	}

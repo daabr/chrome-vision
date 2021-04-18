@@ -42,7 +42,7 @@ func (t *ClearDataForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ClearDataForOrigin", b)
+	response, err := cdp.Send(ctx, "Storage.clearDataForOrigin", b)
 	if err != nil {
 		return err
 	}
@@ -95,7 +95,7 @@ func (t *GetCookies) Do(ctx context.Context) (*GetCookiesResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetCookies", b)
+	response, err := cdp.Send(ctx, "Storage.getCookies", b)
 	if err != nil {
 		return nil, err
 	}
@@ -149,7 +149,7 @@ func (t *SetCookies) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetCookies", b)
+	response, err := cdp.Send(ctx, "Storage.setCookies", b)
 	if err != nil {
 		return err
 	}
@@ -195,7 +195,7 @@ func (t *ClearCookies) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ClearCookies", b)
+	response, err := cdp.Send(ctx, "Storage.clearCookies", b)
 	if err != nil {
 		return err
 	}
@@ -247,7 +247,7 @@ func (t *GetUsageAndQuota) Do(ctx context.Context) (*GetUsageAndQuotaResponse, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetUsageAndQuota", b)
+	response, err := cdp.Send(ctx, "Storage.getUsageAndQuota", b)
 	if err != nil {
 		return nil, err
 	}
@@ -317,7 +317,7 @@ func (t *OverrideQuotaForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "OverrideQuotaForOrigin", b)
+	response, err := cdp.Send(ctx, "Storage.overrideQuotaForOrigin", b)
 	if err != nil {
 		return err
 	}
@@ -356,7 +356,7 @@ func (t *TrackCacheStorageForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "TrackCacheStorageForOrigin", b)
+	response, err := cdp.Send(ctx, "Storage.trackCacheStorageForOrigin", b)
 	if err != nil {
 		return err
 	}
@@ -395,7 +395,7 @@ func (t *TrackIndexedDBForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "TrackIndexedDBForOrigin", b)
+	response, err := cdp.Send(ctx, "Storage.trackIndexedDBForOrigin", b)
 	if err != nil {
 		return err
 	}
@@ -434,7 +434,7 @@ func (t *UntrackCacheStorageForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "UntrackCacheStorageForOrigin", b)
+	response, err := cdp.Send(ctx, "Storage.untrackCacheStorageForOrigin", b)
 	if err != nil {
 		return err
 	}
@@ -473,7 +473,7 @@ func (t *UntrackIndexedDBForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "UntrackIndexedDBForOrigin", b)
+	response, err := cdp.Send(ctx, "Storage.untrackIndexedDBForOrigin", b)
 	if err != nil {
 		return err
 	}
@@ -514,7 +514,7 @@ type GetTrustTokensResponse struct {
 // Do sends the GetTrustTokens CDP command to a browser,
 // and returns the browser's response.
 func (t *GetTrustTokens) Do(ctx context.Context) (*GetTrustTokensResponse, error) {
-	response, err := cdp.Send(ctx, "GetTrustTokens", nil)
+	response, err := cdp.Send(ctx, "Storage.getTrustTokens", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -568,7 +568,7 @@ func (t *ClearTrustTokens) Do(ctx context.Context) (*ClearTrustTokensResponse, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "ClearTrustTokens", b)
+	response, err := cdp.Send(ctx, "Storage.clearTrustTokens", b)
 	if err != nil {
 		return nil, err
 	}

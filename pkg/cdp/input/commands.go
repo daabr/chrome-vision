@@ -63,7 +63,7 @@ func (t *DispatchDragEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "DispatchDragEvent", b)
+	response, err := cdp.Send(ctx, "Input.dispatchDragEvent", b)
 	if err != nil {
 		return err
 	}
@@ -274,7 +274,7 @@ func (t *DispatchKeyEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "DispatchKeyEvent", b)
+	response, err := cdp.Send(ctx, "Input.dispatchKeyEvent", b)
 	if err != nil {
 		return err
 	}
@@ -318,7 +318,7 @@ func (t *InsertText) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "InsertText", b)
+	response, err := cdp.Send(ctx, "Input.insertText", b)
 	if err != nil {
 		return err
 	}
@@ -531,7 +531,7 @@ func (t *DispatchMouseEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "DispatchMouseEvent", b)
+	response, err := cdp.Send(ctx, "Input.dispatchMouseEvent", b)
 	if err != nil {
 		return err
 	}
@@ -600,7 +600,7 @@ func (t *DispatchTouchEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "DispatchTouchEvent", b)
+	response, err := cdp.Send(ctx, "Input.dispatchTouchEvent", b)
 	if err != nil {
 		return err
 	}
@@ -709,7 +709,7 @@ func (t *EmulateTouchFromMouseEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "EmulateTouchFromMouseEvent", b)
+	response, err := cdp.Send(ctx, "Input.emulateTouchFromMouseEvent", b)
 	if err != nil {
 		return err
 	}
@@ -748,7 +748,7 @@ func (t *SetIgnoreInputEvents) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetIgnoreInputEvents", b)
+	response, err := cdp.Send(ctx, "Input.setIgnoreInputEvents", b)
 	if err != nil {
 		return err
 	}
@@ -791,7 +791,7 @@ func (t *SetInterceptDrags) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetInterceptDrags", b)
+	response, err := cdp.Send(ctx, "Input.setInterceptDrags", b)
 	if err != nil {
 		return err
 	}
@@ -864,7 +864,7 @@ func (t *SynthesizePinchGesture) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SynthesizePinchGesture", b)
+	response, err := cdp.Send(ctx, "Input.synthesizePinchGesture", b)
 	if err != nil {
 		return err
 	}
@@ -1026,7 +1026,7 @@ func (t *SynthesizeScrollGesture) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SynthesizeScrollGesture", b)
+	response, err := cdp.Send(ctx, "Input.synthesizeScrollGesture", b)
 	if err != nil {
 		return err
 	}
@@ -1107,7 +1107,7 @@ func (t *SynthesizeTapGesture) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SynthesizeTapGesture", b)
+	response, err := cdp.Send(ctx, "Input.synthesizeTapGesture", b)
 	if err != nil {
 		return err
 	}

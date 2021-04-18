@@ -38,7 +38,7 @@ func (t *DeliverPushMessage) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "DeliverPushMessage", b)
+	response, err := cdp.Send(ctx, "ServiceWorker.deliverPushMessage", b)
 	if err != nil {
 		return err
 	}
@@ -66,7 +66,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "ServiceWorker.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -108,7 +108,7 @@ func (t *DispatchSyncEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "DispatchSyncEvent", b)
+	response, err := cdp.Send(ctx, "ServiceWorker.dispatchSyncEvent", b)
 	if err != nil {
 		return err
 	}
@@ -148,7 +148,7 @@ func (t *DispatchPeriodicSyncEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "DispatchPeriodicSyncEvent", b)
+	response, err := cdp.Send(ctx, "ServiceWorker.dispatchPeriodicSyncEvent", b)
 	if err != nil {
 		return err
 	}
@@ -176,7 +176,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Enable", nil)
+	response, err := cdp.Send(ctx, "ServiceWorker.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -212,7 +212,7 @@ func (t *InspectWorker) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "InspectWorker", b)
+	response, err := cdp.Send(ctx, "ServiceWorker.inspectWorker", b)
 	if err != nil {
 		return err
 	}
@@ -248,7 +248,7 @@ func (t *SetForceUpdateOnPageLoad) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetForceUpdateOnPageLoad", b)
+	response, err := cdp.Send(ctx, "ServiceWorker.setForceUpdateOnPageLoad", b)
 	if err != nil {
 		return err
 	}
@@ -284,7 +284,7 @@ func (t *SkipWaiting) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SkipWaiting", b)
+	response, err := cdp.Send(ctx, "ServiceWorker.skipWaiting", b)
 	if err != nil {
 		return err
 	}
@@ -320,7 +320,7 @@ func (t *StartWorker) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "StartWorker", b)
+	response, err := cdp.Send(ctx, "ServiceWorker.startWorker", b)
 	if err != nil {
 		return err
 	}
@@ -348,7 +348,7 @@ func NewStopAllWorkers() *StopAllWorkers {
 // Do sends the StopAllWorkers CDP command to a browser,
 // and returns the browser's response.
 func (t *StopAllWorkers) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "StopAllWorkers", nil)
+	response, err := cdp.Send(ctx, "ServiceWorker.stopAllWorkers", nil)
 	if err != nil {
 		return err
 	}
@@ -384,7 +384,7 @@ func (t *StopWorker) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "StopWorker", b)
+	response, err := cdp.Send(ctx, "ServiceWorker.stopWorker", b)
 	if err != nil {
 		return err
 	}
@@ -420,7 +420,7 @@ func (t *Unregister) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "Unregister", b)
+	response, err := cdp.Send(ctx, "ServiceWorker.unregister", b)
 	if err != nil {
 		return err
 	}
@@ -456,7 +456,7 @@ func (t *UpdateRegistration) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "UpdateRegistration", b)
+	response, err := cdp.Send(ctx, "ServiceWorker.updateRegistration", b)
 	if err != nil {
 		return err
 	}

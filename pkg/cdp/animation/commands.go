@@ -29,7 +29,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "Animation.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -59,7 +59,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Enable", nil)
+	response, err := cdp.Send(ctx, "Animation.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -105,7 +105,7 @@ func (t *GetCurrentTime) Do(ctx context.Context) (*GetCurrentTimeResponse, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetCurrentTime", b)
+	response, err := cdp.Send(ctx, "Animation.getCurrentTime", b)
 	if err != nil {
 		return nil, err
 	}
@@ -146,7 +146,7 @@ type GetPlaybackRateResponse struct {
 // Do sends the GetPlaybackRate CDP command to a browser,
 // and returns the browser's response.
 func (t *GetPlaybackRate) Do(ctx context.Context) (*GetPlaybackRateResponse, error) {
-	response, err := cdp.Send(ctx, "GetPlaybackRate", nil)
+	response, err := cdp.Send(ctx, "Animation.getPlaybackRate", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -189,7 +189,7 @@ func (t *ReleaseAnimations) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ReleaseAnimations", b)
+	response, err := cdp.Send(ctx, "Animation.releaseAnimations", b)
 	if err != nil {
 		return err
 	}
@@ -235,7 +235,7 @@ func (t *ResolveAnimation) Do(ctx context.Context) (*ResolveAnimationResponse, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "ResolveAnimation", b)
+	response, err := cdp.Send(ctx, "Animation.resolveAnimation", b)
 	if err != nil {
 		return nil, err
 	}
@@ -281,7 +281,7 @@ func (t *SeekAnimations) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SeekAnimations", b)
+	response, err := cdp.Send(ctx, "Animation.seekAnimations", b)
 	if err != nil {
 		return err
 	}
@@ -323,7 +323,7 @@ func (t *SetPaused) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetPaused", b)
+	response, err := cdp.Send(ctx, "Animation.setPaused", b)
 	if err != nil {
 		return err
 	}
@@ -362,7 +362,7 @@ func (t *SetPlaybackRate) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetPlaybackRate", b)
+	response, err := cdp.Send(ctx, "Animation.setPlaybackRate", b)
 	if err != nil {
 		return err
 	}
@@ -407,7 +407,7 @@ func (t *SetTiming) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetTiming", b)
+	response, err := cdp.Send(ctx, "Animation.setTiming", b)
 	if err != nil {
 		return err
 	}

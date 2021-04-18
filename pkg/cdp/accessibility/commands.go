@@ -30,7 +30,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "Accessibility.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -61,7 +61,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Enable", nil)
+	response, err := cdp.Send(ctx, "Accessibility.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -152,7 +152,7 @@ func (t *GetPartialAXTree) Do(ctx context.Context) (*GetPartialAXTreeResponse, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetPartialAXTree", b)
+	response, err := cdp.Send(ctx, "Accessibility.getPartialAXTree", b)
 	if err != nil {
 		return nil, err
 	}
@@ -214,7 +214,7 @@ func (t *GetFullAXTree) Do(ctx context.Context) (*GetFullAXTreeResponse, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetFullAXTree", b)
+	response, err := cdp.Send(ctx, "Accessibility.getFullAXTree", b)
 	if err != nil {
 		return nil, err
 	}
@@ -267,7 +267,7 @@ func (t *GetChildAXNodes) Do(ctx context.Context) (*GetChildAXNodesResponse, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetChildAXNodes", b)
+	response, err := cdp.Send(ctx, "Accessibility.getChildAXNodes", b)
 	if err != nil {
 		return nil, err
 	}
@@ -377,7 +377,7 @@ func (t *QueryAXTree) Do(ctx context.Context) (*QueryAXTreeResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "QueryAXTree", b)
+	response, err := cdp.Send(ctx, "Accessibility.queryAXTree", b)
 	if err != nil {
 		return nil, err
 	}
