@@ -54,7 +54,7 @@ func (t *AddScriptToEvaluateOnLoad) Do(ctx context.Context) (*AddScriptToEvaluat
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "AddScriptToEvaluateOnLoad", b)
+	response, err := cdp.Send(ctx, "Page.addScriptToEvaluateOnLoad", b)
 	if err != nil {
 		return nil, err
 	}
@@ -122,7 +122,7 @@ func (t *AddScriptToEvaluateOnNewDocument) Do(ctx context.Context) (*AddScriptTo
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "AddScriptToEvaluateOnNewDocument", b)
+	response, err := cdp.Send(ctx, "Page.addScriptToEvaluateOnNewDocument", b)
 	if err != nil {
 		return nil, err
 	}
@@ -156,7 +156,7 @@ func NewBringToFront() *BringToFront {
 // Do sends the BringToFront CDP command to a browser,
 // and returns the browser's response.
 func (t *BringToFront) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "BringToFront", nil)
+	response, err := cdp.Send(ctx, "Page.bringToFront", nil)
 	if err != nil {
 		return err
 	}
@@ -261,7 +261,7 @@ func (t *CaptureScreenshot) Do(ctx context.Context) (*CaptureScreenshotResponse,
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "CaptureScreenshot", b)
+	response, err := cdp.Send(ctx, "Page.captureScreenshot", b)
 	if err != nil {
 		return nil, err
 	}
@@ -323,7 +323,7 @@ func (t *CaptureSnapshot) Do(ctx context.Context) (*CaptureSnapshotResponse, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "CaptureSnapshot", b)
+	response, err := cdp.Send(ctx, "Page.captureSnapshot", b)
 	if err != nil {
 		return nil, err
 	}
@@ -397,7 +397,7 @@ func (t *CreateIsolatedWorld) Do(ctx context.Context) (*CreateIsolatedWorldRespo
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "CreateIsolatedWorld", b)
+	response, err := cdp.Send(ctx, "Page.createIsolatedWorld", b)
 	if err != nil {
 		return nil, err
 	}
@@ -431,7 +431,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "Page.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -461,7 +461,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Enable", nil)
+	response, err := cdp.Send(ctx, "Page.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -503,7 +503,7 @@ type GetAppManifestResponse struct {
 // Do sends the GetAppManifest CDP command to a browser,
 // and returns the browser's response.
 func (t *GetAppManifest) Do(ctx context.Context) (*GetAppManifestResponse, error) {
-	response, err := cdp.Send(ctx, "GetAppManifest", nil)
+	response, err := cdp.Send(ctx, "Page.getAppManifest", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -545,7 +545,7 @@ type GetInstallabilityErrorsResponse struct {
 // Do sends the GetInstallabilityErrors CDP command to a browser,
 // and returns the browser's response.
 func (t *GetInstallabilityErrors) Do(ctx context.Context) (*GetInstallabilityErrorsResponse, error) {
-	response, err := cdp.Send(ctx, "GetInstallabilityErrors", nil)
+	response, err := cdp.Send(ctx, "Page.getInstallabilityErrors", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -587,7 +587,7 @@ type GetManifestIconsResponse struct {
 // Do sends the GetManifestIcons CDP command to a browser,
 // and returns the browser's response.
 func (t *GetManifestIcons) Do(ctx context.Context) (*GetManifestIconsResponse, error) {
-	response, err := cdp.Send(ctx, "GetManifestIcons", nil)
+	response, err := cdp.Send(ctx, "Page.getManifestIcons", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -628,7 +628,7 @@ type GetFrameTreeResponse struct {
 // Do sends the GetFrameTree CDP command to a browser,
 // and returns the browser's response.
 func (t *GetFrameTree) Do(ctx context.Context) (*GetFrameTreeResponse, error) {
-	response, err := cdp.Send(ctx, "GetFrameTree", nil)
+	response, err := cdp.Send(ctx, "Page.getFrameTree", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -685,7 +685,7 @@ type GetLayoutMetricsResponse struct {
 // Do sends the GetLayoutMetrics CDP command to a browser,
 // and returns the browser's response.
 func (t *GetLayoutMetrics) Do(ctx context.Context) (*GetLayoutMetricsResponse, error) {
-	response, err := cdp.Send(ctx, "GetLayoutMetrics", nil)
+	response, err := cdp.Send(ctx, "Page.getLayoutMetrics", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -728,7 +728,7 @@ type GetNavigationHistoryResponse struct {
 // Do sends the GetNavigationHistory CDP command to a browser,
 // and returns the browser's response.
 func (t *GetNavigationHistory) Do(ctx context.Context) (*GetNavigationHistoryResponse, error) {
-	response, err := cdp.Send(ctx, "GetNavigationHistory", nil)
+	response, err := cdp.Send(ctx, "Page.getNavigationHistory", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -762,7 +762,7 @@ func NewResetNavigationHistory() *ResetNavigationHistory {
 // Do sends the ResetNavigationHistory CDP command to a browser,
 // and returns the browser's response.
 func (t *ResetNavigationHistory) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "ResetNavigationHistory", nil)
+	response, err := cdp.Send(ctx, "Page.resetNavigationHistory", nil)
 	if err != nil {
 		return err
 	}
@@ -817,7 +817,7 @@ func (t *GetResourceContent) Do(ctx context.Context) (*GetResourceContentRespons
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetResourceContent", b)
+	response, err := cdp.Send(ctx, "Page.getResourceContent", b)
 	if err != nil {
 		return nil, err
 	}
@@ -862,7 +862,7 @@ type GetResourceTreeResponse struct {
 // Do sends the GetResourceTree CDP command to a browser,
 // and returns the browser's response.
 func (t *GetResourceTree) Do(ctx context.Context) (*GetResourceTreeResponse, error) {
-	response, err := cdp.Send(ctx, "GetResourceTree", nil)
+	response, err := cdp.Send(ctx, "Page.getResourceTree", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -918,7 +918,7 @@ func (t *HandleJavaScriptDialog) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "HandleJavaScriptDialog", b)
+	response, err := cdp.Send(ctx, "Page.handleJavaScriptDialog", b)
 	if err != nil {
 		return err
 	}
@@ -1016,7 +1016,7 @@ func (t *Navigate) Do(ctx context.Context) (*NavigateResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "Navigate", b)
+	response, err := cdp.Send(ctx, "Page.navigate", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1059,7 +1059,7 @@ func (t *NavigateToHistoryEntry) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "NavigateToHistoryEntry", b)
+	response, err := cdp.Send(ctx, "Page.navigateToHistoryEntry", b)
 	if err != nil {
 		return err
 	}
@@ -1307,7 +1307,7 @@ func (t *PrintToPDF) Do(ctx context.Context) (*PrintToPDFResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "PrintToPDF", b)
+	response, err := cdp.Send(ctx, "Page.printToPDF", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1370,7 +1370,7 @@ func (t *Reload) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "Reload", b)
+	response, err := cdp.Send(ctx, "Page.reload", b)
 	if err != nil {
 		return err
 	}
@@ -1414,7 +1414,7 @@ func (t *RemoveScriptToEvaluateOnLoad) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "RemoveScriptToEvaluateOnLoad", b)
+	response, err := cdp.Send(ctx, "Page.removeScriptToEvaluateOnLoad", b)
 	if err != nil {
 		return err
 	}
@@ -1452,7 +1452,7 @@ func (t *RemoveScriptToEvaluateOnNewDocument) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "RemoveScriptToEvaluateOnNewDocument", b)
+	response, err := cdp.Send(ctx, "Page.removeScriptToEvaluateOnNewDocument", b)
 	if err != nil {
 		return err
 	}
@@ -1495,7 +1495,7 @@ func (t *ScreencastFrameAck) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ScreencastFrameAck", b)
+	response, err := cdp.Send(ctx, "Page.screencastFrameAck", b)
 	if err != nil {
 		return err
 	}
@@ -1573,7 +1573,7 @@ func (t *SearchInResource) Do(ctx context.Context) (*SearchInResourceResponse, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "SearchInResource", b)
+	response, err := cdp.Send(ctx, "Page.searchInResource", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1620,7 +1620,7 @@ func (t *SetAdBlockingEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetAdBlockingEnabled", b)
+	response, err := cdp.Send(ctx, "Page.setAdBlockingEnabled", b)
 	if err != nil {
 		return err
 	}
@@ -1663,7 +1663,7 @@ func (t *SetBypassCSP) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetBypassCSP", b)
+	response, err := cdp.Send(ctx, "Page.setBypassCSP", b)
 	if err != nil {
 		return err
 	}
@@ -1711,7 +1711,7 @@ func (t *GetPermissionsPolicyState) Do(ctx context.Context) (*GetPermissionsPoli
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetPermissionsPolicyState", b)
+	response, err := cdp.Send(ctx, "Page.getPermissionsPolicyState", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1758,7 +1758,7 @@ func (t *SetFontFamilies) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetFontFamilies", b)
+	response, err := cdp.Send(ctx, "Page.setFontFamilies", b)
 	if err != nil {
 		return err
 	}
@@ -1801,7 +1801,7 @@ func (t *SetFontSizes) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetFontSizes", b)
+	response, err := cdp.Send(ctx, "Page.setFontSizes", b)
 	if err != nil {
 		return err
 	}
@@ -1843,7 +1843,7 @@ func (t *SetDocumentContent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetDocumentContent", b)
+	response, err := cdp.Send(ctx, "Page.setDocumentContent", b)
 	if err != nil {
 		return err
 	}
@@ -1900,7 +1900,7 @@ func (t *SetDownloadBehavior) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetDownloadBehavior", b)
+	response, err := cdp.Send(ctx, "Page.setDownloadBehavior", b)
 	if err != nil {
 		return err
 	}
@@ -1943,7 +1943,7 @@ func (t *SetLifecycleEventsEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetLifecycleEventsEnabled", b)
+	response, err := cdp.Send(ctx, "Page.setLifecycleEventsEnabled", b)
 	if err != nil {
 		return err
 	}
@@ -2037,7 +2037,7 @@ func (t *StartScreencast) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "StartScreencast", b)
+	response, err := cdp.Send(ctx, "Page.startScreencast", b)
 	if err != nil {
 		return err
 	}
@@ -2067,7 +2067,7 @@ func NewStopLoading() *StopLoading {
 // Do sends the StopLoading CDP command to a browser,
 // and returns the browser's response.
 func (t *StopLoading) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "StopLoading", nil)
+	response, err := cdp.Send(ctx, "Page.stopLoading", nil)
 	if err != nil {
 		return err
 	}
@@ -2101,7 +2101,7 @@ func NewCrash() *Crash {
 // Do sends the Crash CDP command to a browser,
 // and returns the browser's response.
 func (t *Crash) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Crash", nil)
+	response, err := cdp.Send(ctx, "Page.crash", nil)
 	if err != nil {
 		return err
 	}
@@ -2135,7 +2135,7 @@ func NewClose() *Close {
 // Do sends the Close CDP command to a browser,
 // and returns the browser's response.
 func (t *Close) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Close", nil)
+	response, err := cdp.Send(ctx, "Page.close", nil)
 	if err != nil {
 		return err
 	}
@@ -2180,7 +2180,7 @@ func (t *SetWebLifecycleState) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetWebLifecycleState", b)
+	response, err := cdp.Send(ctx, "Page.setWebLifecycleState", b)
 	if err != nil {
 		return err
 	}
@@ -2214,7 +2214,7 @@ func NewStopScreencast() *StopScreencast {
 // Do sends the StopScreencast CDP command to a browser,
 // and returns the browser's response.
 func (t *StopScreencast) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "StopScreencast", nil)
+	response, err := cdp.Send(ctx, "Page.stopScreencast", nil)
 	if err != nil {
 		return err
 	}
@@ -2257,7 +2257,7 @@ func (t *SetProduceCompilationCache) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetProduceCompilationCache", b)
+	response, err := cdp.Send(ctx, "Page.setProduceCompilationCache", b)
 	if err != nil {
 		return err
 	}
@@ -2307,7 +2307,7 @@ func (t *ProduceCompilationCache) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ProduceCompilationCache", b)
+	response, err := cdp.Send(ctx, "Page.produceCompilationCache", b)
 	if err != nil {
 		return err
 	}
@@ -2353,7 +2353,7 @@ func (t *AddCompilationCache) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "AddCompilationCache", b)
+	response, err := cdp.Send(ctx, "Page.addCompilationCache", b)
 	if err != nil {
 		return err
 	}
@@ -2387,7 +2387,7 @@ func NewClearCompilationCache() *ClearCompilationCache {
 // Do sends the ClearCompilationCache CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearCompilationCache) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "ClearCompilationCache", nil)
+	response, err := cdp.Send(ctx, "Page.clearCompilationCache", nil)
 	if err != nil {
 		return err
 	}
@@ -2441,7 +2441,7 @@ func (t *GenerateTestReport) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "GenerateTestReport", b)
+	response, err := cdp.Send(ctx, "Page.generateTestReport", b)
 	if err != nil {
 		return err
 	}
@@ -2475,7 +2475,7 @@ func NewWaitForDebugger() *WaitForDebugger {
 // Do sends the WaitForDebugger CDP command to a browser,
 // and returns the browser's response.
 func (t *WaitForDebugger) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "WaitForDebugger", nil)
+	response, err := cdp.Send(ctx, "Page.waitForDebugger", nil)
 	if err != nil {
 		return err
 	}
@@ -2519,7 +2519,7 @@ func (t *SetInterceptFileChooserDialog) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetInterceptFileChooserDialog", b)
+	response, err := cdp.Send(ctx, "Page.setInterceptFileChooserDialog", b)
 	if err != nil {
 		return err
 	}

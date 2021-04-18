@@ -43,7 +43,7 @@ func (t *ClearObjectStore) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ClearObjectStore", b)
+	response, err := cdp.Send(ctx, "IndexedDB.clearObjectStore", b)
 	if err != nil {
 		return err
 	}
@@ -85,7 +85,7 @@ func (t *DeleteDatabase) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "DeleteDatabase", b)
+	response, err := cdp.Send(ctx, "IndexedDB.deleteDatabase", b)
 	if err != nil {
 		return err
 	}
@@ -130,7 +130,7 @@ func (t *DeleteObjectStoreEntries) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "DeleteObjectStoreEntries", b)
+	response, err := cdp.Send(ctx, "IndexedDB.deleteObjectStoreEntries", b)
 	if err != nil {
 		return err
 	}
@@ -160,7 +160,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "IndexedDB.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -190,7 +190,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Enable", nil)
+	response, err := cdp.Send(ctx, "IndexedDB.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -264,7 +264,7 @@ func (t *RequestData) Do(ctx context.Context) (*RequestDataResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "RequestData", b)
+	response, err := cdp.Send(ctx, "IndexedDB.requestData", b)
 	if err != nil {
 		return nil, err
 	}
@@ -324,7 +324,7 @@ func (t *GetMetadata) Do(ctx context.Context) (*GetMetadataResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetMetadata", b)
+	response, err := cdp.Send(ctx, "IndexedDB.getMetadata", b)
 	if err != nil {
 		return nil, err
 	}
@@ -377,7 +377,7 @@ func (t *RequestDatabase) Do(ctx context.Context) (*RequestDatabaseResponse, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "RequestDatabase", b)
+	response, err := cdp.Send(ctx, "IndexedDB.requestDatabase", b)
 	if err != nil {
 		return nil, err
 	}
@@ -427,7 +427,7 @@ func (t *RequestDatabaseNames) Do(ctx context.Context) (*RequestDatabaseNamesRes
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "RequestDatabaseNames", b)
+	response, err := cdp.Send(ctx, "IndexedDB.requestDatabaseNames", b)
 	if err != nil {
 		return nil, err
 	}

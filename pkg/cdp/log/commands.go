@@ -28,7 +28,7 @@ func NewClear() *Clear {
 // Do sends the Clear CDP command to a browser,
 // and returns the browser's response.
 func (t *Clear) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Clear", nil)
+	response, err := cdp.Send(ctx, "Log.clear", nil)
 	if err != nil {
 		return err
 	}
@@ -58,7 +58,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "Log.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -89,7 +89,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Enable", nil)
+	response, err := cdp.Send(ctx, "Log.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -128,7 +128,7 @@ func (t *StartViolationsReport) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "StartViolationsReport", b)
+	response, err := cdp.Send(ctx, "Log.startViolationsReport", b)
 	if err != nil {
 		return err
 	}
@@ -158,7 +158,7 @@ func NewStopViolationsReport() *StopViolationsReport {
 // Do sends the StopViolationsReport CDP command to a browser,
 // and returns the browser's response.
 func (t *StopViolationsReport) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "StopViolationsReport", nil)
+	response, err := cdp.Send(ctx, "Log.stopViolationsReport", nil)
 	if err != nil {
 		return err
 	}

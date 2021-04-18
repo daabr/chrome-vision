@@ -115,7 +115,7 @@ func generateCommands(d Domain) string {
 			fmt.Fprintf(b, "(*%sResponse, error) {\n", cmd)
 		}
 		if len(required)+len(optional) == 0 {
-			fmt.Fprintf(b, "\tresponse, err := cdp.Send(ctx, %q, nil)\n", cmd)
+			fmt.Fprintf(b, "\tresponse, err := cdp.Send(ctx, \"%s.%s\", nil)\n", d.Domain, c.Name)
 		} else {
 			fmt.Fprintln(b, "\tb, err := json.Marshal(t)")
 			fmt.Fprintln(b, "\tif err != nil {")
@@ -125,7 +125,7 @@ func generateCommands(d Domain) string {
 				fmt.Fprintln(b, "\t\treturn nil, err")
 			}
 			fmt.Fprintln(b, "\t}")
-			fmt.Fprintf(b, "\tresponse, err := cdp.Send(ctx, %q, b)\n", cmd)
+			fmt.Fprintf(b, "\tresponse, err := cdp.Send(ctx, \"%s.%s\", b)\n", d.Domain, c.Name)
 		}
 		fmt.Fprintln(b, "\tif err != nil {")
 		if len(c.Returns) == 0 {

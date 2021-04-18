@@ -35,7 +35,7 @@ type GetDomainsResponse struct {
 // Do sends the GetDomains CDP command to a browser,
 // and returns the browser's response.
 func (t *GetDomains) Do(ctx context.Context) (*GetDomainsResponse, error) {
-	response, err := cdp.Send(ctx, "GetDomains", nil)
+	response, err := cdp.Send(ctx, "Schema.getDomains", nil)
 	if err != nil {
 		return nil, err
 	}

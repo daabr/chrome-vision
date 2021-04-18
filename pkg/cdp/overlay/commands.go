@@ -30,7 +30,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "Overlay.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -60,7 +60,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Enable", nil)
+	response, err := cdp.Send(ctx, "Overlay.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -150,7 +150,7 @@ func (t *GetHighlightObjectForTest) Do(ctx context.Context) (*GetHighlightObject
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetHighlightObjectForTest", b)
+	response, err := cdp.Send(ctx, "Overlay.getHighlightObjectForTest", b)
 	if err != nil {
 		return nil, err
 	}
@@ -200,7 +200,7 @@ func (t *GetGridHighlightObjectsForTest) Do(ctx context.Context) (*GetGridHighli
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetGridHighlightObjectsForTest", b)
+	response, err := cdp.Send(ctx, "Overlay.getGridHighlightObjectsForTest", b)
 	if err != nil {
 		return nil, err
 	}
@@ -250,7 +250,7 @@ func (t *GetSourceOrderHighlightObjectForTest) Do(ctx context.Context) (*GetSour
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetSourceOrderHighlightObjectForTest", b)
+	response, err := cdp.Send(ctx, "Overlay.getSourceOrderHighlightObjectForTest", b)
 	if err != nil {
 		return nil, err
 	}
@@ -284,7 +284,7 @@ func NewHideHighlight() *HideHighlight {
 // Do sends the HideHighlight CDP command to a browser,
 // and returns the browser's response.
 func (t *HideHighlight) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "HideHighlight", nil)
+	response, err := cdp.Send(ctx, "Overlay.hideHighlight", nil)
 	if err != nil {
 		return err
 	}
@@ -345,7 +345,7 @@ func (t *HighlightFrame) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "HighlightFrame", b)
+	response, err := cdp.Send(ctx, "Overlay.highlightFrame", b)
 	if err != nil {
 		return err
 	}
@@ -429,7 +429,7 @@ func (t *HighlightNode) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "HighlightNode", b)
+	response, err := cdp.Send(ctx, "Overlay.highlightNode", b)
 	if err != nil {
 		return err
 	}
@@ -490,7 +490,7 @@ func (t *HighlightQuad) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "HighlightQuad", b)
+	response, err := cdp.Send(ctx, "Overlay.highlightQuad", b)
 	if err != nil {
 		return err
 	}
@@ -560,7 +560,7 @@ func (t *HighlightRect) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "HighlightRect", b)
+	response, err := cdp.Send(ctx, "Overlay.highlightRect", b)
 	if err != nil {
 		return err
 	}
@@ -633,7 +633,7 @@ func (t *HighlightSourceOrder) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "HighlightSourceOrder", b)
+	response, err := cdp.Send(ctx, "Overlay.highlightSourceOrder", b)
 	if err != nil {
 		return err
 	}
@@ -686,7 +686,7 @@ func (t *SetInspectMode) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetInspectMode", b)
+	response, err := cdp.Send(ctx, "Overlay.setInspectMode", b)
 	if err != nil {
 		return err
 	}
@@ -725,7 +725,7 @@ func (t *SetShowAdHighlights) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetShowAdHighlights", b)
+	response, err := cdp.Send(ctx, "Overlay.setShowAdHighlights", b)
 	if err != nil {
 		return err
 	}
@@ -769,7 +769,7 @@ func (t *SetPausedInDebuggerMessage) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetPausedInDebuggerMessage", b)
+	response, err := cdp.Send(ctx, "Overlay.setPausedInDebuggerMessage", b)
 	if err != nil {
 		return err
 	}
@@ -808,7 +808,7 @@ func (t *SetShowDebugBorders) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetShowDebugBorders", b)
+	response, err := cdp.Send(ctx, "Overlay.setShowDebugBorders", b)
 	if err != nil {
 		return err
 	}
@@ -847,7 +847,7 @@ func (t *SetShowFPSCounter) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetShowFPSCounter", b)
+	response, err := cdp.Send(ctx, "Overlay.setShowFPSCounter", b)
 	if err != nil {
 		return err
 	}
@@ -886,7 +886,7 @@ func (t *SetShowGridOverlays) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetShowGridOverlays", b)
+	response, err := cdp.Send(ctx, "Overlay.setShowGridOverlays", b)
 	if err != nil {
 		return err
 	}
@@ -923,7 +923,7 @@ func (t *SetShowFlexOverlays) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetShowFlexOverlays", b)
+	response, err := cdp.Send(ctx, "Overlay.setShowFlexOverlays", b)
 	if err != nil {
 		return err
 	}
@@ -960,7 +960,7 @@ func (t *SetShowScrollSnapOverlays) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetShowScrollSnapOverlays", b)
+	response, err := cdp.Send(ctx, "Overlay.setShowScrollSnapOverlays", b)
 	if err != nil {
 		return err
 	}
@@ -999,7 +999,7 @@ func (t *SetShowPaintRects) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetShowPaintRects", b)
+	response, err := cdp.Send(ctx, "Overlay.setShowPaintRects", b)
 	if err != nil {
 		return err
 	}
@@ -1038,7 +1038,7 @@ func (t *SetShowLayoutShiftRegions) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetShowLayoutShiftRegions", b)
+	response, err := cdp.Send(ctx, "Overlay.setShowLayoutShiftRegions", b)
 	if err != nil {
 		return err
 	}
@@ -1077,7 +1077,7 @@ func (t *SetShowScrollBottleneckRects) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetShowScrollBottleneckRects", b)
+	response, err := cdp.Send(ctx, "Overlay.setShowScrollBottleneckRects", b)
 	if err != nil {
 		return err
 	}
@@ -1116,7 +1116,7 @@ func (t *SetShowHitTestBorders) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetShowHitTestBorders", b)
+	response, err := cdp.Send(ctx, "Overlay.setShowHitTestBorders", b)
 	if err != nil {
 		return err
 	}
@@ -1154,7 +1154,7 @@ func (t *SetShowWebVitals) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetShowWebVitals", b)
+	response, err := cdp.Send(ctx, "Overlay.setShowWebVitals", b)
 	if err != nil {
 		return err
 	}
@@ -1193,7 +1193,7 @@ func (t *SetShowViewportSizeOnResize) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetShowViewportSizeOnResize", b)
+	response, err := cdp.Send(ctx, "Overlay.setShowViewportSizeOnResize", b)
 	if err != nil {
 		return err
 	}
@@ -1239,7 +1239,7 @@ func (t *SetShowHinge) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetShowHinge", b)
+	response, err := cdp.Send(ctx, "Overlay.setShowHinge", b)
 	if err != nil {
 		return err
 	}

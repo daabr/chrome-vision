@@ -39,7 +39,7 @@ func (t *AddInspectedHeapObject) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "AddInspectedHeapObject", b)
+	response, err := cdp.Send(ctx, "HeapProfiler.addInspectedHeapObject", b)
 	if err != nil {
 		return err
 	}
@@ -67,7 +67,7 @@ func NewCollectGarbage() *CollectGarbage {
 // Do sends the CollectGarbage CDP command to a browser,
 // and returns the browser's response.
 func (t *CollectGarbage) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "CollectGarbage", nil)
+	response, err := cdp.Send(ctx, "HeapProfiler.collectGarbage", nil)
 	if err != nil {
 		return err
 	}
@@ -95,7 +95,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "HeapProfiler.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -123,7 +123,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Enable", nil)
+	response, err := cdp.Send(ctx, "HeapProfiler.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -167,7 +167,7 @@ func (t *GetHeapObjectID) Do(ctx context.Context) (*GetHeapObjectIDResponse, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetHeapObjectID", b)
+	response, err := cdp.Send(ctx, "HeapProfiler.getHeapObjectId", b)
 	if err != nil {
 		return nil, err
 	}
@@ -225,7 +225,7 @@ func (t *GetObjectByHeapObjectID) Do(ctx context.Context) (*GetObjectByHeapObjec
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetObjectByHeapObjectID", b)
+	response, err := cdp.Send(ctx, "HeapProfiler.getObjectByHeapObjectId", b)
 	if err != nil {
 		return nil, err
 	}
@@ -264,7 +264,7 @@ type GetSamplingProfileResponse struct {
 // Do sends the GetSamplingProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *GetSamplingProfile) Do(ctx context.Context) (*GetSamplingProfileResponse, error) {
-	response, err := cdp.Send(ctx, "GetSamplingProfile", nil)
+	response, err := cdp.Send(ctx, "HeapProfiler.getSamplingProfile", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -314,7 +314,7 @@ func (t *StartSampling) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "StartSampling", b)
+	response, err := cdp.Send(ctx, "HeapProfiler.startSampling", b)
 	if err != nil {
 		return err
 	}
@@ -355,7 +355,7 @@ func (t *StartTrackingHeapObjects) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "StartTrackingHeapObjects", b)
+	response, err := cdp.Send(ctx, "HeapProfiler.startTrackingHeapObjects", b)
 	if err != nil {
 		return err
 	}
@@ -390,7 +390,7 @@ type StopSamplingResponse struct {
 // Do sends the StopSampling CDP command to a browser,
 // and returns the browser's response.
 func (t *StopSampling) Do(ctx context.Context) (*StopSamplingResponse, error) {
-	response, err := cdp.Send(ctx, "StopSampling", nil)
+	response, err := cdp.Send(ctx, "HeapProfiler.stopSampling", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -448,7 +448,7 @@ func (t *StopTrackingHeapObjects) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "StopTrackingHeapObjects", b)
+	response, err := cdp.Send(ctx, "HeapProfiler.stopTrackingHeapObjects", b)
 	if err != nil {
 		return err
 	}
@@ -503,7 +503,7 @@ func (t *TakeHeapSnapshot) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "TakeHeapSnapshot", b)
+	response, err := cdp.Send(ctx, "HeapProfiler.takeHeapSnapshot", b)
 	if err != nil {
 		return err
 	}

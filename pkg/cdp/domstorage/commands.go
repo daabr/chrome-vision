@@ -34,7 +34,7 @@ func (t *Clear) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "Clear", b)
+	response, err := cdp.Send(ctx, "DOMStorage.clear", b)
 	if err != nil {
 		return err
 	}
@@ -64,7 +64,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "DOMStorage.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -94,7 +94,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Enable", nil)
+	response, err := cdp.Send(ctx, "DOMStorage.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -136,7 +136,7 @@ func (t *GetDOMStorageItems) Do(ctx context.Context) (*GetDOMStorageItemsRespons
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetDOMStorageItems", b)
+	response, err := cdp.Send(ctx, "DOMStorage.getDOMStorageItems", b)
 	if err != nil {
 		return nil, err
 	}
@@ -178,7 +178,7 @@ func (t *RemoveDOMStorageItem) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "RemoveDOMStorageItem", b)
+	response, err := cdp.Send(ctx, "DOMStorage.removeDOMStorageItem", b)
 	if err != nil {
 		return err
 	}
@@ -218,7 +218,7 @@ func (t *SetDOMStorageItem) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetDOMStorageItem", b)
+	response, err := cdp.Send(ctx, "DOMStorage.setDOMStorageItem", b)
 	if err != nil {
 		return err
 	}

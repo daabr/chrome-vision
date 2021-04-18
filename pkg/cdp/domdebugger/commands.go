@@ -72,7 +72,7 @@ func (t *GetEventListeners) Do(ctx context.Context) (*GetEventListenersResponse,
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetEventListeners", b)
+	response, err := cdp.Send(ctx, "DOMDebugger.getEventListeners", b)
 	if err != nil {
 		return nil, err
 	}
@@ -118,7 +118,7 @@ func (t *RemoveDOMBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "RemoveDOMBreakpoint", b)
+	response, err := cdp.Send(ctx, "DOMDebugger.removeDOMBreakpoint", b)
 	if err != nil {
 		return err
 	}
@@ -172,7 +172,7 @@ func (t *RemoveEventListenerBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "RemoveEventListenerBreakpoint", b)
+	response, err := cdp.Send(ctx, "DOMDebugger.removeEventListenerBreakpoint", b)
 	if err != nil {
 		return err
 	}
@@ -215,7 +215,7 @@ func (t *RemoveInstrumentationBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "RemoveInstrumentationBreakpoint", b)
+	response, err := cdp.Send(ctx, "DOMDebugger.removeInstrumentationBreakpoint", b)
 	if err != nil {
 		return err
 	}
@@ -254,7 +254,7 @@ func (t *RemoveXHRBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "RemoveXHRBreakpoint", b)
+	response, err := cdp.Send(ctx, "DOMDebugger.removeXHRBreakpoint", b)
 	if err != nil {
 		return err
 	}
@@ -297,7 +297,7 @@ func (t *SetBreakOnCSPViolation) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetBreakOnCSPViolation", b)
+	response, err := cdp.Send(ctx, "DOMDebugger.setBreakOnCSPViolation", b)
 	if err != nil {
 		return err
 	}
@@ -339,7 +339,7 @@ func (t *SetDOMBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetDOMBreakpoint", b)
+	response, err := cdp.Send(ctx, "DOMDebugger.setDOMBreakpoint", b)
 	if err != nil {
 		return err
 	}
@@ -395,7 +395,7 @@ func (t *SetEventListenerBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetEventListenerBreakpoint", b)
+	response, err := cdp.Send(ctx, "DOMDebugger.setEventListenerBreakpoint", b)
 	if err != nil {
 		return err
 	}
@@ -438,7 +438,7 @@ func (t *SetInstrumentationBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetInstrumentationBreakpoint", b)
+	response, err := cdp.Send(ctx, "DOMDebugger.setInstrumentationBreakpoint", b)
 	if err != nil {
 		return err
 	}
@@ -477,7 +477,7 @@ func (t *SetXHRBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetXHRBreakpoint", b)
+	response, err := cdp.Send(ctx, "DOMDebugger.setXHRBreakpoint", b)
 	if err != nil {
 		return err
 	}

@@ -34,7 +34,7 @@ type GetDOMCountersResponse struct {
 // Do sends the GetDOMCounters CDP command to a browser,
 // and returns the browser's response.
 func (t *GetDOMCounters) Do(ctx context.Context) (*GetDOMCountersResponse, error) {
-	response, err := cdp.Send(ctx, "GetDOMCounters", nil)
+	response, err := cdp.Send(ctx, "Memory.getDOMCounters", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ func NewPrepareForLeakDetection() *PrepareForLeakDetection {
 // Do sends the PrepareForLeakDetection CDP command to a browser,
 // and returns the browser's response.
 func (t *PrepareForLeakDetection) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "PrepareForLeakDetection", nil)
+	response, err := cdp.Send(ctx, "Memory.prepareForLeakDetection", nil)
 	if err != nil {
 		return err
 	}
@@ -96,7 +96,7 @@ func NewForciblyPurgeJavaScriptMemory() *ForciblyPurgeJavaScriptMemory {
 // Do sends the ForciblyPurgeJavaScriptMemory CDP command to a browser,
 // and returns the browser's response.
 func (t *ForciblyPurgeJavaScriptMemory) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "ForciblyPurgeJavaScriptMemory", nil)
+	response, err := cdp.Send(ctx, "Memory.forciblyPurgeJavaScriptMemory", nil)
 	if err != nil {
 		return err
 	}
@@ -135,7 +135,7 @@ func (t *SetPressureNotificationsSuppressed) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetPressureNotificationsSuppressed", b)
+	response, err := cdp.Send(ctx, "Memory.setPressureNotificationsSuppressed", b)
 	if err != nil {
 		return err
 	}
@@ -174,7 +174,7 @@ func (t *SimulatePressureNotification) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SimulatePressureNotification", b)
+	response, err := cdp.Send(ctx, "Memory.simulatePressureNotification", b)
 	if err != nil {
 		return err
 	}
@@ -231,7 +231,7 @@ func (t *StartSampling) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "StartSampling", b)
+	response, err := cdp.Send(ctx, "Memory.startSampling", b)
 	if err != nil {
 		return err
 	}
@@ -261,7 +261,7 @@ func NewStopSampling() *StopSampling {
 // Do sends the StopSampling CDP command to a browser,
 // and returns the browser's response.
 func (t *StopSampling) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "StopSampling", nil)
+	response, err := cdp.Send(ctx, "Memory.stopSampling", nil)
 	if err != nil {
 		return err
 	}
@@ -298,7 +298,7 @@ type GetAllTimeSamplingProfileResponse struct {
 // Do sends the GetAllTimeSamplingProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *GetAllTimeSamplingProfile) Do(ctx context.Context) (*GetAllTimeSamplingProfileResponse, error) {
-	response, err := cdp.Send(ctx, "GetAllTimeSamplingProfile", nil)
+	response, err := cdp.Send(ctx, "Memory.getAllTimeSamplingProfile", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -339,7 +339,7 @@ type GetBrowserSamplingProfileResponse struct {
 // Do sends the GetBrowserSamplingProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *GetBrowserSamplingProfile) Do(ctx context.Context) (*GetBrowserSamplingProfileResponse, error) {
-	response, err := cdp.Send(ctx, "GetBrowserSamplingProfile", nil)
+	response, err := cdp.Send(ctx, "Memory.getBrowserSamplingProfile", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -380,7 +380,7 @@ type GetSamplingProfileResponse struct {
 // Do sends the GetSamplingProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *GetSamplingProfile) Do(ctx context.Context) (*GetSamplingProfileResponse, error) {
-	response, err := cdp.Send(ctx, "GetSamplingProfile", nil)
+	response, err := cdp.Send(ctx, "Memory.getSamplingProfile", nil)
 	if err != nil {
 		return nil, err
 	}

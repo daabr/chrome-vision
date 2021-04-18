@@ -28,7 +28,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "Security.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -58,7 +58,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Enable", nil)
+	response, err := cdp.Send(ctx, "Security.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -101,7 +101,7 @@ func (t *SetIgnoreCertificateErrors) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetIgnoreCertificateErrors", b)
+	response, err := cdp.Send(ctx, "Security.setIgnoreCertificateErrors", b)
 	if err != nil {
 		return err
 	}
@@ -147,7 +147,7 @@ func (t *HandleCertificateError) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "HandleCertificateError", b)
+	response, err := cdp.Send(ctx, "Security.handleCertificateError", b)
 	if err != nil {
 		return err
 	}
@@ -191,7 +191,7 @@ func (t *SetOverrideCertificateErrors) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetOverrideCertificateErrors", b)
+	response, err := cdp.Send(ctx, "Security.setOverrideCertificateErrors", b)
 	if err != nil {
 		return err
 	}

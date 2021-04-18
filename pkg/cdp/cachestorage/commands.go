@@ -37,7 +37,7 @@ func (t *DeleteCache) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "DeleteCache", b)
+	response, err := cdp.Send(ctx, "CacheStorage.deleteCache", b)
 	if err != nil {
 		return err
 	}
@@ -79,7 +79,7 @@ func (t *DeleteEntry) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "DeleteEntry", b)
+	response, err := cdp.Send(ctx, "CacheStorage.deleteEntry", b)
 	if err != nil {
 		return err
 	}
@@ -125,7 +125,7 @@ func (t *RequestCacheNames) Do(ctx context.Context) (*RequestCacheNamesResponse,
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "RequestCacheNames", b)
+	response, err := cdp.Send(ctx, "CacheStorage.requestCacheNames", b)
 	if err != nil {
 		return nil, err
 	}
@@ -181,7 +181,7 @@ func (t *RequestCachedResponse) Do(ctx context.Context) (*RequestCachedResponseR
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "RequestCachedResponse", b)
+	response, err := cdp.Send(ctx, "CacheStorage.requestCachedResponse", b)
 	if err != nil {
 		return nil, err
 	}
@@ -267,7 +267,7 @@ func (t *RequestEntries) Do(ctx context.Context) (*RequestEntriesResponse, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "RequestEntries", b)
+	response, err := cdp.Send(ctx, "CacheStorage.requestEntries", b)
 	if err != nil {
 		return nil, err
 	}

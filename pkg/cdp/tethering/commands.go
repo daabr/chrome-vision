@@ -37,7 +37,7 @@ func (t *Bind) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "Bind", b)
+	response, err := cdp.Send(ctx, "Tethering.bind", b)
 	if err != nil {
 		return err
 	}
@@ -76,7 +76,7 @@ func (t *Unbind) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "Unbind", b)
+	response, err := cdp.Send(ctx, "Tethering.unbind", b)
 	if err != nil {
 		return err
 	}

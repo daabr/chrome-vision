@@ -44,7 +44,7 @@ type GetInfoResponse struct {
 // Do sends the GetInfo CDP command to a browser,
 // and returns the browser's response.
 func (t *GetInfo) Do(ctx context.Context) (*GetInfoResponse, error) {
-	response, err := cdp.Send(ctx, "GetInfo", nil)
+	response, err := cdp.Send(ctx, "SystemInfo.getInfo", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ type GetProcessInfoResponse struct {
 // Do sends the GetProcessInfo CDP command to a browser,
 // and returns the browser's response.
 func (t *GetProcessInfo) Do(ctx context.Context) (*GetProcessInfoResponse, error) {
-	response, err := cdp.Send(ctx, "GetProcessInfo", nil)
+	response, err := cdp.Send(ctx, "SystemInfo.getProcessInfo", nil)
 	if err != nil {
 		return nil, err
 	}

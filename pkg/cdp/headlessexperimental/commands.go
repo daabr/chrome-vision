@@ -102,7 +102,7 @@ func (t *BeginFrame) Do(ctx context.Context) (*BeginFrameResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "BeginFrame", b)
+	response, err := cdp.Send(ctx, "HeadlessExperimental.beginFrame", b)
 	if err != nil {
 		return nil, err
 	}
@@ -136,7 +136,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "HeadlessExperimental.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -166,7 +166,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Enable", nil)
+	response, err := cdp.Send(ctx, "HeadlessExperimental.enable", nil)
 	if err != nil {
 		return err
 	}

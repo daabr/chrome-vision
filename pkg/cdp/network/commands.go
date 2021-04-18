@@ -43,7 +43,7 @@ func (t *SetAcceptedEncodings) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetAcceptedEncodings", b)
+	response, err := cdp.Send(ctx, "Network.setAcceptedEncodings", b)
 	if err != nil {
 		return err
 	}
@@ -77,7 +77,7 @@ func NewClearAcceptedEncodingsOverride() *ClearAcceptedEncodingsOverride {
 // Do sends the ClearAcceptedEncodingsOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearAcceptedEncodingsOverride) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "ClearAcceptedEncodingsOverride", nil)
+	response, err := cdp.Send(ctx, "Network.clearAcceptedEncodingsOverride", nil)
 	if err != nil {
 		return err
 	}
@@ -118,7 +118,7 @@ type CanClearBrowserCacheResponse struct {
 // Do sends the CanClearBrowserCache CDP command to a browser,
 // and returns the browser's response.
 func (t *CanClearBrowserCache) Do(ctx context.Context) (*CanClearBrowserCacheResponse, error) {
-	response, err := cdp.Send(ctx, "CanClearBrowserCache", nil)
+	response, err := cdp.Send(ctx, "Network.canClearBrowserCache", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -163,7 +163,7 @@ type CanClearBrowserCookiesResponse struct {
 // Do sends the CanClearBrowserCookies CDP command to a browser,
 // and returns the browser's response.
 func (t *CanClearBrowserCookies) Do(ctx context.Context) (*CanClearBrowserCookiesResponse, error) {
-	response, err := cdp.Send(ctx, "CanClearBrowserCookies", nil)
+	response, err := cdp.Send(ctx, "Network.canClearBrowserCookies", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -208,7 +208,7 @@ type CanEmulateNetworkConditionsResponse struct {
 // Do sends the CanEmulateNetworkConditions CDP command to a browser,
 // and returns the browser's response.
 func (t *CanEmulateNetworkConditions) Do(ctx context.Context) (*CanEmulateNetworkConditionsResponse, error) {
-	response, err := cdp.Send(ctx, "CanEmulateNetworkConditions", nil)
+	response, err := cdp.Send(ctx, "Network.canEmulateNetworkConditions", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -242,7 +242,7 @@ func NewClearBrowserCache() *ClearBrowserCache {
 // Do sends the ClearBrowserCache CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearBrowserCache) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "ClearBrowserCache", nil)
+	response, err := cdp.Send(ctx, "Network.clearBrowserCache", nil)
 	if err != nil {
 		return err
 	}
@@ -272,7 +272,7 @@ func NewClearBrowserCookies() *ClearBrowserCookies {
 // Do sends the ClearBrowserCookies CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearBrowserCookies) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "ClearBrowserCookies", nil)
+	response, err := cdp.Send(ctx, "Network.clearBrowserCookies", nil)
 	if err != nil {
 		return err
 	}
@@ -409,7 +409,7 @@ func (t *ContinueInterceptedRequest) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ContinueInterceptedRequest", b)
+	response, err := cdp.Send(ctx, "Network.continueInterceptedRequest", b)
 	if err != nil {
 		return err
 	}
@@ -483,7 +483,7 @@ func (t *DeleteCookies) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "DeleteCookies", b)
+	response, err := cdp.Send(ctx, "Network.deleteCookies", b)
 	if err != nil {
 		return err
 	}
@@ -513,7 +513,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := cdp.Send(ctx, "Disable", nil)
+	response, err := cdp.Send(ctx, "Network.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -572,7 +572,7 @@ func (t *EmulateNetworkConditions) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "EmulateNetworkConditions", b)
+	response, err := cdp.Send(ctx, "Network.emulateNetworkConditions", b)
 	if err != nil {
 		return err
 	}
@@ -648,7 +648,7 @@ func (t *Enable) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "Enable", b)
+	response, err := cdp.Send(ctx, "Network.enable", b)
 	if err != nil {
 		return err
 	}
@@ -686,7 +686,7 @@ type GetAllCookiesResponse struct {
 // Do sends the GetAllCookies CDP command to a browser,
 // and returns the browser's response.
 func (t *GetAllCookies) Do(ctx context.Context) (*GetAllCookiesResponse, error) {
-	response, err := cdp.Send(ctx, "GetAllCookies", nil)
+	response, err := cdp.Send(ctx, "Network.getAllCookies", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -739,7 +739,7 @@ func (t *GetCertificate) Do(ctx context.Context) (*GetCertificateResponse, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetCertificate", b)
+	response, err := cdp.Send(ctx, "Network.getCertificate", b)
 	if err != nil {
 		return nil, err
 	}
@@ -801,7 +801,7 @@ func (t *GetCookies) Do(ctx context.Context) (*GetCookiesResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetCookies", b)
+	response, err := cdp.Send(ctx, "Network.getCookies", b)
 	if err != nil {
 		return nil, err
 	}
@@ -853,7 +853,7 @@ func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResponse, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetResponseBody", b)
+	response, err := cdp.Send(ctx, "Network.getResponseBody", b)
 	if err != nil {
 		return nil, err
 	}
@@ -903,7 +903,7 @@ func (t *GetRequestPostData) Do(ctx context.Context) (*GetRequestPostDataRespons
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetRequestPostData", b)
+	response, err := cdp.Send(ctx, "Network.getRequestPostData", b)
 	if err != nil {
 		return nil, err
 	}
@@ -959,7 +959,7 @@ func (t *GetResponseBodyForInterception) Do(ctx context.Context) (*GetResponseBo
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetResponseBodyForInterception", b)
+	response, err := cdp.Send(ctx, "Network.getResponseBodyForInterception", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1014,7 +1014,7 @@ func (t *TakeResponseBodyForInterceptionAsStream) Do(ctx context.Context) (*Take
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "TakeResponseBodyForInterceptionAsStream", b)
+	response, err := cdp.Send(ctx, "Network.takeResponseBodyForInterceptionAsStream", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1063,7 +1063,7 @@ func (t *ReplayXHR) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "ReplayXHR", b)
+	response, err := cdp.Send(ctx, "Network.replayXHR", b)
 	if err != nil {
 		return err
 	}
@@ -1138,7 +1138,7 @@ func (t *SearchInResponseBody) Do(ctx context.Context) (*SearchInResponseBodyRes
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "SearchInResponseBody", b)
+	response, err := cdp.Send(ctx, "Network.searchInResponseBody", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1185,7 +1185,7 @@ func (t *SetBlockedURLs) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetBlockedURLs", b)
+	response, err := cdp.Send(ctx, "Network.setBlockedURLs", b)
 	if err != nil {
 		return err
 	}
@@ -1228,7 +1228,7 @@ func (t *SetBypassServiceWorker) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetBypassServiceWorker", b)
+	response, err := cdp.Send(ctx, "Network.setBypassServiceWorker", b)
 	if err != nil {
 		return err
 	}
@@ -1267,7 +1267,7 @@ func (t *SetCacheDisabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetCacheDisabled", b)
+	response, err := cdp.Send(ctx, "Network.setCacheDisabled", b)
 	if err != nil {
 		return err
 	}
@@ -1461,7 +1461,7 @@ func (t *SetCookie) Do(ctx context.Context) (*SetCookieResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "SetCookie", b)
+	response, err := cdp.Send(ctx, "Network.setCookie", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1504,7 +1504,7 @@ func (t *SetCookies) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetCookies", b)
+	response, err := cdp.Send(ctx, "Network.setCookies", b)
 	if err != nil {
 		return err
 	}
@@ -1550,7 +1550,7 @@ func (t *SetDataSizeLimitsForTest) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetDataSizeLimitsForTest", b)
+	response, err := cdp.Send(ctx, "Network.setDataSizeLimitsForTest", b)
 	if err != nil {
 		return err
 	}
@@ -1589,7 +1589,7 @@ func (t *SetExtraHTTPHeaders) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetExtraHTTPHeaders", b)
+	response, err := cdp.Send(ctx, "Network.setExtraHTTPHeaders", b)
 	if err != nil {
 		return err
 	}
@@ -1632,7 +1632,7 @@ func (t *SetAttachDebugStack) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetAttachDebugStack", b)
+	response, err := cdp.Send(ctx, "Network.setAttachDebugStack", b)
 	if err != nil {
 		return err
 	}
@@ -1679,7 +1679,7 @@ func (t *SetRequestInterception) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := cdp.Send(ctx, "SetRequestInterception", b)
+	response, err := cdp.Send(ctx, "Network.setRequestInterception", b)
 	if err != nil {
 		return err
 	}
@@ -1735,7 +1735,7 @@ func (t *GetSecurityIsolationStatus) Do(ctx context.Context) (*GetSecurityIsolat
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "GetSecurityIsolationStatus", b)
+	response, err := cdp.Send(ctx, "Network.getSecurityIsolationStatus", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1794,7 +1794,7 @@ func (t *LoadNetworkResource) Do(ctx context.Context) (*LoadNetworkResourceRespo
 	if err != nil {
 		return nil, err
 	}
-	response, err := cdp.Send(ctx, "LoadNetworkResource", b)
+	response, err := cdp.Send(ctx, "Network.loadNetworkResource", b)
 	if err != nil {
 		return nil, err
 	}
