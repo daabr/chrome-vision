@@ -6,6 +6,7 @@ package cdp
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -26,7 +27,8 @@ type Session struct {
 
 	OutputDir, UserDataDir *string
 
-	// Browser execution details.
+	// Browser execution details. Not shared with descendant contexts because
+	// the browser was already started by the first call to cdp.NewContext.
 	browserPath  *string
 	browserFlags map[string]interface{}
 	// TODO: environment variables.
@@ -41,8 +43,14 @@ type Session struct {
 
 	// Exactly one subscriber per response (created and used in cdp.Send).
 	responseSubscribers map[int64]chan *Message
-	// Zero or more subscribers per event.
+	// Zero or more subscribers per event type.
 	eventSubscribers map[string][]chan *Message
+
+	// Metadata about the browser, pages and iframes.
+	targets map[string]targetInfo
+	// The attached target. Not shared with descendant contexts because they
+	// create their own tabs, targets and sessions IDs.
+	targetID, sessionID string
 }
 
 type sessionKey struct{}
@@ -97,6 +105,10 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 
 		session.responseSubscribers = ps.responseSubscribers
 		session.eventSubscribers = ps.eventSubscribers
+
+		session.targets = ps.targets
+
+		// TODO: open a new tab, attach to the target, and set the session ID.
 	} else {
 		// Construct a new session.
 
@@ -138,6 +150,48 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 				s.msgID++
 			}
 		}(session)
+
+		// Enable and receive target update events.
+		session.targets = make(map[string]targetInfo)
+		events := [...]string{
+			"Target.targetCreated",
+			"Target.targetInfoChanged",
+			"Target.targetDestroyed",
+		}
+		channels := []chan *Message{}
+		for _, e := range events {
+			ch, err := SubscribeEvent(ctx, e)
+			if err != nil {
+				log.Printf("WARNING: %q subscription error: %v", e, err)
+			}
+			channels = append(channels, ch)
+		}
+		go receiveTargetUpdates(ctx, channels)
+
+		method, params := "Target.setDiscoverTargets", `{"discover":true}`
+		if _, err := Send(ctx, method, []byte(params)); err != nil {
+			log.Printf("WARNING: %q command error: %v", method, err)
+		}
+		for _, t := range session.targets {
+			if t.Type == "page" && !t.Attached {
+				// Attach to the new page target to get a session ID.
+				session.targetID = t.TargetID
+				log.Printf("Target ID: %s", t.TargetID)
+				params := fmt.Sprintf(`{"targetId":%q,"flatten":true}`, t.TargetID)
+				response, err := Send(ctx, "Target.attachToTarget", []byte(params))
+				if err != nil {
+					log.Printf(`WARNING: "attachToTarget" command error: %v`, err)
+				}
+				r := make(map[string]string)
+				json.Unmarshal(response.Result, &r)
+				session.sessionID = r["sessionId"]
+				log.Printf("Session ID: %s", session.sessionID)
+			}
+		}
+
+		// TODO: Runtime.enable, Log.enable, Network.enable, Inspector.enable,
+		// Page.enable, DOM.enable, CSS.enable, Page.setLifecycleEventsEnabled?
+
 		// Report when the context will be canceled. No need to clean-up
 		// anything: the cancelation of the context automatically kills the
 		// browser, which triggers its own cleanup: see the goroutine at the
