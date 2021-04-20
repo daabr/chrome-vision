@@ -71,9 +71,9 @@ func receiveFromPipe(s *Session) {
 				}
 				switch len(subscribers) {
 				case 1:
-					log.Printf("Relayed to %d subscribers", len(subscribers))
-				default:
 					log.Printf("Relayed to 1 subscriber")
+				default:
+					log.Printf("Relayed to %d subscribers", len(subscribers))
 				}
 			}
 		}
