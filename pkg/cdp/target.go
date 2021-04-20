@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 )
 
-// Partial copy of target.TargetInfo.
+// Partial copy of target.TargetInfo for parsing target state events.
 type targetInfo struct {
 	TargetID string `json:"targetId"`
 	Type     string `json:"type"`
