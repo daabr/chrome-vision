@@ -26,11 +26,12 @@ func (e *Error) Error() string {
 
 // Message is a generic CDP message sent to or received from a browser.
 type Message struct {
-	ID     int64           `json:"id,omitempty"`
-	Method string          `json:"method,omitempty"`
-	Params json.RawMessage `json:"params,omitempty"`
-	Result json.RawMessage `json:"result,omitempty"`
-	Error  *Error          `json:"error,omitempty"`
+	ID        int64           `json:"id,omitempty"`
+	SessionID string          `json:"sessionId,omitempty"`
+	Method    string          `json:"method,omitempty"`
+	Params    json.RawMessage `json:"params,omitempty"`
+	Result    json.RawMessage `json:"result,omitempty"`
+	Error     *Error          `json:"error,omitempty"`
 }
 
 type asyncMessage struct {
@@ -165,7 +166,7 @@ func Send(ctx context.Context, method string, params json.RawMessage) (*Message,
 	if !ok {
 		return nil, errors.New("context not initialized with cdp.NewContext")
 	}
-	m := &Message{Method: method, Params: params}
+	m := &Message{Method: method, SessionID: session.sessionID, Params: params}
 	ch := make(chan *Message)
 	// https://blog.golang.org/codelab-share
 	session.msgQ <- asyncMessage{requestMsg: *m, responseChan: ch}
@@ -186,4 +187,4 @@ func SubscribeEvent(ctx context.Context, name string) (chan *Message, error) {
 	return ch, nil
 }
 
-// TODO: ubsubscribe.
+// TODO: unsubscribe.
