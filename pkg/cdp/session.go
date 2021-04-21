@@ -15,11 +15,11 @@ import (
 )
 
 // OutputRootEnv is the name of an optional environment variable to override
-// the default path for CDP output directories instead of Go's os.TempDir().
+// the default path for CDP output directories instead of Go's `os.TempDir()`.
 const OutputRootEnv = "CDP_OUTPUT_ROOT"
 
-// Session contains CDP runtime details, stored in a context.Context,
-// and retrievable with the cdp.FromContext function.
+// Session contains CDP runtime details, stored in a `context.Context`,
+// and retrievable with the `cdp.FromContext` function.
 type Session struct {
 	// For immediate canceling of the context returned by cdp.NewContext,
 	// and any descendant contexts, when the browser process ends.
@@ -46,17 +46,18 @@ type Session struct {
 	// Zero or more subscribers per event type.
 	eventSubscribers map[string][]chan *Message
 
-	// Metadata about the browser, pages and iframes.
+	// Metadata about the browser, its tabs (pages) and their iframes.
 	targets map[string]targetInfo
-	// The attached target. Not shared with descendant contexts because they
-	// create their own tabs, targets and sessions IDs.
+	// The attached target. Not shared with descendant contexts
+	// because they create their own tabs, targets and sessions IDs. See also:
+	// https://github.com/aslushnikov/getting-started-with-cdp#targets--sessions.
 	targetID, sessionID string
 }
 
 type sessionKey struct{}
 
-// FromContext returns the cdp.Session stored in the given context.Context,
-// if that context was initialized with the cdp.NewContext function.
+// FromContext returns the `cdp.Session` stored in the given `context.Context`,
+// if that context was initialized with the `cdp.NewContext` function.
 func FromContext(ctx context.Context) (*Session, bool) {
 	s, ok := ctx.Value(sessionKey{}).(*Session)
 	if ok && s == nil {
@@ -65,11 +66,12 @@ func FromContext(ctx context.Context) (*Session, bool) {
 	return s, ok
 }
 
-// SessionOption is used for customization in the cdp.NewContext function.
+// SessionOption is used for customization in the `cdp.NewContext` function.
+//
 // See https://commandcenter.blogspot.com/2014/01/self-referential-functions-and-design.html.
 type SessionOption = func(*Session)
 
-// NewContext constructs a new cdp.Session, and returns a copy of the parent
+// NewContext constructs a new `cdp.Session`, and returns a copy of the parent
 // context which carries this new session.
 //
 // If the parent context already carries a CDP session, this function reuses
@@ -80,8 +82,8 @@ type SessionOption = func(*Session)
 // directory (unless the caller overrides the browser flag "user-data-dir"),
 // proxy logs, screenshots, etc.
 //
-// The default path for output directories is Go's os.TempDir(), but it can be
-// overriden with an optional environment variable (see cdp.OutputRootEnv).
+// The default path for output directories is Go's `os.TempDir()`, but it can be
+// overriden with an optional environment variable (see `cdp.OutputRootEnv`).
 func NewContext(parent context.Context, opts ...SessionOption) (context.Context, error) {
 	// Store the new session in a cancelable copy of the parent context.
 	ctx, cancel := context.WithCancel(parent)
@@ -168,23 +170,19 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 		}
 		go receiveTargetUpdates(ctx, channels)
 
+		// https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-setDiscoverTargets
+		// (we don't use the target sub-package to avoid circular dependencies).
 		method, params := "Target.setDiscoverTargets", `{"discover":true}`
 		if _, err := Send(ctx, method, []byte(params)); err != nil {
 			log.Printf("WARNING: %q command error: %v", method, err)
 		}
 		for _, t := range session.targets {
 			if t.Type == "page" && !t.Attached {
-				// Attach to the new page target to get a session ID.
+				// Attach to the new page target to get a session ID
+				// (https://github.com/aslushnikov/getting-started-with-cdp#targets--sessions).
 				session.targetID = t.TargetID
 				log.Printf("Target ID: %s", t.TargetID)
-				params := fmt.Sprintf(`{"targetId":%q,"flatten":true}`, t.TargetID)
-				response, err := Send(ctx, "Target.attachToTarget", []byte(params))
-				if err != nil {
-					log.Printf(`WARNING: "attachToTarget" command error: %v`, err)
-				}
-				r := make(map[string]string)
-				json.Unmarshal(response.Result, &r)
-				session.sessionID = r["sessionId"]
+				session.sessionID = attachToTarget(ctx, t.TargetID)
 				log.Printf("Session ID: %s", session.sessionID)
 			}
 		}
@@ -205,7 +203,7 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 	return ctx, nil
 }
 
-// mkdirOutput creates a uniquely-named session output directory.
+// Create a uniquely-named session output directory.
 func mkdirOutput() (string, error) {
 	path, ok := os.LookupEnv(OutputRootEnv)
 	if !ok {
@@ -220,8 +218,22 @@ func mkdirOutput() (string, error) {
 	return path, nil
 }
 
-// BrowserPath allows the caller of the cdp.NewContext function to force this
-// Go package to run the browser from a specific path, instead of looking
+// Attaches to the given target, and returns the resulting session ID. Uses
+// https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-attachToTarget
+// (we don't use the target sub-package to avoid circular dependencies).
+func attachToTarget(ctx context.Context, targetID string) string {
+	params := fmt.Sprintf(`{"targetId":%q,"flatten":true}`, targetID)
+	response, err := Send(ctx, "Target.attachToTarget", []byte(params))
+	if err != nil {
+		log.Printf(`WARNING: "attachToTarget" command error: %v`, err)
+	}
+	result := &Message{}
+	json.Unmarshal(response.Result, result)
+	return result.SessionID
+}
+
+// BrowserPath allows the caller of the `cdp.NewContext` function to force
+// this Go package to run the browser from a specific path, instead of looking
 // for the first available OS-specific default path.
 //
 // This is useful if you want to run a non-default browser or build.
@@ -231,7 +243,7 @@ func BrowserPath(path string) SessionOption {
 	}
 }
 
-// UserDataDir allows the caller of the cdp.NewContext function to customize
+// UserDataDir allows the caller of the `cdp.NewContext` function to customize
 // the browser's default user data directory.
 //
 // This is useful if you want to customize or monitor the content of the user
@@ -242,9 +254,9 @@ func UserDataDir(path string) SessionOption {
 	}
 }
 
-// BrowserFlags allows the caller of the cdp.NewContext function to override
+// BrowserFlags allows the caller of the `cdp.NewContext` function to override
 // this Go package's default browser flags, retrieved with the function
-// cdp.DefaultBrowserFlags.
+// `cdp.DefaultBrowserFlags`.
 //
 // This is useful if you want to customize the browser's behavior.
 func BrowserFlags(flags map[string]interface{}) SessionOption {
