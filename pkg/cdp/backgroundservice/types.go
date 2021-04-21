@@ -1,10 +1,5 @@
 package backgroundservice
 
-import (
-	"github.com/daabr/chrome-vision/pkg/cdp"
-	"github.com/daabr/chrome-vision/pkg/cdp/serviceworker"
-)
-
 // The Background Service that will be associated with the commands/events.
 // Every Background Service operates independently, but they share the same
 // API.
@@ -33,13 +28,13 @@ type EventMetadata struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#type-BackgroundServiceEvent
 type BackgroundServiceEvent struct {
 	// Timestamp of the event (in seconds).
-	Timestamp cdp.TimeSinceEpoch `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 	// The origin this event belongs to.
 	Origin string `json:"origin"`
 	// The Service Worker ID that initiated the event.
-	ServiceWorkerRegistrationID serviceworker.RegistrationID `json:"serviceWorkerRegistrationId"`
+	ServiceWorkerRegistrationID string `json:"serviceWorkerRegistrationId"`
 	// The Background Service this event belongs to.
-	Service ServiceName `json:"service"`
+	Service string `json:"service"`
 	// A description of the event.
 	EventName string `json:"eventName"`
 	// An identifier that groups related events together.

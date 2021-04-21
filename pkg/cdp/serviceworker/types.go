@@ -1,7 +1,5 @@
 package serviceworker
 
-import "github.com/daabr/chrome-vision/pkg/cdp"
-
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-RegistrationID
 type RegistrationID string
 
@@ -9,9 +7,9 @@ type RegistrationID string
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerRegistration
 type ServiceWorkerRegistration struct {
-	RegistrationID RegistrationID `json:"registrationId"`
-	ScopeURL       string         `json:"scopeURL"`
-	IsDeleted      bool           `json:"isDeleted"`
+	RegistrationID string `json:"registrationId"`
+	ScopeURL       string `json:"scopeURL"`
+	IsDeleted      bool   `json:"isDeleted"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerVersionRunningStatus
@@ -42,28 +40,28 @@ const (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerVersion
 type ServiceWorkerVersion struct {
-	VersionID      string                            `json:"versionId"`
-	RegistrationID RegistrationID                    `json:"registrationId"`
-	ScriptURL      string                            `json:"scriptURL"`
-	RunningStatus  ServiceWorkerVersionRunningStatus `json:"runningStatus"`
-	Status         ServiceWorkerVersionStatus        `json:"status"`
+	VersionID      string `json:"versionId"`
+	RegistrationID string `json:"registrationId"`
+	ScriptURL      string `json:"scriptURL"`
+	RunningStatus  string `json:"runningStatus"`
+	Status         string `json:"status"`
 	// The Last-Modified header value of the main script.
 	ScriptLastModified float64 `json:"scriptLastModified,omitempty"`
 	// The time at which the response headers of the main script were received from the server.
 	// For cached script it is the last time the cache entry was validated.
-	ScriptResponseTime float64        `json:"scriptResponseTime,omitempty"`
-	ControlledClients  []cdp.TargetID `json:"controlledClients,omitempty"`
-	TargetID           *cdp.TargetID  `json:"targetId,omitempty"`
+	ScriptResponseTime float64  `json:"scriptResponseTime,omitempty"`
+	ControlledClients  []string `json:"controlledClients,omitempty"`
+	TargetID           string   `json:"targetId,omitempty"`
 }
 
 // ServiceWorker error message.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerErrorMessage
 type ServiceWorkerErrorMessage struct {
-	ErrorMessage   string         `json:"errorMessage"`
-	RegistrationID RegistrationID `json:"registrationId"`
-	VersionID      string         `json:"versionId"`
-	SourceURL      string         `json:"sourceURL"`
-	LineNumber     int64          `json:"lineNumber"`
-	ColumnNumber   int64          `json:"columnNumber"`
+	ErrorMessage   string `json:"errorMessage"`
+	RegistrationID string `json:"registrationId"`
+	VersionID      string `json:"versionId"`
+	SourceURL      string `json:"sourceURL"`
+	LineNumber     int64  `json:"lineNumber"`
+	ColumnNumber   int64  `json:"columnNumber"`
 }

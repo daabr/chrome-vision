@@ -73,8 +73,8 @@ func (t *Enable) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Database/#method-executeSQL
 type ExecuteSQL struct {
-	DatabaseID DatabaseID `json:"databaseId"`
-	Query      string     `json:"query"`
+	DatabaseID string `json:"databaseId"`
+	Query      string `json:"query"`
 }
 
 // NewExecuteSQL constructs a new ExecuteSQL struct instance, with
@@ -82,9 +82,9 @@ type ExecuteSQL struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Database/#method-executeSQL
-func NewExecuteSQL(databaseId DatabaseID, query string) *ExecuteSQL {
+func NewExecuteSQL(databaseID string, query string) *ExecuteSQL {
 	return &ExecuteSQL{
-		DatabaseID: databaseId,
+		DatabaseID: databaseID,
 		Query:      query,
 	}
 }
@@ -123,7 +123,7 @@ func (t *ExecuteSQL) Do(ctx context.Context) (*ExecuteSQLResponse, error) {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Database/#method-getDatabaseTableNames
 type GetDatabaseTableNames struct {
-	DatabaseID DatabaseID `json:"databaseId"`
+	DatabaseID string `json:"databaseId"`
 }
 
 // NewGetDatabaseTableNames constructs a new GetDatabaseTableNames struct instance, with
@@ -131,9 +131,9 @@ type GetDatabaseTableNames struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Database/#method-getDatabaseTableNames
-func NewGetDatabaseTableNames(databaseId DatabaseID) *GetDatabaseTableNames {
+func NewGetDatabaseTableNames(databaseID string) *GetDatabaseTableNames {
 	return &GetDatabaseTableNames{
-		DatabaseID: databaseId,
+		DatabaseID: databaseID,
 	}
 }
 

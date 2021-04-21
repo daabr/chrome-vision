@@ -21,9 +21,9 @@ type Clear struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#method-clear
-func NewClear(storageId StorageID) *Clear {
+func NewClear(storageID StorageID) *Clear {
 	return &Clear{
-		StorageID: storageId,
+		StorageID: storageID,
 	}
 }
 
@@ -117,9 +117,9 @@ type GetDOMStorageItems struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#method-getDOMStorageItems
-func NewGetDOMStorageItems(storageId StorageID) *GetDOMStorageItems {
+func NewGetDOMStorageItems(storageID StorageID) *GetDOMStorageItems {
 	return &GetDOMStorageItems{
-		StorageID: storageId,
+		StorageID: storageID,
 	}
 }
 
@@ -164,9 +164,9 @@ type RemoveDOMStorageItem struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#method-removeDOMStorageItem
-func NewRemoveDOMStorageItem(storageId StorageID, key string) *RemoveDOMStorageItem {
+func NewRemoveDOMStorageItem(storageID StorageID, key string) *RemoveDOMStorageItem {
 	return &RemoveDOMStorageItem{
-		StorageID: storageId,
+		StorageID: storageID,
 		Key:       key,
 	}
 }
@@ -203,9 +203,9 @@ type SetDOMStorageItem struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#method-setDOMStorageItem
-func NewSetDOMStorageItem(storageId StorageID, key string, value string) *SetDOMStorageItem {
+func NewSetDOMStorageItem(storageID StorageID, key string, value string) *SetDOMStorageItem {
 	return &SetDOMStorageItem{
-		StorageID: storageId,
+		StorageID: storageID,
 		Key:       key,
 		Value:     value,
 	}

@@ -18,7 +18,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-addInspectedHeapObject
 type AddInspectedHeapObject struct {
 	// Heap snapshot object id to be accessible by means of $x command line API.
-	HeapObjectID HeapSnapshotObjectID `json:"heapObjectId"`
+	HeapObjectID string `json:"heapObjectId"`
 }
 
 // NewAddInspectedHeapObject constructs a new AddInspectedHeapObject struct instance, with
@@ -26,9 +26,9 @@ type AddInspectedHeapObject struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-addInspectedHeapObject
-func NewAddInspectedHeapObject(heapObjectId HeapSnapshotObjectID) *AddInspectedHeapObject {
+func NewAddInspectedHeapObject(heapObjectID string) *AddInspectedHeapObject {
 	return &AddInspectedHeapObject{
-		HeapObjectID: heapObjectId,
+		HeapObjectID: heapObjectID,
 	}
 }
 
@@ -139,7 +139,7 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-getHeapObjectId
 type GetHeapObjectID struct {
 	// Identifier of the object to get heap object id for.
-	ObjectID runtime.RemoteObjectID `json:"objectId"`
+	ObjectID string `json:"objectId"`
 }
 
 // NewGetHeapObjectID constructs a new GetHeapObjectID struct instance, with
@@ -147,9 +147,9 @@ type GetHeapObjectID struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-getHeapObjectId
-func NewGetHeapObjectID(objectId runtime.RemoteObjectID) *GetHeapObjectID {
+func NewGetHeapObjectID(objectID string) *GetHeapObjectID {
 	return &GetHeapObjectID{
-		ObjectID: objectId,
+		ObjectID: objectID,
 	}
 }
 
@@ -157,7 +157,7 @@ func NewGetHeapObjectID(objectId runtime.RemoteObjectID) *GetHeapObjectID {
 // to calling the GetHeapObjectID CDP command with Do().
 type GetHeapObjectIDResponse struct {
 	// Id of the heap snapshot object corresponding to the passed remote object id.
-	HeapSnapshotObjectID HeapSnapshotObjectID `json:"heapSnapshotObjectId"`
+	HeapSnapshotObjectID string `json:"heapSnapshotObjectId"`
 }
 
 // Do sends the GetHeapObjectID CDP command to a browser,
@@ -186,7 +186,7 @@ func (t *GetHeapObjectID) Do(ctx context.Context) (*GetHeapObjectIDResponse, err
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-getObjectByHeapObjectId
 type GetObjectByHeapObjectID struct {
-	ObjectID HeapSnapshotObjectID `json:"objectId"`
+	ObjectID string `json:"objectId"`
 	// Symbolic group name that can be used to release multiple objects.
 	ObjectGroup string `json:"objectGroup,omitempty"`
 }
@@ -196,9 +196,9 @@ type GetObjectByHeapObjectID struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-getObjectByHeapObjectId
-func NewGetObjectByHeapObjectID(objectId HeapSnapshotObjectID) *GetObjectByHeapObjectID {
+func NewGetObjectByHeapObjectID(objectID string) *GetObjectByHeapObjectID {
 	return &GetObjectByHeapObjectID{
-		ObjectID: objectId,
+		ObjectID: objectID,
 	}
 }
 

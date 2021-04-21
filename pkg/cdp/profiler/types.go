@@ -79,7 +79,7 @@ type FunctionCoverage struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-ScriptCoverage
 type ScriptCoverage struct {
 	// JavaScript script id.
-	ScriptID runtime.ScriptID `json:"scriptId"`
+	ScriptID string `json:"scriptId"`
 	// JavaScript script name or url.
 	URL string `json:"url"`
 	// Functions contained in the script that has coverage data.
@@ -115,7 +115,7 @@ type TypeProfileEntry struct {
 // This CDP type is experimental.
 type ScriptTypeProfile struct {
 	// JavaScript script id.
-	ScriptID runtime.ScriptID `json:"scriptId"`
+	ScriptID string `json:"scriptId"`
 	// JavaScript script name or url.
 	URL string `json:"url"`
 	// Type profile entries for parameters and return values of the functions in the script.

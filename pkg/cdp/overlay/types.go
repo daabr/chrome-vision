@@ -159,7 +159,7 @@ type HighlightConfig struct {
 	// The grid layout color (default: transparent).
 	CssGridColor *dom.RGBA `json:"cssGridColor,omitempty"`
 	// The color format used to format color styles (default: hex).
-	ColorFormat *ColorFormat `json:"colorFormat,omitempty"`
+	ColorFormat string `json:"colorFormat,omitempty"`
 	// The grid layout highlight configuration (default: all transparent).
 	GridHighlightConfig *GridHighlightConfig `json:"gridHighlightConfig,omitempty"`
 	// The flex container highlight configuration (default: all transparent).
@@ -167,7 +167,7 @@ type HighlightConfig struct {
 	// The flex item highlight configuration (default: all transparent).
 	FlexItemHighlightConfig *FlexItemHighlightConfig `json:"flexItemHighlightConfig,omitempty"`
 	// The contrast algorithm to use for the contrast ratio (default: aa).
-	ContrastAlgorithm *ContrastAlgorithm `json:"contrastAlgorithm,omitempty"`
+	ContrastAlgorithm string `json:"contrastAlgorithm,omitempty"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ColorFormat
@@ -187,7 +187,7 @@ type GridNodeHighlightConfig struct {
 	// A descriptor for the highlight appearance.
 	GridHighlightConfig GridHighlightConfig `json:"gridHighlightConfig"`
 	// Identifier of the node to highlight.
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-FlexNodeHighlightConfig
@@ -195,7 +195,7 @@ type FlexNodeHighlightConfig struct {
 	// A descriptor for the highlight appearance of flex containers.
 	FlexContainerHighlightConfig FlexContainerHighlightConfig `json:"flexContainerHighlightConfig"`
 	// Identifier of the node to highlight.
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ScrollSnapContainerHighlightConfig
@@ -215,7 +215,7 @@ type ScrollSnapHighlightConfig struct {
 	// A descriptor for the highlight appearance of scroll snap containers.
 	ScrollSnapContainerHighlightConfig ScrollSnapContainerHighlightConfig `json:"scrollSnapContainerHighlightConfig"`
 	// Identifier of the node to highlight.
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // Configuration for dual screen hinge

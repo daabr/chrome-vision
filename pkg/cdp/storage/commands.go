@@ -6,7 +6,6 @@ import (
 	"errors"
 
 	"github.com/daabr/chrome-vision/pkg/cdp"
-	"github.com/daabr/chrome-vision/pkg/cdp/browser"
 	"github.com/daabr/chrome-vision/pkg/cdp/network"
 )
 
@@ -60,7 +59,7 @@ func (t *ClearDataForOrigin) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-getCookies
 type GetCookies struct {
 	// Browser context to use when called on the browser endpoint.
-	BrowserContextID *browser.BrowserContextID `json:"browserContextId,omitempty"`
+	BrowserContextID string `json:"browserContextId,omitempty"`
 }
 
 // NewGetCookies constructs a new GetCookies struct instance, with
@@ -76,8 +75,8 @@ func NewGetCookies() *GetCookies {
 // parameter `browserContextId` in the GetCookies CDP command.
 //
 // Browser context to use when called on the browser endpoint.
-func (t *GetCookies) SetBrowserContextID(v browser.BrowserContextID) *GetCookies {
-	t.BrowserContextID = &v
+func (t *GetCookies) SetBrowserContextID(v string) *GetCookies {
+	t.BrowserContextID = v
 	return t
 }
 
@@ -119,7 +118,7 @@ type SetCookies struct {
 	// Cookies to be set.
 	Cookies []network.CookieParam `json:"cookies"`
 	// Browser context to use when called on the browser endpoint.
-	BrowserContextID *browser.BrowserContextID `json:"browserContextId,omitempty"`
+	BrowserContextID string `json:"browserContextId,omitempty"`
 }
 
 // NewSetCookies constructs a new SetCookies struct instance, with
@@ -137,8 +136,8 @@ func NewSetCookies(cookies []network.CookieParam) *SetCookies {
 // parameter `browserContextId` in the SetCookies CDP command.
 //
 // Browser context to use when called on the browser endpoint.
-func (t *SetCookies) SetBrowserContextID(v browser.BrowserContextID) *SetCookies {
-	t.BrowserContextID = &v
+func (t *SetCookies) SetBrowserContextID(v string) *SetCookies {
+	t.BrowserContextID = v
 	return t
 }
 
@@ -167,7 +166,7 @@ func (t *SetCookies) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-clearCookies
 type ClearCookies struct {
 	// Browser context to use when called on the browser endpoint.
-	BrowserContextID *browser.BrowserContextID `json:"browserContextId,omitempty"`
+	BrowserContextID string `json:"browserContextId,omitempty"`
 }
 
 // NewClearCookies constructs a new ClearCookies struct instance, with
@@ -183,8 +182,8 @@ func NewClearCookies() *ClearCookies {
 // parameter `browserContextId` in the ClearCookies CDP command.
 //
 // Browser context to use when called on the browser endpoint.
-func (t *ClearCookies) SetBrowserContextID(v browser.BrowserContextID) *ClearCookies {
-	t.BrowserContextID = &v
+func (t *ClearCookies) SetBrowserContextID(v string) *ClearCookies {
+	t.BrowserContextID = v
 	return t
 }
 

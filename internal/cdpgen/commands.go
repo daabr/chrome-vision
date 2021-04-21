@@ -2,6 +2,7 @@ package cdpgen
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 )
 
@@ -78,7 +79,9 @@ func generateCommands(d Domain) string {
 					// (e.g. CSS.NewSetKeyframeKey, DOMDebugger.NewRemoveDOMBreakpoint).
 					fmt.Fprintf(b, "\t\t%s: %s,\n", adjust(p.Name), string(p.Name[0]))
 				} else {
-					fmt.Fprintf(b, "\t\t%s: %s,\n", adjust(p.Name), p.Name)
+					re := regexp.MustCompile(`(Id)$`)
+					s := re.ReplaceAllLiteralString(p.Name, "ID")
+					fmt.Fprintf(b, "\t\t%s: %s,\n", adjust(p.Name), s)
 				}
 			}
 			fmt.Fprint(b, "\t")
@@ -162,16 +165,23 @@ func generateRequiredParameter(b *strings.Builder, p Property) {
 		// (e.g. CSS.NewSetKeyframeKey, DOMDebugger.NewRemoveDOMBreakpoint).
 		fmt.Fprintf(b, "%s ", string(p.Name[0]))
 	} else {
-		fmt.Fprintf(b, "%s ", p.Name)
+		re := regexp.MustCompile(`(Id)$`)
+		s := re.ReplaceAllLiteralString(p.Name, "ID")
+		fmt.Fprintf(b, "%s ", s)
 	}
 	// Type.
 	if p.Type != nil {
 		fmt.Fprint(b, convertType(*p.Type, p.Items))
 	} else {
+		// De-alias built-in types (https://crbug.com/1193242).
+		r := adjust(*p.Ref)
+		if t, ok := aliases[r]; ok {
+			r = t
+		}
 		if p.Optional {
-			fmt.Fprintf(b, "*%s", adjust(*p.Ref))
+			fmt.Fprintf(b, "*%s", r)
 		} else {
-			fmt.Fprintf(b, "%s", adjust(*p.Ref))
+			fmt.Fprint(b, r)
 		}
 	}
 }
@@ -199,6 +209,10 @@ func generateOptionalParameter(b *strings.Builder, domain, cmd string, p Propert
 		fmt.Fprint(b, convertType(*p.Type, p.Items))
 	} else {
 		r := strings.ReplaceAll(adjust(*p.Ref), strings.ToLower(domain)+".", "")
+		// De-alias built-in types (https://crbug.com/1193242).
+		if t, ok := aliases[r]; ok {
+			r = t
+		}
 		fmt.Fprintf(b, "%s", r)
 	}
 	fmt.Fprintf(b, ") *%s {\n", cmd)
@@ -208,7 +222,16 @@ func generateOptionalParameter(b *strings.Builder, domain, cmd string, p Propert
 	if p.Type != nil {
 		fmt.Fprintln(b, "v") // By value - built-in JSON types.
 	} else {
-		fmt.Fprintln(b, "&v") // By reference - CDP types.
+		r := strings.ReplaceAll(adjust(*p.Ref), strings.ToLower(domain)+".", "")
+		// De-alias built-in types (https://crbug.com/1193242).
+		if t, ok := aliases[r]; ok {
+			r = t
+		}
+		if r == "int64" || r == "float64" || r == "string" {
+			fmt.Fprintln(b, "v") // By value - aliased built-in JSON types.
+		} else {
+			fmt.Fprintln(b, "&v") // By reference - CDP types.
+		}
 	}
 	fmt.Fprintln(b, "\treturn t")
 	fmt.Fprintln(b, "}")

@@ -6,7 +6,6 @@ import (
 	"errors"
 
 	"github.com/daabr/chrome-vision/pkg/cdp"
-	"github.com/daabr/chrome-vision/pkg/cdp/dom"
 	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
 )
 
@@ -81,9 +80,9 @@ func (t *Enable) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type GetPartialAXTree struct {
 	// Identifier of the node to get the partial accessibility tree for.
-	NodeID *dom.NodeID `json:"nodeId,omitempty"`
+	NodeID int64 `json:"nodeId,omitempty"`
 	// Identifier of the backend node to get the partial accessibility tree for.
-	BackendNodeID *dom.BackendNodeID `json:"backendNodeId,omitempty"`
+	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 	// JavaScript object id of the node wrapper to get the partial accessibility tree for.
 	ObjectID *runtime.RemoteObjectID `json:"objectId,omitempty"`
 	// Whether to fetch this nodes ancestors, siblings and children. Defaults to true.
@@ -105,8 +104,8 @@ func NewGetPartialAXTree() *GetPartialAXTree {
 // parameter `nodeId` in the GetPartialAXTree CDP command.
 //
 // Identifier of the node to get the partial accessibility tree for.
-func (t *GetPartialAXTree) SetNodeID(v dom.NodeID) *GetPartialAXTree {
-	t.NodeID = &v
+func (t *GetPartialAXTree) SetNodeID(v int64) *GetPartialAXTree {
+	t.NodeID = v
 	return t
 }
 
@@ -114,8 +113,8 @@ func (t *GetPartialAXTree) SetNodeID(v dom.NodeID) *GetPartialAXTree {
 // parameter `backendNodeId` in the GetPartialAXTree CDP command.
 //
 // Identifier of the backend node to get the partial accessibility tree for.
-func (t *GetPartialAXTree) SetBackendNodeID(v dom.BackendNodeID) *GetPartialAXTree {
-	t.BackendNodeID = &v
+func (t *GetPartialAXTree) SetBackendNodeID(v int64) *GetPartialAXTree {
+	t.BackendNodeID = v
 	return t
 }
 
@@ -238,7 +237,7 @@ func (t *GetFullAXTree) Do(ctx context.Context) (*GetFullAXTreeResponse, error) 
 //
 // This CDP method is experimental.
 type GetChildAXNodes struct {
-	ID AXNodeID `json:"id"`
+	ID string `json:"id"`
 }
 
 // NewGetChildAXNodes constructs a new GetChildAXNodes struct instance, with
@@ -248,7 +247,7 @@ type GetChildAXNodes struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#method-getChildAXNodes
 //
 // This CDP method is experimental.
-func NewGetChildAXNodes(id AXNodeID) *GetChildAXNodes {
+func NewGetChildAXNodes(id string) *GetChildAXNodes {
 	return &GetChildAXNodes{
 		ID: id,
 	}
@@ -295,9 +294,9 @@ func (t *GetChildAXNodes) Do(ctx context.Context) (*GetChildAXNodesResponse, err
 // This CDP method is experimental.
 type QueryAXTree struct {
 	// Identifier of the node for the root to query.
-	NodeID *dom.NodeID `json:"nodeId,omitempty"`
+	NodeID int64 `json:"nodeId,omitempty"`
 	// Identifier of the backend node for the root to query.
-	BackendNodeID *dom.BackendNodeID `json:"backendNodeId,omitempty"`
+	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 	// JavaScript object id of the node wrapper for the root to query.
 	ObjectID *runtime.RemoteObjectID `json:"objectId,omitempty"`
 	// Find nodes with this computed name.
@@ -321,8 +320,8 @@ func NewQueryAXTree() *QueryAXTree {
 // parameter `nodeId` in the QueryAXTree CDP command.
 //
 // Identifier of the node for the root to query.
-func (t *QueryAXTree) SetNodeID(v dom.NodeID) *QueryAXTree {
-	t.NodeID = &v
+func (t *QueryAXTree) SetNodeID(v int64) *QueryAXTree {
+	t.NodeID = v
 	return t
 }
 
@@ -330,8 +329,8 @@ func (t *QueryAXTree) SetNodeID(v dom.NodeID) *QueryAXTree {
 // parameter `backendNodeId` in the QueryAXTree CDP command.
 //
 // Identifier of the backend node for the root to query.
-func (t *QueryAXTree) SetBackendNodeID(v dom.BackendNodeID) *QueryAXTree {
-	t.BackendNodeID = &v
+func (t *QueryAXTree) SetBackendNodeID(v int64) *QueryAXTree {
+	t.BackendNodeID = v
 	return t
 }
 

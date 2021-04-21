@@ -17,7 +17,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/IO/#method-close
 type Close struct {
 	// Handle of the stream to close.
-	Handle StreamHandle `json:"handle"`
+	Handle string `json:"handle"`
 }
 
 // NewClose constructs a new Close struct instance, with
@@ -25,7 +25,7 @@ type Close struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IO/#method-close
-func NewClose(handle StreamHandle) *Close {
+func NewClose(handle string) *Close {
 	return &Close{
 		Handle: handle,
 	}
@@ -56,7 +56,7 @@ func (t *Close) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/IO/#method-read
 type Read struct {
 	// Handle of the stream to read.
-	Handle StreamHandle `json:"handle"`
+	Handle string `json:"handle"`
 	// Seek to the specified offset before reading (if not specificed, proceed with offset
 	// following the last read). Some types of streams may only support sequential reads.
 	Offset int64 `json:"offset,omitempty"`
@@ -69,7 +69,7 @@ type Read struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IO/#method-read
-func NewRead(handle StreamHandle) *Read {
+func NewRead(handle string) *Read {
 	return &Read{
 		Handle: handle,
 	}
@@ -142,9 +142,9 @@ type ResolveBlob struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IO/#method-resolveBlob
-func NewResolveBlob(objectId runtime.RemoteObjectID) *ResolveBlob {
+func NewResolveBlob(objectID runtime.RemoteObjectID) *ResolveBlob {
 	return &ResolveBlob{
-		ObjectID: objectId,
+		ObjectID: objectID,
 	}
 }
 

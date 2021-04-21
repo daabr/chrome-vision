@@ -6,8 +6,6 @@ import (
 	"errors"
 
 	"github.com/daabr/chrome-vision/pkg/cdp"
-	"github.com/daabr/chrome-vision/pkg/cdp/io"
-	"github.com/daabr/chrome-vision/pkg/cdp/network"
 )
 
 // Disable contains the parameters, and acts as
@@ -112,9 +110,9 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-failRequest
 type FailRequest struct {
 	// An id the client received in requestPaused event.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Causes the request to fail with the given reason.
-	ErrorReason network.ErrorReason `json:"errorReason"`
+	ErrorReason string `json:"errorReason"`
 }
 
 // NewFailRequest constructs a new FailRequest struct instance, with
@@ -122,9 +120,9 @@ type FailRequest struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-failRequest
-func NewFailRequest(requestId RequestID, errorReason network.ErrorReason) *FailRequest {
+func NewFailRequest(requestID string, errorReason string) *FailRequest {
 	return &FailRequest{
-		RequestID:   requestId,
+		RequestID:   requestID,
 		ErrorReason: errorReason,
 	}
 }
@@ -154,7 +152,7 @@ func (t *FailRequest) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-fulfillRequest
 type FulfillRequest struct {
 	// An id the client received in requestPaused event.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// An HTTP response code.
 	ResponseCode int64 `json:"responseCode"`
 	// Response headers.
@@ -176,9 +174,9 @@ type FulfillRequest struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-fulfillRequest
-func NewFulfillRequest(requestId RequestID, responseCode int64) *FulfillRequest {
+func NewFulfillRequest(requestID string, responseCode int64) *FulfillRequest {
 	return &FulfillRequest{
-		RequestID:    requestId,
+		RequestID:    requestID,
 		ResponseCode: responseCode,
 	}
 }
@@ -248,7 +246,7 @@ func (t *FulfillRequest) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-continueRequest
 type ContinueRequest struct {
 	// An id the client received in requestPaused event.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// If set, the request url will be modified in a way that's not observable by page.
 	URL string `json:"url,omitempty"`
 	// If set, the request method is overridden.
@@ -264,9 +262,9 @@ type ContinueRequest struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-continueRequest
-func NewContinueRequest(requestId RequestID) *ContinueRequest {
+func NewContinueRequest(requestID string) *ContinueRequest {
 	return &ContinueRequest{
-		RequestID: requestId,
+		RequestID: requestID,
 	}
 }
 
@@ -331,7 +329,7 @@ func (t *ContinueRequest) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-continueWithAuth
 type ContinueWithAuth struct {
 	// An id the client received in authRequired event.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Response to  with an authChallenge.
 	AuthChallengeResponse AuthChallengeResponse `json:"authChallengeResponse"`
 }
@@ -341,9 +339,9 @@ type ContinueWithAuth struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-continueWithAuth
-func NewContinueWithAuth(requestId RequestID, authChallengeResponse AuthChallengeResponse) *ContinueWithAuth {
+func NewContinueWithAuth(requestID string, authChallengeResponse AuthChallengeResponse) *ContinueWithAuth {
 	return &ContinueWithAuth{
-		RequestID:             requestId,
+		RequestID:             requestID,
 		AuthChallengeResponse: authChallengeResponse,
 	}
 }
@@ -378,7 +376,7 @@ func (t *ContinueWithAuth) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-getResponseBody
 type GetResponseBody struct {
 	// Identifier for the intercepted request to get body for.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 }
 
 // NewGetResponseBody constructs a new GetResponseBody struct instance, with
@@ -386,9 +384,9 @@ type GetResponseBody struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-getResponseBody
-func NewGetResponseBody(requestId RequestID) *GetResponseBody {
+func NewGetResponseBody(requestID string) *GetResponseBody {
 	return &GetResponseBody{
-		RequestID: requestId,
+		RequestID: requestID,
 	}
 }
 
@@ -438,7 +436,7 @@ func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResponse, err
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-takeResponseBodyAsStream
 type TakeResponseBodyAsStream struct {
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 }
 
 // NewTakeResponseBodyAsStream constructs a new TakeResponseBodyAsStream struct instance, with
@@ -446,16 +444,16 @@ type TakeResponseBodyAsStream struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-takeResponseBodyAsStream
-func NewTakeResponseBodyAsStream(requestId RequestID) *TakeResponseBodyAsStream {
+func NewTakeResponseBodyAsStream(requestID string) *TakeResponseBodyAsStream {
 	return &TakeResponseBodyAsStream{
-		RequestID: requestId,
+		RequestID: requestID,
 	}
 }
 
 // TakeResponseBodyAsStreamResponse contains the browser's response
 // to calling the TakeResponseBodyAsStream CDP command with Do().
 type TakeResponseBodyAsStreamResponse struct {
-	Stream io.StreamHandle `json:"stream"`
+	Stream string `json:"stream"`
 }
 
 // Do sends the TakeResponseBodyAsStream CDP command to a browser,

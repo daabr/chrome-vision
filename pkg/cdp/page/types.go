@@ -1,10 +1,5 @@
 package page
 
-import (
-	"github.com/daabr/chrome-vision/pkg/cdp"
-	"github.com/daabr/chrome-vision/pkg/cdp/network"
-)
-
 // Unique frame identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-FrameId
@@ -148,15 +143,15 @@ const (
 //
 // This CDP type is experimental.
 type PermissionsPolicyBlockLocator struct {
-	FrameID     FrameID                      `json:"frameId"`
-	BlockReason PermissionsPolicyBlockReason `json:"blockReason"`
+	FrameID     string `json:"frameId"`
+	BlockReason string `json:"blockReason"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-PermissionsPolicyFeatureState
 //
 // This CDP type is experimental.
 type PermissionsPolicyFeatureState struct {
-	Feature PermissionsPolicyFeature       `json:"feature"`
+	Feature string                         `json:"feature"`
 	Allowed bool                           `json:"allowed"`
 	Locator *PermissionsPolicyBlockLocator `json:"locator,omitempty"`
 }
@@ -166,11 +161,11 @@ type PermissionsPolicyFeatureState struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-Frame
 type Frame struct {
 	// Frame unique identifier.
-	ID FrameID `json:"id"`
+	ID string `json:"id"`
 	// Parent frame identifier.
 	ParentID string `json:"parentId,omitempty"`
 	// Identifier of the loader associated with this frame.
-	LoaderID network.LoaderID `json:"loaderId"`
+	LoaderID string `json:"loaderId"`
 	// Frame's name as specified in the tag.
 	Name string `json:"name,omitempty"`
 	// Frame document's URL without fragment.
@@ -197,15 +192,15 @@ type Frame struct {
 	// Indicates whether this frame was tagged as an ad.
 	//
 	// This CDP property is experimental.
-	AdFrameType *AdFrameType `json:"adFrameType,omitempty"`
+	AdFrameType string `json:"adFrameType,omitempty"`
 	// Indicates whether the main document is a secure context and explains why that is the case.
 	//
 	// This CDP property is experimental.
-	SecureContextType SecureContextType `json:"secureContextType"`
+	SecureContextType string `json:"secureContextType"`
 	// Indicates whether this is a cross origin isolated context.
 	//
 	// This CDP property is experimental.
-	CrossOriginIsolatedContextType CrossOriginIsolatedContextType `json:"crossOriginIsolatedContextType"`
+	CrossOriginIsolatedContextType string `json:"crossOriginIsolatedContextType"`
 	// Indicated which gated APIs / features are available.
 	//
 	// This CDP property is experimental.
@@ -221,11 +216,11 @@ type FrameResource struct {
 	// Resource URL.
 	URL string `json:"url"`
 	// Type of this resource.
-	Type network.ResourceType `json:"type"`
+	Type string `json:"type"`
 	// Resource mimeType as determined by the browser.
 	MimeType string `json:"mimeType"`
 	// last-modified timestamp as reported by server.
-	LastModified *cdp.TimeSinceEpoch `json:"lastModified,omitempty"`
+	LastModified float64 `json:"lastModified,omitempty"`
 	// Resource content size.
 	ContentSize float64 `json:"contentSize,omitempty"`
 	// True if the resource failed to load.
@@ -298,7 +293,7 @@ type NavigationEntry struct {
 	// Title of the navigation history entry.
 	Title string `json:"title"`
 	// Transition type.
-	TransitionType TransitionType `json:"transitionType"`
+	TransitionType string `json:"transitionType"`
 }
 
 // Screencast frame metadata.
@@ -320,7 +315,7 @@ type ScreencastFrameMetadata struct {
 	// Position of vertical scroll in CSS pixels.
 	ScrollOffsetY float64 `json:"scrollOffsetY"`
 	// Frame swap timestamp.
-	Timestamp *cdp.TimeSinceEpoch `json:"timestamp,omitempty"`
+	Timestamp float64 `json:"timestamp,omitempty"`
 }
 
 // Javascript dialog type.

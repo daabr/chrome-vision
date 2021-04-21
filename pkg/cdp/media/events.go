@@ -5,7 +5,7 @@ package media
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#event-playerPropertiesChanged
 type PlayerPropertiesChanged struct {
-	PlayerID   PlayerID         `json:"playerId"`
+	PlayerID   string           `json:"playerId"`
 	Properties []PlayerProperty `json:"properties"`
 }
 
@@ -14,7 +14,7 @@ type PlayerPropertiesChanged struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#event-playerEventsAdded
 type PlayerEventsAdded struct {
-	PlayerID PlayerID      `json:"playerId"`
+	PlayerID string        `json:"playerId"`
 	Events   []PlayerEvent `json:"events"`
 }
 
@@ -22,7 +22,7 @@ type PlayerEventsAdded struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#event-playerMessagesLogged
 type PlayerMessagesLogged struct {
-	PlayerID PlayerID        `json:"playerId"`
+	PlayerID string          `json:"playerId"`
 	Messages []PlayerMessage `json:"messages"`
 }
 
@@ -30,7 +30,7 @@ type PlayerMessagesLogged struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#event-playerErrorsRaised
 type PlayerErrorsRaised struct {
-	PlayerID PlayerID      `json:"playerId"`
+	PlayerID string        `json:"playerId"`
 	Errors   []PlayerError `json:"errors"`
 }
 

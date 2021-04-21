@@ -20,11 +20,11 @@ type SetPermission struct {
 	// Descriptor of permission to override.
 	Permission PermissionDescriptor `json:"permission"`
 	// Setting of the permission.
-	Setting PermissionSetting `json:"setting"`
+	Setting string `json:"setting"`
 	// Origin the permission applies to, all origins if not specified.
 	Origin string `json:"origin,omitempty"`
 	// Context to override. When omitted, default browser context is used.
-	BrowserContextID *BrowserContextID `json:"browserContextId,omitempty"`
+	BrowserContextID string `json:"browserContextId,omitempty"`
 }
 
 // NewSetPermission constructs a new SetPermission struct instance, with
@@ -34,7 +34,7 @@ type SetPermission struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-setPermission
 //
 // This CDP method is experimental.
-func NewSetPermission(permission PermissionDescriptor, setting PermissionSetting) *SetPermission {
+func NewSetPermission(permission PermissionDescriptor, setting string) *SetPermission {
 	return &SetPermission{
 		Permission: permission,
 		Setting:    setting,
@@ -54,8 +54,8 @@ func (t *SetPermission) SetOrigin(v string) *SetPermission {
 // parameter `browserContextId` in the SetPermission CDP command.
 //
 // Context to override. When omitted, default browser context is used.
-func (t *SetPermission) SetBrowserContextID(v BrowserContextID) *SetPermission {
-	t.BrowserContextID = &v
+func (t *SetPermission) SetBrowserContextID(v string) *SetPermission {
+	t.BrowserContextID = v
 	return t
 }
 
@@ -89,7 +89,7 @@ type GrantPermissions struct {
 	// Origin the permission applies to, all origins if not specified.
 	Origin string `json:"origin,omitempty"`
 	// BrowserContext to override permissions. When omitted, default browser context is used.
-	BrowserContextID *BrowserContextID `json:"browserContextId,omitempty"`
+	BrowserContextID string `json:"browserContextId,omitempty"`
 }
 
 // NewGrantPermissions constructs a new GrantPermissions struct instance, with
@@ -118,8 +118,8 @@ func (t *GrantPermissions) SetOrigin(v string) *GrantPermissions {
 // parameter `browserContextId` in the GrantPermissions CDP command.
 //
 // BrowserContext to override permissions. When omitted, default browser context is used.
-func (t *GrantPermissions) SetBrowserContextID(v BrowserContextID) *GrantPermissions {
-	t.BrowserContextID = &v
+func (t *GrantPermissions) SetBrowserContextID(v string) *GrantPermissions {
+	t.BrowserContextID = v
 	return t
 }
 
@@ -150,7 +150,7 @@ func (t *GrantPermissions) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type ResetPermissions struct {
 	// BrowserContext to reset permissions. When omitted, default browser context is used.
-	BrowserContextID *BrowserContextID `json:"browserContextId,omitempty"`
+	BrowserContextID string `json:"browserContextId,omitempty"`
 }
 
 // NewResetPermissions constructs a new ResetPermissions struct instance, with
@@ -168,8 +168,8 @@ func NewResetPermissions() *ResetPermissions {
 // parameter `browserContextId` in the ResetPermissions CDP command.
 //
 // BrowserContext to reset permissions. When omitted, default browser context is used.
-func (t *ResetPermissions) SetBrowserContextID(v BrowserContextID) *ResetPermissions {
-	t.BrowserContextID = &v
+func (t *ResetPermissions) SetBrowserContextID(v string) *ResetPermissions {
+	t.BrowserContextID = v
 	return t
 }
 
@@ -204,7 +204,7 @@ type SetDownloadBehavior struct {
 	// their dowmload guids.
 	Behavior string `json:"behavior"`
 	// BrowserContext to set download behavior. When omitted, default browser context is used.
-	BrowserContextID *BrowserContextID `json:"browserContextId,omitempty"`
+	BrowserContextID string `json:"browserContextId,omitempty"`
 	// The default path to save downloaded files to. This is requred if behavior is set to 'allow'
 	// or 'allowAndName'.
 	DownloadPath string `json:"downloadPath,omitempty"`
@@ -229,8 +229,8 @@ func NewSetDownloadBehavior(behavior string) *SetDownloadBehavior {
 // parameter `browserContextId` in the SetDownloadBehavior CDP command.
 //
 // BrowserContext to set download behavior. When omitted, default browser context is used.
-func (t *SetDownloadBehavior) SetBrowserContextID(v BrowserContextID) *SetDownloadBehavior {
-	t.BrowserContextID = &v
+func (t *SetDownloadBehavior) SetBrowserContextID(v string) *SetDownloadBehavior {
+	t.BrowserContextID = v
 	return t
 }
 
@@ -282,7 +282,7 @@ type CancelDownload struct {
 	// Global unique identifier of the download.
 	Guid string `json:"guid"`
 	// BrowserContext to perform the action in. When omitted, default browser context is used.
-	BrowserContextID *BrowserContextID `json:"browserContextId,omitempty"`
+	BrowserContextID string `json:"browserContextId,omitempty"`
 }
 
 // NewCancelDownload constructs a new CancelDownload struct instance, with
@@ -302,8 +302,8 @@ func NewCancelDownload(guid string) *CancelDownload {
 // parameter `browserContextId` in the CancelDownload CDP command.
 //
 // BrowserContext to perform the action in. When omitted, default browser context is used.
-func (t *CancelDownload) SetBrowserContextID(v BrowserContextID) *CancelDownload {
-	t.BrowserContextID = &v
+func (t *CancelDownload) SetBrowserContextID(v string) *CancelDownload {
+	t.BrowserContextID = v
 	return t
 }
 
@@ -668,7 +668,7 @@ func (t *GetHistogram) Do(ctx context.Context) (*GetHistogramResponse, error) {
 // This CDP method is experimental.
 type GetWindowBounds struct {
 	// Browser window id.
-	WindowID WindowID `json:"windowId"`
+	WindowID int64 `json:"windowId"`
 }
 
 // NewGetWindowBounds constructs a new GetWindowBounds struct instance, with
@@ -678,9 +678,9 @@ type GetWindowBounds struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-getWindowBounds
 //
 // This CDP method is experimental.
-func NewGetWindowBounds(windowId WindowID) *GetWindowBounds {
+func NewGetWindowBounds(windowID int64) *GetWindowBounds {
 	return &GetWindowBounds{
-		WindowID: windowId,
+		WindowID: windowID,
 	}
 }
 
@@ -723,7 +723,7 @@ func (t *GetWindowBounds) Do(ctx context.Context) (*GetWindowBoundsResponse, err
 // This CDP method is experimental.
 type GetWindowForTarget struct {
 	// Devtools agent host id. If called as a part of the session, associated targetId is used.
-	TargetID *cdp.TargetID `json:"targetId,omitempty"`
+	TargetID string `json:"targetId,omitempty"`
 }
 
 // NewGetWindowForTarget constructs a new GetWindowForTarget struct instance, with
@@ -741,8 +741,8 @@ func NewGetWindowForTarget() *GetWindowForTarget {
 // parameter `targetId` in the GetWindowForTarget CDP command.
 //
 // Devtools agent host id. If called as a part of the session, associated targetId is used.
-func (t *GetWindowForTarget) SetTargetID(v cdp.TargetID) *GetWindowForTarget {
-	t.TargetID = &v
+func (t *GetWindowForTarget) SetTargetID(v string) *GetWindowForTarget {
+	t.TargetID = v
 	return t
 }
 
@@ -750,7 +750,7 @@ func (t *GetWindowForTarget) SetTargetID(v cdp.TargetID) *GetWindowForTarget {
 // to calling the GetWindowForTarget CDP command with Do().
 type GetWindowForTargetResponse struct {
 	// Browser window id.
-	WindowID WindowID `json:"windowId"`
+	WindowID int64 `json:"windowId"`
 	// Bounds information of the window. When window state is 'minimized', the restored window
 	// position and size are returned.
 	Bounds Bounds `json:"bounds"`
@@ -787,7 +787,7 @@ func (t *GetWindowForTarget) Do(ctx context.Context) (*GetWindowForTargetRespons
 // This CDP method is experimental.
 type SetWindowBounds struct {
 	// Browser window id.
-	WindowID WindowID `json:"windowId"`
+	WindowID int64 `json:"windowId"`
 	// New window bounds. The 'minimized', 'maximized' and 'fullscreen' states cannot be combined
 	// with 'left', 'top', 'width' or 'height'. Leaves unspecified fields unchanged.
 	Bounds Bounds `json:"bounds"`
@@ -800,9 +800,9 @@ type SetWindowBounds struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-setWindowBounds
 //
 // This CDP method is experimental.
-func NewSetWindowBounds(windowId WindowID, bounds Bounds) *SetWindowBounds {
+func NewSetWindowBounds(windowID int64, bounds Bounds) *SetWindowBounds {
 	return &SetWindowBounds{
-		WindowID: windowId,
+		WindowID: windowID,
 		Bounds:   bounds,
 	}
 }
@@ -891,7 +891,7 @@ func (t *SetDockTile) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type ExecuteBrowserCommand struct {
-	CommandID BrowserCommandID `json:"commandId"`
+	CommandID string `json:"commandId"`
 }
 
 // NewExecuteBrowserCommand constructs a new ExecuteBrowserCommand struct instance, with
@@ -901,9 +901,9 @@ type ExecuteBrowserCommand struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-executeBrowserCommand
 //
 // This CDP method is experimental.
-func NewExecuteBrowserCommand(commandId BrowserCommandID) *ExecuteBrowserCommand {
+func NewExecuteBrowserCommand(commandID string) *ExecuteBrowserCommand {
 	return &ExecuteBrowserCommand{
-		CommandID: commandId,
+		CommandID: commandID,
 	}
 }
 

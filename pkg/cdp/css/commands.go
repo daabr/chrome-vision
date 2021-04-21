@@ -6,7 +6,6 @@ import (
 	"errors"
 
 	"github.com/daabr/chrome-vision/pkg/cdp"
-	"github.com/daabr/chrome-vision/pkg/cdp/dom"
 )
 
 // AddRule contains the parameters, and acts as
@@ -18,7 +17,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-addRule
 type AddRule struct {
 	// The css style sheet identifier where a new rule should be inserted.
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
+	StyleSheetID string `json:"styleSheetId"`
 	// The text of a new rule.
 	RuleText string `json:"ruleText"`
 	// Text position of a new rule in the target style sheet.
@@ -30,9 +29,9 @@ type AddRule struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-addRule
-func NewAddRule(styleSheetId StyleSheetID, ruleText string, location SourceRange) *AddRule {
+func NewAddRule(styleSheetID string, ruleText string, location SourceRange) *AddRule {
 	return &AddRule{
-		StyleSheetID: styleSheetId,
+		StyleSheetID: styleSheetID,
 		RuleText:     ruleText,
 		Location:     location,
 	}
@@ -73,7 +72,7 @@ func (t *AddRule) Do(ctx context.Context) (*AddRuleResponse, error) {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-collectClassNames
 type CollectClassNames struct {
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
+	StyleSheetID string `json:"styleSheetId"`
 }
 
 // NewCollectClassNames constructs a new CollectClassNames struct instance, with
@@ -81,9 +80,9 @@ type CollectClassNames struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-collectClassNames
-func NewCollectClassNames(styleSheetId StyleSheetID) *CollectClassNames {
+func NewCollectClassNames(styleSheetID string) *CollectClassNames {
 	return &CollectClassNames{
-		StyleSheetID: styleSheetId,
+		StyleSheetID: styleSheetID,
 	}
 }
 
@@ -123,7 +122,7 @@ func (t *CollectClassNames) Do(ctx context.Context) (*CollectClassNamesResponse,
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-createStyleSheet
 type CreateStyleSheet struct {
 	// Identifier of the frame where "via-inspector" stylesheet should be created.
-	FrameID cdp.FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 }
 
 // NewCreateStyleSheet constructs a new CreateStyleSheet struct instance, with
@@ -131,9 +130,9 @@ type CreateStyleSheet struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-createStyleSheet
-func NewCreateStyleSheet(frameId cdp.FrameID) *CreateStyleSheet {
+func NewCreateStyleSheet(frameID string) *CreateStyleSheet {
 	return &CreateStyleSheet{
-		FrameID: frameId,
+		FrameID: frameID,
 	}
 }
 
@@ -141,7 +140,7 @@ func NewCreateStyleSheet(frameId cdp.FrameID) *CreateStyleSheet {
 // to calling the CreateStyleSheet CDP command with Do().
 type CreateStyleSheetResponse struct {
 	// Identifier of the created "via-inspector" stylesheet.
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
+	StyleSheetID string `json:"styleSheetId"`
 }
 
 // Do sends the CreateStyleSheet CDP command to a browser,
@@ -235,7 +234,7 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-forcePseudoState
 type ForcePseudoState struct {
 	// The element id for which to force the pseudo state.
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// Element pseudo classes to force when computing the element's style.
 	ForcedPseudoClasses []string `json:"forcedPseudoClasses"`
 }
@@ -245,9 +244,9 @@ type ForcePseudoState struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-forcePseudoState
-func NewForcePseudoState(nodeId dom.NodeID, forcedPseudoClasses []string) *ForcePseudoState {
+func NewForcePseudoState(nodeID int64, forcedPseudoClasses []string) *ForcePseudoState {
 	return &ForcePseudoState{
-		NodeID:              nodeId,
+		NodeID:              nodeID,
 		ForcedPseudoClasses: forcedPseudoClasses,
 	}
 }
@@ -275,7 +274,7 @@ func (t *ForcePseudoState) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getBackgroundColors
 type GetBackgroundColors struct {
 	// Id of the node to get background colors for.
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetBackgroundColors constructs a new GetBackgroundColors struct instance, with
@@ -283,9 +282,9 @@ type GetBackgroundColors struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getBackgroundColors
-func NewGetBackgroundColors(nodeId dom.NodeID) *GetBackgroundColors {
+func NewGetBackgroundColors(nodeID int64) *GetBackgroundColors {
 	return &GetBackgroundColors{
-		NodeID: nodeId,
+		NodeID: nodeID,
 	}
 }
 
@@ -333,7 +332,7 @@ func (t *GetBackgroundColors) Do(ctx context.Context) (*GetBackgroundColorsRespo
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getComputedStyleForNode
 type GetComputedStyleForNode struct {
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetComputedStyleForNode constructs a new GetComputedStyleForNode struct instance, with
@@ -341,9 +340,9 @@ type GetComputedStyleForNode struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getComputedStyleForNode
-func NewGetComputedStyleForNode(nodeId dom.NodeID) *GetComputedStyleForNode {
+func NewGetComputedStyleForNode(nodeID int64) *GetComputedStyleForNode {
 	return &GetComputedStyleForNode{
-		NodeID: nodeId,
+		NodeID: nodeID,
 	}
 }
 
@@ -383,7 +382,7 @@ func (t *GetComputedStyleForNode) Do(ctx context.Context) (*GetComputedStyleForN
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getInlineStylesForNode
 type GetInlineStylesForNode struct {
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetInlineStylesForNode constructs a new GetInlineStylesForNode struct instance, with
@@ -391,9 +390,9 @@ type GetInlineStylesForNode struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getInlineStylesForNode
-func NewGetInlineStylesForNode(nodeId dom.NodeID) *GetInlineStylesForNode {
+func NewGetInlineStylesForNode(nodeID int64) *GetInlineStylesForNode {
 	return &GetInlineStylesForNode{
-		NodeID: nodeId,
+		NodeID: nodeID,
 	}
 }
 
@@ -434,7 +433,7 @@ func (t *GetInlineStylesForNode) Do(ctx context.Context) (*GetInlineStylesForNod
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getMatchedStylesForNode
 type GetMatchedStylesForNode struct {
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetMatchedStylesForNode constructs a new GetMatchedStylesForNode struct instance, with
@@ -442,9 +441,9 @@ type GetMatchedStylesForNode struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getMatchedStylesForNode
-func NewGetMatchedStylesForNode(nodeId dom.NodeID) *GetMatchedStylesForNode {
+func NewGetMatchedStylesForNode(nodeID int64) *GetMatchedStylesForNode {
 	return &GetMatchedStylesForNode{
-		NodeID: nodeId,
+		NodeID: nodeID,
 	}
 }
 
@@ -534,7 +533,7 @@ func (t *GetMediaQueries) Do(ctx context.Context) (*GetMediaQueriesResponse, err
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getPlatformFontsForNode
 type GetPlatformFontsForNode struct {
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetPlatformFontsForNode constructs a new GetPlatformFontsForNode struct instance, with
@@ -542,9 +541,9 @@ type GetPlatformFontsForNode struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getPlatformFontsForNode
-func NewGetPlatformFontsForNode(nodeId dom.NodeID) *GetPlatformFontsForNode {
+func NewGetPlatformFontsForNode(nodeID int64) *GetPlatformFontsForNode {
 	return &GetPlatformFontsForNode{
-		NodeID: nodeId,
+		NodeID: nodeID,
 	}
 }
 
@@ -583,7 +582,7 @@ func (t *GetPlatformFontsForNode) Do(ctx context.Context) (*GetPlatformFontsForN
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getStyleSheetText
 type GetStyleSheetText struct {
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
+	StyleSheetID string `json:"styleSheetId"`
 }
 
 // NewGetStyleSheetText constructs a new GetStyleSheetText struct instance, with
@@ -591,9 +590,9 @@ type GetStyleSheetText struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getStyleSheetText
-func NewGetStyleSheetText(styleSheetId StyleSheetID) *GetStyleSheetText {
+func NewGetStyleSheetText(styleSheetID string) *GetStyleSheetText {
 	return &GetStyleSheetText{
-		StyleSheetID: styleSheetId,
+		StyleSheetID: styleSheetID,
 	}
 }
 
@@ -697,7 +696,7 @@ func NewTakeComputedStyleUpdates() *TakeComputedStyleUpdates {
 // to calling the TakeComputedStyleUpdates CDP command with Do().
 type TakeComputedStyleUpdatesResponse struct {
 	// The list of node Ids that have their tracked computed styles updated
-	NodeIds []dom.NodeID `json:"nodeIds"`
+	NodeIds []int64 `json:"nodeIds"`
 }
 
 // Do sends the TakeComputedStyleUpdates CDP command to a browser,
@@ -726,9 +725,9 @@ func (t *TakeComputedStyleUpdates) Do(ctx context.Context) (*TakeComputedStyleUp
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setEffectivePropertyValueForNode
 type SetEffectivePropertyValueForNode struct {
 	// The element id for which to set property.
-	NodeID       dom.NodeID `json:"nodeId"`
-	PropertyName string     `json:"propertyName"`
-	Value        string     `json:"value"`
+	NodeID       int64  `json:"nodeId"`
+	PropertyName string `json:"propertyName"`
+	Value        string `json:"value"`
 }
 
 // NewSetEffectivePropertyValueForNode constructs a new SetEffectivePropertyValueForNode struct instance, with
@@ -736,9 +735,9 @@ type SetEffectivePropertyValueForNode struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setEffectivePropertyValueForNode
-func NewSetEffectivePropertyValueForNode(nodeId dom.NodeID, propertyName string, value string) *SetEffectivePropertyValueForNode {
+func NewSetEffectivePropertyValueForNode(nodeID int64, propertyName string, value string) *SetEffectivePropertyValueForNode {
 	return &SetEffectivePropertyValueForNode{
-		NodeID:       nodeId,
+		NodeID:       nodeID,
 		PropertyName: propertyName,
 		Value:        value,
 	}
@@ -768,9 +767,9 @@ func (t *SetEffectivePropertyValueForNode) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setKeyframeKey
 type SetKeyframeKey struct {
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
-	Range        SourceRange  `json:"range"`
-	KeyText      string       `json:"keyText"`
+	StyleSheetID string      `json:"styleSheetId"`
+	Range        SourceRange `json:"range"`
+	KeyText      string      `json:"keyText"`
 }
 
 // NewSetKeyframeKey constructs a new SetKeyframeKey struct instance, with
@@ -778,9 +777,9 @@ type SetKeyframeKey struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setKeyframeKey
-func NewSetKeyframeKey(styleSheetId StyleSheetID, r SourceRange, keyText string) *SetKeyframeKey {
+func NewSetKeyframeKey(styleSheetID string, r SourceRange, keyText string) *SetKeyframeKey {
 	return &SetKeyframeKey{
-		StyleSheetID: styleSheetId,
+		StyleSheetID: styleSheetID,
 		Range:        r,
 		KeyText:      keyText,
 	}
@@ -821,9 +820,9 @@ func (t *SetKeyframeKey) Do(ctx context.Context) (*SetKeyframeKeyResponse, error
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setMediaText
 type SetMediaText struct {
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
-	Range        SourceRange  `json:"range"`
-	Text         string       `json:"text"`
+	StyleSheetID string      `json:"styleSheetId"`
+	Range        SourceRange `json:"range"`
+	Text         string      `json:"text"`
 }
 
 // NewSetMediaText constructs a new SetMediaText struct instance, with
@@ -831,9 +830,9 @@ type SetMediaText struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setMediaText
-func NewSetMediaText(styleSheetId StyleSheetID, r SourceRange, text string) *SetMediaText {
+func NewSetMediaText(styleSheetID string, r SourceRange, text string) *SetMediaText {
 	return &SetMediaText{
-		StyleSheetID: styleSheetId,
+		StyleSheetID: styleSheetID,
 		Range:        r,
 		Text:         text,
 	}
@@ -874,9 +873,9 @@ func (t *SetMediaText) Do(ctx context.Context) (*SetMediaTextResponse, error) {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setRuleSelector
 type SetRuleSelector struct {
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
-	Range        SourceRange  `json:"range"`
-	Selector     string       `json:"selector"`
+	StyleSheetID string      `json:"styleSheetId"`
+	Range        SourceRange `json:"range"`
+	Selector     string      `json:"selector"`
 }
 
 // NewSetRuleSelector constructs a new SetRuleSelector struct instance, with
@@ -884,9 +883,9 @@ type SetRuleSelector struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setRuleSelector
-func NewSetRuleSelector(styleSheetId StyleSheetID, r SourceRange, selector string) *SetRuleSelector {
+func NewSetRuleSelector(styleSheetID string, r SourceRange, selector string) *SetRuleSelector {
 	return &SetRuleSelector{
-		StyleSheetID: styleSheetId,
+		StyleSheetID: styleSheetID,
 		Range:        r,
 		Selector:     selector,
 	}
@@ -927,8 +926,8 @@ func (t *SetRuleSelector) Do(ctx context.Context) (*SetRuleSelectorResponse, err
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setStyleSheetText
 type SetStyleSheetText struct {
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
-	Text         string       `json:"text"`
+	StyleSheetID string `json:"styleSheetId"`
+	Text         string `json:"text"`
 }
 
 // NewSetStyleSheetText constructs a new SetStyleSheetText struct instance, with
@@ -936,9 +935,9 @@ type SetStyleSheetText struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setStyleSheetText
-func NewSetStyleSheetText(styleSheetId StyleSheetID, text string) *SetStyleSheetText {
+func NewSetStyleSheetText(styleSheetID string, text string) *SetStyleSheetText {
 	return &SetStyleSheetText{
-		StyleSheetID: styleSheetId,
+		StyleSheetID: styleSheetID,
 		Text:         text,
 	}
 }

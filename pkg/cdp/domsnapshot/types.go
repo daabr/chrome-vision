@@ -1,7 +1,6 @@
 package domsnapshot
 
 import (
-	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/dom"
 	"github.com/daabr/chrome-vision/pkg/cdp/domdebugger"
 )
@@ -25,7 +24,7 @@ type DOMNode struct {
 	// Only set for option elements, indicates if the element has been selected
 	OptionSelected bool `json:"optionSelected,omitempty"`
 	// `Node`'s id, corresponds to DOM.Node.backendNodeId.
-	BackendNodeID dom.BackendNodeID `json:"backendNodeId"`
+	BackendNodeID int64 `json:"backendNodeId"`
 	// The indexes of the node's child nodes in the `domNodes` array returned by `getSnapshot`, if
 	// any.
 	ChildNodeIndexes []int64 `json:"childNodeIndexes,omitempty"`
@@ -50,14 +49,14 @@ type DOMNode struct {
 	// `DocumentType` node's systemId.
 	SystemID string `json:"systemId,omitempty"`
 	// Frame ID for frame owner elements and also for the document node.
-	FrameID *cdp.FrameID `json:"frameId,omitempty"`
+	FrameID string `json:"frameId,omitempty"`
 	// The index of a frame owner element's content document in the `domNodes` array returned by
 	// `getSnapshot`, if any.
 	ContentDocumentIndex int64 `json:"contentDocumentIndex,omitempty"`
 	// Type of a pseudo element node.
-	PseudoType *dom.PseudoType `json:"pseudoType,omitempty"`
+	PseudoType string `json:"pseudoType,omitempty"`
 	// Shadow root type.
-	ShadowRootType *dom.ShadowRootType `json:"shadowRootType,omitempty"`
+	ShadowRootType string `json:"shadowRootType,omitempty"`
 	// Whether this DOM node responds to mouse clicks. This includes nodes that have had click
 	// event listeners attached via JavaScript as well as anchor tags that naturally navigate when
 	// clicked.
@@ -165,21 +164,21 @@ type Rectangle []float64
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-DocumentSnapshot
 type DocumentSnapshot struct {
 	// Document URL that `Document` or `FrameOwner` node points to.
-	DocumentURL StringIndex `json:"documentURL"`
+	DocumentURL int64 `json:"documentURL"`
 	// Document title.
-	Title StringIndex `json:"title"`
+	Title int64 `json:"title"`
 	// Base URL that `Document` or `FrameOwner` node uses for URL completion.
-	BaseURL StringIndex `json:"baseURL"`
+	BaseURL int64 `json:"baseURL"`
 	// Contains the document's content language.
-	ContentLanguage StringIndex `json:"contentLanguage"`
+	ContentLanguage int64 `json:"contentLanguage"`
 	// Contains the document's character set encoding.
-	EncodingName StringIndex `json:"encodingName"`
+	EncodingName int64 `json:"encodingName"`
 	// `DocumentType` node's publicId.
-	PublicID StringIndex `json:"publicId"`
+	PublicID int64 `json:"publicId"`
 	// `DocumentType` node's systemId.
-	SystemID StringIndex `json:"systemId"`
+	SystemID int64 `json:"systemId"`
 	// Frame ID for frame owner elements and also for the document node.
-	FrameID StringIndex `json:"frameId"`
+	FrameID int64 `json:"frameId"`
 	// A table with dom nodes.
 	Nodes NodeTreeSnapshot `json:"nodes"`
 	// The nodes in the layout tree.
@@ -209,7 +208,7 @@ type NodeTreeSnapshot struct {
 	// `Node`'s nodeValue.
 	NodeValue []StringIndex `json:"nodeValue,omitempty"`
 	// `Node`'s id, corresponds to DOM.Node.backendNodeId.
-	BackendNodeID []dom.BackendNodeID `json:"backendNodeId,omitempty"`
+	BackendNodeID []int64 `json:"backendNodeId,omitempty"`
 	// Attributes of an `Element` node. Flatten name, value pairs.
 	Attributes []ArrayOfStrings `json:"attributes,omitempty"`
 	// Only set for textarea elements, contains the text value.

@@ -1,7 +1,6 @@
 package fetch
 
 import (
-	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/network"
 )
 
@@ -15,22 +14,22 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#event-requestPaused
 type RequestPaused struct {
 	// Each request the page makes will have a unique id.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// The details of the request.
 	Request network.Request `json:"request"`
 	// The id of the frame that initiated the request.
-	FrameID cdp.FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 	// How the requested resource will be used.
-	ResourceType network.ResourceType `json:"resourceType"`
+	ResourceType string `json:"resourceType"`
 	// Response error if intercepted at response stage.
-	ResponseErrorReason *network.ErrorReason `json:"responseErrorReason,omitempty"`
+	ResponseErrorReason string `json:"responseErrorReason,omitempty"`
 	// Response code if intercepted at response stage.
 	ResponseStatusCode int64 `json:"responseStatusCode,omitempty"`
 	// Response headers if intercepted at the response stage.
 	ResponseHeaders []HeaderEntry `json:"responseHeaders,omitempty"`
 	// If the intercepted request had a corresponding Network.requestWillBeSent event fired for it,
 	// then this networkId will be the same as the requestId present in the requestWillBeSent event.
-	NetworkID *RequestID `json:"networkId,omitempty"`
+	NetworkID string `json:"networkId,omitempty"`
 }
 
 // Issued when the domain is enabled with handleAuthRequests set to true.
@@ -39,13 +38,13 @@ type RequestPaused struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#event-authRequired
 type AuthRequired struct {
 	// Each request the page makes will have a unique id.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// The details of the request.
 	Request network.Request `json:"request"`
 	// The id of the frame that initiated the request.
-	FrameID cdp.FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 	// How the requested resource will be used.
-	ResourceType network.ResourceType `json:"resourceType"`
+	ResourceType string `json:"resourceType"`
 	// Details of the Authorization Challenge encountered.
 	// If this is set, client should respond with continueRequest that
 	// contains AuthChallengeResponse.

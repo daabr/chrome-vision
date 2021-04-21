@@ -34,11 +34,11 @@ type RemoteObject struct {
 	Value json.RawMessage `json:"value,omitempty"`
 	// Primitive value which can not be JSON-stringified does not have `value`, but gets this
 	// property.
-	UnserializableValue *UnserializableValue `json:"unserializableValue,omitempty"`
+	UnserializableValue string `json:"unserializableValue,omitempty"`
 	// String representation of the object.
 	Description string `json:"description,omitempty"`
 	// Unique object identifier (for non-primitive values).
-	ObjectID *RemoteObjectID `json:"objectId,omitempty"`
+	ObjectID string `json:"objectId,omitempty"`
 	// Preview containing abbreviated property values. Specified for `object` type values only.
 	//
 	// This CDP property is experimental.
@@ -57,7 +57,7 @@ type CustomPreview struct {
 	// If formatter returns true as a result of formatter.hasBody call then bodyGetterId will
 	// contain RemoteObjectId for the function that returns result of formatter.body(object, config) call.
 	// The result value is json ML array.
-	BodyGetterID *RemoteObjectID `json:"bodyGetterId,omitempty"`
+	BodyGetterID string `json:"bodyGetterId,omitempty"`
 }
 
 // Object containing abbreviated remote object value.
@@ -172,9 +172,9 @@ type CallArgument struct {
 	// Primitive value or serializable javascript object.
 	Value json.RawMessage `json:"value,omitempty"`
 	// Primitive value which can not be JSON-stringified.
-	UnserializableValue *UnserializableValue `json:"unserializableValue,omitempty"`
+	UnserializableValue string `json:"unserializableValue,omitempty"`
 	// Remote object handle.
-	ObjectID *RemoteObjectID `json:"objectId,omitempty"`
+	ObjectID string `json:"objectId,omitempty"`
 }
 
 // Id of an execution context.
@@ -188,7 +188,7 @@ type ExecutionContextID int64
 type ExecutionContextDescription struct {
 	// Unique id of the execution context. It can be used to specify in which execution context
 	// script evaluation should be performed.
-	ID ExecutionContextID `json:"id"`
+	ID int64 `json:"id"`
 	// Execution context origin.
 	Origin string `json:"origin"`
 	// Human readable name describing given context.
@@ -217,7 +217,7 @@ type ExceptionDetails struct {
 	// Column number of the exception location (0-based).
 	ColumnNumber int64 `json:"columnNumber"`
 	// Script ID of the exception location.
-	ScriptID *ScriptID `json:"scriptId,omitempty"`
+	ScriptID string `json:"scriptId,omitempty"`
 	// URL of the exception location, to be used when the script was not reported.
 	URL string `json:"url,omitempty"`
 	// JavaScript stack trace if available.
@@ -225,7 +225,7 @@ type ExceptionDetails struct {
 	// Exception object if available.
 	Exception *RemoteObject `json:"exception,omitempty"`
 	// Identifier of the context where exception happened.
-	ExecutionContextID *ExecutionContextID `json:"executionContextId,omitempty"`
+	ExecutionContextID int64 `json:"executionContextId,omitempty"`
 }
 
 // Number of milliseconds since epoch.
@@ -245,7 +245,7 @@ type CallFrame struct {
 	// JavaScript function name.
 	FunctionName string `json:"functionName"`
 	// JavaScript script id.
-	ScriptID ScriptID `json:"scriptId"`
+	ScriptID string `json:"scriptId"`
 	// JavaScript script name or url.
 	URL string `json:"url"`
 	// JavaScript script line number (0-based).
@@ -285,6 +285,6 @@ type UniqueDebuggerID string
 //
 // This CDP type is experimental.
 type StackTraceID struct {
-	ID         string            `json:"id"`
-	DebuggerID *UniqueDebuggerID `json:"debuggerId,omitempty"`
+	ID         string `json:"id"`
+	DebuggerID string `json:"debuggerId,omitempty"`
 }

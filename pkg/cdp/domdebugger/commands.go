@@ -6,7 +6,6 @@ import (
 	"errors"
 
 	"github.com/daabr/chrome-vision/pkg/cdp"
-	"github.com/daabr/chrome-vision/pkg/cdp/dom"
 	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
 )
 
@@ -32,9 +31,9 @@ type GetEventListeners struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-getEventListeners
-func NewGetEventListeners(objectId runtime.RemoteObjectID) *GetEventListeners {
+func NewGetEventListeners(objectID runtime.RemoteObjectID) *GetEventListeners {
 	return &GetEventListeners{
-		ObjectID: objectId,
+		ObjectID: objectID,
 	}
 }
 
@@ -94,9 +93,9 @@ func (t *GetEventListeners) Do(ctx context.Context) (*GetEventListenersResponse,
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-removeDOMBreakpoint
 type RemoveDOMBreakpoint struct {
 	// Identifier of the node to remove breakpoint from.
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// Type of the breakpoint to remove.
-	Type DOMBreakpointType `json:"type"`
+	Type string `json:"type"`
 }
 
 // NewRemoveDOMBreakpoint constructs a new RemoveDOMBreakpoint struct instance, with
@@ -104,9 +103,9 @@ type RemoveDOMBreakpoint struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-removeDOMBreakpoint
-func NewRemoveDOMBreakpoint(nodeId dom.NodeID, t DOMBreakpointType) *RemoveDOMBreakpoint {
+func NewRemoveDOMBreakpoint(nodeID int64, t string) *RemoveDOMBreakpoint {
 	return &RemoveDOMBreakpoint{
-		NodeID: nodeId,
+		NodeID: nodeID,
 		Type:   t,
 	}
 }
@@ -315,9 +314,9 @@ func (t *SetBreakOnCSPViolation) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-setDOMBreakpoint
 type SetDOMBreakpoint struct {
 	// Identifier of the node to set breakpoint on.
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// Type of the operation to stop upon.
-	Type DOMBreakpointType `json:"type"`
+	Type string `json:"type"`
 }
 
 // NewSetDOMBreakpoint constructs a new SetDOMBreakpoint struct instance, with
@@ -325,9 +324,9 @@ type SetDOMBreakpoint struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-setDOMBreakpoint
-func NewSetDOMBreakpoint(nodeId dom.NodeID, t DOMBreakpointType) *SetDOMBreakpoint {
+func NewSetDOMBreakpoint(nodeID int64, t string) *SetDOMBreakpoint {
 	return &SetDOMBreakpoint{
-		NodeID: nodeId,
+		NodeID: nodeID,
 		Type:   t,
 	}
 }

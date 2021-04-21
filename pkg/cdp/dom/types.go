@@ -2,8 +2,6 @@ package dom
 
 import (
 	"encoding/json"
-
-	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // Unique DOM node identifier.
@@ -24,8 +22,8 @@ type BackendNode struct {
 	// `Node`'s nodeType.
 	NodeType int64 `json:"nodeType"`
 	// `Node`'s nodeName.
-	NodeName      string        `json:"nodeName"`
-	BackendNodeID BackendNodeID `json:"backendNodeId"`
+	NodeName      string `json:"nodeName"`
+	BackendNodeID int64  `json:"backendNodeId"`
 }
 
 // Pseudo element type.
@@ -76,11 +74,11 @@ type Node struct {
 	// Node identifier that is passed into the rest of the DOM messages as the `nodeId`. Backend
 	// will only push node with given `id` once. It is aware of all requested nodes and will only
 	// fire DOM events for nodes known to the client.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// The id of the parent node if any.
-	ParentID *NodeID `json:"parentId,omitempty"`
+	ParentID int64 `json:"parentId,omitempty"`
 	// The BackendNodeId for this node.
-	BackendNodeID BackendNodeID `json:"backendNodeId"`
+	BackendNodeID int64 `json:"backendNodeId"`
 	// `Node`'s nodeType.
 	NodeType int64 `json:"nodeType"`
 	// `Node`'s nodeName.
@@ -112,11 +110,11 @@ type Node struct {
 	// `Attr`'s value.
 	Value string `json:"value,omitempty"`
 	// Pseudo element type for this node.
-	PseudoType *PseudoType `json:"pseudoType,omitempty"`
+	PseudoType string `json:"pseudoType,omitempty"`
 	// Shadow root type.
-	ShadowRootType *ShadowRootType `json:"shadowRootType,omitempty"`
+	ShadowRootType string `json:"shadowRootType,omitempty"`
 	// Frame ID for frame owner elements.
-	FrameID *cdp.FrameID `json:"frameId,omitempty"`
+	FrameID string `json:"frameId,omitempty"`
 	// Content document for frame owner elements.
 	ContentDocument *Node `json:"contentDocument,omitempty"`
 	// Shadow root list for given element host.

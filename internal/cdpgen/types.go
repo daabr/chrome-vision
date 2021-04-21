@@ -5,11 +5,19 @@ import (
 	"strings"
 )
 
+// For de-aliasing of built-in JSON types.
+var aliases = make(map[string]string)
+
 func generateTypes(d Domain) string {
 	b := new(strings.Builder)
 	fmt.Fprintf(b, "package %s\n", strings.ToLower(d.Domain))
 	generateImports(b, []string{"encoding/json"}, d.Dependencies)
 	for _, t := range d.Types {
+		if t.Type != "array" && t.Type != "object" {
+			aliases[adjust(t.ID)] = convertType(t.Type, nil)
+			key := strings.ToLower(d.Domain) + "." + adjust(t.ID)
+			aliases[key] = convertType(t.Type, nil)
+		}
 		generateType(b, t, d.Domain, "type", nil)
 	}
 	return b.String()
@@ -95,7 +103,11 @@ func generateProperty(b *strings.Builder, p Property, usage, domain string) {
 		fmt.Fprint(b, convertType(*p.Type, p.Items))
 	} else {
 		r := strings.ReplaceAll(adjust(*p.Ref), strings.ToLower(domain)+".", "")
-		if p.Optional {
+		// De-alias built-in types (https://crbug.com/1193242).
+		if t, ok := aliases[r]; ok {
+			r = t
+		}
+		if p.Optional && r != "int64" && r != "float64" && r != "string" {
 			fmt.Fprint(b, "*")
 		}
 		fmt.Fprint(b, r)

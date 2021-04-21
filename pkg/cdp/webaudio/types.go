@@ -92,9 +92,9 @@ type ContextRealtimeData struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-BaseAudioContext
 type BaseAudioContext struct {
-	ContextID    GraphObjectID        `json:"contextId"`
-	ContextType  ContextType          `json:"contextType"`
-	ContextState ContextState         `json:"contextState"`
+	ContextID    string               `json:"contextId"`
+	ContextType  string               `json:"contextType"`
+	ContextState string               `json:"contextState"`
 	RealtimeData *ContextRealtimeData `json:"realtimeData,omitempty"`
 	// Platform-dependent callback buffer size.
 	CallbackBufferSize float64 `json:"callbackBufferSize"`
@@ -108,34 +108,34 @@ type BaseAudioContext struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-AudioListener
 type AudioListener struct {
-	ListenerID GraphObjectID `json:"listenerId"`
-	ContextID  GraphObjectID `json:"contextId"`
+	ListenerID string `json:"listenerId"`
+	ContextID  string `json:"contextId"`
 }
 
 // Protocol object for AudioNode
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-AudioNode
 type AudioNode struct {
-	NodeID                GraphObjectID         `json:"nodeId"`
-	ContextID             GraphObjectID         `json:"contextId"`
-	NodeType              NodeType              `json:"nodeType"`
-	NumberOfInputs        float64               `json:"numberOfInputs"`
-	NumberOfOutputs       float64               `json:"numberOfOutputs"`
-	ChannelCount          float64               `json:"channelCount"`
-	ChannelCountMode      ChannelCountMode      `json:"channelCountMode"`
-	ChannelInterpretation ChannelInterpretation `json:"channelInterpretation"`
+	NodeID                string  `json:"nodeId"`
+	ContextID             string  `json:"contextId"`
+	NodeType              string  `json:"nodeType"`
+	NumberOfInputs        float64 `json:"numberOfInputs"`
+	NumberOfOutputs       float64 `json:"numberOfOutputs"`
+	ChannelCount          float64 `json:"channelCount"`
+	ChannelCountMode      string  `json:"channelCountMode"`
+	ChannelInterpretation string  `json:"channelInterpretation"`
 }
 
 // Protocol object for AudioParam
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-AudioParam
 type AudioParam struct {
-	ParamID      GraphObjectID  `json:"paramId"`
-	NodeID       GraphObjectID  `json:"nodeId"`
-	ContextID    GraphObjectID  `json:"contextId"`
-	ParamType    ParamType      `json:"paramType"`
-	Rate         AutomationRate `json:"rate"`
-	DefaultValue float64        `json:"defaultValue"`
-	MinValue     float64        `json:"minValue"`
-	MaxValue     float64        `json:"maxValue"`
+	ParamID      string  `json:"paramId"`
+	NodeID       string  `json:"nodeId"`
+	ContextID    string  `json:"contextId"`
+	ParamType    string  `json:"paramType"`
+	Rate         string  `json:"rate"`
+	DefaultValue float64 `json:"defaultValue"`
+	MinValue     float64 `json:"minValue"`
+	MaxValue     float64 `json:"maxValue"`
 }

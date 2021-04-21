@@ -38,8 +38,8 @@ type PlayerProperty struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#type-PlayerEvent
 type PlayerEvent struct {
-	Timestamp Timestamp `json:"timestamp"`
-	Value     string    `json:"value"`
+	Timestamp float64 `json:"timestamp"`
+	Value     string  `json:"value"`
 }
 
 // Corresponds to kMediaError

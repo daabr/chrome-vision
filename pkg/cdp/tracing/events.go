@@ -2,8 +2,6 @@ package tracing
 
 import (
 	"encoding/json"
-
-	"github.com/daabr/chrome-vision/pkg/cdp/io"
 )
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#event-bufferUsage
@@ -35,9 +33,9 @@ type TracingComplete struct {
 	// buffer wrapped around.
 	DataLossOccurred bool `json:"dataLossOccurred"`
 	// A handle of the stream that holds resulting trace data.
-	Stream *io.StreamHandle `json:"stream,omitempty"`
+	Stream string `json:"stream,omitempty"`
 	// Trace data format of returned stream.
-	TraceFormat *StreamFormat `json:"traceFormat,omitempty"`
+	TraceFormat string `json:"traceFormat,omitempty"`
 	// Compression format of returned stream.
-	StreamCompression *StreamCompression `json:"streamCompression,omitempty"`
+	StreamCompression string `json:"streamCompression,omitempty"`
 }

@@ -11,7 +11,7 @@ type ContextCreated struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-contextWillBeDestroyed
 type ContextWillBeDestroyed struct {
-	ContextID GraphObjectID `json:"contextId"`
+	ContextID string `json:"contextId"`
 }
 
 // Notifies that existing BaseAudioContext has changed some properties (id stays the same)..
@@ -32,8 +32,8 @@ type AudioListenerCreated struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-audioListenerWillBeDestroyed
 type AudioListenerWillBeDestroyed struct {
-	ContextID  GraphObjectID `json:"contextId"`
-	ListenerID GraphObjectID `json:"listenerId"`
+	ContextID  string `json:"contextId"`
+	ListenerID string `json:"listenerId"`
 }
 
 // Notifies that a new AudioNode has been created.
@@ -47,8 +47,8 @@ type AudioNodeCreated struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-audioNodeWillBeDestroyed
 type AudioNodeWillBeDestroyed struct {
-	ContextID GraphObjectID `json:"contextId"`
-	NodeID    GraphObjectID `json:"nodeId"`
+	ContextID string `json:"contextId"`
+	NodeID    string `json:"nodeId"`
 }
 
 // Notifies that a new AudioParam has been created.
@@ -62,49 +62,49 @@ type AudioParamCreated struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-audioParamWillBeDestroyed
 type AudioParamWillBeDestroyed struct {
-	ContextID GraphObjectID `json:"contextId"`
-	NodeID    GraphObjectID `json:"nodeId"`
-	ParamID   GraphObjectID `json:"paramId"`
+	ContextID string `json:"contextId"`
+	NodeID    string `json:"nodeId"`
+	ParamID   string `json:"paramId"`
 }
 
 // Notifies that two AudioNodes are connected.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-nodesConnected
 type NodesConnected struct {
-	ContextID             GraphObjectID `json:"contextId"`
-	SourceID              GraphObjectID `json:"sourceId"`
-	DestinationID         GraphObjectID `json:"destinationId"`
-	SourceOutputIndex     float64       `json:"sourceOutputIndex,omitempty"`
-	DestinationInputIndex float64       `json:"destinationInputIndex,omitempty"`
+	ContextID             string  `json:"contextId"`
+	SourceID              string  `json:"sourceId"`
+	DestinationID         string  `json:"destinationId"`
+	SourceOutputIndex     float64 `json:"sourceOutputIndex,omitempty"`
+	DestinationInputIndex float64 `json:"destinationInputIndex,omitempty"`
 }
 
 // Notifies that AudioNodes are disconnected. The destination can be null, and it means all the outgoing connections from the source are disconnected.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-nodesDisconnected
 type NodesDisconnected struct {
-	ContextID             GraphObjectID `json:"contextId"`
-	SourceID              GraphObjectID `json:"sourceId"`
-	DestinationID         GraphObjectID `json:"destinationId"`
-	SourceOutputIndex     float64       `json:"sourceOutputIndex,omitempty"`
-	DestinationInputIndex float64       `json:"destinationInputIndex,omitempty"`
+	ContextID             string  `json:"contextId"`
+	SourceID              string  `json:"sourceId"`
+	DestinationID         string  `json:"destinationId"`
+	SourceOutputIndex     float64 `json:"sourceOutputIndex,omitempty"`
+	DestinationInputIndex float64 `json:"destinationInputIndex,omitempty"`
 }
 
 // Notifies that an AudioNode is connected to an AudioParam.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-nodeParamConnected
 type NodeParamConnected struct {
-	ContextID         GraphObjectID `json:"contextId"`
-	SourceID          GraphObjectID `json:"sourceId"`
-	DestinationID     GraphObjectID `json:"destinationId"`
-	SourceOutputIndex float64       `json:"sourceOutputIndex,omitempty"`
+	ContextID         string  `json:"contextId"`
+	SourceID          string  `json:"sourceId"`
+	DestinationID     string  `json:"destinationId"`
+	SourceOutputIndex float64 `json:"sourceOutputIndex,omitempty"`
 }
 
 // Notifies that an AudioNode is disconnected to an AudioParam.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-nodeParamDisconnected
 type NodeParamDisconnected struct {
-	ContextID         GraphObjectID `json:"contextId"`
-	SourceID          GraphObjectID `json:"sourceId"`
-	DestinationID     GraphObjectID `json:"destinationId"`
-	SourceOutputIndex float64       `json:"sourceOutputIndex,omitempty"`
+	ContextID         string  `json:"contextId"`
+	SourceID          string  `json:"sourceId"`
+	DestinationID     string  `json:"destinationId"`
+	SourceOutputIndex float64 `json:"sourceOutputIndex,omitempty"`
 }

@@ -32,7 +32,7 @@ type VisibleSecurityStateChanged struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#event-securityStateChanged
 type SecurityStateChanged struct {
 	// Security state.
-	SecurityState SecurityState `json:"securityState"`
+	SecurityState string `json:"securityState"`
 	// True if the page was loaded over cryptographic transport such as HTTPS.
 	//
 	// This CDP parameter is deprecated.

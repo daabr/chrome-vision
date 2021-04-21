@@ -2,8 +2,6 @@ package accessibility
 
 import (
 	"encoding/json"
-
-	"github.com/daabr/chrome-vision/pkg/cdp/dom"
 )
 
 // Unique accessibility node identifier.
@@ -75,7 +73,7 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXValueSource
 type AXValueSource struct {
 	// What type of source this is.
-	Type AXValueSourceType `json:"type"`
+	Type string `json:"type"`
 	// The value of this property source.
 	Value *AXValue `json:"value,omitempty"`
 	// The name of the relevant attribute, if any.
@@ -85,7 +83,7 @@ type AXValueSource struct {
 	// Whether this source is superseded by a higher priority source.
 	Superseded bool `json:"superseded,omitempty"`
 	// The native markup source for this value, e.g. a <label> element.
-	NativeSource *AXValueNativeSourceType `json:"nativeSource,omitempty"`
+	NativeSource string `json:"nativeSource,omitempty"`
 	// The value, such as a node or node list, of the native source.
 	NativeSourceValue *AXValue `json:"nativeSourceValue,omitempty"`
 	// Whether the value for this property is invalid.
@@ -97,7 +95,7 @@ type AXValueSource struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXRelatedNode
 type AXRelatedNode struct {
 	// The BackendNodeId of the related DOM node.
-	BackendDOMNodeID dom.BackendNodeID `json:"backendDOMNodeId"`
+	BackendDOMNodeID int64 `json:"backendDOMNodeId"`
 	// The IDRef value provided, if any.
 	Idref string `json:"idref,omitempty"`
 	// The text alternative of this node in the current context.
@@ -107,7 +105,7 @@ type AXRelatedNode struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXProperty
 type AXProperty struct {
 	// The name of this property.
-	Name AXPropertyName `json:"name"`
+	Name string `json:"name"`
 	// The value of this property.
 	Value AXValue `json:"value"`
 }
@@ -117,7 +115,7 @@ type AXProperty struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXValue
 type AXValue struct {
 	// The type of this value.
-	Type AXValueType `json:"type"`
+	Type string `json:"type"`
 	// The computed value of this property.
 	Value json.RawMessage `json:"value,omitempty"`
 	// One or more related nodes, if applicable.
@@ -184,7 +182,7 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXNode
 type AXNode struct {
 	// Unique identifier for this node.
-	NodeID AXNodeID `json:"nodeId"`
+	NodeID string `json:"nodeId"`
 	// Whether this node is ignored for accessibility
 	Ignored bool `json:"ignored"`
 	// Collection of reasons why this node is hidden.
@@ -202,5 +200,5 @@ type AXNode struct {
 	// IDs for each of this node's child nodes.
 	ChildIds []AXNodeID `json:"childIds,omitempty"`
 	// The backend ID for the associated DOM node, if any.
-	BackendDOMNodeID *dom.BackendNodeID `json:"backendDOMNodeId,omitempty"`
+	BackendDOMNodeID int64 `json:"backendDOMNodeId,omitempty"`
 }

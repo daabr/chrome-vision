@@ -1,7 +1,6 @@
 package log
 
 import (
-	"github.com/daabr/chrome-vision/pkg/cdp/network"
 	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
 )
 
@@ -24,7 +23,7 @@ type LogEntry struct {
 	// JavaScript stack trace.
 	StackTrace *runtime.StackTrace `json:"stackTrace,omitempty"`
 	// Identifier of the network request associated with this entry.
-	NetworkRequestID *network.RequestID `json:"networkRequestId,omitempty"`
+	NetworkRequestID string `json:"networkRequestId,omitempty"`
 	// Identifier of the worker associated with this entry.
 	WorkerID string `json:"workerId,omitempty"`
 	// Call arguments.

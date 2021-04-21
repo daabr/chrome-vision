@@ -123,7 +123,7 @@ type HandleCertificateError struct {
 	// The ID of the event.
 	EventID int64 `json:"eventId"`
 	// The action to take on the certificate error.
-	Action CertificateErrorAction `json:"action"`
+	Action string `json:"action"`
 }
 
 // NewHandleCertificateError constructs a new HandleCertificateError struct instance, with
@@ -133,9 +133,9 @@ type HandleCertificateError struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#method-handleCertificateError
 //
 // This CDP method is deprecated.
-func NewHandleCertificateError(eventId int64, action CertificateErrorAction) *HandleCertificateError {
+func NewHandleCertificateError(eventID int64, action string) *HandleCertificateError {
 	return &HandleCertificateError{
-		EventID: eventId,
+		EventID: eventID,
 		Action:  action,
 	}
 }
