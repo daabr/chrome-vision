@@ -158,7 +158,7 @@ func sendToPipe(s *Session, async asyncMessage) {
 	async.responseChan <- m
 }
 
-// Send constructs and sends a JSON message to the browser associated
+// Send constructs and sends a CDP message to the browser associated
 // with the given context, and returns the browser's response message.
 // This is guaranteed to be thread-safe.
 func Send(ctx context.Context, method string, params json.RawMessage) (*Message, error) {
@@ -166,6 +166,7 @@ func Send(ctx context.Context, method string, params json.RawMessage) (*Message,
 	if !ok {
 		return nil, errors.New("context not initialized with cdp.NewContext")
 	}
+	// https://github.com/aslushnikov/getting-started-with-cdp#targets--sessions
 	m := &Message{Method: method, SessionID: session.sessionID, Params: params}
 	ch := make(chan *Message)
 	// https://blog.golang.org/codelab-share

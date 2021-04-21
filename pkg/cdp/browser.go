@@ -121,14 +121,14 @@ func start(ctx context.Context, s *Session) error {
 }
 
 // Cancel cancels the given context, if it was initialized with the
-// cdp.NewContext function, and returns immediately.
+// `cdp.NewContext` function, and returns immediately.
 //
 // This will kill the browser forcefully. If you want to let it close
-// gracefully, call the cdp.Close function instead. Either way, any resources
+// gracefully, call the `cdp.Close` function instead. Either way, any resources
 // associated with the CDP session will be released when the process ends.
 //
 // Remember that this does not impact ancestor or parent contexts specified
-// in the cdp.NewContext function call, only contexts returned by it.
+// in the `cdp.NewContext` function call, only contexts returned by it.
 // Context cancelation propogates only from ancestors to descendants.
 func Cancel(ctx context.Context) {
 	if session, ok := FromContext(ctx); ok {
@@ -137,7 +137,7 @@ func Cancel(ctx context.Context) {
 }
 
 // Wait waits for the browser associated with the given context (which was
-// started by the cdp.NewContext function) to end - no matter how - and for
+// started by the `cdp.NewContext` function) to end - no matter how - and for
 // any resources associated with the CDP session to be released.
 func Wait(ctx context.Context) {
 	if session, ok := FromContext(ctx); ok {
@@ -150,7 +150,7 @@ func Wait(ctx context.Context) {
 // Close sends to the browser a command to close itself gracefully,
 // and waits until this is done.
 //
-// If you want to kill the browser forcefully, call cdp.Cancel instead.
+// If you want to kill the browser forcefully, call `cdp.Cancel` instead.
 // Either way, any resources associated with the CDP session will be
 // released when the process ends.
 func Close(ctx context.Context) {
