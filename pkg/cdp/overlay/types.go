@@ -187,7 +187,7 @@ type GridNodeHighlightConfig struct {
 	// A descriptor for the highlight appearance.
 	GridHighlightConfig GridHighlightConfig `json:"gridHighlightConfig"`
 	// Identifier of the node to highlight.
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-FlexNodeHighlightConfig
@@ -195,7 +195,7 @@ type FlexNodeHighlightConfig struct {
 	// A descriptor for the highlight appearance of flex containers.
 	FlexContainerHighlightConfig FlexContainerHighlightConfig `json:"flexContainerHighlightConfig"`
 	// Identifier of the node to highlight.
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ScrollSnapContainerHighlightConfig
@@ -215,7 +215,7 @@ type ScrollSnapHighlightConfig struct {
 	// A descriptor for the highlight appearance of scroll snap containers.
 	ScrollSnapContainerHighlightConfig ScrollSnapContainerHighlightConfig `json:"scrollSnapContainerHighlightConfig"`
 	// Identifier of the node to highlight.
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // Configuration for dual screen hinge

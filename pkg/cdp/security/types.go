@@ -1,7 +1,5 @@
 package security
 
-import "github.com/daabr/chrome-vision/pkg/cdp"
-
 // An internal certificate ID value.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-CertificateId
@@ -58,9 +56,9 @@ type CertificateSecurityState struct {
 	// Name of the issuing CA.
 	Issuer string `json:"issuer"`
 	// Certificate valid from date.
-	ValidFrom cdp.TimeSinceEpoch `json:"validFrom"`
+	ValidFrom float64 `json:"validFrom"`
 	// Certificate valid to (expiration) date
-	ValidTo cdp.TimeSinceEpoch `json:"validTo"`
+	ValidTo float64 `json:"validTo"`
 	// The highest priority network error code, if the certificate has an error.
 	CertificateNetworkError string `json:"certificateNetworkError,omitempty"`
 	// True if the certificate uses a weak signature aglorithm.

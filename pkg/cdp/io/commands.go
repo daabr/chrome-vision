@@ -142,9 +142,9 @@ type ResolveBlob struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IO/#method-resolveBlob
-func NewResolveBlob(objectId runtime.RemoteObjectID) *ResolveBlob {
+func NewResolveBlob(objectID runtime.RemoteObjectID) *ResolveBlob {
 	return &ResolveBlob{
-		ObjectID: objectId,
+		ObjectID: objectID,
 	}
 }
 

@@ -51,7 +51,7 @@ type Resumed struct{}
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#event-scriptFailedToParse
 type ScriptFailedToParse struct {
 	// Identifier of the script parsed.
-	ScriptID runtime.ScriptID `json:"scriptId"`
+	ScriptID string `json:"scriptId"`
 	// URL or name of the script parsed (if any).
 	URL string `json:"url"`
 	// Line offset of the script within the resource with given URL (for script tags).
@@ -63,7 +63,7 @@ type ScriptFailedToParse struct {
 	// Length of the last line of the script.
 	EndColumn int64 `json:"endColumn"`
 	// Specifies script creation context.
-	ExecutionContextID runtime.ExecutionContextID `json:"executionContextId"`
+	ExecutionContextID int64 `json:"executionContextId"`
 	// Content hash of the script.
 	Hash string `json:"hash"`
 	// Embedder-specific auxiliary data.
@@ -87,7 +87,7 @@ type ScriptFailedToParse struct {
 	// The language of the script.
 	//
 	// This CDP parameter is experimental.
-	ScriptLanguage *ScriptLanguage `json:"scriptLanguage,omitempty"`
+	ScriptLanguage string `json:"scriptLanguage,omitempty"`
 	// The name the embedder supplied for this script.
 	//
 	// This CDP parameter is experimental.
@@ -100,7 +100,7 @@ type ScriptFailedToParse struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#event-scriptParsed
 type ScriptParsed struct {
 	// Identifier of the script parsed.
-	ScriptID runtime.ScriptID `json:"scriptId"`
+	ScriptID string `json:"scriptId"`
 	// URL or name of the script parsed (if any).
 	URL string `json:"url"`
 	// Line offset of the script within the resource with given URL (for script tags).
@@ -112,7 +112,7 @@ type ScriptParsed struct {
 	// Length of the last line of the script.
 	EndColumn int64 `json:"endColumn"`
 	// Specifies script creation context.
-	ExecutionContextID runtime.ExecutionContextID `json:"executionContextId"`
+	ExecutionContextID int64 `json:"executionContextId"`
 	// Content hash of the script.
 	Hash string `json:"hash"`
 	// Embedder-specific auxiliary data.
@@ -140,7 +140,7 @@ type ScriptParsed struct {
 	// The language of the script.
 	//
 	// This CDP parameter is experimental.
-	ScriptLanguage *ScriptLanguage `json:"scriptLanguage,omitempty"`
+	ScriptLanguage string `json:"scriptLanguage,omitempty"`
 	// If the scriptLanguage is WebASsembly, the source of debug symbols for the module.
 	//
 	// This CDP parameter is experimental.

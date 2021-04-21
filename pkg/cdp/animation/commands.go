@@ -215,9 +215,9 @@ type ResolveAnimation struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-resolveAnimation
-func NewResolveAnimation(animationId string) *ResolveAnimation {
+func NewResolveAnimation(animationID string) *ResolveAnimation {
 	return &ResolveAnimation{
-		AnimationID: animationId,
+		AnimationID: animationID,
 	}
 }
 
@@ -392,9 +392,9 @@ type SetTiming struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-setTiming
-func NewSetTiming(animationId string, duration float64, delay float64) *SetTiming {
+func NewSetTiming(animationID string, duration float64, delay float64) *SetTiming {
 	return &SetTiming{
-		AnimationID: animationId,
+		AnimationID: animationID,
 		Duration:    duration,
 		Delay:       delay,
 	}

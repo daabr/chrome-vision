@@ -8,8 +8,6 @@ import (
 	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/debugger"
 	"github.com/daabr/chrome-vision/pkg/cdp/dom"
-	"github.com/daabr/chrome-vision/pkg/cdp/io"
-	"github.com/daabr/chrome-vision/pkg/cdp/network"
 	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
 )
 
@@ -358,9 +356,9 @@ type CreateIsolatedWorld struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-createIsolatedWorld
-func NewCreateIsolatedWorld(frameId FrameID) *CreateIsolatedWorld {
+func NewCreateIsolatedWorld(frameID FrameID) *CreateIsolatedWorld {
 	return &CreateIsolatedWorld{
-		FrameID: frameId,
+		FrameID: frameID,
 	}
 }
 
@@ -794,9 +792,9 @@ type GetResourceContent struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getResourceContent
 //
 // This CDP method is experimental.
-func NewGetResourceContent(frameId FrameID, url string) *GetResourceContent {
+func NewGetResourceContent(frameID FrameID, url string) *GetResourceContent {
 	return &GetResourceContent{
-		FrameID: frameId,
+		FrameID: frameID,
 		URL:     url,
 	}
 }
@@ -1004,7 +1002,7 @@ type NavigateResponse struct {
 	// Frame id that has navigated (or failed to navigate)
 	FrameID FrameID `json:"frameId"`
 	// Loader identifier.
-	LoaderID *network.LoaderID `json:"loaderId,omitempty"`
+	LoaderID string `json:"loaderId,omitempty"`
 	// User friendly error message, present if and only if navigation has failed.
 	ErrorText string `json:"errorText,omitempty"`
 }
@@ -1046,9 +1044,9 @@ type NavigateToHistoryEntry struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-navigateToHistoryEntry
-func NewNavigateToHistoryEntry(entryId int64) *NavigateToHistoryEntry {
+func NewNavigateToHistoryEntry(entryID int64) *NavigateToHistoryEntry {
 	return &NavigateToHistoryEntry{
-		EntryID: entryId,
+		EntryID: entryID,
 	}
 }
 
@@ -1297,7 +1295,7 @@ type PrintToPDFResponse struct {
 	// A handle of the stream that holds resulting PDF data.
 	//
 	// This CDP parameter is experimental.
-	Stream *io.StreamHandle `json:"stream,omitempty"`
+	Stream string `json:"stream,omitempty"`
 }
 
 // Do sends the PrintToPDF CDP command to a browser,
@@ -1482,9 +1480,9 @@ type ScreencastFrameAck struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-screencastFrameAck
 //
 // This CDP method is experimental.
-func NewScreencastFrameAck(sessionId int64) *ScreencastFrameAck {
+func NewScreencastFrameAck(sessionID int64) *ScreencastFrameAck {
 	return &ScreencastFrameAck{
-		SessionID: sessionId,
+		SessionID: sessionID,
 	}
 }
 
@@ -1533,9 +1531,9 @@ type SearchInResource struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-searchInResource
 //
 // This CDP method is experimental.
-func NewSearchInResource(frameId FrameID, url string, query string) *SearchInResource {
+func NewSearchInResource(frameID FrameID, url string, query string) *SearchInResource {
 	return &SearchInResource{
-		FrameID: frameId,
+		FrameID: frameID,
 		URL:     url,
 		Query:   query,
 	}
@@ -1692,9 +1690,9 @@ type GetPermissionsPolicyState struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getPermissionsPolicyState
 //
 // This CDP method is experimental.
-func NewGetPermissionsPolicyState(frameId FrameID) *GetPermissionsPolicyState {
+func NewGetPermissionsPolicyState(frameID FrameID) *GetPermissionsPolicyState {
 	return &GetPermissionsPolicyState{
-		FrameID: frameId,
+		FrameID: frameID,
 	}
 }
 
@@ -1829,9 +1827,9 @@ type SetDocumentContent struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setDocumentContent
-func NewSetDocumentContent(frameId FrameID, html string) *SetDocumentContent {
+func NewSetDocumentContent(frameID FrameID, html string) *SetDocumentContent {
 	return &SetDocumentContent{
-		FrameID: frameId,
+		FrameID: frameID,
 		Html:    html,
 	}
 }

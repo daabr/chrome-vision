@@ -7,7 +7,6 @@ import (
 
 	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/debugger"
-	"github.com/daabr/chrome-vision/pkg/cdp/io"
 )
 
 // SetAcceptedEncodings contains the parameters, and acts as
@@ -327,9 +326,9 @@ type ContinueInterceptedRequest struct {
 //
 // This CDP method is deprecated.
 // This CDP method is experimental.
-func NewContinueInterceptedRequest(interceptionId InterceptionID) *ContinueInterceptedRequest {
+func NewContinueInterceptedRequest(interceptionID InterceptionID) *ContinueInterceptedRequest {
 	return &ContinueInterceptedRequest{
-		InterceptionID: interceptionId,
+		InterceptionID: interceptionID,
 	}
 }
 
@@ -831,9 +830,9 @@ type GetResponseBody struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getResponseBody
-func NewGetResponseBody(requestId RequestID) *GetResponseBody {
+func NewGetResponseBody(requestID RequestID) *GetResponseBody {
 	return &GetResponseBody{
-		RequestID: requestId,
+		RequestID: requestID,
 	}
 }
 
@@ -883,9 +882,9 @@ type GetRequestPostData struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getRequestPostData
-func NewGetRequestPostData(requestId RequestID) *GetRequestPostData {
+func NewGetRequestPostData(requestID RequestID) *GetRequestPostData {
 	return &GetRequestPostData{
-		RequestID: requestId,
+		RequestID: requestID,
 	}
 }
 
@@ -937,9 +936,9 @@ type GetResponseBodyForInterception struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getResponseBodyForInterception
 //
 // This CDP method is experimental.
-func NewGetResponseBodyForInterception(interceptionId InterceptionID) *GetResponseBodyForInterception {
+func NewGetResponseBodyForInterception(interceptionID InterceptionID) *GetResponseBodyForInterception {
 	return &GetResponseBodyForInterception{
-		InterceptionID: interceptionId,
+		InterceptionID: interceptionID,
 	}
 }
 
@@ -995,16 +994,16 @@ type TakeResponseBodyForInterceptionAsStream struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-takeResponseBodyForInterceptionAsStream
 //
 // This CDP method is experimental.
-func NewTakeResponseBodyForInterceptionAsStream(interceptionId InterceptionID) *TakeResponseBodyForInterceptionAsStream {
+func NewTakeResponseBodyForInterceptionAsStream(interceptionID InterceptionID) *TakeResponseBodyForInterceptionAsStream {
 	return &TakeResponseBodyForInterceptionAsStream{
-		InterceptionID: interceptionId,
+		InterceptionID: interceptionID,
 	}
 }
 
 // TakeResponseBodyForInterceptionAsStreamResponse contains the browser's response
 // to calling the TakeResponseBodyForInterceptionAsStream CDP command with Do().
 type TakeResponseBodyForInterceptionAsStreamResponse struct {
-	Stream io.StreamHandle `json:"stream"`
+	Stream string `json:"stream"`
 }
 
 // Do sends the TakeResponseBodyForInterceptionAsStream CDP command to a browser,
@@ -1050,9 +1049,9 @@ type ReplayXHR struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-replayXHR
 //
 // This CDP method is experimental.
-func NewReplayXHR(requestId RequestID) *ReplayXHR {
+func NewReplayXHR(requestID RequestID) *ReplayXHR {
 	return &ReplayXHR{
-		RequestID: requestId,
+		RequestID: requestID,
 	}
 }
 
@@ -1099,9 +1098,9 @@ type SearchInResponseBody struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-searchInResponseBody
 //
 // This CDP method is experimental.
-func NewSearchInResponseBody(requestId RequestID, query string) *SearchInResponseBody {
+func NewSearchInResponseBody(requestID RequestID, query string) *SearchInResponseBody {
 	return &SearchInResponseBody{
-		RequestID: requestId,
+		RequestID: requestID,
 		Query:     query,
 	}
 }
@@ -1699,7 +1698,7 @@ func (t *SetRequestInterception) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type GetSecurityIsolationStatus struct {
 	// If no frameId is provided, the status of the target is provided.
-	FrameID *cdp.FrameID `json:"frameId,omitempty"`
+	FrameID string `json:"frameId,omitempty"`
 }
 
 // NewGetSecurityIsolationStatus constructs a new GetSecurityIsolationStatus struct instance, with
@@ -1717,8 +1716,8 @@ func NewGetSecurityIsolationStatus() *GetSecurityIsolationStatus {
 // parameter `frameId` in the GetSecurityIsolationStatus CDP command.
 //
 // If no frameId is provided, the status of the target is provided.
-func (t *GetSecurityIsolationStatus) SetFrameID(v cdp.FrameID) *GetSecurityIsolationStatus {
-	t.FrameID = &v
+func (t *GetSecurityIsolationStatus) SetFrameID(v string) *GetSecurityIsolationStatus {
+	t.FrameID = v
 	return t
 }
 
@@ -1759,7 +1758,7 @@ func (t *GetSecurityIsolationStatus) Do(ctx context.Context) (*GetSecurityIsolat
 // This CDP method is experimental.
 type LoadNetworkResource struct {
 	// Frame id to get the resource for.
-	FrameID cdp.FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 	// URL of the resource to get content for.
 	URL string `json:"url"`
 	// Options for the request.
@@ -1773,9 +1772,9 @@ type LoadNetworkResource struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-loadNetworkResource
 //
 // This CDP method is experimental.
-func NewLoadNetworkResource(frameId cdp.FrameID, url string, options LoadNetworkResourceOptions) *LoadNetworkResource {
+func NewLoadNetworkResource(frameID string, url string, options LoadNetworkResourceOptions) *LoadNetworkResource {
 	return &LoadNetworkResource{
-		FrameID: frameId,
+		FrameID: frameID,
 		URL:     url,
 		Options: options,
 	}

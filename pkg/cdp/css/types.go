@@ -1,10 +1,5 @@
 package css
 
-import (
-	"github.com/daabr/chrome-vision/pkg/cdp"
-	"github.com/daabr/chrome-vision/pkg/cdp/dom"
-)
-
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-StyleSheetId
 type StyleSheetID string
 
@@ -28,7 +23,7 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-PseudoElementMatches
 type PseudoElementMatches struct {
 	// Pseudo element type.
-	PseudoType dom.PseudoType `json:"pseudoType"`
+	PseudoType string `json:"pseudoType"`
 	// Matches of CSS rules applicable to the pseudo style.
 	Matches []RuleMatch `json:"matches"`
 }
@@ -80,7 +75,7 @@ type CSSStyleSheetHeader struct {
 	// The stylesheet identifier.
 	StyleSheetID StyleSheetID `json:"styleSheetId"`
 	// Owner frame identifier.
-	FrameID cdp.FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 	// Stylesheet resource URL.
 	SourceURL string `json:"sourceURL"`
 	// URL of source map associated with the stylesheet (if any).
@@ -90,7 +85,7 @@ type CSSStyleSheetHeader struct {
 	// Stylesheet title.
 	Title string `json:"title"`
 	// The backend id for the owner node of the stylesheet.
-	OwnerNode *dom.BackendNodeID `json:"ownerNode,omitempty"`
+	OwnerNode int64 `json:"ownerNode,omitempty"`
 	// Denotes whether the stylesheet is disabled.
 	Disabled bool `json:"disabled"`
 	// Whether the sourceURL field value comes from the sourceURL comment.

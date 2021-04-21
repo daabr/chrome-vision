@@ -24,9 +24,9 @@ type DeleteCache struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-deleteCache
-func NewDeleteCache(cacheId CacheID) *DeleteCache {
+func NewDeleteCache(cacheID CacheID) *DeleteCache {
 	return &DeleteCache{
-		CacheID: cacheId,
+		CacheID: cacheID,
 	}
 }
 
@@ -65,9 +65,9 @@ type DeleteEntry struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-deleteEntry
-func NewDeleteEntry(cacheId CacheID, request string) *DeleteEntry {
+func NewDeleteEntry(cacheID CacheID, request string) *DeleteEntry {
 	return &DeleteEntry{
-		CacheID: cacheId,
+		CacheID: cacheID,
 		Request: request,
 	}
 }
@@ -159,9 +159,9 @@ type RequestCachedResponse struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-requestCachedResponse
-func NewRequestCachedResponse(cacheId CacheID, requestURL string, requestHeaders []Header) *RequestCachedResponse {
+func NewRequestCachedResponse(cacheID CacheID, requestURL string, requestHeaders []Header) *RequestCachedResponse {
 	return &RequestCachedResponse{
-		CacheID:        cacheId,
+		CacheID:        cacheID,
 		RequestURL:     requestURL,
 		RequestHeaders: requestHeaders,
 	}
@@ -217,9 +217,9 @@ type RequestEntries struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-requestEntries
-func NewRequestEntries(cacheId CacheID) *RequestEntries {
+func NewRequestEntries(cacheID CacheID) *RequestEntries {
 	return &RequestEntries{
-		CacheID: cacheId,
+		CacheID: cacheID,
 	}
 }
 

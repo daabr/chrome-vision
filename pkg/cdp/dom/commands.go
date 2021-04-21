@@ -29,9 +29,9 @@ type CollectClassNamesFromSubtree struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-collectClassNamesFromSubtree
 //
 // This CDP method is experimental.
-func NewCollectClassNamesFromSubtree(nodeId NodeID) *CollectClassNamesFromSubtree {
+func NewCollectClassNamesFromSubtree(nodeID NodeID) *CollectClassNamesFromSubtree {
 	return &CollectClassNamesFromSubtree{
-		NodeID: nodeId,
+		NodeID: nodeID,
 	}
 }
 
@@ -89,10 +89,10 @@ type CopyTo struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-copyTo
 //
 // This CDP method is experimental.
-func NewCopyTo(nodeId NodeID, targetNodeId NodeID) *CopyTo {
+func NewCopyTo(nodeID NodeID, targetNodeID NodeID) *CopyTo {
 	return &CopyTo{
-		NodeID:       nodeId,
-		TargetNodeID: targetNodeId,
+		NodeID:       nodeID,
+		TargetNodeID: targetNodeID,
 	}
 }
 
@@ -378,9 +378,9 @@ type DiscardSearchResults struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-discardSearchResults
 //
 // This CDP method is experimental.
-func NewDiscardSearchResults(searchId string) *DiscardSearchResults {
+func NewDiscardSearchResults(searchID string) *DiscardSearchResults {
 	return &DiscardSearchResults{
-		SearchID: searchId,
+		SearchID: searchID,
 	}
 }
 
@@ -515,9 +515,9 @@ type GetAttributes struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getAttributes
-func NewGetAttributes(nodeId NodeID) *GetAttributes {
+func NewGetAttributes(nodeID NodeID) *GetAttributes {
 	return &GetAttributes{
-		NodeID: nodeId,
+		NodeID: nodeID,
 	}
 }
 
@@ -887,9 +887,9 @@ type GetNodesForSubtreeByStyle struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getNodesForSubtreeByStyle
 //
 // This CDP method is experimental.
-func NewGetNodesForSubtreeByStyle(nodeId NodeID, computedStyles []CSSComputedStyleProperty) *GetNodesForSubtreeByStyle {
+func NewGetNodesForSubtreeByStyle(nodeID NodeID, computedStyles []CSSComputedStyleProperty) *GetNodesForSubtreeByStyle {
 	return &GetNodesForSubtreeByStyle{
-		NodeID:         nodeId,
+		NodeID:         nodeID,
 		ComputedStyles: computedStyles,
 	}
 }
@@ -986,7 +986,7 @@ type GetNodeForLocationResponse struct {
 	// Resulting node.
 	BackendNodeID BackendNodeID `json:"backendNodeId"`
 	// Frame this node belongs to.
-	FrameID cdp.FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 	// Id of the node at given coordinates, only when enabled and requested document.
 	NodeID *NodeID `json:"nodeId,omitempty"`
 }
@@ -1111,9 +1111,9 @@ type GetRelayoutBoundary struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getRelayoutBoundary
 //
 // This CDP method is experimental.
-func NewGetRelayoutBoundary(nodeId NodeID) *GetRelayoutBoundary {
+func NewGetRelayoutBoundary(nodeID NodeID) *GetRelayoutBoundary {
 	return &GetRelayoutBoundary{
-		NodeID: nodeId,
+		NodeID: nodeID,
 	}
 }
 
@@ -1170,9 +1170,9 @@ type GetSearchResults struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getSearchResults
 //
 // This CDP method is experimental.
-func NewGetSearchResults(searchId string, fromIndex int64, toIndex int64) *GetSearchResults {
+func NewGetSearchResults(searchID string, fromIndex int64, toIndex int64) *GetSearchResults {
 	return &GetSearchResults{
-		SearchID:  searchId,
+		SearchID:  searchID,
 		FromIndex: fromIndex,
 		ToIndex:   toIndex,
 	}
@@ -1261,10 +1261,10 @@ type MoveTo struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-moveTo
-func NewMoveTo(nodeId NodeID, targetNodeId NodeID) *MoveTo {
+func NewMoveTo(nodeID NodeID, targetNodeID NodeID) *MoveTo {
 	return &MoveTo{
-		NodeID:       nodeId,
-		TargetNodeID: targetNodeId,
+		NodeID:       nodeID,
+		TargetNodeID: targetNodeID,
 	}
 }
 
@@ -1501,9 +1501,9 @@ type QuerySelector struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-querySelector
-func NewQuerySelector(nodeId NodeID, selector string) *QuerySelector {
+func NewQuerySelector(nodeID NodeID, selector string) *QuerySelector {
 	return &QuerySelector{
-		NodeID:   nodeId,
+		NodeID:   nodeID,
 		Selector: selector,
 	}
 }
@@ -1554,9 +1554,9 @@ type QuerySelectorAll struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-querySelectorAll
-func NewQuerySelectorAll(nodeId NodeID, selector string) *QuerySelectorAll {
+func NewQuerySelectorAll(nodeID NodeID, selector string) *QuerySelectorAll {
 	return &QuerySelectorAll{
-		NodeID:   nodeId,
+		NodeID:   nodeID,
 		Selector: selector,
 	}
 }
@@ -1641,9 +1641,9 @@ type RemoveAttribute struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-removeAttribute
-func NewRemoveAttribute(nodeId NodeID, name string) *RemoveAttribute {
+func NewRemoveAttribute(nodeID NodeID, name string) *RemoveAttribute {
 	return &RemoveAttribute{
-		NodeID: nodeId,
+		NodeID: nodeID,
 		Name:   name,
 	}
 }
@@ -1681,9 +1681,9 @@ type RemoveNode struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-removeNode
-func NewRemoveNode(nodeId NodeID) *RemoveNode {
+func NewRemoveNode(nodeID NodeID) *RemoveNode {
 	return &RemoveNode{
-		NodeID: nodeId,
+		NodeID: nodeID,
 	}
 }
 
@@ -1728,9 +1728,9 @@ type RequestChildNodes struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-requestChildNodes
-func NewRequestChildNodes(nodeId NodeID) *RequestChildNodes {
+func NewRequestChildNodes(nodeID NodeID) *RequestChildNodes {
 	return &RequestChildNodes{
-		NodeID: nodeId,
+		NodeID: nodeID,
 	}
 }
 
@@ -1789,9 +1789,9 @@ type RequestNode struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-requestNode
-func NewRequestNode(objectId runtime.RemoteObjectID) *RequestNode {
+func NewRequestNode(objectID runtime.RemoteObjectID) *RequestNode {
 	return &RequestNode{
-		ObjectID: objectId,
+		ObjectID: objectID,
 	}
 }
 
@@ -1833,7 +1833,7 @@ type ResolveNode struct {
 	// Id of the node to resolve.
 	NodeID *NodeID `json:"nodeId,omitempty"`
 	// Backend identifier of the node to resolve.
-	BackendNodeID *BackendNodeID `json:"backendNodeId,omitempty"`
+	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 	// Symbolic group name that can be used to release multiple objects.
 	ObjectGroup string `json:"objectGroup,omitempty"`
 	// Execution context in which to resolve the node.
@@ -1862,8 +1862,8 @@ func (t *ResolveNode) SetNodeID(v NodeID) *ResolveNode {
 // parameter `backendNodeId` in the ResolveNode CDP command.
 //
 // Backend identifier of the node to resolve.
-func (t *ResolveNode) SetBackendNodeID(v BackendNodeID) *ResolveNode {
-	t.BackendNodeID = &v
+func (t *ResolveNode) SetBackendNodeID(v int64) *ResolveNode {
+	t.BackendNodeID = v
 	return t
 }
 
@@ -1933,9 +1933,9 @@ type SetAttributeValue struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setAttributeValue
-func NewSetAttributeValue(nodeId NodeID, name string, value string) *SetAttributeValue {
+func NewSetAttributeValue(nodeID NodeID, name string, value string) *SetAttributeValue {
 	return &SetAttributeValue{
-		NodeID: nodeId,
+		NodeID: nodeID,
 		Name:   name,
 		Value:  value,
 	}
@@ -1980,9 +1980,9 @@ type SetAttributesAsText struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setAttributesAsText
-func NewSetAttributesAsText(nodeId NodeID, text string) *SetAttributesAsText {
+func NewSetAttributesAsText(nodeID NodeID, text string) *SetAttributesAsText {
 	return &SetAttributesAsText{
-		NodeID: nodeId,
+		NodeID: nodeID,
 		Text:   text,
 	}
 }
@@ -2149,9 +2149,9 @@ type GetNodeStackTraces struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getNodeStackTraces
 //
 // This CDP method is experimental.
-func NewGetNodeStackTraces(nodeId NodeID) *GetNodeStackTraces {
+func NewGetNodeStackTraces(nodeID NodeID) *GetNodeStackTraces {
 	return &GetNodeStackTraces{
-		NodeID: nodeId,
+		NodeID: nodeID,
 	}
 }
 
@@ -2204,9 +2204,9 @@ type GetFileInfo struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getFileInfo
 //
 // This CDP method is experimental.
-func NewGetFileInfo(objectId runtime.RemoteObjectID) *GetFileInfo {
+func NewGetFileInfo(objectID runtime.RemoteObjectID) *GetFileInfo {
 	return &GetFileInfo{
-		ObjectID: objectId,
+		ObjectID: objectID,
 	}
 }
 
@@ -2258,9 +2258,9 @@ type SetInspectedNode struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setInspectedNode
 //
 // This CDP method is experimental.
-func NewSetInspectedNode(nodeId NodeID) *SetInspectedNode {
+func NewSetInspectedNode(nodeID NodeID) *SetInspectedNode {
 	return &SetInspectedNode{
-		NodeID: nodeId,
+		NodeID: nodeID,
 	}
 }
 
@@ -2299,9 +2299,9 @@ type SetNodeName struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setNodeName
-func NewSetNodeName(nodeId NodeID, name string) *SetNodeName {
+func NewSetNodeName(nodeID NodeID, name string) *SetNodeName {
 	return &SetNodeName{
-		NodeID: nodeId,
+		NodeID: nodeID,
 		Name:   name,
 	}
 }
@@ -2352,9 +2352,9 @@ type SetNodeValue struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setNodeValue
-func NewSetNodeValue(nodeId NodeID, value string) *SetNodeValue {
+func NewSetNodeValue(nodeID NodeID, value string) *SetNodeValue {
 	return &SetNodeValue{
-		NodeID: nodeId,
+		NodeID: nodeID,
 		Value:  value,
 	}
 }
@@ -2394,9 +2394,9 @@ type SetOuterHTML struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setOuterHTML
-func NewSetOuterHTML(nodeId NodeID, outerHTML string) *SetOuterHTML {
+func NewSetOuterHTML(nodeID NodeID, outerHTML string) *SetOuterHTML {
 	return &SetOuterHTML{
-		NodeID:    nodeId,
+		NodeID:    nodeID,
 		OuterHTML: outerHTML,
 	}
 }
@@ -2461,7 +2461,7 @@ func (t *Undo) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type GetFrameOwner struct {
-	FrameID cdp.FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 }
 
 // NewGetFrameOwner constructs a new GetFrameOwner struct instance, with
@@ -2471,9 +2471,9 @@ type GetFrameOwner struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getFrameOwner
 //
 // This CDP method is experimental.
-func NewGetFrameOwner(frameId cdp.FrameID) *GetFrameOwner {
+func NewGetFrameOwner(frameID string) *GetFrameOwner {
 	return &GetFrameOwner{
-		FrameID: frameId,
+		FrameID: frameID,
 	}
 }
 

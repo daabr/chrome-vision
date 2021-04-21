@@ -26,9 +26,9 @@ type AddInspectedHeapObject struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-addInspectedHeapObject
-func NewAddInspectedHeapObject(heapObjectId HeapSnapshotObjectID) *AddInspectedHeapObject {
+func NewAddInspectedHeapObject(heapObjectID HeapSnapshotObjectID) *AddInspectedHeapObject {
 	return &AddInspectedHeapObject{
-		HeapObjectID: heapObjectId,
+		HeapObjectID: heapObjectID,
 	}
 }
 
@@ -139,7 +139,7 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-getHeapObjectId
 type GetHeapObjectID struct {
 	// Identifier of the object to get heap object id for.
-	ObjectID runtime.RemoteObjectID `json:"objectId"`
+	ObjectID string `json:"objectId"`
 }
 
 // NewGetHeapObjectID constructs a new GetHeapObjectID struct instance, with
@@ -147,9 +147,9 @@ type GetHeapObjectID struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-getHeapObjectId
-func NewGetHeapObjectID(objectId runtime.RemoteObjectID) *GetHeapObjectID {
+func NewGetHeapObjectID(objectID string) *GetHeapObjectID {
 	return &GetHeapObjectID{
-		ObjectID: objectId,
+		ObjectID: objectID,
 	}
 }
 
@@ -196,9 +196,9 @@ type GetObjectByHeapObjectID struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-getObjectByHeapObjectId
-func NewGetObjectByHeapObjectID(objectId HeapSnapshotObjectID) *GetObjectByHeapObjectID {
+func NewGetObjectByHeapObjectID(objectID HeapSnapshotObjectID) *GetObjectByHeapObjectID {
 	return &GetObjectByHeapObjectID{
-		ObjectID: objectId,
+		ObjectID: objectID,
 	}
 }
 

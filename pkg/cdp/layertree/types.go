@@ -59,7 +59,7 @@ type Layer struct {
 	// The id of parent (not present for root).
 	ParentLayerID *LayerID `json:"parentLayerId,omitempty"`
 	// The backend id for the node associated with this layer.
-	BackendNodeID *dom.BackendNodeID `json:"backendNodeId,omitempty"`
+	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 	// Offset from parent layer, X coordinate.
 	OffsetX float64 `json:"offsetX"`
 	// Offset from parent layer, Y coordinate.

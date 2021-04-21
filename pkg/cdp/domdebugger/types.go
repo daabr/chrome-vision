@@ -1,7 +1,6 @@
 package domdebugger
 
 import (
-	"github.com/daabr/chrome-vision/pkg/cdp/dom"
 	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
 )
 
@@ -53,5 +52,5 @@ type EventListener struct {
 	// Event original handler function value.
 	OriginalHandler *runtime.RemoteObject `json:"originalHandler,omitempty"`
 	// Node the listener is added to (if any).
-	BackendNodeID *dom.BackendNodeID `json:"backendNodeId,omitempty"`
+	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 }

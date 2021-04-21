@@ -83,9 +83,9 @@ type GetRealtimeData struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#method-getRealtimeData
-func NewGetRealtimeData(contextId GraphObjectID) *GetRealtimeData {
+func NewGetRealtimeData(contextID GraphObjectID) *GetRealtimeData {
 	return &GetRealtimeData{
-		ContextID: contextId,
+		ContextID: contextID,
 	}
 }
 

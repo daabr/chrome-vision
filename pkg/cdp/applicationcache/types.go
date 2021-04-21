@@ -1,7 +1,5 @@
 package applicationcache
 
-import "github.com/daabr/chrome-vision/pkg/cdp"
-
 // Detailed application cache resource information.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#type-ApplicationCacheResource
@@ -35,7 +33,7 @@ type ApplicationCache struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#type-FrameWithManifest
 type FrameWithManifest struct {
 	// Frame identifier.
-	FrameID cdp.FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 	// Manifest URL.
 	ManifestURL string `json:"manifestURL"`
 	// Application cache status.

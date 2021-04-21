@@ -6,7 +6,6 @@ import (
 	"errors"
 
 	"github.com/daabr/chrome-vision/pkg/cdp"
-	"github.com/daabr/chrome-vision/pkg/cdp/network"
 )
 
 // GetEncodedResponse contains the parameters, and acts as
@@ -18,7 +17,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#method-getEncodedResponse
 type GetEncodedResponse struct {
 	// Identifier of the network request to get content for.
-	RequestID network.RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// The encoding to use.
 	Encoding string `json:"encoding"`
 	// The quality of the encoding (0-1). (defaults to 1)
@@ -32,9 +31,9 @@ type GetEncodedResponse struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#method-getEncodedResponse
-func NewGetEncodedResponse(requestId network.RequestID, encoding string) *GetEncodedResponse {
+func NewGetEncodedResponse(requestID string, encoding string) *GetEncodedResponse {
 	return &GetEncodedResponse{
-		RequestID: requestId,
+		RequestID: requestID,
 		Encoding:  encoding,
 	}
 }

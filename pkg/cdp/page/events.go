@@ -1,14 +1,12 @@
 package page
 
 import (
-	"github.com/daabr/chrome-vision/pkg/cdp/dom"
-	"github.com/daabr/chrome-vision/pkg/cdp/network"
 	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
 )
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-domContentEventFired
 type DomContentEventFired struct {
-	Timestamp network.MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 }
 
 // Emitted only when `page.interceptFileChooser` is enabled.
@@ -22,7 +20,7 @@ type FileChooserOpened struct {
 	// Input node id.
 	//
 	// This CDP parameter is experimental.
-	BackendNodeID dom.BackendNodeID `json:"backendNodeId"`
+	BackendNodeID int64 `json:"backendNodeId"`
 	// Input mode.
 	Mode string `json:"mode"`
 }
@@ -221,9 +219,9 @@ type LifecycleEvent struct {
 	// Id of the frame.
 	FrameID FrameID `json:"frameId"`
 	// Loader identifier. Empty string if the request is fetched from worker.
-	LoaderID  network.LoaderID      `json:"loaderId"`
-	Name      string                `json:"name"`
-	Timestamp network.MonotonicTime `json:"timestamp"`
+	LoaderID  string  `json:"loaderId"`
+	Name      string  `json:"name"`
+	Timestamp float64 `json:"timestamp"`
 }
 
 // Fired for failed bfcache history navigations if BackForwardCache feature is enabled. Do
@@ -236,14 +234,14 @@ type LifecycleEvent struct {
 // This CDP event is experimental.
 type BackForwardCacheNotUsed struct {
 	// The loader id for the associated navgation.
-	LoaderID network.LoaderID `json:"loaderId"`
+	LoaderID string `json:"loaderId"`
 	// The frame id of the associated frame.
 	FrameID FrameID `json:"frameId"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-loadEventFired
 type LoadEventFired struct {
-	Timestamp network.MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 }
 
 // Fired when same-document navigation happens, e.g. due to history API usage or anchor navigation.

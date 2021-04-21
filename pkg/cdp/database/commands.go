@@ -82,9 +82,9 @@ type ExecuteSQL struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Database/#method-executeSQL
-func NewExecuteSQL(databaseId DatabaseID, query string) *ExecuteSQL {
+func NewExecuteSQL(databaseID DatabaseID, query string) *ExecuteSQL {
 	return &ExecuteSQL{
-		DatabaseID: databaseId,
+		DatabaseID: databaseID,
 		Query:      query,
 	}
 }
@@ -131,9 +131,9 @@ type GetDatabaseTableNames struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Database/#method-getDatabaseTableNames
-func NewGetDatabaseTableNames(databaseId DatabaseID) *GetDatabaseTableNames {
+func NewGetDatabaseTableNames(databaseID DatabaseID) *GetDatabaseTableNames {
 	return &GetDatabaseTableNames{
-		DatabaseID: databaseId,
+		DatabaseID: databaseID,
 	}
 }
 

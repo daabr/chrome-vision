@@ -19,7 +19,7 @@ type CallFrameID string
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-Location
 type Location struct {
 	// Script identifier as reported in the `Debugger.scriptParsed`.
-	ScriptID runtime.ScriptID `json:"scriptId"`
+	ScriptID string `json:"scriptId"`
 	// Line number in the script (0-based).
 	LineNumber int64 `json:"lineNumber"`
 	// Column number in the script (0-based).
@@ -42,9 +42,9 @@ type ScriptPosition struct {
 //
 // This CDP type is experimental.
 type LocationRange struct {
-	ScriptID runtime.ScriptID `json:"scriptId"`
-	Start    ScriptPosition   `json:"start"`
-	End      ScriptPosition   `json:"end"`
+	ScriptID string         `json:"scriptId"`
+	Start    ScriptPosition `json:"start"`
+	End      ScriptPosition `json:"end"`
 }
 
 // JavaScript call frame. Array of call frames form the call stack.
@@ -99,7 +99,7 @@ type SearchMatch struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-BreakLocation
 type BreakLocation struct {
 	// Script identifier as reported in the `Debugger.scriptParsed`.
-	ScriptID runtime.ScriptID `json:"scriptId"`
+	ScriptID string `json:"scriptId"`
 	// Line number in the script (0-based).
 	LineNumber int64 `json:"lineNumber"`
 	// Column number in the script (0-based).

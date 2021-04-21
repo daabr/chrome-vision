@@ -28,9 +28,9 @@ type AwaitPromise struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-awaitPromise
-func NewAwaitPromise(promiseObjectId RemoteObjectID) *AwaitPromise {
+func NewAwaitPromise(promiseObjectID RemoteObjectID) *AwaitPromise {
 	return &AwaitPromise{
-		PromiseObjectID: promiseObjectId,
+		PromiseObjectID: promiseObjectID,
 	}
 }
 
@@ -803,9 +803,9 @@ type GetProperties struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-getProperties
-func NewGetProperties(objectId RemoteObjectID) *GetProperties {
+func NewGetProperties(objectID RemoteObjectID) *GetProperties {
 	return &GetProperties{
-		ObjectID: objectId,
+		ObjectID: objectID,
 	}
 }
 
@@ -950,9 +950,9 @@ type QueryObjects struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-queryObjects
-func NewQueryObjects(prototypeObjectId RemoteObjectID) *QueryObjects {
+func NewQueryObjects(prototypeObjectID RemoteObjectID) *QueryObjects {
 	return &QueryObjects{
-		PrototypeObjectID: prototypeObjectId,
+		PrototypeObjectID: prototypeObjectID,
 	}
 }
 
@@ -1009,9 +1009,9 @@ type ReleaseObject struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-releaseObject
-func NewReleaseObject(objectId RemoteObjectID) *ReleaseObject {
+func NewReleaseObject(objectID RemoteObjectID) *ReleaseObject {
 	return &ReleaseObject{
-		ObjectID: objectId,
+		ObjectID: objectID,
 	}
 }
 
@@ -1134,9 +1134,9 @@ type RunScript struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-runScript
-func NewRunScript(scriptId ScriptID) *RunScript {
+func NewRunScript(scriptID ScriptID) *RunScript {
 	return &RunScript{
-		ScriptID: scriptId,
+		ScriptID: scriptID,
 	}
 }
 

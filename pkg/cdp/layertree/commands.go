@@ -25,9 +25,9 @@ type CompositingReasons struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-compositingReasons
-func NewCompositingReasons(layerId LayerID) *CompositingReasons {
+func NewCompositingReasons(layerID LayerID) *CompositingReasons {
 	return &CompositingReasons{
-		LayerID: layerId,
+		LayerID: layerID,
 	}
 }
 
@@ -189,9 +189,9 @@ type MakeSnapshot struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-makeSnapshot
-func NewMakeSnapshot(layerId LayerID) *MakeSnapshot {
+func NewMakeSnapshot(layerID LayerID) *MakeSnapshot {
 	return &MakeSnapshot{
-		LayerID: layerId,
+		LayerID: layerID,
 	}
 }
 
@@ -243,9 +243,9 @@ type ProfileSnapshot struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-profileSnapshot
-func NewProfileSnapshot(snapshotId SnapshotID) *ProfileSnapshot {
+func NewProfileSnapshot(snapshotID SnapshotID) *ProfileSnapshot {
 	return &ProfileSnapshot{
-		SnapshotID: snapshotId,
+		SnapshotID: snapshotID,
 	}
 }
 
@@ -320,9 +320,9 @@ type ReleaseSnapshot struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-releaseSnapshot
-func NewReleaseSnapshot(snapshotId SnapshotID) *ReleaseSnapshot {
+func NewReleaseSnapshot(snapshotID SnapshotID) *ReleaseSnapshot {
 	return &ReleaseSnapshot{
-		SnapshotID: snapshotId,
+		SnapshotID: snapshotID,
 	}
 }
 
@@ -365,9 +365,9 @@ type ReplaySnapshot struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-replaySnapshot
-func NewReplaySnapshot(snapshotId SnapshotID) *ReplaySnapshot {
+func NewReplaySnapshot(snapshotID SnapshotID) *ReplaySnapshot {
 	return &ReplaySnapshot{
-		SnapshotID: snapshotId,
+		SnapshotID: snapshotID,
 	}
 }
 
@@ -442,9 +442,9 @@ type SnapshotCommandLog struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-snapshotCommandLog
-func NewSnapshotCommandLog(snapshotId SnapshotID) *SnapshotCommandLog {
+func NewSnapshotCommandLog(snapshotID SnapshotID) *SnapshotCommandLog {
 	return &SnapshotCommandLog{
-		SnapshotID: snapshotId,
+		SnapshotID: snapshotID,
 	}
 }
 

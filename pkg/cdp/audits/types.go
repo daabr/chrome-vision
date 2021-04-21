@@ -1,8 +1,6 @@
 package audits
 
 import (
-	"github.com/daabr/chrome-vision/pkg/cdp"
-	"github.com/daabr/chrome-vision/pkg/cdp/dom"
 	"github.com/daabr/chrome-vision/pkg/cdp/network"
 	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
 )
@@ -22,15 +20,15 @@ type AffectedCookie struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-AffectedRequest
 type AffectedRequest struct {
 	// The unique request id.
-	RequestID network.RequestID `json:"requestId"`
-	URL       string            `json:"url,omitempty"`
+	RequestID string `json:"requestId"`
+	URL       string `json:"url,omitempty"`
 }
 
 // Information about the frame affected by an inspector issue.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-AffectedFrame
 type AffectedFrame struct {
-	FrameID cdp.FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-SameSiteCookieExclusionReason
@@ -234,7 +232,7 @@ type ContentSecurityPolicyIssueDetails struct {
 	ContentSecurityPolicyViolationType ContentSecurityPolicyViolationType `json:"contentSecurityPolicyViolationType"`
 	FrameAncestor                      *AffectedFrame                     `json:"frameAncestor,omitempty"`
 	SourceCodeLocation                 *SourceCodeLocation                `json:"sourceCodeLocation,omitempty"`
-	ViolatingNodeID                    *dom.BackendNodeID                 `json:"violatingNodeId,omitempty"`
+	ViolatingNodeID                    int64                              `json:"violatingNodeId,omitempty"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-SharedArrayBufferIssueType
@@ -282,13 +280,13 @@ type TrustedWebActivityIssueDetails struct {
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-LowTextContrastIssueDetails
 type LowTextContrastIssueDetails struct {
-	ViolatingNodeID       dom.BackendNodeID `json:"violatingNodeId"`
-	ViolatingNodeSelector string            `json:"violatingNodeSelector"`
-	ContrastRatio         float64           `json:"contrastRatio"`
-	ThresholdAA           float64           `json:"thresholdAA"`
-	ThresholdAAA          float64           `json:"thresholdAAA"`
-	FontSize              string            `json:"fontSize"`
-	FontWeight            string            `json:"fontWeight"`
+	ViolatingNodeID       int64   `json:"violatingNodeId"`
+	ViolatingNodeSelector string  `json:"violatingNodeSelector"`
+	ContrastRatio         float64 `json:"contrastRatio"`
+	ThresholdAA           float64 `json:"thresholdAA"`
+	ThresholdAAA          float64 `json:"thresholdAAA"`
+	FontSize              string  `json:"fontSize"`
+	FontWeight            string  `json:"fontWeight"`
 }
 
 // Details for a CORS related issue, e.g. a warning or error related to
@@ -300,7 +298,7 @@ type CorsIssueDetails struct {
 	IsWarning              bool                         `json:"isWarning"`
 	Request                AffectedRequest              `json:"request"`
 	InitiatorOrigin        string                       `json:"initiatorOrigin,omitempty"`
-	ResourceIPAddressSpace *network.IPAddressSpace      `json:"resourceIPAddressSpace,omitempty"`
+	ResourceIPAddressSpace string                       `json:"resourceIPAddressSpace,omitempty"`
 	ClientSecurityState    *network.ClientSecurityState `json:"clientSecurityState,omitempty"`
 }
 
@@ -310,6 +308,7 @@ type AttributionReportingIssueType string
 // AttributionReportingIssueType valid values.
 const (
 	AttributionReportingIssueTypePermissionPolicyDisabled AttributionReportingIssueType = "PermissionPolicyDisabled"
+	AttributionReportingIssueTypeInvalidAttributionData   AttributionReportingIssueType = "InvalidAttributionData"
 )
 
 // Details for issues around "Attribution Reporting API" usage.
@@ -317,10 +316,11 @@ const (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-AttributionReportingIssueDetails
 type AttributionReportingIssueDetails struct {
-	ViolationType   AttributionReportingIssueType `json:"violationType"`
-	Frame           *AffectedFrame                `json:"frame,omitempty"`
-	Request         *AffectedRequest              `json:"request,omitempty"`
-	ViolatingNodeID *dom.BackendNodeID            `json:"violatingNodeId,omitempty"`
+	ViolationType    AttributionReportingIssueType `json:"violationType"`
+	Frame            *AffectedFrame                `json:"frame,omitempty"`
+	Request          *AffectedRequest              `json:"request,omitempty"`
+	ViolatingNodeID  int64                         `json:"violatingNodeId,omitempty"`
+	InvalidParameter string                        `json:"invalidParameter,omitempty"`
 }
 
 // A unique identifier for the type of issue. Each type may use one of the

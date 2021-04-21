@@ -678,9 +678,9 @@ type GetWindowBounds struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-getWindowBounds
 //
 // This CDP method is experimental.
-func NewGetWindowBounds(windowId WindowID) *GetWindowBounds {
+func NewGetWindowBounds(windowID WindowID) *GetWindowBounds {
 	return &GetWindowBounds{
-		WindowID: windowId,
+		WindowID: windowID,
 	}
 }
 
@@ -723,7 +723,7 @@ func (t *GetWindowBounds) Do(ctx context.Context) (*GetWindowBoundsResponse, err
 // This CDP method is experimental.
 type GetWindowForTarget struct {
 	// Devtools agent host id. If called as a part of the session, associated targetId is used.
-	TargetID *cdp.TargetID `json:"targetId,omitempty"`
+	TargetID string `json:"targetId,omitempty"`
 }
 
 // NewGetWindowForTarget constructs a new GetWindowForTarget struct instance, with
@@ -741,8 +741,8 @@ func NewGetWindowForTarget() *GetWindowForTarget {
 // parameter `targetId` in the GetWindowForTarget CDP command.
 //
 // Devtools agent host id. If called as a part of the session, associated targetId is used.
-func (t *GetWindowForTarget) SetTargetID(v cdp.TargetID) *GetWindowForTarget {
-	t.TargetID = &v
+func (t *GetWindowForTarget) SetTargetID(v string) *GetWindowForTarget {
+	t.TargetID = v
 	return t
 }
 
@@ -800,9 +800,9 @@ type SetWindowBounds struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-setWindowBounds
 //
 // This CDP method is experimental.
-func NewSetWindowBounds(windowId WindowID, bounds Bounds) *SetWindowBounds {
+func NewSetWindowBounds(windowID WindowID, bounds Bounds) *SetWindowBounds {
 	return &SetWindowBounds{
-		WindowID: windowId,
+		WindowID: windowID,
 		Bounds:   bounds,
 	}
 }
@@ -901,9 +901,9 @@ type ExecuteBrowserCommand struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-executeBrowserCommand
 //
 // This CDP method is experimental.
-func NewExecuteBrowserCommand(commandId BrowserCommandID) *ExecuteBrowserCommand {
+func NewExecuteBrowserCommand(commandID BrowserCommandID) *ExecuteBrowserCommand {
 	return &ExecuteBrowserCommand{
-		CommandID: commandId,
+		CommandID: commandID,
 	}
 }
 

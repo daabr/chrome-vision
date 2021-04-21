@@ -95,9 +95,9 @@ type RecordClockSyncMarker struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#method-recordClockSyncMarker
-func NewRecordClockSyncMarker(syncId string) *RecordClockSyncMarker {
+func NewRecordClockSyncMarker(syncID string) *RecordClockSyncMarker {
 	return &RecordClockSyncMarker{
-		SyncID: syncId,
+		SyncID: syncID,
 	}
 }
 

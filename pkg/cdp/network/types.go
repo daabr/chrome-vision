@@ -1,9 +1,7 @@
 package network
 
 import (
-	"github.com/daabr/chrome-vision/pkg/cdp/io"
 	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
-	"github.com/daabr/chrome-vision/pkg/cdp/security"
 )
 
 // Resource type as it was perceived by the rendering engine.
@@ -244,7 +242,7 @@ type Request struct {
 	// This CDP property is experimental.
 	PostDataEntries []PostDataEntry `json:"postDataEntries,omitempty"`
 	// The mixed content type of the request.
-	MixedContentType *security.MixedContentType `json:"mixedContentType,omitempty"`
+	MixedContentType string `json:"mixedContentType,omitempty"`
 	// Priority of the resource request at the time request is sent.
 	InitialPriority ResourcePriority `json:"initialPriority"`
 	// The referrer policy of the request, as defined in https://www.w3.org/TR/referrer-policy/
@@ -295,7 +293,7 @@ type SecurityDetails struct {
 	// TLS MAC. Note that AEAD ciphers do not have separate MACs.
 	Mac string `json:"mac,omitempty"`
 	// Certificate ID value.
-	CertificateID security.CertificateID `json:"certificateId"`
+	CertificateID int64 `json:"certificateId"`
 	// Certificate subject name.
 	SubjectName string `json:"subjectName"`
 	// Subject Alternative Name (SAN) DNS names and IP addresses.
@@ -474,7 +472,7 @@ type Response struct {
 	// Protocol used to fetch this request.
 	Protocol string `json:"protocol,omitempty"`
 	// Security state of the request resource.
-	SecurityState security.SecurityState `json:"securityState"`
+	SecurityState string `json:"securityState"`
 	// Security details for the request.
 	SecurityDetails *SecurityDetails `json:"securityDetails,omitempty"`
 }
@@ -990,7 +988,7 @@ type LoadNetworkResourcePageResult struct {
 	NetErrorName   string  `json:"netErrorName,omitempty"`
 	HttpStatusCode float64 `json:"httpStatusCode,omitempty"`
 	// If successful, one of the following two fields holds the result.
-	Stream *io.StreamHandle `json:"stream,omitempty"`
+	Stream string `json:"stream,omitempty"`
 	// Response headers.
 	Headers *Headers `json:"headers,omitempty"`
 }

@@ -1,9 +1,5 @@
 package animation
 
-import (
-	"github.com/daabr/chrome-vision/pkg/cdp/dom"
-)
-
 // Animation instance.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#type-Animation
@@ -50,7 +46,7 @@ type AnimationEffect struct {
 	// `AnimationEffect`'s fill mode.
 	Fill string `json:"fill"`
 	// `AnimationEffect`'s target node.
-	BackendNodeID *dom.BackendNodeID `json:"backendNodeId,omitempty"`
+	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 	// `AnimationEffect`'s keyframes.
 	KeyframesRule *KeyframesRule `json:"keyframesRule,omitempty"`
 	// `AnimationEffect`'s timing function.

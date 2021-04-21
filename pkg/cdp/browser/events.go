@@ -1,7 +1,5 @@
 package browser
 
-import "github.com/daabr/chrome-vision/pkg/cdp"
-
 // Fired when page is about to start a download.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#event-downloadWillBegin
@@ -9,7 +7,7 @@ import "github.com/daabr/chrome-vision/pkg/cdp"
 // This CDP event is experimental.
 type DownloadWillBegin struct {
 	// Id of the frame that caused the download to begin.
-	FrameID cdp.FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 	// Global unique identifier of the download.
 	Guid string `json:"guid"`
 	// URL of the resource being downloaded.

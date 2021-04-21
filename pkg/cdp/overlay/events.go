@@ -1,7 +1,6 @@
 package overlay
 
 import (
-	"github.com/daabr/chrome-vision/pkg/cdp/dom"
 	"github.com/daabr/chrome-vision/pkg/cdp/page"
 )
 
@@ -11,14 +10,14 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#event-inspectNodeRequested
 type InspectNodeRequested struct {
 	// Id of the node to inspect.
-	BackendNodeID dom.BackendNodeID `json:"backendNodeId"`
+	BackendNodeID int64 `json:"backendNodeId"`
 }
 
 // Fired when the node should be highlighted. This happens after call to `setInspectMode`.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#event-nodeHighlightRequested
 type NodeHighlightRequested struct {
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // Fired when user asks to capture screenshot of some area on the page.

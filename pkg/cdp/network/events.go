@@ -1,7 +1,5 @@
 package network
 
-import "github.com/daabr/chrome-vision/pkg/cdp"
-
 // Fired when data chunk was received over the network.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-dataReceived
@@ -82,7 +80,7 @@ type RequestIntercepted struct {
 	InterceptionID InterceptionID `json:"interceptionId"`
 	Request        Request        `json:"request"`
 	// The id of the frame that initiated the request.
-	FrameID cdp.FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 	// How the requested resource will be used.
 	ResourceType ResourceType `json:"resourceType"`
 	// Whether this is a navigation request, which can abort the navigation completely.
@@ -140,7 +138,7 @@ type RequestWillBeSent struct {
 	// Type of this resource.
 	Type *ResourceType `json:"type,omitempty"`
 	// Frame identifier.
-	FrameID *cdp.FrameID `json:"frameId,omitempty"`
+	FrameID string `json:"frameId,omitempty"`
 	// Whether the request is initiated by a user gesture. Defaults to false.
 	HasUserGesture bool `json:"hasUserGesture,omitempty"`
 }
@@ -186,7 +184,7 @@ type ResponseReceived struct {
 	// Response data.
 	Response Response `json:"response"`
 	// Frame identifier.
-	FrameID *cdp.FrameID `json:"frameId,omitempty"`
+	FrameID string `json:"frameId,omitempty"`
 }
 
 // Fired when WebSocket is closed.

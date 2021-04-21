@@ -23,10 +23,10 @@ type DeliverPushMessage struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-deliverPushMessage
-func NewDeliverPushMessage(origin string, registrationId RegistrationID, data string) *DeliverPushMessage {
+func NewDeliverPushMessage(origin string, registrationID RegistrationID, data string) *DeliverPushMessage {
 	return &DeliverPushMessage{
 		Origin:         origin,
-		RegistrationID: registrationId,
+		RegistrationID: registrationID,
 		Data:           data,
 	}
 }
@@ -92,10 +92,10 @@ type DispatchSyncEvent struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-dispatchSyncEvent
-func NewDispatchSyncEvent(origin string, registrationId RegistrationID, tag string, lastChance bool) *DispatchSyncEvent {
+func NewDispatchSyncEvent(origin string, registrationID RegistrationID, tag string, lastChance bool) *DispatchSyncEvent {
 	return &DispatchSyncEvent{
 		Origin:         origin,
-		RegistrationID: registrationId,
+		RegistrationID: registrationID,
 		Tag:            tag,
 		LastChance:     lastChance,
 	}
@@ -133,10 +133,10 @@ type DispatchPeriodicSyncEvent struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-dispatchPeriodicSyncEvent
-func NewDispatchPeriodicSyncEvent(origin string, registrationId RegistrationID, tag string) *DispatchPeriodicSyncEvent {
+func NewDispatchPeriodicSyncEvent(origin string, registrationID RegistrationID, tag string) *DispatchPeriodicSyncEvent {
 	return &DispatchPeriodicSyncEvent{
 		Origin:         origin,
-		RegistrationID: registrationId,
+		RegistrationID: registrationID,
 		Tag:            tag,
 	}
 }
@@ -199,9 +199,9 @@ type InspectWorker struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-inspectWorker
-func NewInspectWorker(versionId string) *InspectWorker {
+func NewInspectWorker(versionID string) *InspectWorker {
 	return &InspectWorker{
-		VersionID: versionId,
+		VersionID: versionID,
 	}
 }
 
@@ -371,9 +371,9 @@ type StopWorker struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-stopWorker
-func NewStopWorker(versionId string) *StopWorker {
+func NewStopWorker(versionID string) *StopWorker {
 	return &StopWorker{
-		VersionID: versionId,
+		VersionID: versionID,
 	}
 }
 

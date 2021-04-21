@@ -1,7 +1,6 @@
 package fetch
 
 import (
-	"github.com/daabr/chrome-vision/pkg/cdp"
 	"github.com/daabr/chrome-vision/pkg/cdp/network"
 )
 
@@ -19,11 +18,11 @@ type RequestPaused struct {
 	// The details of the request.
 	Request network.Request `json:"request"`
 	// The id of the frame that initiated the request.
-	FrameID cdp.FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 	// How the requested resource will be used.
-	ResourceType network.ResourceType `json:"resourceType"`
+	ResourceType string `json:"resourceType"`
 	// Response error if intercepted at response stage.
-	ResponseErrorReason *network.ErrorReason `json:"responseErrorReason,omitempty"`
+	ResponseErrorReason string `json:"responseErrorReason,omitempty"`
 	// Response code if intercepted at response stage.
 	ResponseStatusCode int64 `json:"responseStatusCode,omitempty"`
 	// Response headers if intercepted at the response stage.
@@ -43,9 +42,9 @@ type AuthRequired struct {
 	// The details of the request.
 	Request network.Request `json:"request"`
 	// The id of the frame that initiated the request.
-	FrameID cdp.FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 	// How the requested resource will be used.
-	ResourceType network.ResourceType `json:"resourceType"`
+	ResourceType string `json:"resourceType"`
 	// Details of the Authorization Challenge encountered.
 	// If this is set, client should respond with continueRequest that
 	// contains AuthChallengeResponse.

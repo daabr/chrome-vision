@@ -1,7 +1,5 @@
 package serviceworker
 
-import "github.com/daabr/chrome-vision/pkg/cdp"
-
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-RegistrationID
 type RegistrationID string
 
@@ -51,9 +49,9 @@ type ServiceWorkerVersion struct {
 	ScriptLastModified float64 `json:"scriptLastModified,omitempty"`
 	// The time at which the response headers of the main script were received from the server.
 	// For cached script it is the last time the cache entry was validated.
-	ScriptResponseTime float64        `json:"scriptResponseTime,omitempty"`
-	ControlledClients  []cdp.TargetID `json:"controlledClients,omitempty"`
-	TargetID           *cdp.TargetID  `json:"targetId,omitempty"`
+	ScriptResponseTime float64  `json:"scriptResponseTime,omitempty"`
+	ControlledClients  []string `json:"controlledClients,omitempty"`
+	TargetID           string   `json:"targetId,omitempty"`
 }
 
 // ServiceWorker error message.

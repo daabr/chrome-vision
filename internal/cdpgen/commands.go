@@ -2,6 +2,7 @@ package cdpgen
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 )
 
@@ -78,7 +79,9 @@ func generateCommands(d Domain) string {
 					// (e.g. CSS.NewSetKeyframeKey, DOMDebugger.NewRemoveDOMBreakpoint).
 					fmt.Fprintf(b, "\t\t%s: %s,\n", adjust(p.Name), string(p.Name[0]))
 				} else {
-					fmt.Fprintf(b, "\t\t%s: %s,\n", adjust(p.Name), p.Name)
+					re := regexp.MustCompile(`(Id)$`)
+					s := re.ReplaceAllLiteralString(p.Name, "ID")
+					fmt.Fprintf(b, "\t\t%s: %s,\n", adjust(p.Name), s)
 				}
 			}
 			fmt.Fprint(b, "\t")
@@ -162,7 +165,9 @@ func generateRequiredParameter(b *strings.Builder, p Property) {
 		// (e.g. CSS.NewSetKeyframeKey, DOMDebugger.NewRemoveDOMBreakpoint).
 		fmt.Fprintf(b, "%s ", string(p.Name[0]))
 	} else {
-		fmt.Fprintf(b, "%s ", p.Name)
+		re := regexp.MustCompile(`(Id)$`)
+		s := re.ReplaceAllLiteralString(p.Name, "ID")
+		fmt.Fprintf(b, "%s ", s)
 	}
 	// Type.
 	if p.Type != nil {
@@ -208,7 +213,12 @@ func generateOptionalParameter(b *strings.Builder, domain, cmd string, p Propert
 	if p.Type != nil {
 		fmt.Fprintln(b, "v") // By value - built-in JSON types.
 	} else {
-		fmt.Fprintln(b, "&v") // By reference - CDP types.
+		r := strings.ReplaceAll(adjust(*p.Ref), strings.ToLower(domain)+".", "")
+		if r == "int64" || r == "float64" || r == "string" {
+			fmt.Fprintln(b, "v") // By value - aliased built-in JSON types.
+		} else {
+			fmt.Fprintln(b, "&v") // By reference - CDP types.
+		}
 	}
 	fmt.Fprintln(b, "\treturn t")
 	fmt.Fprintln(b, "}")

@@ -1047,7 +1047,7 @@ type SetVirtualTimePolicy struct {
 	// Note any previous deferred policy change is superseded.
 	WaitForNavigation bool `json:"waitForNavigation,omitempty"`
 	// If set, base::Time::Now will be overriden to initially return this value.
-	InitialVirtualTime *cdp.TimeSinceEpoch `json:"initialVirtualTime,omitempty"`
+	InitialVirtualTime float64 `json:"initialVirtualTime,omitempty"`
 }
 
 // NewSetVirtualTimePolicy constructs a new SetVirtualTimePolicy struct instance, with
@@ -1097,8 +1097,8 @@ func (t *SetVirtualTimePolicy) SetWaitForNavigation(v bool) *SetVirtualTimePolic
 // parameter `initialVirtualTime` in the SetVirtualTimePolicy CDP command.
 //
 // If set, base::Time::Now will be overriden to initially return this value.
-func (t *SetVirtualTimePolicy) SetInitialVirtualTime(v cdp.TimeSinceEpoch) *SetVirtualTimePolicy {
-	t.InitialVirtualTime = &v
+func (t *SetVirtualTimePolicy) SetInitialVirtualTime(v float64) *SetVirtualTimePolicy {
+	t.InitialVirtualTime = v
 	return t
 }
 
@@ -1203,9 +1203,9 @@ type SetTimezoneOverride struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setTimezoneOverride
 //
 // This CDP method is experimental.
-func NewSetTimezoneOverride(timezoneId string) *SetTimezoneOverride {
+func NewSetTimezoneOverride(timezoneID string) *SetTimezoneOverride {
 	return &SetTimezoneOverride{
-		TimezoneID: timezoneId,
+		TimezoneID: timezoneID,
 	}
 }
 

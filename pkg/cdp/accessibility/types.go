@@ -2,8 +2,6 @@ package accessibility
 
 import (
 	"encoding/json"
-
-	"github.com/daabr/chrome-vision/pkg/cdp/dom"
 )
 
 // Unique accessibility node identifier.
@@ -97,7 +95,7 @@ type AXValueSource struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXRelatedNode
 type AXRelatedNode struct {
 	// The BackendNodeId of the related DOM node.
-	BackendDOMNodeID dom.BackendNodeID `json:"backendDOMNodeId"`
+	BackendDOMNodeID int64 `json:"backendDOMNodeId"`
 	// The IDRef value provided, if any.
 	Idref string `json:"idref,omitempty"`
 	// The text alternative of this node in the current context.
@@ -202,5 +200,5 @@ type AXNode struct {
 	// IDs for each of this node's child nodes.
 	ChildIds []AXNodeID `json:"childIds,omitempty"`
 	// The backend ID for the associated DOM node, if any.
-	BackendDOMNodeID *dom.BackendNodeID `json:"backendDOMNodeId,omitempty"`
+	BackendDOMNodeID int64 `json:"backendDOMNodeId,omitempty"`
 }

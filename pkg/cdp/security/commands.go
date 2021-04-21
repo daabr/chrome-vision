@@ -133,9 +133,9 @@ type HandleCertificateError struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#method-handleCertificateError
 //
 // This CDP method is deprecated.
-func NewHandleCertificateError(eventId int64, action CertificateErrorAction) *HandleCertificateError {
+func NewHandleCertificateError(eventID int64, action CertificateErrorAction) *HandleCertificateError {
 	return &HandleCertificateError{
-		EventID: eventId,
+		EventID: eventID,
 		Action:  action,
 	}
 }

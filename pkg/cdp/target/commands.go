@@ -6,7 +6,6 @@ import (
 	"errors"
 
 	"github.com/daabr/chrome-vision/pkg/cdp"
-	"github.com/daabr/chrome-vision/pkg/cdp/browser"
 )
 
 // ActivateTarget contains the parameters, and acts as
@@ -24,9 +23,9 @@ type ActivateTarget struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-activateTarget
-func NewActivateTarget(targetId TargetID) *ActivateTarget {
+func NewActivateTarget(targetID TargetID) *ActivateTarget {
 	return &ActivateTarget{
-		TargetID: targetId,
+		TargetID: targetID,
 	}
 }
 
@@ -66,9 +65,9 @@ type AttachToTarget struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-attachToTarget
-func NewAttachToTarget(targetId TargetID) *AttachToTarget {
+func NewAttachToTarget(targetID TargetID) *AttachToTarget {
 	return &AttachToTarget{
-		TargetID: targetId,
+		TargetID: targetID,
 	}
 }
 
@@ -171,9 +170,9 @@ type CloseTarget struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-closeTarget
-func NewCloseTarget(targetId TargetID) *CloseTarget {
+func NewCloseTarget(targetID TargetID) *CloseTarget {
 	return &CloseTarget{
-		TargetID: targetId,
+		TargetID: targetID,
 	}
 }
 
@@ -235,9 +234,9 @@ type ExposeDevToolsProtocol struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-exposeDevToolsProtocol
 //
 // This CDP method is experimental.
-func NewExposeDevToolsProtocol(targetId TargetID) *ExposeDevToolsProtocol {
+func NewExposeDevToolsProtocol(targetID TargetID) *ExposeDevToolsProtocol {
 	return &ExposeDevToolsProtocol{
-		TargetID: targetId,
+		TargetID: targetID,
 	}
 }
 
@@ -327,7 +326,7 @@ func (t *CreateBrowserContext) SetProxyBypassList(v string) *CreateBrowserContex
 // to calling the CreateBrowserContext CDP command with Do().
 type CreateBrowserContextResponse struct {
 	// The id of the context created.
-	BrowserContextID browser.BrowserContextID `json:"browserContextId"`
+	BrowserContextID string `json:"browserContextId"`
 }
 
 // Do sends the CreateBrowserContext CDP command to a browser,
@@ -376,7 +375,7 @@ func NewGetBrowserContexts() *GetBrowserContexts {
 // to calling the GetBrowserContexts CDP command with Do().
 type GetBrowserContextsResponse struct {
 	// An array of browser context ids.
-	BrowserContextIds []browser.BrowserContextID `json:"browserContextIds"`
+	BrowserContextIds []string `json:"browserContextIds"`
 }
 
 // Do sends the GetBrowserContexts CDP command to a browser,
@@ -410,7 +409,7 @@ type CreateTarget struct {
 	// Frame height in DIP (headless chrome only).
 	Height int64 `json:"height,omitempty"`
 	// The browser context to create the page in.
-	BrowserContextID *browser.BrowserContextID `json:"browserContextId,omitempty"`
+	BrowserContextID string `json:"browserContextId,omitempty"`
 	// Whether BeginFrames for this target will be controlled via DevTools (headless chrome only,
 	// not supported on MacOS yet, false by default).
 	//
@@ -456,8 +455,8 @@ func (t *CreateTarget) SetHeight(v int64) *CreateTarget {
 // parameter `browserContextId` in the CreateTarget CDP command.
 //
 // The browser context to create the page in.
-func (t *CreateTarget) SetBrowserContextID(v browser.BrowserContextID) *CreateTarget {
-	t.BrowserContextID = &v
+func (t *CreateTarget) SetBrowserContextID(v string) *CreateTarget {
+	t.BrowserContextID = v
 	return t
 }
 
@@ -591,7 +590,7 @@ func (t *DetachFromTarget) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type DisposeBrowserContext struct {
-	BrowserContextID browser.BrowserContextID `json:"browserContextId"`
+	BrowserContextID string `json:"browserContextId"`
 }
 
 // NewDisposeBrowserContext constructs a new DisposeBrowserContext struct instance, with
@@ -601,9 +600,9 @@ type DisposeBrowserContext struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-disposeBrowserContext
 //
 // This CDP method is experimental.
-func NewDisposeBrowserContext(browserContextId browser.BrowserContextID) *DisposeBrowserContext {
+func NewDisposeBrowserContext(browserContextID string) *DisposeBrowserContext {
 	return &DisposeBrowserContext{
-		BrowserContextID: browserContextId,
+		BrowserContextID: browserContextID,
 	}
 }
 

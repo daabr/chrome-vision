@@ -46,7 +46,7 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#method-getApplicationCacheForFrame
 type GetApplicationCacheForFrame struct {
 	// Identifier of the frame containing document whose application cache is retrieved.
-	FrameID cdp.FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 }
 
 // NewGetApplicationCacheForFrame constructs a new GetApplicationCacheForFrame struct instance, with
@@ -54,9 +54,9 @@ type GetApplicationCacheForFrame struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#method-getApplicationCacheForFrame
-func NewGetApplicationCacheForFrame(frameId cdp.FrameID) *GetApplicationCacheForFrame {
+func NewGetApplicationCacheForFrame(frameID string) *GetApplicationCacheForFrame {
 	return &GetApplicationCacheForFrame{
-		FrameID: frameId,
+		FrameID: frameID,
 	}
 }
 
@@ -139,7 +139,7 @@ func (t *GetFramesWithManifests) Do(ctx context.Context) (*GetFramesWithManifest
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#method-getManifestForFrame
 type GetManifestForFrame struct {
 	// Identifier of the frame containing document whose manifest is retrieved.
-	FrameID cdp.FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 }
 
 // NewGetManifestForFrame constructs a new GetManifestForFrame struct instance, with
@@ -147,9 +147,9 @@ type GetManifestForFrame struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#method-getManifestForFrame
-func NewGetManifestForFrame(frameId cdp.FrameID) *GetManifestForFrame {
+func NewGetManifestForFrame(frameID string) *GetManifestForFrame {
 	return &GetManifestForFrame{
-		FrameID: frameId,
+		FrameID: frameID,
 	}
 }
 

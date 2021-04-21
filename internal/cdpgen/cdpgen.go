@@ -89,6 +89,9 @@ type Event struct {
 // (one Go package per CDP domain, up to 4 files per package).
 func Generate(p Protocol) {
 	for _, d := range p.Domains {
+		generateTypes(d) // For de-aliasing of built-in JSON types.
+	}
+	for _, d := range p.Domains {
 		pkg := strings.ToLower(d.Domain)
 		writeFile(cdpRoot+"/"+pkg, "doc.go", generateDoc(d, p.Version))
 		if len(d.Types) > 0 {
@@ -119,8 +122,8 @@ func writeFile(dir, file, content string) {
 	}
 }
 
-// generateImports generates Go import statements for types, commands and events files.
-// Not really needed, given that we run "goimports" later, but still useful.
+// Generates Go import statements for types, commands and events files.
+// Not quite needed, given that we run `goimports` later, but still useful.
 func generateImports(b *strings.Builder, standrd, github []string) {
 	n := len(standrd) + len(github)
 	if n > 0 {
@@ -172,14 +175,14 @@ func adjust(s string) string {
 		s = re.ReplaceAllStringFunc(s, strings.ToLower)
 
 		// Resolve circular dependencies (https://crbug.com/1193242).
-		s = strings.ReplaceAll(s, "network.TimeSinceEpoch", "cdp.TimeSinceEpoch")
-		s = strings.ReplaceAll(s, "page.FrameID", "cdp.FrameID")
-		s = strings.ReplaceAll(s, "target.TargetID", "cdp.TargetID")
+		if t, ok := aliases[s]; ok {
+			s = t
+		}
 	}
 	return s
 }
 
-// convertType converts the given built-in JSON type to a Go data type.
+// Convert the given built-in JSON type to a Go data type.
 func convertType(t string, arrayTypes map[string]string) string {
 	switch t {
 	case "any", "object":

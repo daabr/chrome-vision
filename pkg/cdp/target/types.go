@@ -1,10 +1,5 @@
 package target
 
-import (
-	"github.com/daabr/chrome-vision/pkg/cdp"
-	"github.com/daabr/chrome-vision/pkg/cdp/browser"
-)
-
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#type-TargetID
 type TargetID string
 
@@ -30,9 +25,9 @@ type TargetInfo struct {
 	// Frame id of originating window (is only set if target has an opener).
 	//
 	// This CDP property is experimental.
-	OpenerFrameID *cdp.FrameID `json:"openerFrameId,omitempty"`
+	OpenerFrameID string `json:"openerFrameId,omitempty"`
 	// This CDP property is experimental.
-	BrowserContextID *browser.BrowserContextID `json:"browserContextId,omitempty"`
+	BrowserContextID string `json:"browserContextId,omitempty"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#type-RemoteLocation

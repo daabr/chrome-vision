@@ -132,9 +132,9 @@ type RemoveVirtualAuthenticator struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-removeVirtualAuthenticator
-func NewRemoveVirtualAuthenticator(authenticatorId AuthenticatorID) *RemoveVirtualAuthenticator {
+func NewRemoveVirtualAuthenticator(authenticatorID AuthenticatorID) *RemoveVirtualAuthenticator {
 	return &RemoveVirtualAuthenticator{
-		AuthenticatorID: authenticatorId,
+		AuthenticatorID: authenticatorID,
 	}
 }
 
@@ -171,9 +171,9 @@ type AddCredential struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-addCredential
-func NewAddCredential(authenticatorId AuthenticatorID, credential Credential) *AddCredential {
+func NewAddCredential(authenticatorID AuthenticatorID, credential Credential) *AddCredential {
 	return &AddCredential{
-		AuthenticatorID: authenticatorId,
+		AuthenticatorID: authenticatorID,
 		Credential:      credential,
 	}
 }
@@ -212,10 +212,10 @@ type GetCredential struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-getCredential
-func NewGetCredential(authenticatorId AuthenticatorID, credentialId string) *GetCredential {
+func NewGetCredential(authenticatorID AuthenticatorID, credentialID string) *GetCredential {
 	return &GetCredential{
-		AuthenticatorID: authenticatorId,
-		CredentialID:    credentialId,
+		AuthenticatorID: authenticatorID,
+		CredentialID:    credentialID,
 	}
 }
 
@@ -261,9 +261,9 @@ type GetCredentials struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-getCredentials
-func NewGetCredentials(authenticatorId AuthenticatorID) *GetCredentials {
+func NewGetCredentials(authenticatorID AuthenticatorID) *GetCredentials {
 	return &GetCredentials{
-		AuthenticatorID: authenticatorId,
+		AuthenticatorID: authenticatorID,
 	}
 }
 
@@ -310,10 +310,10 @@ type RemoveCredential struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-removeCredential
-func NewRemoveCredential(authenticatorId AuthenticatorID, credentialId string) *RemoveCredential {
+func NewRemoveCredential(authenticatorID AuthenticatorID, credentialID string) *RemoveCredential {
 	return &RemoveCredential{
-		AuthenticatorID: authenticatorId,
-		CredentialID:    credentialId,
+		AuthenticatorID: authenticatorID,
+		CredentialID:    credentialID,
 	}
 }
 
@@ -349,9 +349,9 @@ type ClearCredentials struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-clearCredentials
-func NewClearCredentials(authenticatorId AuthenticatorID) *ClearCredentials {
+func NewClearCredentials(authenticatorID AuthenticatorID) *ClearCredentials {
 	return &ClearCredentials{
-		AuthenticatorID: authenticatorId,
+		AuthenticatorID: authenticatorID,
 	}
 }
 
@@ -389,9 +389,9 @@ type SetUserVerified struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-setUserVerified
-func NewSetUserVerified(authenticatorId AuthenticatorID, isUserVerified bool) *SetUserVerified {
+func NewSetUserVerified(authenticatorID AuthenticatorID, isUserVerified bool) *SetUserVerified {
 	return &SetUserVerified{
-		AuthenticatorID: authenticatorId,
+		AuthenticatorID: authenticatorID,
 		IsUserVerified:  isUserVerified,
 	}
 }
@@ -430,9 +430,9 @@ type SetAutomaticPresenceSimulation struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-setAutomaticPresenceSimulation
-func NewSetAutomaticPresenceSimulation(authenticatorId AuthenticatorID, enabled bool) *SetAutomaticPresenceSimulation {
+func NewSetAutomaticPresenceSimulation(authenticatorID AuthenticatorID, enabled bool) *SetAutomaticPresenceSimulation {
 	return &SetAutomaticPresenceSimulation{
-		AuthenticatorID: authenticatorId,
+		AuthenticatorID: authenticatorID,
 		Enabled:         enabled,
 	}
 }

@@ -1,10 +1,5 @@
 package page
 
-import (
-	"github.com/daabr/chrome-vision/pkg/cdp"
-	"github.com/daabr/chrome-vision/pkg/cdp/network"
-)
-
 // Unique frame identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-FrameId
@@ -170,7 +165,7 @@ type Frame struct {
 	// Parent frame identifier.
 	ParentID string `json:"parentId,omitempty"`
 	// Identifier of the loader associated with this frame.
-	LoaderID network.LoaderID `json:"loaderId"`
+	LoaderID string `json:"loaderId"`
 	// Frame's name as specified in the tag.
 	Name string `json:"name,omitempty"`
 	// Frame document's URL without fragment.
@@ -221,11 +216,11 @@ type FrameResource struct {
 	// Resource URL.
 	URL string `json:"url"`
 	// Type of this resource.
-	Type network.ResourceType `json:"type"`
+	Type string `json:"type"`
 	// Resource mimeType as determined by the browser.
 	MimeType string `json:"mimeType"`
 	// last-modified timestamp as reported by server.
-	LastModified *cdp.TimeSinceEpoch `json:"lastModified,omitempty"`
+	LastModified float64 `json:"lastModified,omitempty"`
 	// Resource content size.
 	ContentSize float64 `json:"contentSize,omitempty"`
 	// True if the resource failed to load.
@@ -320,7 +315,7 @@ type ScreencastFrameMetadata struct {
 	// Position of vertical scroll in CSS pixels.
 	ScrollOffsetY float64 `json:"scrollOffsetY"`
 	// Frame swap timestamp.
-	Timestamp *cdp.TimeSinceEpoch `json:"timestamp,omitempty"`
+	Timestamp float64 `json:"timestamp,omitempty"`
 }
 
 // Javascript dialog type.

@@ -78,7 +78,7 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-getHighlightObjectForTest
 type GetHighlightObjectForTest struct {
 	// Id of the node to get highlight object for.
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// Whether to include distance info.
 	IncludeDistance bool `json:"includeDistance,omitempty"`
 	// Whether to include style info.
@@ -94,9 +94,9 @@ type GetHighlightObjectForTest struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-getHighlightObjectForTest
-func NewGetHighlightObjectForTest(nodeId dom.NodeID) *GetHighlightObjectForTest {
+func NewGetHighlightObjectForTest(nodeID int64) *GetHighlightObjectForTest {
 	return &GetHighlightObjectForTest{
-		NodeID: nodeId,
+		NodeID: nodeID,
 	}
 }
 
@@ -172,7 +172,7 @@ func (t *GetHighlightObjectForTest) Do(ctx context.Context) (*GetHighlightObject
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-getGridHighlightObjectsForTest
 type GetGridHighlightObjectsForTest struct {
 	// Ids of the node to get highlight object for.
-	NodeIds []dom.NodeID `json:"nodeIds"`
+	NodeIds []int64 `json:"nodeIds"`
 }
 
 // NewGetGridHighlightObjectsForTest constructs a new GetGridHighlightObjectsForTest struct instance, with
@@ -180,7 +180,7 @@ type GetGridHighlightObjectsForTest struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-getGridHighlightObjectsForTest
-func NewGetGridHighlightObjectsForTest(nodeIds []dom.NodeID) *GetGridHighlightObjectsForTest {
+func NewGetGridHighlightObjectsForTest(nodeIds []int64) *GetGridHighlightObjectsForTest {
 	return &GetGridHighlightObjectsForTest{
 		NodeIds: nodeIds,
 	}
@@ -222,7 +222,7 @@ func (t *GetGridHighlightObjectsForTest) Do(ctx context.Context) (*GetGridHighli
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-getSourceOrderHighlightObjectForTest
 type GetSourceOrderHighlightObjectForTest struct {
 	// Id of the node to highlight.
-	NodeID dom.NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetSourceOrderHighlightObjectForTest constructs a new GetSourceOrderHighlightObjectForTest struct instance, with
@@ -230,9 +230,9 @@ type GetSourceOrderHighlightObjectForTest struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-getSourceOrderHighlightObjectForTest
-func NewGetSourceOrderHighlightObjectForTest(nodeId dom.NodeID) *GetSourceOrderHighlightObjectForTest {
+func NewGetSourceOrderHighlightObjectForTest(nodeID int64) *GetSourceOrderHighlightObjectForTest {
 	return &GetSourceOrderHighlightObjectForTest{
-		NodeID: nodeId,
+		NodeID: nodeID,
 	}
 }
 
@@ -302,7 +302,7 @@ func (t *HideHighlight) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightFrame
 type HighlightFrame struct {
 	// Identifier of the frame to highlight.
-	FrameID cdp.FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 	// The content box highlight fill color (default: transparent).
 	ContentColor *dom.RGBA `json:"contentColor,omitempty"`
 	// The content box highlight outline color (default: transparent).
@@ -314,9 +314,9 @@ type HighlightFrame struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightFrame
-func NewHighlightFrame(frameId cdp.FrameID) *HighlightFrame {
+func NewHighlightFrame(frameID string) *HighlightFrame {
 	return &HighlightFrame{
-		FrameID: frameId,
+		FrameID: frameID,
 	}
 }
 
@@ -366,9 +366,9 @@ type HighlightNode struct {
 	// A descriptor for the highlight appearance.
 	HighlightConfig HighlightConfig `json:"highlightConfig"`
 	// Identifier of the node to highlight.
-	NodeID *dom.NodeID `json:"nodeId,omitempty"`
+	NodeID int64 `json:"nodeId,omitempty"`
 	// Identifier of the backend node to highlight.
-	BackendNodeID *dom.BackendNodeID `json:"backendNodeId,omitempty"`
+	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 	// JavaScript object id of the node to be highlighted.
 	ObjectID *runtime.RemoteObjectID `json:"objectId,omitempty"`
 	// Selectors to highlight relevant nodes.
@@ -390,8 +390,8 @@ func NewHighlightNode(highlightConfig HighlightConfig) *HighlightNode {
 // parameter `nodeId` in the HighlightNode CDP command.
 //
 // Identifier of the node to highlight.
-func (t *HighlightNode) SetNodeID(v dom.NodeID) *HighlightNode {
-	t.NodeID = &v
+func (t *HighlightNode) SetNodeID(v int64) *HighlightNode {
+	t.NodeID = v
 	return t
 }
 
@@ -399,8 +399,8 @@ func (t *HighlightNode) SetNodeID(v dom.NodeID) *HighlightNode {
 // parameter `backendNodeId` in the HighlightNode CDP command.
 //
 // Identifier of the backend node to highlight.
-func (t *HighlightNode) SetBackendNodeID(v dom.BackendNodeID) *HighlightNode {
-	t.BackendNodeID = &v
+func (t *HighlightNode) SetBackendNodeID(v int64) *HighlightNode {
+	t.BackendNodeID = v
 	return t
 }
 
@@ -581,9 +581,9 @@ type HighlightSourceOrder struct {
 	// A descriptor for the appearance of the overlay drawing.
 	SourceOrderConfig SourceOrderConfig `json:"sourceOrderConfig"`
 	// Identifier of the node to highlight.
-	NodeID *dom.NodeID `json:"nodeId,omitempty"`
+	NodeID int64 `json:"nodeId,omitempty"`
 	// Identifier of the backend node to highlight.
-	BackendNodeID *dom.BackendNodeID `json:"backendNodeId,omitempty"`
+	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 	// JavaScript object id of the node to be highlighted.
 	ObjectID *runtime.RemoteObjectID `json:"objectId,omitempty"`
 }
@@ -603,8 +603,8 @@ func NewHighlightSourceOrder(sourceOrderConfig SourceOrderConfig) *HighlightSour
 // parameter `nodeId` in the HighlightSourceOrder CDP command.
 //
 // Identifier of the node to highlight.
-func (t *HighlightSourceOrder) SetNodeID(v dom.NodeID) *HighlightSourceOrder {
-	t.NodeID = &v
+func (t *HighlightSourceOrder) SetNodeID(v int64) *HighlightSourceOrder {
+	t.NodeID = v
 	return t
 }
 
@@ -612,8 +612,8 @@ func (t *HighlightSourceOrder) SetNodeID(v dom.NodeID) *HighlightSourceOrder {
 // parameter `backendNodeId` in the HighlightSourceOrder CDP command.
 //
 // Identifier of the backend node to highlight.
-func (t *HighlightSourceOrder) SetBackendNodeID(v dom.BackendNodeID) *HighlightSourceOrder {
-	t.BackendNodeID = &v
+func (t *HighlightSourceOrder) SetBackendNodeID(v int64) *HighlightSourceOrder {
+	t.BackendNodeID = v
 	return t
 }
 

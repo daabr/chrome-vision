@@ -2,8 +2,6 @@ package dom
 
 import (
 	"encoding/json"
-
-	"github.com/daabr/chrome-vision/pkg/cdp"
 )
 
 // Unique DOM node identifier.
@@ -116,7 +114,7 @@ type Node struct {
 	// Shadow root type.
 	ShadowRootType *ShadowRootType `json:"shadowRootType,omitempty"`
 	// Frame ID for frame owner elements.
-	FrameID *cdp.FrameID `json:"frameId,omitempty"`
+	FrameID string `json:"frameId,omitempty"`
 	// Content document for frame owner elements.
 	ContentDocument *Node `json:"contentDocument,omitempty"`
 	// Shadow root list for given element host.
