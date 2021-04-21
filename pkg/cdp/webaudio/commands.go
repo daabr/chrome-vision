@@ -75,7 +75,7 @@ func (t *Disable) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#method-getRealtimeData
 type GetRealtimeData struct {
-	ContextID GraphObjectID `json:"contextId"`
+	ContextID string `json:"contextId"`
 }
 
 // NewGetRealtimeData constructs a new GetRealtimeData struct instance, with
@@ -83,7 +83,7 @@ type GetRealtimeData struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#method-getRealtimeData
-func NewGetRealtimeData(contextID GraphObjectID) *GetRealtimeData {
+func NewGetRealtimeData(contextID string) *GetRealtimeData {
 	return &GetRealtimeData{
 		ContextID: contextID,
 	}

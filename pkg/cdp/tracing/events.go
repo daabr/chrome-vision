@@ -35,7 +35,7 @@ type TracingComplete struct {
 	// A handle of the stream that holds resulting trace data.
 	Stream string `json:"stream,omitempty"`
 	// Trace data format of returned stream.
-	TraceFormat *StreamFormat `json:"traceFormat,omitempty"`
+	TraceFormat string `json:"traceFormat,omitempty"`
 	// Compression format of returned stream.
-	StreamCompression *StreamCompression `json:"streamCompression,omitempty"`
+	StreamCompression string `json:"streamCompression,omitempty"`
 }

@@ -5,9 +5,9 @@ package network
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-dataReceived
 type DataReceived struct {
 	// Request identifier.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Timestamp.
-	Timestamp MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 	// Data chunk length.
 	DataLength int64 `json:"dataLength"`
 	// Actual bytes received (might be less than dataLength for compressed encodings).
@@ -19,9 +19,9 @@ type DataReceived struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-eventSourceMessageReceived
 type EventSourceMessageReceived struct {
 	// Request identifier.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Timestamp.
-	Timestamp MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 	// Message type.
 	EventName string `json:"eventName"`
 	// Message identifier.
@@ -35,17 +35,17 @@ type EventSourceMessageReceived struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-loadingFailed
 type LoadingFailed struct {
 	// Request identifier.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Timestamp.
-	Timestamp MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 	// Resource type.
-	Type ResourceType `json:"type"`
+	Type string `json:"type"`
 	// User friendly error message.
 	ErrorText string `json:"errorText"`
 	// True if loading was canceled.
 	Canceled bool `json:"canceled,omitempty"`
 	// The reason why loading was blocked, if any.
-	BlockedReason *BlockedReason `json:"blockedReason,omitempty"`
+	BlockedReason string `json:"blockedReason,omitempty"`
 	// The reason why loading was blocked by CORS, if any.
 	CorsErrorStatus *CorsErrorStatus `json:"corsErrorStatus,omitempty"`
 }
@@ -55,9 +55,9 @@ type LoadingFailed struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-loadingFinished
 type LoadingFinished struct {
 	// Request identifier.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Timestamp.
-	Timestamp MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 	// Total number of bytes received for this request.
 	EncodedDataLength float64 `json:"encodedDataLength"`
 	// Set when 1) response was blocked by Cross-Origin Read Blocking and also
@@ -77,12 +77,12 @@ type RequestIntercepted struct {
 	// Each request the page makes will have a unique id, however if any redirects are encountered
 	// while processing that fetch, they will be reported with the same id as the original fetch.
 	// Likewise if HTTP authentication is needed then the same fetch id will be used.
-	InterceptionID InterceptionID `json:"interceptionId"`
-	Request        Request        `json:"request"`
+	InterceptionID string  `json:"interceptionId"`
+	Request        Request `json:"request"`
 	// The id of the frame that initiated the request.
 	FrameID string `json:"frameId"`
 	// How the requested resource will be used.
-	ResourceType ResourceType `json:"resourceType"`
+	ResourceType string `json:"resourceType"`
 	// Whether this is a navigation request, which can abort the navigation completely.
 	IsNavigationRequest bool `json:"isNavigationRequest"`
 	// Set if the request is a navigation that will result in a download.
@@ -95,7 +95,7 @@ type RequestIntercepted struct {
 	AuthChallenge *AuthChallenge `json:"authChallenge,omitempty"`
 	// Response error if intercepted at response stage or if redirect occurred while intercepting
 	// request.
-	ResponseErrorReason *ErrorReason `json:"responseErrorReason,omitempty"`
+	ResponseErrorReason string `json:"responseErrorReason,omitempty"`
 	// Response code if intercepted at response stage or if redirect occurred while intercepting
 	// request or auth retry occurred.
 	ResponseStatusCode int64 `json:"responseStatusCode,omitempty"`
@@ -104,7 +104,7 @@ type RequestIntercepted struct {
 	ResponseHeaders *Headers `json:"responseHeaders,omitempty"`
 	// If the intercepted request had a corresponding requestWillBeSent event fired for it, then
 	// this requestId will be the same as the requestId present in the requestWillBeSent event.
-	RequestID *RequestID `json:"requestId,omitempty"`
+	RequestID string `json:"requestId,omitempty"`
 }
 
 // Fired if request ended up loading from cache.
@@ -112,7 +112,7 @@ type RequestIntercepted struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-requestServedFromCache
 type RequestServedFromCache struct {
 	// Request identifier.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 }
 
 // Fired when page is about to send HTTP request.
@@ -120,23 +120,23 @@ type RequestServedFromCache struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-requestWillBeSent
 type RequestWillBeSent struct {
 	// Request identifier.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Loader identifier. Empty string if the request is fetched from worker.
-	LoaderID LoaderID `json:"loaderId"`
+	LoaderID string `json:"loaderId"`
 	// URL of the document this request is loaded for.
 	DocumentURL string `json:"documentURL"`
 	// Request data.
 	Request Request `json:"request"`
 	// Timestamp.
-	Timestamp MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 	// Timestamp.
-	WallTime TimeSinceEpoch `json:"wallTime"`
+	WallTime float64 `json:"wallTime"`
 	// Request initiator.
 	Initiator Initiator `json:"initiator"`
 	// Redirect response data.
 	RedirectResponse *Response `json:"redirectResponse,omitempty"`
 	// Type of this resource.
-	Type *ResourceType `json:"type,omitempty"`
+	Type string `json:"type,omitempty"`
 	// Frame identifier.
 	FrameID string `json:"frameId,omitempty"`
 	// Whether the request is initiated by a user gesture. Defaults to false.
@@ -150,11 +150,11 @@ type RequestWillBeSent struct {
 // This CDP event is experimental.
 type ResourceChangedPriority struct {
 	// Request identifier.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// New priority
-	NewPriority ResourcePriority `json:"newPriority"`
+	NewPriority string `json:"newPriority"`
 	// Timestamp.
-	Timestamp MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 }
 
 // Fired when a signed exchange was received over the network
@@ -164,7 +164,7 @@ type ResourceChangedPriority struct {
 // This CDP event is experimental.
 type SignedExchangeReceived struct {
 	// Request identifier.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Information about the signed exchange response.
 	Info SignedExchangeInfo `json:"info"`
 }
@@ -174,13 +174,13 @@ type SignedExchangeReceived struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-responseReceived
 type ResponseReceived struct {
 	// Request identifier.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Loader identifier. Empty string if the request is fetched from worker.
-	LoaderID LoaderID `json:"loaderId"`
+	LoaderID string `json:"loaderId"`
 	// Timestamp.
-	Timestamp MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 	// Resource type.
-	Type ResourceType `json:"type"`
+	Type string `json:"type"`
 	// Response data.
 	Response Response `json:"response"`
 	// Frame identifier.
@@ -192,9 +192,9 @@ type ResponseReceived struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webSocketClosed
 type WebSocketClosed struct {
 	// Request identifier.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Timestamp.
-	Timestamp MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 }
 
 // Fired upon WebSocket creation.
@@ -202,7 +202,7 @@ type WebSocketClosed struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webSocketCreated
 type WebSocketCreated struct {
 	// Request identifier.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// WebSocket request URL.
 	URL string `json:"url"`
 	// Request initiator.
@@ -214,9 +214,9 @@ type WebSocketCreated struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webSocketFrameError
 type WebSocketFrameError struct {
 	// Request identifier.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Timestamp.
-	Timestamp MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 	// WebSocket error message.
 	ErrorMessage string `json:"errorMessage"`
 }
@@ -226,9 +226,9 @@ type WebSocketFrameError struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webSocketFrameReceived
 type WebSocketFrameReceived struct {
 	// Request identifier.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Timestamp.
-	Timestamp MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 	// WebSocket response data.
 	Response WebSocketFrame `json:"response"`
 }
@@ -238,9 +238,9 @@ type WebSocketFrameReceived struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webSocketFrameSent
 type WebSocketFrameSent struct {
 	// Request identifier.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Timestamp.
-	Timestamp MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 	// WebSocket response data.
 	Response WebSocketFrame `json:"response"`
 }
@@ -250,9 +250,9 @@ type WebSocketFrameSent struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webSocketHandshakeResponseReceived
 type WebSocketHandshakeResponseReceived struct {
 	// Request identifier.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Timestamp.
-	Timestamp MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 	// WebSocket response data.
 	Response WebSocketResponse `json:"response"`
 }
@@ -262,11 +262,11 @@ type WebSocketHandshakeResponseReceived struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webSocketWillSendHandshakeRequest
 type WebSocketWillSendHandshakeRequest struct {
 	// Request identifier.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Timestamp.
-	Timestamp MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 	// UTC Timestamp.
-	WallTime TimeSinceEpoch `json:"wallTime"`
+	WallTime float64 `json:"wallTime"`
 	// WebSocket request data.
 	Request WebSocketRequest `json:"request"`
 }
@@ -276,11 +276,11 @@ type WebSocketWillSendHandshakeRequest struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webTransportCreated
 type WebTransportCreated struct {
 	// WebTransport identifier.
-	TransportID RequestID `json:"transportId"`
+	TransportID string `json:"transportId"`
 	// WebTransport request URL.
 	URL string `json:"url"`
 	// Timestamp.
-	Timestamp MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 	// Request initiator.
 	Initiator *Initiator `json:"initiator,omitempty"`
 }
@@ -290,9 +290,9 @@ type WebTransportCreated struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webTransportConnectionEstablished
 type WebTransportConnectionEstablished struct {
 	// WebTransport identifier.
-	TransportID RequestID `json:"transportId"`
+	TransportID string `json:"transportId"`
 	// Timestamp.
-	Timestamp MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 }
 
 // Fired when WebTransport is disposed.
@@ -300,9 +300,9 @@ type WebTransportConnectionEstablished struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webTransportClosed
 type WebTransportClosed struct {
 	// WebTransport identifier.
-	TransportID RequestID `json:"transportId"`
+	TransportID string `json:"transportId"`
 	// Timestamp.
-	Timestamp MonotonicTime `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 }
 
 // Fired when additional information about a requestWillBeSent event is available from the
@@ -315,7 +315,7 @@ type WebTransportClosed struct {
 // This CDP event is experimental.
 type RequestWillBeSentExtraInfo struct {
 	// Request identifier. Used to match this information to an existing requestWillBeSent event.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// A list of cookies potentially associated to the requested URL. This includes both cookies sent with
 	// the request and the ones not sent; the latter are distinguished by having blockedReason field set.
 	AssociatedCookies []BlockedCookieWithReason `json:"associatedCookies"`
@@ -334,7 +334,7 @@ type RequestWillBeSentExtraInfo struct {
 // This CDP event is experimental.
 type ResponseReceivedExtraInfo struct {
 	// Request identifier. Used to match this information to another responseReceived event.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// A list of cookies which were not stored from the response along with the corresponding
 	// reasons for blocking. The cookies here may not be valid due to syntax errors, which
 	// are represented by the invalid cookie line string instead of a proper cookie.
@@ -343,7 +343,7 @@ type ResponseReceivedExtraInfo struct {
 	Headers Headers `json:"headers"`
 	// The IP address space of the resource. The address space can only be determined once the transport
 	// established the connection, so we can't send it in `requestWillBeSentExtraInfo`.
-	ResourceIPAddressSpace IPAddressSpace `json:"resourceIPAddressSpace"`
+	ResourceIPAddressSpace string `json:"resourceIPAddressSpace"`
 	// Raw response header text as it was received over the wire. The raw text may not always be
 	// available, such as in the case of HTTP/2 or QUIC.
 	HeadersText string `json:"headersText,omitempty"`
@@ -362,9 +362,9 @@ type TrustTokenOperationDone struct {
 	// 'AlreadyExists' also signifies a successful operation, as the result
 	// of the operation already exists und thus, the operation was abort
 	// preemptively (e.g. a cache hit).
-	Status    string                  `json:"status"`
-	Type      TrustTokenOperationType `json:"type"`
-	RequestID RequestID               `json:"requestId"`
+	Status    string `json:"status"`
+	Type      string `json:"type"`
+	RequestID string `json:"requestId"`
 	// Top level origin. The context in which the operation was attempted.
 	TopLevelOrigin string `json:"topLevelOrigin,omitempty"`
 	// Origin of the issuer in case of a "Issuance" or "Redemption" operation.

@@ -143,15 +143,15 @@ const (
 //
 // This CDP type is experimental.
 type PermissionsPolicyBlockLocator struct {
-	FrameID     FrameID                      `json:"frameId"`
-	BlockReason PermissionsPolicyBlockReason `json:"blockReason"`
+	FrameID     string `json:"frameId"`
+	BlockReason string `json:"blockReason"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-PermissionsPolicyFeatureState
 //
 // This CDP type is experimental.
 type PermissionsPolicyFeatureState struct {
-	Feature PermissionsPolicyFeature       `json:"feature"`
+	Feature string                         `json:"feature"`
 	Allowed bool                           `json:"allowed"`
 	Locator *PermissionsPolicyBlockLocator `json:"locator,omitempty"`
 }
@@ -161,7 +161,7 @@ type PermissionsPolicyFeatureState struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-Frame
 type Frame struct {
 	// Frame unique identifier.
-	ID FrameID `json:"id"`
+	ID string `json:"id"`
 	// Parent frame identifier.
 	ParentID string `json:"parentId,omitempty"`
 	// Identifier of the loader associated with this frame.
@@ -192,15 +192,15 @@ type Frame struct {
 	// Indicates whether this frame was tagged as an ad.
 	//
 	// This CDP property is experimental.
-	AdFrameType *AdFrameType `json:"adFrameType,omitempty"`
+	AdFrameType string `json:"adFrameType,omitempty"`
 	// Indicates whether the main document is a secure context and explains why that is the case.
 	//
 	// This CDP property is experimental.
-	SecureContextType SecureContextType `json:"secureContextType"`
+	SecureContextType string `json:"secureContextType"`
 	// Indicates whether this is a cross origin isolated context.
 	//
 	// This CDP property is experimental.
-	CrossOriginIsolatedContextType CrossOriginIsolatedContextType `json:"crossOriginIsolatedContextType"`
+	CrossOriginIsolatedContextType string `json:"crossOriginIsolatedContextType"`
 	// Indicated which gated APIs / features are available.
 	//
 	// This CDP property is experimental.
@@ -293,7 +293,7 @@ type NavigationEntry struct {
 	// Title of the navigation history entry.
 	Title string `json:"title"`
 	// Transition type.
-	TransitionType TransitionType `json:"transitionType"`
+	TransitionType string `json:"transitionType"`
 }
 
 // Screencast frame metadata.

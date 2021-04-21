@@ -15,7 +15,7 @@ import (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#method-startObserving
 type StartObserving struct {
-	Service ServiceName `json:"service"`
+	Service string `json:"service"`
 }
 
 // NewStartObserving constructs a new StartObserving struct instance, with
@@ -23,7 +23,7 @@ type StartObserving struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#method-startObserving
-func NewStartObserving(service ServiceName) *StartObserving {
+func NewStartObserving(service string) *StartObserving {
 	return &StartObserving{
 		Service: service,
 	}
@@ -53,7 +53,7 @@ func (t *StartObserving) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#method-stopObserving
 type StopObserving struct {
-	Service ServiceName `json:"service"`
+	Service string `json:"service"`
 }
 
 // NewStopObserving constructs a new StopObserving struct instance, with
@@ -61,7 +61,7 @@ type StopObserving struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#method-stopObserving
-func NewStopObserving(service ServiceName) *StopObserving {
+func NewStopObserving(service string) *StopObserving {
 	return &StopObserving{
 		Service: service,
 	}
@@ -91,8 +91,8 @@ func (t *StopObserving) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#method-setRecording
 type SetRecording struct {
-	ShouldRecord bool        `json:"shouldRecord"`
-	Service      ServiceName `json:"service"`
+	ShouldRecord bool   `json:"shouldRecord"`
+	Service      string `json:"service"`
 }
 
 // NewSetRecording constructs a new SetRecording struct instance, with
@@ -100,7 +100,7 @@ type SetRecording struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#method-setRecording
-func NewSetRecording(shouldRecord bool, service ServiceName) *SetRecording {
+func NewSetRecording(shouldRecord bool, service string) *SetRecording {
 	return &SetRecording{
 		ShouldRecord: shouldRecord,
 		Service:      service,
@@ -131,7 +131,7 @@ func (t *SetRecording) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#method-clearEvents
 type ClearEvents struct {
-	Service ServiceName `json:"service"`
+	Service string `json:"service"`
 }
 
 // NewClearEvents constructs a new ClearEvents struct instance, with
@@ -139,7 +139,7 @@ type ClearEvents struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#method-clearEvents
-func NewClearEvents(service ServiceName) *ClearEvents {
+func NewClearEvents(service string) *ClearEvents {
 	return &ClearEvents{
 		Service: service,
 	}

@@ -17,7 +17,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-compositingReasons
 type CompositingReasons struct {
 	// The id of the layer for which we want to get the reasons it was composited.
-	LayerID LayerID `json:"layerId"`
+	LayerID string `json:"layerId"`
 }
 
 // NewCompositingReasons constructs a new CompositingReasons struct instance, with
@@ -25,7 +25,7 @@ type CompositingReasons struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-compositingReasons
-func NewCompositingReasons(layerID LayerID) *CompositingReasons {
+func NewCompositingReasons(layerID string) *CompositingReasons {
 	return &CompositingReasons{
 		LayerID: layerID,
 	}
@@ -149,7 +149,7 @@ func NewLoadSnapshot(tiles []PictureTile) *LoadSnapshot {
 // to calling the LoadSnapshot CDP command with Do().
 type LoadSnapshotResponse struct {
 	// The id of the snapshot.
-	SnapshotID SnapshotID `json:"snapshotId"`
+	SnapshotID string `json:"snapshotId"`
 }
 
 // Do sends the LoadSnapshot CDP command to a browser,
@@ -181,7 +181,7 @@ func (t *LoadSnapshot) Do(ctx context.Context) (*LoadSnapshotResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-makeSnapshot
 type MakeSnapshot struct {
 	// The id of the layer.
-	LayerID LayerID `json:"layerId"`
+	LayerID string `json:"layerId"`
 }
 
 // NewMakeSnapshot constructs a new MakeSnapshot struct instance, with
@@ -189,7 +189,7 @@ type MakeSnapshot struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-makeSnapshot
-func NewMakeSnapshot(layerID LayerID) *MakeSnapshot {
+func NewMakeSnapshot(layerID string) *MakeSnapshot {
 	return &MakeSnapshot{
 		LayerID: layerID,
 	}
@@ -199,7 +199,7 @@ func NewMakeSnapshot(layerID LayerID) *MakeSnapshot {
 // to calling the MakeSnapshot CDP command with Do().
 type MakeSnapshotResponse struct {
 	// The id of the layer snapshot.
-	SnapshotID SnapshotID `json:"snapshotId"`
+	SnapshotID string `json:"snapshotId"`
 }
 
 // Do sends the MakeSnapshot CDP command to a browser,
@@ -229,7 +229,7 @@ func (t *MakeSnapshot) Do(ctx context.Context) (*MakeSnapshotResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-profileSnapshot
 type ProfileSnapshot struct {
 	// The id of the layer snapshot.
-	SnapshotID SnapshotID `json:"snapshotId"`
+	SnapshotID string `json:"snapshotId"`
 	// The maximum number of times to replay the snapshot (1, if not specified).
 	MinRepeatCount int64 `json:"minRepeatCount,omitempty"`
 	// The minimum duration (in seconds) to replay the snapshot.
@@ -243,7 +243,7 @@ type ProfileSnapshot struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-profileSnapshot
-func NewProfileSnapshot(snapshotID SnapshotID) *ProfileSnapshot {
+func NewProfileSnapshot(snapshotID string) *ProfileSnapshot {
 	return &ProfileSnapshot{
 		SnapshotID: snapshotID,
 	}
@@ -312,7 +312,7 @@ func (t *ProfileSnapshot) Do(ctx context.Context) (*ProfileSnapshotResponse, err
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-releaseSnapshot
 type ReleaseSnapshot struct {
 	// The id of the layer snapshot.
-	SnapshotID SnapshotID `json:"snapshotId"`
+	SnapshotID string `json:"snapshotId"`
 }
 
 // NewReleaseSnapshot constructs a new ReleaseSnapshot struct instance, with
@@ -320,7 +320,7 @@ type ReleaseSnapshot struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-releaseSnapshot
-func NewReleaseSnapshot(snapshotID SnapshotID) *ReleaseSnapshot {
+func NewReleaseSnapshot(snapshotID string) *ReleaseSnapshot {
 	return &ReleaseSnapshot{
 		SnapshotID: snapshotID,
 	}
@@ -351,7 +351,7 @@ func (t *ReleaseSnapshot) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-replaySnapshot
 type ReplaySnapshot struct {
 	// The id of the layer snapshot.
-	SnapshotID SnapshotID `json:"snapshotId"`
+	SnapshotID string `json:"snapshotId"`
 	// The first step to replay from (replay from the very start if not specified).
 	FromStep int64 `json:"fromStep,omitempty"`
 	// The last step to replay to (replay till the end if not specified).
@@ -365,7 +365,7 @@ type ReplaySnapshot struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-replaySnapshot
-func NewReplaySnapshot(snapshotID SnapshotID) *ReplaySnapshot {
+func NewReplaySnapshot(snapshotID string) *ReplaySnapshot {
 	return &ReplaySnapshot{
 		SnapshotID: snapshotID,
 	}
@@ -434,7 +434,7 @@ func (t *ReplaySnapshot) Do(ctx context.Context) (*ReplaySnapshotResponse, error
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-snapshotCommandLog
 type SnapshotCommandLog struct {
 	// The id of the layer snapshot.
-	SnapshotID SnapshotID `json:"snapshotId"`
+	SnapshotID string `json:"snapshotId"`
 }
 
 // NewSnapshotCommandLog constructs a new SnapshotCommandLog struct instance, with
@@ -442,7 +442,7 @@ type SnapshotCommandLog struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-snapshotCommandLog
-func NewSnapshotCommandLog(snapshotID SnapshotID) *SnapshotCommandLog {
+func NewSnapshotCommandLog(snapshotID string) *SnapshotCommandLog {
 	return &SnapshotCommandLog{
 		SnapshotID: snapshotID,
 	}

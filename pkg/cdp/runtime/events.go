@@ -11,7 +11,7 @@ type BindingCalled struct {
 	Name    string `json:"name"`
 	Payload string `json:"payload"`
 	// Identifier of the context where the call was made.
-	ExecutionContextID ExecutionContextID `json:"executionContextId"`
+	ExecutionContextID int64 `json:"executionContextId"`
 }
 
 // Issued when console API was called.
@@ -23,9 +23,9 @@ type ConsoleAPICalled struct {
 	// Call arguments.
 	Args []RemoteObject `json:"args"`
 	// Identifier of the context where the call was made.
-	ExecutionContextID ExecutionContextID `json:"executionContextId"`
+	ExecutionContextID int64 `json:"executionContextId"`
 	// Call timestamp.
-	Timestamp Timestamp `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 	// Stack trace captured when the call was made. The async stack chain is automatically reported for
 	// the following call types: `assert`, `error`, `trace`, `warning`. For other types the async call
 	// chain can be retrieved using `Debugger.getStackTrace` and `stackTrace.parentId` field.
@@ -53,7 +53,7 @@ type ExceptionRevoked struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#event-exceptionThrown
 type ExceptionThrown struct {
 	// Timestamp of the exception.
-	Timestamp        Timestamp        `json:"timestamp"`
+	Timestamp        float64          `json:"timestamp"`
 	ExceptionDetails ExceptionDetails `json:"exceptionDetails"`
 }
 
@@ -70,7 +70,7 @@ type ExecutionContextCreated struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#event-executionContextDestroyed
 type ExecutionContextDestroyed struct {
 	// Id of the destroyed context
-	ExecutionContextID ExecutionContextID `json:"executionContextId"`
+	ExecutionContextID int64 `json:"executionContextId"`
 }
 
 // Issued when all executionContexts were cleared in browser

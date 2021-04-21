@@ -93,7 +93,7 @@ func NewAddVirtualAuthenticator(options VirtualAuthenticatorOptions) *AddVirtual
 // AddVirtualAuthenticatorResponse contains the browser's response
 // to calling the AddVirtualAuthenticator CDP command with Do().
 type AddVirtualAuthenticatorResponse struct {
-	AuthenticatorID AuthenticatorID `json:"authenticatorId"`
+	AuthenticatorID string `json:"authenticatorId"`
 }
 
 // Do sends the AddVirtualAuthenticator CDP command to a browser,
@@ -124,7 +124,7 @@ func (t *AddVirtualAuthenticator) Do(ctx context.Context) (*AddVirtualAuthentica
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-removeVirtualAuthenticator
 type RemoveVirtualAuthenticator struct {
-	AuthenticatorID AuthenticatorID `json:"authenticatorId"`
+	AuthenticatorID string `json:"authenticatorId"`
 }
 
 // NewRemoveVirtualAuthenticator constructs a new RemoveVirtualAuthenticator struct instance, with
@@ -132,7 +132,7 @@ type RemoveVirtualAuthenticator struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-removeVirtualAuthenticator
-func NewRemoveVirtualAuthenticator(authenticatorID AuthenticatorID) *RemoveVirtualAuthenticator {
+func NewRemoveVirtualAuthenticator(authenticatorID string) *RemoveVirtualAuthenticator {
 	return &RemoveVirtualAuthenticator{
 		AuthenticatorID: authenticatorID,
 	}
@@ -162,8 +162,8 @@ func (t *RemoveVirtualAuthenticator) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-addCredential
 type AddCredential struct {
-	AuthenticatorID AuthenticatorID `json:"authenticatorId"`
-	Credential      Credential      `json:"credential"`
+	AuthenticatorID string     `json:"authenticatorId"`
+	Credential      Credential `json:"credential"`
 }
 
 // NewAddCredential constructs a new AddCredential struct instance, with
@@ -171,7 +171,7 @@ type AddCredential struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-addCredential
-func NewAddCredential(authenticatorID AuthenticatorID, credential Credential) *AddCredential {
+func NewAddCredential(authenticatorID string, credential Credential) *AddCredential {
 	return &AddCredential{
 		AuthenticatorID: authenticatorID,
 		Credential:      credential,
@@ -203,8 +203,8 @@ func (t *AddCredential) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-getCredential
 type GetCredential struct {
-	AuthenticatorID AuthenticatorID `json:"authenticatorId"`
-	CredentialID    string          `json:"credentialId"`
+	AuthenticatorID string `json:"authenticatorId"`
+	CredentialID    string `json:"credentialId"`
 }
 
 // NewGetCredential constructs a new GetCredential struct instance, with
@@ -212,7 +212,7 @@ type GetCredential struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-getCredential
-func NewGetCredential(authenticatorID AuthenticatorID, credentialID string) *GetCredential {
+func NewGetCredential(authenticatorID string, credentialID string) *GetCredential {
 	return &GetCredential{
 		AuthenticatorID: authenticatorID,
 		CredentialID:    credentialID,
@@ -253,7 +253,7 @@ func (t *GetCredential) Do(ctx context.Context) (*GetCredentialResponse, error) 
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-getCredentials
 type GetCredentials struct {
-	AuthenticatorID AuthenticatorID `json:"authenticatorId"`
+	AuthenticatorID string `json:"authenticatorId"`
 }
 
 // NewGetCredentials constructs a new GetCredentials struct instance, with
@@ -261,7 +261,7 @@ type GetCredentials struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-getCredentials
-func NewGetCredentials(authenticatorID AuthenticatorID) *GetCredentials {
+func NewGetCredentials(authenticatorID string) *GetCredentials {
 	return &GetCredentials{
 		AuthenticatorID: authenticatorID,
 	}
@@ -301,8 +301,8 @@ func (t *GetCredentials) Do(ctx context.Context) (*GetCredentialsResponse, error
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-removeCredential
 type RemoveCredential struct {
-	AuthenticatorID AuthenticatorID `json:"authenticatorId"`
-	CredentialID    string          `json:"credentialId"`
+	AuthenticatorID string `json:"authenticatorId"`
+	CredentialID    string `json:"credentialId"`
 }
 
 // NewRemoveCredential constructs a new RemoveCredential struct instance, with
@@ -310,7 +310,7 @@ type RemoveCredential struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-removeCredential
-func NewRemoveCredential(authenticatorID AuthenticatorID, credentialID string) *RemoveCredential {
+func NewRemoveCredential(authenticatorID string, credentialID string) *RemoveCredential {
 	return &RemoveCredential{
 		AuthenticatorID: authenticatorID,
 		CredentialID:    credentialID,
@@ -341,7 +341,7 @@ func (t *RemoveCredential) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-clearCredentials
 type ClearCredentials struct {
-	AuthenticatorID AuthenticatorID `json:"authenticatorId"`
+	AuthenticatorID string `json:"authenticatorId"`
 }
 
 // NewClearCredentials constructs a new ClearCredentials struct instance, with
@@ -349,7 +349,7 @@ type ClearCredentials struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-clearCredentials
-func NewClearCredentials(authenticatorID AuthenticatorID) *ClearCredentials {
+func NewClearCredentials(authenticatorID string) *ClearCredentials {
 	return &ClearCredentials{
 		AuthenticatorID: authenticatorID,
 	}
@@ -380,8 +380,8 @@ func (t *ClearCredentials) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-setUserVerified
 type SetUserVerified struct {
-	AuthenticatorID AuthenticatorID `json:"authenticatorId"`
-	IsUserVerified  bool            `json:"isUserVerified"`
+	AuthenticatorID string `json:"authenticatorId"`
+	IsUserVerified  bool   `json:"isUserVerified"`
 }
 
 // NewSetUserVerified constructs a new SetUserVerified struct instance, with
@@ -389,7 +389,7 @@ type SetUserVerified struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-setUserVerified
-func NewSetUserVerified(authenticatorID AuthenticatorID, isUserVerified bool) *SetUserVerified {
+func NewSetUserVerified(authenticatorID string, isUserVerified bool) *SetUserVerified {
 	return &SetUserVerified{
 		AuthenticatorID: authenticatorID,
 		IsUserVerified:  isUserVerified,
@@ -421,8 +421,8 @@ func (t *SetUserVerified) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-setAutomaticPresenceSimulation
 type SetAutomaticPresenceSimulation struct {
-	AuthenticatorID AuthenticatorID `json:"authenticatorId"`
-	Enabled         bool            `json:"enabled"`
+	AuthenticatorID string `json:"authenticatorId"`
+	Enabled         bool   `json:"enabled"`
 }
 
 // NewSetAutomaticPresenceSimulation constructs a new SetAutomaticPresenceSimulation struct instance, with
@@ -430,7 +430,7 @@ type SetAutomaticPresenceSimulation struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#method-setAutomaticPresenceSimulation
-func NewSetAutomaticPresenceSimulation(authenticatorID AuthenticatorID, enabled bool) *SetAutomaticPresenceSimulation {
+func NewSetAutomaticPresenceSimulation(authenticatorID string, enabled bool) *SetAutomaticPresenceSimulation {
 	return &SetAutomaticPresenceSimulation{
 		AuthenticatorID: authenticatorID,
 		Enabled:         enabled,

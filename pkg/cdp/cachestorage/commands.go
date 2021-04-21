@@ -16,7 +16,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-deleteCache
 type DeleteCache struct {
 	// Id of cache for deletion.
-	CacheID CacheID `json:"cacheId"`
+	CacheID string `json:"cacheId"`
 }
 
 // NewDeleteCache constructs a new DeleteCache struct instance, with
@@ -24,7 +24,7 @@ type DeleteCache struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-deleteCache
-func NewDeleteCache(cacheID CacheID) *DeleteCache {
+func NewDeleteCache(cacheID string) *DeleteCache {
 	return &DeleteCache{
 		CacheID: cacheID,
 	}
@@ -55,7 +55,7 @@ func (t *DeleteCache) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-deleteEntry
 type DeleteEntry struct {
 	// Id of cache where the entry will be deleted.
-	CacheID CacheID `json:"cacheId"`
+	CacheID string `json:"cacheId"`
 	// URL spec of the request.
 	Request string `json:"request"`
 }
@@ -65,7 +65,7 @@ type DeleteEntry struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-deleteEntry
-func NewDeleteEntry(cacheID CacheID, request string) *DeleteEntry {
+func NewDeleteEntry(cacheID string, request string) *DeleteEntry {
 	return &DeleteEntry{
 		CacheID: cacheID,
 		Request: request,
@@ -147,7 +147,7 @@ func (t *RequestCacheNames) Do(ctx context.Context) (*RequestCacheNamesResponse,
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-requestCachedResponse
 type RequestCachedResponse struct {
 	// Id of cache that contains the entry.
-	CacheID CacheID `json:"cacheId"`
+	CacheID string `json:"cacheId"`
 	// URL spec of the request.
 	RequestURL string `json:"requestURL"`
 	// headers of the request.
@@ -159,7 +159,7 @@ type RequestCachedResponse struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-requestCachedResponse
-func NewRequestCachedResponse(cacheID CacheID, requestURL string, requestHeaders []Header) *RequestCachedResponse {
+func NewRequestCachedResponse(cacheID string, requestURL string, requestHeaders []Header) *RequestCachedResponse {
 	return &RequestCachedResponse{
 		CacheID:        cacheID,
 		RequestURL:     requestURL,
@@ -203,7 +203,7 @@ func (t *RequestCachedResponse) Do(ctx context.Context) (*RequestCachedResponseR
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-requestEntries
 type RequestEntries struct {
 	// ID of cache to get entries from.
-	CacheID CacheID `json:"cacheId"`
+	CacheID string `json:"cacheId"`
 	// Number of records to skip.
 	SkipCount int64 `json:"skipCount,omitempty"`
 	// Number of records to fetch.
@@ -217,7 +217,7 @@ type RequestEntries struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-requestEntries
-func NewRequestEntries(cacheID CacheID) *RequestEntries {
+func NewRequestEntries(cacheID string) *RequestEntries {
 	return &RequestEntries{
 		CacheID: cacheID,
 	}

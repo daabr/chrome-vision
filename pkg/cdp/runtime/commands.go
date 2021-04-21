@@ -16,7 +16,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-awaitPromise
 type AwaitPromise struct {
 	// Identifier of the promise.
-	PromiseObjectID RemoteObjectID `json:"promiseObjectId"`
+	PromiseObjectID string `json:"promiseObjectId"`
 	// Whether the result is expected to be a JSON object that should be sent by value.
 	ReturnByValue bool `json:"returnByValue,omitempty"`
 	// Whether preview should be generated for the result.
@@ -28,7 +28,7 @@ type AwaitPromise struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-awaitPromise
-func NewAwaitPromise(promiseObjectID RemoteObjectID) *AwaitPromise {
+func NewAwaitPromise(promiseObjectID string) *AwaitPromise {
 	return &AwaitPromise{
 		PromiseObjectID: promiseObjectID,
 	}
@@ -94,7 +94,7 @@ type CallFunctionOn struct {
 	FunctionDeclaration string `json:"functionDeclaration"`
 	// Identifier of the object to call function on. Either objectId or executionContextId should
 	// be specified.
-	ObjectID *RemoteObjectID `json:"objectId,omitempty"`
+	ObjectID string `json:"objectId,omitempty"`
 	// Call arguments. All call arguments must belong to the same JavaScript world as the target
 	// object.
 	Arguments []CallArgument `json:"arguments,omitempty"`
@@ -114,7 +114,7 @@ type CallFunctionOn struct {
 	AwaitPromise bool `json:"awaitPromise,omitempty"`
 	// Specifies execution context which global object will be used to call function on. Either
 	// executionContextId or objectId should be specified.
-	ExecutionContextID *ExecutionContextID `json:"executionContextId,omitempty"`
+	ExecutionContextID int64 `json:"executionContextId,omitempty"`
 	// Symbolic group name that can be used to release multiple objects. If objectGroup is not
 	// specified and objectId is, objectGroup will be inherited from object.
 	ObjectGroup string `json:"objectGroup,omitempty"`
@@ -136,8 +136,8 @@ func NewCallFunctionOn(functionDeclaration string) *CallFunctionOn {
 //
 // Identifier of the object to call function on. Either objectId or executionContextId should
 // be specified.
-func (t *CallFunctionOn) SetObjectID(v RemoteObjectID) *CallFunctionOn {
-	t.ObjectID = &v
+func (t *CallFunctionOn) SetObjectID(v string) *CallFunctionOn {
+	t.ObjectID = v
 	return t
 }
 
@@ -205,8 +205,8 @@ func (t *CallFunctionOn) SetAwaitPromise(v bool) *CallFunctionOn {
 //
 // Specifies execution context which global object will be used to call function on. Either
 // executionContextId or objectId should be specified.
-func (t *CallFunctionOn) SetExecutionContextID(v ExecutionContextID) *CallFunctionOn {
-	t.ExecutionContextID = &v
+func (t *CallFunctionOn) SetExecutionContextID(v int64) *CallFunctionOn {
+	t.ExecutionContextID = v
 	return t
 }
 
@@ -265,7 +265,7 @@ type CompileScript struct {
 	PersistScript bool `json:"persistScript"`
 	// Specifies in which execution context to perform script run. If the parameter is omitted the
 	// evaluation will be performed in the context of the inspected page.
-	ExecutionContextID *ExecutionContextID `json:"executionContextId,omitempty"`
+	ExecutionContextID int64 `json:"executionContextId,omitempty"`
 }
 
 // NewCompileScript constructs a new CompileScript struct instance, with
@@ -286,8 +286,8 @@ func NewCompileScript(expression string, sourceURL string, persistScript bool) *
 //
 // Specifies in which execution context to perform script run. If the parameter is omitted the
 // evaluation will be performed in the context of the inspected page.
-func (t *CompileScript) SetExecutionContextID(v ExecutionContextID) *CompileScript {
-	t.ExecutionContextID = &v
+func (t *CompileScript) SetExecutionContextID(v int64) *CompileScript {
+	t.ExecutionContextID = v
 	return t
 }
 
@@ -295,7 +295,7 @@ func (t *CompileScript) SetExecutionContextID(v ExecutionContextID) *CompileScri
 // to calling the CompileScript CDP command with Do().
 type CompileScriptResponse struct {
 	// Id of the script.
-	ScriptID *ScriptID `json:"scriptId,omitempty"`
+	ScriptID string `json:"scriptId,omitempty"`
 	// Exception details.
 	ExceptionDetails *ExceptionDetails `json:"exceptionDetails,omitempty"`
 }
@@ -434,7 +434,7 @@ type Evaluate struct {
 	// This is mutually exclusive with `uniqueContextId`, which offers an
 	// alternative way to identify the execution context that is more reliable
 	// in a multi-process environment.
-	ContextID *ExecutionContextID `json:"contextId,omitempty"`
+	ContextID int64 `json:"contextId,omitempty"`
 	// Whether the result is expected to be a JSON object that should be sent by value.
 	ReturnByValue bool `json:"returnByValue,omitempty"`
 	// Whether preview should be generated for the result.
@@ -454,7 +454,7 @@ type Evaluate struct {
 	// Terminate execution after timing out (number of milliseconds).
 	//
 	// This CDP parameter is experimental.
-	Timeout *TimeDelta `json:"timeout,omitempty"`
+	Timeout float64 `json:"timeout,omitempty"`
 	// Disable breakpoints during execution.
 	//
 	// This CDP parameter is experimental.
@@ -530,8 +530,8 @@ func (t *Evaluate) SetSilent(v bool) *Evaluate {
 // This is mutually exclusive with `uniqueContextId`, which offers an
 // alternative way to identify the execution context that is more reliable
 // in a multi-process environment.
-func (t *Evaluate) SetContextID(v ExecutionContextID) *Evaluate {
-	t.ContextID = &v
+func (t *Evaluate) SetContextID(v int64) *Evaluate {
+	t.ContextID = v
 	return t
 }
 
@@ -592,8 +592,8 @@ func (t *Evaluate) SetThrowOnSideEffect(v bool) *Evaluate {
 // Terminate execution after timing out (number of milliseconds).
 //
 // This CDP parameter is experimental.
-func (t *Evaluate) SetTimeout(v TimeDelta) *Evaluate {
-	t.Timeout = &v
+func (t *Evaluate) SetTimeout(v float64) *Evaluate {
+	t.Timeout = v
 	return t
 }
 
@@ -783,7 +783,7 @@ func (t *GetHeapUsage) Do(ctx context.Context) (*GetHeapUsageResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-getProperties
 type GetProperties struct {
 	// Identifier of the object to return properties for.
-	ObjectID RemoteObjectID `json:"objectId"`
+	ObjectID string `json:"objectId"`
 	// If true, returns properties belonging only to the element itself, not to its prototype
 	// chain.
 	OwnProperties bool `json:"ownProperties,omitempty"`
@@ -803,7 +803,7 @@ type GetProperties struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-getProperties
-func NewGetProperties(objectID RemoteObjectID) *GetProperties {
+func NewGetProperties(objectID string) *GetProperties {
 	return &GetProperties{
 		ObjectID: objectID,
 	}
@@ -886,7 +886,7 @@ func (t *GetProperties) Do(ctx context.Context) (*GetPropertiesResponse, error) 
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-globalLexicalScopeNames
 type GlobalLexicalScopeNames struct {
 	// Specifies in which execution context to lookup global scope variables.
-	ExecutionContextID *ExecutionContextID `json:"executionContextId,omitempty"`
+	ExecutionContextID int64 `json:"executionContextId,omitempty"`
 }
 
 // NewGlobalLexicalScopeNames constructs a new GlobalLexicalScopeNames struct instance, with
@@ -902,8 +902,8 @@ func NewGlobalLexicalScopeNames() *GlobalLexicalScopeNames {
 // parameter `executionContextId` in the GlobalLexicalScopeNames CDP command.
 //
 // Specifies in which execution context to lookup global scope variables.
-func (t *GlobalLexicalScopeNames) SetExecutionContextID(v ExecutionContextID) *GlobalLexicalScopeNames {
-	t.ExecutionContextID = &v
+func (t *GlobalLexicalScopeNames) SetExecutionContextID(v int64) *GlobalLexicalScopeNames {
+	t.ExecutionContextID = v
 	return t
 }
 
@@ -940,7 +940,7 @@ func (t *GlobalLexicalScopeNames) Do(ctx context.Context) (*GlobalLexicalScopeNa
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-queryObjects
 type QueryObjects struct {
 	// Identifier of the prototype to return objects for.
-	PrototypeObjectID RemoteObjectID `json:"prototypeObjectId"`
+	PrototypeObjectID string `json:"prototypeObjectId"`
 	// Symbolic group name that can be used to release the results.
 	ObjectGroup string `json:"objectGroup,omitempty"`
 }
@@ -950,7 +950,7 @@ type QueryObjects struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-queryObjects
-func NewQueryObjects(prototypeObjectID RemoteObjectID) *QueryObjects {
+func NewQueryObjects(prototypeObjectID string) *QueryObjects {
 	return &QueryObjects{
 		PrototypeObjectID: prototypeObjectID,
 	}
@@ -1001,7 +1001,7 @@ func (t *QueryObjects) Do(ctx context.Context) (*QueryObjectsResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-releaseObject
 type ReleaseObject struct {
 	// Identifier of the object to release.
-	ObjectID RemoteObjectID `json:"objectId"`
+	ObjectID string `json:"objectId"`
 }
 
 // NewReleaseObject constructs a new ReleaseObject struct instance, with
@@ -1009,7 +1009,7 @@ type ReleaseObject struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-releaseObject
-func NewReleaseObject(objectID RemoteObjectID) *ReleaseObject {
+func NewReleaseObject(objectID string) *ReleaseObject {
 	return &ReleaseObject{
 		ObjectID: objectID,
 	}
@@ -1109,10 +1109,10 @@ func (t *RunIfWaitingForDebugger) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-runScript
 type RunScript struct {
 	// Id of the script to run.
-	ScriptID ScriptID `json:"scriptId"`
+	ScriptID string `json:"scriptId"`
 	// Specifies in which execution context to perform script run. If the parameter is omitted the
 	// evaluation will be performed in the context of the inspected page.
-	ExecutionContextID *ExecutionContextID `json:"executionContextId,omitempty"`
+	ExecutionContextID int64 `json:"executionContextId,omitempty"`
 	// Symbolic group name that can be used to release multiple objects.
 	ObjectGroup string `json:"objectGroup,omitempty"`
 	// In silent mode exceptions thrown during evaluation are not reported and do not pause
@@ -1134,7 +1134,7 @@ type RunScript struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-runScript
-func NewRunScript(scriptID ScriptID) *RunScript {
+func NewRunScript(scriptID string) *RunScript {
 	return &RunScript{
 		ScriptID: scriptID,
 	}
@@ -1145,8 +1145,8 @@ func NewRunScript(scriptID ScriptID) *RunScript {
 //
 // Specifies in which execution context to perform script run. If the parameter is omitted the
 // evaluation will be performed in the context of the inspected page.
-func (t *RunScript) SetExecutionContextID(v ExecutionContextID) *RunScript {
-	t.ExecutionContextID = &v
+func (t *RunScript) SetExecutionContextID(v int64) *RunScript {
+	t.ExecutionContextID = v
 	return t
 }
 
@@ -1370,7 +1370,7 @@ type AddBinding struct {
 	// execution context. If omitted and `executionContextName` is not set,
 	// the binding is exposed to all execution contexts of the target.
 	// This parameter is mutually exclusive with `executionContextName`.
-	ExecutionContextID *ExecutionContextID `json:"executionContextId,omitempty"`
+	ExecutionContextID int64 `json:"executionContextId,omitempty"`
 	// If specified, the binding is exposed to the executionContext with
 	// matching name, even for contexts created after the binding is added.
 	// See also `ExecutionContext.name` and `worldName` parameter to
@@ -1401,8 +1401,8 @@ func NewAddBinding(name string) *AddBinding {
 // execution context. If omitted and `executionContextName` is not set,
 // the binding is exposed to all execution contexts of the target.
 // This parameter is mutually exclusive with `executionContextName`.
-func (t *AddBinding) SetExecutionContextID(v ExecutionContextID) *AddBinding {
-	t.ExecutionContextID = &v
+func (t *AddBinding) SetExecutionContextID(v int64) *AddBinding {
+	t.ExecutionContextID = v
 	return t
 }
 

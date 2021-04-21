@@ -40,7 +40,7 @@ type Bounds struct {
 	// The window height in pixels.
 	Height int64 `json:"height,omitempty"`
 	// The window state. Default to normal.
-	WindowState *WindowState `json:"windowState,omitempty"`
+	WindowState string `json:"windowState,omitempty"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-PermissionType

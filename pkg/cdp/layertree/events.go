@@ -7,7 +7,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#event-layerPainted
 type LayerPainted struct {
 	// The id of the painted layer.
-	LayerID LayerID `json:"layerId"`
+	LayerID string `json:"layerId"`
 	// Clip rectangle.
 	Clip dom.Rect `json:"clip"`
 }

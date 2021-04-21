@@ -84,7 +84,7 @@ type GetHighlightObjectForTest struct {
 	// Whether to include style info.
 	IncludeStyle bool `json:"includeStyle,omitempty"`
 	// The color format to get config with (default: hex).
-	ColorFormat *ColorFormat `json:"colorFormat,omitempty"`
+	ColorFormat string `json:"colorFormat,omitempty"`
 	// Whether to show accessibility info (default: true).
 	ShowAccessibilityInfo bool `json:"showAccessibilityInfo,omitempty"`
 }
@@ -122,8 +122,8 @@ func (t *GetHighlightObjectForTest) SetIncludeStyle(v bool) *GetHighlightObjectF
 // parameter `colorFormat` in the GetHighlightObjectForTest CDP command.
 //
 // The color format to get config with (default: hex).
-func (t *GetHighlightObjectForTest) SetColorFormat(v ColorFormat) *GetHighlightObjectForTest {
-	t.ColorFormat = &v
+func (t *GetHighlightObjectForTest) SetColorFormat(v string) *GetHighlightObjectForTest {
+	t.ColorFormat = v
 	return t
 }
 
@@ -652,7 +652,7 @@ func (t *HighlightSourceOrder) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setInspectMode
 type SetInspectMode struct {
 	// Set an inspection mode.
-	Mode InspectMode `json:"mode"`
+	Mode string `json:"mode"`
 	// A descriptor for the highlight appearance of hovered-over nodes. May be omitted if `enabled
 	// == false`.
 	HighlightConfig *HighlightConfig `json:"highlightConfig,omitempty"`
@@ -663,7 +663,7 @@ type SetInspectMode struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setInspectMode
-func NewSetInspectMode(mode InspectMode) *SetInspectMode {
+func NewSetInspectMode(mode string) *SetInspectMode {
 	return &SetInspectMode{
 		Mode: mode,
 	}

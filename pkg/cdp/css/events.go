@@ -27,7 +27,7 @@ type StyleSheetAdded struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#event-styleSheetChanged
 type StyleSheetChanged struct {
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
+	StyleSheetID string `json:"styleSheetId"`
 }
 
 // Fired whenever an active document stylesheet is removed.
@@ -35,5 +35,5 @@ type StyleSheetChanged struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#event-styleSheetRemoved
 type StyleSheetRemoved struct {
 	// Identifier of the removed stylesheet.
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
+	StyleSheetID string `json:"styleSheetId"`
 }

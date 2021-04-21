@@ -37,7 +37,7 @@ type DataEntry struct {
 	// HTTP response status text.
 	ResponseStatusText string `json:"responseStatusText"`
 	// HTTP response type
-	ResponseType CachedResponseType `json:"responseType"`
+	ResponseType string `json:"responseType"`
 	// Response headers
 	ResponseHeaders []Header `json:"responseHeaders"`
 }
@@ -47,7 +47,7 @@ type DataEntry struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#type-Cache
 type Cache struct {
 	// An opaque unique id of the cache.
-	CacheID CacheID `json:"cacheId"`
+	CacheID string `json:"cacheId"`
 	// Security origin of the cache.
 	SecurityOrigin string `json:"securityOrigin"`
 	// The name of the cache.

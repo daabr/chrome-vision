@@ -295,11 +295,11 @@ func (t *ClearBrowserCookies) Do(ctx context.Context) error {
 // This CDP method is deprecated.
 // This CDP method is experimental.
 type ContinueInterceptedRequest struct {
-	InterceptionID InterceptionID `json:"interceptionId"`
+	InterceptionID string `json:"interceptionId"`
 	// If set this causes the request to fail with the given reason. Passing `Aborted` for requests
 	// marked with `isNavigationRequest` also cancels the navigation. Must not be set in response
 	// to an authChallenge.
-	ErrorReason *ErrorReason `json:"errorReason,omitempty"`
+	ErrorReason string `json:"errorReason,omitempty"`
 	// If set the requests completes using with the provided base64 encoded raw response, including
 	// HTTP status line and headers etc... Must not be set in response to an authChallenge. (Encoded as a base64 string when passed over JSON)
 	RawResponse string `json:"rawResponse,omitempty"`
@@ -326,7 +326,7 @@ type ContinueInterceptedRequest struct {
 //
 // This CDP method is deprecated.
 // This CDP method is experimental.
-func NewContinueInterceptedRequest(interceptionID InterceptionID) *ContinueInterceptedRequest {
+func NewContinueInterceptedRequest(interceptionID string) *ContinueInterceptedRequest {
 	return &ContinueInterceptedRequest{
 		InterceptionID: interceptionID,
 	}
@@ -338,8 +338,8 @@ func NewContinueInterceptedRequest(interceptionID InterceptionID) *ContinueInter
 // If set this causes the request to fail with the given reason. Passing `Aborted` for requests
 // marked with `isNavigationRequest` also cancels the navigation. Must not be set in response
 // to an authChallenge.
-func (t *ContinueInterceptedRequest) SetErrorReason(v ErrorReason) *ContinueInterceptedRequest {
-	t.ErrorReason = &v
+func (t *ContinueInterceptedRequest) SetErrorReason(v string) *ContinueInterceptedRequest {
+	t.ErrorReason = v
 	return t
 }
 
@@ -538,7 +538,7 @@ type EmulateNetworkConditions struct {
 	// Maximal aggregated upload throughput (bytes/sec).  -1 disables upload throttling.
 	UploadThroughput float64 `json:"uploadThroughput"`
 	// Connection type if known.
-	ConnectionType *ConnectionType `json:"connectionType,omitempty"`
+	ConnectionType string `json:"connectionType,omitempty"`
 }
 
 // NewEmulateNetworkConditions constructs a new EmulateNetworkConditions struct instance, with
@@ -559,8 +559,8 @@ func NewEmulateNetworkConditions(offline bool, latency float64, downloadThroughp
 // parameter `connectionType` in the EmulateNetworkConditions CDP command.
 //
 // Connection type if known.
-func (t *EmulateNetworkConditions) SetConnectionType(v ConnectionType) *EmulateNetworkConditions {
-	t.ConnectionType = &v
+func (t *EmulateNetworkConditions) SetConnectionType(v string) *EmulateNetworkConditions {
+	t.ConnectionType = v
 	return t
 }
 
@@ -822,7 +822,7 @@ func (t *GetCookies) Do(ctx context.Context) (*GetCookiesResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getResponseBody
 type GetResponseBody struct {
 	// Identifier of the network request to get content for.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 }
 
 // NewGetResponseBody constructs a new GetResponseBody struct instance, with
@@ -830,7 +830,7 @@ type GetResponseBody struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getResponseBody
-func NewGetResponseBody(requestID RequestID) *GetResponseBody {
+func NewGetResponseBody(requestID string) *GetResponseBody {
 	return &GetResponseBody{
 		RequestID: requestID,
 	}
@@ -874,7 +874,7 @@ func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResponse, err
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getRequestPostData
 type GetRequestPostData struct {
 	// Identifier of the network request to get content for.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 }
 
 // NewGetRequestPostData constructs a new GetRequestPostData struct instance, with
@@ -882,7 +882,7 @@ type GetRequestPostData struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getRequestPostData
-func NewGetRequestPostData(requestID RequestID) *GetRequestPostData {
+func NewGetRequestPostData(requestID string) *GetRequestPostData {
 	return &GetRequestPostData{
 		RequestID: requestID,
 	}
@@ -926,7 +926,7 @@ func (t *GetRequestPostData) Do(ctx context.Context) (*GetRequestPostDataRespons
 // This CDP method is experimental.
 type GetResponseBodyForInterception struct {
 	// Identifier for the intercepted request to get body for.
-	InterceptionID InterceptionID `json:"interceptionId"`
+	InterceptionID string `json:"interceptionId"`
 }
 
 // NewGetResponseBodyForInterception constructs a new GetResponseBodyForInterception struct instance, with
@@ -936,7 +936,7 @@ type GetResponseBodyForInterception struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getResponseBodyForInterception
 //
 // This CDP method is experimental.
-func NewGetResponseBodyForInterception(interceptionID InterceptionID) *GetResponseBodyForInterception {
+func NewGetResponseBodyForInterception(interceptionID string) *GetResponseBodyForInterception {
 	return &GetResponseBodyForInterception{
 		InterceptionID: interceptionID,
 	}
@@ -984,7 +984,7 @@ func (t *GetResponseBodyForInterception) Do(ctx context.Context) (*GetResponseBo
 //
 // This CDP method is experimental.
 type TakeResponseBodyForInterceptionAsStream struct {
-	InterceptionID InterceptionID `json:"interceptionId"`
+	InterceptionID string `json:"interceptionId"`
 }
 
 // NewTakeResponseBodyForInterceptionAsStream constructs a new TakeResponseBodyForInterceptionAsStream struct instance, with
@@ -994,7 +994,7 @@ type TakeResponseBodyForInterceptionAsStream struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-takeResponseBodyForInterceptionAsStream
 //
 // This CDP method is experimental.
-func NewTakeResponseBodyForInterceptionAsStream(interceptionID InterceptionID) *TakeResponseBodyForInterceptionAsStream {
+func NewTakeResponseBodyForInterceptionAsStream(interceptionID string) *TakeResponseBodyForInterceptionAsStream {
 	return &TakeResponseBodyForInterceptionAsStream{
 		InterceptionID: interceptionID,
 	}
@@ -1039,7 +1039,7 @@ func (t *TakeResponseBodyForInterceptionAsStream) Do(ctx context.Context) (*Take
 // This CDP method is experimental.
 type ReplayXHR struct {
 	// Identifier of XHR to replay.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 }
 
 // NewReplayXHR constructs a new ReplayXHR struct instance, with
@@ -1049,7 +1049,7 @@ type ReplayXHR struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-replayXHR
 //
 // This CDP method is experimental.
-func NewReplayXHR(requestID RequestID) *ReplayXHR {
+func NewReplayXHR(requestID string) *ReplayXHR {
 	return &ReplayXHR{
 		RequestID: requestID,
 	}
@@ -1082,7 +1082,7 @@ func (t *ReplayXHR) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SearchInResponseBody struct {
 	// Identifier of the network response to search.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// String to search for.
 	Query string `json:"query"`
 	// If true, search is case sensitive.
@@ -1098,7 +1098,7 @@ type SearchInResponseBody struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-searchInResponseBody
 //
 // This CDP method is experimental.
-func NewSearchInResponseBody(requestID RequestID, query string) *SearchInResponseBody {
+func NewSearchInResponseBody(requestID string, query string) *SearchInResponseBody {
 	return &SearchInResponseBody{
 		RequestID: requestID,
 		Query:     query,
@@ -1299,13 +1299,13 @@ type SetCookie struct {
 	// True if cookie is http-only.
 	HttpOnly bool `json:"httpOnly,omitempty"`
 	// Cookie SameSite type.
-	SameSite *CookieSameSite `json:"sameSite,omitempty"`
+	SameSite string `json:"sameSite,omitempty"`
 	// Cookie expiration date, session cookie if not set
-	Expires *TimeSinceEpoch `json:"expires,omitempty"`
+	Expires float64 `json:"expires,omitempty"`
 	// Cookie Priority type.
 	//
 	// This CDP parameter is experimental.
-	Priority *CookiePriority `json:"priority,omitempty"`
+	Priority string `json:"priority,omitempty"`
 	// True if cookie is SameParty.
 	//
 	// This CDP parameter is experimental.
@@ -1313,7 +1313,7 @@ type SetCookie struct {
 	// Cookie source scheme type.
 	//
 	// This CDP parameter is experimental.
-	SourceScheme *CookieSourceScheme `json:"sourceScheme,omitempty"`
+	SourceScheme string `json:"sourceScheme,omitempty"`
 	// Cookie source port. Valid values are {-1, [1, 65535]}, -1 indicates an unspecified port.
 	// An unspecified port value allows protocol clients to emulate legacy cookie scope for the port.
 	// This is a temporary ability and it will be removed in the future.
@@ -1384,8 +1384,8 @@ func (t *SetCookie) SetHttpOnly(v bool) *SetCookie {
 // parameter `sameSite` in the SetCookie CDP command.
 //
 // Cookie SameSite type.
-func (t *SetCookie) SetSameSite(v CookieSameSite) *SetCookie {
-	t.SameSite = &v
+func (t *SetCookie) SetSameSite(v string) *SetCookie {
+	t.SameSite = v
 	return t
 }
 
@@ -1393,8 +1393,8 @@ func (t *SetCookie) SetSameSite(v CookieSameSite) *SetCookie {
 // parameter `expires` in the SetCookie CDP command.
 //
 // Cookie expiration date, session cookie if not set
-func (t *SetCookie) SetExpires(v TimeSinceEpoch) *SetCookie {
-	t.Expires = &v
+func (t *SetCookie) SetExpires(v float64) *SetCookie {
+	t.Expires = v
 	return t
 }
 
@@ -1404,8 +1404,8 @@ func (t *SetCookie) SetExpires(v TimeSinceEpoch) *SetCookie {
 // Cookie Priority type.
 //
 // This CDP parameter is experimental.
-func (t *SetCookie) SetPriority(v CookiePriority) *SetCookie {
-	t.Priority = &v
+func (t *SetCookie) SetPriority(v string) *SetCookie {
+	t.Priority = v
 	return t
 }
 
@@ -1426,8 +1426,8 @@ func (t *SetCookie) SetSameParty(v bool) *SetCookie {
 // Cookie source scheme type.
 //
 // This CDP parameter is experimental.
-func (t *SetCookie) SetSourceScheme(v CookieSourceScheme) *SetCookie {
-	t.SourceScheme = &v
+func (t *SetCookie) SetSourceScheme(v string) *SetCookie {
+	t.SourceScheme = v
 	return t
 }
 

@@ -110,7 +110,7 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-failRequest
 type FailRequest struct {
 	// An id the client received in requestPaused event.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Causes the request to fail with the given reason.
 	ErrorReason string `json:"errorReason"`
 }
@@ -120,7 +120,7 @@ type FailRequest struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-failRequest
-func NewFailRequest(requestID RequestID, errorReason string) *FailRequest {
+func NewFailRequest(requestID string, errorReason string) *FailRequest {
 	return &FailRequest{
 		RequestID:   requestID,
 		ErrorReason: errorReason,
@@ -152,7 +152,7 @@ func (t *FailRequest) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-fulfillRequest
 type FulfillRequest struct {
 	// An id the client received in requestPaused event.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// An HTTP response code.
 	ResponseCode int64 `json:"responseCode"`
 	// Response headers.
@@ -174,7 +174,7 @@ type FulfillRequest struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-fulfillRequest
-func NewFulfillRequest(requestID RequestID, responseCode int64) *FulfillRequest {
+func NewFulfillRequest(requestID string, responseCode int64) *FulfillRequest {
 	return &FulfillRequest{
 		RequestID:    requestID,
 		ResponseCode: responseCode,
@@ -246,7 +246,7 @@ func (t *FulfillRequest) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-continueRequest
 type ContinueRequest struct {
 	// An id the client received in requestPaused event.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// If set, the request url will be modified in a way that's not observable by page.
 	URL string `json:"url,omitempty"`
 	// If set, the request method is overridden.
@@ -262,7 +262,7 @@ type ContinueRequest struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-continueRequest
-func NewContinueRequest(requestID RequestID) *ContinueRequest {
+func NewContinueRequest(requestID string) *ContinueRequest {
 	return &ContinueRequest{
 		RequestID: requestID,
 	}
@@ -329,7 +329,7 @@ func (t *ContinueRequest) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-continueWithAuth
 type ContinueWithAuth struct {
 	// An id the client received in authRequired event.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// Response to  with an authChallenge.
 	AuthChallengeResponse AuthChallengeResponse `json:"authChallengeResponse"`
 }
@@ -339,7 +339,7 @@ type ContinueWithAuth struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-continueWithAuth
-func NewContinueWithAuth(requestID RequestID, authChallengeResponse AuthChallengeResponse) *ContinueWithAuth {
+func NewContinueWithAuth(requestID string, authChallengeResponse AuthChallengeResponse) *ContinueWithAuth {
 	return &ContinueWithAuth{
 		RequestID:             requestID,
 		AuthChallengeResponse: authChallengeResponse,
@@ -376,7 +376,7 @@ func (t *ContinueWithAuth) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-getResponseBody
 type GetResponseBody struct {
 	// Identifier for the intercepted request to get body for.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 }
 
 // NewGetResponseBody constructs a new GetResponseBody struct instance, with
@@ -384,7 +384,7 @@ type GetResponseBody struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-getResponseBody
-func NewGetResponseBody(requestID RequestID) *GetResponseBody {
+func NewGetResponseBody(requestID string) *GetResponseBody {
 	return &GetResponseBody{
 		RequestID: requestID,
 	}
@@ -436,7 +436,7 @@ func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResponse, err
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-takeResponseBodyAsStream
 type TakeResponseBodyAsStream struct {
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 }
 
 // NewTakeResponseBodyAsStream constructs a new TakeResponseBodyAsStream struct instance, with
@@ -444,7 +444,7 @@ type TakeResponseBodyAsStream struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-takeResponseBodyAsStream
-func NewTakeResponseBodyAsStream(requestID RequestID) *TakeResponseBodyAsStream {
+func NewTakeResponseBodyAsStream(requestID string) *TakeResponseBodyAsStream {
 	return &TakeResponseBodyAsStream{
 		RequestID: requestID,
 	}

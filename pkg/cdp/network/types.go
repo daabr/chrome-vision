@@ -244,7 +244,7 @@ type Request struct {
 	// The mixed content type of the request.
 	MixedContentType string `json:"mixedContentType,omitempty"`
 	// Priority of the resource request at the time request is sent.
-	InitialPriority ResourcePriority `json:"initialPriority"`
+	InitialPriority string `json:"initialPriority"`
 	// The referrer policy of the request, as defined in https://www.w3.org/TR/referrer-policy/
 	ReferrerPolicy string `json:"referrerPolicy"`
 	// Whether is loaded via link preload.
@@ -269,7 +269,7 @@ type SignedCertificateTimestamp struct {
 	// Log ID.
 	LogID string `json:"logId"`
 	// Issuance date.
-	Timestamp TimeSinceEpoch `json:"timestamp"`
+	Timestamp float64 `json:"timestamp"`
 	// Hash algorithm.
 	HashAlgorithm string `json:"hashAlgorithm"`
 	// Signature algorithm.
@@ -301,13 +301,13 @@ type SecurityDetails struct {
 	// Name of the issuing CA.
 	Issuer string `json:"issuer"`
 	// Certificate valid from date.
-	ValidFrom TimeSinceEpoch `json:"validFrom"`
+	ValidFrom float64 `json:"validFrom"`
 	// Certificate valid to (expiration) date
-	ValidTo TimeSinceEpoch `json:"validTo"`
+	ValidTo float64 `json:"validTo"`
 	// List of signed certificate timestamps (SCTs).
 	SignedCertificateTimestampList []SignedCertificateTimestamp `json:"signedCertificateTimestampList"`
 	// Whether the request complied with Certificate Transparency policy
-	CertificateTransparencyCompliance CertificateTransparencyCompliance `json:"certificateTransparencyCompliance"`
+	CertificateTransparencyCompliance string `json:"certificateTransparencyCompliance"`
 }
 
 // Whether the request complied with Certificate Transparency policy.
@@ -379,8 +379,8 @@ const (
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CorsErrorStatus
 type CorsErrorStatus struct {
-	CorsError       CorsError `json:"corsError"`
-	FailedParameter string    `json:"failedParameter"`
+	CorsError       string `json:"corsError"`
+	FailedParameter string `json:"failedParameter"`
 }
 
 // Source of serviceworker response.
@@ -404,7 +404,7 @@ const (
 //
 // This CDP type is experimental.
 type TrustTokenParams struct {
-	Type TrustTokenOperationType `json:"type"`
+	Type string `json:"type"`
 	// Only set for "token-redemption" type and determine whether
 	// to request a fresh SRR or use a still valid cached SRR.
 	RefreshPolicy string `json:"refreshPolicy"`
@@ -464,9 +464,9 @@ type Response struct {
 	// Timing information for the given request.
 	Timing *ResourceTiming `json:"timing,omitempty"`
 	// Response source of response from ServiceWorker.
-	ServiceWorkerResponseSource *ServiceWorkerResponseSource `json:"serviceWorkerResponseSource,omitempty"`
+	ServiceWorkerResponseSource string `json:"serviceWorkerResponseSource,omitempty"`
 	// The time at which the returned response was generated.
-	ResponseTime *TimeSinceEpoch `json:"responseTime,omitempty"`
+	ResponseTime float64 `json:"responseTime,omitempty"`
 	// Cache Storage Cache Name.
 	CacheStorageCacheName string `json:"cacheStorageCacheName,omitempty"`
 	// Protocol used to fetch this request.
@@ -524,7 +524,7 @@ type CachedResource struct {
 	// Resource URL. This is the url of the original network request.
 	URL string `json:"url"`
 	// Type of this resource.
-	Type ResourceType `json:"type"`
+	Type string `json:"type"`
 	// Cached response data.
 	Response *Response `json:"response,omitempty"`
 	// Cached response body size.
@@ -548,7 +548,7 @@ type Initiator struct {
 	// module) (0-based).
 	ColumnNumber float64 `json:"columnNumber,omitempty"`
 	// Set if another request triggered this request (e.g. preflight).
-	RequestID *RequestID `json:"requestId,omitempty"`
+	RequestID string `json:"requestId,omitempty"`
 }
 
 // Cookie object
@@ -574,11 +574,11 @@ type Cookie struct {
 	// True in case of session cookie.
 	Session bool `json:"session"`
 	// Cookie SameSite type.
-	SameSite *CookieSameSite `json:"sameSite,omitempty"`
+	SameSite string `json:"sameSite,omitempty"`
 	// Cookie Priority
 	//
 	// This CDP property is experimental.
-	Priority CookiePriority `json:"priority"`
+	Priority string `json:"priority"`
 	// True if cookie is SameParty.
 	//
 	// This CDP property is experimental.
@@ -586,7 +586,7 @@ type Cookie struct {
 	// Cookie source scheme type.
 	//
 	// This CDP property is experimental.
-	SourceScheme CookieSourceScheme `json:"sourceScheme"`
+	SourceScheme string `json:"sourceScheme"`
 	// Cookie source port. Valid values are {-1, [1, 65535]}, -1 indicates an unspecified port.
 	// An unspecified port value allows protocol clients to emulate legacy cookie scope for the port.
 	// This is a temporary ability and it will be removed in the future.
@@ -696,13 +696,13 @@ type CookieParam struct {
 	// True if cookie is http-only.
 	HttpOnly bool `json:"httpOnly,omitempty"`
 	// Cookie SameSite type.
-	SameSite *CookieSameSite `json:"sameSite,omitempty"`
+	SameSite string `json:"sameSite,omitempty"`
 	// Cookie expiration date, session cookie if not set
-	Expires *TimeSinceEpoch `json:"expires,omitempty"`
+	Expires float64 `json:"expires,omitempty"`
 	// Cookie Priority.
 	//
 	// This CDP property is experimental.
-	Priority *CookiePriority `json:"priority,omitempty"`
+	Priority string `json:"priority,omitempty"`
 	// True if cookie is SameParty.
 	//
 	// This CDP property is experimental.
@@ -710,7 +710,7 @@ type CookieParam struct {
 	// Cookie source scheme type.
 	//
 	// This CDP property is experimental.
-	SourceScheme *CookieSourceScheme `json:"sourceScheme,omitempty"`
+	SourceScheme string `json:"sourceScheme,omitempty"`
 	// Cookie source port. Valid values are {-1, [1, 65535]}, -1 indicates an unspecified port.
 	// An unspecified port value allows protocol clients to emulate legacy cookie scope for the port.
 	// This is a temporary ability and it will be removed in the future.
@@ -777,9 +777,9 @@ type RequestPattern struct {
 	// backslash. Omitting is equivalent to "*".
 	URLPattern string `json:"urlPattern,omitempty"`
 	// If set, only requests for matching resource types will be intercepted.
-	ResourceType *ResourceType `json:"resourceType,omitempty"`
+	ResourceType string `json:"resourceType,omitempty"`
 	// Stage at wich to begin intercepting requests. Default is Request.
-	InterceptionStage *InterceptionStage `json:"interceptionStage,omitempty"`
+	InterceptionStage string `json:"interceptionStage,omitempty"`
 }
 
 // Information about a signed exchange signature.
@@ -856,7 +856,7 @@ type SignedExchangeError struct {
 	// The index of the signature which caused the error.
 	SignatureIndex int64 `json:"signatureIndex,omitempty"`
 	// The field which caused the error.
-	ErrorField *SignedExchangeErrorField `json:"errorField,omitempty"`
+	ErrorField string `json:"errorField,omitempty"`
 }
 
 // Information about a signed exchange response.
@@ -918,9 +918,9 @@ const (
 //
 // This CDP type is experimental.
 type ClientSecurityState struct {
-	InitiatorIsSecureContext    bool                        `json:"initiatorIsSecureContext"`
-	InitiatorIPAddressSpace     IPAddressSpace              `json:"initiatorIPAddressSpace"`
-	PrivateNetworkRequestPolicy PrivateNetworkRequestPolicy `json:"privateNetworkRequestPolicy"`
+	InitiatorIsSecureContext    bool   `json:"initiatorIsSecureContext"`
+	InitiatorIPAddressSpace     string `json:"initiatorIPAddressSpace"`
+	PrivateNetworkRequestPolicy string `json:"privateNetworkRequestPolicy"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CrossOriginOpenerPolicyValue
@@ -940,10 +940,10 @@ const (
 //
 // This CDP type is experimental.
 type CrossOriginOpenerPolicyStatus struct {
-	Value                       CrossOriginOpenerPolicyValue `json:"value"`
-	ReportOnlyValue             CrossOriginOpenerPolicyValue `json:"reportOnlyValue"`
-	ReportingEndpoint           string                       `json:"reportingEndpoint,omitempty"`
-	ReportOnlyReportingEndpoint string                       `json:"reportOnlyReportingEndpoint,omitempty"`
+	Value                       string `json:"value"`
+	ReportOnlyValue             string `json:"reportOnlyValue"`
+	ReportingEndpoint           string `json:"reportingEndpoint,omitempty"`
+	ReportOnlyReportingEndpoint string `json:"reportOnlyReportingEndpoint,omitempty"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CrossOriginEmbedderPolicyValue
@@ -962,10 +962,10 @@ const (
 //
 // This CDP type is experimental.
 type CrossOriginEmbedderPolicyStatus struct {
-	Value                       CrossOriginEmbedderPolicyValue `json:"value"`
-	ReportOnlyValue             CrossOriginEmbedderPolicyValue `json:"reportOnlyValue"`
-	ReportingEndpoint           string                         `json:"reportingEndpoint,omitempty"`
-	ReportOnlyReportingEndpoint string                         `json:"reportOnlyReportingEndpoint,omitempty"`
+	Value                       string `json:"value"`
+	ReportOnlyValue             string `json:"reportOnlyValue"`
+	ReportingEndpoint           string `json:"reportingEndpoint,omitempty"`
+	ReportOnlyReportingEndpoint string `json:"reportOnlyReportingEndpoint,omitempty"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-SecurityIsolationStatus

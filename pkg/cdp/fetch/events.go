@@ -14,7 +14,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#event-requestPaused
 type RequestPaused struct {
 	// Each request the page makes will have a unique id.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// The details of the request.
 	Request network.Request `json:"request"`
 	// The id of the frame that initiated the request.
@@ -29,7 +29,7 @@ type RequestPaused struct {
 	ResponseHeaders []HeaderEntry `json:"responseHeaders,omitempty"`
 	// If the intercepted request had a corresponding Network.requestWillBeSent event fired for it,
 	// then this networkId will be the same as the requestId present in the requestWillBeSent event.
-	NetworkID *RequestID `json:"networkId,omitempty"`
+	NetworkID string `json:"networkId,omitempty"`
 }
 
 // Issued when the domain is enabled with handleAuthRequests set to true.
@@ -38,7 +38,7 @@ type RequestPaused struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#event-authRequired
 type AuthRequired struct {
 	// Each request the page makes will have a unique id.
-	RequestID RequestID `json:"requestId"`
+	RequestID string `json:"requestId"`
 	// The details of the request.
 	Request network.Request `json:"request"`
 	// The id of the frame that initiated the request.

@@ -26,7 +26,7 @@ type RequestPattern struct {
 	// If set, only requests for matching resource types will be intercepted.
 	ResourceType string `json:"resourceType,omitempty"`
 	// Stage at wich to begin intercepting requests. Default is Request.
-	RequestStage *RequestStage `json:"requestStage,omitempty"`
+	RequestStage string `json:"requestStage,omitempty"`
 }
 
 // Response HTTP header entry

@@ -164,21 +164,21 @@ type Rectangle []float64
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-DocumentSnapshot
 type DocumentSnapshot struct {
 	// Document URL that `Document` or `FrameOwner` node points to.
-	DocumentURL StringIndex `json:"documentURL"`
+	DocumentURL int64 `json:"documentURL"`
 	// Document title.
-	Title StringIndex `json:"title"`
+	Title int64 `json:"title"`
 	// Base URL that `Document` or `FrameOwner` node uses for URL completion.
-	BaseURL StringIndex `json:"baseURL"`
+	BaseURL int64 `json:"baseURL"`
 	// Contains the document's content language.
-	ContentLanguage StringIndex `json:"contentLanguage"`
+	ContentLanguage int64 `json:"contentLanguage"`
 	// Contains the document's character set encoding.
-	EncodingName StringIndex `json:"encodingName"`
+	EncodingName int64 `json:"encodingName"`
 	// `DocumentType` node's publicId.
-	PublicID StringIndex `json:"publicId"`
+	PublicID int64 `json:"publicId"`
 	// `DocumentType` node's systemId.
-	SystemID StringIndex `json:"systemId"`
+	SystemID int64 `json:"systemId"`
 	// Frame ID for frame owner elements and also for the document node.
-	FrameID StringIndex `json:"frameId"`
+	FrameID int64 `json:"frameId"`
 	// A table with dom nodes.
 	Nodes NodeTreeSnapshot `json:"nodes"`
 	// The nodes in the layout tree.

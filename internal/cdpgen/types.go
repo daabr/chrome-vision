@@ -14,6 +14,7 @@ func generateTypes(d Domain) string {
 	generateImports(b, []string{"encoding/json"}, d.Dependencies)
 	for _, t := range d.Types {
 		if t.Type != "array" && t.Type != "object" {
+			aliases[adjust(t.ID)] = convertType(t.Type, nil)
 			key := strings.ToLower(d.Domain) + "." + adjust(t.ID)
 			aliases[key] = convertType(t.Type, nil)
 		}
@@ -102,6 +103,10 @@ func generateProperty(b *strings.Builder, p Property, usage, domain string) {
 		fmt.Fprint(b, convertType(*p.Type, p.Items))
 	} else {
 		r := strings.ReplaceAll(adjust(*p.Ref), strings.ToLower(domain)+".", "")
+		// De-alias built-in types (https://crbug.com/1193242).
+		if t, ok := aliases[r]; ok {
+			r = t
+		}
 		if p.Optional && r != "int64" && r != "float64" && r != "string" {
 			fmt.Fprint(b, "*")
 		}

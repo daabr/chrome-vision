@@ -52,7 +52,7 @@ type LocationRange struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-CallFrame
 type CallFrame struct {
 	// Call frame identifier. This identifier is only valid while the virtual machine is paused.
-	CallFrameID CallFrameID `json:"callFrameId"`
+	CallFrameID string `json:"callFrameId"`
 	// Name of the JavaScript function called on this call frame.
 	FunctionName string `json:"functionName"`
 	// Location in the source code.

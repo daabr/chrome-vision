@@ -4,8 +4,8 @@ package backgroundservice
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#event-recordingStateChanged
 type RecordingStateChanged struct {
-	IsRecording bool        `json:"isRecording"`
-	Service     ServiceName `json:"service"`
+	IsRecording bool   `json:"isRecording"`
+	Service     string `json:"service"`
 }
 
 // Called with all existing backgroundServiceEvents when enabled, and all new

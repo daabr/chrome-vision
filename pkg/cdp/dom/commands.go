@@ -19,7 +19,7 @@ import (
 // This CDP method is experimental.
 type CollectClassNamesFromSubtree struct {
 	// Id of the node to collect class names.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewCollectClassNamesFromSubtree constructs a new CollectClassNamesFromSubtree struct instance, with
@@ -29,7 +29,7 @@ type CollectClassNamesFromSubtree struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-collectClassNamesFromSubtree
 //
 // This CDP method is experimental.
-func NewCollectClassNamesFromSubtree(nodeID NodeID) *CollectClassNamesFromSubtree {
+func NewCollectClassNamesFromSubtree(nodeID int64) *CollectClassNamesFromSubtree {
 	return &CollectClassNamesFromSubtree{
 		NodeID: nodeID,
 	}
@@ -74,12 +74,12 @@ func (t *CollectClassNamesFromSubtree) Do(ctx context.Context) (*CollectClassNam
 // This CDP method is experimental.
 type CopyTo struct {
 	// Id of the node to copy.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// Id of the element to drop the copy into.
-	TargetNodeID NodeID `json:"targetNodeId"`
+	TargetNodeID int64 `json:"targetNodeId"`
 	// Drop the copy before this node (if absent, the copy becomes the last child of
 	// `targetNodeId`).
-	InsertBeforeNodeID *NodeID `json:"insertBeforeNodeId,omitempty"`
+	InsertBeforeNodeID int64 `json:"insertBeforeNodeId,omitempty"`
 }
 
 // NewCopyTo constructs a new CopyTo struct instance, with
@@ -89,7 +89,7 @@ type CopyTo struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-copyTo
 //
 // This CDP method is experimental.
-func NewCopyTo(nodeID NodeID, targetNodeID NodeID) *CopyTo {
+func NewCopyTo(nodeID int64, targetNodeID int64) *CopyTo {
 	return &CopyTo{
 		NodeID:       nodeID,
 		TargetNodeID: targetNodeID,
@@ -101,8 +101,8 @@ func NewCopyTo(nodeID NodeID, targetNodeID NodeID) *CopyTo {
 //
 // Drop the copy before this node (if absent, the copy becomes the last child of
 // `targetNodeId`).
-func (t *CopyTo) SetInsertBeforeNodeID(v NodeID) *CopyTo {
-	t.InsertBeforeNodeID = &v
+func (t *CopyTo) SetInsertBeforeNodeID(v int64) *CopyTo {
+	t.InsertBeforeNodeID = v
 	return t
 }
 
@@ -110,7 +110,7 @@ func (t *CopyTo) SetInsertBeforeNodeID(v NodeID) *CopyTo {
 // to calling the CopyTo CDP command with Do().
 type CopyToResponse struct {
 	// Id of the node clone.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the CopyTo CDP command to a browser,
@@ -143,9 +143,9 @@ func (t *CopyTo) Do(ctx context.Context) (*CopyToResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-describeNode
 type DescribeNode struct {
 	// Identifier of the node.
-	NodeID *NodeID `json:"nodeId,omitempty"`
+	NodeID int64 `json:"nodeId,omitempty"`
 	// Identifier of the backend node.
-	BackendNodeID *BackendNodeID `json:"backendNodeId,omitempty"`
+	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 	// JavaScript object id of the node wrapper.
 	ObjectID *runtime.RemoteObjectID `json:"objectId,omitempty"`
 	// The maximum depth at which children should be retrieved, defaults to 1. Use -1 for the
@@ -169,8 +169,8 @@ func NewDescribeNode() *DescribeNode {
 // parameter `nodeId` in the DescribeNode CDP command.
 //
 // Identifier of the node.
-func (t *DescribeNode) SetNodeID(v NodeID) *DescribeNode {
-	t.NodeID = &v
+func (t *DescribeNode) SetNodeID(v int64) *DescribeNode {
+	t.NodeID = v
 	return t
 }
 
@@ -178,8 +178,8 @@ func (t *DescribeNode) SetNodeID(v NodeID) *DescribeNode {
 // parameter `backendNodeId` in the DescribeNode CDP command.
 //
 // Identifier of the backend node.
-func (t *DescribeNode) SetBackendNodeID(v BackendNodeID) *DescribeNode {
-	t.BackendNodeID = &v
+func (t *DescribeNode) SetBackendNodeID(v int64) *DescribeNode {
+	t.BackendNodeID = v
 	return t
 }
 
@@ -252,9 +252,9 @@ func (t *DescribeNode) Do(ctx context.Context) (*DescribeNodeResponse, error) {
 // This CDP method is experimental.
 type ScrollIntoViewIfNeeded struct {
 	// Identifier of the node.
-	NodeID *NodeID `json:"nodeId,omitempty"`
+	NodeID int64 `json:"nodeId,omitempty"`
 	// Identifier of the backend node.
-	BackendNodeID *BackendNodeID `json:"backendNodeId,omitempty"`
+	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 	// JavaScript object id of the node wrapper.
 	ObjectID *runtime.RemoteObjectID `json:"objectId,omitempty"`
 	// The rect to be scrolled into view, relative to the node's border box, in CSS pixels.
@@ -277,8 +277,8 @@ func NewScrollIntoViewIfNeeded() *ScrollIntoViewIfNeeded {
 // parameter `nodeId` in the ScrollIntoViewIfNeeded CDP command.
 //
 // Identifier of the node.
-func (t *ScrollIntoViewIfNeeded) SetNodeID(v NodeID) *ScrollIntoViewIfNeeded {
-	t.NodeID = &v
+func (t *ScrollIntoViewIfNeeded) SetNodeID(v int64) *ScrollIntoViewIfNeeded {
+	t.NodeID = v
 	return t
 }
 
@@ -286,8 +286,8 @@ func (t *ScrollIntoViewIfNeeded) SetNodeID(v NodeID) *ScrollIntoViewIfNeeded {
 // parameter `backendNodeId` in the ScrollIntoViewIfNeeded CDP command.
 //
 // Identifier of the backend node.
-func (t *ScrollIntoViewIfNeeded) SetBackendNodeID(v BackendNodeID) *ScrollIntoViewIfNeeded {
-	t.BackendNodeID = &v
+func (t *ScrollIntoViewIfNeeded) SetBackendNodeID(v int64) *ScrollIntoViewIfNeeded {
+	t.BackendNodeID = v
 	return t
 }
 
@@ -439,9 +439,9 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-focus
 type Focus struct {
 	// Identifier of the node.
-	NodeID *NodeID `json:"nodeId,omitempty"`
+	NodeID int64 `json:"nodeId,omitempty"`
 	// Identifier of the backend node.
-	BackendNodeID *BackendNodeID `json:"backendNodeId,omitempty"`
+	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 	// JavaScript object id of the node wrapper.
 	ObjectID *runtime.RemoteObjectID `json:"objectId,omitempty"`
 }
@@ -459,8 +459,8 @@ func NewFocus() *Focus {
 // parameter `nodeId` in the Focus CDP command.
 //
 // Identifier of the node.
-func (t *Focus) SetNodeID(v NodeID) *Focus {
-	t.NodeID = &v
+func (t *Focus) SetNodeID(v int64) *Focus {
+	t.NodeID = v
 	return t
 }
 
@@ -468,8 +468,8 @@ func (t *Focus) SetNodeID(v NodeID) *Focus {
 // parameter `backendNodeId` in the Focus CDP command.
 //
 // Identifier of the backend node.
-func (t *Focus) SetBackendNodeID(v BackendNodeID) *Focus {
-	t.BackendNodeID = &v
+func (t *Focus) SetBackendNodeID(v int64) *Focus {
+	t.BackendNodeID = v
 	return t
 }
 
@@ -507,7 +507,7 @@ func (t *Focus) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getAttributes
 type GetAttributes struct {
 	// Id of the node to retrieve attibutes for.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetAttributes constructs a new GetAttributes struct instance, with
@@ -515,7 +515,7 @@ type GetAttributes struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getAttributes
-func NewGetAttributes(nodeID NodeID) *GetAttributes {
+func NewGetAttributes(nodeID int64) *GetAttributes {
 	return &GetAttributes{
 		NodeID: nodeID,
 	}
@@ -557,9 +557,9 @@ func (t *GetAttributes) Do(ctx context.Context) (*GetAttributesResponse, error) 
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getBoxModel
 type GetBoxModel struct {
 	// Identifier of the node.
-	NodeID *NodeID `json:"nodeId,omitempty"`
+	NodeID int64 `json:"nodeId,omitempty"`
 	// Identifier of the backend node.
-	BackendNodeID *BackendNodeID `json:"backendNodeId,omitempty"`
+	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 	// JavaScript object id of the node wrapper.
 	ObjectID *runtime.RemoteObjectID `json:"objectId,omitempty"`
 }
@@ -577,8 +577,8 @@ func NewGetBoxModel() *GetBoxModel {
 // parameter `nodeId` in the GetBoxModel CDP command.
 //
 // Identifier of the node.
-func (t *GetBoxModel) SetNodeID(v NodeID) *GetBoxModel {
-	t.NodeID = &v
+func (t *GetBoxModel) SetNodeID(v int64) *GetBoxModel {
+	t.NodeID = v
 	return t
 }
 
@@ -586,8 +586,8 @@ func (t *GetBoxModel) SetNodeID(v NodeID) *GetBoxModel {
 // parameter `backendNodeId` in the GetBoxModel CDP command.
 //
 // Identifier of the backend node.
-func (t *GetBoxModel) SetBackendNodeID(v BackendNodeID) *GetBoxModel {
-	t.BackendNodeID = &v
+func (t *GetBoxModel) SetBackendNodeID(v int64) *GetBoxModel {
+	t.BackendNodeID = v
 	return t
 }
 
@@ -639,9 +639,9 @@ func (t *GetBoxModel) Do(ctx context.Context) (*GetBoxModelResponse, error) {
 // This CDP method is experimental.
 type GetContentQuads struct {
 	// Identifier of the node.
-	NodeID *NodeID `json:"nodeId,omitempty"`
+	NodeID int64 `json:"nodeId,omitempty"`
 	// Identifier of the backend node.
-	BackendNodeID *BackendNodeID `json:"backendNodeId,omitempty"`
+	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 	// JavaScript object id of the node wrapper.
 	ObjectID *runtime.RemoteObjectID `json:"objectId,omitempty"`
 }
@@ -661,8 +661,8 @@ func NewGetContentQuads() *GetContentQuads {
 // parameter `nodeId` in the GetContentQuads CDP command.
 //
 // Identifier of the node.
-func (t *GetContentQuads) SetNodeID(v NodeID) *GetContentQuads {
-	t.NodeID = &v
+func (t *GetContentQuads) SetNodeID(v int64) *GetContentQuads {
+	t.NodeID = v
 	return t
 }
 
@@ -670,8 +670,8 @@ func (t *GetContentQuads) SetNodeID(v NodeID) *GetContentQuads {
 // parameter `backendNodeId` in the GetContentQuads CDP command.
 //
 // Identifier of the backend node.
-func (t *GetContentQuads) SetBackendNodeID(v BackendNodeID) *GetContentQuads {
-	t.BackendNodeID = &v
+func (t *GetContentQuads) SetBackendNodeID(v int64) *GetContentQuads {
+	t.BackendNodeID = v
 	return t
 }
 
@@ -872,7 +872,7 @@ func (t *GetFlattenedDocument) Do(ctx context.Context) (*GetFlattenedDocumentRes
 // This CDP method is experimental.
 type GetNodesForSubtreeByStyle struct {
 	// Node ID pointing to the root of a subtree.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// The style to filter nodes by (includes nodes if any of properties matches).
 	ComputedStyles []CSSComputedStyleProperty `json:"computedStyles"`
 	// Whether or not iframes and shadow roots in the same target should be traversed when returning the
@@ -887,7 +887,7 @@ type GetNodesForSubtreeByStyle struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getNodesForSubtreeByStyle
 //
 // This CDP method is experimental.
-func NewGetNodesForSubtreeByStyle(nodeID NodeID, computedStyles []CSSComputedStyleProperty) *GetNodesForSubtreeByStyle {
+func NewGetNodesForSubtreeByStyle(nodeID int64, computedStyles []CSSComputedStyleProperty) *GetNodesForSubtreeByStyle {
 	return &GetNodesForSubtreeByStyle{
 		NodeID:         nodeID,
 		ComputedStyles: computedStyles,
@@ -984,11 +984,11 @@ func (t *GetNodeForLocation) SetIgnorePointerEventsNone(v bool) *GetNodeForLocat
 // to calling the GetNodeForLocation CDP command with Do().
 type GetNodeForLocationResponse struct {
 	// Resulting node.
-	BackendNodeID BackendNodeID `json:"backendNodeId"`
+	BackendNodeID int64 `json:"backendNodeId"`
 	// Frame this node belongs to.
 	FrameID string `json:"frameId"`
 	// Id of the node at given coordinates, only when enabled and requested document.
-	NodeID *NodeID `json:"nodeId,omitempty"`
+	NodeID int64 `json:"nodeId,omitempty"`
 }
 
 // Do sends the GetNodeForLocation CDP command to a browser,
@@ -1020,9 +1020,9 @@ func (t *GetNodeForLocation) Do(ctx context.Context) (*GetNodeForLocationRespons
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getOuterHTML
 type GetOuterHTML struct {
 	// Identifier of the node.
-	NodeID *NodeID `json:"nodeId,omitempty"`
+	NodeID int64 `json:"nodeId,omitempty"`
 	// Identifier of the backend node.
-	BackendNodeID *BackendNodeID `json:"backendNodeId,omitempty"`
+	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 	// JavaScript object id of the node wrapper.
 	ObjectID *runtime.RemoteObjectID `json:"objectId,omitempty"`
 }
@@ -1040,8 +1040,8 @@ func NewGetOuterHTML() *GetOuterHTML {
 // parameter `nodeId` in the GetOuterHTML CDP command.
 //
 // Identifier of the node.
-func (t *GetOuterHTML) SetNodeID(v NodeID) *GetOuterHTML {
-	t.NodeID = &v
+func (t *GetOuterHTML) SetNodeID(v int64) *GetOuterHTML {
+	t.NodeID = v
 	return t
 }
 
@@ -1049,8 +1049,8 @@ func (t *GetOuterHTML) SetNodeID(v NodeID) *GetOuterHTML {
 // parameter `backendNodeId` in the GetOuterHTML CDP command.
 //
 // Identifier of the backend node.
-func (t *GetOuterHTML) SetBackendNodeID(v BackendNodeID) *GetOuterHTML {
-	t.BackendNodeID = &v
+func (t *GetOuterHTML) SetBackendNodeID(v int64) *GetOuterHTML {
+	t.BackendNodeID = v
 	return t
 }
 
@@ -1101,7 +1101,7 @@ func (t *GetOuterHTML) Do(ctx context.Context) (*GetOuterHTMLResponse, error) {
 // This CDP method is experimental.
 type GetRelayoutBoundary struct {
 	// Id of the node.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetRelayoutBoundary constructs a new GetRelayoutBoundary struct instance, with
@@ -1111,7 +1111,7 @@ type GetRelayoutBoundary struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getRelayoutBoundary
 //
 // This CDP method is experimental.
-func NewGetRelayoutBoundary(nodeID NodeID) *GetRelayoutBoundary {
+func NewGetRelayoutBoundary(nodeID int64) *GetRelayoutBoundary {
 	return &GetRelayoutBoundary{
 		NodeID: nodeID,
 	}
@@ -1121,7 +1121,7 @@ func NewGetRelayoutBoundary(nodeID NodeID) *GetRelayoutBoundary {
 // to calling the GetRelayoutBoundary CDP command with Do().
 type GetRelayoutBoundaryResponse struct {
 	// Relayout boundary node id for the given node.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the GetRelayoutBoundary CDP command to a browser,
@@ -1248,12 +1248,12 @@ func (t *MarkUndoableState) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-moveTo
 type MoveTo struct {
 	// Id of the node to move.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// Id of the element to drop the moved node into.
-	TargetNodeID NodeID `json:"targetNodeId"`
+	TargetNodeID int64 `json:"targetNodeId"`
 	// Drop node before this one (if absent, the moved node becomes the last child of
 	// `targetNodeId`).
-	InsertBeforeNodeID *NodeID `json:"insertBeforeNodeId,omitempty"`
+	InsertBeforeNodeID int64 `json:"insertBeforeNodeId,omitempty"`
 }
 
 // NewMoveTo constructs a new MoveTo struct instance, with
@@ -1261,7 +1261,7 @@ type MoveTo struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-moveTo
-func NewMoveTo(nodeID NodeID, targetNodeID NodeID) *MoveTo {
+func NewMoveTo(nodeID int64, targetNodeID int64) *MoveTo {
 	return &MoveTo{
 		NodeID:       nodeID,
 		TargetNodeID: targetNodeID,
@@ -1273,8 +1273,8 @@ func NewMoveTo(nodeID NodeID, targetNodeID NodeID) *MoveTo {
 //
 // Drop node before this one (if absent, the moved node becomes the last child of
 // `targetNodeId`).
-func (t *MoveTo) SetInsertBeforeNodeID(v NodeID) *MoveTo {
-	t.InsertBeforeNodeID = &v
+func (t *MoveTo) SetInsertBeforeNodeID(v int64) *MoveTo {
+	t.InsertBeforeNodeID = v
 	return t
 }
 
@@ -1282,7 +1282,7 @@ func (t *MoveTo) SetInsertBeforeNodeID(v NodeID) *MoveTo {
 // to calling the MoveTo CDP command with Do().
 type MoveToResponse struct {
 	// New id of the moved node.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the MoveTo CDP command to a browser,
@@ -1404,7 +1404,7 @@ func NewPushNodeByPathToFrontend(path string) *PushNodeByPathToFrontend {
 // to calling the PushNodeByPathToFrontend CDP command with Do().
 type PushNodeByPathToFrontendResponse struct {
 	// Id of the node for given path.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the PushNodeByPathToFrontend CDP command to a browser,
@@ -1491,7 +1491,7 @@ func (t *PushNodesByBackendIdsToFrontend) Do(ctx context.Context) (*PushNodesByB
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-querySelector
 type QuerySelector struct {
 	// Id of the node to query upon.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// Selector string.
 	Selector string `json:"selector"`
 }
@@ -1501,7 +1501,7 @@ type QuerySelector struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-querySelector
-func NewQuerySelector(nodeID NodeID, selector string) *QuerySelector {
+func NewQuerySelector(nodeID int64, selector string) *QuerySelector {
 	return &QuerySelector{
 		NodeID:   nodeID,
 		Selector: selector,
@@ -1512,7 +1512,7 @@ func NewQuerySelector(nodeID NodeID, selector string) *QuerySelector {
 // to calling the QuerySelector CDP command with Do().
 type QuerySelectorResponse struct {
 	// Query selector result.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the QuerySelector CDP command to a browser,
@@ -1544,7 +1544,7 @@ func (t *QuerySelector) Do(ctx context.Context) (*QuerySelectorResponse, error) 
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-querySelectorAll
 type QuerySelectorAll struct {
 	// Id of the node to query upon.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// Selector string.
 	Selector string `json:"selector"`
 }
@@ -1554,7 +1554,7 @@ type QuerySelectorAll struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-querySelectorAll
-func NewQuerySelectorAll(nodeID NodeID, selector string) *QuerySelectorAll {
+func NewQuerySelectorAll(nodeID int64, selector string) *QuerySelectorAll {
 	return &QuerySelectorAll{
 		NodeID:   nodeID,
 		Selector: selector,
@@ -1631,7 +1631,7 @@ func (t *Redo) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-removeAttribute
 type RemoveAttribute struct {
 	// Id of the element to remove attribute from.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// Name of the attribute to remove.
 	Name string `json:"name"`
 }
@@ -1641,7 +1641,7 @@ type RemoveAttribute struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-removeAttribute
-func NewRemoveAttribute(nodeID NodeID, name string) *RemoveAttribute {
+func NewRemoveAttribute(nodeID int64, name string) *RemoveAttribute {
 	return &RemoveAttribute{
 		NodeID: nodeID,
 		Name:   name,
@@ -1673,7 +1673,7 @@ func (t *RemoveAttribute) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-removeNode
 type RemoveNode struct {
 	// Id of the node to remove.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewRemoveNode constructs a new RemoveNode struct instance, with
@@ -1681,7 +1681,7 @@ type RemoveNode struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-removeNode
-func NewRemoveNode(nodeID NodeID) *RemoveNode {
+func NewRemoveNode(nodeID int64) *RemoveNode {
 	return &RemoveNode{
 		NodeID: nodeID,
 	}
@@ -1714,7 +1714,7 @@ func (t *RemoveNode) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-requestChildNodes
 type RequestChildNodes struct {
 	// Id of the node to get children for.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// The maximum depth at which children should be retrieved, defaults to 1. Use -1 for the
 	// entire subtree or provide an integer larger than 0.
 	Depth int64 `json:"depth,omitempty"`
@@ -1728,7 +1728,7 @@ type RequestChildNodes struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-requestChildNodes
-func NewRequestChildNodes(nodeID NodeID) *RequestChildNodes {
+func NewRequestChildNodes(nodeID int64) *RequestChildNodes {
 	return &RequestChildNodes{
 		NodeID: nodeID,
 	}
@@ -1799,7 +1799,7 @@ func NewRequestNode(objectID runtime.RemoteObjectID) *RequestNode {
 // to calling the RequestNode CDP command with Do().
 type RequestNodeResponse struct {
 	// Node id for given object.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the RequestNode CDP command to a browser,
@@ -1831,7 +1831,7 @@ func (t *RequestNode) Do(ctx context.Context) (*RequestNodeResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-resolveNode
 type ResolveNode struct {
 	// Id of the node to resolve.
-	NodeID *NodeID `json:"nodeId,omitempty"`
+	NodeID int64 `json:"nodeId,omitempty"`
 	// Backend identifier of the node to resolve.
 	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 	// Symbolic group name that can be used to release multiple objects.
@@ -1853,8 +1853,8 @@ func NewResolveNode() *ResolveNode {
 // parameter `nodeId` in the ResolveNode CDP command.
 //
 // Id of the node to resolve.
-func (t *ResolveNode) SetNodeID(v NodeID) *ResolveNode {
-	t.NodeID = &v
+func (t *ResolveNode) SetNodeID(v int64) *ResolveNode {
+	t.NodeID = v
 	return t
 }
 
@@ -1921,7 +1921,7 @@ func (t *ResolveNode) Do(ctx context.Context) (*ResolveNodeResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setAttributeValue
 type SetAttributeValue struct {
 	// Id of the element to set attribute for.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// Attribute name.
 	Name string `json:"name"`
 	// Attribute value.
@@ -1933,7 +1933,7 @@ type SetAttributeValue struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setAttributeValue
-func NewSetAttributeValue(nodeID NodeID, name string, value string) *SetAttributeValue {
+func NewSetAttributeValue(nodeID int64, name string, value string) *SetAttributeValue {
 	return &SetAttributeValue{
 		NodeID: nodeID,
 		Name:   name,
@@ -1967,7 +1967,7 @@ func (t *SetAttributeValue) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setAttributesAsText
 type SetAttributesAsText struct {
 	// Id of the element to set attributes for.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// Text with a number of attributes. Will parse this text using HTML parser.
 	Text string `json:"text"`
 	// Attribute name to replace with new attributes derived from text in case text parsed
@@ -1980,7 +1980,7 @@ type SetAttributesAsText struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setAttributesAsText
-func NewSetAttributesAsText(nodeID NodeID, text string) *SetAttributesAsText {
+func NewSetAttributesAsText(nodeID int64, text string) *SetAttributesAsText {
 	return &SetAttributesAsText{
 		NodeID: nodeID,
 		Text:   text,
@@ -2024,9 +2024,9 @@ type SetFileInputFiles struct {
 	// Array of file paths to set.
 	Files []string `json:"files"`
 	// Identifier of the node.
-	NodeID *NodeID `json:"nodeId,omitempty"`
+	NodeID int64 `json:"nodeId,omitempty"`
 	// Identifier of the backend node.
-	BackendNodeID *BackendNodeID `json:"backendNodeId,omitempty"`
+	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 	// JavaScript object id of the node wrapper.
 	ObjectID *runtime.RemoteObjectID `json:"objectId,omitempty"`
 }
@@ -2046,8 +2046,8 @@ func NewSetFileInputFiles(files []string) *SetFileInputFiles {
 // parameter `nodeId` in the SetFileInputFiles CDP command.
 //
 // Identifier of the node.
-func (t *SetFileInputFiles) SetNodeID(v NodeID) *SetFileInputFiles {
-	t.NodeID = &v
+func (t *SetFileInputFiles) SetNodeID(v int64) *SetFileInputFiles {
+	t.NodeID = v
 	return t
 }
 
@@ -2055,8 +2055,8 @@ func (t *SetFileInputFiles) SetNodeID(v NodeID) *SetFileInputFiles {
 // parameter `backendNodeId` in the SetFileInputFiles CDP command.
 //
 // Identifier of the backend node.
-func (t *SetFileInputFiles) SetBackendNodeID(v BackendNodeID) *SetFileInputFiles {
-	t.BackendNodeID = &v
+func (t *SetFileInputFiles) SetBackendNodeID(v int64) *SetFileInputFiles {
+	t.BackendNodeID = v
 	return t
 }
 
@@ -2139,7 +2139,7 @@ func (t *SetNodeStackTracesEnabled) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type GetNodeStackTraces struct {
 	// Id of the node to get stack traces for.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetNodeStackTraces constructs a new GetNodeStackTraces struct instance, with
@@ -2149,7 +2149,7 @@ type GetNodeStackTraces struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getNodeStackTraces
 //
 // This CDP method is experimental.
-func NewGetNodeStackTraces(nodeID NodeID) *GetNodeStackTraces {
+func NewGetNodeStackTraces(nodeID int64) *GetNodeStackTraces {
 	return &GetNodeStackTraces{
 		NodeID: nodeID,
 	}
@@ -2248,7 +2248,7 @@ func (t *GetFileInfo) Do(ctx context.Context) (*GetFileInfoResponse, error) {
 // This CDP method is experimental.
 type SetInspectedNode struct {
 	// DOM node id to be accessible by means of $x command line API.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewSetInspectedNode constructs a new SetInspectedNode struct instance, with
@@ -2258,7 +2258,7 @@ type SetInspectedNode struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setInspectedNode
 //
 // This CDP method is experimental.
-func NewSetInspectedNode(nodeID NodeID) *SetInspectedNode {
+func NewSetInspectedNode(nodeID int64) *SetInspectedNode {
 	return &SetInspectedNode{
 		NodeID: nodeID,
 	}
@@ -2289,7 +2289,7 @@ func (t *SetInspectedNode) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setNodeName
 type SetNodeName struct {
 	// Id of the node to set name for.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// New node's name.
 	Name string `json:"name"`
 }
@@ -2299,7 +2299,7 @@ type SetNodeName struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setNodeName
-func NewSetNodeName(nodeID NodeID, name string) *SetNodeName {
+func NewSetNodeName(nodeID int64, name string) *SetNodeName {
 	return &SetNodeName{
 		NodeID: nodeID,
 		Name:   name,
@@ -2310,7 +2310,7 @@ func NewSetNodeName(nodeID NodeID, name string) *SetNodeName {
 // to calling the SetNodeName CDP command with Do().
 type SetNodeNameResponse struct {
 	// New node's id.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the SetNodeName CDP command to a browser,
@@ -2342,7 +2342,7 @@ func (t *SetNodeName) Do(ctx context.Context) (*SetNodeNameResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setNodeValue
 type SetNodeValue struct {
 	// Id of the node to set value for.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// New node's value.
 	Value string `json:"value"`
 }
@@ -2352,7 +2352,7 @@ type SetNodeValue struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setNodeValue
-func NewSetNodeValue(nodeID NodeID, value string) *SetNodeValue {
+func NewSetNodeValue(nodeID int64, value string) *SetNodeValue {
 	return &SetNodeValue{
 		NodeID: nodeID,
 		Value:  value,
@@ -2384,7 +2384,7 @@ func (t *SetNodeValue) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setOuterHTML
 type SetOuterHTML struct {
 	// Id of the node to set markup for.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// Outer HTML markup to set.
 	OuterHTML string `json:"outerHTML"`
 }
@@ -2394,7 +2394,7 @@ type SetOuterHTML struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setOuterHTML
-func NewSetOuterHTML(nodeID NodeID, outerHTML string) *SetOuterHTML {
+func NewSetOuterHTML(nodeID int64, outerHTML string) *SetOuterHTML {
 	return &SetOuterHTML{
 		NodeID:    nodeID,
 		OuterHTML: outerHTML,
@@ -2481,9 +2481,9 @@ func NewGetFrameOwner(frameID string) *GetFrameOwner {
 // to calling the GetFrameOwner CDP command with Do().
 type GetFrameOwnerResponse struct {
 	// Resulting node.
-	BackendNodeID BackendNodeID `json:"backendNodeId"`
+	BackendNodeID int64 `json:"backendNodeId"`
 	// Id of the node at given coordinates, only when enabled and requested document.
-	NodeID *NodeID `json:"nodeId,omitempty"`
+	NodeID int64 `json:"nodeId,omitempty"`
 }
 
 // Do sends the GetFrameOwner CDP command to a browser,

@@ -237,7 +237,7 @@ func (t *GetFullAXTree) Do(ctx context.Context) (*GetFullAXTreeResponse, error) 
 //
 // This CDP method is experimental.
 type GetChildAXNodes struct {
-	ID AXNodeID `json:"id"`
+	ID string `json:"id"`
 }
 
 // NewGetChildAXNodes constructs a new GetChildAXNodes struct instance, with
@@ -247,7 +247,7 @@ type GetChildAXNodes struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#method-getChildAXNodes
 //
 // This CDP method is experimental.
-func NewGetChildAXNodes(id AXNodeID) *GetChildAXNodes {
+func NewGetChildAXNodes(id string) *GetChildAXNodes {
 	return &GetChildAXNodes{
 		ID: id,
 	}

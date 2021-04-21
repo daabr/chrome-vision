@@ -11,7 +11,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#event-breakpointResolved
 type BreakpointResolved struct {
 	// Breakpoint unique identifier.
-	BreakpointID BreakpointID `json:"breakpointId"`
+	BreakpointID string `json:"breakpointId"`
 	// Actual breakpoint location.
 	Location Location `json:"location"`
 }

@@ -160,7 +160,7 @@ func (t *Enable) Do(ctx context.Context) (*EnableResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-evaluateOnCallFrame
 type EvaluateOnCallFrame struct {
 	// Call frame identifier to evaluate on.
-	CallFrameID CallFrameID `json:"callFrameId"`
+	CallFrameID string `json:"callFrameId"`
 	// Expression to evaluate.
 	Expression string `json:"expression"`
 	// String object group name to put result into (allows rapid releasing resulting object handles
@@ -191,7 +191,7 @@ type EvaluateOnCallFrame struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-evaluateOnCallFrame
-func NewEvaluateOnCallFrame(callFrameID CallFrameID, expression string) *EvaluateOnCallFrame {
+func NewEvaluateOnCallFrame(callFrameID string, expression string) *EvaluateOnCallFrame {
 	return &EvaluateOnCallFrame{
 		CallFrameID: callFrameID,
 		Expression:  expression,
@@ -611,7 +611,7 @@ func (t *PauseOnAsyncCall) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-removeBreakpoint
 type RemoveBreakpoint struct {
-	BreakpointID BreakpointID `json:"breakpointId"`
+	BreakpointID string `json:"breakpointId"`
 }
 
 // NewRemoveBreakpoint constructs a new RemoveBreakpoint struct instance, with
@@ -619,7 +619,7 @@ type RemoveBreakpoint struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-removeBreakpoint
-func NewRemoveBreakpoint(breakpointID BreakpointID) *RemoveBreakpoint {
+func NewRemoveBreakpoint(breakpointID string) *RemoveBreakpoint {
 	return &RemoveBreakpoint{
 		BreakpointID: breakpointID,
 	}
@@ -650,7 +650,7 @@ func (t *RemoveBreakpoint) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-restartFrame
 type RestartFrame struct {
 	// Call frame identifier to evaluate on.
-	CallFrameID CallFrameID `json:"callFrameId"`
+	CallFrameID string `json:"callFrameId"`
 }
 
 // NewRestartFrame constructs a new RestartFrame struct instance, with
@@ -658,7 +658,7 @@ type RestartFrame struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-restartFrame
-func NewRestartFrame(callFrameID CallFrameID) *RestartFrame {
+func NewRestartFrame(callFrameID string) *RestartFrame {
 	return &RestartFrame{
 		CallFrameID: callFrameID,
 	}
@@ -999,7 +999,7 @@ func (t *SetBreakpoint) SetCondition(v string) *SetBreakpoint {
 // to calling the SetBreakpoint CDP command with Do().
 type SetBreakpointResponse struct {
 	// Id of the created breakpoint for further reference.
-	BreakpointID BreakpointID `json:"breakpointId"`
+	BreakpointID string `json:"breakpointId"`
 	// Location this breakpoint resolved into.
 	ActualLocation Location `json:"actualLocation"`
 }
@@ -1051,7 +1051,7 @@ func NewSetInstrumentationBreakpoint(instrumentation string) *SetInstrumentation
 // to calling the SetInstrumentationBreakpoint CDP command with Do().
 type SetInstrumentationBreakpointResponse struct {
 	// Id of the created breakpoint for further reference.
-	BreakpointID BreakpointID `json:"breakpointId"`
+	BreakpointID string `json:"breakpointId"`
 }
 
 // Do sends the SetInstrumentationBreakpoint CDP command to a browser,
@@ -1163,7 +1163,7 @@ func (t *SetBreakpointByURL) SetCondition(v string) *SetBreakpointByURL {
 // to calling the SetBreakpointByURL CDP command with Do().
 type SetBreakpointByURLResponse struct {
 	// Id of the created breakpoint for further reference.
-	BreakpointID BreakpointID `json:"breakpointId"`
+	BreakpointID string `json:"breakpointId"`
 	// List of the locations this breakpoint resolved into upon addition.
 	Locations []Location `json:"locations"`
 }
@@ -1234,7 +1234,7 @@ func (t *SetBreakpointOnFunctionCall) SetCondition(v string) *SetBreakpointOnFun
 // to calling the SetBreakpointOnFunctionCall CDP command with Do().
 type SetBreakpointOnFunctionCallResponse struct {
 	// Id of the created breakpoint for further reference.
-	BreakpointID BreakpointID `json:"breakpointId"`
+	BreakpointID string `json:"breakpointId"`
 }
 
 // Do sends the SetBreakpointOnFunctionCall CDP command to a browser,
@@ -1511,7 +1511,7 @@ type SetVariableValue struct {
 	// New variable value.
 	NewValue runtime.CallArgument `json:"newValue"`
 	// Id of callframe that holds variable.
-	CallFrameID CallFrameID `json:"callFrameId"`
+	CallFrameID string `json:"callFrameId"`
 }
 
 // NewSetVariableValue constructs a new SetVariableValue struct instance, with
@@ -1519,7 +1519,7 @@ type SetVariableValue struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setVariableValue
-func NewSetVariableValue(scopeNumber int64, variableName string, newValue runtime.CallArgument, callFrameID CallFrameID) *SetVariableValue {
+func NewSetVariableValue(scopeNumber int64, variableName string, newValue runtime.CallArgument, callFrameID string) *SetVariableValue {
 	return &SetVariableValue{
 		ScopeNumber:  scopeNumber,
 		VariableName: variableName,

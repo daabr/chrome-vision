@@ -15,7 +15,7 @@ import (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-activateTarget
 type ActivateTarget struct {
-	TargetID TargetID `json:"targetId"`
+	TargetID string `json:"targetId"`
 }
 
 // NewActivateTarget constructs a new ActivateTarget struct instance, with
@@ -23,7 +23,7 @@ type ActivateTarget struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-activateTarget
-func NewActivateTarget(targetID TargetID) *ActivateTarget {
+func NewActivateTarget(targetID string) *ActivateTarget {
 	return &ActivateTarget{
 		TargetID: targetID,
 	}
@@ -53,7 +53,7 @@ func (t *ActivateTarget) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-attachToTarget
 type AttachToTarget struct {
-	TargetID TargetID `json:"targetId"`
+	TargetID string `json:"targetId"`
 	// Enables "flat" access to the session via specifying sessionId attribute in the commands.
 	// We plan to make this the default, deprecate non-flattened mode,
 	// and eventually retire it. See crbug.com/991325.
@@ -65,7 +65,7 @@ type AttachToTarget struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-attachToTarget
-func NewAttachToTarget(targetID TargetID) *AttachToTarget {
+func NewAttachToTarget(targetID string) *AttachToTarget {
 	return &AttachToTarget{
 		TargetID: targetID,
 	}
@@ -86,7 +86,7 @@ func (t *AttachToTarget) SetFlatten(v bool) *AttachToTarget {
 // to calling the AttachToTarget CDP command with Do().
 type AttachToTargetResponse struct {
 	// Id assigned to the session.
-	SessionID SessionID `json:"sessionId"`
+	SessionID string `json:"sessionId"`
 }
 
 // Do sends the AttachToTarget CDP command to a browser,
@@ -135,7 +135,7 @@ func NewAttachToBrowserTarget() *AttachToBrowserTarget {
 // to calling the AttachToBrowserTarget CDP command with Do().
 type AttachToBrowserTargetResponse struct {
 	// Id assigned to the session.
-	SessionID SessionID `json:"sessionId"`
+	SessionID string `json:"sessionId"`
 }
 
 // Do sends the AttachToBrowserTarget CDP command to a browser,
@@ -162,7 +162,7 @@ func (t *AttachToBrowserTarget) Do(ctx context.Context) (*AttachToBrowserTargetR
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-closeTarget
 type CloseTarget struct {
-	TargetID TargetID `json:"targetId"`
+	TargetID string `json:"targetId"`
 }
 
 // NewCloseTarget constructs a new CloseTarget struct instance, with
@@ -170,7 +170,7 @@ type CloseTarget struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-closeTarget
-func NewCloseTarget(targetID TargetID) *CloseTarget {
+func NewCloseTarget(targetID string) *CloseTarget {
 	return &CloseTarget{
 		TargetID: targetID,
 	}
@@ -222,7 +222,7 @@ func (t *CloseTarget) Do(ctx context.Context) (*CloseTargetResponse, error) {
 //
 // This CDP method is experimental.
 type ExposeDevToolsProtocol struct {
-	TargetID TargetID `json:"targetId"`
+	TargetID string `json:"targetId"`
 	// Binding name, 'cdp' if not specified.
 	BindingName string `json:"bindingName,omitempty"`
 }
@@ -234,7 +234,7 @@ type ExposeDevToolsProtocol struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-exposeDevToolsProtocol
 //
 // This CDP method is experimental.
-func NewExposeDevToolsProtocol(targetID TargetID) *ExposeDevToolsProtocol {
+func NewExposeDevToolsProtocol(targetID string) *ExposeDevToolsProtocol {
 	return &ExposeDevToolsProtocol{
 		TargetID: targetID,
 	}
@@ -495,7 +495,7 @@ func (t *CreateTarget) SetBackground(v bool) *CreateTarget {
 // to calling the CreateTarget CDP command with Do().
 type CreateTargetResponse struct {
 	// The id of the page opened.
-	TargetID TargetID `json:"targetId"`
+	TargetID string `json:"targetId"`
 }
 
 // Do sends the CreateTarget CDP command to a browser,
@@ -527,11 +527,11 @@ func (t *CreateTarget) Do(ctx context.Context) (*CreateTargetResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-detachFromTarget
 type DetachFromTarget struct {
 	// Session to detach.
-	SessionID *SessionID `json:"sessionId,omitempty"`
+	SessionID string `json:"sessionId,omitempty"`
 	// Deprecated.
 	//
 	// This CDP parameter is deprecated.
-	TargetID *TargetID `json:"targetId,omitempty"`
+	TargetID string `json:"targetId,omitempty"`
 }
 
 // NewDetachFromTarget constructs a new DetachFromTarget struct instance, with
@@ -547,8 +547,8 @@ func NewDetachFromTarget() *DetachFromTarget {
 // parameter `sessionId` in the DetachFromTarget CDP command.
 //
 // Session to detach.
-func (t *DetachFromTarget) SetSessionID(v SessionID) *DetachFromTarget {
-	t.SessionID = &v
+func (t *DetachFromTarget) SetSessionID(v string) *DetachFromTarget {
+	t.SessionID = v
 	return t
 }
 
@@ -558,8 +558,8 @@ func (t *DetachFromTarget) SetSessionID(v SessionID) *DetachFromTarget {
 // Deprecated.
 //
 // This CDP parameter is deprecated.
-func (t *DetachFromTarget) SetTargetID(v TargetID) *DetachFromTarget {
-	t.TargetID = &v
+func (t *DetachFromTarget) SetTargetID(v string) *DetachFromTarget {
+	t.TargetID = v
 	return t
 }
 
@@ -632,7 +632,7 @@ func (t *DisposeBrowserContext) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type GetTargetInfo struct {
-	TargetID *TargetID `json:"targetId,omitempty"`
+	TargetID string `json:"targetId,omitempty"`
 }
 
 // NewGetTargetInfo constructs a new GetTargetInfo struct instance, with
@@ -648,8 +648,8 @@ func NewGetTargetInfo() *GetTargetInfo {
 
 // SetTargetID adds or modifies the value of the optional
 // parameter `targetId` in the GetTargetInfo CDP command.
-func (t *GetTargetInfo) SetTargetID(v TargetID) *GetTargetInfo {
-	t.TargetID = &v
+func (t *GetTargetInfo) SetTargetID(v string) *GetTargetInfo {
+	t.TargetID = v
 	return t
 }
 
@@ -734,11 +734,11 @@ func (t *GetTargets) Do(ctx context.Context) (*GetTargetsResponse, error) {
 type SendMessageToTarget struct {
 	Message string `json:"message"`
 	// Identifier of the session.
-	SessionID *SessionID `json:"sessionId,omitempty"`
+	SessionID string `json:"sessionId,omitempty"`
 	// Deprecated.
 	//
 	// This CDP parameter is deprecated.
-	TargetID *TargetID `json:"targetId,omitempty"`
+	TargetID string `json:"targetId,omitempty"`
 }
 
 // NewSendMessageToTarget constructs a new SendMessageToTarget struct instance, with
@@ -758,8 +758,8 @@ func NewSendMessageToTarget(message string) *SendMessageToTarget {
 // parameter `sessionId` in the SendMessageToTarget CDP command.
 //
 // Identifier of the session.
-func (t *SendMessageToTarget) SetSessionID(v SessionID) *SendMessageToTarget {
-	t.SessionID = &v
+func (t *SendMessageToTarget) SetSessionID(v string) *SendMessageToTarget {
+	t.SessionID = v
 	return t
 }
 
@@ -769,8 +769,8 @@ func (t *SendMessageToTarget) SetSessionID(v SessionID) *SendMessageToTarget {
 // Deprecated.
 //
 // This CDP parameter is deprecated.
-func (t *SendMessageToTarget) SetTargetID(v TargetID) *SendMessageToTarget {
-	t.TargetID = &v
+func (t *SendMessageToTarget) SetTargetID(v string) *SendMessageToTarget {
+	t.TargetID = v
 	return t
 }
 

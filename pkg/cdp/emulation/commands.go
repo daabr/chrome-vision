@@ -1036,7 +1036,7 @@ func (t *SetTouchEmulationEnabled) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type SetVirtualTimePolicy struct {
-	Policy VirtualTimePolicy `json:"policy"`
+	Policy string `json:"policy"`
 	// If set, after this many virtual milliseconds have elapsed virtual time will be paused and a
 	// virtualTimeBudgetExpired event is sent.
 	Budget float64 `json:"budget,omitempty"`
@@ -1057,7 +1057,7 @@ type SetVirtualTimePolicy struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setVirtualTimePolicy
 //
 // This CDP method is experimental.
-func NewSetVirtualTimePolicy(policy VirtualTimePolicy) *SetVirtualTimePolicy {
+func NewSetVirtualTimePolicy(policy string) *SetVirtualTimePolicy {
 	return &SetVirtualTimePolicy{
 		Policy: policy,
 	}

@@ -10,7 +10,7 @@ type DatabaseID string
 // https://chromedevtools.github.io/devtools-protocol/tot/Database/#type-Database
 type Database struct {
 	// Database ID.
-	ID DatabaseID `json:"id"`
+	ID string `json:"id"`
 	// Database domain.
 	Domain string `json:"domain"`
 	// Database name.

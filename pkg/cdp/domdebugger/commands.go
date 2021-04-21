@@ -95,7 +95,7 @@ type RemoveDOMBreakpoint struct {
 	// Identifier of the node to remove breakpoint from.
 	NodeID int64 `json:"nodeId"`
 	// Type of the breakpoint to remove.
-	Type DOMBreakpointType `json:"type"`
+	Type string `json:"type"`
 }
 
 // NewRemoveDOMBreakpoint constructs a new RemoveDOMBreakpoint struct instance, with
@@ -103,7 +103,7 @@ type RemoveDOMBreakpoint struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-removeDOMBreakpoint
-func NewRemoveDOMBreakpoint(nodeID int64, t DOMBreakpointType) *RemoveDOMBreakpoint {
+func NewRemoveDOMBreakpoint(nodeID int64, t string) *RemoveDOMBreakpoint {
 	return &RemoveDOMBreakpoint{
 		NodeID: nodeID,
 		Type:   t,
@@ -316,7 +316,7 @@ type SetDOMBreakpoint struct {
 	// Identifier of the node to set breakpoint on.
 	NodeID int64 `json:"nodeId"`
 	// Type of the operation to stop upon.
-	Type DOMBreakpointType `json:"type"`
+	Type string `json:"type"`
 }
 
 // NewSetDOMBreakpoint constructs a new SetDOMBreakpoint struct instance, with
@@ -324,7 +324,7 @@ type SetDOMBreakpoint struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-setDOMBreakpoint
-func NewSetDOMBreakpoint(nodeID int64, t DOMBreakpointType) *SetDOMBreakpoint {
+func NewSetDOMBreakpoint(nodeID int64, t string) *SetDOMBreakpoint {
 	return &SetDOMBreakpoint{
 		NodeID: nodeID,
 		Type:   t,

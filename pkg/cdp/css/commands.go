@@ -17,7 +17,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-addRule
 type AddRule struct {
 	// The css style sheet identifier where a new rule should be inserted.
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
+	StyleSheetID string `json:"styleSheetId"`
 	// The text of a new rule.
 	RuleText string `json:"ruleText"`
 	// Text position of a new rule in the target style sheet.
@@ -29,7 +29,7 @@ type AddRule struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-addRule
-func NewAddRule(styleSheetID StyleSheetID, ruleText string, location SourceRange) *AddRule {
+func NewAddRule(styleSheetID string, ruleText string, location SourceRange) *AddRule {
 	return &AddRule{
 		StyleSheetID: styleSheetID,
 		RuleText:     ruleText,
@@ -72,7 +72,7 @@ func (t *AddRule) Do(ctx context.Context) (*AddRuleResponse, error) {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-collectClassNames
 type CollectClassNames struct {
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
+	StyleSheetID string `json:"styleSheetId"`
 }
 
 // NewCollectClassNames constructs a new CollectClassNames struct instance, with
@@ -80,7 +80,7 @@ type CollectClassNames struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-collectClassNames
-func NewCollectClassNames(styleSheetID StyleSheetID) *CollectClassNames {
+func NewCollectClassNames(styleSheetID string) *CollectClassNames {
 	return &CollectClassNames{
 		StyleSheetID: styleSheetID,
 	}
@@ -140,7 +140,7 @@ func NewCreateStyleSheet(frameID string) *CreateStyleSheet {
 // to calling the CreateStyleSheet CDP command with Do().
 type CreateStyleSheetResponse struct {
 	// Identifier of the created "via-inspector" stylesheet.
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
+	StyleSheetID string `json:"styleSheetId"`
 }
 
 // Do sends the CreateStyleSheet CDP command to a browser,
@@ -582,7 +582,7 @@ func (t *GetPlatformFontsForNode) Do(ctx context.Context) (*GetPlatformFontsForN
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getStyleSheetText
 type GetStyleSheetText struct {
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
+	StyleSheetID string `json:"styleSheetId"`
 }
 
 // NewGetStyleSheetText constructs a new GetStyleSheetText struct instance, with
@@ -590,7 +590,7 @@ type GetStyleSheetText struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getStyleSheetText
-func NewGetStyleSheetText(styleSheetID StyleSheetID) *GetStyleSheetText {
+func NewGetStyleSheetText(styleSheetID string) *GetStyleSheetText {
 	return &GetStyleSheetText{
 		StyleSheetID: styleSheetID,
 	}
@@ -767,9 +767,9 @@ func (t *SetEffectivePropertyValueForNode) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setKeyframeKey
 type SetKeyframeKey struct {
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
-	Range        SourceRange  `json:"range"`
-	KeyText      string       `json:"keyText"`
+	StyleSheetID string      `json:"styleSheetId"`
+	Range        SourceRange `json:"range"`
+	KeyText      string      `json:"keyText"`
 }
 
 // NewSetKeyframeKey constructs a new SetKeyframeKey struct instance, with
@@ -777,7 +777,7 @@ type SetKeyframeKey struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setKeyframeKey
-func NewSetKeyframeKey(styleSheetID StyleSheetID, r SourceRange, keyText string) *SetKeyframeKey {
+func NewSetKeyframeKey(styleSheetID string, r SourceRange, keyText string) *SetKeyframeKey {
 	return &SetKeyframeKey{
 		StyleSheetID: styleSheetID,
 		Range:        r,
@@ -820,9 +820,9 @@ func (t *SetKeyframeKey) Do(ctx context.Context) (*SetKeyframeKeyResponse, error
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setMediaText
 type SetMediaText struct {
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
-	Range        SourceRange  `json:"range"`
-	Text         string       `json:"text"`
+	StyleSheetID string      `json:"styleSheetId"`
+	Range        SourceRange `json:"range"`
+	Text         string      `json:"text"`
 }
 
 // NewSetMediaText constructs a new SetMediaText struct instance, with
@@ -830,7 +830,7 @@ type SetMediaText struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setMediaText
-func NewSetMediaText(styleSheetID StyleSheetID, r SourceRange, text string) *SetMediaText {
+func NewSetMediaText(styleSheetID string, r SourceRange, text string) *SetMediaText {
 	return &SetMediaText{
 		StyleSheetID: styleSheetID,
 		Range:        r,
@@ -873,9 +873,9 @@ func (t *SetMediaText) Do(ctx context.Context) (*SetMediaTextResponse, error) {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setRuleSelector
 type SetRuleSelector struct {
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
-	Range        SourceRange  `json:"range"`
-	Selector     string       `json:"selector"`
+	StyleSheetID string      `json:"styleSheetId"`
+	Range        SourceRange `json:"range"`
+	Selector     string      `json:"selector"`
 }
 
 // NewSetRuleSelector constructs a new SetRuleSelector struct instance, with
@@ -883,7 +883,7 @@ type SetRuleSelector struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setRuleSelector
-func NewSetRuleSelector(styleSheetID StyleSheetID, r SourceRange, selector string) *SetRuleSelector {
+func NewSetRuleSelector(styleSheetID string, r SourceRange, selector string) *SetRuleSelector {
 	return &SetRuleSelector{
 		StyleSheetID: styleSheetID,
 		Range:        r,
@@ -926,8 +926,8 @@ func (t *SetRuleSelector) Do(ctx context.Context) (*SetRuleSelectorResponse, err
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setStyleSheetText
 type SetStyleSheetText struct {
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
-	Text         string       `json:"text"`
+	StyleSheetID string `json:"styleSheetId"`
+	Text         string `json:"text"`
 }
 
 // NewSetStyleSheetText constructs a new SetStyleSheetText struct instance, with
@@ -935,7 +935,7 @@ type SetStyleSheetText struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setStyleSheetText
-func NewSetStyleSheetText(styleSheetID StyleSheetID, text string) *SetStyleSheetText {
+func NewSetStyleSheetText(styleSheetID string, text string) *SetStyleSheetText {
 	return &SetStyleSheetText{
 		StyleSheetID: styleSheetID,
 		Text:         text,

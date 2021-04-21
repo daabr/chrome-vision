@@ -42,7 +42,7 @@ func NewAddScriptToEvaluateOnLoad(scriptSource string) *AddScriptToEvaluateOnLoa
 // to calling the AddScriptToEvaluateOnLoad CDP command with Do().
 type AddScriptToEvaluateOnLoadResponse struct {
 	// Identifier of the added script.
-	Identifier ScriptIdentifier `json:"identifier"`
+	Identifier string `json:"identifier"`
 }
 
 // Do sends the AddScriptToEvaluateOnLoad CDP command to a browser,
@@ -110,7 +110,7 @@ func (t *AddScriptToEvaluateOnNewDocument) SetWorldName(v string) *AddScriptToEv
 // to calling the AddScriptToEvaluateOnNewDocument CDP command with Do().
 type AddScriptToEvaluateOnNewDocumentResponse struct {
 	// Identifier of the added script.
-	Identifier ScriptIdentifier `json:"identifier"`
+	Identifier string `json:"identifier"`
 }
 
 // Do sends the AddScriptToEvaluateOnNewDocument CDP command to a browser,
@@ -343,7 +343,7 @@ func (t *CaptureSnapshot) Do(ctx context.Context) (*CaptureSnapshotResponse, err
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-createIsolatedWorld
 type CreateIsolatedWorld struct {
 	// Id of the frame in which the isolated world should be created.
-	FrameID FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 	// An optional name which is reported in the Execution Context.
 	WorldName string `json:"worldName,omitempty"`
 	// Whether or not universal access should be granted to the isolated world. This is a powerful
@@ -356,7 +356,7 @@ type CreateIsolatedWorld struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-createIsolatedWorld
-func NewCreateIsolatedWorld(frameID FrameID) *CreateIsolatedWorld {
+func NewCreateIsolatedWorld(frameID string) *CreateIsolatedWorld {
 	return &CreateIsolatedWorld{
 		FrameID: frameID,
 	}
@@ -780,7 +780,7 @@ func (t *ResetNavigationHistory) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type GetResourceContent struct {
 	// Frame id to get resource for.
-	FrameID FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 	// URL of the resource to get content for.
 	URL string `json:"url"`
 }
@@ -792,7 +792,7 @@ type GetResourceContent struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getResourceContent
 //
 // This CDP method is experimental.
-func NewGetResourceContent(frameID FrameID, url string) *GetResourceContent {
+func NewGetResourceContent(frameID string, url string) *GetResourceContent {
 	return &GetResourceContent{
 		FrameID: frameID,
 		URL:     url,
@@ -938,13 +938,13 @@ type Navigate struct {
 	// Referrer URL.
 	Referrer string `json:"referrer,omitempty"`
 	// Intended transition type.
-	TransitionType *TransitionType `json:"transitionType,omitempty"`
+	TransitionType string `json:"transitionType,omitempty"`
 	// Frame id to navigate, if not specified navigates the top frame.
-	FrameID *FrameID `json:"frameId,omitempty"`
+	FrameID string `json:"frameId,omitempty"`
 	// Referrer-policy used for the navigation.
 	//
 	// This CDP parameter is experimental.
-	ReferrerPolicy *ReferrerPolicy `json:"referrerPolicy,omitempty"`
+	ReferrerPolicy string `json:"referrerPolicy,omitempty"`
 }
 
 // NewNavigate constructs a new Navigate struct instance, with
@@ -971,8 +971,8 @@ func (t *Navigate) SetReferrer(v string) *Navigate {
 // parameter `transitionType` in the Navigate CDP command.
 //
 // Intended transition type.
-func (t *Navigate) SetTransitionType(v TransitionType) *Navigate {
-	t.TransitionType = &v
+func (t *Navigate) SetTransitionType(v string) *Navigate {
+	t.TransitionType = v
 	return t
 }
 
@@ -980,8 +980,8 @@ func (t *Navigate) SetTransitionType(v TransitionType) *Navigate {
 // parameter `frameId` in the Navigate CDP command.
 //
 // Frame id to navigate, if not specified navigates the top frame.
-func (t *Navigate) SetFrameID(v FrameID) *Navigate {
-	t.FrameID = &v
+func (t *Navigate) SetFrameID(v string) *Navigate {
+	t.FrameID = v
 	return t
 }
 
@@ -991,8 +991,8 @@ func (t *Navigate) SetFrameID(v FrameID) *Navigate {
 // Referrer-policy used for the navigation.
 //
 // This CDP parameter is experimental.
-func (t *Navigate) SetReferrerPolicy(v ReferrerPolicy) *Navigate {
-	t.ReferrerPolicy = &v
+func (t *Navigate) SetReferrerPolicy(v string) *Navigate {
+	t.ReferrerPolicy = v
 	return t
 }
 
@@ -1000,7 +1000,7 @@ func (t *Navigate) SetReferrerPolicy(v ReferrerPolicy) *Navigate {
 // to calling the Navigate CDP command with Do().
 type NavigateResponse struct {
 	// Frame id that has navigated (or failed to navigate)
-	FrameID FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 	// Loader identifier.
 	LoaderID string `json:"loaderId,omitempty"`
 	// User friendly error message, present if and only if navigation has failed.
@@ -1388,7 +1388,7 @@ func (t *Reload) Do(ctx context.Context) error {
 // This CDP method is deprecated.
 // This CDP method is experimental.
 type RemoveScriptToEvaluateOnLoad struct {
-	Identifier ScriptIdentifier `json:"identifier"`
+	Identifier string `json:"identifier"`
 }
 
 // NewRemoveScriptToEvaluateOnLoad constructs a new RemoveScriptToEvaluateOnLoad struct instance, with
@@ -1399,7 +1399,7 @@ type RemoveScriptToEvaluateOnLoad struct {
 //
 // This CDP method is deprecated.
 // This CDP method is experimental.
-func NewRemoveScriptToEvaluateOnLoad(identifier ScriptIdentifier) *RemoveScriptToEvaluateOnLoad {
+func NewRemoveScriptToEvaluateOnLoad(identifier string) *RemoveScriptToEvaluateOnLoad {
 	return &RemoveScriptToEvaluateOnLoad{
 		Identifier: identifier,
 	}
@@ -1429,7 +1429,7 @@ func (t *RemoveScriptToEvaluateOnLoad) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-removeScriptToEvaluateOnNewDocument
 type RemoveScriptToEvaluateOnNewDocument struct {
-	Identifier ScriptIdentifier `json:"identifier"`
+	Identifier string `json:"identifier"`
 }
 
 // NewRemoveScriptToEvaluateOnNewDocument constructs a new RemoveScriptToEvaluateOnNewDocument struct instance, with
@@ -1437,7 +1437,7 @@ type RemoveScriptToEvaluateOnNewDocument struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-removeScriptToEvaluateOnNewDocument
-func NewRemoveScriptToEvaluateOnNewDocument(identifier ScriptIdentifier) *RemoveScriptToEvaluateOnNewDocument {
+func NewRemoveScriptToEvaluateOnNewDocument(identifier string) *RemoveScriptToEvaluateOnNewDocument {
 	return &RemoveScriptToEvaluateOnNewDocument{
 		Identifier: identifier,
 	}
@@ -1513,7 +1513,7 @@ func (t *ScreencastFrameAck) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SearchInResource struct {
 	// Frame id for resource to search in.
-	FrameID FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 	// URL of the resource to search in.
 	URL string `json:"url"`
 	// String to search for.
@@ -1531,7 +1531,7 @@ type SearchInResource struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-searchInResource
 //
 // This CDP method is experimental.
-func NewSearchInResource(frameID FrameID, url string, query string) *SearchInResource {
+func NewSearchInResource(frameID string, url string, query string) *SearchInResource {
 	return &SearchInResource{
 		FrameID: frameID,
 		URL:     url,
@@ -1680,7 +1680,7 @@ func (t *SetBypassCSP) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type GetPermissionsPolicyState struct {
-	FrameID FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 }
 
 // NewGetPermissionsPolicyState constructs a new GetPermissionsPolicyState struct instance, with
@@ -1690,7 +1690,7 @@ type GetPermissionsPolicyState struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getPermissionsPolicyState
 //
 // This CDP method is experimental.
-func NewGetPermissionsPolicyState(frameID FrameID) *GetPermissionsPolicyState {
+func NewGetPermissionsPolicyState(frameID string) *GetPermissionsPolicyState {
 	return &GetPermissionsPolicyState{
 		FrameID: frameID,
 	}
@@ -1817,7 +1817,7 @@ func (t *SetFontSizes) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setDocumentContent
 type SetDocumentContent struct {
 	// Frame id to set HTML for.
-	FrameID FrameID `json:"frameId"`
+	FrameID string `json:"frameId"`
 	// HTML content to set.
 	Html string `json:"html"`
 }
@@ -1827,7 +1827,7 @@ type SetDocumentContent struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setDocumentContent
-func NewSetDocumentContent(frameID FrameID, html string) *SetDocumentContent {
+func NewSetDocumentContent(frameID string, html string) *SetDocumentContent {
 	return &SetDocumentContent{
 		FrameID: frameID,
 		Html:    html,

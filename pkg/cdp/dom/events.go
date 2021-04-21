@@ -5,7 +5,7 @@ package dom
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-attributeModified
 type AttributeModified struct {
 	// Id of the node that has changed.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// Attribute name.
 	Name string `json:"name"`
 	// Attribute value.
@@ -17,7 +17,7 @@ type AttributeModified struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-attributeRemoved
 type AttributeRemoved struct {
 	// Id of the node that has changed.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// A ttribute name.
 	Name string `json:"name"`
 }
@@ -27,7 +27,7 @@ type AttributeRemoved struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-characterDataModified
 type CharacterDataModified struct {
 	// Id of the node that has changed.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// New text value.
 	CharacterData string `json:"characterData"`
 }
@@ -37,7 +37,7 @@ type CharacterDataModified struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-childNodeCountUpdated
 type ChildNodeCountUpdated struct {
 	// Id of the node that has changed.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 	// New node count.
 	ChildNodeCount int64 `json:"childNodeCount"`
 }
@@ -47,9 +47,9 @@ type ChildNodeCountUpdated struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-childNodeInserted
 type ChildNodeInserted struct {
 	// Id of the node that has changed.
-	ParentNodeID NodeID `json:"parentNodeId"`
+	ParentNodeID int64 `json:"parentNodeId"`
 	// If of the previous siblint.
-	PreviousNodeID NodeID `json:"previousNodeId"`
+	PreviousNodeID int64 `json:"previousNodeId"`
 	// Inserted node data.
 	Node Node `json:"node"`
 }
@@ -59,9 +59,9 @@ type ChildNodeInserted struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-childNodeRemoved
 type ChildNodeRemoved struct {
 	// Parent id.
-	ParentNodeID NodeID `json:"parentNodeId"`
+	ParentNodeID int64 `json:"parentNodeId"`
 	// Id of the node that has been removed.
-	NodeID NodeID `json:"nodeId"`
+	NodeID int64 `json:"nodeId"`
 }
 
 // Called when distrubution is changed.
@@ -71,7 +71,7 @@ type ChildNodeRemoved struct {
 // This CDP event is experimental.
 type DistributedNodesUpdated struct {
 	// Insertion point where distrubuted nodes were updated.
-	InsertionPointID NodeID `json:"insertionPointId"`
+	InsertionPointID int64 `json:"insertionPointId"`
 	// Distributed nodes for given insertion point.
 	DistributedNodes []BackendNode `json:"distributedNodes"`
 }
@@ -98,7 +98,7 @@ type InlineStyleInvalidated struct {
 // This CDP event is experimental.
 type PseudoElementAdded struct {
 	// Pseudo element's parent element id.
-	ParentID NodeID `json:"parentId"`
+	ParentID int64 `json:"parentId"`
 	// The added pseudo element.
 	PseudoElement Node `json:"pseudoElement"`
 }
@@ -110,9 +110,9 @@ type PseudoElementAdded struct {
 // This CDP event is experimental.
 type PseudoElementRemoved struct {
 	// Pseudo element's parent element id.
-	ParentID NodeID `json:"parentId"`
+	ParentID int64 `json:"parentId"`
 	// The removed pseudo element id.
-	PseudoElementID NodeID `json:"pseudoElementId"`
+	PseudoElementID int64 `json:"pseudoElementId"`
 }
 
 // Fired when backend wants to provide client with the missing DOM structure. This happens upon
@@ -121,7 +121,7 @@ type PseudoElementRemoved struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-setChildNodes
 type SetChildNodes struct {
 	// Parent node id to populate with children.
-	ParentID NodeID `json:"parentId"`
+	ParentID int64 `json:"parentId"`
 	// Child nodes array.
 	Nodes []Node `json:"nodes"`
 }
@@ -133,9 +133,9 @@ type SetChildNodes struct {
 // This CDP event is experimental.
 type ShadowRootPopped struct {
 	// Host element id.
-	HostID NodeID `json:"hostId"`
+	HostID int64 `json:"hostId"`
 	// Shadow root id.
-	RootID NodeID `json:"rootId"`
+	RootID int64 `json:"rootId"`
 }
 
 // Called when shadow root is pushed into the element.
@@ -145,7 +145,7 @@ type ShadowRootPopped struct {
 // This CDP event is experimental.
 type ShadowRootPushed struct {
 	// Host element id.
-	HostID NodeID `json:"hostId"`
+	HostID int64 `json:"hostId"`
 	// Shadow root.
 	Root Node `json:"root"`
 }

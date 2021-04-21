@@ -73,7 +73,7 @@ type SelectorList struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSStyleSheetHeader
 type CSSStyleSheetHeader struct {
 	// The stylesheet identifier.
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
+	StyleSheetID string `json:"styleSheetId"`
 	// Owner frame identifier.
 	FrameID string `json:"frameId"`
 	// Stylesheet resource URL.
@@ -81,7 +81,7 @@ type CSSStyleSheetHeader struct {
 	// URL of source map associated with the stylesheet (if any).
 	SourceMapURL string `json:"sourceMapURL,omitempty"`
 	// Stylesheet origin.
-	Origin StyleSheetOrigin `json:"origin"`
+	Origin string `json:"origin"`
 	// Stylesheet title.
 	Title string `json:"title"`
 	// The backend id for the owner node of the stylesheet.
@@ -118,11 +118,11 @@ type CSSStyleSheetHeader struct {
 type CSSRule struct {
 	// The css style sheet identifier (absent for user agent stylesheet and user-specified
 	// stylesheet rules) this rule came from.
-	StyleSheetID *StyleSheetID `json:"styleSheetId,omitempty"`
+	StyleSheetID string `json:"styleSheetId,omitempty"`
 	// Rule selector data.
 	SelectorList SelectorList `json:"selectorList"`
 	// Parent stylesheet's origin.
-	Origin StyleSheetOrigin `json:"origin"`
+	Origin string `json:"origin"`
 	// Associated style declaration.
 	Style CSSStyle `json:"style"`
 	// Media list array (for rules involving media queries). The array enumerates media queries
@@ -136,7 +136,7 @@ type CSSRule struct {
 type RuleUsage struct {
 	// The css style sheet identifier (absent for user agent stylesheet and user-specified
 	// stylesheet rules) this rule came from.
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
+	StyleSheetID string `json:"styleSheetId"`
 	// Offset of the start of the rule (including selector) from the beginning of the stylesheet.
 	StartOffset float64 `json:"startOffset"`
 	// Offset of the end of the rule body from the beginning of the stylesheet.
@@ -183,7 +183,7 @@ type CSSComputedStyleProperty struct {
 type CSSStyle struct {
 	// The css style sheet identifier (absent for user agent stylesheet and user-specified
 	// stylesheet rules) this rule came from.
-	StyleSheetID *StyleSheetID `json:"styleSheetId,omitempty"`
+	StyleSheetID string `json:"styleSheetId,omitempty"`
 	// CSS properties in the style.
 	CssProperties []CSSProperty `json:"cssProperties"`
 	// Computed values for all shorthands found in the style.
@@ -233,7 +233,7 @@ type CSSMedia struct {
 	// available).
 	Range *SourceRange `json:"range,omitempty"`
 	// Identifier of the stylesheet containing this object (if exists).
-	StyleSheetID *StyleSheetID `json:"styleSheetId,omitempty"`
+	StyleSheetID string `json:"styleSheetId,omitempty"`
 	// Array of media queries.
 	MediaList []MediaQuery `json:"mediaList,omitempty"`
 }
@@ -333,9 +333,9 @@ type CSSKeyframesRule struct {
 type CSSKeyframeRule struct {
 	// The css style sheet identifier (absent for user agent stylesheet and user-specified
 	// stylesheet rules) this rule came from.
-	StyleSheetID *StyleSheetID `json:"styleSheetId,omitempty"`
+	StyleSheetID string `json:"styleSheetId,omitempty"`
 	// Parent stylesheet's origin.
-	Origin StyleSheetOrigin `json:"origin"`
+	Origin string `json:"origin"`
 	// Associated key text.
 	KeyText Value `json:"keyText"`
 	// Associated style declaration.
@@ -347,7 +347,7 @@ type CSSKeyframeRule struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-StyleDeclarationEdit
 type StyleDeclarationEdit struct {
 	// The css style sheet identifier.
-	StyleSheetID StyleSheetID `json:"styleSheetId"`
+	StyleSheetID string `json:"styleSheetId"`
 	// The range of the style text in the enclosing stylesheet.
 	Range SourceRange `json:"range"`
 	// New style text.

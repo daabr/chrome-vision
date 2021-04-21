@@ -13,9 +13,9 @@ import (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-deliverPushMessage
 type DeliverPushMessage struct {
-	Origin         string         `json:"origin"`
-	RegistrationID RegistrationID `json:"registrationId"`
-	Data           string         `json:"data"`
+	Origin         string `json:"origin"`
+	RegistrationID string `json:"registrationId"`
+	Data           string `json:"data"`
 }
 
 // NewDeliverPushMessage constructs a new DeliverPushMessage struct instance, with
@@ -23,7 +23,7 @@ type DeliverPushMessage struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-deliverPushMessage
-func NewDeliverPushMessage(origin string, registrationID RegistrationID, data string) *DeliverPushMessage {
+func NewDeliverPushMessage(origin string, registrationID string, data string) *DeliverPushMessage {
 	return &DeliverPushMessage{
 		Origin:         origin,
 		RegistrationID: registrationID,
@@ -81,10 +81,10 @@ func (t *Disable) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-dispatchSyncEvent
 type DispatchSyncEvent struct {
-	Origin         string         `json:"origin"`
-	RegistrationID RegistrationID `json:"registrationId"`
-	Tag            string         `json:"tag"`
-	LastChance     bool           `json:"lastChance"`
+	Origin         string `json:"origin"`
+	RegistrationID string `json:"registrationId"`
+	Tag            string `json:"tag"`
+	LastChance     bool   `json:"lastChance"`
 }
 
 // NewDispatchSyncEvent constructs a new DispatchSyncEvent struct instance, with
@@ -92,7 +92,7 @@ type DispatchSyncEvent struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-dispatchSyncEvent
-func NewDispatchSyncEvent(origin string, registrationID RegistrationID, tag string, lastChance bool) *DispatchSyncEvent {
+func NewDispatchSyncEvent(origin string, registrationID string, tag string, lastChance bool) *DispatchSyncEvent {
 	return &DispatchSyncEvent{
 		Origin:         origin,
 		RegistrationID: registrationID,
@@ -123,9 +123,9 @@ func (t *DispatchSyncEvent) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-dispatchPeriodicSyncEvent
 type DispatchPeriodicSyncEvent struct {
-	Origin         string         `json:"origin"`
-	RegistrationID RegistrationID `json:"registrationId"`
-	Tag            string         `json:"tag"`
+	Origin         string `json:"origin"`
+	RegistrationID string `json:"registrationId"`
+	Tag            string `json:"tag"`
 }
 
 // NewDispatchPeriodicSyncEvent constructs a new DispatchPeriodicSyncEvent struct instance, with
@@ -133,7 +133,7 @@ type DispatchPeriodicSyncEvent struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-dispatchPeriodicSyncEvent
-func NewDispatchPeriodicSyncEvent(origin string, registrationID RegistrationID, tag string) *DispatchPeriodicSyncEvent {
+func NewDispatchPeriodicSyncEvent(origin string, registrationID string, tag string) *DispatchPeriodicSyncEvent {
 	return &DispatchPeriodicSyncEvent{
 		Origin:         origin,
 		RegistrationID: registrationID,

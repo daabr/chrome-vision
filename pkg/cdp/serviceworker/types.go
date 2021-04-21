@@ -7,9 +7,9 @@ type RegistrationID string
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerRegistration
 type ServiceWorkerRegistration struct {
-	RegistrationID RegistrationID `json:"registrationId"`
-	ScopeURL       string         `json:"scopeURL"`
-	IsDeleted      bool           `json:"isDeleted"`
+	RegistrationID string `json:"registrationId"`
+	ScopeURL       string `json:"scopeURL"`
+	IsDeleted      bool   `json:"isDeleted"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerVersionRunningStatus
@@ -40,11 +40,11 @@ const (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerVersion
 type ServiceWorkerVersion struct {
-	VersionID      string                            `json:"versionId"`
-	RegistrationID RegistrationID                    `json:"registrationId"`
-	ScriptURL      string                            `json:"scriptURL"`
-	RunningStatus  ServiceWorkerVersionRunningStatus `json:"runningStatus"`
-	Status         ServiceWorkerVersionStatus        `json:"status"`
+	VersionID      string `json:"versionId"`
+	RegistrationID string `json:"registrationId"`
+	ScriptURL      string `json:"scriptURL"`
+	RunningStatus  string `json:"runningStatus"`
+	Status         string `json:"status"`
 	// The Last-Modified header value of the main script.
 	ScriptLastModified float64 `json:"scriptLastModified,omitempty"`
 	// The time at which the response headers of the main script were received from the server.
@@ -58,10 +58,10 @@ type ServiceWorkerVersion struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerErrorMessage
 type ServiceWorkerErrorMessage struct {
-	ErrorMessage   string         `json:"errorMessage"`
-	RegistrationID RegistrationID `json:"registrationId"`
-	VersionID      string         `json:"versionId"`
-	SourceURL      string         `json:"sourceURL"`
-	LineNumber     int64          `json:"lineNumber"`
-	ColumnNumber   int64          `json:"columnNumber"`
+	ErrorMessage   string `json:"errorMessage"`
+	RegistrationID string `json:"registrationId"`
+	VersionID      string `json:"versionId"`
+	SourceURL      string `json:"sourceURL"`
+	LineNumber     int64  `json:"lineNumber"`
+	ColumnNumber   int64  `json:"columnNumber"`
 }

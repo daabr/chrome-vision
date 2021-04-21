@@ -10,14 +10,14 @@ type SessionID string
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#type-TargetInfo
 type TargetInfo struct {
-	TargetID TargetID `json:"targetId"`
-	Type     string   `json:"type"`
-	Title    string   `json:"title"`
-	URL      string   `json:"url"`
+	TargetID string `json:"targetId"`
+	Type     string `json:"type"`
+	Title    string `json:"title"`
+	URL      string `json:"url"`
 	// Whether the target has an attached client.
 	Attached bool `json:"attached"`
 	// Opener target Id
-	OpenerID *TargetID `json:"openerId,omitempty"`
+	OpenerID string `json:"openerId,omitempty"`
 	// Whether the target has access to the originating window.
 	//
 	// This CDP property is experimental.
