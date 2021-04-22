@@ -12,8 +12,8 @@ import (
 
 // Error details passed within a CDP response message.
 type Error struct {
-	Code    int64
-	Message string
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
 }
 
 // Error satisfies the Go error interface (https://golang.org/pkg/builtin/#error).
@@ -176,8 +176,8 @@ func Send(ctx context.Context, method string, params json.RawMessage) (*Message,
 	return m, nil
 }
 
-// SubscribeEvent returns a channel to receive event messages of the
-// given type from the browser associated with the given context.
+// SubscribeEvent returns a channel to receive event messages of
+// the given type from the browser associated with the given context.
 func SubscribeEvent(ctx context.Context, name string) (chan *Message, error) {
 	session, ok := FromContext(ctx)
 	if !ok {
