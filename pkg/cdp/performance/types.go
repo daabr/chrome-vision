@@ -5,7 +5,7 @@ package performance
 // https://chromedevtools.github.io/devtools-protocol/tot/Performance/#type-Metric
 type Metric struct {
 	// Metric name.
-	Name string `json:"name"`
+	Name string
 	// Metric value.
-	Value float64 `json:"value"`
+	Value float64
 }

@@ -22,35 +22,35 @@ type PlayerMessage struct {
 	// going to be moving away from using PipelineStatus for errors and
 	// introducing a new error type which should hopefully let us integrate
 	// the error log level into the PlayerError type.
-	Level   string `json:"level"`
-	Message string `json:"message"`
+	Level   string
+	Message string
 }
 
 // Corresponds to kMediaPropertyChange
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#type-PlayerProperty
 type PlayerProperty struct {
-	Name  string `json:"name"`
-	Value string `json:"value"`
+	Name  string
+	Value string
 }
 
 // Corresponds to kMediaEventTriggered
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#type-PlayerEvent
 type PlayerEvent struct {
-	Timestamp float64 `json:"timestamp"`
-	Value     string  `json:"value"`
+	Timestamp float64
+	Value     string
 }
 
 // Corresponds to kMediaError
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#type-PlayerError
 type PlayerError struct {
-	Type string `json:"type"`
+	Type string
 	// When this switches to using media::Status instead of PipelineStatus
 	// we can remove "errorCode" and replace it with the fields from
 	// a Status instance. This also seems like a duplicate of the error
 	// level enum - there is a todo bug to have that level removed and
 	// use this instead. (crbug.com/1068454)
-	ErrorCode string `json:"errorCode"`
+	ErrorCode string
 }

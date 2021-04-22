@@ -77,65 +77,65 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-ContextRealtimeData
 type ContextRealtimeData struct {
 	// The current context time in second in BaseAudioContext.
-	CurrentTime float64 `json:"currentTime"`
+	CurrentTime float64
 	// The time spent on rendering graph divided by render qunatum duration,
 	// and multiplied by 100. 100 means the audio renderer reached the full
 	// capacity and glitch may occur.
-	RenderCapacity float64 `json:"renderCapacity"`
+	RenderCapacity float64
 	// A running mean of callback interval.
-	CallbackIntervalMean float64 `json:"callbackIntervalMean"`
+	CallbackIntervalMean float64
 	// A running variance of callback interval.
-	CallbackIntervalVariance float64 `json:"callbackIntervalVariance"`
+	CallbackIntervalVariance float64
 }
 
 // Protocol object for BaseAudioContext
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-BaseAudioContext
 type BaseAudioContext struct {
-	ContextID    string               `json:"contextId"`
-	ContextType  string               `json:"contextType"`
-	ContextState string               `json:"contextState"`
+	ContextID    string
+	ContextType  string
+	ContextState string
 	RealtimeData *ContextRealtimeData `json:"realtimeData,omitempty"`
 	// Platform-dependent callback buffer size.
-	CallbackBufferSize float64 `json:"callbackBufferSize"`
+	CallbackBufferSize float64
 	// Number of output channels supported by audio hardware in use.
-	MaxOutputChannelCount float64 `json:"maxOutputChannelCount"`
+	MaxOutputChannelCount float64
 	// Context sample rate.
-	SampleRate float64 `json:"sampleRate"`
+	SampleRate float64
 }
 
 // Protocol object for AudioListener
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-AudioListener
 type AudioListener struct {
-	ListenerID string `json:"listenerId"`
-	ContextID  string `json:"contextId"`
+	ListenerID string
+	ContextID  string
 }
 
 // Protocol object for AudioNode
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-AudioNode
 type AudioNode struct {
-	NodeID                string  `json:"nodeId"`
-	ContextID             string  `json:"contextId"`
-	NodeType              string  `json:"nodeType"`
-	NumberOfInputs        float64 `json:"numberOfInputs"`
-	NumberOfOutputs       float64 `json:"numberOfOutputs"`
-	ChannelCount          float64 `json:"channelCount"`
-	ChannelCountMode      string  `json:"channelCountMode"`
-	ChannelInterpretation string  `json:"channelInterpretation"`
+	NodeID                string
+	ContextID             string
+	NodeType              string
+	NumberOfInputs        float64
+	NumberOfOutputs       float64
+	ChannelCount          float64
+	ChannelCountMode      string
+	ChannelInterpretation string
 }
 
 // Protocol object for AudioParam
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-AudioParam
 type AudioParam struct {
-	ParamID      string  `json:"paramId"`
-	NodeID       string  `json:"nodeId"`
-	ContextID    string  `json:"contextId"`
-	ParamType    string  `json:"paramType"`
-	Rate         string  `json:"rate"`
-	DefaultValue float64 `json:"defaultValue"`
-	MinValue     float64 `json:"minValue"`
-	MaxValue     float64 `json:"maxValue"`
+	ParamID      string
+	NodeID       string
+	ContextID    string
+	ParamType    string
+	Rate         string
+	DefaultValue float64
+	MinValue     float64
+	MaxValue     float64
 }

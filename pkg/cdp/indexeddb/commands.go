@@ -16,11 +16,11 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#method-clearObjectStore
 type ClearObjectStore struct {
 	// Security origin.
-	SecurityOrigin string `json:"securityOrigin"`
+	SecurityOrigin string
 	// Database name.
-	DatabaseName string `json:"databaseName"`
+	DatabaseName string
 	// Object store name.
-	ObjectStoreName string `json:"objectStoreName"`
+	ObjectStoreName string
 }
 
 // NewClearObjectStore constructs a new ClearObjectStore struct instance, with
@@ -61,9 +61,9 @@ func (t *ClearObjectStore) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#method-deleteDatabase
 type DeleteDatabase struct {
 	// Security origin.
-	SecurityOrigin string `json:"securityOrigin"`
+	SecurityOrigin string
 	// Database name.
-	DatabaseName string `json:"databaseName"`
+	DatabaseName string
 }
 
 // NewDeleteDatabase constructs a new DeleteDatabase struct instance, with
@@ -102,11 +102,11 @@ func (t *DeleteDatabase) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#method-deleteObjectStoreEntries
 type DeleteObjectStoreEntries struct {
-	SecurityOrigin  string `json:"securityOrigin"`
-	DatabaseName    string `json:"databaseName"`
-	ObjectStoreName string `json:"objectStoreName"`
+	SecurityOrigin  string
+	DatabaseName    string
+	ObjectStoreName string
 	// Range of entry keys to delete
-	KeyRange KeyRange `json:"keyRange"`
+	KeyRange KeyRange
 }
 
 // NewDeleteObjectStoreEntries constructs a new DeleteObjectStoreEntries struct instance, with
@@ -208,17 +208,17 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#method-requestData
 type RequestData struct {
 	// Security origin.
-	SecurityOrigin string `json:"securityOrigin"`
+	SecurityOrigin string
 	// Database name.
-	DatabaseName string `json:"databaseName"`
+	DatabaseName string
 	// Object store name.
-	ObjectStoreName string `json:"objectStoreName"`
+	ObjectStoreName string
 	// Index name, empty string for object store data requests.
-	IndexName string `json:"indexName"`
+	IndexName string
 	// Number of records to skip.
-	SkipCount int64 `json:"skipCount"`
+	SkipCount int64
 	// Number of records to fetch.
-	PageSize int64 `json:"pageSize"`
+	PageSize int64
 	// Key range.
 	KeyRange *KeyRange `json:"keyRange,omitempty"`
 }
@@ -252,9 +252,9 @@ func (t *RequestData) SetKeyRange(v KeyRange) *RequestData {
 // to calling the RequestData CDP command with Do().
 type RequestDataResponse struct {
 	// Array of object store data entries.
-	ObjectStoreDataEntries []DataEntry `json:"objectStoreDataEntries"`
+	ObjectStoreDataEntries []DataEntry
 	// If true, there are more entries to fetch in the given range.
-	HasMore bool `json:"hasMore"`
+	HasMore bool
 }
 
 // Do sends the RequestData CDP command to a browser,
@@ -286,11 +286,11 @@ func (t *RequestData) Do(ctx context.Context) (*RequestDataResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#method-getMetadata
 type GetMetadata struct {
 	// Security origin.
-	SecurityOrigin string `json:"securityOrigin"`
+	SecurityOrigin string
 	// Database name.
-	DatabaseName string `json:"databaseName"`
+	DatabaseName string
 	// Object store name.
-	ObjectStoreName string `json:"objectStoreName"`
+	ObjectStoreName string
 }
 
 // NewGetMetadata constructs a new GetMetadata struct instance, with
@@ -310,11 +310,11 @@ func NewGetMetadata(securityOrigin string, databaseName string, objectStoreName 
 // to calling the GetMetadata CDP command with Do().
 type GetMetadataResponse struct {
 	// the entries count
-	EntriesCount float64 `json:"entriesCount"`
+	EntriesCount float64
 	// the current value of key generator, to become the next inserted
 	// key into the object store. Valid if objectStore.autoIncrement
 	// is true.
-	KeyGeneratorValue float64 `json:"keyGeneratorValue"`
+	KeyGeneratorValue float64
 }
 
 // Do sends the GetMetadata CDP command to a browser,
@@ -346,9 +346,9 @@ func (t *GetMetadata) Do(ctx context.Context) (*GetMetadataResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#method-requestDatabase
 type RequestDatabase struct {
 	// Security origin.
-	SecurityOrigin string `json:"securityOrigin"`
+	SecurityOrigin string
 	// Database name.
-	DatabaseName string `json:"databaseName"`
+	DatabaseName string
 }
 
 // NewRequestDatabase constructs a new RequestDatabase struct instance, with
@@ -367,7 +367,7 @@ func NewRequestDatabase(securityOrigin string, databaseName string) *RequestData
 // to calling the RequestDatabase CDP command with Do().
 type RequestDatabaseResponse struct {
 	// Database with an array of object stores.
-	DatabaseWithObjectStores DatabaseWithObjectStores `json:"databaseWithObjectStores"`
+	DatabaseWithObjectStores DatabaseWithObjectStores
 }
 
 // Do sends the RequestDatabase CDP command to a browser,
@@ -399,7 +399,7 @@ func (t *RequestDatabase) Do(ctx context.Context) (*RequestDatabaseResponse, err
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#method-requestDatabaseNames
 type RequestDatabaseNames struct {
 	// Security origin.
-	SecurityOrigin string `json:"securityOrigin"`
+	SecurityOrigin string
 }
 
 // NewRequestDatabaseNames constructs a new RequestDatabaseNames struct instance, with
@@ -417,7 +417,7 @@ func NewRequestDatabaseNames(securityOrigin string) *RequestDatabaseNames {
 // to calling the RequestDatabaseNames CDP command with Do().
 type RequestDatabaseNamesResponse struct {
 	// Database names for origin.
-	DatabaseNames []string `json:"databaseNames"`
+	DatabaseNames []string
 }
 
 // Do sends the RequestDatabaseNames CDP command to a browser,

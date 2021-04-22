@@ -17,7 +17,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-compositingReasons
 type CompositingReasons struct {
 	// The id of the layer for which we want to get the reasons it was composited.
-	LayerID string `json:"layerId"`
+	LayerID string
 }
 
 // NewCompositingReasons constructs a new CompositingReasons struct instance, with
@@ -37,9 +37,9 @@ type CompositingReasonsResponse struct {
 	// A list of strings specifying reasons for the given layer to become composited.
 	//
 	// This CDP parameter is deprecated.
-	CompositingReasons []string `json:"compositingReasons"`
+	CompositingReasons []string
 	// A list of strings specifying reason IDs for the given layer to become composited.
-	CompositingReasonIds []string `json:"compositingReasonIds"`
+	CompositingReasonIds []string
 }
 
 // Do sends the CompositingReasons CDP command to a browser,
@@ -131,7 +131,7 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-loadSnapshot
 type LoadSnapshot struct {
 	// An array of tiles composing the snapshot.
-	Tiles []PictureTile `json:"tiles"`
+	Tiles []PictureTile
 }
 
 // NewLoadSnapshot constructs a new LoadSnapshot struct instance, with
@@ -149,7 +149,7 @@ func NewLoadSnapshot(tiles []PictureTile) *LoadSnapshot {
 // to calling the LoadSnapshot CDP command with Do().
 type LoadSnapshotResponse struct {
 	// The id of the snapshot.
-	SnapshotID string `json:"snapshotId"`
+	SnapshotID string
 }
 
 // Do sends the LoadSnapshot CDP command to a browser,
@@ -181,7 +181,7 @@ func (t *LoadSnapshot) Do(ctx context.Context) (*LoadSnapshotResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-makeSnapshot
 type MakeSnapshot struct {
 	// The id of the layer.
-	LayerID string `json:"layerId"`
+	LayerID string
 }
 
 // NewMakeSnapshot constructs a new MakeSnapshot struct instance, with
@@ -199,7 +199,7 @@ func NewMakeSnapshot(layerID string) *MakeSnapshot {
 // to calling the MakeSnapshot CDP command with Do().
 type MakeSnapshotResponse struct {
 	// The id of the layer snapshot.
-	SnapshotID string `json:"snapshotId"`
+	SnapshotID string
 }
 
 // Do sends the MakeSnapshot CDP command to a browser,
@@ -229,7 +229,7 @@ func (t *MakeSnapshot) Do(ctx context.Context) (*MakeSnapshotResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-profileSnapshot
 type ProfileSnapshot struct {
 	// The id of the layer snapshot.
-	SnapshotID string `json:"snapshotId"`
+	SnapshotID string
 	// The maximum number of times to replay the snapshot (1, if not specified).
 	MinRepeatCount int64 `json:"minRepeatCount,omitempty"`
 	// The minimum duration (in seconds) to replay the snapshot.
@@ -280,7 +280,7 @@ func (t *ProfileSnapshot) SetClipRect(v dom.Rect) *ProfileSnapshot {
 // to calling the ProfileSnapshot CDP command with Do().
 type ProfileSnapshotResponse struct {
 	// The array of paint profiles, one per run.
-	Timings []PaintProfile `json:"timings"`
+	Timings []PaintProfile
 }
 
 // Do sends the ProfileSnapshot CDP command to a browser,
@@ -312,7 +312,7 @@ func (t *ProfileSnapshot) Do(ctx context.Context) (*ProfileSnapshotResponse, err
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-releaseSnapshot
 type ReleaseSnapshot struct {
 	// The id of the layer snapshot.
-	SnapshotID string `json:"snapshotId"`
+	SnapshotID string
 }
 
 // NewReleaseSnapshot constructs a new ReleaseSnapshot struct instance, with
@@ -351,7 +351,7 @@ func (t *ReleaseSnapshot) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-replaySnapshot
 type ReplaySnapshot struct {
 	// The id of the layer snapshot.
-	SnapshotID string `json:"snapshotId"`
+	SnapshotID string
 	// The first step to replay from (replay from the very start if not specified).
 	FromStep int64 `json:"fromStep,omitempty"`
 	// The last step to replay to (replay till the end if not specified).
@@ -402,7 +402,7 @@ func (t *ReplaySnapshot) SetScale(v float64) *ReplaySnapshot {
 // to calling the ReplaySnapshot CDP command with Do().
 type ReplaySnapshotResponse struct {
 	// A data: URL for resulting image.
-	DataURL string `json:"dataURL"`
+	DataURL string
 }
 
 // Do sends the ReplaySnapshot CDP command to a browser,
@@ -434,7 +434,7 @@ func (t *ReplaySnapshot) Do(ctx context.Context) (*ReplaySnapshotResponse, error
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#method-snapshotCommandLog
 type SnapshotCommandLog struct {
 	// The id of the layer snapshot.
-	SnapshotID string `json:"snapshotId"`
+	SnapshotID string
 }
 
 // NewSnapshotCommandLog constructs a new SnapshotCommandLog struct instance, with
@@ -452,7 +452,7 @@ func NewSnapshotCommandLog(snapshotID string) *SnapshotCommandLog {
 // to calling the SnapshotCommandLog CDP command with Do().
 type SnapshotCommandLogResponse struct {
 	// The array of canvas function calls.
-	CommandLog []json.RawMessage `json:"commandLog"`
+	CommandLog []json.RawMessage
 }
 
 // Do sends the SnapshotCommandLog CDP command to a browser,

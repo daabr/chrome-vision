@@ -77,7 +77,7 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-getCurrentTime
 type GetCurrentTime struct {
 	// Id of animation.
-	ID string `json:"id"`
+	ID string
 }
 
 // NewGetCurrentTime constructs a new GetCurrentTime struct instance, with
@@ -95,7 +95,7 @@ func NewGetCurrentTime(id string) *GetCurrentTime {
 // to calling the GetCurrentTime CDP command with Do().
 type GetCurrentTimeResponse struct {
 	// Current time of the page.
-	CurrentTime float64 `json:"currentTime"`
+	CurrentTime float64
 }
 
 // Do sends the GetCurrentTime CDP command to a browser,
@@ -140,7 +140,7 @@ func NewGetPlaybackRate() *GetPlaybackRate {
 // to calling the GetPlaybackRate CDP command with Do().
 type GetPlaybackRateResponse struct {
 	// Playback rate for animations on page.
-	PlaybackRate float64 `json:"playbackRate"`
+	PlaybackRate float64
 }
 
 // Do sends the GetPlaybackRate CDP command to a browser,
@@ -168,7 +168,7 @@ func (t *GetPlaybackRate) Do(ctx context.Context) (*GetPlaybackRateResponse, err
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-releaseAnimations
 type ReleaseAnimations struct {
 	// List of animation ids to seek.
-	Animations []string `json:"animations"`
+	Animations []string
 }
 
 // NewReleaseAnimations constructs a new ReleaseAnimations struct instance, with
@@ -207,7 +207,7 @@ func (t *ReleaseAnimations) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-resolveAnimation
 type ResolveAnimation struct {
 	// Animation id.
-	AnimationID string `json:"animationId"`
+	AnimationID string
 }
 
 // NewResolveAnimation constructs a new ResolveAnimation struct instance, with
@@ -225,7 +225,7 @@ func NewResolveAnimation(animationID string) *ResolveAnimation {
 // to calling the ResolveAnimation CDP command with Do().
 type ResolveAnimationResponse struct {
 	// Corresponding remote object.
-	RemoteObject runtime.RemoteObject `json:"remoteObject"`
+	RemoteObject runtime.RemoteObject
 }
 
 // Do sends the ResolveAnimation CDP command to a browser,
@@ -257,9 +257,9 @@ func (t *ResolveAnimation) Do(ctx context.Context) (*ResolveAnimationResponse, e
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-seekAnimations
 type SeekAnimations struct {
 	// List of animation ids to seek.
-	Animations []string `json:"animations"`
+	Animations []string
 	// Set the current time of each animation.
-	CurrentTime float64 `json:"currentTime"`
+	CurrentTime float64
 }
 
 // NewSeekAnimations constructs a new SeekAnimations struct instance, with
@@ -299,9 +299,9 @@ func (t *SeekAnimations) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-setPaused
 type SetPaused struct {
 	// Animations to set the pause state of.
-	Animations []string `json:"animations"`
+	Animations []string
 	// Paused state to set to.
-	Paused bool `json:"paused"`
+	Paused bool
 }
 
 // NewSetPaused constructs a new SetPaused struct instance, with
@@ -341,7 +341,7 @@ func (t *SetPaused) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-setPlaybackRate
 type SetPlaybackRate struct {
 	// Playback rate for animations on page
-	PlaybackRate float64 `json:"playbackRate"`
+	PlaybackRate float64
 }
 
 // NewSetPlaybackRate constructs a new SetPlaybackRate struct instance, with
@@ -380,11 +380,11 @@ func (t *SetPlaybackRate) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#method-setTiming
 type SetTiming struct {
 	// Animation id.
-	AnimationID string `json:"animationId"`
+	AnimationID string
 	// Duration of the animation.
-	Duration float64 `json:"duration"`
+	Duration float64
 	// Delay of the animation.
-	Delay float64 `json:"delay"`
+	Delay float64
 }
 
 // NewSetTiming constructs a new SetTiming struct instance, with

@@ -1,8 +1,6 @@
 package fetch
 
-import (
-	"github.com/daabr/chrome-vision/pkg/cdp/network"
-)
+import "github.com/daabr/chrome-vision/pkg/cdp/network"
 
 // Issued when the domain is enabled and the request URL matches the
 // specified filter. The request is paused until the client responds
@@ -14,13 +12,13 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#event-requestPaused
 type RequestPaused struct {
 	// Each request the page makes will have a unique id.
-	RequestID string `json:"requestId"`
+	RequestID string
 	// The details of the request.
-	Request network.Request `json:"request"`
+	Request network.Request
 	// The id of the frame that initiated the request.
-	FrameID string `json:"frameId"`
+	FrameID string
 	// How the requested resource will be used.
-	ResourceType string `json:"resourceType"`
+	ResourceType string
 	// Response error if intercepted at response stage.
 	ResponseErrorReason string `json:"responseErrorReason,omitempty"`
 	// Response code if intercepted at response stage.
@@ -38,15 +36,15 @@ type RequestPaused struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#event-authRequired
 type AuthRequired struct {
 	// Each request the page makes will have a unique id.
-	RequestID string `json:"requestId"`
+	RequestID string
 	// The details of the request.
-	Request network.Request `json:"request"`
+	Request network.Request
 	// The id of the frame that initiated the request.
-	FrameID string `json:"frameId"`
+	FrameID string
 	// How the requested resource will be used.
-	ResourceType string `json:"resourceType"`
+	ResourceType string
 	// Details of the Authorization Challenge encountered.
 	// If this is set, client should respond with continueRequest that
 	// contains AuthChallengeResponse.
-	AuthChallenge AuthChallenge `json:"authChallenge"`
+	AuthChallenge AuthChallenge
 }

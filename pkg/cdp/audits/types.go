@@ -10,9 +10,9 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-AffectedCookie
 type AffectedCookie struct {
 	// The following three properties uniquely identify a cookie
-	Name   string `json:"name"`
-	Path   string `json:"path"`
-	Domain string `json:"domain"`
+	Name   string
+	Path   string
+	Domain string
 }
 
 // Information about a request that is affected by an inspector issue.
@@ -20,7 +20,7 @@ type AffectedCookie struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-AffectedRequest
 type AffectedRequest struct {
 	// The unique request id.
-	RequestID string `json:"requestId"`
+	RequestID string
 	URL       string `json:"url,omitempty"`
 }
 
@@ -28,7 +28,7 @@ type AffectedRequest struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-AffectedFrame
 type AffectedFrame struct {
-	FrameID string `json:"frameId"`
+	FrameID string
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-SameSiteCookieExclusionReason
@@ -72,12 +72,12 @@ const (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-SameSiteCookieIssueDetails
 type SameSiteCookieIssueDetails struct {
-	Cookie                 AffectedCookie                  `json:"cookie"`
-	CookieWarningReasons   []SameSiteCookieWarningReason   `json:"cookieWarningReasons"`
-	CookieExclusionReasons []SameSiteCookieExclusionReason `json:"cookieExclusionReasons"`
+	Cookie                 AffectedCookie
+	CookieWarningReasons   []SameSiteCookieWarningReason
+	CookieExclusionReasons []SameSiteCookieExclusionReason
 	// Optionally identifies the site-for-cookies and the cookie url, which
 	// may be used by the front-end as additional context.
-	Operation      string           `json:"operation"`
+	Operation      string
 	SiteForCookies string           `json:"siteForCookies,omitempty"`
 	CookieURL      string           `json:"cookieUrl,omitempty"`
 	Request        *AffectedRequest `json:"request,omitempty"`
@@ -134,11 +134,11 @@ type MixedContentIssueDetails struct {
 	// by network::mojom::RequestDestination
 	ResourceType string `json:"resourceType,omitempty"`
 	// The way the mixed content issue is being resolved.
-	ResolutionStatus string `json:"resolutionStatus"`
+	ResolutionStatus string
 	// The unsafe http url causing the mixed content issue.
-	InsecureURL string `json:"insecureURL"`
+	InsecureURL string
 	// The url responsible for the call to an unsafe url.
-	MainResourceURL string `json:"mainResourceURL"`
+	MainResourceURL string
 	// The mixed content request.
 	// Does not always exist (e.g. for unsafe form submission urls).
 	Request *AffectedRequest `json:"request,omitempty"`
@@ -167,10 +167,10 @@ const (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-BlockedByResponseIssueDetails
 type BlockedByResponseIssueDetails struct {
-	Request      AffectedRequest `json:"request"`
-	ParentFrame  *AffectedFrame  `json:"parentFrame,omitempty"`
-	BlockedFrame *AffectedFrame  `json:"blockedFrame,omitempty"`
-	Reason       string          `json:"reason"`
+	Request      AffectedRequest
+	ParentFrame  *AffectedFrame `json:"parentFrame,omitempty"`
+	BlockedFrame *AffectedFrame `json:"blockedFrame,omitempty"`
+	Reason       string
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-HeavyAdResolutionStatus
@@ -195,11 +195,11 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-HeavyAdIssueDetails
 type HeavyAdIssueDetails struct {
 	// The resolution status, either blocking the content or warning.
-	Resolution string `json:"resolution"`
+	Resolution string
 	// The reason the ad was blocked, total network or cpu or peak cpu.
-	Reason string `json:"reason"`
+	Reason string
 	// The frame that was blocked.
-	Frame AffectedFrame `json:"frame"`
+	Frame AffectedFrame
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-ContentSecurityPolicyViolationType
@@ -217,9 +217,9 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-SourceCodeLocation
 type SourceCodeLocation struct {
 	ScriptID     *runtime.ScriptID `json:"scriptId,omitempty"`
-	URL          string            `json:"url"`
-	LineNumber   int64             `json:"lineNumber"`
-	ColumnNumber int64             `json:"columnNumber"`
+	URL          string
+	LineNumber   int64
+	ColumnNumber int64
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-ContentSecurityPolicyIssueDetails
@@ -227,9 +227,9 @@ type ContentSecurityPolicyIssueDetails struct {
 	// The url not included in allowed sources.
 	BlockedURL string `json:"blockedURL,omitempty"`
 	// Specific directive that is violated, causing the CSP issue.
-	ViolatedDirective                  string              `json:"violatedDirective"`
-	IsReportOnly                       bool                `json:"isReportOnly"`
-	ContentSecurityPolicyViolationType string              `json:"contentSecurityPolicyViolationType"`
+	ViolatedDirective                  string
+	IsReportOnly                       bool
+	ContentSecurityPolicyViolationType string
 	FrameAncestor                      *AffectedFrame      `json:"frameAncestor,omitempty"`
 	SourceCodeLocation                 *SourceCodeLocation `json:"sourceCodeLocation,omitempty"`
 	ViolatingNodeID                    int64               `json:"violatingNodeId,omitempty"`
@@ -249,9 +249,9 @@ const (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-SharedArrayBufferIssueDetails
 type SharedArrayBufferIssueDetails struct {
-	SourceCodeLocation SourceCodeLocation `json:"sourceCodeLocation"`
-	IsWarning          bool               `json:"isWarning"`
-	Type               string             `json:"type"`
+	SourceCodeLocation SourceCodeLocation
+	IsWarning          bool
+	Type               string
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-TwaQualityEnforcementViolationType
@@ -267,9 +267,9 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-TrustedWebActivityIssueDetails
 type TrustedWebActivityIssueDetails struct {
 	// The url that triggers the violation.
-	URL            string `json:"url"`
-	ViolationType  string `json:"violationType"`
-	HttpStatusCode int64  `json:"httpStatusCode,omitempty"`
+	URL            string
+	ViolationType  string
+	HttpStatusCode int64 `json:"httpStatusCode,omitempty"`
 	// The package name of the Trusted Web Activity client app. This field is
 	// only used when violation type is kDigitalAssetLinks.
 	PackageName string `json:"packageName,omitempty"`
@@ -280,13 +280,13 @@ type TrustedWebActivityIssueDetails struct {
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-LowTextContrastIssueDetails
 type LowTextContrastIssueDetails struct {
-	ViolatingNodeID       int64   `json:"violatingNodeId"`
-	ViolatingNodeSelector string  `json:"violatingNodeSelector"`
-	ContrastRatio         float64 `json:"contrastRatio"`
-	ThresholdAA           float64 `json:"thresholdAA"`
-	ThresholdAAA          float64 `json:"thresholdAAA"`
-	FontSize              string  `json:"fontSize"`
-	FontWeight            string  `json:"fontWeight"`
+	ViolatingNodeID       int64
+	ViolatingNodeSelector string
+	ContrastRatio         float64
+	ThresholdAA           float64
+	ThresholdAAA          float64
+	FontSize              string
+	FontWeight            string
 }
 
 // Details for a CORS related issue, e.g. a warning or error related to
@@ -294,9 +294,9 @@ type LowTextContrastIssueDetails struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-CorsIssueDetails
 type CorsIssueDetails struct {
-	CorsErrorStatus        network.CorsErrorStatus      `json:"corsErrorStatus"`
-	IsWarning              bool                         `json:"isWarning"`
-	Request                AffectedRequest              `json:"request"`
+	CorsErrorStatus        network.CorsErrorStatus
+	IsWarning              bool
+	Request                AffectedRequest
 	InitiatorOrigin        string                       `json:"initiatorOrigin,omitempty"`
 	ResourceIPAddressSpace string                       `json:"resourceIPAddressSpace,omitempty"`
 	ClientSecurityState    *network.ClientSecurityState `json:"clientSecurityState,omitempty"`
@@ -316,7 +316,7 @@ const (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-AttributionReportingIssueDetails
 type AttributionReportingIssueDetails struct {
-	ViolationType    string           `json:"violationType"`
+	ViolationType    string
 	Frame            *AffectedFrame   `json:"frame,omitempty"`
 	Request          *AffectedRequest `json:"request,omitempty"`
 	ViolatingNodeID  int64            `json:"violatingNodeId,omitempty"`
@@ -366,6 +366,6 @@ type InspectorIssueDetails struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-InspectorIssue
 type InspectorIssue struct {
-	Code    string                `json:"code"`
-	Details InspectorIssueDetails `json:"details"`
+	Code    string
+	Details InspectorIssueDetails
 }

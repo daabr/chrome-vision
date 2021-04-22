@@ -1,8 +1,6 @@
 package debugger
 
-import (
-	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
-)
+import "github.com/daabr/chrome-vision/pkg/cdp/runtime"
 
 // Breakpoint identifier.
 //
@@ -19,9 +17,9 @@ type CallFrameID string
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-Location
 type Location struct {
 	// Script identifier as reported in the `Debugger.scriptParsed`.
-	ScriptID string `json:"scriptId"`
+	ScriptID string
 	// Line number in the script (0-based).
-	LineNumber int64 `json:"lineNumber"`
+	LineNumber int64
 	// Column number in the script (0-based).
 	ColumnNumber int64 `json:"columnNumber,omitempty"`
 }
@@ -32,8 +30,8 @@ type Location struct {
 //
 // This CDP type is experimental.
 type ScriptPosition struct {
-	LineNumber   int64 `json:"lineNumber"`
-	ColumnNumber int64 `json:"columnNumber"`
+	LineNumber   int64
+	ColumnNumber int64
 }
 
 // Location range within one script.
@@ -42,9 +40,9 @@ type ScriptPosition struct {
 //
 // This CDP type is experimental.
 type LocationRange struct {
-	ScriptID string         `json:"scriptId"`
-	Start    ScriptPosition `json:"start"`
-	End      ScriptPosition `json:"end"`
+	ScriptID string
+	Start    ScriptPosition
+	End      ScriptPosition
 }
 
 // JavaScript call frame. Array of call frames form the call stack.
@@ -52,19 +50,19 @@ type LocationRange struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-CallFrame
 type CallFrame struct {
 	// Call frame identifier. This identifier is only valid while the virtual machine is paused.
-	CallFrameID string `json:"callFrameId"`
+	CallFrameID string
 	// Name of the JavaScript function called on this call frame.
-	FunctionName string `json:"functionName"`
+	FunctionName string
 	// Location in the source code.
 	FunctionLocation *Location `json:"functionLocation,omitempty"`
 	// Location in the source code.
-	Location Location `json:"location"`
+	Location Location
 	// JavaScript script name or url.
-	URL string `json:"url"`
+	URL string
 	// Scope chain for this call frame.
-	ScopeChain []Scope `json:"scopeChain"`
+	ScopeChain []Scope
 	// `this` object for this call frame.
-	This runtime.RemoteObject `json:"this"`
+	This runtime.RemoteObject
 	// The value being returned, if the function is at return point.
 	ReturnValue *runtime.RemoteObject `json:"returnValue,omitempty"`
 }
@@ -74,12 +72,12 @@ type CallFrame struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-Scope
 type Scope struct {
 	// Scope type.
-	Type string `json:"type"`
+	Type string
 	// Object representing the scope. For `global` and `with` scopes it represents the actual
 	// object; for the rest of the scopes, it is artificial transient object enumerating scope
 	// variables as its properties.
-	Object runtime.RemoteObject `json:"object"`
-	Name   string               `json:"name,omitempty"`
+	Object runtime.RemoteObject
+	Name   string `json:"name,omitempty"`
 	// Location in the source code where scope starts
 	StartLocation *Location `json:"startLocation,omitempty"`
 	// Location in the source code where scope ends
@@ -91,17 +89,17 @@ type Scope struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-SearchMatch
 type SearchMatch struct {
 	// Line number in resource content.
-	LineNumber float64 `json:"lineNumber"`
+	LineNumber float64
 	// Line with match content.
-	LineContent string `json:"lineContent"`
+	LineContent string
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-BreakLocation
 type BreakLocation struct {
 	// Script identifier as reported in the `Debugger.scriptParsed`.
-	ScriptID string `json:"scriptId"`
+	ScriptID string
 	// Line number in the script (0-based).
-	LineNumber int64 `json:"lineNumber"`
+	LineNumber int64
 	// Column number in the script (0-based).
 	ColumnNumber int64  `json:"columnNumber,omitempty"`
 	Type         string `json:"type,omitempty"`
@@ -123,7 +121,7 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-DebugSymbols
 type DebugSymbols struct {
 	// Type of the debug symbols.
-	Type string `json:"type"`
+	Type string
 	// URL of the external symbol source.
 	ExternalURL string `json:"externalURL,omitempty"`
 }

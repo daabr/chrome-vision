@@ -15,7 +15,7 @@ import (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-activateTarget
 type ActivateTarget struct {
-	TargetID string `json:"targetId"`
+	TargetID string
 }
 
 // NewActivateTarget constructs a new ActivateTarget struct instance, with
@@ -53,7 +53,7 @@ func (t *ActivateTarget) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-attachToTarget
 type AttachToTarget struct {
-	TargetID string `json:"targetId"`
+	TargetID string
 	// Enables "flat" access to the session via specifying sessionId attribute in the commands.
 	// We plan to make this the default, deprecate non-flattened mode,
 	// and eventually retire it. See crbug.com/991325.
@@ -86,7 +86,7 @@ func (t *AttachToTarget) SetFlatten(v bool) *AttachToTarget {
 // to calling the AttachToTarget CDP command with Do().
 type AttachToTargetResponse struct {
 	// Id assigned to the session.
-	SessionID string `json:"sessionId"`
+	SessionID string
 }
 
 // Do sends the AttachToTarget CDP command to a browser,
@@ -135,7 +135,7 @@ func NewAttachToBrowserTarget() *AttachToBrowserTarget {
 // to calling the AttachToBrowserTarget CDP command with Do().
 type AttachToBrowserTargetResponse struct {
 	// Id assigned to the session.
-	SessionID string `json:"sessionId"`
+	SessionID string
 }
 
 // Do sends the AttachToBrowserTarget CDP command to a browser,
@@ -162,7 +162,7 @@ func (t *AttachToBrowserTarget) Do(ctx context.Context) (*AttachToBrowserTargetR
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-closeTarget
 type CloseTarget struct {
-	TargetID string `json:"targetId"`
+	TargetID string
 }
 
 // NewCloseTarget constructs a new CloseTarget struct instance, with
@@ -182,7 +182,7 @@ type CloseTargetResponse struct {
 	// Always set to true. If an error occurs, the response indicates protocol error.
 	//
 	// This CDP parameter is deprecated.
-	Success bool `json:"success"`
+	Success bool
 }
 
 // Do sends the CloseTarget CDP command to a browser,
@@ -222,7 +222,7 @@ func (t *CloseTarget) Do(ctx context.Context) (*CloseTargetResponse, error) {
 //
 // This CDP method is experimental.
 type ExposeDevToolsProtocol struct {
-	TargetID string `json:"targetId"`
+	TargetID string
 	// Binding name, 'cdp' if not specified.
 	BindingName string `json:"bindingName,omitempty"`
 }
@@ -326,7 +326,7 @@ func (t *CreateBrowserContext) SetProxyBypassList(v string) *CreateBrowserContex
 // to calling the CreateBrowserContext CDP command with Do().
 type CreateBrowserContextResponse struct {
 	// The id of the context created.
-	BrowserContextID string `json:"browserContextId"`
+	BrowserContextID string
 }
 
 // Do sends the CreateBrowserContext CDP command to a browser,
@@ -375,7 +375,7 @@ func NewGetBrowserContexts() *GetBrowserContexts {
 // to calling the GetBrowserContexts CDP command with Do().
 type GetBrowserContextsResponse struct {
 	// An array of browser context ids.
-	BrowserContextIds []string `json:"browserContextIds"`
+	BrowserContextIds []string
 }
 
 // Do sends the GetBrowserContexts CDP command to a browser,
@@ -403,7 +403,7 @@ func (t *GetBrowserContexts) Do(ctx context.Context) (*GetBrowserContextsRespons
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-createTarget
 type CreateTarget struct {
 	// The initial URL the page will be navigated to. An empty string indicates about:blank.
-	URL string `json:"url"`
+	URL string
 	// Frame width in DIP (headless chrome only).
 	Width int64 `json:"width,omitempty"`
 	// Frame height in DIP (headless chrome only).
@@ -495,7 +495,7 @@ func (t *CreateTarget) SetBackground(v bool) *CreateTarget {
 // to calling the CreateTarget CDP command with Do().
 type CreateTargetResponse struct {
 	// The id of the page opened.
-	TargetID string `json:"targetId"`
+	TargetID string
 }
 
 // Do sends the CreateTarget CDP command to a browser,
@@ -590,7 +590,7 @@ func (t *DetachFromTarget) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type DisposeBrowserContext struct {
-	BrowserContextID string `json:"browserContextId"`
+	BrowserContextID string
 }
 
 // NewDisposeBrowserContext constructs a new DisposeBrowserContext struct instance, with
@@ -656,7 +656,7 @@ func (t *GetTargetInfo) SetTargetID(v string) *GetTargetInfo {
 // GetTargetInfoResponse contains the browser's response
 // to calling the GetTargetInfo CDP command with Do().
 type GetTargetInfoResponse struct {
-	TargetInfo TargetInfo `json:"targetInfo"`
+	TargetInfo TargetInfo
 }
 
 // Do sends the GetTargetInfo CDP command to a browser,
@@ -701,7 +701,7 @@ func NewGetTargets() *GetTargets {
 // to calling the GetTargets CDP command with Do().
 type GetTargetsResponse struct {
 	// The list of targets.
-	TargetInfos []TargetInfo `json:"targetInfos"`
+	TargetInfos []TargetInfo
 }
 
 // Do sends the GetTargets CDP command to a browser,
@@ -732,7 +732,7 @@ func (t *GetTargets) Do(ctx context.Context) (*GetTargetsResponse, error) {
 //
 // This CDP method is deprecated.
 type SendMessageToTarget struct {
-	Message string `json:"message"`
+	Message string
 	// Identifier of the session.
 	SessionID string `json:"sessionId,omitempty"`
 	// Deprecated.
@@ -803,10 +803,10 @@ func (t *SendMessageToTarget) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetAutoAttach struct {
 	// Whether to auto-attach to related targets.
-	AutoAttach bool `json:"autoAttach"`
+	AutoAttach bool
 	// Whether to pause new targets when attaching to them. Use `Runtime.runIfWaitingForDebugger`
 	// to run paused targets.
-	WaitForDebuggerOnStart bool `json:"waitForDebuggerOnStart"`
+	WaitForDebuggerOnStart bool
 	// Enables "flat" access to the session via specifying sessionId attribute in the commands.
 	// We plan to make this the default, deprecate non-flattened mode,
 	// and eventually retire it. See crbug.com/991325.
@@ -864,7 +864,7 @@ func (t *SetAutoAttach) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-setDiscoverTargets
 type SetDiscoverTargets struct {
 	// Whether to discover available targets.
-	Discover bool `json:"discover"`
+	Discover bool
 }
 
 // NewSetDiscoverTargets constructs a new SetDiscoverTargets struct instance, with
@@ -906,7 +906,7 @@ func (t *SetDiscoverTargets) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetRemoteLocations struct {
 	// List of remote locations.
-	Locations []RemoteLocation `json:"locations"`
+	Locations []RemoteLocation
 }
 
 // NewSetRemoteLocations constructs a new SetRemoteLocations struct instance, with

@@ -33,8 +33,8 @@ type RequestPattern struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#type-HeaderEntry
 type HeaderEntry struct {
-	Name  string `json:"name"`
-	Value string `json:"value"`
+	Name  string
+	Value string
 }
 
 // Authorization challenge for HTTP status code 401 or 407.
@@ -44,11 +44,11 @@ type AuthChallenge struct {
 	// Source of the authentication challenge.
 	Source string `json:"source,omitempty"`
 	// Origin of the challenger.
-	Origin string `json:"origin"`
+	Origin string
 	// The authentication scheme used, such as basic or digest
-	Scheme string `json:"scheme"`
+	Scheme string
 	// The realm of the challenge. May be empty.
-	Realm string `json:"realm"`
+	Realm string
 }
 
 // Response to an AuthChallenge.
@@ -58,7 +58,7 @@ type AuthChallengeResponse struct {
 	// The decision on what to do in response to the authorization challenge.  Default means
 	// deferring to the default behavior of the net stack, which will likely either the Cancel
 	// authentication or display a popup dialog box.
-	Response string `json:"response"`
+	Response string
 	// The username to provide, possibly empty. Should only be set if response is
 	// ProvideCredentials.
 	Username string `json:"username,omitempty"`

@@ -5,26 +5,26 @@ import (
 	"strings"
 )
 
-// For de-aliasing of built-in JSON types.
+// For de-aliasing of built-in data types.
 var aliases = make(map[string]string)
 
 func generateTypes(d Domain) string {
 	b := new(strings.Builder)
 	fmt.Fprintf(b, "package %s\n", strings.ToLower(d.Domain))
-	generateImports(b, []string{"encoding/json"}, d.Dependencies)
+
 	for _, t := range d.Types {
 		if t.Type != "array" && t.Type != "object" {
-			aliases[adjust(t.ID)] = convertType(t.Type, nil)
+			aliases[adjust(t.ID)] = transformType(t.Type, nil)
 			key := strings.ToLower(d.Domain) + "." + adjust(t.ID)
-			aliases[key] = convertType(t.Type, nil)
+			aliases[key] = transformType(t.Type, nil)
 		}
 		generateType(b, t, d.Domain, "type", nil)
 	}
 	return b.String()
 }
 
-// generateType generates structs - mainly for CDP types, but this is also reused for
-// CDP commands and events. The redirect argument is relevant only for CDP commands.
+// Generate structs - mainly for CDP types, but this is also reused for CDP
+// commands and events. The redirect argument is relevant only for CDP commands.
 func generateType(b *strings.Builder, t Type, domain, usage string, redirect *string) {
 	// Comment.
 	if t.Description != nil {
@@ -76,7 +76,7 @@ func generateType(b *strings.Builder, t Type, domain, usage string, redirect *st
 			fmt.Fprintln(b, ")")
 		}
 	default:
-		fmt.Fprintf(b, "type %s %s\n", id, convertType(t.Type, t.Items))
+		fmt.Fprintf(b, "type %s %s\n", id, transformType(t.Type, t.Items))
 	}
 }
 
@@ -100,12 +100,11 @@ func generateProperty(b *strings.Builder, p Property, usage, domain string) {
 
 	// Struct field type.
 	if p.Type != nil {
-		fmt.Fprint(b, convertType(*p.Type, p.Items))
+		fmt.Fprint(b, transformType(*p.Type, p.Items))
 	} else {
 		r := strings.ReplaceAll(adjust(*p.Ref), strings.ToLower(domain)+".", "")
-		// De-alias built-in types (https://crbug.com/1193242).
 		if t, ok := aliases[r]; ok {
-			r = t
+			r = t // De-alias built-in data types (https://crbug.com/1193242).
 		}
 		if p.Optional && r != "int64" && r != "float64" && r != "string" {
 			fmt.Fprint(b, "*")
@@ -113,10 +112,10 @@ func generateProperty(b *strings.Builder, p Property, usage, domain string) {
 		fmt.Fprint(b, r)
 	}
 
-	// JSON key hint.
-	fmt.Fprintf(b, " `json:\"%s", p.Name)
+	// JSON key hint - if the field is optional (otherwise no need,
+	// un/marshalling is case-insensitive).
 	if p.Optional {
-		fmt.Fprint(b, ",omitempty")
+		fmt.Fprintf(b, " `json:\"%s,omitempty\"`", p.Name)
 	}
-	fmt.Fprint(b, "\"`\n")
+	fmt.Fprint(b, "\n")
 }

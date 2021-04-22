@@ -5,21 +5,21 @@ package animation
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#type-Animation
 type Animation struct {
 	// `Animation`'s id.
-	ID string `json:"id"`
+	ID string
 	// `Animation`'s name.
-	Name string `json:"name"`
+	Name string
 	// `Animation`'s internal paused state.
-	PausedState bool `json:"pausedState"`
+	PausedState bool
 	// `Animation`'s play state.
-	PlayState string `json:"playState"`
+	PlayState string
 	// `Animation`'s playback rate.
-	PlaybackRate float64 `json:"playbackRate"`
+	PlaybackRate float64
 	// `Animation`'s start time.
-	StartTime float64 `json:"startTime"`
+	StartTime float64
 	// `Animation`'s current time.
-	CurrentTime float64 `json:"currentTime"`
+	CurrentTime float64
 	// Animation type of `Animation`.
-	Type string `json:"type"`
+	Type string
 	// `Animation`'s source animation node.
 	Source *AnimationEffect `json:"source,omitempty"`
 	// A unique ID for `Animation` representing the sources that triggered this CSS
@@ -32,25 +32,25 @@ type Animation struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#type-AnimationEffect
 type AnimationEffect struct {
 	// `AnimationEffect`'s delay.
-	Delay float64 `json:"delay"`
+	Delay float64
 	// `AnimationEffect`'s end delay.
-	EndDelay float64 `json:"endDelay"`
+	EndDelay float64
 	// `AnimationEffect`'s iteration start.
-	IterationStart float64 `json:"iterationStart"`
+	IterationStart float64
 	// `AnimationEffect`'s iterations.
-	Iterations float64 `json:"iterations"`
+	Iterations float64
 	// `AnimationEffect`'s iteration duration.
-	Duration float64 `json:"duration"`
+	Duration float64
 	// `AnimationEffect`'s playback direction.
-	Direction string `json:"direction"`
+	Direction string
 	// `AnimationEffect`'s fill mode.
-	Fill string `json:"fill"`
+	Fill string
 	// `AnimationEffect`'s target node.
 	BackendNodeID int64 `json:"backendNodeId,omitempty"`
 	// `AnimationEffect`'s keyframes.
 	KeyframesRule *KeyframesRule `json:"keyframesRule,omitempty"`
 	// `AnimationEffect`'s timing function.
-	Easing string `json:"easing"`
+	Easing string
 }
 
 // Keyframes Rule
@@ -60,7 +60,7 @@ type KeyframesRule struct {
 	// CSS keyframed animation's name.
 	Name string `json:"name,omitempty"`
 	// List of animation keyframes.
-	Keyframes []KeyframeStyle `json:"keyframes"`
+	Keyframes []KeyframeStyle
 }
 
 // Keyframe Style
@@ -68,7 +68,7 @@ type KeyframesRule struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#type-KeyframeStyle
 type KeyframeStyle struct {
 	// Keyframe's time offset.
-	Offset string `json:"offset"`
+	Offset string
 	// `AnimationEffect`'s timing function.
-	Easing string `json:"easing"`
+	Easing string
 }

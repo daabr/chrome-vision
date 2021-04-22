@@ -3,10 +3,10 @@ package input
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#type-TouchPoint
 type TouchPoint struct {
 	// X coordinate of the event relative to the main frame's viewport in CSS pixels.
-	X float64 `json:"x"`
+	X float64
 	// Y coordinate of the event relative to the main frame's viewport in CSS pixels. 0 refers to
 	// the top of the viewport and Y increases as it proceeds towards the bottom of the viewport.
-	Y float64 `json:"y"`
+	Y float64
 	// X radius of the touch area (default: 1.0).
 	RadiusX float64 `json:"radiusX,omitempty"`
 	// Y radius of the touch area (default: 1.0).
@@ -70,10 +70,10 @@ type TimeSinceEpoch float64
 // This CDP type is experimental.
 type DragDataItem struct {
 	// Mime type of the dragged data.
-	MimeType string `json:"mimeType"`
+	MimeType string
 	// Depending of the value of `mimeType`, it contains the dragged link,
 	// text, HTML markup or any other data.
-	Data string `json:"data"`
+	Data string
 	// Title associated with a link. Only valid when `mimeType` == "text/uri-list".
 	Title string `json:"title,omitempty"`
 	// Stores the base URL for the contained markup. Only valid when `mimeType`
@@ -85,7 +85,7 @@ type DragDataItem struct {
 //
 // This CDP type is experimental.
 type DragData struct {
-	Items []DragDataItem `json:"items"`
+	Items []DragDataItem
 	// Bit field representing allowed drag operations. Copy = 1, Link = 2, Move = 16
-	DragOperationsMask int64 `json:"dragOperationsMask"`
+	DragOperationsMask int64
 }

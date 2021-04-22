@@ -1,8 +1,6 @@
 package network
 
-import (
-	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
-)
+import "github.com/daabr/chrome-vision/pkg/cdp/runtime"
 
 // Resource type as it was perceived by the rendering engine.
 //
@@ -151,53 +149,53 @@ const (
 type ResourceTiming struct {
 	// Timing's requestTime is a baseline in seconds, while the other numbers are ticks in
 	// milliseconds relatively to this requestTime.
-	RequestTime float64 `json:"requestTime"`
+	RequestTime float64
 	// Started resolving proxy.
-	ProxyStart float64 `json:"proxyStart"`
+	ProxyStart float64
 	// Finished resolving proxy.
-	ProxyEnd float64 `json:"proxyEnd"`
+	ProxyEnd float64
 	// Started DNS address resolve.
-	DnsStart float64 `json:"dnsStart"`
+	DnsStart float64
 	// Finished DNS address resolve.
-	DnsEnd float64 `json:"dnsEnd"`
+	DnsEnd float64
 	// Started connecting to the remote host.
-	ConnectStart float64 `json:"connectStart"`
+	ConnectStart float64
 	// Connected to the remote host.
-	ConnectEnd float64 `json:"connectEnd"`
+	ConnectEnd float64
 	// Started SSL handshake.
-	SslStart float64 `json:"sslStart"`
+	SslStart float64
 	// Finished SSL handshake.
-	SslEnd float64 `json:"sslEnd"`
+	SslEnd float64
 	// Started running ServiceWorker.
 	//
 	// This CDP property is experimental.
-	WorkerStart float64 `json:"workerStart"`
+	WorkerStart float64
 	// Finished Starting ServiceWorker.
 	//
 	// This CDP property is experimental.
-	WorkerReady float64 `json:"workerReady"`
+	WorkerReady float64
 	// Started fetch event.
 	//
 	// This CDP property is experimental.
-	WorkerFetchStart float64 `json:"workerFetchStart"`
+	WorkerFetchStart float64
 	// Settled fetch event respondWith promise.
 	//
 	// This CDP property is experimental.
-	WorkerRespondWithSettled float64 `json:"workerRespondWithSettled"`
+	WorkerRespondWithSettled float64
 	// Started sending request.
-	SendStart float64 `json:"sendStart"`
+	SendStart float64
 	// Finished sending request.
-	SendEnd float64 `json:"sendEnd"`
+	SendEnd float64
 	// Time the server started pushing request.
 	//
 	// This CDP property is experimental.
-	PushStart float64 `json:"pushStart"`
+	PushStart float64
 	// Time the server finished pushing request.
 	//
 	// This CDP property is experimental.
-	PushEnd float64 `json:"pushEnd"`
+	PushEnd float64
 	// Finished receiving response headers.
-	ReceiveHeadersEnd float64 `json:"receiveHeadersEnd"`
+	ReceiveHeadersEnd float64
 }
 
 // Loading priority of a resource request.
@@ -226,13 +224,13 @@ type PostDataEntry struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-Request
 type Request struct {
 	// Request URL (without fragment).
-	URL string `json:"url"`
+	URL string
 	// Fragment of the requested URL starting with hash, if present.
 	URLFragment string `json:"urlFragment,omitempty"`
 	// HTTP request method.
-	Method string `json:"method"`
+	Method string
 	// HTTP request headers.
-	Headers Headers `json:"headers"`
+	Headers Headers
 	// HTTP POST request data.
 	PostData string `json:"postData,omitempty"`
 	// True when the request has POST data. Note that postData might still be omitted when this flag is true when the data is too long.
@@ -244,9 +242,9 @@ type Request struct {
 	// The mixed content type of the request.
 	MixedContentType string `json:"mixedContentType,omitempty"`
 	// Priority of the resource request at the time request is sent.
-	InitialPriority string `json:"initialPriority"`
+	InitialPriority string
 	// The referrer policy of the request, as defined in https://www.w3.org/TR/referrer-policy/
-	ReferrerPolicy string `json:"referrerPolicy"`
+	ReferrerPolicy string
 	// Whether is loaded via link preload.
 	IsLinkPreload bool `json:"isLinkPreload,omitempty"`
 	// Set for requests when the TrustToken API is used. Contains the parameters
@@ -261,21 +259,21 @@ type Request struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-SignedCertificateTimestamp
 type SignedCertificateTimestamp struct {
 	// Validation status.
-	Status string `json:"status"`
+	Status string
 	// Origin.
-	Origin string `json:"origin"`
+	Origin string
 	// Log name / description.
-	LogDescription string `json:"logDescription"`
+	LogDescription string
 	// Log ID.
-	LogID string `json:"logId"`
+	LogID string
 	// Issuance date.
-	Timestamp float64 `json:"timestamp"`
+	Timestamp float64
 	// Hash algorithm.
-	HashAlgorithm string `json:"hashAlgorithm"`
+	HashAlgorithm string
 	// Signature algorithm.
-	SignatureAlgorithm string `json:"signatureAlgorithm"`
+	SignatureAlgorithm string
 	// Signature data.
-	SignatureData string `json:"signatureData"`
+	SignatureData string
 }
 
 // Security details about a request.
@@ -283,31 +281,31 @@ type SignedCertificateTimestamp struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-SecurityDetails
 type SecurityDetails struct {
 	// Protocol name (e.g. "TLS 1.2" or "QUIC").
-	Protocol string `json:"protocol"`
+	Protocol string
 	// Key Exchange used by the connection, or the empty string if not applicable.
-	KeyExchange string `json:"keyExchange"`
+	KeyExchange string
 	// (EC)DH group used by the connection, if applicable.
 	KeyExchangeGroup string `json:"keyExchangeGroup,omitempty"`
 	// Cipher name.
-	Cipher string `json:"cipher"`
+	Cipher string
 	// TLS MAC. Note that AEAD ciphers do not have separate MACs.
 	Mac string `json:"mac,omitempty"`
 	// Certificate ID value.
-	CertificateID int64 `json:"certificateId"`
+	CertificateID int64
 	// Certificate subject name.
-	SubjectName string `json:"subjectName"`
+	SubjectName string
 	// Subject Alternative Name (SAN) DNS names and IP addresses.
-	SanList []string `json:"sanList"`
+	SanList []string
 	// Name of the issuing CA.
-	Issuer string `json:"issuer"`
+	Issuer string
 	// Certificate valid from date.
-	ValidFrom float64 `json:"validFrom"`
+	ValidFrom float64
 	// Certificate valid to (expiration) date
-	ValidTo float64 `json:"validTo"`
+	ValidTo float64
 	// List of signed certificate timestamps (SCTs).
-	SignedCertificateTimestampList []SignedCertificateTimestamp `json:"signedCertificateTimestampList"`
+	SignedCertificateTimestampList []SignedCertificateTimestamp
 	// Whether the request complied with Certificate Transparency policy
-	CertificateTransparencyCompliance string `json:"certificateTransparencyCompliance"`
+	CertificateTransparencyCompliance string
 }
 
 // Whether the request complied with Certificate Transparency policy.
@@ -379,8 +377,8 @@ const (
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CorsErrorStatus
 type CorsErrorStatus struct {
-	CorsError       string `json:"corsError"`
-	FailedParameter string `json:"failedParameter"`
+	CorsError       string
+	FailedParameter string
 }
 
 // Source of serviceworker response.
@@ -404,10 +402,10 @@ const (
 //
 // This CDP type is experimental.
 type TrustTokenParams struct {
-	Type string `json:"type"`
+	Type string
 	// Only set for "token-redemption" type and determine whether
 	// to request a fresh SRR or use a still valid cached SRR.
-	RefreshPolicy string `json:"refreshPolicy"`
+	RefreshPolicy string
 	// Origins of issuers from whom to request tokens or redemption
 	// records.
 	Issuers []string `json:"issuers,omitempty"`
@@ -430,25 +428,25 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-Response
 type Response struct {
 	// Response URL. This URL can be different from CachedResource.url in case of redirect.
-	URL string `json:"url"`
+	URL string
 	// HTTP response status code.
-	Status int64 `json:"status"`
+	Status int64
 	// HTTP response status text.
-	StatusText string `json:"statusText"`
+	StatusText string
 	// HTTP response headers.
-	Headers Headers `json:"headers"`
+	Headers Headers
 	// HTTP response headers text.
 	HeadersText string `json:"headersText,omitempty"`
 	// Resource mimeType as determined by the browser.
-	MimeType string `json:"mimeType"`
+	MimeType string
 	// Refined HTTP request headers that were actually transmitted over the network.
 	RequestHeaders *Headers `json:"requestHeaders,omitempty"`
 	// HTTP request headers text.
 	RequestHeadersText string `json:"requestHeadersText,omitempty"`
 	// Specifies whether physical connection was actually reused for this request.
-	ConnectionReused bool `json:"connectionReused"`
+	ConnectionReused bool
 	// Physical connection id that was actually used for this request.
-	ConnectionID float64 `json:"connectionId"`
+	ConnectionID float64
 	// Remote IP address.
 	RemoteIPAddress string `json:"remoteIPAddress,omitempty"`
 	// Remote port.
@@ -460,7 +458,7 @@ type Response struct {
 	// Specifies that the request was served from the prefetch cache.
 	FromPrefetchCache bool `json:"fromPrefetchCache,omitempty"`
 	// Total number of bytes received for this request so far.
-	EncodedDataLength float64 `json:"encodedDataLength"`
+	EncodedDataLength float64
 	// Timing information for the given request.
 	Timing *ResourceTiming `json:"timing,omitempty"`
 	// Response source of response from ServiceWorker.
@@ -472,7 +470,7 @@ type Response struct {
 	// Protocol used to fetch this request.
 	Protocol string `json:"protocol,omitempty"`
 	// Security state of the request resource.
-	SecurityState string `json:"securityState"`
+	SecurityState string
 	// Security details for the request.
 	SecurityDetails *SecurityDetails `json:"securityDetails,omitempty"`
 }
@@ -482,7 +480,7 @@ type Response struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-WebSocketRequest
 type WebSocketRequest struct {
 	// HTTP request headers.
-	Headers Headers `json:"headers"`
+	Headers Headers
 }
 
 // WebSocket response data.
@@ -490,11 +488,11 @@ type WebSocketRequest struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-WebSocketResponse
 type WebSocketResponse struct {
 	// HTTP response status code.
-	Status int64 `json:"status"`
+	Status int64
 	// HTTP response status text.
-	StatusText string `json:"statusText"`
+	StatusText string
 	// HTTP response headers.
-	Headers Headers `json:"headers"`
+	Headers Headers
 	// HTTP response headers text.
 	HeadersText string `json:"headersText,omitempty"`
 	// HTTP request headers.
@@ -508,13 +506,13 @@ type WebSocketResponse struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-WebSocketFrame
 type WebSocketFrame struct {
 	// WebSocket message opcode.
-	Opcode float64 `json:"opcode"`
+	Opcode float64
 	// WebSocket message mask.
-	Mask bool `json:"mask"`
+	Mask bool
 	// WebSocket message payload data.
 	// If the opcode is 1, this is a text message and payloadData is a UTF-8 string.
 	// If the opcode isn't 1, then payloadData is a base64 encoded string representing binary data.
-	PayloadData string `json:"payloadData"`
+	PayloadData string
 }
 
 // Information about the cached resource.
@@ -522,13 +520,13 @@ type WebSocketFrame struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CachedResource
 type CachedResource struct {
 	// Resource URL. This is the url of the original network request.
-	URL string `json:"url"`
+	URL string
 	// Type of this resource.
-	Type string `json:"type"`
+	Type string
 	// Cached response data.
 	Response *Response `json:"response,omitempty"`
 	// Cached response body size.
-	BodySize float64 `json:"bodySize"`
+	BodySize float64
 }
 
 // Information about the request initiator.
@@ -536,7 +534,7 @@ type CachedResource struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-Initiator
 type Initiator struct {
 	// Type of this initiator.
-	Type string `json:"type"`
+	Type string
 	// Initiator JavaScript stack trace, set for Script only.
 	Stack *runtime.StackTrace `json:"stack,omitempty"`
 	// Initiator URL, set for Parser type or for Script type (when script is importing module) or for SignedExchange type.
@@ -556,43 +554,43 @@ type Initiator struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-Cookie
 type Cookie struct {
 	// Cookie name.
-	Name string `json:"name"`
+	Name string
 	// Cookie value.
-	Value string `json:"value"`
+	Value string
 	// Cookie domain.
-	Domain string `json:"domain"`
+	Domain string
 	// Cookie path.
-	Path string `json:"path"`
+	Path string
 	// Cookie expiration date as the number of seconds since the UNIX epoch.
-	Expires float64 `json:"expires"`
+	Expires float64
 	// Cookie size.
-	Size int64 `json:"size"`
+	Size int64
 	// True if cookie is http-only.
-	HttpOnly bool `json:"httpOnly"`
+	HttpOnly bool
 	// True if cookie is secure.
-	Secure bool `json:"secure"`
+	Secure bool
 	// True in case of session cookie.
-	Session bool `json:"session"`
+	Session bool
 	// Cookie SameSite type.
 	SameSite string `json:"sameSite,omitempty"`
 	// Cookie Priority
 	//
 	// This CDP property is experimental.
-	Priority string `json:"priority"`
+	Priority string
 	// True if cookie is SameParty.
 	//
 	// This CDP property is experimental.
-	SameParty bool `json:"sameParty"`
+	SameParty bool
 	// Cookie source scheme type.
 	//
 	// This CDP property is experimental.
-	SourceScheme string `json:"sourceScheme"`
+	SourceScheme string
 	// Cookie source port. Valid values are {-1, [1, 65535]}, -1 indicates an unspecified port.
 	// An unspecified port value allows protocol clients to emulate legacy cookie scope for the port.
 	// This is a temporary ability and it will be removed in the future.
 	//
 	// This CDP property is experimental.
-	SourcePort int64 `json:"sourcePort"`
+	SourcePort int64
 }
 
 // Types of reasons why a cookie may not be stored from a response.
@@ -654,10 +652,10 @@ const (
 // This CDP type is experimental.
 type BlockedSetCookieWithReason struct {
 	// The reason(s) this cookie was blocked.
-	BlockedReasons []SetCookieBlockedReason `json:"blockedReasons"`
+	BlockedReasons []SetCookieBlockedReason
 	// The string representing this individual cookie as it would appear in the header.
 	// This is not the entire "cookie" or "set-cookie" header which could have multiple cookies.
-	CookieLine string `json:"cookieLine"`
+	CookieLine string
 	// The cookie object which represents the cookie which was not stored. It is optional because
 	// sometimes complete cookie information is not available, such as in the case of parsing
 	// errors.
@@ -671,9 +669,9 @@ type BlockedSetCookieWithReason struct {
 // This CDP type is experimental.
 type BlockedCookieWithReason struct {
 	// The reason(s) the cookie was blocked.
-	BlockedReasons []CookieBlockedReason `json:"blockedReasons"`
+	BlockedReasons []CookieBlockedReason
 	// The cookie object representing the cookie which was not sent.
-	Cookie Cookie `json:"cookie"`
+	Cookie Cookie
 }
 
 // Cookie parameter object
@@ -681,9 +679,9 @@ type BlockedCookieWithReason struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CookieParam
 type CookieParam struct {
 	// Cookie name.
-	Name string `json:"name"`
+	Name string
 	// Cookie value.
-	Value string `json:"value"`
+	Value string
 	// The request-URI to associate with the setting of the cookie. This value can affect the
 	// default domain, path, source port, and source scheme values of the created cookie.
 	URL string `json:"url,omitempty"`
@@ -728,11 +726,11 @@ type AuthChallenge struct {
 	// Source of the authentication challenge.
 	Source string `json:"source,omitempty"`
 	// Origin of the challenger.
-	Origin string `json:"origin"`
+	Origin string
 	// The authentication scheme used, such as basic or digest
-	Scheme string `json:"scheme"`
+	Scheme string
 	// The realm of the challenge. May be empty.
-	Realm string `json:"realm"`
+	Realm string
 }
 
 // Response to an AuthChallenge.
@@ -744,7 +742,7 @@ type AuthChallengeResponse struct {
 	// The decision on what to do in response to the authorization challenge.  Default means
 	// deferring to the default behavior of the net stack, which will likely either the Cancel
 	// authentication or display a popup dialog box.
-	Response string `json:"response"`
+	Response string
 	// The username to provide, possibly empty. Should only be set if response is
 	// ProvideCredentials.
 	Username string `json:"username,omitempty"`
@@ -790,21 +788,21 @@ type RequestPattern struct {
 // This CDP type is experimental.
 type SignedExchangeSignature struct {
 	// Signed exchange signature label.
-	Label string `json:"label"`
+	Label string
 	// The hex string of signed exchange signature.
-	Signature string `json:"signature"`
+	Signature string
 	// Signed exchange signature integrity.
-	Integrity string `json:"integrity"`
+	Integrity string
 	// Signed exchange signature cert Url.
 	CertURL string `json:"certUrl,omitempty"`
 	// The hex string of signed exchange signature cert sha256.
 	CertSha256 string `json:"certSha256,omitempty"`
 	// Signed exchange signature validity Url.
-	ValidityURL string `json:"validityUrl"`
+	ValidityURL string
 	// Signed exchange signature date.
-	Date int64 `json:"date"`
+	Date int64
 	// Signed exchange signature expires.
-	Expires int64 `json:"expires"`
+	Expires int64
 	// The encoded certificates.
 	Certificates []string `json:"certificates,omitempty"`
 }
@@ -817,15 +815,15 @@ type SignedExchangeSignature struct {
 // This CDP type is experimental.
 type SignedExchangeHeader struct {
 	// Signed exchange request URL.
-	RequestURL string `json:"requestUrl"`
+	RequestURL string
 	// Signed exchange response code.
-	ResponseCode int64 `json:"responseCode"`
+	ResponseCode int64
 	// Signed exchange response headers.
-	ResponseHeaders Headers `json:"responseHeaders"`
+	ResponseHeaders Headers
 	// Signed exchange response signature.
-	Signatures []SignedExchangeSignature `json:"signatures"`
+	Signatures []SignedExchangeSignature
 	// Signed exchange header integrity hash in the form of "sha256-<base64-hash-value>".
-	HeaderIntegrity string `json:"headerIntegrity"`
+	HeaderIntegrity string
 }
 
 // Field type for a signed exchange related error.
@@ -852,7 +850,7 @@ const (
 // This CDP type is experimental.
 type SignedExchangeError struct {
 	// Error message.
-	Message string `json:"message"`
+	Message string
 	// The index of the signature which caused the error.
 	SignatureIndex int64 `json:"signatureIndex,omitempty"`
 	// The field which caused the error.
@@ -866,7 +864,7 @@ type SignedExchangeError struct {
 // This CDP type is experimental.
 type SignedExchangeInfo struct {
 	// The outer response of signed HTTP exchange which was received from network.
-	OuterResponse Response `json:"outerResponse"`
+	OuterResponse Response
 	// Information about the signed exchange header.
 	Header *SignedExchangeHeader `json:"header,omitempty"`
 	// Security details for the signed exchange header.
@@ -918,9 +916,9 @@ const (
 //
 // This CDP type is experimental.
 type ClientSecurityState struct {
-	InitiatorIsSecureContext    bool   `json:"initiatorIsSecureContext"`
-	InitiatorIPAddressSpace     string `json:"initiatorIPAddressSpace"`
-	PrivateNetworkRequestPolicy string `json:"privateNetworkRequestPolicy"`
+	InitiatorIsSecureContext    bool
+	InitiatorIPAddressSpace     string
+	PrivateNetworkRequestPolicy string
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CrossOriginOpenerPolicyValue
@@ -940,8 +938,8 @@ const (
 //
 // This CDP type is experimental.
 type CrossOriginOpenerPolicyStatus struct {
-	Value                       string `json:"value"`
-	ReportOnlyValue             string `json:"reportOnlyValue"`
+	Value                       string
+	ReportOnlyValue             string
 	ReportingEndpoint           string `json:"reportingEndpoint,omitempty"`
 	ReportOnlyReportingEndpoint string `json:"reportOnlyReportingEndpoint,omitempty"`
 }
@@ -962,8 +960,8 @@ const (
 //
 // This CDP type is experimental.
 type CrossOriginEmbedderPolicyStatus struct {
-	Value                       string `json:"value"`
-	ReportOnlyValue             string `json:"reportOnlyValue"`
+	Value                       string
+	ReportOnlyValue             string
 	ReportingEndpoint           string `json:"reportingEndpoint,omitempty"`
 	ReportOnlyReportingEndpoint string `json:"reportOnlyReportingEndpoint,omitempty"`
 }
@@ -982,7 +980,7 @@ type SecurityIsolationStatus struct {
 //
 // This CDP type is experimental.
 type LoadNetworkResourcePageResult struct {
-	Success bool `json:"success"`
+	Success bool
 	// Optional values used for error reporting.
 	NetError       float64 `json:"netError,omitempty"`
 	NetErrorName   string  `json:"netErrorName,omitempty"`
@@ -1000,6 +998,6 @@ type LoadNetworkResourcePageResult struct {
 //
 // This CDP type is experimental.
 type LoadNetworkResourceOptions struct {
-	DisableCache       bool `json:"disableCache"`
-	IncludeCredentials bool `json:"includeCredentials"`
+	DisableCache       bool
+	IncludeCredentials bool
 }

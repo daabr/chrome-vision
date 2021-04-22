@@ -75,7 +75,7 @@ func (t *Disable) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#method-getRealtimeData
 type GetRealtimeData struct {
-	ContextID string `json:"contextId"`
+	ContextID string
 }
 
 // NewGetRealtimeData constructs a new GetRealtimeData struct instance, with
@@ -92,7 +92,7 @@ func NewGetRealtimeData(contextID string) *GetRealtimeData {
 // GetRealtimeDataResponse contains the browser's response
 // to calling the GetRealtimeData CDP command with Do().
 type GetRealtimeDataResponse struct {
-	RealtimeData ContextRealtimeData `json:"realtimeData"`
+	RealtimeData ContextRealtimeData
 }
 
 // Do sends the GetRealtimeData CDP command to a browser,

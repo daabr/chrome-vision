@@ -1,21 +1,19 @@
 package log
 
-import (
-	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
-)
+import "github.com/daabr/chrome-vision/pkg/cdp/runtime"
 
 // Log entry.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Log/#type-LogEntry
 type LogEntry struct {
 	// Log entry source.
-	Source string `json:"source"`
+	Source string
 	// Log entry severity.
-	Level string `json:"level"`
+	Level string
 	// Logged text.
-	Text string `json:"text"`
+	Text string
 	// Timestamp when this entry was added.
-	Timestamp runtime.Timestamp `json:"timestamp"`
+	Timestamp runtime.Timestamp
 	// URL of the resource if known.
 	URL string `json:"url,omitempty"`
 	// Line number in the resource.
@@ -35,7 +33,7 @@ type LogEntry struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Log/#type-ViolationSetting
 type ViolationSetting struct {
 	// Violation type.
-	Name string `json:"name"`
+	Name string
 	// Time threshold to trigger upon.
-	Threshold float64 `json:"threshold"`
+	Threshold float64
 }

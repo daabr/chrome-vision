@@ -5,11 +5,11 @@ package applicationcache
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#type-ApplicationCacheResource
 type ApplicationCacheResource struct {
 	// Resource url.
-	URL string `json:"url"`
+	URL string
 	// Resource size.
-	Size int64 `json:"size"`
+	Size int64
 	// Resource type.
-	Type string `json:"type"`
+	Type string
 }
 
 // Detailed application cache information.
@@ -17,15 +17,15 @@ type ApplicationCacheResource struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#type-ApplicationCache
 type ApplicationCache struct {
 	// Manifest URL.
-	ManifestURL string `json:"manifestURL"`
+	ManifestURL string
 	// Application cache size.
-	Size float64 `json:"size"`
+	Size float64
 	// Application cache creation time.
-	CreationTime float64 `json:"creationTime"`
+	CreationTime float64
 	// Application cache update time.
-	UpdateTime float64 `json:"updateTime"`
+	UpdateTime float64
 	// Application cache resources.
-	Resources []ApplicationCacheResource `json:"resources"`
+	Resources []ApplicationCacheResource
 }
 
 // Frame identifier - manifest URL pair.
@@ -33,9 +33,9 @@ type ApplicationCache struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#type-FrameWithManifest
 type FrameWithManifest struct {
 	// Frame identifier.
-	FrameID string `json:"frameId"`
+	FrameID string
 	// Manifest URL.
-	ManifestURL string `json:"manifestURL"`
+	ManifestURL string
 	// Application cache status.
-	Status int64 `json:"status"`
+	Status int64
 }

@@ -21,24 +21,24 @@ const (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#type-EventMetadata
 type EventMetadata struct {
-	Key   string `json:"key"`
-	Value string `json:"value"`
+	Key   string
+	Value string
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#type-BackgroundServiceEvent
 type BackgroundServiceEvent struct {
 	// Timestamp of the event (in seconds).
-	Timestamp float64 `json:"timestamp"`
+	Timestamp float64
 	// The origin this event belongs to.
-	Origin string `json:"origin"`
+	Origin string
 	// The Service Worker ID that initiated the event.
-	ServiceWorkerRegistrationID string `json:"serviceWorkerRegistrationId"`
+	ServiceWorkerRegistrationID string
 	// The Background Service this event belongs to.
-	Service string `json:"service"`
+	Service string
 	// A description of the event.
-	EventName string `json:"eventName"`
+	EventName string
 	// An identifier that groups related events together.
-	InstanceID string `json:"instanceId"`
+	InstanceID string
 	// A list of event-specific information.
-	EventMetadata []EventMetadata `json:"eventMetadata"`
+	EventMetadata []EventMetadata
 }

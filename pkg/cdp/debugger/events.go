@@ -11,9 +11,9 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#event-breakpointResolved
 type BreakpointResolved struct {
 	// Breakpoint unique identifier.
-	BreakpointID string `json:"breakpointId"`
+	BreakpointID string
 	// Actual breakpoint location.
-	Location Location `json:"location"`
+	Location Location
 }
 
 // Fired when the virtual machine stopped on breakpoint or exception or any other stop criteria.
@@ -21,9 +21,9 @@ type BreakpointResolved struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#event-paused
 type Paused struct {
 	// Call stack the virtual machine stopped on.
-	CallFrames []CallFrame `json:"callFrames"`
+	CallFrames []CallFrame
 	// Pause reason.
-	Reason string `json:"reason"`
+	Reason string
 	// Object containing break-specific auxiliary properties.
 	Data json.RawMessage `json:"data,omitempty"`
 	// Hit breakpoints IDs
@@ -51,21 +51,21 @@ type Resumed struct{}
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#event-scriptFailedToParse
 type ScriptFailedToParse struct {
 	// Identifier of the script parsed.
-	ScriptID string `json:"scriptId"`
+	ScriptID string
 	// URL or name of the script parsed (if any).
-	URL string `json:"url"`
+	URL string
 	// Line offset of the script within the resource with given URL (for script tags).
-	StartLine int64 `json:"startLine"`
+	StartLine int64
 	// Column offset of the script within the resource with given URL.
-	StartColumn int64 `json:"startColumn"`
+	StartColumn int64
 	// Last line of the script.
-	EndLine int64 `json:"endLine"`
+	EndLine int64
 	// Length of the last line of the script.
-	EndColumn int64 `json:"endColumn"`
+	EndColumn int64
 	// Specifies script creation context.
-	ExecutionContextID int64 `json:"executionContextId"`
+	ExecutionContextID int64
 	// Content hash of the script.
-	Hash string `json:"hash"`
+	Hash string
 	// Embedder-specific auxiliary data.
 	ExecutionContextAuxData json.RawMessage `json:"executionContextAuxData,omitempty"`
 	// URL of source map associated with script (if any).
@@ -100,21 +100,21 @@ type ScriptFailedToParse struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#event-scriptParsed
 type ScriptParsed struct {
 	// Identifier of the script parsed.
-	ScriptID string `json:"scriptId"`
+	ScriptID string
 	// URL or name of the script parsed (if any).
-	URL string `json:"url"`
+	URL string
 	// Line offset of the script within the resource with given URL (for script tags).
-	StartLine int64 `json:"startLine"`
+	StartLine int64
 	// Column offset of the script within the resource with given URL.
-	StartColumn int64 `json:"startColumn"`
+	StartColumn int64
 	// Last line of the script.
-	EndLine int64 `json:"endLine"`
+	EndLine int64
 	// Length of the last line of the script.
-	EndColumn int64 `json:"endColumn"`
+	EndColumn int64
 	// Specifies script creation context.
-	ExecutionContextID int64 `json:"executionContextId"`
+	ExecutionContextID int64
 	// Content hash of the script.
-	Hash string `json:"hash"`
+	Hash string
 	// Embedder-specific auxiliary data.
 	ExecutionContextAuxData json.RawMessage `json:"executionContextAuxData,omitempty"`
 	// True, if this script is generated as a result of the live edit operation.

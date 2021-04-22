@@ -1,8 +1,6 @@
 package accessibility
 
-import (
-	"encoding/json"
-)
+import "encoding/json"
 
 // Unique accessibility node identifier.
 //
@@ -73,7 +71,7 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXValueSource
 type AXValueSource struct {
 	// What type of source this is.
-	Type string `json:"type"`
+	Type string
 	// The value of this property source.
 	Value *AXValue `json:"value,omitempty"`
 	// The name of the relevant attribute, if any.
@@ -95,7 +93,7 @@ type AXValueSource struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXRelatedNode
 type AXRelatedNode struct {
 	// The BackendNodeId of the related DOM node.
-	BackendDOMNodeID int64 `json:"backendDOMNodeId"`
+	BackendDOMNodeID int64
 	// The IDRef value provided, if any.
 	Idref string `json:"idref,omitempty"`
 	// The text alternative of this node in the current context.
@@ -105,9 +103,9 @@ type AXRelatedNode struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXProperty
 type AXProperty struct {
 	// The name of this property.
-	Name string `json:"name"`
+	Name string
 	// The value of this property.
-	Value AXValue `json:"value"`
+	Value AXValue
 }
 
 // A single computed AX property.
@@ -115,7 +113,7 @@ type AXProperty struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXValue
 type AXValue struct {
 	// The type of this value.
-	Type string `json:"type"`
+	Type string
 	// The computed value of this property.
 	Value json.RawMessage `json:"value,omitempty"`
 	// One or more related nodes, if applicable.
@@ -182,9 +180,9 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXNode
 type AXNode struct {
 	// Unique identifier for this node.
-	NodeID string `json:"nodeId"`
+	NodeID string
 	// Whether this node is ignored for accessibility
-	Ignored bool `json:"ignored"`
+	Ignored bool
 	// Collection of reasons why this node is hidden.
 	IgnoredReasons []AXProperty `json:"ignoredReasons,omitempty"`
 	// This `Node`'s role, whether explicit or implicit.

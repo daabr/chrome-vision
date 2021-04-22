@@ -1,17 +1,15 @@
 package profiler
 
-import (
-	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
-)
+import "github.com/daabr/chrome-vision/pkg/cdp/runtime"
 
 // Profile node. Holds callsite information, execution statistics and child nodes.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-ProfileNode
 type ProfileNode struct {
 	// Unique id of the node.
-	ID int64 `json:"id"`
+	ID int64
 	// Function location.
-	CallFrame runtime.CallFrame `json:"callFrame"`
+	CallFrame runtime.CallFrame
 	// Number of samples where this node was on top of the call stack.
 	HitCount int64 `json:"hitCount,omitempty"`
 	// Child node ids.
@@ -28,11 +26,11 @@ type ProfileNode struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-Profile
 type Profile struct {
 	// The list of profile nodes. First item is the root node.
-	Nodes []ProfileNode `json:"nodes"`
+	Nodes []ProfileNode
 	// Profiling start timestamp in microseconds.
-	StartTime float64 `json:"startTime"`
+	StartTime float64
 	// Profiling end timestamp in microseconds.
-	EndTime float64 `json:"endTime"`
+	EndTime float64
 	// Ids of samples top nodes.
 	Samples []int64 `json:"samples,omitempty"`
 	// Time intervals between adjacent samples in microseconds. The first delta is relative to the
@@ -45,9 +43,9 @@ type Profile struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-PositionTickInfo
 type PositionTickInfo struct {
 	// Source line number (1-based).
-	Line int64 `json:"line"`
+	Line int64
 	// Number of samples attributed to the source line.
-	Ticks int64 `json:"ticks"`
+	Ticks int64
 }
 
 // Coverage data for a source range.
@@ -55,11 +53,11 @@ type PositionTickInfo struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-CoverageRange
 type CoverageRange struct {
 	// JavaScript script source offset for the range start.
-	StartOffset int64 `json:"startOffset"`
+	StartOffset int64
 	// JavaScript script source offset for the range end.
-	EndOffset int64 `json:"endOffset"`
+	EndOffset int64
 	// Collected execution count of the source range.
-	Count int64 `json:"count"`
+	Count int64
 }
 
 // Coverage data for a JavaScript function.
@@ -67,11 +65,11 @@ type CoverageRange struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-FunctionCoverage
 type FunctionCoverage struct {
 	// JavaScript function name.
-	FunctionName string `json:"functionName"`
+	FunctionName string
 	// Source ranges inside the function with coverage data.
-	Ranges []CoverageRange `json:"ranges"`
+	Ranges []CoverageRange
 	// Whether coverage data for this function has block granularity.
-	IsBlockCoverage bool `json:"isBlockCoverage"`
+	IsBlockCoverage bool
 }
 
 // Coverage data for a JavaScript script.
@@ -79,11 +77,11 @@ type FunctionCoverage struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-ScriptCoverage
 type ScriptCoverage struct {
 	// JavaScript script id.
-	ScriptID string `json:"scriptId"`
+	ScriptID string
 	// JavaScript script name or url.
-	URL string `json:"url"`
+	URL string
 	// Functions contained in the script that has coverage data.
-	Functions []FunctionCoverage `json:"functions"`
+	Functions []FunctionCoverage
 }
 
 // Describes a type collected during runtime.
@@ -93,7 +91,7 @@ type ScriptCoverage struct {
 // This CDP type is experimental.
 type TypeObject struct {
 	// Name of a type collected with type profiling.
-	Name string `json:"name"`
+	Name string
 }
 
 // Source offset and types for a parameter or return value.
@@ -103,9 +101,9 @@ type TypeObject struct {
 // This CDP type is experimental.
 type TypeProfileEntry struct {
 	// Source offset of the parameter or end of function for return values.
-	Offset int64 `json:"offset"`
+	Offset int64
 	// The types for this parameter or return value.
-	Types []TypeObject `json:"types"`
+	Types []TypeObject
 }
 
 // Type profile data collected during runtime for a JavaScript script.
@@ -115,11 +113,11 @@ type TypeProfileEntry struct {
 // This CDP type is experimental.
 type ScriptTypeProfile struct {
 	// JavaScript script id.
-	ScriptID string `json:"scriptId"`
+	ScriptID string
 	// JavaScript script name or url.
-	URL string `json:"url"`
+	URL string
 	// Type profile entries for parameters and return values of the functions in the script.
-	Entries []TypeProfileEntry `json:"entries"`
+	Entries []TypeProfileEntry
 }
 
 // Collected counter information.
@@ -129,9 +127,9 @@ type ScriptTypeProfile struct {
 // This CDP type is experimental.
 type CounterInfo struct {
 	// Counter name.
-	Name string `json:"name"`
+	Name string
 	// Counter value.
-	Value int64 `json:"value"`
+	Value int64
 }
 
 // Runtime call counter information.
@@ -141,9 +139,9 @@ type CounterInfo struct {
 // This CDP type is experimental.
 type RuntimeCallCounterInfo struct {
 	// Counter name.
-	Name string `json:"name"`
+	Name string
 	// Counter value.
-	Value float64 `json:"value"`
+	Value float64
 	// Counter time in seconds.
-	Time float64 `json:"time"`
+	Time float64
 }

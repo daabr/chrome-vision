@@ -9,7 +9,6 @@ import (
 func generateCommands(d Domain) string {
 	b := new(strings.Builder)
 	fmt.Fprintf(b, "package %s\n", strings.ToLower(d.Domain))
-	generateImports(b, []string{"context", "encoding/json", "errors"}, d.Dependencies)
 
 	for _, c := range d.Commands {
 		// Don't ignore commands which are merely marked as deprecated,
@@ -169,14 +168,14 @@ func generateRequiredParameter(b *strings.Builder, p Property) {
 		s := re.ReplaceAllLiteralString(p.Name, "ID")
 		fmt.Fprintf(b, "%s ", s)
 	}
+
 	// Type.
 	if p.Type != nil {
-		fmt.Fprint(b, convertType(*p.Type, p.Items))
+		fmt.Fprint(b, transformType(*p.Type, p.Items))
 	} else {
-		// De-alias built-in types (https://crbug.com/1193242).
 		r := adjust(*p.Ref)
 		if t, ok := aliases[r]; ok {
-			r = t
+			r = t // De-alias built-in data types (https://crbug.com/1193242).
 		}
 		if p.Optional {
 			fmt.Fprintf(b, "*%s", r)
@@ -206,12 +205,11 @@ func generateOptionalParameter(b *strings.Builder, domain, cmd string, p Propert
 	// Method declaration.
 	fmt.Fprintf(b, "func (t *%s) Set%s(v ", cmd, adjust(p.Name))
 	if p.Type != nil {
-		fmt.Fprint(b, convertType(*p.Type, p.Items))
+		fmt.Fprint(b, transformType(*p.Type, p.Items))
 	} else {
 		r := strings.ReplaceAll(adjust(*p.Ref), strings.ToLower(domain)+".", "")
-		// De-alias built-in types (https://crbug.com/1193242).
 		if t, ok := aliases[r]; ok {
-			r = t
+			r = t // De-alias built-in data types (https://crbug.com/1193242).
 		}
 		fmt.Fprintf(b, "%s", r)
 	}
@@ -223,9 +221,8 @@ func generateOptionalParameter(b *strings.Builder, domain, cmd string, p Propert
 		fmt.Fprintln(b, "v") // By value - built-in JSON types.
 	} else {
 		r := strings.ReplaceAll(adjust(*p.Ref), strings.ToLower(domain)+".", "")
-		// De-alias built-in types (https://crbug.com/1193242).
 		if t, ok := aliases[r]; ok {
-			r = t
+			r = t // De-alias built-in data types (https://crbug.com/1193242).
 		}
 		if r == "int64" || r == "float64" || r == "string" {
 			fmt.Fprintln(b, "v") // By value - aliased built-in JSON types.

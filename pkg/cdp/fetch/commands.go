@@ -110,9 +110,9 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-failRequest
 type FailRequest struct {
 	// An id the client received in requestPaused event.
-	RequestID string `json:"requestId"`
+	RequestID string
 	// Causes the request to fail with the given reason.
-	ErrorReason string `json:"errorReason"`
+	ErrorReason string
 }
 
 // NewFailRequest constructs a new FailRequest struct instance, with
@@ -152,9 +152,9 @@ func (t *FailRequest) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-fulfillRequest
 type FulfillRequest struct {
 	// An id the client received in requestPaused event.
-	RequestID string `json:"requestId"`
+	RequestID string
 	// An HTTP response code.
-	ResponseCode int64 `json:"responseCode"`
+	ResponseCode int64
 	// Response headers.
 	ResponseHeaders []HeaderEntry `json:"responseHeaders,omitempty"`
 	// Alternative way of specifying response headers as a \0-separated
@@ -246,7 +246,7 @@ func (t *FulfillRequest) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-continueRequest
 type ContinueRequest struct {
 	// An id the client received in requestPaused event.
-	RequestID string `json:"requestId"`
+	RequestID string
 	// If set, the request url will be modified in a way that's not observable by page.
 	URL string `json:"url,omitempty"`
 	// If set, the request method is overridden.
@@ -329,9 +329,9 @@ func (t *ContinueRequest) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-continueWithAuth
 type ContinueWithAuth struct {
 	// An id the client received in authRequired event.
-	RequestID string `json:"requestId"`
+	RequestID string
 	// Response to  with an authChallenge.
-	AuthChallengeResponse AuthChallengeResponse `json:"authChallengeResponse"`
+	AuthChallengeResponse AuthChallengeResponse
 }
 
 // NewContinueWithAuth constructs a new ContinueWithAuth struct instance, with
@@ -376,7 +376,7 @@ func (t *ContinueWithAuth) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-getResponseBody
 type GetResponseBody struct {
 	// Identifier for the intercepted request to get body for.
-	RequestID string `json:"requestId"`
+	RequestID string
 }
 
 // NewGetResponseBody constructs a new GetResponseBody struct instance, with
@@ -394,9 +394,9 @@ func NewGetResponseBody(requestID string) *GetResponseBody {
 // to calling the GetResponseBody CDP command with Do().
 type GetResponseBodyResponse struct {
 	// Response body.
-	Body string `json:"body"`
+	Body string
 	// True, if content was sent as base64.
-	Base64Encoded bool `json:"base64Encoded"`
+	Base64Encoded bool
 }
 
 // Do sends the GetResponseBody CDP command to a browser,
@@ -436,7 +436,7 @@ func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResponse, err
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-takeResponseBodyAsStream
 type TakeResponseBodyAsStream struct {
-	RequestID string `json:"requestId"`
+	RequestID string
 }
 
 // NewTakeResponseBodyAsStream constructs a new TakeResponseBodyAsStream struct instance, with
@@ -453,7 +453,7 @@ func NewTakeResponseBodyAsStream(requestID string) *TakeResponseBodyAsStream {
 // TakeResponseBodyAsStreamResponse contains the browser's response
 // to calling the TakeResponseBodyAsStream CDP command with Do().
 type TakeResponseBodyAsStreamResponse struct {
-	Stream string `json:"stream"`
+	Stream string
 }
 
 // Do sends the TakeResponseBodyAsStream CDP command to a browser,

@@ -46,7 +46,7 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#method-getApplicationCacheForFrame
 type GetApplicationCacheForFrame struct {
 	// Identifier of the frame containing document whose application cache is retrieved.
-	FrameID string `json:"frameId"`
+	FrameID string
 }
 
 // NewGetApplicationCacheForFrame constructs a new GetApplicationCacheForFrame struct instance, with
@@ -64,7 +64,7 @@ func NewGetApplicationCacheForFrame(frameID string) *GetApplicationCacheForFrame
 // to calling the GetApplicationCacheForFrame CDP command with Do().
 type GetApplicationCacheForFrameResponse struct {
 	// Relevant application cache data for the document in given frame.
-	ApplicationCache ApplicationCache `json:"applicationCache"`
+	ApplicationCache ApplicationCache
 }
 
 // Do sends the GetApplicationCacheForFrame CDP command to a browser,
@@ -111,7 +111,7 @@ func NewGetFramesWithManifests() *GetFramesWithManifests {
 type GetFramesWithManifestsResponse struct {
 	// Array of frame identifiers with manifest urls for each frame containing a document
 	// associated with some application cache.
-	FrameIds []FrameWithManifest `json:"frameIds"`
+	FrameIds []FrameWithManifest
 }
 
 // Do sends the GetFramesWithManifests CDP command to a browser,
@@ -139,7 +139,7 @@ func (t *GetFramesWithManifests) Do(ctx context.Context) (*GetFramesWithManifest
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#method-getManifestForFrame
 type GetManifestForFrame struct {
 	// Identifier of the frame containing document whose manifest is retrieved.
-	FrameID string `json:"frameId"`
+	FrameID string
 }
 
 // NewGetManifestForFrame constructs a new GetManifestForFrame struct instance, with
@@ -157,7 +157,7 @@ func NewGetManifestForFrame(frameID string) *GetManifestForFrame {
 // to calling the GetManifestForFrame CDP command with Do().
 type GetManifestForFrameResponse struct {
 	// Manifest URL for document in the given frame.
-	ManifestURL string `json:"manifestURL"`
+	ManifestURL string
 }
 
 // Do sends the GetManifestForFrame CDP command to a browser,

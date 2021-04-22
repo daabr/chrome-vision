@@ -46,11 +46,11 @@ func (t *ClearDeviceOrientationOverride) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DeviceOrientation/#method-setDeviceOrientationOverride
 type SetDeviceOrientationOverride struct {
 	// Mock alpha
-	Alpha float64 `json:"alpha"`
+	Alpha float64
 	// Mock beta
-	Beta float64 `json:"beta"`
+	Beta float64
 	// Mock gamma
-	Gamma float64 `json:"gamma"`
+	Gamma float64
 }
 
 // NewSetDeviceOrientationOverride constructs a new SetDeviceOrientationOverride struct instance, with

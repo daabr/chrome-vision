@@ -93,7 +93,7 @@ func (t *Disable) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Cast/#method-setSinkToUse
 type SetSinkToUse struct {
-	SinkName string `json:"sinkName"`
+	SinkName string
 }
 
 // NewSetSinkToUse constructs a new SetSinkToUse struct instance, with
@@ -131,7 +131,7 @@ func (t *SetSinkToUse) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Cast/#method-startTabMirroring
 type StartTabMirroring struct {
-	SinkName string `json:"sinkName"`
+	SinkName string
 }
 
 // NewStartTabMirroring constructs a new StartTabMirroring struct instance, with
@@ -169,7 +169,7 @@ func (t *StartTabMirroring) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Cast/#method-stopCasting
 type StopCasting struct {
-	SinkName string `json:"sinkName"`
+	SinkName string
 }
 
 // NewStopCasting constructs a new StopCasting struct instance, with

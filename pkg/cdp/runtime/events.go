@@ -8,10 +8,10 @@ import "encoding/json"
 //
 // This CDP event is experimental.
 type BindingCalled struct {
-	Name    string `json:"name"`
-	Payload string `json:"payload"`
+	Name    string
+	Payload string
 	// Identifier of the context where the call was made.
-	ExecutionContextID int64 `json:"executionContextId"`
+	ExecutionContextID int64
 }
 
 // Issued when console API was called.
@@ -19,13 +19,13 @@ type BindingCalled struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#event-consoleAPICalled
 type ConsoleAPICalled struct {
 	// Type of the call.
-	Type string `json:"type"`
+	Type string
 	// Call arguments.
-	Args []RemoteObject `json:"args"`
+	Args []RemoteObject
 	// Identifier of the context where the call was made.
-	ExecutionContextID int64 `json:"executionContextId"`
+	ExecutionContextID int64
 	// Call timestamp.
-	Timestamp float64 `json:"timestamp"`
+	Timestamp float64
 	// Stack trace captured when the call was made. The async stack chain is automatically reported for
 	// the following call types: `assert`, `error`, `trace`, `warning`. For other types the async call
 	// chain can be retrieved using `Debugger.getStackTrace` and `stackTrace.parentId` field.
@@ -43,9 +43,9 @@ type ConsoleAPICalled struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#event-exceptionRevoked
 type ExceptionRevoked struct {
 	// Reason describing why exception was revoked.
-	Reason string `json:"reason"`
+	Reason string
 	// The id of revoked exception, as reported in `exceptionThrown`.
-	ExceptionID int64 `json:"exceptionId"`
+	ExceptionID int64
 }
 
 // Issued when exception was thrown and unhandled.
@@ -53,8 +53,8 @@ type ExceptionRevoked struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#event-exceptionThrown
 type ExceptionThrown struct {
 	// Timestamp of the exception.
-	Timestamp        float64          `json:"timestamp"`
-	ExceptionDetails ExceptionDetails `json:"exceptionDetails"`
+	Timestamp        float64
+	ExceptionDetails ExceptionDetails
 }
 
 // Issued when new execution context is created.
@@ -62,7 +62,7 @@ type ExceptionThrown struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#event-executionContextCreated
 type ExecutionContextCreated struct {
 	// A newly created execution context.
-	Context ExecutionContextDescription `json:"context"`
+	Context ExecutionContextDescription
 }
 
 // Issued when execution context is destroyed.
@@ -70,7 +70,7 @@ type ExecutionContextCreated struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#event-executionContextDestroyed
 type ExecutionContextDestroyed struct {
 	// Id of the destroyed context
-	ExecutionContextID int64 `json:"executionContextId"`
+	ExecutionContextID int64
 }
 
 // Issued when all executionContexts were cleared in browser
@@ -83,6 +83,6 @@ type ExecutionContextsCleared struct{}
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#event-inspectRequested
 type InspectRequested struct {
-	Object RemoteObject    `json:"object"`
-	Hints  json.RawMessage `json:"hints"`
+	Object RemoteObject
+	Hints  json.RawMessage
 }

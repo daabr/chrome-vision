@@ -9,5 +9,5 @@ package headlessexperimental
 // This CDP event is deprecated.
 type NeedsBeginFramesChanged struct {
 	// True if BeginFrames are needed, false otherwise.
-	NeedsBeginFrames bool `json:"needsBeginFrames"`
+	NeedsBeginFrames bool
 }
