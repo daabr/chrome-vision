@@ -218,10 +218,10 @@ func mkdirOutput() (string, error) {
 	return path, nil
 }
 
-// Attaches to the given target, and returns the resulting session ID. Uses
-// https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-attachToTarget
-// (we don't use the target sub-package to avoid circular dependencies).
+// Attach to the given target, and return the resulting session ID. Based on
+// https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-attachToTarget.
 func attachToTarget(ctx context.Context, targetID string) string {
+	// We don't use the target sub-package to avoid circular dependencies.
 	params := fmt.Sprintf(`{"targetId":%q,"flatten":true}`, targetID)
 	response, err := Send(ctx, "Target.attachToTarget", []byte(params))
 	if err != nil {

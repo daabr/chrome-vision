@@ -1,6 +1,6 @@
 package cdp
 
-const executables = [...]string{
+var executables = [...]string{
 	"google-chrome",
 	"google-chrome-stable",
 	"google-chrome-beta",
