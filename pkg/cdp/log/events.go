@@ -5,5 +5,5 @@ package log
 // https://chromedevtools.github.io/devtools-protocol/tot/Log/#event-entryAdded
 type EntryAdded struct {
 	// The entry.
-	Entry LogEntry
+	Entry LogEntry `json:"entry"`
 }

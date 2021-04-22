@@ -5,7 +5,7 @@ package animation
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#event-animationCanceled
 type AnimationCanceled struct {
 	// Id of the animation that was cancelled.
-	ID string
+	ID string `json:"id"`
 }
 
 // Event for each animation that has been created.
@@ -13,7 +13,7 @@ type AnimationCanceled struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#event-animationCreated
 type AnimationCreated struct {
 	// Id of the animation that was created.
-	ID string
+	ID string `json:"id"`
 }
 
 // Event for animation that has been started.
@@ -21,5 +21,5 @@ type AnimationCreated struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#event-animationStarted
 type AnimationStarted struct {
 	// Animation that was started.
-	Animation Animation
+	Animation Animation `json:"animation"`
 }

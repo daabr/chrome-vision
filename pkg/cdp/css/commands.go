@@ -17,11 +17,11 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-addRule
 type AddRule struct {
 	// The css style sheet identifier where a new rule should be inserted.
-	StyleSheetID string
+	StyleSheetID string `json:"styleSheetId"`
 	// The text of a new rule.
-	RuleText string
+	RuleText string `json:"ruleText"`
 	// Text position of a new rule in the target style sheet.
-	Location SourceRange
+	Location SourceRange `json:"location"`
 }
 
 // NewAddRule constructs a new AddRule struct instance, with
@@ -41,7 +41,7 @@ func NewAddRule(styleSheetID string, ruleText string, location SourceRange) *Add
 // to calling the AddRule CDP command with Do().
 type AddRuleResponse struct {
 	// The newly created rule.
-	Rule CSSRule
+	Rule CSSRule `json:"rule"`
 }
 
 // Do sends the AddRule CDP command to a browser,
@@ -72,7 +72,7 @@ func (t *AddRule) Do(ctx context.Context) (*AddRuleResponse, error) {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-collectClassNames
 type CollectClassNames struct {
-	StyleSheetID string
+	StyleSheetID string `json:"styleSheetId"`
 }
 
 // NewCollectClassNames constructs a new CollectClassNames struct instance, with
@@ -90,7 +90,7 @@ func NewCollectClassNames(styleSheetID string) *CollectClassNames {
 // to calling the CollectClassNames CDP command with Do().
 type CollectClassNamesResponse struct {
 	// Class name list.
-	ClassNames []string
+	ClassNames []string `json:"classNames"`
 }
 
 // Do sends the CollectClassNames CDP command to a browser,
@@ -122,7 +122,7 @@ func (t *CollectClassNames) Do(ctx context.Context) (*CollectClassNamesResponse,
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-createStyleSheet
 type CreateStyleSheet struct {
 	// Identifier of the frame where "via-inspector" stylesheet should be created.
-	FrameID string
+	FrameID string `json:"frameId"`
 }
 
 // NewCreateStyleSheet constructs a new CreateStyleSheet struct instance, with
@@ -140,7 +140,7 @@ func NewCreateStyleSheet(frameID string) *CreateStyleSheet {
 // to calling the CreateStyleSheet CDP command with Do().
 type CreateStyleSheetResponse struct {
 	// Identifier of the created "via-inspector" stylesheet.
-	StyleSheetID string
+	StyleSheetID string `json:"styleSheetId"`
 }
 
 // Do sends the CreateStyleSheet CDP command to a browser,
@@ -234,9 +234,9 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-forcePseudoState
 type ForcePseudoState struct {
 	// The element id for which to force the pseudo state.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// Element pseudo classes to force when computing the element's style.
-	ForcedPseudoClasses []string
+	ForcedPseudoClasses []string `json:"forcedPseudoClasses"`
 }
 
 // NewForcePseudoState constructs a new ForcePseudoState struct instance, with
@@ -274,7 +274,7 @@ func (t *ForcePseudoState) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getBackgroundColors
 type GetBackgroundColors struct {
 	// Id of the node to get background colors for.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetBackgroundColors constructs a new GetBackgroundColors struct instance, with
@@ -332,7 +332,7 @@ func (t *GetBackgroundColors) Do(ctx context.Context) (*GetBackgroundColorsRespo
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getComputedStyleForNode
 type GetComputedStyleForNode struct {
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetComputedStyleForNode constructs a new GetComputedStyleForNode struct instance, with
@@ -350,7 +350,7 @@ func NewGetComputedStyleForNode(nodeID int64) *GetComputedStyleForNode {
 // to calling the GetComputedStyleForNode CDP command with Do().
 type GetComputedStyleForNodeResponse struct {
 	// Computed style for the specified DOM node.
-	ComputedStyle []CSSComputedStyleProperty
+	ComputedStyle []CSSComputedStyleProperty `json:"computedStyle"`
 }
 
 // Do sends the GetComputedStyleForNode CDP command to a browser,
@@ -382,7 +382,7 @@ func (t *GetComputedStyleForNode) Do(ctx context.Context) (*GetComputedStyleForN
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getInlineStylesForNode
 type GetInlineStylesForNode struct {
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetInlineStylesForNode constructs a new GetInlineStylesForNode struct instance, with
@@ -433,7 +433,7 @@ func (t *GetInlineStylesForNode) Do(ctx context.Context) (*GetInlineStylesForNod
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getMatchedStylesForNode
 type GetMatchedStylesForNode struct {
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetMatchedStylesForNode constructs a new GetMatchedStylesForNode struct instance, with
@@ -505,7 +505,7 @@ func NewGetMediaQueries() *GetMediaQueries {
 // GetMediaQueriesResponse contains the browser's response
 // to calling the GetMediaQueries CDP command with Do().
 type GetMediaQueriesResponse struct {
-	Medias []CSSMedia
+	Medias []CSSMedia `json:"medias"`
 }
 
 // Do sends the GetMediaQueries CDP command to a browser,
@@ -533,7 +533,7 @@ func (t *GetMediaQueries) Do(ctx context.Context) (*GetMediaQueriesResponse, err
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getPlatformFontsForNode
 type GetPlatformFontsForNode struct {
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetPlatformFontsForNode constructs a new GetPlatformFontsForNode struct instance, with
@@ -551,7 +551,7 @@ func NewGetPlatformFontsForNode(nodeID int64) *GetPlatformFontsForNode {
 // to calling the GetPlatformFontsForNode CDP command with Do().
 type GetPlatformFontsForNodeResponse struct {
 	// Usage statistics for every employed platform font.
-	Fonts []PlatformFontUsage
+	Fonts []PlatformFontUsage `json:"fonts"`
 }
 
 // Do sends the GetPlatformFontsForNode CDP command to a browser,
@@ -582,7 +582,7 @@ func (t *GetPlatformFontsForNode) Do(ctx context.Context) (*GetPlatformFontsForN
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getStyleSheetText
 type GetStyleSheetText struct {
-	StyleSheetID string
+	StyleSheetID string `json:"styleSheetId"`
 }
 
 // NewGetStyleSheetText constructs a new GetStyleSheetText struct instance, with
@@ -600,7 +600,7 @@ func NewGetStyleSheetText(styleSheetID string) *GetStyleSheetText {
 // to calling the GetStyleSheetText CDP command with Do().
 type GetStyleSheetTextResponse struct {
 	// The stylesheet text.
-	Text string
+	Text string `json:"text"`
 }
 
 // Do sends the GetStyleSheetText CDP command to a browser,
@@ -638,7 +638,7 @@ func (t *GetStyleSheetText) Do(ctx context.Context) (*GetStyleSheetTextResponse,
 //
 // This CDP method is experimental.
 type TrackComputedStyleUpdates struct {
-	PropertiesToTrack []CSSComputedStyleProperty
+	PropertiesToTrack []CSSComputedStyleProperty `json:"propertiesToTrack"`
 }
 
 // NewTrackComputedStyleUpdates constructs a new TrackComputedStyleUpdates struct instance, with
@@ -696,7 +696,7 @@ func NewTakeComputedStyleUpdates() *TakeComputedStyleUpdates {
 // to calling the TakeComputedStyleUpdates CDP command with Do().
 type TakeComputedStyleUpdatesResponse struct {
 	// The list of node Ids that have their tracked computed styles updated
-	NodeIds []int64
+	NodeIds []int64 `json:"nodeIds"`
 }
 
 // Do sends the TakeComputedStyleUpdates CDP command to a browser,
@@ -725,9 +725,9 @@ func (t *TakeComputedStyleUpdates) Do(ctx context.Context) (*TakeComputedStyleUp
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setEffectivePropertyValueForNode
 type SetEffectivePropertyValueForNode struct {
 	// The element id for which to set property.
-	NodeID       int64
-	PropertyName string
-	Value        string
+	NodeID       int64  `json:"nodeId"`
+	PropertyName string `json:"propertyName"`
+	Value        string `json:"value"`
 }
 
 // NewSetEffectivePropertyValueForNode constructs a new SetEffectivePropertyValueForNode struct instance, with
@@ -767,9 +767,9 @@ func (t *SetEffectivePropertyValueForNode) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setKeyframeKey
 type SetKeyframeKey struct {
-	StyleSheetID string
-	Range        SourceRange
-	KeyText      string
+	StyleSheetID string      `json:"styleSheetId"`
+	Range        SourceRange `json:"range"`
+	KeyText      string      `json:"keyText"`
 }
 
 // NewSetKeyframeKey constructs a new SetKeyframeKey struct instance, with
@@ -789,7 +789,7 @@ func NewSetKeyframeKey(styleSheetID string, r SourceRange, keyText string) *SetK
 // to calling the SetKeyframeKey CDP command with Do().
 type SetKeyframeKeyResponse struct {
 	// The resulting key text after modification.
-	KeyText Value
+	KeyText Value `json:"keyText"`
 }
 
 // Do sends the SetKeyframeKey CDP command to a browser,
@@ -820,9 +820,9 @@ func (t *SetKeyframeKey) Do(ctx context.Context) (*SetKeyframeKeyResponse, error
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setMediaText
 type SetMediaText struct {
-	StyleSheetID string
-	Range        SourceRange
-	Text         string
+	StyleSheetID string      `json:"styleSheetId"`
+	Range        SourceRange `json:"range"`
+	Text         string      `json:"text"`
 }
 
 // NewSetMediaText constructs a new SetMediaText struct instance, with
@@ -842,7 +842,7 @@ func NewSetMediaText(styleSheetID string, r SourceRange, text string) *SetMediaT
 // to calling the SetMediaText CDP command with Do().
 type SetMediaTextResponse struct {
 	// The resulting CSS media rule after modification.
-	Media CSSMedia
+	Media CSSMedia `json:"media"`
 }
 
 // Do sends the SetMediaText CDP command to a browser,
@@ -873,9 +873,9 @@ func (t *SetMediaText) Do(ctx context.Context) (*SetMediaTextResponse, error) {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setRuleSelector
 type SetRuleSelector struct {
-	StyleSheetID string
-	Range        SourceRange
-	Selector     string
+	StyleSheetID string      `json:"styleSheetId"`
+	Range        SourceRange `json:"range"`
+	Selector     string      `json:"selector"`
 }
 
 // NewSetRuleSelector constructs a new SetRuleSelector struct instance, with
@@ -895,7 +895,7 @@ func NewSetRuleSelector(styleSheetID string, r SourceRange, selector string) *Se
 // to calling the SetRuleSelector CDP command with Do().
 type SetRuleSelectorResponse struct {
 	// The resulting selector list after modification.
-	SelectorList SelectorList
+	SelectorList SelectorList `json:"selectorList"`
 }
 
 // Do sends the SetRuleSelector CDP command to a browser,
@@ -926,8 +926,8 @@ func (t *SetRuleSelector) Do(ctx context.Context) (*SetRuleSelectorResponse, err
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setStyleSheetText
 type SetStyleSheetText struct {
-	StyleSheetID string
-	Text         string
+	StyleSheetID string `json:"styleSheetId"`
+	Text         string `json:"text"`
 }
 
 // NewSetStyleSheetText constructs a new SetStyleSheetText struct instance, with
@@ -977,7 +977,7 @@ func (t *SetStyleSheetText) Do(ctx context.Context) (*SetStyleSheetTextResponse,
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setStyleTexts
 type SetStyleTexts struct {
-	Edits []StyleDeclarationEdit
+	Edits []StyleDeclarationEdit `json:"edits"`
 }
 
 // NewSetStyleTexts constructs a new SetStyleTexts struct instance, with
@@ -995,7 +995,7 @@ func NewSetStyleTexts(edits []StyleDeclarationEdit) *SetStyleTexts {
 // to calling the SetStyleTexts CDP command with Do().
 type SetStyleTextsResponse struct {
 	// The resulting styles after modification.
-	Styles []CSSStyle
+	Styles []CSSStyle `json:"styles"`
 }
 
 // Do sends the SetStyleTexts CDP command to a browser,
@@ -1070,7 +1070,7 @@ func NewStopRuleUsageTracking() *StopRuleUsageTracking {
 // StopRuleUsageTrackingResponse contains the browser's response
 // to calling the StopRuleUsageTracking CDP command with Do().
 type StopRuleUsageTrackingResponse struct {
-	RuleUsage []RuleUsage
+	RuleUsage []RuleUsage `json:"ruleUsage"`
 }
 
 // Do sends the StopRuleUsageTracking CDP command to a browser,
@@ -1111,9 +1111,9 @@ func NewTakeCoverageDelta() *TakeCoverageDelta {
 // TakeCoverageDeltaResponse contains the browser's response
 // to calling the TakeCoverageDelta CDP command with Do().
 type TakeCoverageDeltaResponse struct {
-	Coverage []RuleUsage
+	Coverage []RuleUsage `json:"coverage"`
 	// Monotonically increasing time, in seconds.
-	Timestamp float64
+	Timestamp float64 `json:"timestamp"`
 }
 
 // Do sends the TakeCoverageDelta CDP command to a browser,
@@ -1143,7 +1143,7 @@ func (t *TakeCoverageDelta) Do(ctx context.Context) (*TakeCoverageDeltaResponse,
 // This CDP method is experimental.
 type SetLocalFontsEnabled struct {
 	// Whether rendering of local fonts is enabled.
-	Enabled bool
+	Enabled bool `json:"enabled"`
 }
 
 // NewSetLocalFontsEnabled constructs a new SetLocalFontsEnabled struct instance, with

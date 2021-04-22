@@ -18,9 +18,9 @@ import (
 // This CDP method is experimental.
 type SetPermission struct {
 	// Descriptor of permission to override.
-	Permission PermissionDescriptor
+	Permission PermissionDescriptor `json:"permission"`
 	// Setting of the permission.
-	Setting string
+	Setting string `json:"setting"`
 	// Origin the permission applies to, all origins if not specified.
 	Origin string `json:"origin,omitempty"`
 	// Context to override. When omitted, default browser context is used.
@@ -85,7 +85,7 @@ func (t *SetPermission) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type GrantPermissions struct {
-	Permissions []PermissionType
+	Permissions []PermissionType `json:"permissions"`
 	// Origin the permission applies to, all origins if not specified.
 	Origin string `json:"origin,omitempty"`
 	// BrowserContext to override permissions. When omitted, default browser context is used.
@@ -202,7 +202,7 @@ type SetDownloadBehavior struct {
 	// Whether to allow all or deny all download requests, or use default Chrome behavior if
 	// available (otherwise deny). |allowAndName| allows download and names files according to
 	// their dowmload guids.
-	Behavior string
+	Behavior string `json:"behavior"`
 	// BrowserContext to set download behavior. When omitted, default browser context is used.
 	BrowserContextID string `json:"browserContextId,omitempty"`
 	// The default path to save downloaded files to. This is requred if behavior is set to 'allow'
@@ -280,7 +280,7 @@ func (t *SetDownloadBehavior) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type CancelDownload struct {
 	// Global unique identifier of the download.
-	Guid string
+	Guid string `json:"guid"`
 	// BrowserContext to perform the action in. When omitted, default browser context is used.
 	BrowserContextID string `json:"browserContextId,omitempty"`
 }
@@ -443,15 +443,15 @@ func NewGetVersion() *GetVersion {
 // to calling the GetVersion CDP command with Do().
 type GetVersionResponse struct {
 	// Protocol version.
-	ProtocolVersion string
+	ProtocolVersion string `json:"protocolVersion"`
 	// Product name.
-	Product string
+	Product string `json:"product"`
 	// Product revision.
-	Revision string
+	Revision string `json:"revision"`
 	// User-Agent.
-	UserAgent string
+	UserAgent string `json:"userAgent"`
 	// V8 version.
-	JsVersion string
+	JsVersion string `json:"jsVersion"`
 }
 
 // Do sends the GetVersion CDP command to a browser,
@@ -497,7 +497,7 @@ func NewGetBrowserCommandLine() *GetBrowserCommandLine {
 // to calling the GetBrowserCommandLine CDP command with Do().
 type GetBrowserCommandLineResponse struct {
 	// Commandline parameters
-	Arguments []string
+	Arguments []string `json:"arguments"`
 }
 
 // Do sends the GetBrowserCommandLine CDP command to a browser,
@@ -569,7 +569,7 @@ func (t *GetHistograms) SetDelta(v bool) *GetHistograms {
 // to calling the GetHistograms CDP command with Do().
 type GetHistogramsResponse struct {
 	// Histograms.
-	Histograms []Histogram
+	Histograms []Histogram `json:"histograms"`
 }
 
 // Do sends the GetHistograms CDP command to a browser,
@@ -603,7 +603,7 @@ func (t *GetHistograms) Do(ctx context.Context) (*GetHistogramsResponse, error) 
 // This CDP method is experimental.
 type GetHistogram struct {
 	// Requested histogram name.
-	Name string
+	Name string `json:"name"`
 	// If true, retrieve delta since last call.
 	Delta bool `json:"delta,omitempty"`
 }
@@ -634,7 +634,7 @@ func (t *GetHistogram) SetDelta(v bool) *GetHistogram {
 // to calling the GetHistogram CDP command with Do().
 type GetHistogramResponse struct {
 	// Histogram.
-	Histogram Histogram
+	Histogram Histogram `json:"histogram"`
 }
 
 // Do sends the GetHistogram CDP command to a browser,
@@ -668,7 +668,7 @@ func (t *GetHistogram) Do(ctx context.Context) (*GetHistogramResponse, error) {
 // This CDP method is experimental.
 type GetWindowBounds struct {
 	// Browser window id.
-	WindowID int64
+	WindowID int64 `json:"windowId"`
 }
 
 // NewGetWindowBounds constructs a new GetWindowBounds struct instance, with
@@ -689,7 +689,7 @@ func NewGetWindowBounds(windowID int64) *GetWindowBounds {
 type GetWindowBoundsResponse struct {
 	// Bounds information of the window. When window state is 'minimized', the restored window
 	// position and size are returned.
-	Bounds Bounds
+	Bounds Bounds `json:"bounds"`
 }
 
 // Do sends the GetWindowBounds CDP command to a browser,
@@ -750,10 +750,10 @@ func (t *GetWindowForTarget) SetTargetID(v string) *GetWindowForTarget {
 // to calling the GetWindowForTarget CDP command with Do().
 type GetWindowForTargetResponse struct {
 	// Browser window id.
-	WindowID int64
+	WindowID int64 `json:"windowId"`
 	// Bounds information of the window. When window state is 'minimized', the restored window
 	// position and size are returned.
-	Bounds Bounds
+	Bounds Bounds `json:"bounds"`
 }
 
 // Do sends the GetWindowForTarget CDP command to a browser,
@@ -787,10 +787,10 @@ func (t *GetWindowForTarget) Do(ctx context.Context) (*GetWindowForTargetRespons
 // This CDP method is experimental.
 type SetWindowBounds struct {
 	// Browser window id.
-	WindowID int64
+	WindowID int64 `json:"windowId"`
 	// New window bounds. The 'minimized', 'maximized' and 'fullscreen' states cannot be combined
 	// with 'left', 'top', 'width' or 'height'. Leaves unspecified fields unchanged.
-	Bounds Bounds
+	Bounds Bounds `json:"bounds"`
 }
 
 // NewSetWindowBounds constructs a new SetWindowBounds struct instance, with
@@ -891,7 +891,7 @@ func (t *SetDockTile) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type ExecuteBrowserCommand struct {
-	CommandID string
+	CommandID string `json:"commandId"`
 }
 
 // NewExecuteBrowserCommand constructs a new ExecuteBrowserCommand struct instance, with

@@ -5,9 +5,9 @@ import "github.com/daabr/chrome-vision/pkg/cdp/dom"
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#event-layerPainted
 type LayerPainted struct {
 	// The id of the painted layer.
-	LayerID string
+	LayerID string `json:"layerId"`
 	// Clip rectangle.
-	Clip dom.Rect
+	Clip dom.Rect `json:"clip"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#event-layerTreeDidChange

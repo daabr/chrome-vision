@@ -32,19 +32,19 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#type-EventListener
 type EventListener struct {
 	// `EventListener`'s type.
-	Type string
+	Type string `json:"type"`
 	// `EventListener`'s useCapture.
-	UseCapture bool
+	UseCapture bool `json:"useCapture"`
 	// `EventListener`'s passive flag.
-	Passive bool
+	Passive bool `json:"passive"`
 	// `EventListener`'s once flag.
-	Once bool
+	Once bool `json:"once"`
 	// Script id of the handler code.
-	ScriptID runtime.ScriptID
+	ScriptID runtime.ScriptID `json:"scriptId"`
 	// Line number in the script (0-based).
-	LineNumber int64
+	LineNumber int64 `json:"lineNumber"`
 	// Column number in the script (0-based).
-	ColumnNumber int64
+	ColumnNumber int64 `json:"columnNumber"`
 	// Event handler function value.
 	Handler *runtime.RemoteObject `json:"handler,omitempty"`
 	// Event original handler function value.

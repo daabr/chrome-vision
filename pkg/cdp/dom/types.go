@@ -18,10 +18,10 @@ type BackendNodeID int64
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-BackendNode
 type BackendNode struct {
 	// `Node`'s nodeType.
-	NodeType int64
+	NodeType int64 `json:"nodeType"`
 	// `Node`'s nodeName.
-	NodeName      string
-	BackendNodeID int64
+	NodeName      string `json:"nodeName"`
+	BackendNodeID int64  `json:"backendNodeId"`
 }
 
 // Pseudo element type.
@@ -72,19 +72,19 @@ type Node struct {
 	// Node identifier that is passed into the rest of the DOM messages as the `nodeId`. Backend
 	// will only push node with given `id` once. It is aware of all requested nodes and will only
 	// fire DOM events for nodes known to the client.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// The id of the parent node if any.
 	ParentID int64 `json:"parentId,omitempty"`
 	// The BackendNodeId for this node.
-	BackendNodeID int64
+	BackendNodeID int64 `json:"backendNodeId"`
 	// `Node`'s nodeType.
-	NodeType int64
+	NodeType int64 `json:"nodeType"`
 	// `Node`'s nodeName.
-	NodeName string
+	NodeName string `json:"nodeName"`
 	// `Node`'s localName.
-	LocalName string
+	LocalName string `json:"localName"`
 	// `Node`'s nodeValue.
-	NodeValue string
+	NodeValue string `json:"nodeValue"`
 	// Child count for `Container` nodes.
 	ChildNodeCount int64 `json:"childNodeCount,omitempty"`
 	// Child nodes of this node when requested with children.
@@ -138,11 +138,11 @@ type Node struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-RGBA
 type RGBA struct {
 	// The red component, in the [0-255] range.
-	R int64
+	R int64 `json:"r"`
 	// The green component, in the [0-255] range.
-	G int64
+	G int64 `json:"g"`
 	// The blue component, in the [0-255] range.
-	B int64
+	B int64 `json:"b"`
 	// The alpha component, in the [0-1] range (default: 1).
 	A float64 `json:"a,omitempty"`
 }
@@ -157,17 +157,17 @@ type Quad []float64
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-BoxModel
 type BoxModel struct {
 	// Content box
-	Content Quad
+	Content Quad `json:"content"`
 	// Padding box
-	Padding Quad
+	Padding Quad `json:"padding"`
 	// Border box
-	Border Quad
+	Border Quad `json:"border"`
 	// Margin box
-	Margin Quad
+	Margin Quad `json:"margin"`
 	// Node width
-	Width int64
+	Width int64 `json:"width"`
 	// Node height
-	Height int64
+	Height int64 `json:"height"`
 	// Shape outside coordinates
 	ShapeOutside *ShapeOutsideInfo `json:"shapeOutside,omitempty"`
 }
@@ -177,11 +177,11 @@ type BoxModel struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-ShapeOutsideInfo
 type ShapeOutsideInfo struct {
 	// Shape bounds
-	Bounds Quad
+	Bounds Quad `json:"bounds"`
 	// Shape coordinate details
-	Shape []json.RawMessage
+	Shape []json.RawMessage `json:"shape"`
 	// Margin shape bounds
-	MarginShape []json.RawMessage
+	MarginShape []json.RawMessage `json:"marginShape"`
 }
 
 // Rectangle.
@@ -189,19 +189,19 @@ type ShapeOutsideInfo struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-Rect
 type Rect struct {
 	// X coordinate
-	X float64
+	X float64 `json:"x"`
 	// Y coordinate
-	Y float64
+	Y float64 `json:"y"`
 	// Rectangle width
-	Width float64
+	Width float64 `json:"width"`
 	// Rectangle height
-	Height float64
+	Height float64 `json:"height"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-CSSComputedStyleProperty
 type CSSComputedStyleProperty struct {
 	// Computed style property name.
-	Name string
+	Name string `json:"name"`
 	// Computed style property value.
-	Value string
+	Value string `json:"value"`
 }

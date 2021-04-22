@@ -4,10 +4,10 @@ import "github.com/daabr/chrome-vision/pkg/cdp/debugger"
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#event-consoleProfileFinished
 type ConsoleProfileFinished struct {
-	ID string
+	ID string `json:"id"`
 	// Location of console.profileEnd().
-	Location debugger.Location
-	Profile  Profile
+	Location debugger.Location `json:"location"`
+	Profile  Profile           `json:"profile"`
 	// Profile title passed as an argument to console.profile().
 	Title string `json:"title,omitempty"`
 }
@@ -16,9 +16,9 @@ type ConsoleProfileFinished struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#event-consoleProfileStarted
 type ConsoleProfileStarted struct {
-	ID string
+	ID string `json:"id"`
 	// Location of console.profile().
-	Location debugger.Location
+	Location debugger.Location `json:"location"`
 	// Profile title passed as an argument to console.profile().
 	Title string `json:"title,omitempty"`
 }
@@ -33,9 +33,9 @@ type ConsoleProfileStarted struct {
 // This CDP event is experimental.
 type PreciseCoverageDeltaUpdate struct {
 	// Monotonically increasing time (in seconds) when the coverage update was taken in the backend.
-	Timestamp float64
+	Timestamp float64 `json:"timestamp"`
 	// Identifier for distinguishing coverage events.
-	Occassion string
+	Occassion string `json:"occassion"`
 	// Coverage data for the current isolate.
-	Result []ScriptCoverage
+	Result []ScriptCoverage `json:"result"`
 }

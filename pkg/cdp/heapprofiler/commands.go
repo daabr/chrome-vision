@@ -18,7 +18,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-addInspectedHeapObject
 type AddInspectedHeapObject struct {
 	// Heap snapshot object id to be accessible by means of $x command line API.
-	HeapObjectID string
+	HeapObjectID string `json:"heapObjectId"`
 }
 
 // NewAddInspectedHeapObject constructs a new AddInspectedHeapObject struct instance, with
@@ -139,7 +139,7 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-getHeapObjectId
 type GetHeapObjectID struct {
 	// Identifier of the object to get heap object id for.
-	ObjectID string
+	ObjectID string `json:"objectId"`
 }
 
 // NewGetHeapObjectID constructs a new GetHeapObjectID struct instance, with
@@ -157,7 +157,7 @@ func NewGetHeapObjectID(objectID string) *GetHeapObjectID {
 // to calling the GetHeapObjectID CDP command with Do().
 type GetHeapObjectIDResponse struct {
 	// Id of the heap snapshot object corresponding to the passed remote object id.
-	HeapSnapshotObjectID string
+	HeapSnapshotObjectID string `json:"heapSnapshotObjectId"`
 }
 
 // Do sends the GetHeapObjectID CDP command to a browser,
@@ -186,7 +186,7 @@ func (t *GetHeapObjectID) Do(ctx context.Context) (*GetHeapObjectIDResponse, err
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#method-getObjectByHeapObjectId
 type GetObjectByHeapObjectID struct {
-	ObjectID string
+	ObjectID string `json:"objectId"`
 	// Symbolic group name that can be used to release multiple objects.
 	ObjectGroup string `json:"objectGroup,omitempty"`
 }
@@ -215,7 +215,7 @@ func (t *GetObjectByHeapObjectID) SetObjectGroup(v string) *GetObjectByHeapObjec
 // to calling the GetObjectByHeapObjectID CDP command with Do().
 type GetObjectByHeapObjectIDResponse struct {
 	// Evaluation result.
-	Result runtime.RemoteObject
+	Result runtime.RemoteObject `json:"result"`
 }
 
 // Do sends the GetObjectByHeapObjectID CDP command to a browser,
@@ -258,7 +258,7 @@ func NewGetSamplingProfile() *GetSamplingProfile {
 // to calling the GetSamplingProfile CDP command with Do().
 type GetSamplingProfileResponse struct {
 	// Return the sampling profile being collected.
-	Profile SamplingHeapProfile
+	Profile SamplingHeapProfile `json:"profile"`
 }
 
 // Do sends the GetSamplingProfile CDP command to a browser,
@@ -384,7 +384,7 @@ func NewStopSampling() *StopSampling {
 // to calling the StopSampling CDP command with Do().
 type StopSamplingResponse struct {
 	// Recorded sampling heap profile.
-	Profile SamplingHeapProfile
+	Profile SamplingHeapProfile `json:"profile"`
 }
 
 // Do sends the StopSampling CDP command to a browser,

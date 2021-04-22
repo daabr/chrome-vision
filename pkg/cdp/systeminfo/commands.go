@@ -29,16 +29,16 @@ func NewGetInfo() *GetInfo {
 // to calling the GetInfo CDP command with Do().
 type GetInfoResponse struct {
 	// Information about the GPUs on the system.
-	Gpu GPUInfo
+	Gpu GPUInfo `json:"gpu"`
 	// A platform-dependent description of the model of the machine. On Mac OS, this is, for
 	// example, 'MacBookPro'. Will be the empty string if not supported.
-	ModelName string
+	ModelName string `json:"modelName"`
 	// A platform-dependent description of the version of the machine. On Mac OS, this is, for
 	// example, '10.1'. Will be the empty string if not supported.
-	ModelVersion string
+	ModelVersion string `json:"modelVersion"`
 	// The command line string used to launch the browser. Will be the empty string if not
 	// supported.
-	CommandLine string
+	CommandLine string `json:"commandLine"`
 }
 
 // Do sends the GetInfo CDP command to a browser,
@@ -79,7 +79,7 @@ func NewGetProcessInfo() *GetProcessInfo {
 // to calling the GetProcessInfo CDP command with Do().
 type GetProcessInfoResponse struct {
 	// An array of process info blocks.
-	ProcessInfo []ProcessInfo
+	ProcessInfo []ProcessInfo `json:"processInfo"`
 }
 
 // Do sends the GetProcessInfo CDP command to a browser,

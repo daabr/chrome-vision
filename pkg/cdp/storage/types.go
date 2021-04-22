@@ -25,9 +25,9 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#type-UsageForType
 type UsageForType struct {
 	// Name of storage type.
-	StorageType string
+	StorageType string `json:"storageType"`
 	// Storage usage (bytes).
-	Usage float64
+	Usage float64 `json:"usage"`
 }
 
 // Pair of issuer origin and number of available (signed, but not used) Trust
@@ -37,6 +37,6 @@ type UsageForType struct {
 //
 // This CDP type is experimental.
 type TrustTokens struct {
-	IssuerOrigin string
-	Count        float64
+	IssuerOrigin string  `json:"issuerOrigin"`
+	Count        float64 `json:"count"`
 }

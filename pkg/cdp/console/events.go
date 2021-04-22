@@ -5,5 +5,5 @@ package console
 // https://chromedevtools.github.io/devtools-protocol/tot/Console/#event-messageAdded
 type MessageAdded struct {
 	// Console message that has been added.
-	Message ConsoleMessage
+	Message ConsoleMessage `json:"message"`
 }

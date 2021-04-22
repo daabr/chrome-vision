@@ -4,5 +4,5 @@ package performancetimeline
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/PerformanceTimeline/#event-timelineEventAdded
 type TimelineEventAdded struct {
-	Event TimelineEvent
+	Event TimelineEvent `json:"event"`
 }

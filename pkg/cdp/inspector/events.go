@@ -5,7 +5,7 @@ package inspector
 // https://chromedevtools.github.io/devtools-protocol/tot/Inspector/#event-detached
 type Detached struct {
 	// The reason why connection has been terminated.
-	Reason string
+	Reason string `json:"reason"`
 }
 
 // Fired when debugging target has crashed

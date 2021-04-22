@@ -16,7 +16,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-awaitPromise
 type AwaitPromise struct {
 	// Identifier of the promise.
-	PromiseObjectID string
+	PromiseObjectID string `json:"promiseObjectId"`
 	// Whether the result is expected to be a JSON object that should be sent by value.
 	ReturnByValue bool `json:"returnByValue,omitempty"`
 	// Whether preview should be generated for the result.
@@ -56,7 +56,7 @@ func (t *AwaitPromise) SetGeneratePreview(v bool) *AwaitPromise {
 // to calling the AwaitPromise CDP command with Do().
 type AwaitPromiseResponse struct {
 	// Promise result. Will contain rejected value if promise was rejected.
-	Result RemoteObject
+	Result RemoteObject `json:"result"`
 	// Exception details if stack strace is available.
 	ExceptionDetails *ExceptionDetails `json:"exceptionDetails,omitempty"`
 }
@@ -91,7 +91,7 @@ func (t *AwaitPromise) Do(ctx context.Context) (*AwaitPromiseResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-callFunctionOn
 type CallFunctionOn struct {
 	// Declaration of the function to call.
-	FunctionDeclaration string
+	FunctionDeclaration string `json:"functionDeclaration"`
 	// Identifier of the object to call function on. Either objectId or executionContextId should
 	// be specified.
 	ObjectID string `json:"objectId,omitempty"`
@@ -224,7 +224,7 @@ func (t *CallFunctionOn) SetObjectGroup(v string) *CallFunctionOn {
 // to calling the CallFunctionOn CDP command with Do().
 type CallFunctionOnResponse struct {
 	// Call result.
-	Result RemoteObject
+	Result RemoteObject `json:"result"`
 	// Exception details.
 	ExceptionDetails *ExceptionDetails `json:"exceptionDetails,omitempty"`
 }
@@ -258,11 +258,11 @@ func (t *CallFunctionOn) Do(ctx context.Context) (*CallFunctionOnResponse, error
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-compileScript
 type CompileScript struct {
 	// Expression to compile.
-	Expression string
+	Expression string `json:"expression"`
 	// Source url to be set for the script.
-	SourceURL string
+	SourceURL string `json:"sourceURL"`
 	// Specifies whether the compiled script should be persisted.
-	PersistScript bool
+	PersistScript bool `json:"persistScript"`
 	// Specifies in which execution context to perform script run. If the parameter is omitted the
 	// evaluation will be performed in the context of the inspected page.
 	ExecutionContextID int64 `json:"executionContextId,omitempty"`
@@ -421,7 +421,7 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-evaluate
 type Evaluate struct {
 	// Expression to evaluate.
-	Expression string
+	Expression string `json:"expression"`
 	// Symbolic group name that can be used to release multiple objects.
 	ObjectGroup string `json:"objectGroup,omitempty"`
 	// Determines whether Command Line API should be available during the evaluation.
@@ -655,7 +655,7 @@ func (t *Evaluate) SetUniqueContextID(v string) *Evaluate {
 // to calling the Evaluate CDP command with Do().
 type EvaluateResponse struct {
 	// Evaluation result.
-	Result RemoteObject
+	Result RemoteObject `json:"result"`
 	// Exception details.
 	ExceptionDetails *ExceptionDetails `json:"exceptionDetails,omitempty"`
 }
@@ -706,7 +706,7 @@ func NewGetIsolateID() *GetIsolateID {
 // to calling the GetIsolateID CDP command with Do().
 type GetIsolateIDResponse struct {
 	// The isolate id.
-	ID string
+	ID string `json:"id"`
 }
 
 // Do sends the GetIsolateID CDP command to a browser,
@@ -752,9 +752,9 @@ func NewGetHeapUsage() *GetHeapUsage {
 // to calling the GetHeapUsage CDP command with Do().
 type GetHeapUsageResponse struct {
 	// Used heap size in bytes.
-	UsedSize float64
+	UsedSize float64 `json:"usedSize"`
 	// Allocated heap size in bytes.
-	TotalSize float64
+	TotalSize float64 `json:"totalSize"`
 }
 
 // Do sends the GetHeapUsage CDP command to a browser,
@@ -783,7 +783,7 @@ func (t *GetHeapUsage) Do(ctx context.Context) (*GetHeapUsageResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-getProperties
 type GetProperties struct {
 	// Identifier of the object to return properties for.
-	ObjectID string
+	ObjectID string `json:"objectId"`
 	// If true, returns properties belonging only to the element itself, not to its prototype
 	// chain.
 	OwnProperties bool `json:"ownProperties,omitempty"`
@@ -846,7 +846,7 @@ func (t *GetProperties) SetGeneratePreview(v bool) *GetProperties {
 // to calling the GetProperties CDP command with Do().
 type GetPropertiesResponse struct {
 	// Object properties.
-	Result []PropertyDescriptor
+	Result []PropertyDescriptor `json:"result"`
 	// Internal object properties (only of the element itself).
 	InternalProperties []InternalPropertyDescriptor `json:"internalProperties,omitempty"`
 	// Object private properties.
@@ -910,7 +910,7 @@ func (t *GlobalLexicalScopeNames) SetExecutionContextID(v int64) *GlobalLexicalS
 // GlobalLexicalScopeNamesResponse contains the browser's response
 // to calling the GlobalLexicalScopeNames CDP command with Do().
 type GlobalLexicalScopeNamesResponse struct {
-	Names []string
+	Names []string `json:"names"`
 }
 
 // Do sends the GlobalLexicalScopeNames CDP command to a browser,
@@ -940,7 +940,7 @@ func (t *GlobalLexicalScopeNames) Do(ctx context.Context) (*GlobalLexicalScopeNa
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-queryObjects
 type QueryObjects struct {
 	// Identifier of the prototype to return objects for.
-	PrototypeObjectID string
+	PrototypeObjectID string `json:"prototypeObjectId"`
 	// Symbolic group name that can be used to release the results.
 	ObjectGroup string `json:"objectGroup,omitempty"`
 }
@@ -969,7 +969,7 @@ func (t *QueryObjects) SetObjectGroup(v string) *QueryObjects {
 // to calling the QueryObjects CDP command with Do().
 type QueryObjectsResponse struct {
 	// Array with objects.
-	Objects RemoteObject
+	Objects RemoteObject `json:"objects"`
 }
 
 // Do sends the QueryObjects CDP command to a browser,
@@ -1001,7 +1001,7 @@ func (t *QueryObjects) Do(ctx context.Context) (*QueryObjectsResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-releaseObject
 type ReleaseObject struct {
 	// Identifier of the object to release.
-	ObjectID string
+	ObjectID string `json:"objectId"`
 }
 
 // NewReleaseObject constructs a new ReleaseObject struct instance, with
@@ -1040,7 +1040,7 @@ func (t *ReleaseObject) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-releaseObjectGroup
 type ReleaseObjectGroup struct {
 	// Symbolic object group name.
-	ObjectGroup string
+	ObjectGroup string `json:"objectGroup"`
 }
 
 // NewReleaseObjectGroup constructs a new ReleaseObjectGroup struct instance, with
@@ -1109,7 +1109,7 @@ func (t *RunIfWaitingForDebugger) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#method-runScript
 type RunScript struct {
 	// Id of the script to run.
-	ScriptID string
+	ScriptID string `json:"scriptId"`
 	// Specifies in which execution context to perform script run. If the parameter is omitted the
 	// evaluation will be performed in the context of the inspected page.
 	ExecutionContextID int64 `json:"executionContextId,omitempty"`
@@ -1210,7 +1210,7 @@ func (t *RunScript) SetAwaitPromise(v bool) *RunScript {
 // to calling the RunScript CDP command with Do().
 type RunScriptResponse struct {
 	// Run result.
-	Result RemoteObject
+	Result RemoteObject `json:"result"`
 	// Exception details.
 	ExceptionDetails *ExceptionDetails `json:"exceptionDetails,omitempty"`
 }
@@ -1243,7 +1243,7 @@ func (t *RunScript) Do(ctx context.Context) (*RunScriptResponse, error) {
 //
 // This CDP method is experimental.
 type SetCustomObjectFormatterEnabled struct {
-	Enabled bool
+	Enabled bool `json:"enabled"`
 }
 
 // NewSetCustomObjectFormatterEnabled constructs a new SetCustomObjectFormatterEnabled struct instance, with
@@ -1283,7 +1283,7 @@ func (t *SetCustomObjectFormatterEnabled) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type SetMaxCallStackSizeToCapture struct {
-	Size int64
+	Size int64 `json:"size"`
 }
 
 // NewSetMaxCallStackSizeToCapture constructs a new SetMaxCallStackSizeToCapture struct instance, with
@@ -1365,7 +1365,7 @@ func (t *TerminateExecution) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type AddBinding struct {
-	Name string
+	Name string `json:"name"`
 	// If specified, the binding would only be exposed to the specified
 	// execution context. If omitted and `executionContextName` is not set,
 	// the binding is exposed to all execution contexts of the target.
@@ -1448,7 +1448,7 @@ func (t *AddBinding) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type RemoveBinding struct {
-	Name string
+	Name string `json:"name"`
 }
 
 // NewRemoveBinding constructs a new RemoveBinding struct instance, with

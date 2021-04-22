@@ -107,7 +107,7 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Log/#method-startViolationsReport
 type StartViolationsReport struct {
 	// Configuration for violations.
-	Config []ViolationSetting
+	Config []ViolationSetting `json:"config"`
 }
 
 // NewStartViolationsReport constructs a new StartViolationsReport struct instance, with

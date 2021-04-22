@@ -71,7 +71,7 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXValueSource
 type AXValueSource struct {
 	// What type of source this is.
-	Type string
+	Type string `json:"type"`
 	// The value of this property source.
 	Value *AXValue `json:"value,omitempty"`
 	// The name of the relevant attribute, if any.
@@ -93,7 +93,7 @@ type AXValueSource struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXRelatedNode
 type AXRelatedNode struct {
 	// The BackendNodeId of the related DOM node.
-	BackendDOMNodeID int64
+	BackendDOMNodeID int64 `json:"backendDOMNodeId"`
 	// The IDRef value provided, if any.
 	Idref string `json:"idref,omitempty"`
 	// The text alternative of this node in the current context.
@@ -103,9 +103,9 @@ type AXRelatedNode struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXProperty
 type AXProperty struct {
 	// The name of this property.
-	Name string
+	Name string `json:"name"`
 	// The value of this property.
-	Value AXValue
+	Value AXValue `json:"value"`
 }
 
 // A single computed AX property.
@@ -113,7 +113,7 @@ type AXProperty struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXValue
 type AXValue struct {
 	// The type of this value.
-	Type string
+	Type string `json:"type"`
 	// The computed value of this property.
 	Value json.RawMessage `json:"value,omitempty"`
 	// One or more related nodes, if applicable.
@@ -180,9 +180,9 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXNode
 type AXNode struct {
 	// Unique identifier for this node.
-	NodeID string
+	NodeID string `json:"nodeId"`
 	// Whether this node is ignored for accessibility
-	Ignored bool
+	Ignored bool `json:"ignored"`
 	// Collection of reasons why this node is hidden.
 	IgnoredReasons []AXProperty `json:"ignoredReasons,omitempty"`
 	// This `Node`'s role, whether explicit or implicit.

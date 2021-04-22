@@ -86,7 +86,7 @@ func NewGetBestEffortCoverage() *GetBestEffortCoverage {
 // to calling the GetBestEffortCoverage CDP command with Do().
 type GetBestEffortCoverageResponse struct {
 	// Coverage data for the current isolate.
-	Result []ScriptCoverage
+	Result []ScriptCoverage `json:"result"`
 }
 
 // Do sends the GetBestEffortCoverage CDP command to a browser,
@@ -114,7 +114,7 @@ func (t *GetBestEffortCoverage) Do(ctx context.Context) (*GetBestEffortCoverageR
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#method-setSamplingInterval
 type SetSamplingInterval struct {
 	// New sampling interval in microseconds.
-	Interval int64
+	Interval int64 `json:"interval"`
 }
 
 // NewSetSamplingInterval constructs a new SetSamplingInterval struct instance, with
@@ -230,7 +230,7 @@ func (t *StartPreciseCoverage) SetAllowTriggeredUpdates(v bool) *StartPreciseCov
 // to calling the StartPreciseCoverage CDP command with Do().
 type StartPreciseCoverageResponse struct {
 	// Monotonically increasing time (in seconds) when the coverage update was taken in the backend.
-	Timestamp float64
+	Timestamp float64 `json:"timestamp"`
 }
 
 // Do sends the StartPreciseCoverage CDP command to a browser,
@@ -307,7 +307,7 @@ func NewStop() *Stop {
 // to calling the Stop CDP command with Do().
 type StopResponse struct {
 	// Recorded profile.
-	Profile Profile
+	Profile Profile `json:"profile"`
 }
 
 // Do sends the Stop CDP command to a browser,
@@ -414,9 +414,9 @@ func NewTakePreciseCoverage() *TakePreciseCoverage {
 // to calling the TakePreciseCoverage CDP command with Do().
 type TakePreciseCoverageResponse struct {
 	// Coverage data for the current isolate.
-	Result []ScriptCoverage
+	Result []ScriptCoverage `json:"result"`
 	// Monotonically increasing time (in seconds) when the coverage update was taken in the backend.
-	Timestamp float64
+	Timestamp float64 `json:"timestamp"`
 }
 
 // Do sends the TakePreciseCoverage CDP command to a browser,
@@ -461,7 +461,7 @@ func NewTakeTypeProfile() *TakeTypeProfile {
 // to calling the TakeTypeProfile CDP command with Do().
 type TakeTypeProfileResponse struct {
 	// Type profile for all scripts since startTypeProfile() was turned on.
-	Result []ScriptTypeProfile
+	Result []ScriptTypeProfile `json:"result"`
 }
 
 // Do sends the TakeTypeProfile CDP command to a browser,
@@ -574,7 +574,7 @@ func NewGetCounters() *GetCounters {
 // to calling the GetCounters CDP command with Do().
 type GetCountersResponse struct {
 	// Collected counters information.
-	Result []CounterInfo
+	Result []CounterInfo `json:"result"`
 }
 
 // Do sends the GetCounters CDP command to a browser,
@@ -687,7 +687,7 @@ func NewGetRuntimeCallStats() *GetRuntimeCallStats {
 // to calling the GetRuntimeCallStats CDP command with Do().
 type GetRuntimeCallStatsResponse struct {
 	// Collected runtime call counter information.
-	Result []RuntimeCallCounterInfo
+	Result []RuntimeCallCounterInfo `json:"result"`
 }
 
 // Do sends the GetRuntimeCallStats CDP command to a browser,

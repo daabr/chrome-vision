@@ -7,12 +7,12 @@ import "github.com/daabr/chrome-vision/pkg/cdp/runtime"
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#type-DatabaseWithObjectStores
 type DatabaseWithObjectStores struct {
 	// Database name.
-	Name string
+	Name string `json:"name"`
 	// Database version (type is not 'integer', as the standard
 	// requires the version number to be 'unsigned long long')
-	Version float64
+	Version float64 `json:"version"`
 	// Object stores in this database.
-	ObjectStores []ObjectStore
+	ObjectStores []ObjectStore `json:"objectStores"`
 }
 
 // Object store.
@@ -20,13 +20,13 @@ type DatabaseWithObjectStores struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#type-ObjectStore
 type ObjectStore struct {
 	// Object store name.
-	Name string
+	Name string `json:"name"`
 	// Object store key path.
-	KeyPath KeyPath
+	KeyPath KeyPath `json:"keyPath"`
 	// If true, object store has auto increment flag set.
-	AutoIncrement bool
+	AutoIncrement bool `json:"autoIncrement"`
 	// Indexes in this object store.
-	Indexes []ObjectStoreIndex
+	Indexes []ObjectStoreIndex `json:"indexes"`
 }
 
 // Object store index.
@@ -34,13 +34,13 @@ type ObjectStore struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#type-ObjectStoreIndex
 type ObjectStoreIndex struct {
 	// Index name.
-	Name string
+	Name string `json:"name"`
 	// Index key path.
-	KeyPath KeyPath
+	KeyPath KeyPath `json:"keyPath"`
 	// If true, index is unique.
-	Unique bool
+	Unique bool `json:"unique"`
 	// If true, index allows multiple entries for a key.
-	MultiEntry bool
+	MultiEntry bool `json:"multiEntry"`
 }
 
 // Key.
@@ -48,7 +48,7 @@ type ObjectStoreIndex struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#type-Key
 type Key struct {
 	// Key type.
-	Type string
+	Type string `json:"type"`
 	// Number value.
 	Number float64 `json:"number,omitempty"`
 	// String value.
@@ -68,9 +68,9 @@ type KeyRange struct {
 	// Upper bound.
 	Upper *Key `json:"upper,omitempty"`
 	// If true lower bound is open.
-	LowerOpen bool
+	LowerOpen bool `json:"lowerOpen"`
 	// If true upper bound is open.
-	UpperOpen bool
+	UpperOpen bool `json:"upperOpen"`
 }
 
 // Data entry.
@@ -78,11 +78,11 @@ type KeyRange struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#type-DataEntry
 type DataEntry struct {
 	// Key object.
-	Key runtime.RemoteObject
+	Key runtime.RemoteObject `json:"key"`
 	// Primary key object.
-	PrimaryKey runtime.RemoteObject
+	PrimaryKey runtime.RemoteObject `json:"primaryKey"`
 	// Value object.
-	Value runtime.RemoteObject
+	Value runtime.RemoteObject `json:"value"`
 }
 
 // Key path.
@@ -90,7 +90,7 @@ type DataEntry struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#type-KeyPath
 type KeyPath struct {
 	// Key path type.
-	Type string
+	Type string `json:"type"`
 	// String value.
 	String string `json:"string,omitempty"`
 	// Array value.

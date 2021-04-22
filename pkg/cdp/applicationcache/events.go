@@ -3,14 +3,14 @@ package applicationcache
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#event-applicationCacheStatusUpdated
 type ApplicationCacheStatusUpdated struct {
 	// Identifier of the frame containing document whose application cache updated status.
-	FrameID string
+	FrameID string `json:"frameId"`
 	// Manifest URL.
-	ManifestURL string
+	ManifestURL string `json:"manifestURL"`
 	// Updated application cache status.
-	Status int64
+	Status int64 `json:"status"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#event-networkStateUpdated
 type NetworkStateUpdated struct {
-	IsNowOnline bool
+	IsNowOnline bool `json:"isNowOnline"`
 }

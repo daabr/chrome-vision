@@ -7,9 +7,9 @@ package target
 // This CDP event is experimental.
 type AttachedToTarget struct {
 	// Identifier assigned to the session used to send/receive messages.
-	SessionID          string
-	TargetInfo         TargetInfo
-	WaitingForDebugger bool
+	SessionID          string     `json:"sessionId"`
+	TargetInfo         TargetInfo `json:"targetInfo"`
+	WaitingForDebugger bool       `json:"waitingForDebugger"`
 }
 
 // Issued when detached from target for any reason (including `detachFromTarget` command). Can be
@@ -20,7 +20,7 @@ type AttachedToTarget struct {
 // This CDP event is experimental.
 type DetachedFromTarget struct {
 	// Detached session identifier.
-	SessionID string
+	SessionID string `json:"sessionId"`
 	// Deprecated.
 	//
 	// This CDP parameter is deprecated.
@@ -33,8 +33,8 @@ type DetachedFromTarget struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#event-receivedMessageFromTarget
 type ReceivedMessageFromTarget struct {
 	// Identifier of a session which sends a message.
-	SessionID string
-	Message   string
+	SessionID string `json:"sessionId"`
+	Message   string `json:"message"`
 	// Deprecated.
 	//
 	// This CDP parameter is deprecated.
@@ -45,25 +45,25 @@ type ReceivedMessageFromTarget struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#event-targetCreated
 type TargetCreated struct {
-	TargetInfo TargetInfo
+	TargetInfo TargetInfo `json:"targetInfo"`
 }
 
 // Issued when a target is destroyed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#event-targetDestroyed
 type TargetDestroyed struct {
-	TargetID string
+	TargetID string `json:"targetId"`
 }
 
 // Issued when a target has crashed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#event-targetCrashed
 type TargetCrashed struct {
-	TargetID string
+	TargetID string `json:"targetId"`
 	// Termination status type.
-	Status string
+	Status string `json:"status"`
 	// Termination error code.
-	ErrorCode int64
+	ErrorCode int64 `json:"errorCode"`
 }
 
 // Issued when some information about a target has changed. This only happens between
@@ -71,5 +71,5 @@ type TargetCrashed struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#event-targetInfoChanged
 type TargetInfoChanged struct {
-	TargetInfo TargetInfo
+	TargetInfo TargetInfo `json:"targetInfo"`
 }

@@ -73,8 +73,8 @@ func (t *Enable) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Database/#method-executeSQL
 type ExecuteSQL struct {
-	DatabaseID string
-	Query      string
+	DatabaseID string `json:"databaseId"`
+	Query      string `json:"query"`
 }
 
 // NewExecuteSQL constructs a new ExecuteSQL struct instance, with
@@ -123,7 +123,7 @@ func (t *ExecuteSQL) Do(ctx context.Context) (*ExecuteSQLResponse, error) {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Database/#method-getDatabaseTableNames
 type GetDatabaseTableNames struct {
-	DatabaseID string
+	DatabaseID string `json:"databaseId"`
 }
 
 // NewGetDatabaseTableNames constructs a new GetDatabaseTableNames struct instance, with
@@ -140,7 +140,7 @@ func NewGetDatabaseTableNames(databaseID string) *GetDatabaseTableNames {
 // GetDatabaseTableNamesResponse contains the browser's response
 // to calling the GetDatabaseTableNames CDP command with Do().
 type GetDatabaseTableNamesResponse struct {
-	TableNames []string
+	TableNames []string `json:"tableNames"`
 }
 
 // Do sends the GetDatabaseTableNames CDP command to a browser,

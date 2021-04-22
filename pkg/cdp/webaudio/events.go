@@ -4,76 +4,76 @@ package webaudio
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-contextCreated
 type ContextCreated struct {
-	Context BaseAudioContext
+	Context BaseAudioContext `json:"context"`
 }
 
 // Notifies that an existing BaseAudioContext will be destroyed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-contextWillBeDestroyed
 type ContextWillBeDestroyed struct {
-	ContextID string
+	ContextID string `json:"contextId"`
 }
 
 // Notifies that existing BaseAudioContext has changed some properties (id stays the same)..
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-contextChanged
 type ContextChanged struct {
-	Context BaseAudioContext
+	Context BaseAudioContext `json:"context"`
 }
 
 // Notifies that the construction of an AudioListener has finished.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-audioListenerCreated
 type AudioListenerCreated struct {
-	Listener AudioListener
+	Listener AudioListener `json:"listener"`
 }
 
 // Notifies that a new AudioListener has been created.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-audioListenerWillBeDestroyed
 type AudioListenerWillBeDestroyed struct {
-	ContextID  string
-	ListenerID string
+	ContextID  string `json:"contextId"`
+	ListenerID string `json:"listenerId"`
 }
 
 // Notifies that a new AudioNode has been created.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-audioNodeCreated
 type AudioNodeCreated struct {
-	Node AudioNode
+	Node AudioNode `json:"node"`
 }
 
 // Notifies that an existing AudioNode has been destroyed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-audioNodeWillBeDestroyed
 type AudioNodeWillBeDestroyed struct {
-	ContextID string
-	NodeID    string
+	ContextID string `json:"contextId"`
+	NodeID    string `json:"nodeId"`
 }
 
 // Notifies that a new AudioParam has been created.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-audioParamCreated
 type AudioParamCreated struct {
-	Param AudioParam
+	Param AudioParam `json:"param"`
 }
 
 // Notifies that an existing AudioParam has been destroyed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-audioParamWillBeDestroyed
 type AudioParamWillBeDestroyed struct {
-	ContextID string
-	NodeID    string
-	ParamID   string
+	ContextID string `json:"contextId"`
+	NodeID    string `json:"nodeId"`
+	ParamID   string `json:"paramId"`
 }
 
 // Notifies that two AudioNodes are connected.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-nodesConnected
 type NodesConnected struct {
-	ContextID             string
-	SourceID              string
-	DestinationID         string
+	ContextID             string  `json:"contextId"`
+	SourceID              string  `json:"sourceId"`
+	DestinationID         string  `json:"destinationId"`
 	SourceOutputIndex     float64 `json:"sourceOutputIndex,omitempty"`
 	DestinationInputIndex float64 `json:"destinationInputIndex,omitempty"`
 }
@@ -82,9 +82,9 @@ type NodesConnected struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-nodesDisconnected
 type NodesDisconnected struct {
-	ContextID             string
-	SourceID              string
-	DestinationID         string
+	ContextID             string  `json:"contextId"`
+	SourceID              string  `json:"sourceId"`
+	DestinationID         string  `json:"destinationId"`
 	SourceOutputIndex     float64 `json:"sourceOutputIndex,omitempty"`
 	DestinationInputIndex float64 `json:"destinationInputIndex,omitempty"`
 }
@@ -93,9 +93,9 @@ type NodesDisconnected struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-nodeParamConnected
 type NodeParamConnected struct {
-	ContextID         string
-	SourceID          string
-	DestinationID     string
+	ContextID         string  `json:"contextId"`
+	SourceID          string  `json:"sourceId"`
+	DestinationID     string  `json:"destinationId"`
 	SourceOutputIndex float64 `json:"sourceOutputIndex,omitempty"`
 }
 
@@ -103,8 +103,8 @@ type NodeParamConnected struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#event-nodeParamDisconnected
 type NodeParamDisconnected struct {
-	ContextID         string
-	SourceID          string
-	DestinationID     string
+	ContextID         string  `json:"contextId"`
+	SourceID          string  `json:"sourceId"`
+	DestinationID     string  `json:"destinationId"`
 	SourceOutputIndex float64 `json:"sourceOutputIndex,omitempty"`
 }

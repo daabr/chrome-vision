@@ -19,7 +19,7 @@ type BufferUsage struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#event-dataCollected
 type DataCollected struct {
-	Value []json.RawMessage
+	Value []json.RawMessage `json:"value"`
 }
 
 // Signals that tracing is stopped and there is no trace buffers pending flush, all data were
@@ -29,7 +29,7 @@ type DataCollected struct {
 type TracingComplete struct {
 	// Indicates whether some trace data is known to have been lost, e.g. because the trace ring
 	// buffer wrapped around.
-	DataLossOccurred bool
+	DataLossOccurred bool `json:"dataLossOccurred"`
 	// A handle of the stream that holds resulting trace data.
 	Stream string `json:"stream,omitempty"`
 	// Trace data format of returned stream.

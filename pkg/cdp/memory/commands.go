@@ -26,9 +26,9 @@ func NewGetDOMCounters() *GetDOMCounters {
 // GetDOMCountersResponse contains the browser's response
 // to calling the GetDOMCounters CDP command with Do().
 type GetDOMCountersResponse struct {
-	Documents        int64
-	Nodes            int64
-	JsEventListeners int64
+	Documents        int64 `json:"documents"`
+	Nodes            int64 `json:"nodes"`
+	JsEventListeners int64 `json:"jsEventListeners"`
 }
 
 // Do sends the GetDOMCounters CDP command to a browser,
@@ -114,7 +114,7 @@ func (t *ForciblyPurgeJavaScriptMemory) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#method-setPressureNotificationsSuppressed
 type SetPressureNotificationsSuppressed struct {
 	// If true, memory pressure notifications will be suppressed.
-	Suppressed bool
+	Suppressed bool `json:"suppressed"`
 }
 
 // NewSetPressureNotificationsSuppressed constructs a new SetPressureNotificationsSuppressed struct instance, with
@@ -153,7 +153,7 @@ func (t *SetPressureNotificationsSuppressed) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#method-simulatePressureNotification
 type SimulatePressureNotification struct {
 	// Memory pressure level of the notification.
-	Level string
+	Level string `json:"level"`
 }
 
 // NewSimulatePressureNotification constructs a new SimulatePressureNotification struct instance, with
@@ -292,7 +292,7 @@ func NewGetAllTimeSamplingProfile() *GetAllTimeSamplingProfile {
 // GetAllTimeSamplingProfileResponse contains the browser's response
 // to calling the GetAllTimeSamplingProfile CDP command with Do().
 type GetAllTimeSamplingProfileResponse struct {
-	Profile SamplingProfile
+	Profile SamplingProfile `json:"profile"`
 }
 
 // Do sends the GetAllTimeSamplingProfile CDP command to a browser,
@@ -333,7 +333,7 @@ func NewGetBrowserSamplingProfile() *GetBrowserSamplingProfile {
 // GetBrowserSamplingProfileResponse contains the browser's response
 // to calling the GetBrowserSamplingProfile CDP command with Do().
 type GetBrowserSamplingProfileResponse struct {
-	Profile SamplingProfile
+	Profile SamplingProfile `json:"profile"`
 }
 
 // Do sends the GetBrowserSamplingProfile CDP command to a browser,
@@ -374,7 +374,7 @@ func NewGetSamplingProfile() *GetSamplingProfile {
 // GetSamplingProfileResponse contains the browser's response
 // to calling the GetSamplingProfile CDP command with Do().
 type GetSamplingProfileResponse struct {
-	Profile SamplingProfile
+	Profile SamplingProfile `json:"profile"`
 }
 
 // Do sends the GetSamplingProfile CDP command to a browser,

@@ -17,7 +17,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/IO/#method-close
 type Close struct {
 	// Handle of the stream to close.
-	Handle string
+	Handle string `json:"handle"`
 }
 
 // NewClose constructs a new Close struct instance, with
@@ -56,7 +56,7 @@ func (t *Close) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/IO/#method-read
 type Read struct {
 	// Handle of the stream to read.
-	Handle string
+	Handle string `json:"handle"`
 	// Seek to the specified offset before reading (if not specificed, proceed with offset
 	// following the last read). Some types of streams may only support sequential reads.
 	Offset int64 `json:"offset,omitempty"`
@@ -100,9 +100,9 @@ type ReadResponse struct {
 	// Set if the data is base64-encoded
 	Base64Encoded bool `json:"base64Encoded,omitempty"`
 	// Data that were read.
-	Data string
+	Data string `json:"data"`
 	// Set if the end-of-file condition occured while reading.
-	Eof bool
+	Eof bool `json:"eof"`
 }
 
 // Do sends the Read CDP command to a browser,
@@ -134,7 +134,7 @@ func (t *Read) Do(ctx context.Context) (*ReadResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/IO/#method-resolveBlob
 type ResolveBlob struct {
 	// Object id of a Blob object wrapper.
-	ObjectID runtime.RemoteObjectID
+	ObjectID runtime.RemoteObjectID `json:"objectId"`
 }
 
 // NewResolveBlob constructs a new ResolveBlob struct instance, with
@@ -152,7 +152,7 @@ func NewResolveBlob(objectID runtime.RemoteObjectID) *ResolveBlob {
 // to calling the ResolveBlob CDP command with Do().
 type ResolveBlobResponse struct {
 	// UUID of the specified Blob.
-	Uuid string
+	Uuid string `json:"uuid"`
 }
 
 // Do sends the ResolveBlob CDP command to a browser,

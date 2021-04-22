@@ -59,7 +59,7 @@ func NewGetCategories() *GetCategories {
 // to calling the GetCategories CDP command with Do().
 type GetCategoriesResponse struct {
 	// A list of supported tracing categories.
-	Categories []string
+	Categories []string `json:"categories"`
 }
 
 // Do sends the GetCategories CDP command to a browser,
@@ -87,7 +87,7 @@ func (t *GetCategories) Do(ctx context.Context) (*GetCategoriesResponse, error) 
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#method-recordClockSyncMarker
 type RecordClockSyncMarker struct {
 	// The ID of this clock sync marker
-	SyncID string
+	SyncID string `json:"syncId"`
 }
 
 // NewRecordClockSyncMarker constructs a new RecordClockSyncMarker struct instance, with
@@ -162,9 +162,9 @@ func (t *RequestMemoryDump) SetLevelOfDetail(v string) *RequestMemoryDump {
 // to calling the RequestMemoryDump CDP command with Do().
 type RequestMemoryDumpResponse struct {
 	// GUID of the resulting global memory dump.
-	DumpGuid string
+	DumpGuid string `json:"dumpGuid"`
 	// True iff the global memory dump succeeded.
-	Success bool
+	Success bool `json:"success"`
 }
 
 // Do sends the RequestMemoryDump CDP command to a browser,

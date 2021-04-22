@@ -5,9 +5,9 @@ package domstorage
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#type-StorageId
 type StorageID struct {
 	// Security origin for the storage.
-	SecurityOrigin string
+	SecurityOrigin string `json:"securityOrigin"`
 	// Whether the storage is local storage (not session storage).
-	IsLocalStorage bool
+	IsLocalStorage bool `json:"isLocalStorage"`
 }
 
 // DOM Storage item.
