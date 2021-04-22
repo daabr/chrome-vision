@@ -7,15 +7,15 @@ import (
 
 // Partial copy of target.TargetInfo for parsing target state events.
 type targetInfo struct {
-	TargetID string
-	Type     string
-	Title    string
-	URL      string
-	Attached bool
+	TargetID string `json:"targetId"`
+	Type     string `json:"type"`
+	Title    string `json:"title"`
+	URL      string `json:"url"`
+	Attached bool   `json:"attached"`
 }
 
 type targetEvent struct {
-	TargetInfo targetInfo
+	TargetInfo targetInfo `json:"targetInfo"`
 }
 
 // Parse incoming CDP target state events to update the session's state.
