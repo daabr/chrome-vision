@@ -19,6 +19,7 @@ func TestCancel(t *testing.T) {
 		t.Fatalf("cdp.NewContext(ctx); got error: %s", err.Error())
 	}
 	defer func() {
+		// Tear down.
 		if session, ok := cdp.FromContext(ctx); ok {
 			if session.OutputDir != nil {
 				os.RemoveAll(*session.OutputDir)
@@ -32,6 +33,9 @@ func TestCancel(t *testing.T) {
 	if ctx.Err() == nil {
 		t.Error("cdp.Cancel(ctx); ctx.Err() = nil, want !nil")
 	}
+	if session, ok := cdp.FromContext(ctx); ok {
+		t.Logf("%#v", session)
+	}
 }
 
 func TestClose(t *testing.T) {
@@ -44,6 +48,7 @@ func TestClose(t *testing.T) {
 		t.Fatalf("cdp.NewContext(ctx); got error: %s", err.Error())
 	}
 	defer func() {
+		// Tear down.
 		if session, ok := cdp.FromContext(ctx); ok {
 			if session.OutputDir != nil {
 				os.RemoveAll(*session.OutputDir)
@@ -55,5 +60,8 @@ func TestClose(t *testing.T) {
 	cdp.Close(ctx)
 	if ctx.Err() == nil {
 		t.Error("cdp.Close(ctx); ctx.Err() = nil, want !nil")
+	}
+	if session, ok := cdp.FromContext(ctx); ok {
+		t.Logf("%#v", session)
 	}
 }
