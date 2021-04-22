@@ -5,8 +5,8 @@ package media
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#event-playerPropertiesChanged
 type PlayerPropertiesChanged struct {
-	PlayerID   string           `json:"playerId"`
-	Properties []PlayerProperty `json:"properties"`
+	PlayerID   string
+	Properties []PlayerProperty
 }
 
 // Send events as a list, allowing them to be batched on the browser for less
@@ -14,24 +14,24 @@ type PlayerPropertiesChanged struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#event-playerEventsAdded
 type PlayerEventsAdded struct {
-	PlayerID string        `json:"playerId"`
-	Events   []PlayerEvent `json:"events"`
+	PlayerID string
+	Events   []PlayerEvent
 }
 
 // Send a list of any messages that need to be delivered.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#event-playerMessagesLogged
 type PlayerMessagesLogged struct {
-	PlayerID string          `json:"playerId"`
-	Messages []PlayerMessage `json:"messages"`
+	PlayerID string
+	Messages []PlayerMessage
 }
 
 // Send a list of any errors that need to be delivered.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#event-playerErrorsRaised
 type PlayerErrorsRaised struct {
-	PlayerID string        `json:"playerId"`
-	Errors   []PlayerError `json:"errors"`
+	PlayerID string
+	Errors   []PlayerError
 }
 
 // Called whenever a player is created, or when a new agent joins and recieves
@@ -40,5 +40,5 @@ type PlayerErrorsRaised struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#event-playersCreated
 type PlayersCreated struct {
-	Players []PlayerID `json:"players"`
+	Players []PlayerID
 }

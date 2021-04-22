@@ -7,9 +7,9 @@ type RegistrationID string
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerRegistration
 type ServiceWorkerRegistration struct {
-	RegistrationID string `json:"registrationId"`
-	ScopeURL       string `json:"scopeURL"`
-	IsDeleted      bool   `json:"isDeleted"`
+	RegistrationID string
+	ScopeURL       string
+	IsDeleted      bool
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerVersionRunningStatus
@@ -40,11 +40,11 @@ const (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerVersion
 type ServiceWorkerVersion struct {
-	VersionID      string `json:"versionId"`
-	RegistrationID string `json:"registrationId"`
-	ScriptURL      string `json:"scriptURL"`
-	RunningStatus  string `json:"runningStatus"`
-	Status         string `json:"status"`
+	VersionID      string
+	RegistrationID string
+	ScriptURL      string
+	RunningStatus  string
+	Status         string
 	// The Last-Modified header value of the main script.
 	ScriptLastModified float64 `json:"scriptLastModified,omitempty"`
 	// The time at which the response headers of the main script were received from the server.
@@ -58,10 +58,10 @@ type ServiceWorkerVersion struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerErrorMessage
 type ServiceWorkerErrorMessage struct {
-	ErrorMessage   string `json:"errorMessage"`
-	RegistrationID string `json:"registrationId"`
-	VersionID      string `json:"versionId"`
-	SourceURL      string `json:"sourceURL"`
-	LineNumber     int64  `json:"lineNumber"`
-	ColumnNumber   int64  `json:"columnNumber"`
+	ErrorMessage   string
+	RegistrationID string
+	VersionID      string
+	SourceURL      string
+	LineNumber     int64
+	ColumnNumber   int64
 }

@@ -16,7 +16,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-deleteCache
 type DeleteCache struct {
 	// Id of cache for deletion.
-	CacheID string `json:"cacheId"`
+	CacheID string
 }
 
 // NewDeleteCache constructs a new DeleteCache struct instance, with
@@ -55,9 +55,9 @@ func (t *DeleteCache) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-deleteEntry
 type DeleteEntry struct {
 	// Id of cache where the entry will be deleted.
-	CacheID string `json:"cacheId"`
+	CacheID string
 	// URL spec of the request.
-	Request string `json:"request"`
+	Request string
 }
 
 // NewDeleteEntry constructs a new DeleteEntry struct instance, with
@@ -97,7 +97,7 @@ func (t *DeleteEntry) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-requestCacheNames
 type RequestCacheNames struct {
 	// Security origin.
-	SecurityOrigin string `json:"securityOrigin"`
+	SecurityOrigin string
 }
 
 // NewRequestCacheNames constructs a new RequestCacheNames struct instance, with
@@ -115,7 +115,7 @@ func NewRequestCacheNames(securityOrigin string) *RequestCacheNames {
 // to calling the RequestCacheNames CDP command with Do().
 type RequestCacheNamesResponse struct {
 	// Caches for the security origin.
-	Caches []Cache `json:"caches"`
+	Caches []Cache
 }
 
 // Do sends the RequestCacheNames CDP command to a browser,
@@ -147,11 +147,11 @@ func (t *RequestCacheNames) Do(ctx context.Context) (*RequestCacheNamesResponse,
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-requestCachedResponse
 type RequestCachedResponse struct {
 	// Id of cache that contains the entry.
-	CacheID string `json:"cacheId"`
+	CacheID string
 	// URL spec of the request.
-	RequestURL string `json:"requestURL"`
+	RequestURL string
 	// headers of the request.
-	RequestHeaders []Header `json:"requestHeaders"`
+	RequestHeaders []Header
 }
 
 // NewRequestCachedResponse constructs a new RequestCachedResponse struct instance, with
@@ -171,7 +171,7 @@ func NewRequestCachedResponse(cacheID string, requestURL string, requestHeaders 
 // to calling the RequestCachedResponse CDP command with Do().
 type RequestCachedResponseResponse struct {
 	// Response read from the cache.
-	Response CachedResponse `json:"response"`
+	Response CachedResponse
 }
 
 // Do sends the RequestCachedResponse CDP command to a browser,
@@ -203,7 +203,7 @@ func (t *RequestCachedResponse) Do(ctx context.Context) (*RequestCachedResponseR
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#method-requestEntries
 type RequestEntries struct {
 	// ID of cache to get entries from.
-	CacheID string `json:"cacheId"`
+	CacheID string
 	// Number of records to skip.
 	SkipCount int64 `json:"skipCount,omitempty"`
 	// Number of records to fetch.
@@ -254,10 +254,10 @@ func (t *RequestEntries) SetPathFilter(v string) *RequestEntries {
 // to calling the RequestEntries CDP command with Do().
 type RequestEntriesResponse struct {
 	// Array of object store data entries.
-	CacheDataEntries []DataEntry `json:"cacheDataEntries"`
+	CacheDataEntries []DataEntry
 	// Count of returned entries from this storage. If pathFilter is empty, it
 	// is the count of all entries from this storage.
-	ReturnCount float64 `json:"returnCount"`
+	ReturnCount float64
 }
 
 // Do sends the RequestEntries CDP command to a browser,

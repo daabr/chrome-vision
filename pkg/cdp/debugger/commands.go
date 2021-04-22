@@ -17,8 +17,8 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-continueToLocation
 type ContinueToLocation struct {
 	// Location to continue to.
-	Location         Location `json:"location"`
-	TargetCallFrames string   `json:"targetCallFrames,omitempty"`
+	Location         Location
+	TargetCallFrames string `json:"targetCallFrames,omitempty"`
 }
 
 // NewContinueToLocation constructs a new ContinueToLocation struct instance, with
@@ -128,7 +128,7 @@ type EnableResponse struct {
 	// Unique identifier of the debugger.
 	//
 	// This CDP parameter is experimental.
-	DebuggerID string `json:"debuggerId"`
+	DebuggerID string
 }
 
 // Do sends the Enable CDP command to a browser,
@@ -160,9 +160,9 @@ func (t *Enable) Do(ctx context.Context) (*EnableResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-evaluateOnCallFrame
 type EvaluateOnCallFrame struct {
 	// Call frame identifier to evaluate on.
-	CallFrameID string `json:"callFrameId"`
+	CallFrameID string
 	// Expression to evaluate.
-	Expression string `json:"expression"`
+	Expression string
 	// String object group name to put result into (allows rapid releasing resulting object handles
 	// using `releaseObjectGroup`).
 	ObjectGroup string `json:"objectGroup,omitempty"`
@@ -272,7 +272,7 @@ func (t *EvaluateOnCallFrame) SetTimeout(v float64) *EvaluateOnCallFrame {
 // to calling the EvaluateOnCallFrame CDP command with Do().
 type EvaluateOnCallFrameResponse struct {
 	// Object wrapper for the evaluation result.
-	Result runtime.RemoteObject `json:"result"`
+	Result runtime.RemoteObject
 	// Exception details.
 	ExceptionDetails *runtime.ExceptionDetails `json:"exceptionDetails,omitempty"`
 }
@@ -307,7 +307,7 @@ func (t *EvaluateOnCallFrame) Do(ctx context.Context) (*EvaluateOnCallFrameRespo
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-getPossibleBreakpoints
 type GetPossibleBreakpoints struct {
 	// Start of range to search possible breakpoint locations in.
-	Start Location `json:"start"`
+	Start Location
 	// End of range to search possible breakpoint locations in (excluding). When not specified, end
 	// of scripts is used as end of range.
 	End *Location `json:"end,omitempty"`
@@ -349,7 +349,7 @@ func (t *GetPossibleBreakpoints) SetRestrictToFunction(v bool) *GetPossibleBreak
 // to calling the GetPossibleBreakpoints CDP command with Do().
 type GetPossibleBreakpointsResponse struct {
 	// List of the possible breakpoint locations.
-	Locations []BreakLocation `json:"locations"`
+	Locations []BreakLocation
 }
 
 // Do sends the GetPossibleBreakpoints CDP command to a browser,
@@ -381,7 +381,7 @@ func (t *GetPossibleBreakpoints) Do(ctx context.Context) (*GetPossibleBreakpoint
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-getScriptSource
 type GetScriptSource struct {
 	// Id of the script to get source for.
-	ScriptID string `json:"scriptId"`
+	ScriptID string
 }
 
 // NewGetScriptSource constructs a new GetScriptSource struct instance, with
@@ -399,7 +399,7 @@ func NewGetScriptSource(scriptID string) *GetScriptSource {
 // to calling the GetScriptSource CDP command with Do().
 type GetScriptSourceResponse struct {
 	// Script source (empty in case of Wasm bytecode).
-	ScriptSource string `json:"scriptSource"`
+	ScriptSource string
 	// Wasm bytecode. (Encoded as a base64 string when passed over JSON)
 	Bytecode string `json:"bytecode,omitempty"`
 }
@@ -435,7 +435,7 @@ func (t *GetScriptSource) Do(ctx context.Context) (*GetScriptSourceResponse, err
 // This CDP method is deprecated.
 type GetWasmBytecode struct {
 	// Id of the Wasm script to get source for.
-	ScriptID string `json:"scriptId"`
+	ScriptID string
 }
 
 // NewGetWasmBytecode constructs a new GetWasmBytecode struct instance, with
@@ -455,7 +455,7 @@ func NewGetWasmBytecode(scriptID string) *GetWasmBytecode {
 // to calling the GetWasmBytecode CDP command with Do().
 type GetWasmBytecodeResponse struct {
 	// Script source. (Encoded as a base64 string when passed over JSON)
-	Bytecode string `json:"bytecode"`
+	Bytecode string
 }
 
 // Do sends the GetWasmBytecode CDP command to a browser,
@@ -488,7 +488,7 @@ func (t *GetWasmBytecode) Do(ctx context.Context) (*GetWasmBytecodeResponse, err
 //
 // This CDP method is experimental.
 type GetStackTrace struct {
-	StackTraceID runtime.StackTraceID `json:"stackTraceId"`
+	StackTraceID runtime.StackTraceID
 }
 
 // NewGetStackTrace constructs a new GetStackTrace struct instance, with
@@ -507,7 +507,7 @@ func NewGetStackTrace(stackTraceID runtime.StackTraceID) *GetStackTrace {
 // GetStackTraceResponse contains the browser's response
 // to calling the GetStackTrace CDP command with Do().
 type GetStackTraceResponse struct {
-	StackTrace runtime.StackTrace `json:"stackTrace"`
+	StackTrace runtime.StackTrace
 }
 
 // Do sends the GetStackTrace CDP command to a browser,
@@ -570,7 +570,7 @@ func (t *Pause) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type PauseOnAsyncCall struct {
 	// Debugger will pause when async call with given stack trace is started.
-	ParentStackTraceID runtime.StackTraceID `json:"parentStackTraceId"`
+	ParentStackTraceID runtime.StackTraceID
 }
 
 // NewPauseOnAsyncCall constructs a new PauseOnAsyncCall struct instance, with
@@ -611,7 +611,7 @@ func (t *PauseOnAsyncCall) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-removeBreakpoint
 type RemoveBreakpoint struct {
-	BreakpointID string `json:"breakpointId"`
+	BreakpointID string
 }
 
 // NewRemoveBreakpoint constructs a new RemoveBreakpoint struct instance, with
@@ -650,7 +650,7 @@ func (t *RemoveBreakpoint) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-restartFrame
 type RestartFrame struct {
 	// Call frame identifier to evaluate on.
-	CallFrameID string `json:"callFrameId"`
+	CallFrameID string
 }
 
 // NewRestartFrame constructs a new RestartFrame struct instance, with
@@ -668,7 +668,7 @@ func NewRestartFrame(callFrameID string) *RestartFrame {
 // to calling the RestartFrame CDP command with Do().
 type RestartFrameResponse struct {
 	// New stack trace.
-	CallFrames []CallFrame `json:"callFrames"`
+	CallFrames []CallFrame
 	// Async stack trace, if any.
 	AsyncStackTrace *runtime.StackTrace `json:"asyncStackTrace,omitempty"`
 	// Async stack trace, if any.
@@ -760,9 +760,9 @@ func (t *Resume) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-searchInContent
 type SearchInContent struct {
 	// Id of the script to search in.
-	ScriptID string `json:"scriptId"`
+	ScriptID string
 	// String to search for.
-	Query string `json:"query"`
+	Query string
 	// If true, search is case sensitive.
 	CaseSensitive bool `json:"caseSensitive,omitempty"`
 	// If true, treats string parameter as regex.
@@ -803,7 +803,7 @@ func (t *SearchInContent) SetIsRegex(v bool) *SearchInContent {
 // to calling the SearchInContent CDP command with Do().
 type SearchInContentResponse struct {
 	// List of search matches.
-	Result []SearchMatch `json:"result"`
+	Result []SearchMatch
 }
 
 // Do sends the SearchInContent CDP command to a browser,
@@ -836,7 +836,7 @@ func (t *SearchInContent) Do(ctx context.Context) (*SearchInContentResponse, err
 type SetAsyncCallStackDepth struct {
 	// Maximum depth of async call stacks. Setting to `0` will effectively disable collecting async
 	// call stacks (default).
-	MaxDepth int64 `json:"maxDepth"`
+	MaxDepth int64
 }
 
 // NewSetAsyncCallStackDepth constructs a new SetAsyncCallStackDepth struct instance, with
@@ -879,7 +879,7 @@ func (t *SetAsyncCallStackDepth) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetBlackboxPatterns struct {
 	// Array of regexps that will be used to check script url for blackbox state.
-	Patterns []string `json:"patterns"`
+	Patterns []string
 }
 
 // NewSetBlackboxPatterns constructs a new SetBlackboxPatterns struct instance, with
@@ -925,8 +925,8 @@ func (t *SetBlackboxPatterns) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetBlackboxedRanges struct {
 	// Id of the script.
-	ScriptID  string           `json:"scriptId"`
-	Positions []ScriptPosition `json:"positions"`
+	ScriptID  string
+	Positions []ScriptPosition
 }
 
 // NewSetBlackboxedRanges constructs a new SetBlackboxedRanges struct instance, with
@@ -968,7 +968,7 @@ func (t *SetBlackboxedRanges) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setBreakpoint
 type SetBreakpoint struct {
 	// Location to set breakpoint in.
-	Location Location `json:"location"`
+	Location Location
 	// Expression to use as a breakpoint condition. When specified, debugger will only stop on the
 	// breakpoint if this expression evaluates to true.
 	Condition string `json:"condition,omitempty"`
@@ -999,9 +999,9 @@ func (t *SetBreakpoint) SetCondition(v string) *SetBreakpoint {
 // to calling the SetBreakpoint CDP command with Do().
 type SetBreakpointResponse struct {
 	// Id of the created breakpoint for further reference.
-	BreakpointID string `json:"breakpointId"`
+	BreakpointID string
 	// Location this breakpoint resolved into.
-	ActualLocation Location `json:"actualLocation"`
+	ActualLocation Location
 }
 
 // Do sends the SetBreakpoint CDP command to a browser,
@@ -1033,7 +1033,7 @@ func (t *SetBreakpoint) Do(ctx context.Context) (*SetBreakpointResponse, error) 
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setInstrumentationBreakpoint
 type SetInstrumentationBreakpoint struct {
 	// Instrumentation name.
-	Instrumentation string `json:"instrumentation"`
+	Instrumentation string
 }
 
 // NewSetInstrumentationBreakpoint constructs a new SetInstrumentationBreakpoint struct instance, with
@@ -1051,7 +1051,7 @@ func NewSetInstrumentationBreakpoint(instrumentation string) *SetInstrumentation
 // to calling the SetInstrumentationBreakpoint CDP command with Do().
 type SetInstrumentationBreakpointResponse struct {
 	// Id of the created breakpoint for further reference.
-	BreakpointID string `json:"breakpointId"`
+	BreakpointID string
 }
 
 // Do sends the SetInstrumentationBreakpoint CDP command to a browser,
@@ -1086,7 +1086,7 @@ func (t *SetInstrumentationBreakpoint) Do(ctx context.Context) (*SetInstrumentat
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setBreakpointByUrl
 type SetBreakpointByURL struct {
 	// Line number to set breakpoint at.
-	LineNumber int64 `json:"lineNumber"`
+	LineNumber int64
 	// URL of the resources to set breakpoint on.
 	URL string `json:"url,omitempty"`
 	// Regex pattern for the URLs of the resources to set breakpoints on. Either `url` or
@@ -1163,9 +1163,9 @@ func (t *SetBreakpointByURL) SetCondition(v string) *SetBreakpointByURL {
 // to calling the SetBreakpointByURL CDP command with Do().
 type SetBreakpointByURLResponse struct {
 	// Id of the created breakpoint for further reference.
-	BreakpointID string `json:"breakpointId"`
+	BreakpointID string
 	// List of the locations this breakpoint resolved into upon addition.
-	Locations []Location `json:"locations"`
+	Locations []Location
 }
 
 // Do sends the SetBreakpointByURL CDP command to a browser,
@@ -1201,7 +1201,7 @@ func (t *SetBreakpointByURL) Do(ctx context.Context) (*SetBreakpointByURLRespons
 // This CDP method is experimental.
 type SetBreakpointOnFunctionCall struct {
 	// Function object id.
-	ObjectID string `json:"objectId"`
+	ObjectID string
 	// Expression to use as a breakpoint condition. When specified, debugger will
 	// stop on the breakpoint if this expression evaluates to true.
 	Condition string `json:"condition,omitempty"`
@@ -1234,7 +1234,7 @@ func (t *SetBreakpointOnFunctionCall) SetCondition(v string) *SetBreakpointOnFun
 // to calling the SetBreakpointOnFunctionCall CDP command with Do().
 type SetBreakpointOnFunctionCallResponse struct {
 	// Id of the created breakpoint for further reference.
-	BreakpointID string `json:"breakpointId"`
+	BreakpointID string
 }
 
 // Do sends the SetBreakpointOnFunctionCall CDP command to a browser,
@@ -1266,7 +1266,7 @@ func (t *SetBreakpointOnFunctionCall) Do(ctx context.Context) (*SetBreakpointOnF
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setBreakpointsActive
 type SetBreakpointsActive struct {
 	// New value for breakpoints active state.
-	Active bool `json:"active"`
+	Active bool
 }
 
 // NewSetBreakpointsActive constructs a new SetBreakpointsActive struct instance, with
@@ -1306,7 +1306,7 @@ func (t *SetBreakpointsActive) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setPauseOnExceptions
 type SetPauseOnExceptions struct {
 	// Pause on exceptions mode.
-	State string `json:"state"`
+	State string
 }
 
 // NewSetPauseOnExceptions constructs a new SetPauseOnExceptions struct instance, with
@@ -1347,7 +1347,7 @@ func (t *SetPauseOnExceptions) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetReturnValue struct {
 	// New return value.
-	NewValue runtime.CallArgument `json:"newValue"`
+	NewValue runtime.CallArgument
 }
 
 // NewSetReturnValue constructs a new SetReturnValue struct instance, with
@@ -1388,9 +1388,9 @@ func (t *SetReturnValue) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setScriptSource
 type SetScriptSource struct {
 	// Id of the script to edit.
-	ScriptID string `json:"scriptId"`
+	ScriptID string
 	// New content of the script.
-	ScriptSource string `json:"scriptSource"`
+	ScriptSource string
 	// If true the change will not actually be applied. Dry run may be used to get result
 	// description without actually modifying the code.
 	DryRun bool `json:"dryRun,omitempty"`
@@ -1464,7 +1464,7 @@ func (t *SetScriptSource) Do(ctx context.Context) (*SetScriptSourceResponse, err
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-setSkipAllPauses
 type SetSkipAllPauses struct {
 	// New value for skip pauses state.
-	Skip bool `json:"skip"`
+	Skip bool
 }
 
 // NewSetSkipAllPauses constructs a new SetSkipAllPauses struct instance, with
@@ -1505,13 +1505,13 @@ func (t *SetSkipAllPauses) Do(ctx context.Context) error {
 type SetVariableValue struct {
 	// 0-based number of scope as was listed in scope chain. Only 'local', 'closure' and 'catch'
 	// scope types are allowed. Other scopes could be manipulated manually.
-	ScopeNumber int64 `json:"scopeNumber"`
+	ScopeNumber int64
 	// Variable name.
-	VariableName string `json:"variableName"`
+	VariableName string
 	// New variable value.
-	NewValue runtime.CallArgument `json:"newValue"`
+	NewValue runtime.CallArgument
 	// Id of callframe that holds variable.
-	CallFrameID string `json:"callFrameId"`
+	CallFrameID string
 }
 
 // NewSetVariableValue constructs a new SetVariableValue struct instance, with

@@ -10,13 +10,13 @@ type DatabaseID string
 // https://chromedevtools.github.io/devtools-protocol/tot/Database/#type-Database
 type Database struct {
 	// Database ID.
-	ID string `json:"id"`
+	ID string
 	// Database domain.
-	Domain string `json:"domain"`
+	Domain string
 	// Database name.
-	Name string `json:"name"`
+	Name string
 	// Database version.
-	Version string `json:"version"`
+	Version string
 }
 
 // Database error.
@@ -24,7 +24,7 @@ type Database struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Database/#type-Error
 type Error struct {
 	// Error message.
-	Message string `json:"message"`
+	Message string
 	// Error code.
-	Code int64 `json:"code"`
+	Code int64
 }

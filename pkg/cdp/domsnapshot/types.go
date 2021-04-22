@@ -10,11 +10,11 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-DOMNode
 type DOMNode struct {
 	// `Node`'s nodeType.
-	NodeType int64 `json:"nodeType"`
+	NodeType int64
 	// `Node`'s nodeName.
-	NodeName string `json:"nodeName"`
+	NodeName string
 	// `Node`'s nodeValue.
-	NodeValue string `json:"nodeValue"`
+	NodeValue string
 	// Only set for textarea elements, contains the text value.
 	TextValue string `json:"textValue,omitempty"`
 	// Only set for input elements, contains the input's associated text value.
@@ -24,7 +24,7 @@ type DOMNode struct {
 	// Only set for option elements, indicates if the element has been selected
 	OptionSelected bool `json:"optionSelected,omitempty"`
 	// `Node`'s id, corresponds to DOM.Node.backendNodeId.
-	BackendNodeID int64 `json:"backendNodeId"`
+	BackendNodeID int64
 	// The indexes of the node's child nodes in the `domNodes` array returned by `getSnapshot`, if
 	// any.
 	ChildNodeIndexes []int64 `json:"childNodeIndexes,omitempty"`
@@ -78,13 +78,13 @@ type DOMNode struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-InlineTextBox
 type InlineTextBox struct {
 	// The bounding box in document coordinates. Note that scroll offset of the document is ignored.
-	BoundingBox dom.Rect `json:"boundingBox"`
+	BoundingBox dom.Rect
 	// The starting index in characters, for this post layout textbox substring. Characters that
 	// would be represented as a surrogate pair in UTF-16 have length 2.
-	StartCharacterIndex int64 `json:"startCharacterIndex"`
+	StartCharacterIndex int64
 	// The number of characters in this post layout textbox substring. Characters that would be
 	// represented as a surrogate pair in UTF-16 have length 2.
-	NumCharacters int64 `json:"numCharacters"`
+	NumCharacters int64
 }
 
 // Details of an element in the DOM tree with a LayoutObject.
@@ -92,9 +92,9 @@ type InlineTextBox struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-LayoutTreeNode
 type LayoutTreeNode struct {
 	// The index of the related DOM node in the `domNodes` array returned by `getSnapshot`.
-	DomNodeIndex int64 `json:"domNodeIndex"`
+	DomNodeIndex int64
 	// The bounding box in document coordinates. Note that scroll offset of the document is ignored.
-	BoundingBox dom.Rect `json:"boundingBox"`
+	BoundingBox dom.Rect
 	// Contents of the LayoutText, if any.
 	LayoutText string `json:"layoutText,omitempty"`
 	// The post-layout inline text nodes, if any.
@@ -114,7 +114,7 @@ type LayoutTreeNode struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-ComputedStyle
 type ComputedStyle struct {
 	// Name/value pairs of computed style properties.
-	Properties []NameValue `json:"properties"`
+	Properties []NameValue
 }
 
 // A name/value pair.
@@ -122,9 +122,9 @@ type ComputedStyle struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-NameValue
 type NameValue struct {
 	// Attribute/property name.
-	Name string `json:"name"`
+	Name string
 	// Attribute/property value.
-	Value string `json:"value"`
+	Value string
 }
 
 // Index of the string in the strings table.
@@ -141,19 +141,19 @@ type ArrayOfStrings []StringIndex
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-RareStringData
 type RareStringData struct {
-	Index []int64       `json:"index"`
-	Value []StringIndex `json:"value"`
+	Index []int64
+	Value []StringIndex
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-RareBooleanData
 type RareBooleanData struct {
-	Index []int64 `json:"index"`
+	Index []int64
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-RareIntegerData
 type RareIntegerData struct {
-	Index []int64 `json:"index"`
-	Value []int64 `json:"value"`
+	Index []int64
+	Value []int64
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-Rectangle
@@ -164,27 +164,27 @@ type Rectangle []float64
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-DocumentSnapshot
 type DocumentSnapshot struct {
 	// Document URL that `Document` or `FrameOwner` node points to.
-	DocumentURL int64 `json:"documentURL"`
+	DocumentURL int64
 	// Document title.
-	Title int64 `json:"title"`
+	Title int64
 	// Base URL that `Document` or `FrameOwner` node uses for URL completion.
-	BaseURL int64 `json:"baseURL"`
+	BaseURL int64
 	// Contains the document's content language.
-	ContentLanguage int64 `json:"contentLanguage"`
+	ContentLanguage int64
 	// Contains the document's character set encoding.
-	EncodingName int64 `json:"encodingName"`
+	EncodingName int64
 	// `DocumentType` node's publicId.
-	PublicID int64 `json:"publicId"`
+	PublicID int64
 	// `DocumentType` node's systemId.
-	SystemID int64 `json:"systemId"`
+	SystemID int64
 	// Frame ID for frame owner elements and also for the document node.
-	FrameID int64 `json:"frameId"`
+	FrameID int64
 	// A table with dom nodes.
-	Nodes NodeTreeSnapshot `json:"nodes"`
+	Nodes NodeTreeSnapshot
 	// The nodes in the layout tree.
-	Layout LayoutTreeSnapshot `json:"layout"`
+	Layout LayoutTreeSnapshot
 	// The post-layout inline text nodes.
-	TextBoxes TextBoxSnapshot `json:"textBoxes"`
+	TextBoxes TextBoxSnapshot
 	// Horizontal scroll offset.
 	ScrollOffsetX float64 `json:"scrollOffsetX,omitempty"`
 	// Vertical scroll offset.
@@ -238,15 +238,15 @@ type NodeTreeSnapshot struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-LayoutTreeSnapshot
 type LayoutTreeSnapshot struct {
 	// Index of the corresponding node in the `NodeTreeSnapshot` array returned by `captureSnapshot`.
-	NodeIndex []int64 `json:"nodeIndex"`
+	NodeIndex []int64
 	// Array of indexes specifying computed style strings, filtered according to the `computedStyles` parameter passed to `captureSnapshot`.
-	Styles []ArrayOfStrings `json:"styles"`
+	Styles []ArrayOfStrings
 	// The absolute position bounding box.
-	Bounds []Rectangle `json:"bounds"`
+	Bounds []Rectangle
 	// Contents of the LayoutText, if any.
-	Text []StringIndex `json:"text"`
+	Text []StringIndex
 	// Stacking context information.
-	StackingContexts RareBooleanData `json:"stackingContexts"`
+	StackingContexts RareBooleanData
 	// Global paint order index, which is determined by the stacking order of the nodes. Nodes
 	// that are painted together will have the same index. Only provided if includePaintOrder in
 	// captureSnapshot was true.
@@ -273,13 +273,13 @@ type LayoutTreeSnapshot struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-TextBoxSnapshot
 type TextBoxSnapshot struct {
 	// Index of the layout tree node that owns this box collection.
-	LayoutIndex []int64 `json:"layoutIndex"`
+	LayoutIndex []int64
 	// The absolute position bounding box.
-	Bounds []Rectangle `json:"bounds"`
+	Bounds []Rectangle
 	// The starting index in characters, for this post layout textbox substring. Characters that
 	// would be represented as a surrogate pair in UTF-16 have length 2.
-	Start []int64 `json:"start"`
+	Start []int64
 	// The number of characters in this post layout textbox substring. Characters that would be
 	// represented as a surrogate pair in UTF-16 have length 2.
-	Length []int64 `json:"length"`
+	Length []int64
 }

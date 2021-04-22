@@ -1,17 +1,15 @@
 package overlay
 
-import (
-	"github.com/daabr/chrome-vision/pkg/cdp/dom"
-)
+import "github.com/daabr/chrome-vision/pkg/cdp/dom"
 
 // Configuration data for drawing the source order of an elements children.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-SourceOrderConfig
 type SourceOrderConfig struct {
 	// the color to outline the givent element in.
-	ParentOutlineColor dom.RGBA `json:"parentOutlineColor"`
+	ParentOutlineColor dom.RGBA
 	// the color to outline the child elements in.
-	ChildOutlineColor dom.RGBA `json:"childOutlineColor"`
+	ChildOutlineColor dom.RGBA
 }
 
 // Configuration data for the highlighting of Grid elements.
@@ -185,17 +183,17 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-GridNodeHighlightConfig
 type GridNodeHighlightConfig struct {
 	// A descriptor for the highlight appearance.
-	GridHighlightConfig GridHighlightConfig `json:"gridHighlightConfig"`
+	GridHighlightConfig GridHighlightConfig
 	// Identifier of the node to highlight.
-	NodeID int64 `json:"nodeId"`
+	NodeID int64
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-FlexNodeHighlightConfig
 type FlexNodeHighlightConfig struct {
 	// A descriptor for the highlight appearance of flex containers.
-	FlexContainerHighlightConfig FlexContainerHighlightConfig `json:"flexContainerHighlightConfig"`
+	FlexContainerHighlightConfig FlexContainerHighlightConfig
 	// Identifier of the node to highlight.
-	NodeID int64 `json:"nodeId"`
+	NodeID int64
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ScrollSnapContainerHighlightConfig
@@ -213,9 +211,9 @@ type ScrollSnapContainerHighlightConfig struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ScrollSnapHighlightConfig
 type ScrollSnapHighlightConfig struct {
 	// A descriptor for the highlight appearance of scroll snap containers.
-	ScrollSnapContainerHighlightConfig ScrollSnapContainerHighlightConfig `json:"scrollSnapContainerHighlightConfig"`
+	ScrollSnapContainerHighlightConfig ScrollSnapContainerHighlightConfig
 	// Identifier of the node to highlight.
-	NodeID int64 `json:"nodeId"`
+	NodeID int64
 }
 
 // Configuration for dual screen hinge
@@ -223,7 +221,7 @@ type ScrollSnapHighlightConfig struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-HingeConfig
 type HingeConfig struct {
 	// A rectangle represent hinge
-	Rect dom.Rect `json:"rect"`
+	Rect dom.Rect
 	// The content box highlight fill color (default: a dark color).
 	ContentColor *dom.RGBA `json:"contentColor,omitempty"`
 	// The content box highlight outline color (default: transparent).

@@ -10,11 +10,11 @@ package security
 // This CDP event is deprecated.
 type CertificateError struct {
 	// The ID of the event.
-	EventID int64 `json:"eventId"`
+	EventID int64
 	// The type of the error.
-	ErrorType string `json:"errorType"`
+	ErrorType string
 	// The url that was requested.
-	RequestURL string `json:"requestURL"`
+	RequestURL string
 }
 
 // The security state of the page changed.
@@ -24,7 +24,7 @@ type CertificateError struct {
 // This CDP event is experimental.
 type VisibleSecurityStateChanged struct {
 	// Security state information about the page.
-	VisibleSecurityState VisibleSecurityState `json:"visibleSecurityState"`
+	VisibleSecurityState VisibleSecurityState
 }
 
 // The security state of the page changed.
@@ -32,18 +32,18 @@ type VisibleSecurityStateChanged struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#event-securityStateChanged
 type SecurityStateChanged struct {
 	// Security state.
-	SecurityState string `json:"securityState"`
+	SecurityState string
 	// True if the page was loaded over cryptographic transport such as HTTPS.
 	//
 	// This CDP parameter is deprecated.
-	SchemeIsCryptographic bool `json:"schemeIsCryptographic"`
+	SchemeIsCryptographic bool
 	// List of explanations for the security state. If the overall security state is `insecure` or
 	// `warning`, at least one corresponding explanation should be included.
-	Explanations []SecurityStateExplanation `json:"explanations"`
+	Explanations []SecurityStateExplanation
 	// Information about insecure content on the page.
 	//
 	// This CDP parameter is deprecated.
-	InsecureContentStatus InsecureContentStatus `json:"insecureContentStatus"`
+	InsecureContentStatus InsecureContentStatus
 	// Overrides user-visible description of the state.
 	Summary string `json:"summary,omitempty"`
 }

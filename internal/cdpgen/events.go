@@ -8,7 +8,6 @@ import (
 func generateEvents(d Domain) string {
 	b := new(strings.Builder)
 	fmt.Fprintf(b, "package %s\n", strings.ToLower(d.Domain))
-	generateImports(b, []string{"encoding/json"}, d.Dependencies)
 
 	for _, e := range d.Events {
 		t := Type{

@@ -16,7 +16,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/Tethering/#method-bind
 type Bind struct {
 	// Port number to bind.
-	Port int64 `json:"port"`
+	Port int64
 }
 
 // NewBind constructs a new Bind struct instance, with
@@ -55,7 +55,7 @@ func (t *Bind) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Tethering/#method-unbind
 type Unbind struct {
 	// Port number to unbind.
-	Port int64 `json:"port"`
+	Port int64
 }
 
 // NewUnbind constructs a new Unbind struct instance, with

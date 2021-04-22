@@ -23,7 +23,7 @@ type UnserializableValue string
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-RemoteObject
 type RemoteObject struct {
 	// Object type.
-	Type string `json:"type"`
+	Type string
 	// Object subtype hint. Specified for `object` type values only.
 	// NOTE: If you change anything here, make sure to also update
 	// `subtype` in `ObjectPreview` and `PropertyPreview` below.
@@ -53,7 +53,7 @@ type RemoteObject struct {
 type CustomPreview struct {
 	// The JSON-stringified result of formatter.header(object, config) call.
 	// It contains json ML array that represents RemoteObject.
-	Header string `json:"header"`
+	Header string
 	// If formatter returns true as a result of formatter.hasBody call then bodyGetterId will
 	// contain RemoteObjectId for the function that returns result of formatter.body(object, config) call.
 	// The result value is json ML array.
@@ -67,15 +67,15 @@ type CustomPreview struct {
 // This CDP type is experimental.
 type ObjectPreview struct {
 	// Object type.
-	Type string `json:"type"`
+	Type string
 	// Object subtype hint. Specified for `object` type values only.
 	Subtype string `json:"subtype,omitempty"`
 	// String representation of the object.
 	Description string `json:"description,omitempty"`
 	// True iff some of the properties or entries of the original object did not fit.
-	Overflow bool `json:"overflow"`
+	Overflow bool
 	// List of the properties.
-	Properties []PropertyPreview `json:"properties"`
+	Properties []PropertyPreview
 	// List of the entries. Specified for `map` and `set` subtype values only.
 	Entries []EntryPreview `json:"entries,omitempty"`
 }
@@ -85,9 +85,9 @@ type ObjectPreview struct {
 // This CDP type is experimental.
 type PropertyPreview struct {
 	// Property name.
-	Name string `json:"name"`
+	Name string
 	// Object type. Accessor means that the property itself is an accessor property.
-	Type string `json:"type"`
+	Type string
 	// User-friendly property value string.
 	Value string `json:"value,omitempty"`
 	// Nested value preview.
@@ -103,7 +103,7 @@ type EntryPreview struct {
 	// Preview of the key. Specified for map-like collection entries.
 	Key *ObjectPreview `json:"key,omitempty"`
 	// Preview of the value.
-	Value ObjectPreview `json:"value"`
+	Value ObjectPreview
 }
 
 // Object property descriptor.
@@ -111,7 +111,7 @@ type EntryPreview struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-PropertyDescriptor
 type PropertyDescriptor struct {
 	// Property name or symbol description.
-	Name string `json:"name"`
+	Name string
 	// The value associated with the property.
 	Value *RemoteObject `json:"value,omitempty"`
 	// True if the value associated with the property may be changed (data descriptors only).
@@ -124,10 +124,10 @@ type PropertyDescriptor struct {
 	Set *RemoteObject `json:"set,omitempty"`
 	// True if the type of this property descriptor may be changed and if the property may be
 	// deleted from the corresponding object.
-	Configurable bool `json:"configurable"`
+	Configurable bool
 	// True if this property shows up during enumeration of the properties on the corresponding
 	// object.
-	Enumerable bool `json:"enumerable"`
+	Enumerable bool
 	// True if the result was thrown during the evaluation.
 	WasThrown bool `json:"wasThrown,omitempty"`
 	// True if the property is owned for the object.
@@ -141,7 +141,7 @@ type PropertyDescriptor struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-InternalPropertyDescriptor
 type InternalPropertyDescriptor struct {
 	// Conventional property name.
-	Name string `json:"name"`
+	Name string
 	// The value associated with the property.
 	Value *RemoteObject `json:"value,omitempty"`
 }
@@ -153,7 +153,7 @@ type InternalPropertyDescriptor struct {
 // This CDP type is experimental.
 type PrivatePropertyDescriptor struct {
 	// Private property name.
-	Name string `json:"name"`
+	Name string
 	// The value associated with the private property.
 	Value *RemoteObject `json:"value,omitempty"`
 	// A function which serves as a getter for the private property,
@@ -188,17 +188,17 @@ type ExecutionContextID int64
 type ExecutionContextDescription struct {
 	// Unique id of the execution context. It can be used to specify in which execution context
 	// script evaluation should be performed.
-	ID int64 `json:"id"`
+	ID int64
 	// Execution context origin.
-	Origin string `json:"origin"`
+	Origin string
 	// Human readable name describing given context.
-	Name string `json:"name"`
+	Name string
 	// A system-unique execution context identifier. Unlike the id, this is unique accross
 	// multiple processes, so can be reliably used to identify specific context while backend
 	// performs a cross-process navigation.
 	//
 	// This CDP property is experimental.
-	UniqueID string `json:"uniqueId"`
+	UniqueID string
 	// Embedder-specific auxiliary data.
 	AuxData json.RawMessage `json:"auxData,omitempty"`
 }
@@ -209,13 +209,13 @@ type ExecutionContextDescription struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-ExceptionDetails
 type ExceptionDetails struct {
 	// Exception id.
-	ExceptionID int64 `json:"exceptionId"`
+	ExceptionID int64
 	// Exception text, which should be used together with exception object when available.
-	Text string `json:"text"`
+	Text string
 	// Line number of the exception location (0-based).
-	LineNumber int64 `json:"lineNumber"`
+	LineNumber int64
 	// Column number of the exception location (0-based).
-	ColumnNumber int64 `json:"columnNumber"`
+	ColumnNumber int64
 	// Script ID of the exception location.
 	ScriptID string `json:"scriptId,omitempty"`
 	// URL of the exception location, to be used when the script was not reported.
@@ -243,15 +243,15 @@ type TimeDelta float64
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-CallFrame
 type CallFrame struct {
 	// JavaScript function name.
-	FunctionName string `json:"functionName"`
+	FunctionName string
 	// JavaScript script id.
-	ScriptID string `json:"scriptId"`
+	ScriptID string
 	// JavaScript script name or url.
-	URL string `json:"url"`
+	URL string
 	// JavaScript script line number (0-based).
-	LineNumber int64 `json:"lineNumber"`
+	LineNumber int64
 	// JavaScript script column number (0-based).
-	ColumnNumber int64 `json:"columnNumber"`
+	ColumnNumber int64
 }
 
 // Call frames for assertions or error messages.
@@ -262,7 +262,7 @@ type StackTrace struct {
 	// initiated the async call.
 	Description string `json:"description,omitempty"`
 	// JavaScript function name.
-	CallFrames []CallFrame `json:"callFrames"`
+	CallFrames []CallFrame
 	// Asynchronous JavaScript stack trace that preceded this stack, if available.
 	Parent *StackTrace `json:"parent,omitempty"`
 	// Asynchronous JavaScript stack trace that preceded this stack, if available.
@@ -285,6 +285,6 @@ type UniqueDebuggerID string
 //
 // This CDP type is experimental.
 type StackTraceID struct {
-	ID         string `json:"id"`
+	ID         string
 	DebuggerID string `json:"debuggerId,omitempty"`
 }

@@ -20,14 +20,14 @@ type MediaQueryResultChanged struct{}
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#event-styleSheetAdded
 type StyleSheetAdded struct {
 	// Added stylesheet metainfo.
-	Header CSSStyleSheetHeader `json:"header"`
+	Header CSSStyleSheetHeader
 }
 
 // Fired whenever a stylesheet is changed as a result of the client operation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#event-styleSheetChanged
 type StyleSheetChanged struct {
-	StyleSheetID string `json:"styleSheetId"`
+	StyleSheetID string
 }
 
 // Fired whenever an active document stylesheet is removed.
@@ -35,5 +35,5 @@ type StyleSheetChanged struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#event-styleSheetRemoved
 type StyleSheetRemoved struct {
 	// Identifier of the removed stylesheet.
-	StyleSheetID string `json:"styleSheetId"`
+	StyleSheetID string
 }

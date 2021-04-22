@@ -1,15 +1,13 @@
 package layertree
 
-import (
-	"github.com/daabr/chrome-vision/pkg/cdp/dom"
-)
+import "github.com/daabr/chrome-vision/pkg/cdp/dom"
 
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#event-layerPainted
 type LayerPainted struct {
 	// The id of the painted layer.
-	LayerID string `json:"layerId"`
+	LayerID string
 	// Clip rectangle.
-	Clip dom.Rect `json:"clip"`
+	Clip dom.Rect
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#event-layerTreeDidChange

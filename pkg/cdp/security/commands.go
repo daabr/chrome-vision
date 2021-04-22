@@ -78,7 +78,7 @@ func (t *Enable) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetIgnoreCertificateErrors struct {
 	// If true, all certificate errors will be ignored.
-	Ignore bool `json:"ignore"`
+	Ignore bool
 }
 
 // NewSetIgnoreCertificateErrors constructs a new SetIgnoreCertificateErrors struct instance, with
@@ -121,9 +121,9 @@ func (t *SetIgnoreCertificateErrors) Do(ctx context.Context) error {
 // This CDP method is deprecated.
 type HandleCertificateError struct {
 	// The ID of the event.
-	EventID int64 `json:"eventId"`
+	EventID int64
 	// The action to take on the certificate error.
-	Action string `json:"action"`
+	Action string
 }
 
 // NewHandleCertificateError constructs a new HandleCertificateError struct instance, with
@@ -168,7 +168,7 @@ func (t *HandleCertificateError) Do(ctx context.Context) error {
 // This CDP method is deprecated.
 type SetOverrideCertificateErrors struct {
 	// If true, certificate errors will be overridden.
-	Override bool `json:"override"`
+	Override bool
 }
 
 // NewSetOverrideCertificateErrors constructs a new SetOverrideCertificateErrors struct instance, with

@@ -17,9 +17,9 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#method-getEncodedResponse
 type GetEncodedResponse struct {
 	// Identifier of the network request to get content for.
-	RequestID string `json:"requestId"`
+	RequestID string
 	// The encoding to use.
-	Encoding string `json:"encoding"`
+	Encoding string
 	// The quality of the encoding (0-1). (defaults to 1)
 	Quality float64 `json:"quality,omitempty"`
 	// Whether to only return the size information (defaults to false).
@@ -62,9 +62,9 @@ type GetEncodedResponseResponse struct {
 	// The encoded body as a base64 string. Omitted if sizeOnly is true. (Encoded as a base64 string when passed over JSON)
 	Body string `json:"body,omitempty"`
 	// Size before re-encoding.
-	OriginalSize int64 `json:"originalSize"`
+	OriginalSize int64
 	// Size after re-encoding.
-	EncodedSize int64 `json:"encodedSize"`
+	EncodedSize int64
 }
 
 // Do sends the GetEncodedResponse CDP command to a browser,

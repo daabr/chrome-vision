@@ -13,7 +13,7 @@ import (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#method-clear
 type Clear struct {
-	StorageID StorageID `json:"storageId"`
+	StorageID StorageID
 }
 
 // NewClear constructs a new Clear struct instance, with
@@ -109,7 +109,7 @@ func (t *Enable) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#method-getDOMStorageItems
 type GetDOMStorageItems struct {
-	StorageID StorageID `json:"storageId"`
+	StorageID StorageID
 }
 
 // NewGetDOMStorageItems constructs a new GetDOMStorageItems struct instance, with
@@ -126,7 +126,7 @@ func NewGetDOMStorageItems(storageID StorageID) *GetDOMStorageItems {
 // GetDOMStorageItemsResponse contains the browser's response
 // to calling the GetDOMStorageItems CDP command with Do().
 type GetDOMStorageItemsResponse struct {
-	Entries []Item `json:"entries"`
+	Entries []Item
 }
 
 // Do sends the GetDOMStorageItems CDP command to a browser,
@@ -155,8 +155,8 @@ func (t *GetDOMStorageItems) Do(ctx context.Context) (*GetDOMStorageItemsRespons
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#method-removeDOMStorageItem
 type RemoveDOMStorageItem struct {
-	StorageID StorageID `json:"storageId"`
-	Key       string    `json:"key"`
+	StorageID StorageID
+	Key       string
 }
 
 // NewRemoveDOMStorageItem constructs a new RemoveDOMStorageItem struct instance, with
@@ -193,9 +193,9 @@ func (t *RemoveDOMStorageItem) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#method-setDOMStorageItem
 type SetDOMStorageItem struct {
-	StorageID StorageID `json:"storageId"`
-	Key       string    `json:"key"`
-	Value     string    `json:"value"`
+	StorageID StorageID
+	Key       string
+	Value     string
 }
 
 // NewSetDOMStorageItem constructs a new SetDOMStorageItem struct instance, with

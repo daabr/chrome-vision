@@ -35,10 +35,10 @@ const (
 
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#type-VirtualAuthenticatorOptions
 type VirtualAuthenticatorOptions struct {
-	Protocol string `json:"protocol"`
+	Protocol string
 	// Defaults to ctap2_0. Ignored if |protocol| == u2f.
 	Ctap2Version string `json:"ctap2Version,omitempty"`
-	Transport    string `json:"transport"`
+	Transport    string
 	// Defaults to false.
 	HasResidentKey bool `json:"hasResidentKey,omitempty"`
 	// Defaults to false.
@@ -61,20 +61,20 @@ type VirtualAuthenticatorOptions struct {
 
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#type-Credential
 type Credential struct {
-	CredentialID         string `json:"credentialId"`
-	IsResidentCredential bool   `json:"isResidentCredential"`
+	CredentialID         string
+	IsResidentCredential bool
 	// Relying Party ID the credential is scoped to. Must be set when adding a
 	// credential.
 	RpID string `json:"rpId,omitempty"`
 	// The ECDSA P-256 private key in PKCS#8 format. (Encoded as a base64 string when passed over JSON)
-	PrivateKey string `json:"privateKey"`
+	PrivateKey string
 	// An opaque byte sequence with a maximum size of 64 bytes mapping the
 	// credential to a specific user. (Encoded as a base64 string when passed over JSON)
 	UserHandle string `json:"userHandle,omitempty"`
 	// Signature counter. This is incremented by one for each successful
 	// assertion.
 	// See https://w3c.github.io/webauthn/#signature-counter
-	SignCount int64 `json:"signCount"`
+	SignCount int64
 	// The large blob associated with the credential.
 	// See https://w3c.github.io/webauthn/#sctn-large-blob-extension (Encoded as a base64 string when passed over JSON)
 	LargeBlob string `json:"largeBlob,omitempty"`

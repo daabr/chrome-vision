@@ -7,5 +7,5 @@ package input
 //
 // This CDP event is experimental.
 type DragIntercepted struct {
-	Data DragData `json:"data"`
+	Data DragData
 }

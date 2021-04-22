@@ -2,7 +2,7 @@ package heapprofiler
 
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#event-addHeapSnapshotChunk
 type AddHeapSnapshotChunk struct {
-	Chunk string `json:"chunk"`
+	Chunk string
 }
 
 // If heap objects tracking has been started then backend may send update for one or more fragments
@@ -12,7 +12,7 @@ type HeapStatsUpdate struct {
 	// An array of triplets. Each triplet describes a fragment. The first integer is the fragment
 	// index, the second integer is a total count of objects for the fragment, the third integer is
 	// a total size of the objects for the fragment.
-	StatsUpdate []int64 `json:"statsUpdate"`
+	StatsUpdate []int64
 }
 
 // If heap objects tracking has been started then backend regularly sends a current value for last
@@ -21,15 +21,15 @@ type HeapStatsUpdate struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#event-lastSeenObjectId
 type LastSeenObjectID struct {
-	LastSeenObjectID int64   `json:"lastSeenObjectId"`
-	Timestamp        float64 `json:"timestamp"`
+	LastSeenObjectID int64
+	Timestamp        float64
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#event-reportHeapSnapshotProgress
 type ReportHeapSnapshotProgress struct {
-	Done     int64 `json:"done"`
-	Total    int64 `json:"total"`
-	Finished bool  `json:"finished,omitempty"`
+	Done     int64
+	Total    int64
+	Finished bool `json:"finished,omitempty"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#event-resetProfiles

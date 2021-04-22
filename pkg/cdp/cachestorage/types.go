@@ -25,21 +25,21 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#type-DataEntry
 type DataEntry struct {
 	// Request URL.
-	RequestURL string `json:"requestURL"`
+	RequestURL string
 	// Request method.
-	RequestMethod string `json:"requestMethod"`
+	RequestMethod string
 	// Request headers
-	RequestHeaders []Header `json:"requestHeaders"`
+	RequestHeaders []Header
 	// Number of seconds since epoch.
-	ResponseTime float64 `json:"responseTime"`
+	ResponseTime float64
 	// HTTP response status code.
-	ResponseStatus int64 `json:"responseStatus"`
+	ResponseStatus int64
 	// HTTP response status text.
-	ResponseStatusText string `json:"responseStatusText"`
+	ResponseStatusText string
 	// HTTP response type
-	ResponseType string `json:"responseType"`
+	ResponseType string
 	// Response headers
-	ResponseHeaders []Header `json:"responseHeaders"`
+	ResponseHeaders []Header
 }
 
 // Cache identifier.
@@ -47,17 +47,17 @@ type DataEntry struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#type-Cache
 type Cache struct {
 	// An opaque unique id of the cache.
-	CacheID string `json:"cacheId"`
+	CacheID string
 	// Security origin of the cache.
-	SecurityOrigin string `json:"securityOrigin"`
+	SecurityOrigin string
 	// The name of the cache.
-	CacheName string `json:"cacheName"`
+	CacheName string
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#type-Header
 type Header struct {
-	Name  string `json:"name"`
-	Value string `json:"value"`
+	Name  string
+	Value string
 }
 
 // Cached response
@@ -65,5 +65,5 @@ type Header struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#type-CachedResponse
 type CachedResponse struct {
 	// Entry content, base64-encoded. (Encoded as a base64 string when passed over JSON)
-	Body string `json:"body"`
+	Body string
 }

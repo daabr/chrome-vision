@@ -15,7 +15,7 @@ import (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#method-startObserving
 type StartObserving struct {
-	Service string `json:"service"`
+	Service string
 }
 
 // NewStartObserving constructs a new StartObserving struct instance, with
@@ -53,7 +53,7 @@ func (t *StartObserving) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#method-stopObserving
 type StopObserving struct {
-	Service string `json:"service"`
+	Service string
 }
 
 // NewStopObserving constructs a new StopObserving struct instance, with
@@ -91,8 +91,8 @@ func (t *StopObserving) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#method-setRecording
 type SetRecording struct {
-	ShouldRecord bool   `json:"shouldRecord"`
-	Service      string `json:"service"`
+	ShouldRecord bool
+	Service      string
 }
 
 // NewSetRecording constructs a new SetRecording struct instance, with
@@ -131,7 +131,7 @@ func (t *SetRecording) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#method-clearEvents
 type ClearEvents struct {
-	Service string `json:"service"`
+	Service string
 }
 
 // NewClearEvents constructs a new ClearEvents struct instance, with

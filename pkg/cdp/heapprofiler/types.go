@@ -1,8 +1,6 @@
 package heapprofiler
 
-import (
-	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
-)
+import "github.com/daabr/chrome-vision/pkg/cdp/runtime"
 
 // Heap snapshot object id.
 //
@@ -14,13 +12,13 @@ type HeapSnapshotObjectID string
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#type-SamplingHeapProfileNode
 type SamplingHeapProfileNode struct {
 	// Function location.
-	CallFrame runtime.CallFrame `json:"callFrame"`
+	CallFrame runtime.CallFrame
 	// Allocations size in bytes for the node excluding children.
-	SelfSize float64 `json:"selfSize"`
+	SelfSize float64
 	// Node id. Ids are unique across all profiles collected between startSampling and stopSampling.
-	ID int64 `json:"id"`
+	ID int64
 	// Child nodes.
-	Children []SamplingHeapProfileNode `json:"children"`
+	Children []SamplingHeapProfileNode
 }
 
 // A single sample from a sampling profile.
@@ -28,18 +26,18 @@ type SamplingHeapProfileNode struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#type-SamplingHeapProfileSample
 type SamplingHeapProfileSample struct {
 	// Allocation size in bytes attributed to the sample.
-	Size float64 `json:"size"`
+	Size float64
 	// Id of the corresponding profile tree node.
-	NodeID int64 `json:"nodeId"`
+	NodeID int64
 	// Time-ordered sample ordinal number. It is unique across all profiles retrieved
 	// between startSampling and stopSampling.
-	Ordinal float64 `json:"ordinal"`
+	Ordinal float64
 }
 
 // Sampling profile.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#type-SamplingHeapProfile
 type SamplingHeapProfile struct {
-	Head    SamplingHeapProfileNode     `json:"head"`
-	Samples []SamplingHeapProfileSample `json:"samples"`
+	Head    SamplingHeapProfileNode
+	Samples []SamplingHeapProfileSample
 }

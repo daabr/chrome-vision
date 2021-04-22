@@ -6,12 +6,10 @@
 package cdpgen
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"path/filepath"
 	"regexp"
-	"sort"
 	"strings"
 )
 
@@ -22,29 +20,30 @@ const (
 	importURL = "github.com/daabr/chrome-vision/pkg/cdp"
 )
 
-// CDP protocol file (browser_protocol.json, js_protocol.json).
+// Protocol represents a CDP file (browser_protocol.json, js_protocol.json).
 type Protocol struct {
 	Version Version
 	Domains []Domain
 }
 
-// CDP protocol versions.
+// Version represents a CDP protocol versions.
 type Version struct {
 	Major, Minor string
 }
 
-// CDP domain (group of related types, commands and events within a protocl).
+// Domain represents a CDP domain (group of related types, commands and
+// events within a protocl).
 type Domain struct {
 	Domain                   string
 	Description              *string
 	Deprecated, Experimental bool
-	Dependencies             []string
+	Dependencies             []string // Unused, we rely on goimports.
 	Types                    []Type
 	Commands                 []Command
 	Events                   []Event
 }
 
-// CDP data type.
+// Type represents a CDP data type.
 type Type struct {
 	ID, Type                 string
 	Description              *string
@@ -67,7 +66,7 @@ type Property struct {
 	Items map[string]string
 }
 
-// CDP command.
+// Command in a CDP domain.
 type Command struct {
 	Name                     string
 	Description              *string
@@ -77,7 +76,7 @@ type Command struct {
 	Returns                  []Property
 }
 
-// CDP event.
+// Event in a CDP domain.
 type Event struct {
 	Name                     string
 	Description              *string
@@ -89,28 +88,28 @@ type Event struct {
 // (one Go package per CDP domain, up to 4 files per package).
 func Generate(p Protocol) {
 	for _, d := range p.Domains {
-		generateTypes(d) // For de-aliasing of built-in JSON types.
+		generateTypes(d) // Preparation for de-aliasing of built-in data types.
 	}
 	for _, d := range p.Domains {
 		pkg := strings.ToLower(d.Domain)
-		writeFile(cdpRoot+"/"+pkg, "doc.go", generateDoc(d, p.Version))
+		writeFile(pkg, "doc.go", generateDoc(d, p.Version))
 		if len(d.Types) > 0 {
-			writeFile(cdpRoot+"/"+pkg, "types.go", generateTypes(d))
+			writeFile(pkg, "types.go", generateTypes(d))
 		}
 		if len(d.Commands) > 0 {
-			writeFile(cdpRoot+"/"+pkg, "commands.go", generateCommands(d))
+			writeFile(pkg, "commands.go", generateCommands(d))
 		}
 		if len(d.Events) > 0 {
-			writeFile(cdpRoot+"/"+pkg, "events.go", generateEvents(d))
+			writeFile(pkg, "events.go", generateEvents(d))
 		}
 	}
 }
 
 func writeFile(dir, file, content string) {
-	if err := os.MkdirAll(dir, 0755); err != nil {
+	if err := os.MkdirAll(filepath.Join(cdpRoot, dir), 0755); err != nil {
 		log.Fatal(err)
 	}
-	f, err := os.Create(filepath.Join(dir, file))
+	f, err := os.Create(filepath.Join(cdpRoot, dir, file))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -122,43 +121,8 @@ func writeFile(dir, file, content string) {
 	}
 }
 
-// Generates Go import statements for types, commands and events files.
-// Not quite needed, given that we run `goimports` later, but still useful.
-func generateImports(b *strings.Builder, standrd, github []string) {
-	n := len(standrd) + len(github)
-	if n > 0 {
-		fmt.Fprint(b, "\n")
-		if n > 1 {
-			fmt.Fprintln(b, "import (")
-		}
-	}
-	sort.Strings(standrd)
-	for _, i := range standrd {
-		generateImport(b, n, i)
-	}
-	if len(standrd) > 0 && len(github) > 0 {
-		fmt.Fprint(b, "\n")
-	}
-	sort.Strings(github)
-	for _, i := range github {
-		generateImport(b, n, importURL+"/"+strings.ToLower(i))
-	}
-	if n > 1 {
-		fmt.Fprintln(b, ")")
-	}
-}
-
-func generateImport(b *strings.Builder, n int, s string) {
-	if n == 1 {
-		fmt.Fprint(b, "import ")
-	} else {
-		fmt.Fprint(b, "\t")
-	}
-	fmt.Fprintf(b, "%q\n", s)
-}
-
-// adjust applies Go naming conventions to CDP types and struct field names,
-// and resolves circular dependencies (https://crbug.com/1193242).
+// Apply Go naming conventions to CDP types and struct field names,
+// and avoid circular dependencies (https://crbug.com/1193242).
 func adjust(s string) string {
 	// "-" enables word capitalization by string.Title(), "_" doesn't.
 	s = strings.Title(strings.ReplaceAll(s, "_", "-"))
@@ -174,7 +138,7 @@ func adjust(s string) string {
 		re := regexp.MustCompile(`^(.*)\.`)
 		s = re.ReplaceAllStringFunc(s, strings.ToLower)
 
-		// Resolve circular dependencies (https://crbug.com/1193242).
+		// Avoid circular dependencies (https://crbug.com/1193242).
 		if t, ok := aliases[s]; ok {
 			s = t
 		}
@@ -182,8 +146,8 @@ func adjust(s string) string {
 	return s
 }
 
-// Convert the given built-in JSON type to a Go data type.
-func convertType(t string, arrayTypes map[string]string) string {
+// Convert a JSON data type to a Go data type.
+func transformType(t string, arrayTypes map[string]string) string {
 	switch t {
 	case "any", "object":
 		return "json.RawMessage"
@@ -197,7 +161,7 @@ func convertType(t string, arrayTypes map[string]string) string {
 		return "string"
 	case "array":
 		if item, ok := arrayTypes["type"]; ok {
-			return "[]" + convertType(item, nil)
+			return "[]" + transformType(item, nil)
 		}
 		return "[]" + adjust(arrayTypes["$ref"])
 	default:

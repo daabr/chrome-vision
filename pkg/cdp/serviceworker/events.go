@@ -2,15 +2,15 @@ package serviceworker
 
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#event-workerErrorReported
 type WorkerErrorReported struct {
-	ErrorMessage ServiceWorkerErrorMessage `json:"errorMessage"`
+	ErrorMessage ServiceWorkerErrorMessage
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#event-workerRegistrationUpdated
 type WorkerRegistrationUpdated struct {
-	Registrations []ServiceWorkerRegistration `json:"registrations"`
+	Registrations []ServiceWorkerRegistration
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#event-workerVersionUpdated
 type WorkerVersionUpdated struct {
-	Versions []ServiceWorkerVersion `json:"versions"`
+	Versions []ServiceWorkerVersion
 }

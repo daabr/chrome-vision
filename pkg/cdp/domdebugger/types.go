@@ -1,8 +1,6 @@
 package domdebugger
 
-import (
-	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
-)
+import "github.com/daabr/chrome-vision/pkg/cdp/runtime"
 
 // DOM breakpoint type.
 //
@@ -34,19 +32,19 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#type-EventListener
 type EventListener struct {
 	// `EventListener`'s type.
-	Type string `json:"type"`
+	Type string
 	// `EventListener`'s useCapture.
-	UseCapture bool `json:"useCapture"`
+	UseCapture bool
 	// `EventListener`'s passive flag.
-	Passive bool `json:"passive"`
+	Passive bool
 	// `EventListener`'s once flag.
-	Once bool `json:"once"`
+	Once bool
 	// Script id of the handler code.
-	ScriptID runtime.ScriptID `json:"scriptId"`
+	ScriptID runtime.ScriptID
 	// Line number in the script (0-based).
-	LineNumber int64 `json:"lineNumber"`
+	LineNumber int64
 	// Column number in the script (0-based).
-	ColumnNumber int64 `json:"columnNumber"`
+	ColumnNumber int64
 	// Event handler function value.
 	Handler *runtime.RemoteObject `json:"handler,omitempty"`
 	// Event original handler function value.

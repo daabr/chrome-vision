@@ -141,7 +141,7 @@ func (t *GetPartialAXTree) SetFetchRelatives(v bool) *GetPartialAXTree {
 type GetPartialAXTreeResponse struct {
 	// The `Accessibility.AXNode` for this DOM node, if it exists, plus its ancestors, siblings and
 	// children, if requested.
-	Nodes []AXNode `json:"nodes"`
+	Nodes []AXNode
 }
 
 // Do sends the GetPartialAXTree CDP command to a browser,
@@ -203,7 +203,7 @@ func (t *GetFullAXTree) SetMaxDepth(v int64) *GetFullAXTree {
 // GetFullAXTreeResponse contains the browser's response
 // to calling the GetFullAXTree CDP command with Do().
 type GetFullAXTreeResponse struct {
-	Nodes []AXNode `json:"nodes"`
+	Nodes []AXNode
 }
 
 // Do sends the GetFullAXTree CDP command to a browser,
@@ -237,7 +237,7 @@ func (t *GetFullAXTree) Do(ctx context.Context) (*GetFullAXTreeResponse, error) 
 //
 // This CDP method is experimental.
 type GetChildAXNodes struct {
-	ID string `json:"id"`
+	ID string
 }
 
 // NewGetChildAXNodes constructs a new GetChildAXNodes struct instance, with
@@ -256,7 +256,7 @@ func NewGetChildAXNodes(id string) *GetChildAXNodes {
 // GetChildAXNodesResponse contains the browser's response
 // to calling the GetChildAXNodes CDP command with Do().
 type GetChildAXNodesResponse struct {
-	Nodes []AXNode `json:"nodes"`
+	Nodes []AXNode
 }
 
 // Do sends the GetChildAXNodes CDP command to a browser,
@@ -366,7 +366,7 @@ func (t *QueryAXTree) SetRole(v string) *QueryAXTree {
 type QueryAXTreeResponse struct {
 	// A list of `Accessibility.AXNode` matching the specified attributes,
 	// including nodes that are ignored for accessibility.
-	Nodes []AXNode `json:"nodes"`
+	Nodes []AXNode
 }
 
 // Do sends the QueryAXTree CDP command to a browser,
