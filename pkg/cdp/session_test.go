@@ -3,6 +3,8 @@ package cdp_test
 import (
 	"context"
 	"log"
+	"os"
+	"testing"
 	"time"
 
 	"github.com/daabr/chrome-vision/pkg/cdp"
@@ -46,4 +48,82 @@ func ExampleBrowserFlags() {
 	}
 
 	cdp.Close(ctx)
+}
+
+func TestFromContext(t *testing.T) {
+	// Set up.
+	parentCtx, cancel := context.WithTimeout(context.Background(), time.Minute)
+	defer cancel()
+
+	ctx, err := cdp.NewContext(parentCtx)
+	if err != nil {
+		t.Fatalf("cdp.NewContext(ctx); got error: %s", err.Error())
+	}
+	defer func() {
+		if session, ok := cdp.FromContext(ctx); ok {
+			if session.OutputDir != nil {
+				os.RemoveAll(*session.OutputDir)
+			}
+		}
+	}()
+
+	// Test.
+	session, ok := cdp.FromContext(ctx)
+	if !ok {
+		t.Fatalf("cdp.FromContext(ctx); ok = %v, want %v", ok, !ok)
+	}
+	if session.OutputDir == nil {
+		t.Error("session.OutputDir = nil, want !nil")
+	}
+	if _, err := os.Stat(*session.OutputDir); err != nil {
+		t.Errorf("os.Stat(*session.OutputDir); got error: %s", err.Error())
+	}
+	if session.UserDataDir == nil {
+		t.Error("session.UserDataDir = nil, want !nil")
+	}
+	if _, err := os.Stat(*session.UserDataDir); err != nil {
+		t.Errorf("os.Stat(*session.UserDataDir); got error: %s", err.Error())
+	}
+
+	// Tear down.
+	cdp.Cancel(ctx)
+	cdp.Wait(ctx)
+}
+
+// TODO: test UserDataDir() (custom temp dir exists, default doesn't)
+func TestUserDataDir(t *testing.T) {
+	// Set up.
+	parentCtx, cancel := context.WithTimeout(context.Background(), time.Minute)
+	defer cancel()
+
+	dir := os.TempDir()
+	defer func() {
+		os.RemoveAll(dir)
+	}()
+
+	ctx, err := cdp.NewContext(parentCtx, cdp.UserDataDir(dir))
+	if err != nil {
+		t.Fatalf("cdp.NewContext(ctx); got error: %s", err.Error())
+	}
+	session, ok := cdp.FromContext(ctx)
+	if !ok {
+		t.Fatalf("cdp.FromContext(ctx); ok = %v, want %v", ok, !ok)
+	}
+	defer func() {
+		if session.OutputDir != nil {
+			os.RemoveAll(*session.OutputDir)
+		}
+	}()
+
+	// Test.
+	if session.UserDataDir == nil {
+		t.Fatalf("session.UserDataDir = nil, want !nil")
+	}
+	if *session.UserDataDir != dir {
+		t.Errorf("*session.UserDataDir = %v, want %v", *session.UserDataDir, dir)
+	}
+
+	// Tear down.
+	cdp.Cancel(ctx)
+	cdp.Wait(ctx)
 }
