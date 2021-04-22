@@ -81,7 +81,7 @@ func (t *Enable) Do(ctx context.Context) error {
 // This CDP method is deprecated.
 type GetSnapshot struct {
 	// Whitelist of computed styles to return.
-	ComputedStyleWhitelist []string
+	ComputedStyleWhitelist []string `json:"computedStyleWhitelist"`
 	// Whether or not to retrieve details of DOM listeners (default false).
 	IncludeEventListeners bool `json:"includeEventListeners,omitempty"`
 	// Whether to determine and include the paint order index of LayoutTreeNodes (default false).
@@ -134,11 +134,11 @@ func (t *GetSnapshot) SetIncludeUserAgentShadowTree(v bool) *GetSnapshot {
 // to calling the GetSnapshot CDP command with Do().
 type GetSnapshotResponse struct {
 	// The nodes in the DOM tree. The DOMNode at index 0 corresponds to the root document.
-	DomNodes []DOMNode
+	DomNodes []DOMNode `json:"domNodes"`
 	// The nodes in the layout tree.
-	LayoutTreeNodes []LayoutTreeNode
+	LayoutTreeNodes []LayoutTreeNode `json:"layoutTreeNodes"`
 	// Whitelisted ComputedStyle properties for each node in the layout tree.
-	ComputedStyles []ComputedStyle
+	ComputedStyles []ComputedStyle `json:"computedStyles"`
 }
 
 // Do sends the GetSnapshot CDP command to a browser,
@@ -173,7 +173,7 @@ func (t *GetSnapshot) Do(ctx context.Context) (*GetSnapshotResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#method-captureSnapshot
 type CaptureSnapshot struct {
 	// Whitelist of computed styles to return.
-	ComputedStyles []string
+	ComputedStyles []string `json:"computedStyles"`
 	// Whether to include layout object paint orders into the snapshot.
 	IncludePaintOrder bool `json:"includePaintOrder,omitempty"`
 	// Whether to include DOM rectangles (offsetRects, clientRects, scrollRects) into the snapshot
@@ -251,9 +251,9 @@ func (t *CaptureSnapshot) SetIncludeTextColorOpacities(v bool) *CaptureSnapshot 
 // to calling the CaptureSnapshot CDP command with Do().
 type CaptureSnapshotResponse struct {
 	// The nodes in the DOM tree. The DOMNode at index 0 corresponds to the root document.
-	Documents []DocumentSnapshot
+	Documents []DocumentSnapshot `json:"documents"`
 	// Shared string table that all string properties refer to with indexes.
-	Strings []string
+	Strings []string `json:"strings"`
 }
 
 // Do sends the CaptureSnapshot CDP command to a browser,

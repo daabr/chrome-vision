@@ -21,7 +21,7 @@ import (
 // This CDP method is deprecated.
 // This CDP method is experimental.
 type AddScriptToEvaluateOnLoad struct {
-	ScriptSource string
+	ScriptSource string `json:"scriptSource"`
 }
 
 // NewAddScriptToEvaluateOnLoad constructs a new AddScriptToEvaluateOnLoad struct instance, with
@@ -42,7 +42,7 @@ func NewAddScriptToEvaluateOnLoad(scriptSource string) *AddScriptToEvaluateOnLoa
 // to calling the AddScriptToEvaluateOnLoad CDP command with Do().
 type AddScriptToEvaluateOnLoadResponse struct {
 	// Identifier of the added script.
-	Identifier string
+	Identifier string `json:"identifier"`
 }
 
 // Do sends the AddScriptToEvaluateOnLoad CDP command to a browser,
@@ -73,7 +73,7 @@ func (t *AddScriptToEvaluateOnLoad) Do(ctx context.Context) (*AddScriptToEvaluat
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-addScriptToEvaluateOnNewDocument
 type AddScriptToEvaluateOnNewDocument struct {
-	Source string
+	Source string `json:"source"`
 	// If specified, creates an isolated world with the given name and evaluates given script in it.
 	// This world name will be used as the ExecutionContextDescription::name when the corresponding
 	// event is emitted.
@@ -110,7 +110,7 @@ func (t *AddScriptToEvaluateOnNewDocument) SetWorldName(v string) *AddScriptToEv
 // to calling the AddScriptToEvaluateOnNewDocument CDP command with Do().
 type AddScriptToEvaluateOnNewDocumentResponse struct {
 	// Identifier of the added script.
-	Identifier string
+	Identifier string `json:"identifier"`
 }
 
 // Do sends the AddScriptToEvaluateOnNewDocument CDP command to a browser,
@@ -249,7 +249,7 @@ func (t *CaptureScreenshot) SetCaptureBeyondViewport(v bool) *CaptureScreenshot 
 // to calling the CaptureScreenshot CDP command with Do().
 type CaptureScreenshotResponse struct {
 	// Base64-encoded image data. (Encoded as a base64 string when passed over JSON)
-	Data string
+	Data string `json:"data"`
 }
 
 // Do sends the CaptureScreenshot CDP command to a browser,
@@ -311,7 +311,7 @@ func (t *CaptureSnapshot) SetFormat(v string) *CaptureSnapshot {
 // to calling the CaptureSnapshot CDP command with Do().
 type CaptureSnapshotResponse struct {
 	// Serialized page data.
-	Data string
+	Data string `json:"data"`
 }
 
 // Do sends the CaptureSnapshot CDP command to a browser,
@@ -343,7 +343,7 @@ func (t *CaptureSnapshot) Do(ctx context.Context) (*CaptureSnapshotResponse, err
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-createIsolatedWorld
 type CreateIsolatedWorld struct {
 	// Id of the frame in which the isolated world should be created.
-	FrameID string
+	FrameID string `json:"frameId"`
 	// An optional name which is reported in the Execution Context.
 	WorldName string `json:"worldName,omitempty"`
 	// Whether or not universal access should be granted to the isolated world. This is a powerful
@@ -385,7 +385,7 @@ func (t *CreateIsolatedWorld) SetGrantUniveralAccess(v bool) *CreateIsolatedWorl
 // to calling the CreateIsolatedWorld CDP command with Do().
 type CreateIsolatedWorldResponse struct {
 	// Execution context of the isolated world.
-	ExecutionContextID runtime.ExecutionContextID
+	ExecutionContextID runtime.ExecutionContextID `json:"executionContextId"`
 }
 
 // Do sends the CreateIsolatedWorld CDP command to a browser,
@@ -488,8 +488,8 @@ func NewGetAppManifest() *GetAppManifest {
 // to calling the GetAppManifest CDP command with Do().
 type GetAppManifestResponse struct {
 	// Manifest location.
-	URL    string
-	Errors []AppManifestError
+	URL    string             `json:"url"`
+	Errors []AppManifestError `json:"errors"`
 	// Manifest content.
 	Data string `json:"data,omitempty"`
 	// Parsed manifest properties
@@ -537,7 +537,7 @@ func NewGetInstallabilityErrors() *GetInstallabilityErrors {
 // GetInstallabilityErrorsResponse contains the browser's response
 // to calling the GetInstallabilityErrors CDP command with Do().
 type GetInstallabilityErrorsResponse struct {
-	InstallabilityErrors []InstallabilityError
+	InstallabilityErrors []InstallabilityError `json:"installabilityErrors"`
 }
 
 // Do sends the GetInstallabilityErrors CDP command to a browser,
@@ -620,7 +620,7 @@ func NewGetFrameTree() *GetFrameTree {
 // to calling the GetFrameTree CDP command with Do().
 type GetFrameTreeResponse struct {
 	// Present frame tree structure.
-	FrameTree FrameTree
+	FrameTree FrameTree `json:"frameTree"`
 }
 
 // Do sends the GetFrameTree CDP command to a browser,
@@ -663,21 +663,21 @@ type GetLayoutMetricsResponse struct {
 	// Deprecated metrics relating to the layout viewport. Can be in DP or in CSS pixels depending on the `enable-use-zoom-for-dsf` flag. Use `cssLayoutViewport` instead.
 	//
 	// This CDP parameter is deprecated.
-	LayoutViewport LayoutViewport
+	LayoutViewport LayoutViewport `json:"layoutViewport"`
 	// Deprecated metrics relating to the visual viewport. Can be in DP or in CSS pixels depending on the `enable-use-zoom-for-dsf` flag. Use `cssVisualViewport` instead.
 	//
 	// This CDP parameter is deprecated.
-	VisualViewport VisualViewport
+	VisualViewport VisualViewport `json:"visualViewport"`
 	// Deprecated size of scrollable area. Can be in DP or in CSS pixels depending on the `enable-use-zoom-for-dsf` flag. Use `cssContentSize` instead.
 	//
 	// This CDP parameter is deprecated.
-	ContentSize dom.Rect
+	ContentSize dom.Rect `json:"contentSize"`
 	// Metrics relating to the layout viewport in CSS pixels.
-	CssLayoutViewport LayoutViewport
+	CssLayoutViewport LayoutViewport `json:"cssLayoutViewport"`
 	// Metrics relating to the visual viewport in CSS pixels.
-	CssVisualViewport VisualViewport
+	CssVisualViewport VisualViewport `json:"cssVisualViewport"`
 	// Size of scrollable area in CSS pixels.
-	CssContentSize dom.Rect
+	CssContentSize dom.Rect `json:"cssContentSize"`
 }
 
 // Do sends the GetLayoutMetrics CDP command to a browser,
@@ -718,9 +718,9 @@ func NewGetNavigationHistory() *GetNavigationHistory {
 // to calling the GetNavigationHistory CDP command with Do().
 type GetNavigationHistoryResponse struct {
 	// Index of the current navigation history entry.
-	CurrentIndex int64
+	CurrentIndex int64 `json:"currentIndex"`
 	// Array of navigation history entries.
-	Entries []NavigationEntry
+	Entries []NavigationEntry `json:"entries"`
 }
 
 // Do sends the GetNavigationHistory CDP command to a browser,
@@ -780,9 +780,9 @@ func (t *ResetNavigationHistory) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type GetResourceContent struct {
 	// Frame id to get resource for.
-	FrameID string
+	FrameID string `json:"frameId"`
 	// URL of the resource to get content for.
-	URL string
+	URL string `json:"url"`
 }
 
 // NewGetResourceContent constructs a new GetResourceContent struct instance, with
@@ -803,9 +803,9 @@ func NewGetResourceContent(frameID string, url string) *GetResourceContent {
 // to calling the GetResourceContent CDP command with Do().
 type GetResourceContentResponse struct {
 	// Resource content.
-	Content string
+	Content string `json:"content"`
 	// True, if content was served as base64.
-	Base64Encoded bool
+	Base64Encoded bool `json:"base64Encoded"`
 }
 
 // Do sends the GetResourceContent CDP command to a browser,
@@ -854,7 +854,7 @@ func NewGetResourceTree() *GetResourceTree {
 // to calling the GetResourceTree CDP command with Do().
 type GetResourceTreeResponse struct {
 	// Present frame / resource tree structure.
-	FrameTree FrameResourceTree
+	FrameTree FrameResourceTree `json:"frameTree"`
 }
 
 // Do sends the GetResourceTree CDP command to a browser,
@@ -882,7 +882,7 @@ func (t *GetResourceTree) Do(ctx context.Context) (*GetResourceTreeResponse, err
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-handleJavaScriptDialog
 type HandleJavaScriptDialog struct {
 	// Whether to accept or dismiss the dialog.
-	Accept bool
+	Accept bool `json:"accept"`
 	// The text to enter into the dialog prompt before accepting. Used only if this is a prompt
 	// dialog.
 	PromptText string `json:"promptText,omitempty"`
@@ -934,7 +934,7 @@ func (t *HandleJavaScriptDialog) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-navigate
 type Navigate struct {
 	// URL to navigate the page to.
-	URL string
+	URL string `json:"url"`
 	// Referrer URL.
 	Referrer string `json:"referrer,omitempty"`
 	// Intended transition type.
@@ -1000,7 +1000,7 @@ func (t *Navigate) SetReferrerPolicy(v string) *Navigate {
 // to calling the Navigate CDP command with Do().
 type NavigateResponse struct {
 	// Frame id that has navigated (or failed to navigate)
-	FrameID string
+	FrameID string `json:"frameId"`
 	// Loader identifier.
 	LoaderID string `json:"loaderId,omitempty"`
 	// User friendly error message, present if and only if navigation has failed.
@@ -1036,7 +1036,7 @@ func (t *Navigate) Do(ctx context.Context) (*NavigateResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-navigateToHistoryEntry
 type NavigateToHistoryEntry struct {
 	// Unique id of the entry to navigate to.
-	EntryID int64
+	EntryID int64 `json:"entryId"`
 }
 
 // NewNavigateToHistoryEntry constructs a new NavigateToHistoryEntry struct instance, with
@@ -1291,7 +1291,7 @@ func (t *PrintToPDF) SetTransferMode(v string) *PrintToPDF {
 // to calling the PrintToPDF CDP command with Do().
 type PrintToPDFResponse struct {
 	// Base64-encoded pdf data. Empty if |returnAsStream| is specified. (Encoded as a base64 string when passed over JSON)
-	Data string
+	Data string `json:"data"`
 	// A handle of the stream that holds resulting PDF data.
 	//
 	// This CDP parameter is experimental.
@@ -1388,7 +1388,7 @@ func (t *Reload) Do(ctx context.Context) error {
 // This CDP method is deprecated.
 // This CDP method is experimental.
 type RemoveScriptToEvaluateOnLoad struct {
-	Identifier string
+	Identifier string `json:"identifier"`
 }
 
 // NewRemoveScriptToEvaluateOnLoad constructs a new RemoveScriptToEvaluateOnLoad struct instance, with
@@ -1429,7 +1429,7 @@ func (t *RemoveScriptToEvaluateOnLoad) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-removeScriptToEvaluateOnNewDocument
 type RemoveScriptToEvaluateOnNewDocument struct {
-	Identifier string
+	Identifier string `json:"identifier"`
 }
 
 // NewRemoveScriptToEvaluateOnNewDocument constructs a new RemoveScriptToEvaluateOnNewDocument struct instance, with
@@ -1470,7 +1470,7 @@ func (t *RemoveScriptToEvaluateOnNewDocument) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type ScreencastFrameAck struct {
 	// Frame number.
-	SessionID int64
+	SessionID int64 `json:"sessionId"`
 }
 
 // NewScreencastFrameAck constructs a new ScreencastFrameAck struct instance, with
@@ -1513,11 +1513,11 @@ func (t *ScreencastFrameAck) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SearchInResource struct {
 	// Frame id for resource to search in.
-	FrameID string
+	FrameID string `json:"frameId"`
 	// URL of the resource to search in.
-	URL string
+	URL string `json:"url"`
 	// String to search for.
-	Query string
+	Query string `json:"query"`
 	// If true, search is case sensitive.
 	CaseSensitive bool `json:"caseSensitive,omitempty"`
 	// If true, treats string parameter as regex.
@@ -1561,7 +1561,7 @@ func (t *SearchInResource) SetIsRegex(v bool) *SearchInResource {
 // to calling the SearchInResource CDP command with Do().
 type SearchInResourceResponse struct {
 	// List of search matches.
-	Result []debugger.SearchMatch
+	Result []debugger.SearchMatch `json:"result"`
 }
 
 // Do sends the SearchInResource CDP command to a browser,
@@ -1595,7 +1595,7 @@ func (t *SearchInResource) Do(ctx context.Context) (*SearchInResourceResponse, e
 // This CDP method is experimental.
 type SetAdBlockingEnabled struct {
 	// Whether to block ads.
-	Enabled bool
+	Enabled bool `json:"enabled"`
 }
 
 // NewSetAdBlockingEnabled constructs a new SetAdBlockingEnabled struct instance, with
@@ -1638,7 +1638,7 @@ func (t *SetAdBlockingEnabled) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetBypassCSP struct {
 	// Whether to bypass page CSP.
-	Enabled bool
+	Enabled bool `json:"enabled"`
 }
 
 // NewSetBypassCSP constructs a new SetBypassCSP struct instance, with
@@ -1680,7 +1680,7 @@ func (t *SetBypassCSP) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type GetPermissionsPolicyState struct {
-	FrameID string
+	FrameID string `json:"frameId"`
 }
 
 // NewGetPermissionsPolicyState constructs a new GetPermissionsPolicyState struct instance, with
@@ -1699,7 +1699,7 @@ func NewGetPermissionsPolicyState(frameID string) *GetPermissionsPolicyState {
 // GetPermissionsPolicyStateResponse contains the browser's response
 // to calling the GetPermissionsPolicyState CDP command with Do().
 type GetPermissionsPolicyStateResponse struct {
-	States []PermissionsPolicyFeatureState
+	States []PermissionsPolicyFeatureState `json:"states"`
 }
 
 // Do sends the GetPermissionsPolicyState CDP command to a browser,
@@ -1733,7 +1733,7 @@ func (t *GetPermissionsPolicyState) Do(ctx context.Context) (*GetPermissionsPoli
 // This CDP method is experimental.
 type SetFontFamilies struct {
 	// Specifies font families to set. If a font family is not specified, it won't be changed.
-	FontFamilies FontFamilies
+	FontFamilies FontFamilies `json:"fontFamilies"`
 }
 
 // NewSetFontFamilies constructs a new SetFontFamilies struct instance, with
@@ -1776,7 +1776,7 @@ func (t *SetFontFamilies) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetFontSizes struct {
 	// Specifies font sizes to set. If a font size is not specified, it won't be changed.
-	FontSizes FontSizes
+	FontSizes FontSizes `json:"fontSizes"`
 }
 
 // NewSetFontSizes constructs a new SetFontSizes struct instance, with
@@ -1817,9 +1817,9 @@ func (t *SetFontSizes) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setDocumentContent
 type SetDocumentContent struct {
 	// Frame id to set HTML for.
-	FrameID string
+	FrameID string `json:"frameId"`
 	// HTML content to set.
-	Html string
+	Html string `json:"html"`
 }
 
 // NewSetDocumentContent constructs a new SetDocumentContent struct instance, with
@@ -1863,7 +1863,7 @@ func (t *SetDocumentContent) Do(ctx context.Context) error {
 type SetDownloadBehavior struct {
 	// Whether to allow all or deny all download requests, or use default Chrome behavior if
 	// available (otherwise deny).
-	Behavior string
+	Behavior string `json:"behavior"`
 	// The default path to save downloaded files to. This is requred if behavior is set to 'allow'
 	DownloadPath string `json:"downloadPath,omitempty"`
 }
@@ -1918,7 +1918,7 @@ func (t *SetDownloadBehavior) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetLifecycleEventsEnabled struct {
 	// If true, starts emitting lifecycle events.
-	Enabled bool
+	Enabled bool `json:"enabled"`
 }
 
 // NewSetLifecycleEventsEnabled constructs a new SetLifecycleEventsEnabled struct instance, with
@@ -2155,7 +2155,7 @@ func (t *Close) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetWebLifecycleState struct {
 	// Target lifecycle state
-	State string
+	State string `json:"state"`
 }
 
 // NewSetWebLifecycleState constructs a new SetWebLifecycleState struct instance, with
@@ -2232,7 +2232,7 @@ func (t *StopScreencast) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type SetProduceCompilationCache struct {
-	Enabled bool
+	Enabled bool `json:"enabled"`
 }
 
 // NewSetProduceCompilationCache constructs a new SetProduceCompilationCache struct instance, with
@@ -2282,7 +2282,7 @@ func (t *SetProduceCompilationCache) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type ProduceCompilationCache struct {
-	Scripts []CompilationCacheParams
+	Scripts []CompilationCacheParams `json:"scripts"`
 }
 
 // NewProduceCompilationCache constructs a new ProduceCompilationCache struct instance, with
@@ -2325,9 +2325,9 @@ func (t *ProduceCompilationCache) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type AddCompilationCache struct {
-	URL string
+	URL string `json:"url"`
 	// Base64-encoded data (Encoded as a base64 string when passed over JSON)
-	Data string
+	Data string `json:"data"`
 }
 
 // NewAddCompilationCache constructs a new AddCompilationCache struct instance, with
@@ -2405,7 +2405,7 @@ func (t *ClearCompilationCache) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type GenerateTestReport struct {
 	// Message to be displayed in the report.
-	Message string
+	Message string `json:"message"`
 	// Specifies the endpoint group to deliver the report to.
 	Group string `json:"group,omitempty"`
 }
@@ -2494,7 +2494,7 @@ func (t *WaitForDebugger) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type SetInterceptFileChooserDialog struct {
-	Enabled bool
+	Enabled bool `json:"enabled"`
 }
 
 // NewSetInterceptFileChooserDialog constructs a new SetInterceptFileChooserDialog struct instance, with

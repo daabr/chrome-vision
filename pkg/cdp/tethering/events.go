@@ -5,7 +5,7 @@ package tethering
 // https://chromedevtools.github.io/devtools-protocol/tot/Tethering/#event-accepted
 type Accepted struct {
 	// Port number that was successfully bound.
-	Port int64
+	Port int64 `json:"port"`
 	// Connection id to be used.
-	ConnectionID string
+	ConnectionID string `json:"connectionId"`
 }

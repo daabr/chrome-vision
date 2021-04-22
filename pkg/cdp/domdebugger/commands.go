@@ -17,7 +17,7 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-getEventListeners
 type GetEventListeners struct {
 	// Identifier of the object to return listeners for.
-	ObjectID runtime.RemoteObjectID
+	ObjectID runtime.RemoteObjectID `json:"objectId"`
 	// The maximum depth at which Node children should be retrieved, defaults to 1. Use -1 for the
 	// entire subtree or provide an integer larger than 0.
 	Depth int64 `json:"depth,omitempty"`
@@ -61,7 +61,7 @@ func (t *GetEventListeners) SetPierce(v bool) *GetEventListeners {
 // to calling the GetEventListeners CDP command with Do().
 type GetEventListenersResponse struct {
 	// Array of relevant listeners.
-	Listeners []EventListener
+	Listeners []EventListener `json:"listeners"`
 }
 
 // Do sends the GetEventListeners CDP command to a browser,
@@ -93,9 +93,9 @@ func (t *GetEventListeners) Do(ctx context.Context) (*GetEventListenersResponse,
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-removeDOMBreakpoint
 type RemoveDOMBreakpoint struct {
 	// Identifier of the node to remove breakpoint from.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// Type of the breakpoint to remove.
-	Type string
+	Type string `json:"type"`
 }
 
 // NewRemoveDOMBreakpoint constructs a new RemoveDOMBreakpoint struct instance, with
@@ -135,7 +135,7 @@ func (t *RemoveDOMBreakpoint) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-removeEventListenerBreakpoint
 type RemoveEventListenerBreakpoint struct {
 	// Event name.
-	EventName string
+	EventName string `json:"eventName"`
 	// EventTarget interface name.
 	//
 	// This CDP parameter is experimental.
@@ -191,7 +191,7 @@ func (t *RemoveEventListenerBreakpoint) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type RemoveInstrumentationBreakpoint struct {
 	// Instrumentation name to stop on.
-	EventName string
+	EventName string `json:"eventName"`
 }
 
 // NewRemoveInstrumentationBreakpoint constructs a new RemoveInstrumentationBreakpoint struct instance, with
@@ -232,7 +232,7 @@ func (t *RemoveInstrumentationBreakpoint) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-removeXHRBreakpoint
 type RemoveXHRBreakpoint struct {
 	// Resource URL substring.
-	URL string
+	URL string `json:"url"`
 }
 
 // NewRemoveXHRBreakpoint constructs a new RemoveXHRBreakpoint struct instance, with
@@ -273,7 +273,7 @@ func (t *RemoveXHRBreakpoint) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetBreakOnCSPViolation struct {
 	// CSP Violations to stop upon.
-	ViolationTypes []CSPViolationType
+	ViolationTypes []CSPViolationType `json:"violationTypes"`
 }
 
 // NewSetBreakOnCSPViolation constructs a new SetBreakOnCSPViolation struct instance, with
@@ -314,9 +314,9 @@ func (t *SetBreakOnCSPViolation) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-setDOMBreakpoint
 type SetDOMBreakpoint struct {
 	// Identifier of the node to set breakpoint on.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// Type of the operation to stop upon.
-	Type string
+	Type string `json:"type"`
 }
 
 // NewSetDOMBreakpoint constructs a new SetDOMBreakpoint struct instance, with
@@ -356,7 +356,7 @@ func (t *SetDOMBreakpoint) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-setEventListenerBreakpoint
 type SetEventListenerBreakpoint struct {
 	// DOM Event name to stop on (any DOM event will do).
-	EventName string
+	EventName string `json:"eventName"`
 	// EventTarget interface name to stop on. If equal to `"*"` or not provided, will stop on any
 	// EventTarget.
 	//
@@ -414,7 +414,7 @@ func (t *SetEventListenerBreakpoint) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetInstrumentationBreakpoint struct {
 	// Instrumentation name to stop on.
-	EventName string
+	EventName string `json:"eventName"`
 }
 
 // NewSetInstrumentationBreakpoint constructs a new SetInstrumentationBreakpoint struct instance, with
@@ -455,7 +455,7 @@ func (t *SetInstrumentationBreakpoint) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#method-setXHRBreakpoint
 type SetXHRBreakpoint struct {
 	// Resource URL substring. All XHRs having this substring in the URL will get stopped upon.
-	URL string
+	URL string `json:"url"`
 }
 
 // NewSetXHRBreakpoint constructs a new SetXHRBreakpoint struct instance, with

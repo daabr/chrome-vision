@@ -12,13 +12,13 @@ import "github.com/daabr/chrome-vision/pkg/cdp/network"
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#event-requestPaused
 type RequestPaused struct {
 	// Each request the page makes will have a unique id.
-	RequestID string
+	RequestID string `json:"requestId"`
 	// The details of the request.
-	Request network.Request
+	Request network.Request `json:"request"`
 	// The id of the frame that initiated the request.
-	FrameID string
+	FrameID string `json:"frameId"`
 	// How the requested resource will be used.
-	ResourceType string
+	ResourceType string `json:"resourceType"`
 	// Response error if intercepted at response stage.
 	ResponseErrorReason string `json:"responseErrorReason,omitempty"`
 	// Response code if intercepted at response stage.
@@ -36,15 +36,15 @@ type RequestPaused struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#event-authRequired
 type AuthRequired struct {
 	// Each request the page makes will have a unique id.
-	RequestID string
+	RequestID string `json:"requestId"`
 	// The details of the request.
-	Request network.Request
+	Request network.Request `json:"request"`
 	// The id of the frame that initiated the request.
-	FrameID string
+	FrameID string `json:"frameId"`
 	// How the requested resource will be used.
-	ResourceType string
+	ResourceType string `json:"resourceType"`
 	// Details of the Authorization Challenge encountered.
 	// If this is set, client should respond with continueRequest that
 	// contains AuthChallengeResponse.
-	AuthChallenge AuthChallenge
+	AuthChallenge AuthChallenge `json:"authChallenge"`
 }

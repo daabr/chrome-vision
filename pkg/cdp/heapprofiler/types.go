@@ -12,13 +12,13 @@ type HeapSnapshotObjectID string
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#type-SamplingHeapProfileNode
 type SamplingHeapProfileNode struct {
 	// Function location.
-	CallFrame runtime.CallFrame
+	CallFrame runtime.CallFrame `json:"callFrame"`
 	// Allocations size in bytes for the node excluding children.
-	SelfSize float64
+	SelfSize float64 `json:"selfSize"`
 	// Node id. Ids are unique across all profiles collected between startSampling and stopSampling.
-	ID int64
+	ID int64 `json:"id"`
 	// Child nodes.
-	Children []SamplingHeapProfileNode
+	Children []SamplingHeapProfileNode `json:"children"`
 }
 
 // A single sample from a sampling profile.
@@ -26,18 +26,18 @@ type SamplingHeapProfileNode struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#type-SamplingHeapProfileSample
 type SamplingHeapProfileSample struct {
 	// Allocation size in bytes attributed to the sample.
-	Size float64
+	Size float64 `json:"size"`
 	// Id of the corresponding profile tree node.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// Time-ordered sample ordinal number. It is unique across all profiles retrieved
 	// between startSampling and stopSampling.
-	Ordinal float64
+	Ordinal float64 `json:"ordinal"`
 }
 
 // Sampling profile.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#type-SamplingHeapProfile
 type SamplingHeapProfile struct {
-	Head    SamplingHeapProfileNode
-	Samples []SamplingHeapProfileSample
+	Head    SamplingHeapProfileNode     `json:"head"`
+	Samples []SamplingHeapProfileSample `json:"samples"`
 }

@@ -19,7 +19,7 @@ import (
 // This CDP method is experimental.
 type SetAcceptedEncodings struct {
 	// List of accepted content encodings.
-	Encodings []ContentEncoding
+	Encodings []ContentEncoding `json:"encodings"`
 }
 
 // NewSetAcceptedEncodings constructs a new SetAcceptedEncodings struct instance, with
@@ -111,7 +111,7 @@ func NewCanClearBrowserCache() *CanClearBrowserCache {
 // to calling the CanClearBrowserCache CDP command with Do().
 type CanClearBrowserCacheResponse struct {
 	// True if browser cache can be cleared.
-	Result bool
+	Result bool `json:"result"`
 }
 
 // Do sends the CanClearBrowserCache CDP command to a browser,
@@ -156,7 +156,7 @@ func NewCanClearBrowserCookies() *CanClearBrowserCookies {
 // to calling the CanClearBrowserCookies CDP command with Do().
 type CanClearBrowserCookiesResponse struct {
 	// True if browser cookies can be cleared.
-	Result bool
+	Result bool `json:"result"`
 }
 
 // Do sends the CanClearBrowserCookies CDP command to a browser,
@@ -201,7 +201,7 @@ func NewCanEmulateNetworkConditions() *CanEmulateNetworkConditions {
 // to calling the CanEmulateNetworkConditions CDP command with Do().
 type CanEmulateNetworkConditionsResponse struct {
 	// True if emulation of network conditions is supported.
-	Result bool
+	Result bool `json:"result"`
 }
 
 // Do sends the CanEmulateNetworkConditions CDP command to a browser,
@@ -295,7 +295,7 @@ func (t *ClearBrowserCookies) Do(ctx context.Context) error {
 // This CDP method is deprecated.
 // This CDP method is experimental.
 type ContinueInterceptedRequest struct {
-	InterceptionID string
+	InterceptionID string `json:"interceptionId"`
 	// If set this causes the request to fail with the given reason. Passing `Aborted` for requests
 	// marked with `isNavigationRequest` also cancels the navigation. Must not be set in response
 	// to an authChallenge.
@@ -426,7 +426,7 @@ func (t *ContinueInterceptedRequest) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-deleteCookies
 type DeleteCookies struct {
 	// Name of the cookies to remove.
-	Name string
+	Name string `json:"name"`
 	// If specified, deletes all the cookies with the given name where domain and path match
 	// provided URL.
 	URL string `json:"url,omitempty"`
@@ -530,13 +530,13 @@ func (t *Disable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-emulateNetworkConditions
 type EmulateNetworkConditions struct {
 	// True to emulate internet disconnection.
-	Offline bool
+	Offline bool `json:"offline"`
 	// Minimum latency from request sent to response headers received (ms).
-	Latency float64
+	Latency float64 `json:"latency"`
 	// Maximal aggregated download throughput (bytes/sec). -1 disables download throttling.
-	DownloadThroughput float64
+	DownloadThroughput float64 `json:"downloadThroughput"`
 	// Maximal aggregated upload throughput (bytes/sec).  -1 disables upload throttling.
-	UploadThroughput float64
+	UploadThroughput float64 `json:"uploadThroughput"`
 	// Connection type if known.
 	ConnectionType string `json:"connectionType,omitempty"`
 }
@@ -679,7 +679,7 @@ func NewGetAllCookies() *GetAllCookies {
 // to calling the GetAllCookies CDP command with Do().
 type GetAllCookiesResponse struct {
 	// Array of cookie objects.
-	Cookies []Cookie
+	Cookies []Cookie `json:"cookies"`
 }
 
 // Do sends the GetAllCookies CDP command to a browser,
@@ -709,7 +709,7 @@ func (t *GetAllCookies) Do(ctx context.Context) (*GetAllCookiesResponse, error) 
 // This CDP method is experimental.
 type GetCertificate struct {
 	// Origin to get certificate for.
-	Origin string
+	Origin string `json:"origin"`
 }
 
 // NewGetCertificate constructs a new GetCertificate struct instance, with
@@ -728,7 +728,7 @@ func NewGetCertificate(origin string) *GetCertificate {
 // GetCertificateResponse contains the browser's response
 // to calling the GetCertificate CDP command with Do().
 type GetCertificateResponse struct {
-	TableNames []string
+	TableNames []string `json:"tableNames"`
 }
 
 // Do sends the GetCertificate CDP command to a browser,
@@ -790,7 +790,7 @@ func (t *GetCookies) SetURLs(v []string) *GetCookies {
 // to calling the GetCookies CDP command with Do().
 type GetCookiesResponse struct {
 	// Array of cookie objects.
-	Cookies []Cookie
+	Cookies []Cookie `json:"cookies"`
 }
 
 // Do sends the GetCookies CDP command to a browser,
@@ -822,7 +822,7 @@ func (t *GetCookies) Do(ctx context.Context) (*GetCookiesResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getResponseBody
 type GetResponseBody struct {
 	// Identifier of the network request to get content for.
-	RequestID string
+	RequestID string `json:"requestId"`
 }
 
 // NewGetResponseBody constructs a new GetResponseBody struct instance, with
@@ -840,9 +840,9 @@ func NewGetResponseBody(requestID string) *GetResponseBody {
 // to calling the GetResponseBody CDP command with Do().
 type GetResponseBodyResponse struct {
 	// Response body.
-	Body string
+	Body string `json:"body"`
 	// True, if content was sent as base64.
-	Base64Encoded bool
+	Base64Encoded bool `json:"base64Encoded"`
 }
 
 // Do sends the GetResponseBody CDP command to a browser,
@@ -874,7 +874,7 @@ func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResponse, err
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-getRequestPostData
 type GetRequestPostData struct {
 	// Identifier of the network request to get content for.
-	RequestID string
+	RequestID string `json:"requestId"`
 }
 
 // NewGetRequestPostData constructs a new GetRequestPostData struct instance, with
@@ -892,7 +892,7 @@ func NewGetRequestPostData(requestID string) *GetRequestPostData {
 // to calling the GetRequestPostData CDP command with Do().
 type GetRequestPostDataResponse struct {
 	// Request body string, omitting files from multipart requests
-	PostData string
+	PostData string `json:"postData"`
 }
 
 // Do sends the GetRequestPostData CDP command to a browser,
@@ -926,7 +926,7 @@ func (t *GetRequestPostData) Do(ctx context.Context) (*GetRequestPostDataRespons
 // This CDP method is experimental.
 type GetResponseBodyForInterception struct {
 	// Identifier for the intercepted request to get body for.
-	InterceptionID string
+	InterceptionID string `json:"interceptionId"`
 }
 
 // NewGetResponseBodyForInterception constructs a new GetResponseBodyForInterception struct instance, with
@@ -946,9 +946,9 @@ func NewGetResponseBodyForInterception(interceptionID string) *GetResponseBodyFo
 // to calling the GetResponseBodyForInterception CDP command with Do().
 type GetResponseBodyForInterceptionResponse struct {
 	// Response body.
-	Body string
+	Body string `json:"body"`
 	// True, if content was sent as base64.
-	Base64Encoded bool
+	Base64Encoded bool `json:"base64Encoded"`
 }
 
 // Do sends the GetResponseBodyForInterception CDP command to a browser,
@@ -984,7 +984,7 @@ func (t *GetResponseBodyForInterception) Do(ctx context.Context) (*GetResponseBo
 //
 // This CDP method is experimental.
 type TakeResponseBodyForInterceptionAsStream struct {
-	InterceptionID string
+	InterceptionID string `json:"interceptionId"`
 }
 
 // NewTakeResponseBodyForInterceptionAsStream constructs a new TakeResponseBodyForInterceptionAsStream struct instance, with
@@ -1003,7 +1003,7 @@ func NewTakeResponseBodyForInterceptionAsStream(interceptionID string) *TakeResp
 // TakeResponseBodyForInterceptionAsStreamResponse contains the browser's response
 // to calling the TakeResponseBodyForInterceptionAsStream CDP command with Do().
 type TakeResponseBodyForInterceptionAsStreamResponse struct {
-	Stream string
+	Stream string `json:"stream"`
 }
 
 // Do sends the TakeResponseBodyForInterceptionAsStream CDP command to a browser,
@@ -1039,7 +1039,7 @@ func (t *TakeResponseBodyForInterceptionAsStream) Do(ctx context.Context) (*Take
 // This CDP method is experimental.
 type ReplayXHR struct {
 	// Identifier of XHR to replay.
-	RequestID string
+	RequestID string `json:"requestId"`
 }
 
 // NewReplayXHR constructs a new ReplayXHR struct instance, with
@@ -1082,9 +1082,9 @@ func (t *ReplayXHR) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SearchInResponseBody struct {
 	// Identifier of the network response to search.
-	RequestID string
+	RequestID string `json:"requestId"`
 	// String to search for.
-	Query string
+	Query string `json:"query"`
 	// If true, search is case sensitive.
 	CaseSensitive bool `json:"caseSensitive,omitempty"`
 	// If true, treats string parameter as regex.
@@ -1127,7 +1127,7 @@ func (t *SearchInResponseBody) SetIsRegex(v bool) *SearchInResponseBody {
 // to calling the SearchInResponseBody CDP command with Do().
 type SearchInResponseBodyResponse struct {
 	// List of search matches.
-	Result []debugger.SearchMatch
+	Result []debugger.SearchMatch `json:"result"`
 }
 
 // Do sends the SearchInResponseBody CDP command to a browser,
@@ -1161,7 +1161,7 @@ func (t *SearchInResponseBody) Do(ctx context.Context) (*SearchInResponseBodyRes
 // This CDP method is experimental.
 type SetBlockedURLs struct {
 	// URL patterns to block. Wildcards ('*') are allowed.
-	URLs []string
+	URLs []string `json:"urls"`
 }
 
 // NewSetBlockedURLs constructs a new SetBlockedURLs struct instance, with
@@ -1204,7 +1204,7 @@ func (t *SetBlockedURLs) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetBypassServiceWorker struct {
 	// Bypass service worker and load from network.
-	Bypass bool
+	Bypass bool `json:"bypass"`
 }
 
 // NewSetBypassServiceWorker constructs a new SetBypassServiceWorker struct instance, with
@@ -1245,7 +1245,7 @@ func (t *SetBypassServiceWorker) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-setCacheDisabled
 type SetCacheDisabled struct {
 	// Cache disabled state.
-	CacheDisabled bool
+	CacheDisabled bool `json:"cacheDisabled"`
 }
 
 // NewSetCacheDisabled constructs a new SetCacheDisabled struct instance, with
@@ -1284,9 +1284,9 @@ func (t *SetCacheDisabled) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-setCookie
 type SetCookie struct {
 	// Cookie name.
-	Name string
+	Name string `json:"name"`
 	// Cookie value.
-	Value string
+	Value string `json:"value"`
 	// The request-URI to associate with the setting of the cookie. This value can affect the
 	// default domain, path, source port, and source scheme values of the created cookie.
 	URL string `json:"url,omitempty"`
@@ -1450,7 +1450,7 @@ type SetCookieResponse struct {
 	// Always set to true. If an error occurs, the response indicates protocol error.
 	//
 	// This CDP parameter is deprecated.
-	Success bool
+	Success bool `json:"success"`
 }
 
 // Do sends the SetCookie CDP command to a browser,
@@ -1482,7 +1482,7 @@ func (t *SetCookie) Do(ctx context.Context) (*SetCookieResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-setCookies
 type SetCookies struct {
 	// Cookies to be set.
-	Cookies []CookieParam
+	Cookies []CookieParam `json:"cookies"`
 }
 
 // NewSetCookies constructs a new SetCookies struct instance, with
@@ -1523,9 +1523,9 @@ func (t *SetCookies) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetDataSizeLimitsForTest struct {
 	// Maximum total buffer size.
-	MaxTotalSize int64
+	MaxTotalSize int64 `json:"maxTotalSize"`
 	// Maximum per-resource size.
-	MaxResourceSize int64
+	MaxResourceSize int64 `json:"maxResourceSize"`
 }
 
 // NewSetDataSizeLimitsForTest constructs a new SetDataSizeLimitsForTest struct instance, with
@@ -1567,7 +1567,7 @@ func (t *SetDataSizeLimitsForTest) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-setExtraHTTPHeaders
 type SetExtraHTTPHeaders struct {
 	// Map with extra HTTP headers.
-	Headers Headers
+	Headers Headers `json:"headers"`
 }
 
 // NewSetExtraHTTPHeaders constructs a new SetExtraHTTPHeaders struct instance, with
@@ -1608,7 +1608,7 @@ func (t *SetExtraHTTPHeaders) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetAttachDebugStack struct {
 	// Whether to attach a page script stack for debugging purpose.
-	Enabled bool
+	Enabled bool `json:"enabled"`
 }
 
 // NewSetAttachDebugStack constructs a new SetAttachDebugStack struct instance, with
@@ -1654,7 +1654,7 @@ func (t *SetAttachDebugStack) Do(ctx context.Context) error {
 type SetRequestInterception struct {
 	// Requests matching any of these patterns will be forwarded and wait for the corresponding
 	// continueInterceptedRequest call.
-	Patterns []RequestPattern
+	Patterns []RequestPattern `json:"patterns"`
 }
 
 // NewSetRequestInterception constructs a new SetRequestInterception struct instance, with
@@ -1724,7 +1724,7 @@ func (t *GetSecurityIsolationStatus) SetFrameID(v string) *GetSecurityIsolationS
 // GetSecurityIsolationStatusResponse contains the browser's response
 // to calling the GetSecurityIsolationStatus CDP command with Do().
 type GetSecurityIsolationStatusResponse struct {
-	Status SecurityIsolationStatus
+	Status SecurityIsolationStatus `json:"status"`
 }
 
 // Do sends the GetSecurityIsolationStatus CDP command to a browser,
@@ -1758,11 +1758,11 @@ func (t *GetSecurityIsolationStatus) Do(ctx context.Context) (*GetSecurityIsolat
 // This CDP method is experimental.
 type LoadNetworkResource struct {
 	// Frame id to get the resource for.
-	FrameID string
+	FrameID string `json:"frameId"`
 	// URL of the resource to get content for.
-	URL string
+	URL string `json:"url"`
 	// Options for the request.
-	Options LoadNetworkResourceOptions
+	Options LoadNetworkResourceOptions `json:"options"`
 }
 
 // NewLoadNetworkResource constructs a new LoadNetworkResource struct instance, with
@@ -1783,7 +1783,7 @@ func NewLoadNetworkResource(frameID string, url string, options LoadNetworkResou
 // LoadNetworkResourceResponse contains the browser's response
 // to calling the LoadNetworkResource CDP command with Do().
 type LoadNetworkResourceResponse struct {
-	Resource LoadNetworkResourcePageResult
+	Resource LoadNetworkResourcePageResult `json:"resource"`
 }
 
 // Do sends the LoadNetworkResource CDP command to a browser,

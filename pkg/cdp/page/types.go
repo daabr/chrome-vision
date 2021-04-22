@@ -143,16 +143,16 @@ const (
 //
 // This CDP type is experimental.
 type PermissionsPolicyBlockLocator struct {
-	FrameID     string
-	BlockReason string
+	FrameID     string `json:"frameId"`
+	BlockReason string `json:"blockReason"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-PermissionsPolicyFeatureState
 //
 // This CDP type is experimental.
 type PermissionsPolicyFeatureState struct {
-	Feature string
-	Allowed bool
+	Feature string                         `json:"feature"`
+	Allowed bool                           `json:"allowed"`
 	Locator *PermissionsPolicyBlockLocator `json:"locator,omitempty"`
 }
 
@@ -161,15 +161,15 @@ type PermissionsPolicyFeatureState struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-Frame
 type Frame struct {
 	// Frame unique identifier.
-	ID string
+	ID string `json:"id"`
 	// Parent frame identifier.
 	ParentID string `json:"parentId,omitempty"`
 	// Identifier of the loader associated with this frame.
-	LoaderID string
+	LoaderID string `json:"loaderId"`
 	// Frame's name as specified in the tag.
 	Name string `json:"name,omitempty"`
 	// Frame document's URL without fragment.
-	URL string
+	URL string `json:"url"`
 	// Frame document's URL fragment including the '#'.
 	//
 	// This CDP property is experimental.
@@ -180,11 +180,11 @@ type Frame struct {
 	//               http://a.b.co.uk/file.html      -> "b.co.uk"
 	//
 	// This CDP property is experimental.
-	DomainAndRegistry string
+	DomainAndRegistry string `json:"domainAndRegistry"`
 	// Frame document's security origin.
-	SecurityOrigin string
+	SecurityOrigin string `json:"securityOrigin"`
 	// Frame document's mimeType as determined by the browser.
-	MimeType string
+	MimeType string `json:"mimeType"`
 	// If the frame failed to load, this contains the URL that could not be loaded. Note that unlike url above, this URL may contain a fragment.
 	//
 	// This CDP property is experimental.
@@ -196,15 +196,15 @@ type Frame struct {
 	// Indicates whether the main document is a secure context and explains why that is the case.
 	//
 	// This CDP property is experimental.
-	SecureContextType string
+	SecureContextType string `json:"secureContextType"`
 	// Indicates whether this is a cross origin isolated context.
 	//
 	// This CDP property is experimental.
-	CrossOriginIsolatedContextType string
+	CrossOriginIsolatedContextType string `json:"crossOriginIsolatedContextType"`
 	// Indicated which gated APIs / features are available.
 	//
 	// This CDP property is experimental.
-	GatedAPIFeatures []GatedAPIFeatures
+	GatedAPIFeatures []GatedAPIFeatures `json:"gatedAPIFeatures"`
 }
 
 // Information about the Resource on the page.
@@ -214,11 +214,11 @@ type Frame struct {
 // This CDP type is experimental.
 type FrameResource struct {
 	// Resource URL.
-	URL string
+	URL string `json:"url"`
 	// Type of this resource.
-	Type string
+	Type string `json:"type"`
 	// Resource mimeType as determined by the browser.
-	MimeType string
+	MimeType string `json:"mimeType"`
 	// last-modified timestamp as reported by server.
 	LastModified float64 `json:"lastModified,omitempty"`
 	// Resource content size.
@@ -236,11 +236,11 @@ type FrameResource struct {
 // This CDP type is experimental.
 type FrameResourceTree struct {
 	// Frame information for this tree item.
-	Frame Frame
+	Frame Frame `json:"frame"`
 	// Child frames.
 	ChildFrames []FrameResourceTree `json:"childFrames,omitempty"`
 	// Information about frame resources.
-	Resources []FrameResource
+	Resources []FrameResource `json:"resources"`
 }
 
 // Information about the Frame hierarchy.
@@ -248,7 +248,7 @@ type FrameResourceTree struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-FrameTree
 type FrameTree struct {
 	// Frame information for this tree item.
-	Frame Frame
+	Frame Frame `json:"frame"`
 	// Child frames.
 	ChildFrames []FrameTree `json:"childFrames,omitempty"`
 }
@@ -285,15 +285,15 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-NavigationEntry
 type NavigationEntry struct {
 	// Unique id of the navigation history entry.
-	ID int64
+	ID int64 `json:"id"`
 	// URL of the navigation history entry.
-	URL string
+	URL string `json:"url"`
 	// URL that the user typed in the url bar.
-	UserTypedURL string
+	UserTypedURL string `json:"userTypedURL"`
 	// Title of the navigation history entry.
-	Title string
+	Title string `json:"title"`
 	// Transition type.
-	TransitionType string
+	TransitionType string `json:"transitionType"`
 }
 
 // Screencast frame metadata.
@@ -303,17 +303,17 @@ type NavigationEntry struct {
 // This CDP type is experimental.
 type ScreencastFrameMetadata struct {
 	// Top offset in DIP.
-	OffsetTop float64
+	OffsetTop float64 `json:"offsetTop"`
 	// Page scale factor.
-	PageScaleFactor float64
+	PageScaleFactor float64 `json:"pageScaleFactor"`
 	// Device screen width in DIP.
-	DeviceWidth float64
+	DeviceWidth float64 `json:"deviceWidth"`
 	// Device screen height in DIP.
-	DeviceHeight float64
+	DeviceHeight float64 `json:"deviceHeight"`
 	// Position of horizontal scroll in CSS pixels.
-	ScrollOffsetX float64
+	ScrollOffsetX float64 `json:"scrollOffsetX"`
 	// Position of vertical scroll in CSS pixels.
-	ScrollOffsetY float64
+	ScrollOffsetY float64 `json:"scrollOffsetY"`
 	// Frame swap timestamp.
 	Timestamp float64 `json:"timestamp,omitempty"`
 }
@@ -336,13 +336,13 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-AppManifestError
 type AppManifestError struct {
 	// Error message.
-	Message string
+	Message string `json:"message"`
 	// If criticial, this is a non-recoverable parse error.
-	Critical int64
+	Critical int64 `json:"critical"`
 	// Error line.
-	Line int64
+	Line int64 `json:"line"`
 	// Error column.
-	Column int64
+	Column int64 `json:"column"`
 }
 
 // Parsed app manifest properties.
@@ -352,7 +352,7 @@ type AppManifestError struct {
 // This CDP type is experimental.
 type AppManifestParsedProperties struct {
 	// Computed scope value
-	Scope string
+	Scope string `json:"scope"`
 }
 
 // Layout viewport position and dimensions.
@@ -360,13 +360,13 @@ type AppManifestParsedProperties struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-LayoutViewport
 type LayoutViewport struct {
 	// Horizontal offset relative to the document (CSS pixels).
-	PageX int64
+	PageX int64 `json:"pageX"`
 	// Vertical offset relative to the document (CSS pixels).
-	PageY int64
+	PageY int64 `json:"pageY"`
 	// Width (CSS pixels), excludes scrollbar if present.
-	ClientWidth int64
+	ClientWidth int64 `json:"clientWidth"`
 	// Height (CSS pixels), excludes scrollbar if present.
-	ClientHeight int64
+	ClientHeight int64 `json:"clientHeight"`
 }
 
 // Visual viewport position, dimensions, and scale.
@@ -374,19 +374,19 @@ type LayoutViewport struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-VisualViewport
 type VisualViewport struct {
 	// Horizontal offset relative to the layout viewport (CSS pixels).
-	OffsetX float64
+	OffsetX float64 `json:"offsetX"`
 	// Vertical offset relative to the layout viewport (CSS pixels).
-	OffsetY float64
+	OffsetY float64 `json:"offsetY"`
 	// Horizontal offset relative to the document (CSS pixels).
-	PageX float64
+	PageX float64 `json:"pageX"`
 	// Vertical offset relative to the document (CSS pixels).
-	PageY float64
+	PageY float64 `json:"pageY"`
 	// Width (CSS pixels), excludes scrollbar if present.
-	ClientWidth float64
+	ClientWidth float64 `json:"clientWidth"`
 	// Height (CSS pixels), excludes scrollbar if present.
-	ClientHeight float64
+	ClientHeight float64 `json:"clientHeight"`
 	// Scale relative to the ideal viewport (size at width=device-width).
-	Scale float64
+	Scale float64 `json:"scale"`
 	// Page zoom factor (CSS to device independent pixels ratio).
 	Zoom float64 `json:"zoom,omitempty"`
 }
@@ -396,15 +396,15 @@ type VisualViewport struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-Viewport
 type Viewport struct {
 	// X offset in device independent pixels (dip).
-	X float64
+	X float64 `json:"x"`
 	// Y offset in device independent pixels (dip).
-	Y float64
+	Y float64 `json:"y"`
 	// Rectangle width in device independent pixels (dip).
-	Width float64
+	Width float64 `json:"width"`
 	// Rectangle height in device independent pixels (dip).
-	Height float64
+	Height float64 `json:"height"`
 	// Page scale factor.
-	Scale float64
+	Scale float64 `json:"scale"`
 }
 
 // Generic font families collection.
@@ -476,9 +476,9 @@ const (
 // This CDP type is experimental.
 type InstallabilityErrorArgument struct {
 	// Argument name (e.g. name:'minimum-icon-size-in-pixels').
-	Name string
+	Name string `json:"name"`
 	// Argument value (e.g. value:'64').
-	Value string
+	Value string `json:"value"`
 }
 
 // The installability error
@@ -488,9 +488,9 @@ type InstallabilityErrorArgument struct {
 // This CDP type is experimental.
 type InstallabilityError struct {
 	// The error id (e.g. 'manifest-missing-suitable-icon').
-	ErrorID string
+	ErrorID string `json:"errorId"`
 	// The list of error arguments (e.g. {name:'minimum-icon-size-in-pixels', value:'64'}).
-	ErrorArguments []InstallabilityErrorArgument
+	ErrorArguments []InstallabilityErrorArgument `json:"errorArguments"`
 }
 
 // The referring-policy used for the navigation.
@@ -519,7 +519,7 @@ const (
 // This CDP type is experimental.
 type CompilationCacheParams struct {
 	// The URL of the script to produce a compilation cache entry for.
-	URL string
+	URL string `json:"url"`
 	// A hint to the backend whether eager compilation is recommended.
 	// (the actual compilation mode used is upon backend discretion).
 	Eager bool `json:"eager,omitempty"`

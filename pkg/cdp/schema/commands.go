@@ -29,7 +29,7 @@ func NewGetDomains() *GetDomains {
 // to calling the GetDomains CDP command with Do().
 type GetDomainsResponse struct {
 	// List of supported domains.
-	Domains []Domain
+	Domains []Domain `json:"domains"`
 }
 
 // Do sends the GetDomains CDP command to a browser,

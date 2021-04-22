@@ -17,9 +17,9 @@ import (
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-clearDataForOrigin
 type ClearDataForOrigin struct {
 	// Security origin.
-	Origin string
+	Origin string `json:"origin"`
 	// Comma separated list of StorageType to clear.
-	StorageTypes string
+	StorageTypes string `json:"storageTypes"`
 }
 
 // NewClearDataForOrigin constructs a new ClearDataForOrigin struct instance, with
@@ -84,7 +84,7 @@ func (t *GetCookies) SetBrowserContextID(v string) *GetCookies {
 // to calling the GetCookies CDP command with Do().
 type GetCookiesResponse struct {
 	// Array of cookie objects.
-	Cookies []network.Cookie
+	Cookies []network.Cookie `json:"cookies"`
 }
 
 // Do sends the GetCookies CDP command to a browser,
@@ -116,7 +116,7 @@ func (t *GetCookies) Do(ctx context.Context) (*GetCookiesResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-setCookies
 type SetCookies struct {
 	// Cookies to be set.
-	Cookies []network.CookieParam
+	Cookies []network.CookieParam `json:"cookies"`
 	// Browser context to use when called on the browser endpoint.
 	BrowserContextID string `json:"browserContextId,omitempty"`
 }
@@ -212,7 +212,7 @@ func (t *ClearCookies) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-getUsageAndQuota
 type GetUsageAndQuota struct {
 	// Security origin.
-	Origin string
+	Origin string `json:"origin"`
 }
 
 // NewGetUsageAndQuota constructs a new GetUsageAndQuota struct instance, with
@@ -230,13 +230,13 @@ func NewGetUsageAndQuota(origin string) *GetUsageAndQuota {
 // to calling the GetUsageAndQuota CDP command with Do().
 type GetUsageAndQuotaResponse struct {
 	// Storage usage (bytes).
-	Usage float64
+	Usage float64 `json:"usage"`
 	// Storage quota (bytes).
-	Quota float64
+	Quota float64 `json:"quota"`
 	// Whether or not the origin has an active storage quota override
-	OverrideActive bool
+	OverrideActive bool `json:"overrideActive"`
 	// Storage usage per type (bytes).
-	UsageBreakdown []UsageForType
+	UsageBreakdown []UsageForType `json:"usageBreakdown"`
 }
 
 // Do sends the GetUsageAndQuota CDP command to a browser,
@@ -270,7 +270,7 @@ func (t *GetUsageAndQuota) Do(ctx context.Context) (*GetUsageAndQuotaResponse, e
 // This CDP method is experimental.
 type OverrideQuotaForOrigin struct {
 	// Security origin.
-	Origin string
+	Origin string `json:"origin"`
 	// The quota size (in bytes) to override the original quota with.
 	// If this is called multiple times, the overriden quota will be equal to
 	// the quotaSize provided in the final call. If this is called without
@@ -334,7 +334,7 @@ func (t *OverrideQuotaForOrigin) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-trackCacheStorageForOrigin
 type TrackCacheStorageForOrigin struct {
 	// Security origin.
-	Origin string
+	Origin string `json:"origin"`
 }
 
 // NewTrackCacheStorageForOrigin constructs a new TrackCacheStorageForOrigin struct instance, with
@@ -373,7 +373,7 @@ func (t *TrackCacheStorageForOrigin) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-trackIndexedDBForOrigin
 type TrackIndexedDBForOrigin struct {
 	// Security origin.
-	Origin string
+	Origin string `json:"origin"`
 }
 
 // NewTrackIndexedDBForOrigin constructs a new TrackIndexedDBForOrigin struct instance, with
@@ -412,7 +412,7 @@ func (t *TrackIndexedDBForOrigin) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-untrackCacheStorageForOrigin
 type UntrackCacheStorageForOrigin struct {
 	// Security origin.
-	Origin string
+	Origin string `json:"origin"`
 }
 
 // NewUntrackCacheStorageForOrigin constructs a new UntrackCacheStorageForOrigin struct instance, with
@@ -451,7 +451,7 @@ func (t *UntrackCacheStorageForOrigin) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#method-untrackIndexedDBForOrigin
 type UntrackIndexedDBForOrigin struct {
 	// Security origin.
-	Origin string
+	Origin string `json:"origin"`
 }
 
 // NewUntrackIndexedDBForOrigin constructs a new UntrackIndexedDBForOrigin struct instance, with
@@ -507,7 +507,7 @@ func NewGetTrustTokens() *GetTrustTokens {
 // GetTrustTokensResponse contains the browser's response
 // to calling the GetTrustTokens CDP command with Do().
 type GetTrustTokensResponse struct {
-	Tokens []TrustTokens
+	Tokens []TrustTokens `json:"tokens"`
 }
 
 // Do sends the GetTrustTokens CDP command to a browser,
@@ -537,7 +537,7 @@ func (t *GetTrustTokens) Do(ctx context.Context) (*GetTrustTokensResponse, error
 //
 // This CDP method is experimental.
 type ClearTrustTokens struct {
-	IssuerOrigin string
+	IssuerOrigin string `json:"issuerOrigin"`
 }
 
 // NewClearTrustTokens constructs a new ClearTrustTokens struct instance, with
@@ -557,7 +557,7 @@ func NewClearTrustTokens(issuerOrigin string) *ClearTrustTokens {
 // to calling the ClearTrustTokens CDP command with Do().
 type ClearTrustTokensResponse struct {
 	// True if any tokens were deleted, false otherwise.
-	DidDeleteTokens bool
+	DidDeleteTokens bool `json:"didDeleteTokens"`
 }
 
 // Do sends the ClearTrustTokens CDP command to a browser,

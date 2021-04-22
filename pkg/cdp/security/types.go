@@ -40,41 +40,41 @@ const (
 // This CDP type is experimental.
 type CertificateSecurityState struct {
 	// Protocol name (e.g. "TLS 1.2" or "QUIC").
-	Protocol string
+	Protocol string `json:"protocol"`
 	// Key Exchange used by the connection, or the empty string if not applicable.
-	KeyExchange string
+	KeyExchange string `json:"keyExchange"`
 	// (EC)DH group used by the connection, if applicable.
 	KeyExchangeGroup string `json:"keyExchangeGroup,omitempty"`
 	// Cipher name.
-	Cipher string
+	Cipher string `json:"cipher"`
 	// TLS MAC. Note that AEAD ciphers do not have separate MACs.
 	Mac string `json:"mac,omitempty"`
 	// Page certificate.
-	Certificate []string
+	Certificate []string `json:"certificate"`
 	// Certificate subject name.
-	SubjectName string
+	SubjectName string `json:"subjectName"`
 	// Name of the issuing CA.
-	Issuer string
+	Issuer string `json:"issuer"`
 	// Certificate valid from date.
-	ValidFrom float64
+	ValidFrom float64 `json:"validFrom"`
 	// Certificate valid to (expiration) date
-	ValidTo float64
+	ValidTo float64 `json:"validTo"`
 	// The highest priority network error code, if the certificate has an error.
 	CertificateNetworkError string `json:"certificateNetworkError,omitempty"`
 	// True if the certificate uses a weak signature aglorithm.
-	CertificateHasWeakSignature bool
+	CertificateHasWeakSignature bool `json:"certificateHasWeakSignature"`
 	// True if the certificate has a SHA1 signature in the chain.
-	CertificateHasSha1Signature bool
+	CertificateHasSha1Signature bool `json:"certificateHasSha1Signature"`
 	// True if modern SSL
-	ModernSSL bool
+	ModernSSL bool `json:"modernSSL"`
 	// True if the connection is using an obsolete SSL protocol.
-	ObsoleteSslProtocol bool
+	ObsoleteSslProtocol bool `json:"obsoleteSslProtocol"`
 	// True if the connection is using an obsolete SSL key exchange.
-	ObsoleteSslKeyExchange bool
+	ObsoleteSslKeyExchange bool `json:"obsoleteSslKeyExchange"`
 	// True if the connection is using an obsolete SSL cipher.
-	ObsoleteSslCipher bool
+	ObsoleteSslCipher bool `json:"obsoleteSslCipher"`
 	// True if the connection is using an obsolete SSL signature.
-	ObsoleteSslSignature bool
+	ObsoleteSslSignature bool `json:"obsoleteSslSignature"`
 }
 
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-SafetyTipStatus
@@ -93,7 +93,7 @@ const (
 // This CDP type is experimental.
 type SafetyTipInfo struct {
 	// Describes whether the page triggers any safety tips or reputation warnings. Default is unknown.
-	SafetyTipStatus string
+	SafetyTipStatus string `json:"safetyTipStatus"`
 	// The URL the safety tip suggested ("Did you mean?"). Only filled in for lookalike matches.
 	SafeURL string `json:"safeUrl,omitempty"`
 }
@@ -105,13 +105,13 @@ type SafetyTipInfo struct {
 // This CDP type is experimental.
 type VisibleSecurityState struct {
 	// The security level of the page.
-	SecurityState string
+	SecurityState string `json:"securityState"`
 	// Security state details about the page certificate.
 	CertificateSecurityState *CertificateSecurityState `json:"certificateSecurityState,omitempty"`
 	// The type of Safety Tip triggered on the page. Note that this field will be set even if the Safety Tip UI was not actually shown.
 	SafetyTipInfo *SafetyTipInfo `json:"safetyTipInfo,omitempty"`
 	// Array of security state issues ids.
-	SecurityStateIssueIds []string
+	SecurityStateIssueIds []string `json:"securityStateIssueIds"`
 }
 
 // An explanation of an factor contributing to the security state.
@@ -119,17 +119,17 @@ type VisibleSecurityState struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-SecurityStateExplanation
 type SecurityStateExplanation struct {
 	// Security state representing the severity of the factor being explained.
-	SecurityState string
+	SecurityState string `json:"securityState"`
 	// Title describing the type of factor.
-	Title string
+	Title string `json:"title"`
 	// Short phrase describing the type of factor.
-	Summary string
+	Summary string `json:"summary"`
 	// Full text explanation of the factor.
-	Description string
+	Description string `json:"description"`
 	// The type of mixed content described by the explanation.
-	MixedContentType string
+	MixedContentType string `json:"mixedContentType"`
 	// Page certificate.
-	Certificate []string
+	Certificate []string `json:"certificate"`
 	// Recommendations to fix any issues.
 	Recommendations []string `json:"recommendations,omitempty"`
 }
@@ -141,19 +141,19 @@ type SecurityStateExplanation struct {
 // This CDP type is deprecated.
 type InsecureContentStatus struct {
 	// Always false.
-	RanMixedContent bool
+	RanMixedContent bool `json:"ranMixedContent"`
 	// Always false.
-	DisplayedMixedContent bool
+	DisplayedMixedContent bool `json:"displayedMixedContent"`
 	// Always false.
-	ContainedMixedForm bool
+	ContainedMixedForm bool `json:"containedMixedForm"`
 	// Always false.
-	RanContentWithCertErrors bool
+	RanContentWithCertErrors bool `json:"ranContentWithCertErrors"`
 	// Always false.
-	DisplayedContentWithCertErrors bool
+	DisplayedContentWithCertErrors bool `json:"displayedContentWithCertErrors"`
 	// Always set to unknown.
-	RanInsecureContentStyle string
+	RanInsecureContentStyle string `json:"ranInsecureContentStyle"`
 	// Always set to unknown.
-	DisplayedInsecureContentStyle string
+	DisplayedInsecureContentStyle string `json:"displayedInsecureContentStyle"`
 }
 
 // The action to take when a certificate error occurs. continue will continue processing the

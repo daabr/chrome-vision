@@ -5,7 +5,7 @@ package performance
 // https://chromedevtools.github.io/devtools-protocol/tot/Performance/#event-metrics
 type Metrics struct {
 	// Current values of the metrics.
-	Metrics []Metric
+	Metrics []Metric `json:"metrics"`
 	// Timestamp title.
-	Title string
+	Title string `json:"title"`
 }

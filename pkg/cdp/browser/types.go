@@ -96,7 +96,7 @@ const (
 type PermissionDescriptor struct {
 	// Name of permission.
 	// See https://cs.chromium.org/chromium/src/third_party/blink/renderer/modules/permissions/permission_descriptor.idl for valid permission names.
-	Name string
+	Name string `json:"name"`
 	// For "midi" permission, may also specify sysex control.
 	Sysex bool `json:"sysex,omitempty"`
 	// For "push" permission, may specify userVisibleOnly.
@@ -128,11 +128,11 @@ const (
 // This CDP type is experimental.
 type Bucket struct {
 	// Minimum value (inclusive).
-	Low int64
+	Low int64 `json:"low"`
 	// Maximum value (exclusive).
-	High int64
+	High int64 `json:"high"`
 	// Number of samples.
-	Count int64
+	Count int64 `json:"count"`
 }
 
 // Chrome histogram.
@@ -142,11 +142,11 @@ type Bucket struct {
 // This CDP type is experimental.
 type Histogram struct {
 	// Name.
-	Name string
+	Name string `json:"name"`
 	// Sum of sample values.
-	Sum int64
+	Sum int64 `json:"sum"`
 	// Total number of samples.
-	Count int64
+	Count int64 `json:"count"`
 	// Buckets.
-	Buckets []Bucket
+	Buckets []Bucket `json:"buckets"`
 }

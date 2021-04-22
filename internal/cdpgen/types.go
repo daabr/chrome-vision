@@ -112,10 +112,10 @@ func generateProperty(b *strings.Builder, p Property, usage, domain string) {
 		fmt.Fprint(b, r)
 	}
 
-	// JSON key hint - if the field is optional (otherwise no need,
-	// un/marshalling is case-insensitive).
+	// JSON key hint.
+	fmt.Fprintf(b, " `json:\"%s", p.Name)
 	if p.Optional {
-		fmt.Fprintf(b, " `json:\"%s,omitempty\"`", p.Name)
+		fmt.Fprint(b, ",omitempty")
 	}
-	fmt.Fprint(b, "\n")
+	fmt.Fprint(b, "\"`\n")
 }

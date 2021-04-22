@@ -16,19 +16,19 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#type-SamplingProfileNode
 type SamplingProfileNode struct {
 	// Size of the sampled allocation.
-	Size float64
+	Size float64 `json:"size"`
 	// Total bytes attributed to this sample.
-	Total float64
+	Total float64 `json:"total"`
 	// Execution stack at the point of allocation.
-	Stack []string
+	Stack []string `json:"stack"`
 }
 
 // Array of heap profile samples.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#type-SamplingProfile
 type SamplingProfile struct {
-	Samples []SamplingProfileNode
-	Modules []Module
+	Samples []SamplingProfileNode `json:"samples"`
+	Modules []Module              `json:"modules"`
 }
 
 // Executable module information
@@ -36,12 +36,12 @@ type SamplingProfile struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#type-Module
 type Module struct {
 	// Name of the module.
-	Name string
+	Name string `json:"name"`
 	// UUID of the module.
-	Uuid string
+	Uuid string `json:"uuid"`
 	// Base address where the module is loaded into memory. Encoded as a decimal
 	// or hexadecimal (0x prefixed) string.
-	BaseAddress string
+	BaseAddress string `json:"baseAddress"`
 	// Size of the module in bytes.
-	Size float64
+	Size float64 `json:"size"`
 }

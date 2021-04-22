@@ -78,7 +78,7 @@ func (t *Enable) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-getHighlightObjectForTest
 type GetHighlightObjectForTest struct {
 	// Id of the node to get highlight object for.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// Whether to include distance info.
 	IncludeDistance bool `json:"includeDistance,omitempty"`
 	// Whether to include style info.
@@ -140,7 +140,7 @@ func (t *GetHighlightObjectForTest) SetShowAccessibilityInfo(v bool) *GetHighlig
 // to calling the GetHighlightObjectForTest CDP command with Do().
 type GetHighlightObjectForTestResponse struct {
 	// Highlight data for the node.
-	Highlight json.RawMessage
+	Highlight json.RawMessage `json:"highlight"`
 }
 
 // Do sends the GetHighlightObjectForTest CDP command to a browser,
@@ -172,7 +172,7 @@ func (t *GetHighlightObjectForTest) Do(ctx context.Context) (*GetHighlightObject
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-getGridHighlightObjectsForTest
 type GetGridHighlightObjectsForTest struct {
 	// Ids of the node to get highlight object for.
-	NodeIds []int64
+	NodeIds []int64 `json:"nodeIds"`
 }
 
 // NewGetGridHighlightObjectsForTest constructs a new GetGridHighlightObjectsForTest struct instance, with
@@ -190,7 +190,7 @@ func NewGetGridHighlightObjectsForTest(nodeIds []int64) *GetGridHighlightObjects
 // to calling the GetGridHighlightObjectsForTest CDP command with Do().
 type GetGridHighlightObjectsForTestResponse struct {
 	// Grid Highlight data for the node ids provided.
-	Highlights json.RawMessage
+	Highlights json.RawMessage `json:"highlights"`
 }
 
 // Do sends the GetGridHighlightObjectsForTest CDP command to a browser,
@@ -222,7 +222,7 @@ func (t *GetGridHighlightObjectsForTest) Do(ctx context.Context) (*GetGridHighli
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-getSourceOrderHighlightObjectForTest
 type GetSourceOrderHighlightObjectForTest struct {
 	// Id of the node to highlight.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetSourceOrderHighlightObjectForTest constructs a new GetSourceOrderHighlightObjectForTest struct instance, with
@@ -240,7 +240,7 @@ func NewGetSourceOrderHighlightObjectForTest(nodeID int64) *GetSourceOrderHighli
 // to calling the GetSourceOrderHighlightObjectForTest CDP command with Do().
 type GetSourceOrderHighlightObjectForTestResponse struct {
 	// Source order highlight data for the node id provided.
-	Highlight json.RawMessage
+	Highlight json.RawMessage `json:"highlight"`
 }
 
 // Do sends the GetSourceOrderHighlightObjectForTest CDP command to a browser,
@@ -302,7 +302,7 @@ func (t *HideHighlight) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightFrame
 type HighlightFrame struct {
 	// Identifier of the frame to highlight.
-	FrameID string
+	FrameID string `json:"frameId"`
 	// The content box highlight fill color (default: transparent).
 	ContentColor *dom.RGBA `json:"contentColor,omitempty"`
 	// The content box highlight outline color (default: transparent).
@@ -364,7 +364,7 @@ func (t *HighlightFrame) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightNode
 type HighlightNode struct {
 	// A descriptor for the highlight appearance.
-	HighlightConfig HighlightConfig
+	HighlightConfig HighlightConfig `json:"highlightConfig"`
 	// Identifier of the node to highlight.
 	NodeID int64 `json:"nodeId,omitempty"`
 	// Identifier of the backend node to highlight.
@@ -447,7 +447,7 @@ func (t *HighlightNode) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightQuad
 type HighlightQuad struct {
 	// Quad to highlight
-	Quad dom.Quad
+	Quad dom.Quad `json:"quad"`
 	// The highlight fill color (default: transparent).
 	Color *dom.RGBA `json:"color,omitempty"`
 	// The highlight outline color (default: transparent).
@@ -508,13 +508,13 @@ func (t *HighlightQuad) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightRect
 type HighlightRect struct {
 	// X coordinate
-	X int64
+	X int64 `json:"x"`
 	// Y coordinate
-	Y int64
+	Y int64 `json:"y"`
 	// Rectangle width
-	Width int64
+	Width int64 `json:"width"`
 	// Rectangle height
-	Height int64
+	Height int64 `json:"height"`
 	// The highlight fill color (default: transparent).
 	Color *dom.RGBA `json:"color,omitempty"`
 	// The highlight outline color (default: transparent).
@@ -579,7 +579,7 @@ func (t *HighlightRect) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightSourceOrder
 type HighlightSourceOrder struct {
 	// A descriptor for the appearance of the overlay drawing.
-	SourceOrderConfig SourceOrderConfig
+	SourceOrderConfig SourceOrderConfig `json:"sourceOrderConfig"`
 	// Identifier of the node to highlight.
 	NodeID int64 `json:"nodeId,omitempty"`
 	// Identifier of the backend node to highlight.
@@ -652,7 +652,7 @@ func (t *HighlightSourceOrder) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setInspectMode
 type SetInspectMode struct {
 	// Set an inspection mode.
-	Mode string
+	Mode string `json:"mode"`
 	// A descriptor for the highlight appearance of hovered-over nodes. May be omitted if `enabled
 	// == false`.
 	HighlightConfig *HighlightConfig `json:"highlightConfig,omitempty"`
@@ -704,7 +704,7 @@ func (t *SetInspectMode) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowAdHighlights
 type SetShowAdHighlights struct {
 	// True for showing ad highlights
-	Show bool
+	Show bool `json:"show"`
 }
 
 // NewSetShowAdHighlights constructs a new SetShowAdHighlights struct instance, with
@@ -787,7 +787,7 @@ func (t *SetPausedInDebuggerMessage) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowDebugBorders
 type SetShowDebugBorders struct {
 	// True for showing debug borders
-	Show bool
+	Show bool `json:"show"`
 }
 
 // NewSetShowDebugBorders constructs a new SetShowDebugBorders struct instance, with
@@ -826,7 +826,7 @@ func (t *SetShowDebugBorders) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowFPSCounter
 type SetShowFPSCounter struct {
 	// True for showing the FPS counter
-	Show bool
+	Show bool `json:"show"`
 }
 
 // NewSetShowFPSCounter constructs a new SetShowFPSCounter struct instance, with
@@ -865,7 +865,7 @@ func (t *SetShowFPSCounter) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowGridOverlays
 type SetShowGridOverlays struct {
 	// An array of node identifiers and descriptors for the highlight appearance.
-	GridNodeHighlightConfigs []GridNodeHighlightConfig
+	GridNodeHighlightConfigs []GridNodeHighlightConfig `json:"gridNodeHighlightConfigs"`
 }
 
 // NewSetShowGridOverlays constructs a new SetShowGridOverlays struct instance, with
@@ -902,7 +902,7 @@ func (t *SetShowGridOverlays) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowFlexOverlays
 type SetShowFlexOverlays struct {
 	// An array of node identifiers and descriptors for the highlight appearance.
-	FlexNodeHighlightConfigs []FlexNodeHighlightConfig
+	FlexNodeHighlightConfigs []FlexNodeHighlightConfig `json:"flexNodeHighlightConfigs"`
 }
 
 // NewSetShowFlexOverlays constructs a new SetShowFlexOverlays struct instance, with
@@ -939,7 +939,7 @@ func (t *SetShowFlexOverlays) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowScrollSnapOverlays
 type SetShowScrollSnapOverlays struct {
 	// An array of node identifiers and descriptors for the highlight appearance.
-	ScrollSnapHighlightConfigs []ScrollSnapHighlightConfig
+	ScrollSnapHighlightConfigs []ScrollSnapHighlightConfig `json:"scrollSnapHighlightConfigs"`
 }
 
 // NewSetShowScrollSnapOverlays constructs a new SetShowScrollSnapOverlays struct instance, with
@@ -978,7 +978,7 @@ func (t *SetShowScrollSnapOverlays) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowPaintRects
 type SetShowPaintRects struct {
 	// True for showing paint rectangles
-	Result bool
+	Result bool `json:"result"`
 }
 
 // NewSetShowPaintRects constructs a new SetShowPaintRects struct instance, with
@@ -1017,7 +1017,7 @@ func (t *SetShowPaintRects) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowLayoutShiftRegions
 type SetShowLayoutShiftRegions struct {
 	// True for showing layout shift regions
-	Result bool
+	Result bool `json:"result"`
 }
 
 // NewSetShowLayoutShiftRegions constructs a new SetShowLayoutShiftRegions struct instance, with
@@ -1056,7 +1056,7 @@ func (t *SetShowLayoutShiftRegions) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowScrollBottleneckRects
 type SetShowScrollBottleneckRects struct {
 	// True for showing scroll bottleneck rects
-	Show bool
+	Show bool `json:"show"`
 }
 
 // NewSetShowScrollBottleneckRects constructs a new SetShowScrollBottleneckRects struct instance, with
@@ -1095,7 +1095,7 @@ func (t *SetShowScrollBottleneckRects) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowHitTestBorders
 type SetShowHitTestBorders struct {
 	// True for showing hit-test borders
-	Show bool
+	Show bool `json:"show"`
 }
 
 // NewSetShowHitTestBorders constructs a new SetShowHitTestBorders struct instance, with
@@ -1133,7 +1133,7 @@ func (t *SetShowHitTestBorders) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowWebVitals
 type SetShowWebVitals struct {
-	Show bool
+	Show bool `json:"show"`
 }
 
 // NewSetShowWebVitals constructs a new SetShowWebVitals struct instance, with
@@ -1172,7 +1172,7 @@ func (t *SetShowWebVitals) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowViewportSizeOnResize
 type SetShowViewportSizeOnResize struct {
 	// Whether to paint size or not.
-	Show bool
+	Show bool `json:"show"`
 }
 
 // NewSetShowViewportSizeOnResize constructs a new SetShowViewportSizeOnResize struct instance, with

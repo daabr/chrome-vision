@@ -19,7 +19,7 @@ import (
 // This CDP method is experimental.
 type CollectClassNamesFromSubtree struct {
 	// Id of the node to collect class names.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewCollectClassNamesFromSubtree constructs a new CollectClassNamesFromSubtree struct instance, with
@@ -39,7 +39,7 @@ func NewCollectClassNamesFromSubtree(nodeID int64) *CollectClassNamesFromSubtree
 // to calling the CollectClassNamesFromSubtree CDP command with Do().
 type CollectClassNamesFromSubtreeResponse struct {
 	// Class name list.
-	ClassNames []string
+	ClassNames []string `json:"classNames"`
 }
 
 // Do sends the CollectClassNamesFromSubtree CDP command to a browser,
@@ -74,9 +74,9 @@ func (t *CollectClassNamesFromSubtree) Do(ctx context.Context) (*CollectClassNam
 // This CDP method is experimental.
 type CopyTo struct {
 	// Id of the node to copy.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// Id of the element to drop the copy into.
-	TargetNodeID int64
+	TargetNodeID int64 `json:"targetNodeId"`
 	// Drop the copy before this node (if absent, the copy becomes the last child of
 	// `targetNodeId`).
 	InsertBeforeNodeID int64 `json:"insertBeforeNodeId,omitempty"`
@@ -110,7 +110,7 @@ func (t *CopyTo) SetInsertBeforeNodeID(v int64) *CopyTo {
 // to calling the CopyTo CDP command with Do().
 type CopyToResponse struct {
 	// Id of the node clone.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the CopyTo CDP command to a browser,
@@ -216,7 +216,7 @@ func (t *DescribeNode) SetPierce(v bool) *DescribeNode {
 // to calling the DescribeNode CDP command with Do().
 type DescribeNodeResponse struct {
 	// Node description.
-	Node Node
+	Node Node `json:"node"`
 }
 
 // Do sends the DescribeNode CDP command to a browser,
@@ -368,7 +368,7 @@ func (t *Disable) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type DiscardSearchResults struct {
 	// Unique search session identifier.
-	SearchID string
+	SearchID string `json:"searchId"`
 }
 
 // NewDiscardSearchResults constructs a new DiscardSearchResults struct instance, with
@@ -507,7 +507,7 @@ func (t *Focus) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getAttributes
 type GetAttributes struct {
 	// Id of the node to retrieve attibutes for.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetAttributes constructs a new GetAttributes struct instance, with
@@ -525,7 +525,7 @@ func NewGetAttributes(nodeID int64) *GetAttributes {
 // to calling the GetAttributes CDP command with Do().
 type GetAttributesResponse struct {
 	// An interleaved array of node attribute names and values.
-	Attributes []string
+	Attributes []string `json:"attributes"`
 }
 
 // Do sends the GetAttributes CDP command to a browser,
@@ -604,7 +604,7 @@ func (t *GetBoxModel) SetObjectID(v runtime.RemoteObjectID) *GetBoxModel {
 // to calling the GetBoxModel CDP command with Do().
 type GetBoxModelResponse struct {
 	// Box model for the node.
-	Model BoxModel
+	Model BoxModel `json:"model"`
 }
 
 // Do sends the GetBoxModel CDP command to a browser,
@@ -688,7 +688,7 @@ func (t *GetContentQuads) SetObjectID(v runtime.RemoteObjectID) *GetContentQuads
 // to calling the GetContentQuads CDP command with Do().
 type GetContentQuadsResponse struct {
 	// Quads that describe node layout relative to viewport.
-	Quads []Quad
+	Quads []Quad `json:"quads"`
 }
 
 // Do sends the GetContentQuads CDP command to a browser,
@@ -760,7 +760,7 @@ func (t *GetDocument) SetPierce(v bool) *GetDocument {
 // to calling the GetDocument CDP command with Do().
 type GetDocumentResponse struct {
 	// Resulting node.
-	Root Node
+	Root Node `json:"root"`
 }
 
 // Do sends the GetDocument CDP command to a browser,
@@ -838,7 +838,7 @@ func (t *GetFlattenedDocument) SetPierce(v bool) *GetFlattenedDocument {
 // to calling the GetFlattenedDocument CDP command with Do().
 type GetFlattenedDocumentResponse struct {
 	// Resulting node.
-	Nodes []Node
+	Nodes []Node `json:"nodes"`
 }
 
 // Do sends the GetFlattenedDocument CDP command to a browser,
@@ -872,9 +872,9 @@ func (t *GetFlattenedDocument) Do(ctx context.Context) (*GetFlattenedDocumentRes
 // This CDP method is experimental.
 type GetNodesForSubtreeByStyle struct {
 	// Node ID pointing to the root of a subtree.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// The style to filter nodes by (includes nodes if any of properties matches).
-	ComputedStyles []CSSComputedStyleProperty
+	ComputedStyles []CSSComputedStyleProperty `json:"computedStyles"`
 	// Whether or not iframes and shadow roots in the same target should be traversed when returning the
 	// results (default is false).
 	Pierce bool `json:"pierce,omitempty"`
@@ -908,7 +908,7 @@ func (t *GetNodesForSubtreeByStyle) SetPierce(v bool) *GetNodesForSubtreeByStyle
 // to calling the GetNodesForSubtreeByStyle CDP command with Do().
 type GetNodesForSubtreeByStyleResponse struct {
 	// Resulting nodes.
-	NodeIds []NodeID
+	NodeIds []NodeID `json:"nodeIds"`
 }
 
 // Do sends the GetNodesForSubtreeByStyle CDP command to a browser,
@@ -941,9 +941,9 @@ func (t *GetNodesForSubtreeByStyle) Do(ctx context.Context) (*GetNodesForSubtree
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getNodeForLocation
 type GetNodeForLocation struct {
 	// X coordinate.
-	X int64
+	X int64 `json:"x"`
 	// Y coordinate.
-	Y int64
+	Y int64 `json:"y"`
 	// False to skip to the nearest non-UA shadow root ancestor (default: false).
 	IncludeUserAgentShadowDOM bool `json:"includeUserAgentShadowDOM,omitempty"`
 	// Whether to ignore pointer-events: none on elements and hit test them.
@@ -984,9 +984,9 @@ func (t *GetNodeForLocation) SetIgnorePointerEventsNone(v bool) *GetNodeForLocat
 // to calling the GetNodeForLocation CDP command with Do().
 type GetNodeForLocationResponse struct {
 	// Resulting node.
-	BackendNodeID int64
+	BackendNodeID int64 `json:"backendNodeId"`
 	// Frame this node belongs to.
-	FrameID string
+	FrameID string `json:"frameId"`
 	// Id of the node at given coordinates, only when enabled and requested document.
 	NodeID int64 `json:"nodeId,omitempty"`
 }
@@ -1067,7 +1067,7 @@ func (t *GetOuterHTML) SetObjectID(v runtime.RemoteObjectID) *GetOuterHTML {
 // to calling the GetOuterHTML CDP command with Do().
 type GetOuterHTMLResponse struct {
 	// Outer HTML markup.
-	OuterHTML string
+	OuterHTML string `json:"outerHTML"`
 }
 
 // Do sends the GetOuterHTML CDP command to a browser,
@@ -1101,7 +1101,7 @@ func (t *GetOuterHTML) Do(ctx context.Context) (*GetOuterHTMLResponse, error) {
 // This CDP method is experimental.
 type GetRelayoutBoundary struct {
 	// Id of the node.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetRelayoutBoundary constructs a new GetRelayoutBoundary struct instance, with
@@ -1121,7 +1121,7 @@ func NewGetRelayoutBoundary(nodeID int64) *GetRelayoutBoundary {
 // to calling the GetRelayoutBoundary CDP command with Do().
 type GetRelayoutBoundaryResponse struct {
 	// Relayout boundary node id for the given node.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the GetRelayoutBoundary CDP command to a browser,
@@ -1156,11 +1156,11 @@ func (t *GetRelayoutBoundary) Do(ctx context.Context) (*GetRelayoutBoundaryRespo
 // This CDP method is experimental.
 type GetSearchResults struct {
 	// Unique search session identifier.
-	SearchID string
+	SearchID string `json:"searchId"`
 	// Start index of the search result to be returned.
-	FromIndex int64
+	FromIndex int64 `json:"fromIndex"`
 	// End index of the search result to be returned.
-	ToIndex int64
+	ToIndex int64 `json:"toIndex"`
 }
 
 // NewGetSearchResults constructs a new GetSearchResults struct instance, with
@@ -1182,7 +1182,7 @@ func NewGetSearchResults(searchID string, fromIndex int64, toIndex int64) *GetSe
 // to calling the GetSearchResults CDP command with Do().
 type GetSearchResultsResponse struct {
 	// Ids of the search result nodes.
-	NodeIds []NodeID
+	NodeIds []NodeID `json:"nodeIds"`
 }
 
 // Do sends the GetSearchResults CDP command to a browser,
@@ -1248,9 +1248,9 @@ func (t *MarkUndoableState) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-moveTo
 type MoveTo struct {
 	// Id of the node to move.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// Id of the element to drop the moved node into.
-	TargetNodeID int64
+	TargetNodeID int64 `json:"targetNodeId"`
 	// Drop node before this one (if absent, the moved node becomes the last child of
 	// `targetNodeId`).
 	InsertBeforeNodeID int64 `json:"insertBeforeNodeId,omitempty"`
@@ -1282,7 +1282,7 @@ func (t *MoveTo) SetInsertBeforeNodeID(v int64) *MoveTo {
 // to calling the MoveTo CDP command with Do().
 type MoveToResponse struct {
 	// New id of the moved node.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the MoveTo CDP command to a browser,
@@ -1317,7 +1317,7 @@ func (t *MoveTo) Do(ctx context.Context) (*MoveToResponse, error) {
 // This CDP method is experimental.
 type PerformSearch struct {
 	// Plain text or query selector or XPath search query.
-	Query string
+	Query string `json:"query"`
 	// True to search in user agent shadow DOM.
 	IncludeUserAgentShadowDOM bool `json:"includeUserAgentShadowDOM,omitempty"`
 }
@@ -1348,9 +1348,9 @@ func (t *PerformSearch) SetIncludeUserAgentShadowDOM(v bool) *PerformSearch {
 // to calling the PerformSearch CDP command with Do().
 type PerformSearchResponse struct {
 	// Unique search session identifier.
-	SearchID string
+	SearchID string `json:"searchId"`
 	// Number of search results.
-	ResultCount int64
+	ResultCount int64 `json:"resultCount"`
 }
 
 // Do sends the PerformSearch CDP command to a browser,
@@ -1384,7 +1384,7 @@ func (t *PerformSearch) Do(ctx context.Context) (*PerformSearchResponse, error) 
 // This CDP method is experimental.
 type PushNodeByPathToFrontend struct {
 	// Path to node in the proprietary format.
-	Path string
+	Path string `json:"path"`
 }
 
 // NewPushNodeByPathToFrontend constructs a new PushNodeByPathToFrontend struct instance, with
@@ -1404,7 +1404,7 @@ func NewPushNodeByPathToFrontend(path string) *PushNodeByPathToFrontend {
 // to calling the PushNodeByPathToFrontend CDP command with Do().
 type PushNodeByPathToFrontendResponse struct {
 	// Id of the node for given path.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the PushNodeByPathToFrontend CDP command to a browser,
@@ -1438,7 +1438,7 @@ func (t *PushNodeByPathToFrontend) Do(ctx context.Context) (*PushNodeByPathToFro
 // This CDP method is experimental.
 type PushNodesByBackendIdsToFrontend struct {
 	// The array of backend node ids.
-	BackendNodeIds []BackendNodeID
+	BackendNodeIds []BackendNodeID `json:"backendNodeIds"`
 }
 
 // NewPushNodesByBackendIdsToFrontend constructs a new PushNodesByBackendIdsToFrontend struct instance, with
@@ -1459,7 +1459,7 @@ func NewPushNodesByBackendIdsToFrontend(backendNodeIds []BackendNodeID) *PushNod
 type PushNodesByBackendIdsToFrontendResponse struct {
 	// The array of ids of pushed nodes that correspond to the backend ids specified in
 	// backendNodeIds.
-	NodeIds []NodeID
+	NodeIds []NodeID `json:"nodeIds"`
 }
 
 // Do sends the PushNodesByBackendIdsToFrontend CDP command to a browser,
@@ -1491,9 +1491,9 @@ func (t *PushNodesByBackendIdsToFrontend) Do(ctx context.Context) (*PushNodesByB
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-querySelector
 type QuerySelector struct {
 	// Id of the node to query upon.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// Selector string.
-	Selector string
+	Selector string `json:"selector"`
 }
 
 // NewQuerySelector constructs a new QuerySelector struct instance, with
@@ -1512,7 +1512,7 @@ func NewQuerySelector(nodeID int64, selector string) *QuerySelector {
 // to calling the QuerySelector CDP command with Do().
 type QuerySelectorResponse struct {
 	// Query selector result.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the QuerySelector CDP command to a browser,
@@ -1544,9 +1544,9 @@ func (t *QuerySelector) Do(ctx context.Context) (*QuerySelectorResponse, error) 
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-querySelectorAll
 type QuerySelectorAll struct {
 	// Id of the node to query upon.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// Selector string.
-	Selector string
+	Selector string `json:"selector"`
 }
 
 // NewQuerySelectorAll constructs a new QuerySelectorAll struct instance, with
@@ -1565,7 +1565,7 @@ func NewQuerySelectorAll(nodeID int64, selector string) *QuerySelectorAll {
 // to calling the QuerySelectorAll CDP command with Do().
 type QuerySelectorAllResponse struct {
 	// Query selector result.
-	NodeIds []NodeID
+	NodeIds []NodeID `json:"nodeIds"`
 }
 
 // Do sends the QuerySelectorAll CDP command to a browser,
@@ -1631,9 +1631,9 @@ func (t *Redo) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-removeAttribute
 type RemoveAttribute struct {
 	// Id of the element to remove attribute from.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// Name of the attribute to remove.
-	Name string
+	Name string `json:"name"`
 }
 
 // NewRemoveAttribute constructs a new RemoveAttribute struct instance, with
@@ -1673,7 +1673,7 @@ func (t *RemoveAttribute) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-removeNode
 type RemoveNode struct {
 	// Id of the node to remove.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewRemoveNode constructs a new RemoveNode struct instance, with
@@ -1714,7 +1714,7 @@ func (t *RemoveNode) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-requestChildNodes
 type RequestChildNodes struct {
 	// Id of the node to get children for.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// The maximum depth at which children should be retrieved, defaults to 1. Use -1 for the
 	// entire subtree or provide an integer larger than 0.
 	Depth int64 `json:"depth,omitempty"`
@@ -1781,7 +1781,7 @@ func (t *RequestChildNodes) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-requestNode
 type RequestNode struct {
 	// JavaScript object id to convert into node.
-	ObjectID runtime.RemoteObjectID
+	ObjectID runtime.RemoteObjectID `json:"objectId"`
 }
 
 // NewRequestNode constructs a new RequestNode struct instance, with
@@ -1799,7 +1799,7 @@ func NewRequestNode(objectID runtime.RemoteObjectID) *RequestNode {
 // to calling the RequestNode CDP command with Do().
 type RequestNodeResponse struct {
 	// Node id for given object.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the RequestNode CDP command to a browser,
@@ -1889,7 +1889,7 @@ func (t *ResolveNode) SetExecutionContextID(v runtime.ExecutionContextID) *Resol
 // to calling the ResolveNode CDP command with Do().
 type ResolveNodeResponse struct {
 	// JavaScript object wrapper for given node.
-	Object runtime.RemoteObject
+	Object runtime.RemoteObject `json:"object"`
 }
 
 // Do sends the ResolveNode CDP command to a browser,
@@ -1921,11 +1921,11 @@ func (t *ResolveNode) Do(ctx context.Context) (*ResolveNodeResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setAttributeValue
 type SetAttributeValue struct {
 	// Id of the element to set attribute for.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// Attribute name.
-	Name string
+	Name string `json:"name"`
 	// Attribute value.
-	Value string
+	Value string `json:"value"`
 }
 
 // NewSetAttributeValue constructs a new SetAttributeValue struct instance, with
@@ -1967,9 +1967,9 @@ func (t *SetAttributeValue) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setAttributesAsText
 type SetAttributesAsText struct {
 	// Id of the element to set attributes for.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// Text with a number of attributes. Will parse this text using HTML parser.
-	Text string
+	Text string `json:"text"`
 	// Attribute name to replace with new attributes derived from text in case text parsed
 	// successfully.
 	Name string `json:"name,omitempty"`
@@ -2022,7 +2022,7 @@ func (t *SetAttributesAsText) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setFileInputFiles
 type SetFileInputFiles struct {
 	// Array of file paths to set.
-	Files []string
+	Files []string `json:"files"`
 	// Identifier of the node.
 	NodeID int64 `json:"nodeId,omitempty"`
 	// Identifier of the backend node.
@@ -2096,7 +2096,7 @@ func (t *SetFileInputFiles) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetNodeStackTracesEnabled struct {
 	// Enable or disable.
-	Enable bool
+	Enable bool `json:"enable"`
 }
 
 // NewSetNodeStackTracesEnabled constructs a new SetNodeStackTracesEnabled struct instance, with
@@ -2139,7 +2139,7 @@ func (t *SetNodeStackTracesEnabled) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type GetNodeStackTraces struct {
 	// Id of the node to get stack traces for.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewGetNodeStackTraces constructs a new GetNodeStackTraces struct instance, with
@@ -2194,7 +2194,7 @@ func (t *GetNodeStackTraces) Do(ctx context.Context) (*GetNodeStackTracesRespons
 // This CDP method is experimental.
 type GetFileInfo struct {
 	// JavaScript object id of the node wrapper.
-	ObjectID runtime.RemoteObjectID
+	ObjectID runtime.RemoteObjectID `json:"objectId"`
 }
 
 // NewGetFileInfo constructs a new GetFileInfo struct instance, with
@@ -2213,7 +2213,7 @@ func NewGetFileInfo(objectID runtime.RemoteObjectID) *GetFileInfo {
 // GetFileInfoResponse contains the browser's response
 // to calling the GetFileInfo CDP command with Do().
 type GetFileInfoResponse struct {
-	Path string
+	Path string `json:"path"`
 }
 
 // Do sends the GetFileInfo CDP command to a browser,
@@ -2248,7 +2248,7 @@ func (t *GetFileInfo) Do(ctx context.Context) (*GetFileInfoResponse, error) {
 // This CDP method is experimental.
 type SetInspectedNode struct {
 	// DOM node id to be accessible by means of $x command line API.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // NewSetInspectedNode constructs a new SetInspectedNode struct instance, with
@@ -2289,9 +2289,9 @@ func (t *SetInspectedNode) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setNodeName
 type SetNodeName struct {
 	// Id of the node to set name for.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// New node's name.
-	Name string
+	Name string `json:"name"`
 }
 
 // NewSetNodeName constructs a new SetNodeName struct instance, with
@@ -2310,7 +2310,7 @@ func NewSetNodeName(nodeID int64, name string) *SetNodeName {
 // to calling the SetNodeName CDP command with Do().
 type SetNodeNameResponse struct {
 	// New node's id.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the SetNodeName CDP command to a browser,
@@ -2342,9 +2342,9 @@ func (t *SetNodeName) Do(ctx context.Context) (*SetNodeNameResponse, error) {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setNodeValue
 type SetNodeValue struct {
 	// Id of the node to set value for.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// New node's value.
-	Value string
+	Value string `json:"value"`
 }
 
 // NewSetNodeValue constructs a new SetNodeValue struct instance, with
@@ -2384,9 +2384,9 @@ func (t *SetNodeValue) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-setOuterHTML
 type SetOuterHTML struct {
 	// Id of the node to set markup for.
-	NodeID int64
+	NodeID int64 `json:"nodeId"`
 	// Outer HTML markup to set.
-	OuterHTML string
+	OuterHTML string `json:"outerHTML"`
 }
 
 // NewSetOuterHTML constructs a new SetOuterHTML struct instance, with
@@ -2461,7 +2461,7 @@ func (t *Undo) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type GetFrameOwner struct {
-	FrameID string
+	FrameID string `json:"frameId"`
 }
 
 // NewGetFrameOwner constructs a new GetFrameOwner struct instance, with
@@ -2481,7 +2481,7 @@ func NewGetFrameOwner(frameID string) *GetFrameOwner {
 // to calling the GetFrameOwner CDP command with Do().
 type GetFrameOwnerResponse struct {
 	// Resulting node.
-	BackendNodeID int64
+	BackendNodeID int64 `json:"backendNodeId"`
 	// Id of the node at given coordinates, only when enabled and requested document.
 	NodeID int64 `json:"nodeId,omitempty"`
 }

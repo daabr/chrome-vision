@@ -5,7 +5,7 @@ package cast
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Cast/#event-sinksUpdated
 type SinksUpdated struct {
-	Sinks []Sink
+	Sinks []Sink `json:"sinks"`
 }
 
 // This is fired whenever the outstanding issue/error message changes.
@@ -13,5 +13,5 @@ type SinksUpdated struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Cast/#event-issueUpdated
 type IssueUpdated struct {
-	IssueMessage string
+	IssueMessage string `json:"issueMessage"`
 }

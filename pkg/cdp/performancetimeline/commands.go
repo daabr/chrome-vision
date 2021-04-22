@@ -21,7 +21,7 @@ type Enable struct {
 	// The specified filter overrides any previous filters, passing empty
 	// filter disables recording.
 	// Note that not all types exposed to the web platform are currently supported.
-	EventTypes []string
+	EventTypes []string `json:"eventTypes"`
 }
 
 // NewEnable constructs a new Enable struct instance, with

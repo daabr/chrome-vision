@@ -7,13 +7,13 @@ package browser
 // This CDP event is experimental.
 type DownloadWillBegin struct {
 	// Id of the frame that caused the download to begin.
-	FrameID string
+	FrameID string `json:"frameId"`
 	// Global unique identifier of the download.
-	Guid string
+	Guid string `json:"guid"`
 	// URL of the resource being downloaded.
-	URL string
+	URL string `json:"url"`
 	// Suggested file name of the resource (the actual name of the file saved on disk may differ).
-	SuggestedFilename string
+	SuggestedFilename string `json:"suggestedFilename"`
 }
 
 // Fired when download makes progress. Last call has |done| == true.
@@ -23,11 +23,11 @@ type DownloadWillBegin struct {
 // This CDP event is experimental.
 type DownloadProgress struct {
 	// Global unique identifier of the download.
-	Guid string
+	Guid string `json:"guid"`
 	// Total expected bytes to download.
-	TotalBytes float64
+	TotalBytes float64 `json:"totalBytes"`
 	// Total bytes received.
-	ReceivedBytes float64
+	ReceivedBytes float64 `json:"receivedBytes"`
 	// Download status.
-	State string
+	State string `json:"state"`
 }

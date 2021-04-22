@@ -13,9 +13,9 @@ import (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-deliverPushMessage
 type DeliverPushMessage struct {
-	Origin         string
-	RegistrationID string
-	Data           string
+	Origin         string `json:"origin"`
+	RegistrationID string `json:"registrationId"`
+	Data           string `json:"data"`
 }
 
 // NewDeliverPushMessage constructs a new DeliverPushMessage struct instance, with
@@ -81,10 +81,10 @@ func (t *Disable) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-dispatchSyncEvent
 type DispatchSyncEvent struct {
-	Origin         string
-	RegistrationID string
-	Tag            string
-	LastChance     bool
+	Origin         string `json:"origin"`
+	RegistrationID string `json:"registrationId"`
+	Tag            string `json:"tag"`
+	LastChance     bool   `json:"lastChance"`
 }
 
 // NewDispatchSyncEvent constructs a new DispatchSyncEvent struct instance, with
@@ -123,9 +123,9 @@ func (t *DispatchSyncEvent) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-dispatchPeriodicSyncEvent
 type DispatchPeriodicSyncEvent struct {
-	Origin         string
-	RegistrationID string
-	Tag            string
+	Origin         string `json:"origin"`
+	RegistrationID string `json:"registrationId"`
+	Tag            string `json:"tag"`
 }
 
 // NewDispatchPeriodicSyncEvent constructs a new DispatchPeriodicSyncEvent struct instance, with
@@ -191,7 +191,7 @@ func (t *Enable) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-inspectWorker
 type InspectWorker struct {
-	VersionID string
+	VersionID string `json:"versionId"`
 }
 
 // NewInspectWorker constructs a new InspectWorker struct instance, with
@@ -227,7 +227,7 @@ func (t *InspectWorker) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-setForceUpdateOnPageLoad
 type SetForceUpdateOnPageLoad struct {
-	ForceUpdateOnPageLoad bool
+	ForceUpdateOnPageLoad bool `json:"forceUpdateOnPageLoad"`
 }
 
 // NewSetForceUpdateOnPageLoad constructs a new SetForceUpdateOnPageLoad struct instance, with
@@ -263,7 +263,7 @@ func (t *SetForceUpdateOnPageLoad) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-skipWaiting
 type SkipWaiting struct {
-	ScopeURL string
+	ScopeURL string `json:"scopeURL"`
 }
 
 // NewSkipWaiting constructs a new SkipWaiting struct instance, with
@@ -299,7 +299,7 @@ func (t *SkipWaiting) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-startWorker
 type StartWorker struct {
-	ScopeURL string
+	ScopeURL string `json:"scopeURL"`
 }
 
 // NewStartWorker constructs a new StartWorker struct instance, with
@@ -363,7 +363,7 @@ func (t *StopAllWorkers) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-stopWorker
 type StopWorker struct {
-	VersionID string
+	VersionID string `json:"versionId"`
 }
 
 // NewStopWorker constructs a new StopWorker struct instance, with
@@ -399,7 +399,7 @@ func (t *StopWorker) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-unregister
 type Unregister struct {
-	ScopeURL string
+	ScopeURL string `json:"scopeURL"`
 }
 
 // NewUnregister constructs a new Unregister struct instance, with
@@ -435,7 +435,7 @@ func (t *Unregister) Do(ctx context.Context) error {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#method-updateRegistration
 type UpdateRegistration struct {
-	ScopeURL string
+	ScopeURL string `json:"scopeURL"`
 }
 
 // NewUpdateRegistration constructs a new UpdateRegistration struct instance, with

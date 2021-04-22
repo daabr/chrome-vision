@@ -18,13 +18,13 @@ import (
 // This CDP method is experimental.
 type DispatchDragEvent struct {
 	// Type of the drag event.
-	Type string
+	Type string `json:"type"`
 	// X coordinate of the event relative to the main frame's viewport in CSS pixels.
-	X float64
+	X float64 `json:"x"`
 	// Y coordinate of the event relative to the main frame's viewport in CSS pixels. 0 refers to
 	// the top of the viewport and Y increases as it proceeds towards the bottom of the viewport.
-	Y    float64
-	Data DragData
+	Y    float64  `json:"y"`
+	Data DragData `json:"data"`
 	// Bit field representing pressed modifier keys. Alt=1, Ctrl=2, Meta/Command=4, Shift=8
 	// (default: 0).
 	Modifiers int64 `json:"modifiers,omitempty"`
@@ -81,7 +81,7 @@ func (t *DispatchDragEvent) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-dispatchKeyEvent
 type DispatchKeyEvent struct {
 	// Type of the key event.
-	Type string
+	Type string `json:"type"`
 	// Bit field representing pressed modifier keys. Alt=1, Ctrl=2, Meta/Command=4, Shift=8
 	// (default: 0).
 	Modifiers int64 `json:"modifiers,omitempty"`
@@ -295,7 +295,7 @@ func (t *DispatchKeyEvent) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type InsertText struct {
 	// The text to insert.
-	Text string
+	Text string `json:"text"`
 }
 
 // NewInsertText constructs a new InsertText struct instance, with
@@ -336,12 +336,12 @@ func (t *InsertText) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-dispatchMouseEvent
 type DispatchMouseEvent struct {
 	// Type of the mouse event.
-	Type string
+	Type string `json:"type"`
 	// X coordinate of the event relative to the main frame's viewport in CSS pixels.
-	X float64
+	X float64 `json:"x"`
 	// Y coordinate of the event relative to the main frame's viewport in CSS pixels. 0 refers to
 	// the top of the viewport and Y increases as it proceeds towards the bottom of the viewport.
-	Y float64
+	Y float64 `json:"y"`
 	// Bit field representing pressed modifier keys. Alt=1, Ctrl=2, Meta/Command=4, Shift=8
 	// (default: 0).
 	Modifiers int64 `json:"modifiers,omitempty"`
@@ -550,11 +550,11 @@ func (t *DispatchMouseEvent) Do(ctx context.Context) error {
 type DispatchTouchEvent struct {
 	// Type of the touch event. TouchEnd and TouchCancel must not contain any touch points, while
 	// TouchStart and TouchMove must contains at least one.
-	Type string
+	Type string `json:"type"`
 	// Active touch points on the touch device. One event per any changed point (compared to
 	// previous touch event in a sequence) is generated, emulating pressing/moving/releasing points
 	// one by one.
-	TouchPoints []TouchPoint
+	TouchPoints []TouchPoint `json:"touchPoints"`
 	// Bit field representing pressed modifier keys. Alt=1, Ctrl=2, Meta/Command=4, Shift=8
 	// (default: 0).
 	Modifiers int64 `json:"modifiers,omitempty"`
@@ -620,13 +620,13 @@ func (t *DispatchTouchEvent) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type EmulateTouchFromMouseEvent struct {
 	// Type of the mouse event.
-	Type string
+	Type string `json:"type"`
 	// X coordinate of the mouse pointer in DIP.
-	X int64
+	X int64 `json:"x"`
 	// Y coordinate of the mouse pointer in DIP.
-	Y int64
+	Y int64 `json:"y"`
 	// Mouse button. Only "none", "left", "right" are supported.
-	Button string
+	Button string `json:"button"`
 	// Time at which the event occurred (default: current time).
 	Timestamp float64 `json:"timestamp,omitempty"`
 	// X delta in DIP for mouse wheel event (default: 0).
@@ -727,7 +727,7 @@ func (t *EmulateTouchFromMouseEvent) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-setIgnoreInputEvents
 type SetIgnoreInputEvents struct {
 	// Ignores input events processing when set to true.
-	Ignore bool
+	Ignore bool `json:"ignore"`
 }
 
 // NewSetIgnoreInputEvents constructs a new SetIgnoreInputEvents struct instance, with
@@ -768,7 +768,7 @@ func (t *SetIgnoreInputEvents) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type SetInterceptDrags struct {
-	Enabled bool
+	Enabled bool `json:"enabled"`
 }
 
 // NewSetInterceptDrags constructs a new SetInterceptDrags struct instance, with
@@ -811,11 +811,11 @@ func (t *SetInterceptDrags) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SynthesizePinchGesture struct {
 	// X coordinate of the start of the gesture in CSS pixels.
-	X float64
+	X float64 `json:"x"`
 	// Y coordinate of the start of the gesture in CSS pixels.
-	Y float64
+	Y float64 `json:"y"`
 	// Relative scale factor after zooming (>1.0 zooms in, <1.0 zooms out).
-	ScaleFactor float64
+	ScaleFactor float64 `json:"scaleFactor"`
 	// Relative pointer speed in pixels per second (default: 800).
 	RelativeSpeed int64 `json:"relativeSpeed,omitempty"`
 	// Which type of input events to be generated (default: 'default', which queries the platform
@@ -884,9 +884,9 @@ func (t *SynthesizePinchGesture) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SynthesizeScrollGesture struct {
 	// X coordinate of the start of the gesture in CSS pixels.
-	X float64
+	X float64 `json:"x"`
 	// Y coordinate of the start of the gesture in CSS pixels.
-	Y float64
+	Y float64 `json:"y"`
 	// The distance to scroll along the X axis (positive to scroll left).
 	XDistance float64 `json:"xDistance,omitempty"`
 	// The distance to scroll along the Y axis (positive to scroll up).
@@ -1046,9 +1046,9 @@ func (t *SynthesizeScrollGesture) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SynthesizeTapGesture struct {
 	// X coordinate of the start of the gesture in CSS pixels.
-	X float64
+	X float64 `json:"x"`
 	// Y coordinate of the start of the gesture in CSS pixels.
-	Y float64
+	Y float64 `json:"y"`
 	// Duration between touchdown and touchup events in ms (default: 50).
 	Duration int64 `json:"duration,omitempty"`
 	// Number of times to perform the tap (e.g. 2 for double tap, default: 1).

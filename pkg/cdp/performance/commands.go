@@ -97,7 +97,7 @@ func (t *Enable) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetTimeDomain struct {
 	// Time domain
-	TimeDomain string
+	TimeDomain string `json:"timeDomain"`
 }
 
 // NewSetTimeDomain constructs a new SetTimeDomain struct instance, with
@@ -152,7 +152,7 @@ func NewGetMetrics() *GetMetrics {
 // to calling the GetMetrics CDP command with Do().
 type GetMetricsResponse struct {
 	// Current values for run-time metrics.
-	Metrics []Metric
+	Metrics []Metric `json:"metrics"`
 }
 
 // Do sends the GetMetrics CDP command to a browser,

@@ -5,7 +5,7 @@ package schema
 // https://chromedevtools.github.io/devtools-protocol/tot/Schema/#type-Domain
 type Domain struct {
 	// Domain name.
-	Name string
+	Name string `json:"name"`
 	// Domain version.
-	Version string
+	Version string `json:"version"`
 }

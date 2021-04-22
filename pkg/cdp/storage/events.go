@@ -5,9 +5,9 @@ package storage
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#event-cacheStorageContentUpdated
 type CacheStorageContentUpdated struct {
 	// Origin to update.
-	Origin string
+	Origin string `json:"origin"`
 	// Name of cache in origin.
-	CacheName string
+	CacheName string `json:"cacheName"`
 }
 
 // A cache has been added/deleted.
@@ -15,7 +15,7 @@ type CacheStorageContentUpdated struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#event-cacheStorageListUpdated
 type CacheStorageListUpdated struct {
 	// Origin to update.
-	Origin string
+	Origin string `json:"origin"`
 }
 
 // The origin's IndexedDB object store has been modified.
@@ -23,11 +23,11 @@ type CacheStorageListUpdated struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#event-indexedDBContentUpdated
 type IndexedDBContentUpdated struct {
 	// Origin to update.
-	Origin string
+	Origin string `json:"origin"`
 	// Database to update.
-	DatabaseName string
+	DatabaseName string `json:"databaseName"`
 	// ObjectStore to update.
-	ObjectStoreName string
+	ObjectStoreName string `json:"objectStoreName"`
 }
 
 // The origin's IndexedDB database list has been modified.
@@ -35,5 +35,5 @@ type IndexedDBContentUpdated struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#event-indexedDBListUpdated
 type IndexedDBListUpdated struct {
 	// Origin to update.
-	Origin string
+	Origin string `json:"origin"`
 }

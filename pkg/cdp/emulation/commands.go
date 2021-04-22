@@ -31,7 +31,7 @@ func NewCanEmulate() *CanEmulate {
 // to calling the CanEmulate CDP command with Do().
 type CanEmulateResponse struct {
 	// True if emulation is supported.
-	Result bool
+	Result bool `json:"result"`
 }
 
 // Do sends the CanEmulate CDP command to a browser,
@@ -155,7 +155,7 @@ func (t *ResetPageScaleFactor) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetFocusEmulationEnabled struct {
 	// Whether to enable to disable focus emulation.
-	Enabled bool
+	Enabled bool `json:"enabled"`
 }
 
 // NewSetFocusEmulationEnabled constructs a new SetFocusEmulationEnabled struct instance, with
@@ -198,7 +198,7 @@ func (t *SetFocusEmulationEnabled) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetCPUThrottlingRate struct {
 	// Throttling rate as a slowdown factor (1 is no throttle, 2 is 2x slowdown, etc).
-	Rate float64
+	Rate float64 `json:"rate"`
 }
 
 // NewSetCPUThrottlingRate constructs a new SetCPUThrottlingRate struct instance, with
@@ -290,14 +290,14 @@ func (t *SetDefaultBackgroundColorOverride) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setDeviceMetricsOverride
 type SetDeviceMetricsOverride struct {
 	// Overriding width value in pixels (minimum 0, maximum 10000000). 0 disables the override.
-	Width int64
+	Width int64 `json:"width"`
 	// Overriding height value in pixels (minimum 0, maximum 10000000). 0 disables the override.
-	Height int64
+	Height int64 `json:"height"`
 	// Overriding device scale factor value. 0 disables the override.
-	DeviceScaleFactor float64
+	DeviceScaleFactor float64 `json:"deviceScaleFactor"`
 	// Whether to emulate mobile device. This includes viewport meta tag, overlay scrollbars, text
 	// autosizing and more.
-	Mobile bool
+	Mobile bool `json:"mobile"`
 	// Scale to apply to resulting view image.
 	//
 	// This CDP parameter is experimental.
@@ -474,7 +474,7 @@ func (t *SetDeviceMetricsOverride) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetScrollbarsHidden struct {
 	// Whether scrollbars should be always hidden.
-	Hidden bool
+	Hidden bool `json:"hidden"`
 }
 
 // NewSetScrollbarsHidden constructs a new SetScrollbarsHidden struct instance, with
@@ -515,7 +515,7 @@ func (t *SetScrollbarsHidden) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetDocumentCookieDisabled struct {
 	// Whether document.coookie API should be disabled.
-	Disabled bool
+	Disabled bool `json:"disabled"`
 }
 
 // NewSetDocumentCookieDisabled constructs a new SetDocumentCookieDisabled struct instance, with
@@ -556,7 +556,7 @@ func (t *SetDocumentCookieDisabled) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetEmitTouchEventsForMouse struct {
 	// Whether touch emulation based on mouse input should be enabled.
-	Enabled bool
+	Enabled bool `json:"enabled"`
 	// Touch/gesture events configuration. Default: current platform.
 	Configuration string `json:"configuration,omitempty"`
 }
@@ -667,7 +667,7 @@ func (t *SetEmulatedMedia) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetEmulatedVisionDeficiency struct {
 	// Vision deficiency to emulate.
-	Type string
+	Type string `json:"type"`
 }
 
 // NewSetEmulatedVisionDeficiency constructs a new SetEmulatedVisionDeficiency struct instance, with
@@ -779,9 +779,9 @@ func (t *SetGeolocationOverride) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetIdleOverride struct {
 	// Mock isUserActive
-	IsUserActive bool
+	IsUserActive bool `json:"isUserActive"`
 	// Mock isScreenUnlocked
-	IsScreenUnlocked bool
+	IsScreenUnlocked bool `json:"isScreenUnlocked"`
 }
 
 // NewSetIdleOverride constructs a new SetIdleOverride struct instance, with
@@ -860,7 +860,7 @@ func (t *ClearIdleOverride) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetNavigatorOverrides struct {
 	// The platform navigator.platform should return.
-	Platform string
+	Platform string `json:"platform"`
 }
 
 // NewSetNavigatorOverrides constructs a new SetNavigatorOverrides struct instance, with
@@ -904,7 +904,7 @@ func (t *SetNavigatorOverrides) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetPageScaleFactor struct {
 	// Page scale factor.
-	PageScaleFactor float64
+	PageScaleFactor float64 `json:"pageScaleFactor"`
 }
 
 // NewSetPageScaleFactor constructs a new SetPageScaleFactor struct instance, with
@@ -945,7 +945,7 @@ func (t *SetPageScaleFactor) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setScriptExecutionDisabled
 type SetScriptExecutionDisabled struct {
 	// Whether script execution should be disabled in the page.
-	Value bool
+	Value bool `json:"value"`
 }
 
 // NewSetScriptExecutionDisabled constructs a new SetScriptExecutionDisabled struct instance, with
@@ -984,7 +984,7 @@ func (t *SetScriptExecutionDisabled) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setTouchEmulationEnabled
 type SetTouchEmulationEnabled struct {
 	// Whether the touch event emulation should be enabled.
-	Enabled bool
+	Enabled bool `json:"enabled"`
 	// Maximum touch points supported. Defaults to one.
 	MaxTouchPoints int64 `json:"maxTouchPoints,omitempty"`
 }
@@ -1036,7 +1036,7 @@ func (t *SetTouchEmulationEnabled) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type SetVirtualTimePolicy struct {
-	Policy string
+	Policy string `json:"policy"`
 	// If set, after this many virtual milliseconds have elapsed virtual time will be paused and a
 	// virtualTimeBudgetExpired event is sent.
 	Budget float64 `json:"budget,omitempty"`
@@ -1106,7 +1106,7 @@ func (t *SetVirtualTimePolicy) SetInitialVirtualTime(v float64) *SetVirtualTimeP
 // to calling the SetVirtualTimePolicy CDP command with Do().
 type SetVirtualTimePolicyResponse struct {
 	// Absolute timestamp at which virtual time was first enabled (up time in milliseconds).
-	VirtualTimeTicksBase float64
+	VirtualTimeTicksBase float64 `json:"virtualTimeTicksBase"`
 }
 
 // Do sends the SetVirtualTimePolicy CDP command to a browser,
@@ -1193,7 +1193,7 @@ func (t *SetLocaleOverride) Do(ctx context.Context) error {
 type SetTimezoneOverride struct {
 	// The timezone identifier. If empty, disables the override and
 	// restores default host system timezone.
-	TimezoneID string
+	TimezoneID string `json:"timezoneId"`
 }
 
 // NewSetTimezoneOverride constructs a new SetTimezoneOverride struct instance, with
@@ -1239,9 +1239,9 @@ func (t *SetTimezoneOverride) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetVisibleSize struct {
 	// Frame width (DIP).
-	Width int64
+	Width int64 `json:"width"`
 	// Frame height (DIP).
-	Height int64
+	Height int64 `json:"height"`
 }
 
 // NewSetVisibleSize constructs a new SetVisibleSize struct instance, with
@@ -1284,7 +1284,7 @@ func (t *SetVisibleSize) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type SetDisabledImageTypes struct {
 	// Image types to disable.
-	ImageTypes []DisabledImageType
+	ImageTypes []DisabledImageType `json:"imageTypes"`
 }
 
 // NewSetDisabledImageTypes constructs a new SetDisabledImageTypes struct instance, with
@@ -1325,7 +1325,7 @@ func (t *SetDisabledImageTypes) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setUserAgentOverride
 type SetUserAgentOverride struct {
 	// User agent to use.
-	UserAgent string
+	UserAgent string `json:"userAgent"`
 	// Browser langugage to emulate.
 	AcceptLanguage string `json:"acceptLanguage,omitempty"`
 	// The platform navigator.platform should return.
