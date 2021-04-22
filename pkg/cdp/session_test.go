@@ -60,6 +60,9 @@ func TestFromContext(t *testing.T) {
 		t.Fatalf("cdp.NewContext(ctx); got error: %s", err.Error())
 	}
 	defer func() {
+		// Tear down.
+		cdp.Cancel(ctx)
+		cdp.Wait(ctx)
 		if session, ok := cdp.FromContext(ctx); ok {
 			if session.OutputDir != nil {
 				os.RemoveAll(*session.OutputDir)
@@ -84,13 +87,9 @@ func TestFromContext(t *testing.T) {
 	if _, err := os.Stat(*session.UserDataDir); err != nil {
 		t.Errorf("os.Stat(*session.UserDataDir); got error: %s", err.Error())
 	}
-
-	// Tear down.
-	cdp.Cancel(ctx)
-	cdp.Wait(ctx)
+	t.Logf("%#v", session)
 }
 
-// TODO: test UserDataDir() (custom temp dir exists, default doesn't)
 func TestUserDataDir(t *testing.T) {
 	// Set up.
 	parentCtx, cancel := context.WithTimeout(context.Background(), time.Minute)
@@ -110,6 +109,9 @@ func TestUserDataDir(t *testing.T) {
 		t.Fatalf("cdp.FromContext(ctx); ok = %v, want %v", ok, !ok)
 	}
 	defer func() {
+		// Tear down.
+		cdp.Cancel(ctx)
+		cdp.Wait(ctx)
 		if session.OutputDir != nil {
 			os.RemoveAll(*session.OutputDir)
 		}
@@ -122,8 +124,5 @@ func TestUserDataDir(t *testing.T) {
 	if *session.UserDataDir != dir {
 		t.Errorf("*session.UserDataDir = %v, want %v", *session.UserDataDir, dir)
 	}
-
-	// Tear down.
-	cdp.Cancel(ctx)
-	cdp.Wait(ctx)
+	t.Logf("%#v", session)
 }

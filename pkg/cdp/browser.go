@@ -104,17 +104,15 @@ func start(ctx context.Context, s *Session) error {
 		} else {
 			log.Println("Browser process has ended without an error")
 		}
+		s.cancel()
 
 		close(s.msgQ)
 		s.browserInputWriter.Close()
 		s.browserOutputReader.Close()
 		s.msgLog.Writer().(*os.File).Sync()
 		s.msgLog.Writer().(*os.File).Close()
-
 		// TODO: unsubscribe (close channels) for all existing subscribers.
-
 		close(s.browserDone)
-		s.cancel()
 	}(s, cmd)
 
 	return nil
