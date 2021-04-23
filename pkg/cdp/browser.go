@@ -45,19 +45,19 @@ func start(ctx context.Context, s *Session) error {
 	// Ensure that the user data directory exists, whether it's the
 	// default (in the output directory) or a custom one specified by the caller.
 	// If starting the browser fails immediately, delete the unused output directory.
-	os.MkdirAll(*s.UserDataDir, 0755)
+	os.MkdirAll(s.UserDataDir, 0755)
 	defer func() {
 		if cmd.Process == nil {
-			os.RemoveAll(*s.OutputDir)
+			os.RemoveAll(s.OutputDir)
 		}
 	}()
 
 	// Redirect the browser process's output to files.
-	stdout, err := os.Create(filepath.Join(*s.OutputDir, "stdout.txt"))
+	stdout, err := os.Create(filepath.Join(s.OutputDir, "stdout.txt"))
 	if err != nil {
 		return fmt.Errorf("failed to initialize browser process's stdout file: %v", err)
 	}
-	stderr, err := os.Create(filepath.Join(*s.OutputDir, "stderr.txt"))
+	stderr, err := os.Create(filepath.Join(s.OutputDir, "stderr.txt"))
 	if err != nil {
 		return fmt.Errorf("failed to initialize browser process's stderr file: %v", err)
 	}

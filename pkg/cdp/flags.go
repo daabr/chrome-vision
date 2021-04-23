@@ -121,11 +121,11 @@ func adjustFlags(s *Session) []string {
 	// then create a new one - for isolation. The existence of the directory,
 	// (in the session's output directory, or a custom path provided by the user)
 	// is ensured right after calling this function.
-	if s.UserDataDir == nil {
-		path := filepath.Join(*s.OutputDir, "user_data")
-		s.UserDataDir = &path
+	if s.UserDataDir == "" {
+		path := filepath.Join(s.OutputDir, "user_data")
+		s.UserDataDir = path
 	}
-	s.browserFlags["user-data-dir"] = *s.UserDataDir
+	s.browserFlags["user-data-dir"] = s.UserDataDir
 
 	// Convert the map to a sorted slice.
 	var args, keys []string
