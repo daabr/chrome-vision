@@ -52,7 +52,6 @@ func receiveFromPipe(s *Session) {
 		// Receive a new messsage.
 		b := scanner.Bytes()
 		s.msgLog.Printf("<- %s\n", b)
-		log.Printf("<- %s\n", b) // TODO: delete this line.
 		// Parse the raw JSON content.
 		m := &Message{}
 		if err := json.Unmarshal(b, m); err != nil {
@@ -152,7 +151,6 @@ func sendToPipe(s *Session, async asyncMessage) {
 	}
 	// Wait for the response, clean-up, and relay back to the caller of cdp.Send.
 	s.msgLog.Printf("-> %s\n", b)
-	log.Printf("-> %s\n", b) // TODO: delete this line.
 	m := <-s.responseSubscribers[s.msgID]
 
 	close(s.responseSubscribers[s.msgID])
