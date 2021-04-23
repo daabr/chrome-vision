@@ -64,9 +64,7 @@ func TestFromContext(t *testing.T) {
 		cdp.Cancel(ctx)
 		cdp.Wait(ctx)
 		if session, ok := cdp.FromContext(ctx); ok {
-			if session.OutputDir != nil {
-				os.RemoveAll(*session.OutputDir)
-			}
+			os.RemoveAll(session.OutputDir)
 		}
 	}()
 
@@ -75,19 +73,18 @@ func TestFromContext(t *testing.T) {
 	if !ok {
 		t.Fatalf("cdp.FromContext(ctx); ok = %v, want %v", ok, !ok)
 	}
-	if session.OutputDir == nil {
-		t.Error("session.OutputDir = nil, want !nil")
+	if session.OutputDir == "" {
+		t.Error(`session.OutputDir = "", want != ""`)
 	}
-	if _, err := os.Stat(*session.OutputDir); err != nil {
-		t.Errorf("os.Stat(*session.OutputDir); got error: %s", err.Error())
+	if _, err := os.Stat(session.OutputDir); err != nil {
+		t.Errorf("os.Stat(session.OutputDir); got error: %s", err.Error())
 	}
-	if session.UserDataDir == nil {
-		t.Error("session.UserDataDir = nil, want !nil")
+	if session.UserDataDir == "" {
+		t.Error(`session.UserDataDir = "", want != ""`)
 	}
-	if _, err := os.Stat(*session.UserDataDir); err != nil {
-		t.Errorf("os.Stat(*session.UserDataDir); got error: %s", err.Error())
+	if _, err := os.Stat(session.UserDataDir); err != nil {
+		t.Errorf("os.Stat(session.UserDataDir); got error: %s", err.Error())
 	}
-	t.Logf("%#v", session)
 }
 
 func TestUserDataDir(t *testing.T) {
@@ -95,7 +92,10 @@ func TestUserDataDir(t *testing.T) {
 	parentCtx, cancel := context.WithTimeout(context.Background(), time.Minute)
 	defer cancel()
 
-	dir := os.TempDir()
+	dir, err := os.MkdirTemp("", "")
+	if err != nil {
+		t.Fatalf("os.MkdirTemp(%q, %q); got error: %s", "", "", err.Error())
+	}
 	defer func() {
 		os.RemoveAll(dir)
 	}()
@@ -112,17 +112,14 @@ func TestUserDataDir(t *testing.T) {
 		// Tear down.
 		cdp.Cancel(ctx)
 		cdp.Wait(ctx)
-		if session.OutputDir != nil {
-			os.RemoveAll(*session.OutputDir)
-		}
+		os.RemoveAll(session.OutputDir)
 	}()
 
 	// Test.
-	if session.UserDataDir == nil {
-		t.Fatalf("session.UserDataDir = nil, want !nil")
+	if session.UserDataDir == "" {
+		t.Fatalf(`session.UserDataDir = "", want != ""`)
 	}
-	if *session.UserDataDir != dir {
-		t.Errorf("*session.UserDataDir = %v, want %v", *session.UserDataDir, dir)
+	if session.UserDataDir != dir {
+		t.Errorf("session.UserDataDir = %v, want %v", session.UserDataDir, dir)
 	}
-	t.Logf("%#v", session)
 }

@@ -41,10 +41,11 @@ type asyncMessage struct {
 
 // Parse and relay incoming CDP messages (solicited responses or unsolicited events),
 // received from the browser through a POSIX pipe on non-Windows operating systems,
-// as long as the pipe is open. Called as a goroutine in browser.go.
+// as long as the pipe is open. Called as a goroutine in `browser.go`.
 func receiveFromPipe(s *Session) {
-	// This scanner wraps the browser's POSIX pipe, which is closed when the browser
-	// process ends (see the goroutine at the bottom of the start function in browser.go).
+	// This scanner wraps the browser's POSIX pipe, which is closed when the
+	// browser process ends (see the goroutine at the bottom of the start
+	// function in `browser.go`).
 	scanner := bufio.NewScanner(s.browserOutputReader)
 	scanner.Split(scanMessages)
 	for scanner.Scan() {
@@ -81,7 +82,7 @@ func receiveFromPipe(s *Session) {
 	}
 }
 
-// Helper function based on bufio.ScanLines, using \0 instead of \n as a
+// Helper function based on `bufio.ScanLines`, using \0 instead of \n as a
 // separator - see https://golang.org/pkg/bufio/#example_Scanner_custom.
 func scanMessages(data []byte, atEOF bool) (int, []byte, error) {
 	if atEOF && len(data) == 0 {
@@ -101,7 +102,7 @@ func scanMessages(data []byte, atEOF bool) (int, []byte, error) {
 
 // Construct and send CDP messages to the browser through a POSIX pipe on non-Windows
 // operating systems, in a thread-safe manner (https://blog.golang.org/codelab-share).
-// Called in a goroutine in session.go as long as the browser is running.
+// Called in a goroutine in `session.go` as long as the browser is running.
 func sendToPipe(s *Session, async asyncMessage) {
 	// Discard malformed data.
 	if len(async.requestMsg.Method) == 0 {
@@ -162,15 +163,15 @@ func sendToPipe(s *Session, async asyncMessage) {
 // with the given context, and returns the browser's response message.
 // This is guaranteed to be thread-safe.
 func Send(ctx context.Context, method string, params json.RawMessage) (*Message, error) {
-	session, ok := FromContext(ctx)
+	s, ok := FromContext(ctx)
 	if !ok {
 		return nil, errors.New("context not initialized with cdp.NewContext")
 	}
 	// https://github.com/aslushnikov/getting-started-with-cdp#targets--sessions
-	m := &Message{Method: method, SessionID: session.sessionID, Params: params}
+	m := &Message{Method: method, SessionID: s.sessionID.read(), Params: params}
 	ch := make(chan *Message)
 	// https://blog.golang.org/codelab-share
-	session.msgQ <- asyncMessage{requestMsg: *m, responseChan: ch}
+	s.msgQ <- asyncMessage{requestMsg: *m, responseChan: ch}
 	m = <-ch
 	close(ch)
 	return m, nil
@@ -179,12 +180,12 @@ func Send(ctx context.Context, method string, params json.RawMessage) (*Message,
 // SubscribeEvent returns a channel to receive event messages of
 // the given type from the browser associated with the given context.
 func SubscribeEvent(ctx context.Context, name string) (chan *Message, error) {
-	session, ok := FromContext(ctx)
+	s, ok := FromContext(ctx)
 	if !ok {
 		return nil, errors.New("context not initialized with cdp.NewContext")
 	}
 	ch := make(chan *Message)
-	session.eventSubscribers[name] = append(session.eventSubscribers[name], ch)
+	s.eventSubscribers[name] = append(s.eventSubscribers[name], ch)
 	return ch, nil
 }
 
