@@ -80,16 +80,16 @@ func (t *GetCookies) SetBrowserContextID(v string) *GetCookies {
 	return t
 }
 
-// GetCookiesResponse contains the browser's response
+// GetCookiesResult contains the browser's response
 // to calling the GetCookies CDP command with Do().
-type GetCookiesResponse struct {
+type GetCookiesResult struct {
 	// Array of cookie objects.
 	Cookies []network.Cookie `json:"cookies"`
 }
 
 // Do sends the GetCookies CDP command to a browser,
 // and returns the browser's response.
-func (t *GetCookies) Do(ctx context.Context) (*GetCookiesResponse, error) {
+func (t *GetCookies) Do(ctx context.Context) (*GetCookiesResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -101,7 +101,7 @@ func (t *GetCookies) Do(ctx context.Context) (*GetCookiesResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetCookiesResponse{}
+	result := &GetCookiesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -226,9 +226,9 @@ func NewGetUsageAndQuota(origin string) *GetUsageAndQuota {
 	}
 }
 
-// GetUsageAndQuotaResponse contains the browser's response
+// GetUsageAndQuotaResult contains the browser's response
 // to calling the GetUsageAndQuota CDP command with Do().
-type GetUsageAndQuotaResponse struct {
+type GetUsageAndQuotaResult struct {
 	// Storage usage (bytes).
 	Usage float64 `json:"usage"`
 	// Storage quota (bytes).
@@ -241,7 +241,7 @@ type GetUsageAndQuotaResponse struct {
 
 // Do sends the GetUsageAndQuota CDP command to a browser,
 // and returns the browser's response.
-func (t *GetUsageAndQuota) Do(ctx context.Context) (*GetUsageAndQuotaResponse, error) {
+func (t *GetUsageAndQuota) Do(ctx context.Context) (*GetUsageAndQuotaResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -253,7 +253,7 @@ func (t *GetUsageAndQuota) Do(ctx context.Context) (*GetUsageAndQuotaResponse, e
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetUsageAndQuotaResponse{}
+	result := &GetUsageAndQuotaResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -504,15 +504,15 @@ func NewGetTrustTokens() *GetTrustTokens {
 	return &GetTrustTokens{}
 }
 
-// GetTrustTokensResponse contains the browser's response
+// GetTrustTokensResult contains the browser's response
 // to calling the GetTrustTokens CDP command with Do().
-type GetTrustTokensResponse struct {
+type GetTrustTokensResult struct {
 	Tokens []TrustTokens `json:"tokens"`
 }
 
 // Do sends the GetTrustTokens CDP command to a browser,
 // and returns the browser's response.
-func (t *GetTrustTokens) Do(ctx context.Context) (*GetTrustTokensResponse, error) {
+func (t *GetTrustTokens) Do(ctx context.Context) (*GetTrustTokensResult, error) {
 	response, err := cdp.Send(ctx, "Storage.getTrustTokens", nil)
 	if err != nil {
 		return nil, err
@@ -520,7 +520,7 @@ func (t *GetTrustTokens) Do(ctx context.Context) (*GetTrustTokensResponse, error
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetTrustTokensResponse{}
+	result := &GetTrustTokensResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -553,16 +553,16 @@ func NewClearTrustTokens(issuerOrigin string) *ClearTrustTokens {
 	}
 }
 
-// ClearTrustTokensResponse contains the browser's response
+// ClearTrustTokensResult contains the browser's response
 // to calling the ClearTrustTokens CDP command with Do().
-type ClearTrustTokensResponse struct {
+type ClearTrustTokensResult struct {
 	// True if any tokens were deleted, false otherwise.
 	DidDeleteTokens bool `json:"didDeleteTokens"`
 }
 
 // Do sends the ClearTrustTokens CDP command to a browser,
 // and returns the browser's response.
-func (t *ClearTrustTokens) Do(ctx context.Context) (*ClearTrustTokensResponse, error) {
+func (t *ClearTrustTokens) Do(ctx context.Context) (*ClearTrustTokensResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -574,7 +574,7 @@ func (t *ClearTrustTokens) Do(ctx context.Context) (*ClearTrustTokensResponse, e
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &ClearTrustTokensResponse{}
+	result := &ClearTrustTokensResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

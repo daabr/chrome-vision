@@ -94,10 +94,10 @@ func generateCommands(d Domain) string {
 
 		// Return types.
 		if len(c.Returns) > 0 {
-			fmt.Fprintf(b, "\n// %sResponse contains the browser's response\n", cmd)
+			fmt.Fprintf(b, "\n// %sResult contains the browser's response\n", cmd)
 			fmt.Fprintf(b, "// to calling the %s CDP command with Do().\n", cmd)
 			t := Type{
-				ID:           cmd + "Response",
+				ID:           cmd + "Result",
 				Type:         "object",
 				Description:  nil,
 				Deprecated:   false,
@@ -114,7 +114,7 @@ func generateCommands(d Domain) string {
 		if len(c.Returns) == 0 {
 			fmt.Fprintln(b, "error {")
 		} else {
-			fmt.Fprintf(b, "(*%sResponse, error) {\n", cmd)
+			fmt.Fprintf(b, "(*%sResult, error) {\n", cmd)
 		}
 		if len(required)+len(optional) == 0 {
 			fmt.Fprintf(b, "\tresponse, err := cdp.Send(ctx, \"%s.%s\", nil)\n", d.Domain, c.Name)
@@ -146,7 +146,7 @@ func generateCommands(d Domain) string {
 		if len(c.Returns) == 0 {
 			fmt.Fprintln(b, "\treturn nil")
 		} else {
-			fmt.Fprintf(b, "\tresult := &%sResponse{}\n", cmd)
+			fmt.Fprintf(b, "\tresult := &%sResult{}\n", cmd)
 			fmt.Fprintln(b, "\tif err := json.Unmarshal(response.Result, result); err != nil {")
 			fmt.Fprintln(b, "\t\treturn nil, err")
 			fmt.Fprintln(b, "\t}")

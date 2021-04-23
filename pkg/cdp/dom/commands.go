@@ -35,16 +35,16 @@ func NewCollectClassNamesFromSubtree(nodeID int64) *CollectClassNamesFromSubtree
 	}
 }
 
-// CollectClassNamesFromSubtreeResponse contains the browser's response
+// CollectClassNamesFromSubtreeResult contains the browser's response
 // to calling the CollectClassNamesFromSubtree CDP command with Do().
-type CollectClassNamesFromSubtreeResponse struct {
+type CollectClassNamesFromSubtreeResult struct {
 	// Class name list.
 	ClassNames []string `json:"classNames"`
 }
 
 // Do sends the CollectClassNamesFromSubtree CDP command to a browser,
 // and returns the browser's response.
-func (t *CollectClassNamesFromSubtree) Do(ctx context.Context) (*CollectClassNamesFromSubtreeResponse, error) {
+func (t *CollectClassNamesFromSubtree) Do(ctx context.Context) (*CollectClassNamesFromSubtreeResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func (t *CollectClassNamesFromSubtree) Do(ctx context.Context) (*CollectClassNam
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CollectClassNamesFromSubtreeResponse{}
+	result := &CollectClassNamesFromSubtreeResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -106,16 +106,16 @@ func (t *CopyTo) SetInsertBeforeNodeID(v int64) *CopyTo {
 	return t
 }
 
-// CopyToResponse contains the browser's response
+// CopyToResult contains the browser's response
 // to calling the CopyTo CDP command with Do().
-type CopyToResponse struct {
+type CopyToResult struct {
 	// Id of the node clone.
 	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the CopyTo CDP command to a browser,
 // and returns the browser's response.
-func (t *CopyTo) Do(ctx context.Context) (*CopyToResponse, error) {
+func (t *CopyTo) Do(ctx context.Context) (*CopyToResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -127,7 +127,7 @@ func (t *CopyTo) Do(ctx context.Context) (*CopyToResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CopyToResponse{}
+	result := &CopyToResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -212,16 +212,16 @@ func (t *DescribeNode) SetPierce(v bool) *DescribeNode {
 	return t
 }
 
-// DescribeNodeResponse contains the browser's response
+// DescribeNodeResult contains the browser's response
 // to calling the DescribeNode CDP command with Do().
-type DescribeNodeResponse struct {
+type DescribeNodeResult struct {
 	// Node description.
 	Node Node `json:"node"`
 }
 
 // Do sends the DescribeNode CDP command to a browser,
 // and returns the browser's response.
-func (t *DescribeNode) Do(ctx context.Context) (*DescribeNodeResponse, error) {
+func (t *DescribeNode) Do(ctx context.Context) (*DescribeNodeResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -233,7 +233,7 @@ func (t *DescribeNode) Do(ctx context.Context) (*DescribeNodeResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &DescribeNodeResponse{}
+	result := &DescribeNodeResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -521,16 +521,16 @@ func NewGetAttributes(nodeID int64) *GetAttributes {
 	}
 }
 
-// GetAttributesResponse contains the browser's response
+// GetAttributesResult contains the browser's response
 // to calling the GetAttributes CDP command with Do().
-type GetAttributesResponse struct {
+type GetAttributesResult struct {
 	// An interleaved array of node attribute names and values.
 	Attributes []string `json:"attributes"`
 }
 
 // Do sends the GetAttributes CDP command to a browser,
 // and returns the browser's response.
-func (t *GetAttributes) Do(ctx context.Context) (*GetAttributesResponse, error) {
+func (t *GetAttributes) Do(ctx context.Context) (*GetAttributesResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -542,7 +542,7 @@ func (t *GetAttributes) Do(ctx context.Context) (*GetAttributesResponse, error) 
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetAttributesResponse{}
+	result := &GetAttributesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -600,16 +600,16 @@ func (t *GetBoxModel) SetObjectID(v runtime.RemoteObjectID) *GetBoxModel {
 	return t
 }
 
-// GetBoxModelResponse contains the browser's response
+// GetBoxModelResult contains the browser's response
 // to calling the GetBoxModel CDP command with Do().
-type GetBoxModelResponse struct {
+type GetBoxModelResult struct {
 	// Box model for the node.
 	Model BoxModel `json:"model"`
 }
 
 // Do sends the GetBoxModel CDP command to a browser,
 // and returns the browser's response.
-func (t *GetBoxModel) Do(ctx context.Context) (*GetBoxModelResponse, error) {
+func (t *GetBoxModel) Do(ctx context.Context) (*GetBoxModelResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -621,7 +621,7 @@ func (t *GetBoxModel) Do(ctx context.Context) (*GetBoxModelResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetBoxModelResponse{}
+	result := &GetBoxModelResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -684,16 +684,16 @@ func (t *GetContentQuads) SetObjectID(v runtime.RemoteObjectID) *GetContentQuads
 	return t
 }
 
-// GetContentQuadsResponse contains the browser's response
+// GetContentQuadsResult contains the browser's response
 // to calling the GetContentQuads CDP command with Do().
-type GetContentQuadsResponse struct {
+type GetContentQuadsResult struct {
 	// Quads that describe node layout relative to viewport.
 	Quads []Quad `json:"quads"`
 }
 
 // Do sends the GetContentQuads CDP command to a browser,
 // and returns the browser's response.
-func (t *GetContentQuads) Do(ctx context.Context) (*GetContentQuadsResponse, error) {
+func (t *GetContentQuads) Do(ctx context.Context) (*GetContentQuadsResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -705,7 +705,7 @@ func (t *GetContentQuads) Do(ctx context.Context) (*GetContentQuadsResponse, err
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetContentQuadsResponse{}
+	result := &GetContentQuadsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -756,16 +756,16 @@ func (t *GetDocument) SetPierce(v bool) *GetDocument {
 	return t
 }
 
-// GetDocumentResponse contains the browser's response
+// GetDocumentResult contains the browser's response
 // to calling the GetDocument CDP command with Do().
-type GetDocumentResponse struct {
+type GetDocumentResult struct {
 	// Resulting node.
 	Root Node `json:"root"`
 }
 
 // Do sends the GetDocument CDP command to a browser,
 // and returns the browser's response.
-func (t *GetDocument) Do(ctx context.Context) (*GetDocumentResponse, error) {
+func (t *GetDocument) Do(ctx context.Context) (*GetDocumentResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -777,7 +777,7 @@ func (t *GetDocument) Do(ctx context.Context) (*GetDocumentResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetDocumentResponse{}
+	result := &GetDocumentResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -834,16 +834,16 @@ func (t *GetFlattenedDocument) SetPierce(v bool) *GetFlattenedDocument {
 	return t
 }
 
-// GetFlattenedDocumentResponse contains the browser's response
+// GetFlattenedDocumentResult contains the browser's response
 // to calling the GetFlattenedDocument CDP command with Do().
-type GetFlattenedDocumentResponse struct {
+type GetFlattenedDocumentResult struct {
 	// Resulting node.
 	Nodes []Node `json:"nodes"`
 }
 
 // Do sends the GetFlattenedDocument CDP command to a browser,
 // and returns the browser's response.
-func (t *GetFlattenedDocument) Do(ctx context.Context) (*GetFlattenedDocumentResponse, error) {
+func (t *GetFlattenedDocument) Do(ctx context.Context) (*GetFlattenedDocumentResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -855,7 +855,7 @@ func (t *GetFlattenedDocument) Do(ctx context.Context) (*GetFlattenedDocumentRes
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetFlattenedDocumentResponse{}
+	result := &GetFlattenedDocumentResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -904,16 +904,16 @@ func (t *GetNodesForSubtreeByStyle) SetPierce(v bool) *GetNodesForSubtreeByStyle
 	return t
 }
 
-// GetNodesForSubtreeByStyleResponse contains the browser's response
+// GetNodesForSubtreeByStyleResult contains the browser's response
 // to calling the GetNodesForSubtreeByStyle CDP command with Do().
-type GetNodesForSubtreeByStyleResponse struct {
+type GetNodesForSubtreeByStyleResult struct {
 	// Resulting nodes.
 	NodeIds []NodeID `json:"nodeIds"`
 }
 
 // Do sends the GetNodesForSubtreeByStyle CDP command to a browser,
 // and returns the browser's response.
-func (t *GetNodesForSubtreeByStyle) Do(ctx context.Context) (*GetNodesForSubtreeByStyleResponse, error) {
+func (t *GetNodesForSubtreeByStyle) Do(ctx context.Context) (*GetNodesForSubtreeByStyleResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -925,7 +925,7 @@ func (t *GetNodesForSubtreeByStyle) Do(ctx context.Context) (*GetNodesForSubtree
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetNodesForSubtreeByStyleResponse{}
+	result := &GetNodesForSubtreeByStyleResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -980,9 +980,9 @@ func (t *GetNodeForLocation) SetIgnorePointerEventsNone(v bool) *GetNodeForLocat
 	return t
 }
 
-// GetNodeForLocationResponse contains the browser's response
+// GetNodeForLocationResult contains the browser's response
 // to calling the GetNodeForLocation CDP command with Do().
-type GetNodeForLocationResponse struct {
+type GetNodeForLocationResult struct {
 	// Resulting node.
 	BackendNodeID int64 `json:"backendNodeId"`
 	// Frame this node belongs to.
@@ -993,7 +993,7 @@ type GetNodeForLocationResponse struct {
 
 // Do sends the GetNodeForLocation CDP command to a browser,
 // and returns the browser's response.
-func (t *GetNodeForLocation) Do(ctx context.Context) (*GetNodeForLocationResponse, error) {
+func (t *GetNodeForLocation) Do(ctx context.Context) (*GetNodeForLocationResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1005,7 +1005,7 @@ func (t *GetNodeForLocation) Do(ctx context.Context) (*GetNodeForLocationRespons
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetNodeForLocationResponse{}
+	result := &GetNodeForLocationResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1063,16 +1063,16 @@ func (t *GetOuterHTML) SetObjectID(v runtime.RemoteObjectID) *GetOuterHTML {
 	return t
 }
 
-// GetOuterHTMLResponse contains the browser's response
+// GetOuterHTMLResult contains the browser's response
 // to calling the GetOuterHTML CDP command with Do().
-type GetOuterHTMLResponse struct {
+type GetOuterHTMLResult struct {
 	// Outer HTML markup.
 	OuterHTML string `json:"outerHTML"`
 }
 
 // Do sends the GetOuterHTML CDP command to a browser,
 // and returns the browser's response.
-func (t *GetOuterHTML) Do(ctx context.Context) (*GetOuterHTMLResponse, error) {
+func (t *GetOuterHTML) Do(ctx context.Context) (*GetOuterHTMLResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1084,7 +1084,7 @@ func (t *GetOuterHTML) Do(ctx context.Context) (*GetOuterHTMLResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetOuterHTMLResponse{}
+	result := &GetOuterHTMLResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1117,16 +1117,16 @@ func NewGetRelayoutBoundary(nodeID int64) *GetRelayoutBoundary {
 	}
 }
 
-// GetRelayoutBoundaryResponse contains the browser's response
+// GetRelayoutBoundaryResult contains the browser's response
 // to calling the GetRelayoutBoundary CDP command with Do().
-type GetRelayoutBoundaryResponse struct {
+type GetRelayoutBoundaryResult struct {
 	// Relayout boundary node id for the given node.
 	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the GetRelayoutBoundary CDP command to a browser,
 // and returns the browser's response.
-func (t *GetRelayoutBoundary) Do(ctx context.Context) (*GetRelayoutBoundaryResponse, error) {
+func (t *GetRelayoutBoundary) Do(ctx context.Context) (*GetRelayoutBoundaryResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1138,7 +1138,7 @@ func (t *GetRelayoutBoundary) Do(ctx context.Context) (*GetRelayoutBoundaryRespo
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetRelayoutBoundaryResponse{}
+	result := &GetRelayoutBoundaryResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1178,16 +1178,16 @@ func NewGetSearchResults(searchID string, fromIndex int64, toIndex int64) *GetSe
 	}
 }
 
-// GetSearchResultsResponse contains the browser's response
+// GetSearchResultsResult contains the browser's response
 // to calling the GetSearchResults CDP command with Do().
-type GetSearchResultsResponse struct {
+type GetSearchResultsResult struct {
 	// Ids of the search result nodes.
 	NodeIds []NodeID `json:"nodeIds"`
 }
 
 // Do sends the GetSearchResults CDP command to a browser,
 // and returns the browser's response.
-func (t *GetSearchResults) Do(ctx context.Context) (*GetSearchResultsResponse, error) {
+func (t *GetSearchResults) Do(ctx context.Context) (*GetSearchResultsResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1199,7 +1199,7 @@ func (t *GetSearchResults) Do(ctx context.Context) (*GetSearchResultsResponse, e
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetSearchResultsResponse{}
+	result := &GetSearchResultsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1278,16 +1278,16 @@ func (t *MoveTo) SetInsertBeforeNodeID(v int64) *MoveTo {
 	return t
 }
 
-// MoveToResponse contains the browser's response
+// MoveToResult contains the browser's response
 // to calling the MoveTo CDP command with Do().
-type MoveToResponse struct {
+type MoveToResult struct {
 	// New id of the moved node.
 	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the MoveTo CDP command to a browser,
 // and returns the browser's response.
-func (t *MoveTo) Do(ctx context.Context) (*MoveToResponse, error) {
+func (t *MoveTo) Do(ctx context.Context) (*MoveToResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1299,7 +1299,7 @@ func (t *MoveTo) Do(ctx context.Context) (*MoveToResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &MoveToResponse{}
+	result := &MoveToResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1344,9 +1344,9 @@ func (t *PerformSearch) SetIncludeUserAgentShadowDOM(v bool) *PerformSearch {
 	return t
 }
 
-// PerformSearchResponse contains the browser's response
+// PerformSearchResult contains the browser's response
 // to calling the PerformSearch CDP command with Do().
-type PerformSearchResponse struct {
+type PerformSearchResult struct {
 	// Unique search session identifier.
 	SearchID string `json:"searchId"`
 	// Number of search results.
@@ -1355,7 +1355,7 @@ type PerformSearchResponse struct {
 
 // Do sends the PerformSearch CDP command to a browser,
 // and returns the browser's response.
-func (t *PerformSearch) Do(ctx context.Context) (*PerformSearchResponse, error) {
+func (t *PerformSearch) Do(ctx context.Context) (*PerformSearchResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1367,7 +1367,7 @@ func (t *PerformSearch) Do(ctx context.Context) (*PerformSearchResponse, error) 
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &PerformSearchResponse{}
+	result := &PerformSearchResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1400,16 +1400,16 @@ func NewPushNodeByPathToFrontend(path string) *PushNodeByPathToFrontend {
 	}
 }
 
-// PushNodeByPathToFrontendResponse contains the browser's response
+// PushNodeByPathToFrontendResult contains the browser's response
 // to calling the PushNodeByPathToFrontend CDP command with Do().
-type PushNodeByPathToFrontendResponse struct {
+type PushNodeByPathToFrontendResult struct {
 	// Id of the node for given path.
 	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the PushNodeByPathToFrontend CDP command to a browser,
 // and returns the browser's response.
-func (t *PushNodeByPathToFrontend) Do(ctx context.Context) (*PushNodeByPathToFrontendResponse, error) {
+func (t *PushNodeByPathToFrontend) Do(ctx context.Context) (*PushNodeByPathToFrontendResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1421,7 +1421,7 @@ func (t *PushNodeByPathToFrontend) Do(ctx context.Context) (*PushNodeByPathToFro
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &PushNodeByPathToFrontendResponse{}
+	result := &PushNodeByPathToFrontendResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1454,9 +1454,9 @@ func NewPushNodesByBackendIdsToFrontend(backendNodeIds []BackendNodeID) *PushNod
 	}
 }
 
-// PushNodesByBackendIdsToFrontendResponse contains the browser's response
+// PushNodesByBackendIdsToFrontendResult contains the browser's response
 // to calling the PushNodesByBackendIdsToFrontend CDP command with Do().
-type PushNodesByBackendIdsToFrontendResponse struct {
+type PushNodesByBackendIdsToFrontendResult struct {
 	// The array of ids of pushed nodes that correspond to the backend ids specified in
 	// backendNodeIds.
 	NodeIds []NodeID `json:"nodeIds"`
@@ -1464,7 +1464,7 @@ type PushNodesByBackendIdsToFrontendResponse struct {
 
 // Do sends the PushNodesByBackendIdsToFrontend CDP command to a browser,
 // and returns the browser's response.
-func (t *PushNodesByBackendIdsToFrontend) Do(ctx context.Context) (*PushNodesByBackendIdsToFrontendResponse, error) {
+func (t *PushNodesByBackendIdsToFrontend) Do(ctx context.Context) (*PushNodesByBackendIdsToFrontendResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1476,7 +1476,7 @@ func (t *PushNodesByBackendIdsToFrontend) Do(ctx context.Context) (*PushNodesByB
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &PushNodesByBackendIdsToFrontendResponse{}
+	result := &PushNodesByBackendIdsToFrontendResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1508,16 +1508,16 @@ func NewQuerySelector(nodeID int64, selector string) *QuerySelector {
 	}
 }
 
-// QuerySelectorResponse contains the browser's response
+// QuerySelectorResult contains the browser's response
 // to calling the QuerySelector CDP command with Do().
-type QuerySelectorResponse struct {
+type QuerySelectorResult struct {
 	// Query selector result.
 	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the QuerySelector CDP command to a browser,
 // and returns the browser's response.
-func (t *QuerySelector) Do(ctx context.Context) (*QuerySelectorResponse, error) {
+func (t *QuerySelector) Do(ctx context.Context) (*QuerySelectorResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1529,7 +1529,7 @@ func (t *QuerySelector) Do(ctx context.Context) (*QuerySelectorResponse, error) 
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &QuerySelectorResponse{}
+	result := &QuerySelectorResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1561,16 +1561,16 @@ func NewQuerySelectorAll(nodeID int64, selector string) *QuerySelectorAll {
 	}
 }
 
-// QuerySelectorAllResponse contains the browser's response
+// QuerySelectorAllResult contains the browser's response
 // to calling the QuerySelectorAll CDP command with Do().
-type QuerySelectorAllResponse struct {
+type QuerySelectorAllResult struct {
 	// Query selector result.
 	NodeIds []NodeID `json:"nodeIds"`
 }
 
 // Do sends the QuerySelectorAll CDP command to a browser,
 // and returns the browser's response.
-func (t *QuerySelectorAll) Do(ctx context.Context) (*QuerySelectorAllResponse, error) {
+func (t *QuerySelectorAll) Do(ctx context.Context) (*QuerySelectorAllResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1582,7 +1582,7 @@ func (t *QuerySelectorAll) Do(ctx context.Context) (*QuerySelectorAllResponse, e
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &QuerySelectorAllResponse{}
+	result := &QuerySelectorAllResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1795,16 +1795,16 @@ func NewRequestNode(objectID runtime.RemoteObjectID) *RequestNode {
 	}
 }
 
-// RequestNodeResponse contains the browser's response
+// RequestNodeResult contains the browser's response
 // to calling the RequestNode CDP command with Do().
-type RequestNodeResponse struct {
+type RequestNodeResult struct {
 	// Node id for given object.
 	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the RequestNode CDP command to a browser,
 // and returns the browser's response.
-func (t *RequestNode) Do(ctx context.Context) (*RequestNodeResponse, error) {
+func (t *RequestNode) Do(ctx context.Context) (*RequestNodeResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1816,7 +1816,7 @@ func (t *RequestNode) Do(ctx context.Context) (*RequestNodeResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &RequestNodeResponse{}
+	result := &RequestNodeResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1885,16 +1885,16 @@ func (t *ResolveNode) SetExecutionContextID(v runtime.ExecutionContextID) *Resol
 	return t
 }
 
-// ResolveNodeResponse contains the browser's response
+// ResolveNodeResult contains the browser's response
 // to calling the ResolveNode CDP command with Do().
-type ResolveNodeResponse struct {
+type ResolveNodeResult struct {
 	// JavaScript object wrapper for given node.
 	Object runtime.RemoteObject `json:"object"`
 }
 
 // Do sends the ResolveNode CDP command to a browser,
 // and returns the browser's response.
-func (t *ResolveNode) Do(ctx context.Context) (*ResolveNodeResponse, error) {
+func (t *ResolveNode) Do(ctx context.Context) (*ResolveNodeResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1906,7 +1906,7 @@ func (t *ResolveNode) Do(ctx context.Context) (*ResolveNodeResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &ResolveNodeResponse{}
+	result := &ResolveNodeResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -2155,16 +2155,16 @@ func NewGetNodeStackTraces(nodeID int64) *GetNodeStackTraces {
 	}
 }
 
-// GetNodeStackTracesResponse contains the browser's response
+// GetNodeStackTracesResult contains the browser's response
 // to calling the GetNodeStackTraces CDP command with Do().
-type GetNodeStackTracesResponse struct {
+type GetNodeStackTracesResult struct {
 	// Creation stack trace, if available.
 	Creation *runtime.StackTrace `json:"creation,omitempty"`
 }
 
 // Do sends the GetNodeStackTraces CDP command to a browser,
 // and returns the browser's response.
-func (t *GetNodeStackTraces) Do(ctx context.Context) (*GetNodeStackTracesResponse, error) {
+func (t *GetNodeStackTraces) Do(ctx context.Context) (*GetNodeStackTracesResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -2176,7 +2176,7 @@ func (t *GetNodeStackTraces) Do(ctx context.Context) (*GetNodeStackTracesRespons
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetNodeStackTracesResponse{}
+	result := &GetNodeStackTracesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -2210,15 +2210,15 @@ func NewGetFileInfo(objectID runtime.RemoteObjectID) *GetFileInfo {
 	}
 }
 
-// GetFileInfoResponse contains the browser's response
+// GetFileInfoResult contains the browser's response
 // to calling the GetFileInfo CDP command with Do().
-type GetFileInfoResponse struct {
+type GetFileInfoResult struct {
 	Path string `json:"path"`
 }
 
 // Do sends the GetFileInfo CDP command to a browser,
 // and returns the browser's response.
-func (t *GetFileInfo) Do(ctx context.Context) (*GetFileInfoResponse, error) {
+func (t *GetFileInfo) Do(ctx context.Context) (*GetFileInfoResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -2230,7 +2230,7 @@ func (t *GetFileInfo) Do(ctx context.Context) (*GetFileInfoResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetFileInfoResponse{}
+	result := &GetFileInfoResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -2306,16 +2306,16 @@ func NewSetNodeName(nodeID int64, name string) *SetNodeName {
 	}
 }
 
-// SetNodeNameResponse contains the browser's response
+// SetNodeNameResult contains the browser's response
 // to calling the SetNodeName CDP command with Do().
-type SetNodeNameResponse struct {
+type SetNodeNameResult struct {
 	// New node's id.
 	NodeID int64 `json:"nodeId"`
 }
 
 // Do sends the SetNodeName CDP command to a browser,
 // and returns the browser's response.
-func (t *SetNodeName) Do(ctx context.Context) (*SetNodeNameResponse, error) {
+func (t *SetNodeName) Do(ctx context.Context) (*SetNodeNameResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -2327,7 +2327,7 @@ func (t *SetNodeName) Do(ctx context.Context) (*SetNodeNameResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &SetNodeNameResponse{}
+	result := &SetNodeNameResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -2477,9 +2477,9 @@ func NewGetFrameOwner(frameID string) *GetFrameOwner {
 	}
 }
 
-// GetFrameOwnerResponse contains the browser's response
+// GetFrameOwnerResult contains the browser's response
 // to calling the GetFrameOwner CDP command with Do().
-type GetFrameOwnerResponse struct {
+type GetFrameOwnerResult struct {
 	// Resulting node.
 	BackendNodeID int64 `json:"backendNodeId"`
 	// Id of the node at given coordinates, only when enabled and requested document.
@@ -2488,7 +2488,7 @@ type GetFrameOwnerResponse struct {
 
 // Do sends the GetFrameOwner CDP command to a browser,
 // and returns the browser's response.
-func (t *GetFrameOwner) Do(ctx context.Context) (*GetFrameOwnerResponse, error) {
+func (t *GetFrameOwner) Do(ctx context.Context) (*GetFrameOwnerResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -2500,7 +2500,7 @@ func (t *GetFrameOwner) Do(ctx context.Context) (*GetFrameOwnerResponse, error) 
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetFrameOwnerResponse{}
+	result := &GetFrameOwnerResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

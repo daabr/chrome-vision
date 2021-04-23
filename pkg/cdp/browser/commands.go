@@ -439,9 +439,9 @@ func NewGetVersion() *GetVersion {
 	return &GetVersion{}
 }
 
-// GetVersionResponse contains the browser's response
+// GetVersionResult contains the browser's response
 // to calling the GetVersion CDP command with Do().
-type GetVersionResponse struct {
+type GetVersionResult struct {
 	// Protocol version.
 	ProtocolVersion string `json:"protocolVersion"`
 	// Product name.
@@ -456,7 +456,7 @@ type GetVersionResponse struct {
 
 // Do sends the GetVersion CDP command to a browser,
 // and returns the browser's response.
-func (t *GetVersion) Do(ctx context.Context) (*GetVersionResponse, error) {
+func (t *GetVersion) Do(ctx context.Context) (*GetVersionResult, error) {
 	response, err := cdp.Send(ctx, "Browser.getVersion", nil)
 	if err != nil {
 		return nil, err
@@ -464,7 +464,7 @@ func (t *GetVersion) Do(ctx context.Context) (*GetVersionResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetVersionResponse{}
+	result := &GetVersionResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -493,16 +493,16 @@ func NewGetBrowserCommandLine() *GetBrowserCommandLine {
 	return &GetBrowserCommandLine{}
 }
 
-// GetBrowserCommandLineResponse contains the browser's response
+// GetBrowserCommandLineResult contains the browser's response
 // to calling the GetBrowserCommandLine CDP command with Do().
-type GetBrowserCommandLineResponse struct {
+type GetBrowserCommandLineResult struct {
 	// Commandline parameters
 	Arguments []string `json:"arguments"`
 }
 
 // Do sends the GetBrowserCommandLine CDP command to a browser,
 // and returns the browser's response.
-func (t *GetBrowserCommandLine) Do(ctx context.Context) (*GetBrowserCommandLineResponse, error) {
+func (t *GetBrowserCommandLine) Do(ctx context.Context) (*GetBrowserCommandLineResult, error) {
 	response, err := cdp.Send(ctx, "Browser.getBrowserCommandLine", nil)
 	if err != nil {
 		return nil, err
@@ -510,7 +510,7 @@ func (t *GetBrowserCommandLine) Do(ctx context.Context) (*GetBrowserCommandLineR
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetBrowserCommandLineResponse{}
+	result := &GetBrowserCommandLineResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -565,16 +565,16 @@ func (t *GetHistograms) SetDelta(v bool) *GetHistograms {
 	return t
 }
 
-// GetHistogramsResponse contains the browser's response
+// GetHistogramsResult contains the browser's response
 // to calling the GetHistograms CDP command with Do().
-type GetHistogramsResponse struct {
+type GetHistogramsResult struct {
 	// Histograms.
 	Histograms []Histogram `json:"histograms"`
 }
 
 // Do sends the GetHistograms CDP command to a browser,
 // and returns the browser's response.
-func (t *GetHistograms) Do(ctx context.Context) (*GetHistogramsResponse, error) {
+func (t *GetHistograms) Do(ctx context.Context) (*GetHistogramsResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -586,7 +586,7 @@ func (t *GetHistograms) Do(ctx context.Context) (*GetHistogramsResponse, error) 
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetHistogramsResponse{}
+	result := &GetHistogramsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -630,16 +630,16 @@ func (t *GetHistogram) SetDelta(v bool) *GetHistogram {
 	return t
 }
 
-// GetHistogramResponse contains the browser's response
+// GetHistogramResult contains the browser's response
 // to calling the GetHistogram CDP command with Do().
-type GetHistogramResponse struct {
+type GetHistogramResult struct {
 	// Histogram.
 	Histogram Histogram `json:"histogram"`
 }
 
 // Do sends the GetHistogram CDP command to a browser,
 // and returns the browser's response.
-func (t *GetHistogram) Do(ctx context.Context) (*GetHistogramResponse, error) {
+func (t *GetHistogram) Do(ctx context.Context) (*GetHistogramResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -651,7 +651,7 @@ func (t *GetHistogram) Do(ctx context.Context) (*GetHistogramResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetHistogramResponse{}
+	result := &GetHistogramResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -684,9 +684,9 @@ func NewGetWindowBounds(windowID int64) *GetWindowBounds {
 	}
 }
 
-// GetWindowBoundsResponse contains the browser's response
+// GetWindowBoundsResult contains the browser's response
 // to calling the GetWindowBounds CDP command with Do().
-type GetWindowBoundsResponse struct {
+type GetWindowBoundsResult struct {
 	// Bounds information of the window. When window state is 'minimized', the restored window
 	// position and size are returned.
 	Bounds Bounds `json:"bounds"`
@@ -694,7 +694,7 @@ type GetWindowBoundsResponse struct {
 
 // Do sends the GetWindowBounds CDP command to a browser,
 // and returns the browser's response.
-func (t *GetWindowBounds) Do(ctx context.Context) (*GetWindowBoundsResponse, error) {
+func (t *GetWindowBounds) Do(ctx context.Context) (*GetWindowBoundsResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -706,7 +706,7 @@ func (t *GetWindowBounds) Do(ctx context.Context) (*GetWindowBoundsResponse, err
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetWindowBoundsResponse{}
+	result := &GetWindowBoundsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -746,9 +746,9 @@ func (t *GetWindowForTarget) SetTargetID(v string) *GetWindowForTarget {
 	return t
 }
 
-// GetWindowForTargetResponse contains the browser's response
+// GetWindowForTargetResult contains the browser's response
 // to calling the GetWindowForTarget CDP command with Do().
-type GetWindowForTargetResponse struct {
+type GetWindowForTargetResult struct {
 	// Browser window id.
 	WindowID int64 `json:"windowId"`
 	// Bounds information of the window. When window state is 'minimized', the restored window
@@ -758,7 +758,7 @@ type GetWindowForTargetResponse struct {
 
 // Do sends the GetWindowForTarget CDP command to a browser,
 // and returns the browser's response.
-func (t *GetWindowForTarget) Do(ctx context.Context) (*GetWindowForTargetResponse, error) {
+func (t *GetWindowForTarget) Do(ctx context.Context) (*GetWindowForTargetResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -770,7 +770,7 @@ func (t *GetWindowForTarget) Do(ctx context.Context) (*GetWindowForTargetRespons
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetWindowForTargetResponse{}
+	result := &GetWindowForTargetResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

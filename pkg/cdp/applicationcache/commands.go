@@ -60,16 +60,16 @@ func NewGetApplicationCacheForFrame(frameID string) *GetApplicationCacheForFrame
 	}
 }
 
-// GetApplicationCacheForFrameResponse contains the browser's response
+// GetApplicationCacheForFrameResult contains the browser's response
 // to calling the GetApplicationCacheForFrame CDP command with Do().
-type GetApplicationCacheForFrameResponse struct {
+type GetApplicationCacheForFrameResult struct {
 	// Relevant application cache data for the document in given frame.
 	ApplicationCache ApplicationCache `json:"applicationCache"`
 }
 
 // Do sends the GetApplicationCacheForFrame CDP command to a browser,
 // and returns the browser's response.
-func (t *GetApplicationCacheForFrame) Do(ctx context.Context) (*GetApplicationCacheForFrameResponse, error) {
+func (t *GetApplicationCacheForFrame) Do(ctx context.Context) (*GetApplicationCacheForFrameResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -81,7 +81,7 @@ func (t *GetApplicationCacheForFrame) Do(ctx context.Context) (*GetApplicationCa
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetApplicationCacheForFrameResponse{}
+	result := &GetApplicationCacheForFrameResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -106,9 +106,9 @@ func NewGetFramesWithManifests() *GetFramesWithManifests {
 	return &GetFramesWithManifests{}
 }
 
-// GetFramesWithManifestsResponse contains the browser's response
+// GetFramesWithManifestsResult contains the browser's response
 // to calling the GetFramesWithManifests CDP command with Do().
-type GetFramesWithManifestsResponse struct {
+type GetFramesWithManifestsResult struct {
 	// Array of frame identifiers with manifest urls for each frame containing a document
 	// associated with some application cache.
 	FrameIds []FrameWithManifest `json:"frameIds"`
@@ -116,7 +116,7 @@ type GetFramesWithManifestsResponse struct {
 
 // Do sends the GetFramesWithManifests CDP command to a browser,
 // and returns the browser's response.
-func (t *GetFramesWithManifests) Do(ctx context.Context) (*GetFramesWithManifestsResponse, error) {
+func (t *GetFramesWithManifests) Do(ctx context.Context) (*GetFramesWithManifestsResult, error) {
 	response, err := cdp.Send(ctx, "ApplicationCache.getFramesWithManifests", nil)
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ func (t *GetFramesWithManifests) Do(ctx context.Context) (*GetFramesWithManifest
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetFramesWithManifestsResponse{}
+	result := &GetFramesWithManifestsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -153,16 +153,16 @@ func NewGetManifestForFrame(frameID string) *GetManifestForFrame {
 	}
 }
 
-// GetManifestForFrameResponse contains the browser's response
+// GetManifestForFrameResult contains the browser's response
 // to calling the GetManifestForFrame CDP command with Do().
-type GetManifestForFrameResponse struct {
+type GetManifestForFrameResult struct {
 	// Manifest URL for document in the given frame.
 	ManifestURL string `json:"manifestURL"`
 }
 
 // Do sends the GetManifestForFrame CDP command to a browser,
 // and returns the browser's response.
-func (t *GetManifestForFrame) Do(ctx context.Context) (*GetManifestForFrameResponse, error) {
+func (t *GetManifestForFrame) Do(ctx context.Context) (*GetManifestForFrameResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -174,7 +174,7 @@ func (t *GetManifestForFrame) Do(ctx context.Context) (*GetManifestForFrameRespo
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetManifestForFrameResponse{}
+	result := &GetManifestForFrameResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

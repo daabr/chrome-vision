@@ -390,9 +390,9 @@ func NewGetResponseBody(requestID string) *GetResponseBody {
 	}
 }
 
-// GetResponseBodyResponse contains the browser's response
+// GetResponseBodyResult contains the browser's response
 // to calling the GetResponseBody CDP command with Do().
-type GetResponseBodyResponse struct {
+type GetResponseBodyResult struct {
 	// Response body.
 	Body string `json:"body"`
 	// True, if content was sent as base64.
@@ -401,7 +401,7 @@ type GetResponseBodyResponse struct {
 
 // Do sends the GetResponseBody CDP command to a browser,
 // and returns the browser's response.
-func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResponse, error) {
+func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -413,7 +413,7 @@ func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResponse, err
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetResponseBodyResponse{}
+	result := &GetResponseBodyResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -450,15 +450,15 @@ func NewTakeResponseBodyAsStream(requestID string) *TakeResponseBodyAsStream {
 	}
 }
 
-// TakeResponseBodyAsStreamResponse contains the browser's response
+// TakeResponseBodyAsStreamResult contains the browser's response
 // to calling the TakeResponseBodyAsStream CDP command with Do().
-type TakeResponseBodyAsStreamResponse struct {
+type TakeResponseBodyAsStreamResult struct {
 	Stream string `json:"stream"`
 }
 
 // Do sends the TakeResponseBodyAsStream CDP command to a browser,
 // and returns the browser's response.
-func (t *TakeResponseBodyAsStream) Do(ctx context.Context) (*TakeResponseBodyAsStreamResponse, error) {
+func (t *TakeResponseBodyAsStream) Do(ctx context.Context) (*TakeResponseBodyAsStreamResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -470,7 +470,7 @@ func (t *TakeResponseBodyAsStream) Do(ctx context.Context) (*TakeResponseBodyAsS
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &TakeResponseBodyAsStreamResponse{}
+	result := &TakeResponseBodyAsStreamResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

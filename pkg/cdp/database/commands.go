@@ -89,9 +89,9 @@ func NewExecuteSQL(databaseID string, query string) *ExecuteSQL {
 	}
 }
 
-// ExecuteSQLResponse contains the browser's response
+// ExecuteSQLResult contains the browser's response
 // to calling the ExecuteSQL CDP command with Do().
-type ExecuteSQLResponse struct {
+type ExecuteSQLResult struct {
 	ColumnNames []string          `json:"columnNames,omitempty"`
 	Values      []json.RawMessage `json:"values,omitempty"`
 	SqlError    *Error            `json:"sqlError,omitempty"`
@@ -99,7 +99,7 @@ type ExecuteSQLResponse struct {
 
 // Do sends the ExecuteSQL CDP command to a browser,
 // and returns the browser's response.
-func (t *ExecuteSQL) Do(ctx context.Context) (*ExecuteSQLResponse, error) {
+func (t *ExecuteSQL) Do(ctx context.Context) (*ExecuteSQLResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -111,7 +111,7 @@ func (t *ExecuteSQL) Do(ctx context.Context) (*ExecuteSQLResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &ExecuteSQLResponse{}
+	result := &ExecuteSQLResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -137,15 +137,15 @@ func NewGetDatabaseTableNames(databaseID string) *GetDatabaseTableNames {
 	}
 }
 
-// GetDatabaseTableNamesResponse contains the browser's response
+// GetDatabaseTableNamesResult contains the browser's response
 // to calling the GetDatabaseTableNames CDP command with Do().
-type GetDatabaseTableNamesResponse struct {
+type GetDatabaseTableNamesResult struct {
 	TableNames []string `json:"tableNames"`
 }
 
 // Do sends the GetDatabaseTableNames CDP command to a browser,
 // and returns the browser's response.
-func (t *GetDatabaseTableNames) Do(ctx context.Context) (*GetDatabaseTableNamesResponse, error) {
+func (t *GetDatabaseTableNames) Do(ctx context.Context) (*GetDatabaseTableNamesResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -157,7 +157,7 @@ func (t *GetDatabaseTableNames) Do(ctx context.Context) (*GetDatabaseTableNamesR
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetDatabaseTableNamesResponse{}
+	result := &GetDatabaseTableNamesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

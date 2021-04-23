@@ -130,9 +130,9 @@ func (t *GetSnapshot) SetIncludeUserAgentShadowTree(v bool) *GetSnapshot {
 	return t
 }
 
-// GetSnapshotResponse contains the browser's response
+// GetSnapshotResult contains the browser's response
 // to calling the GetSnapshot CDP command with Do().
-type GetSnapshotResponse struct {
+type GetSnapshotResult struct {
 	// The nodes in the DOM tree. The DOMNode at index 0 corresponds to the root document.
 	DomNodes []DOMNode `json:"domNodes"`
 	// The nodes in the layout tree.
@@ -143,7 +143,7 @@ type GetSnapshotResponse struct {
 
 // Do sends the GetSnapshot CDP command to a browser,
 // and returns the browser's response.
-func (t *GetSnapshot) Do(ctx context.Context) (*GetSnapshotResponse, error) {
+func (t *GetSnapshot) Do(ctx context.Context) (*GetSnapshotResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -155,7 +155,7 @@ func (t *GetSnapshot) Do(ctx context.Context) (*GetSnapshotResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetSnapshotResponse{}
+	result := &GetSnapshotResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -247,9 +247,9 @@ func (t *CaptureSnapshot) SetIncludeTextColorOpacities(v bool) *CaptureSnapshot 
 	return t
 }
 
-// CaptureSnapshotResponse contains the browser's response
+// CaptureSnapshotResult contains the browser's response
 // to calling the CaptureSnapshot CDP command with Do().
-type CaptureSnapshotResponse struct {
+type CaptureSnapshotResult struct {
 	// The nodes in the DOM tree. The DOMNode at index 0 corresponds to the root document.
 	Documents []DocumentSnapshot `json:"documents"`
 	// Shared string table that all string properties refer to with indexes.
@@ -258,7 +258,7 @@ type CaptureSnapshotResponse struct {
 
 // Do sends the CaptureSnapshot CDP command to a browser,
 // and returns the browser's response.
-func (t *CaptureSnapshot) Do(ctx context.Context) (*CaptureSnapshotResponse, error) {
+func (t *CaptureSnapshot) Do(ctx context.Context) (*CaptureSnapshotResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -270,7 +270,7 @@ func (t *CaptureSnapshot) Do(ctx context.Context) (*CaptureSnapshotResponse, err
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CaptureSnapshotResponse{}
+	result := &CaptureSnapshotResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

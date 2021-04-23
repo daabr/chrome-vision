@@ -90,15 +90,15 @@ func NewAddVirtualAuthenticator(options VirtualAuthenticatorOptions) *AddVirtual
 	}
 }
 
-// AddVirtualAuthenticatorResponse contains the browser's response
+// AddVirtualAuthenticatorResult contains the browser's response
 // to calling the AddVirtualAuthenticator CDP command with Do().
-type AddVirtualAuthenticatorResponse struct {
+type AddVirtualAuthenticatorResult struct {
 	AuthenticatorID string `json:"authenticatorId"`
 }
 
 // Do sends the AddVirtualAuthenticator CDP command to a browser,
 // and returns the browser's response.
-func (t *AddVirtualAuthenticator) Do(ctx context.Context) (*AddVirtualAuthenticatorResponse, error) {
+func (t *AddVirtualAuthenticator) Do(ctx context.Context) (*AddVirtualAuthenticatorResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -110,7 +110,7 @@ func (t *AddVirtualAuthenticator) Do(ctx context.Context) (*AddVirtualAuthentica
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &AddVirtualAuthenticatorResponse{}
+	result := &AddVirtualAuthenticatorResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -219,15 +219,15 @@ func NewGetCredential(authenticatorID string, credentialID string) *GetCredentia
 	}
 }
 
-// GetCredentialResponse contains the browser's response
+// GetCredentialResult contains the browser's response
 // to calling the GetCredential CDP command with Do().
-type GetCredentialResponse struct {
+type GetCredentialResult struct {
 	Credential Credential `json:"credential"`
 }
 
 // Do sends the GetCredential CDP command to a browser,
 // and returns the browser's response.
-func (t *GetCredential) Do(ctx context.Context) (*GetCredentialResponse, error) {
+func (t *GetCredential) Do(ctx context.Context) (*GetCredentialResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -239,7 +239,7 @@ func (t *GetCredential) Do(ctx context.Context) (*GetCredentialResponse, error) 
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetCredentialResponse{}
+	result := &GetCredentialResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -267,15 +267,15 @@ func NewGetCredentials(authenticatorID string) *GetCredentials {
 	}
 }
 
-// GetCredentialsResponse contains the browser's response
+// GetCredentialsResult contains the browser's response
 // to calling the GetCredentials CDP command with Do().
-type GetCredentialsResponse struct {
+type GetCredentialsResult struct {
 	Credentials []Credential `json:"credentials"`
 }
 
 // Do sends the GetCredentials CDP command to a browser,
 // and returns the browser's response.
-func (t *GetCredentials) Do(ctx context.Context) (*GetCredentialsResponse, error) {
+func (t *GetCredentials) Do(ctx context.Context) (*GetCredentialsResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -287,7 +287,7 @@ func (t *GetCredentials) Do(ctx context.Context) (*GetCredentialsResponse, error
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetCredentialsResponse{}
+	result := &GetCredentialsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

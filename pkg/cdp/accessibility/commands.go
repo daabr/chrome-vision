@@ -136,9 +136,9 @@ func (t *GetPartialAXTree) SetFetchRelatives(v bool) *GetPartialAXTree {
 	return t
 }
 
-// GetPartialAXTreeResponse contains the browser's response
+// GetPartialAXTreeResult contains the browser's response
 // to calling the GetPartialAXTree CDP command with Do().
-type GetPartialAXTreeResponse struct {
+type GetPartialAXTreeResult struct {
 	// The `Accessibility.AXNode` for this DOM node, if it exists, plus its ancestors, siblings and
 	// children, if requested.
 	Nodes []AXNode `json:"nodes"`
@@ -146,7 +146,7 @@ type GetPartialAXTreeResponse struct {
 
 // Do sends the GetPartialAXTree CDP command to a browser,
 // and returns the browser's response.
-func (t *GetPartialAXTree) Do(ctx context.Context) (*GetPartialAXTreeResponse, error) {
+func (t *GetPartialAXTree) Do(ctx context.Context) (*GetPartialAXTreeResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -158,7 +158,7 @@ func (t *GetPartialAXTree) Do(ctx context.Context) (*GetPartialAXTreeResponse, e
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetPartialAXTreeResponse{}
+	result := &GetPartialAXTreeResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -200,15 +200,15 @@ func (t *GetFullAXTree) SetMaxDepth(v int64) *GetFullAXTree {
 	return t
 }
 
-// GetFullAXTreeResponse contains the browser's response
+// GetFullAXTreeResult contains the browser's response
 // to calling the GetFullAXTree CDP command with Do().
-type GetFullAXTreeResponse struct {
+type GetFullAXTreeResult struct {
 	Nodes []AXNode `json:"nodes"`
 }
 
 // Do sends the GetFullAXTree CDP command to a browser,
 // and returns the browser's response.
-func (t *GetFullAXTree) Do(ctx context.Context) (*GetFullAXTreeResponse, error) {
+func (t *GetFullAXTree) Do(ctx context.Context) (*GetFullAXTreeResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -220,7 +220,7 @@ func (t *GetFullAXTree) Do(ctx context.Context) (*GetFullAXTreeResponse, error) 
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetFullAXTreeResponse{}
+	result := &GetFullAXTreeResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -253,15 +253,15 @@ func NewGetChildAXNodes(id string) *GetChildAXNodes {
 	}
 }
 
-// GetChildAXNodesResponse contains the browser's response
+// GetChildAXNodesResult contains the browser's response
 // to calling the GetChildAXNodes CDP command with Do().
-type GetChildAXNodesResponse struct {
+type GetChildAXNodesResult struct {
 	Nodes []AXNode `json:"nodes"`
 }
 
 // Do sends the GetChildAXNodes CDP command to a browser,
 // and returns the browser's response.
-func (t *GetChildAXNodes) Do(ctx context.Context) (*GetChildAXNodesResponse, error) {
+func (t *GetChildAXNodes) Do(ctx context.Context) (*GetChildAXNodesResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -273,7 +273,7 @@ func (t *GetChildAXNodes) Do(ctx context.Context) (*GetChildAXNodesResponse, err
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetChildAXNodesResponse{}
+	result := &GetChildAXNodesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -361,9 +361,9 @@ func (t *QueryAXTree) SetRole(v string) *QueryAXTree {
 	return t
 }
 
-// QueryAXTreeResponse contains the browser's response
+// QueryAXTreeResult contains the browser's response
 // to calling the QueryAXTree CDP command with Do().
-type QueryAXTreeResponse struct {
+type QueryAXTreeResult struct {
 	// A list of `Accessibility.AXNode` matching the specified attributes,
 	// including nodes that are ignored for accessibility.
 	Nodes []AXNode `json:"nodes"`
@@ -371,7 +371,7 @@ type QueryAXTreeResponse struct {
 
 // Do sends the QueryAXTree CDP command to a browser,
 // and returns the browser's response.
-func (t *QueryAXTree) Do(ctx context.Context) (*QueryAXTreeResponse, error) {
+func (t *QueryAXTree) Do(ctx context.Context) (*QueryAXTreeResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -383,7 +383,7 @@ func (t *QueryAXTree) Do(ctx context.Context) (*QueryAXTreeResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &QueryAXTreeResponse{}
+	result := &QueryAXTreeResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

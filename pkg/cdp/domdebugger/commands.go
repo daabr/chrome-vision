@@ -57,16 +57,16 @@ func (t *GetEventListeners) SetPierce(v bool) *GetEventListeners {
 	return t
 }
 
-// GetEventListenersResponse contains the browser's response
+// GetEventListenersResult contains the browser's response
 // to calling the GetEventListeners CDP command with Do().
-type GetEventListenersResponse struct {
+type GetEventListenersResult struct {
 	// Array of relevant listeners.
 	Listeners []EventListener `json:"listeners"`
 }
 
 // Do sends the GetEventListeners CDP command to a browser,
 // and returns the browser's response.
-func (t *GetEventListeners) Do(ctx context.Context) (*GetEventListenersResponse, error) {
+func (t *GetEventListeners) Do(ctx context.Context) (*GetEventListenersResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -78,7 +78,7 @@ func (t *GetEventListeners) Do(ctx context.Context) (*GetEventListenersResponse,
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetEventListenersResponse{}
+	result := &GetEventListenersResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

@@ -107,16 +107,16 @@ func NewCanClearBrowserCache() *CanClearBrowserCache {
 	return &CanClearBrowserCache{}
 }
 
-// CanClearBrowserCacheResponse contains the browser's response
+// CanClearBrowserCacheResult contains the browser's response
 // to calling the CanClearBrowserCache CDP command with Do().
-type CanClearBrowserCacheResponse struct {
+type CanClearBrowserCacheResult struct {
 	// True if browser cache can be cleared.
 	Result bool `json:"result"`
 }
 
 // Do sends the CanClearBrowserCache CDP command to a browser,
 // and returns the browser's response.
-func (t *CanClearBrowserCache) Do(ctx context.Context) (*CanClearBrowserCacheResponse, error) {
+func (t *CanClearBrowserCache) Do(ctx context.Context) (*CanClearBrowserCacheResult, error) {
 	response, err := cdp.Send(ctx, "Network.canClearBrowserCache", nil)
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ func (t *CanClearBrowserCache) Do(ctx context.Context) (*CanClearBrowserCacheRes
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CanClearBrowserCacheResponse{}
+	result := &CanClearBrowserCacheResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -152,16 +152,16 @@ func NewCanClearBrowserCookies() *CanClearBrowserCookies {
 	return &CanClearBrowserCookies{}
 }
 
-// CanClearBrowserCookiesResponse contains the browser's response
+// CanClearBrowserCookiesResult contains the browser's response
 // to calling the CanClearBrowserCookies CDP command with Do().
-type CanClearBrowserCookiesResponse struct {
+type CanClearBrowserCookiesResult struct {
 	// True if browser cookies can be cleared.
 	Result bool `json:"result"`
 }
 
 // Do sends the CanClearBrowserCookies CDP command to a browser,
 // and returns the browser's response.
-func (t *CanClearBrowserCookies) Do(ctx context.Context) (*CanClearBrowserCookiesResponse, error) {
+func (t *CanClearBrowserCookies) Do(ctx context.Context) (*CanClearBrowserCookiesResult, error) {
 	response, err := cdp.Send(ctx, "Network.canClearBrowserCookies", nil)
 	if err != nil {
 		return nil, err
@@ -169,7 +169,7 @@ func (t *CanClearBrowserCookies) Do(ctx context.Context) (*CanClearBrowserCookie
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CanClearBrowserCookiesResponse{}
+	result := &CanClearBrowserCookiesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -197,16 +197,16 @@ func NewCanEmulateNetworkConditions() *CanEmulateNetworkConditions {
 	return &CanEmulateNetworkConditions{}
 }
 
-// CanEmulateNetworkConditionsResponse contains the browser's response
+// CanEmulateNetworkConditionsResult contains the browser's response
 // to calling the CanEmulateNetworkConditions CDP command with Do().
-type CanEmulateNetworkConditionsResponse struct {
+type CanEmulateNetworkConditionsResult struct {
 	// True if emulation of network conditions is supported.
 	Result bool `json:"result"`
 }
 
 // Do sends the CanEmulateNetworkConditions CDP command to a browser,
 // and returns the browser's response.
-func (t *CanEmulateNetworkConditions) Do(ctx context.Context) (*CanEmulateNetworkConditionsResponse, error) {
+func (t *CanEmulateNetworkConditions) Do(ctx context.Context) (*CanEmulateNetworkConditionsResult, error) {
 	response, err := cdp.Send(ctx, "Network.canEmulateNetworkConditions", nil)
 	if err != nil {
 		return nil, err
@@ -214,7 +214,7 @@ func (t *CanEmulateNetworkConditions) Do(ctx context.Context) (*CanEmulateNetwor
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CanEmulateNetworkConditionsResponse{}
+	result := &CanEmulateNetworkConditionsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -675,16 +675,16 @@ func NewGetAllCookies() *GetAllCookies {
 	return &GetAllCookies{}
 }
 
-// GetAllCookiesResponse contains the browser's response
+// GetAllCookiesResult contains the browser's response
 // to calling the GetAllCookies CDP command with Do().
-type GetAllCookiesResponse struct {
+type GetAllCookiesResult struct {
 	// Array of cookie objects.
 	Cookies []Cookie `json:"cookies"`
 }
 
 // Do sends the GetAllCookies CDP command to a browser,
 // and returns the browser's response.
-func (t *GetAllCookies) Do(ctx context.Context) (*GetAllCookiesResponse, error) {
+func (t *GetAllCookies) Do(ctx context.Context) (*GetAllCookiesResult, error) {
 	response, err := cdp.Send(ctx, "Network.getAllCookies", nil)
 	if err != nil {
 		return nil, err
@@ -692,7 +692,7 @@ func (t *GetAllCookies) Do(ctx context.Context) (*GetAllCookiesResponse, error) 
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetAllCookiesResponse{}
+	result := &GetAllCookiesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -725,15 +725,15 @@ func NewGetCertificate(origin string) *GetCertificate {
 	}
 }
 
-// GetCertificateResponse contains the browser's response
+// GetCertificateResult contains the browser's response
 // to calling the GetCertificate CDP command with Do().
-type GetCertificateResponse struct {
+type GetCertificateResult struct {
 	TableNames []string `json:"tableNames"`
 }
 
 // Do sends the GetCertificate CDP command to a browser,
 // and returns the browser's response.
-func (t *GetCertificate) Do(ctx context.Context) (*GetCertificateResponse, error) {
+func (t *GetCertificate) Do(ctx context.Context) (*GetCertificateResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -745,7 +745,7 @@ func (t *GetCertificate) Do(ctx context.Context) (*GetCertificateResponse, error
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetCertificateResponse{}
+	result := &GetCertificateResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -786,16 +786,16 @@ func (t *GetCookies) SetURLs(v []string) *GetCookies {
 	return t
 }
 
-// GetCookiesResponse contains the browser's response
+// GetCookiesResult contains the browser's response
 // to calling the GetCookies CDP command with Do().
-type GetCookiesResponse struct {
+type GetCookiesResult struct {
 	// Array of cookie objects.
 	Cookies []Cookie `json:"cookies"`
 }
 
 // Do sends the GetCookies CDP command to a browser,
 // and returns the browser's response.
-func (t *GetCookies) Do(ctx context.Context) (*GetCookiesResponse, error) {
+func (t *GetCookies) Do(ctx context.Context) (*GetCookiesResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -807,7 +807,7 @@ func (t *GetCookies) Do(ctx context.Context) (*GetCookiesResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetCookiesResponse{}
+	result := &GetCookiesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -836,9 +836,9 @@ func NewGetResponseBody(requestID string) *GetResponseBody {
 	}
 }
 
-// GetResponseBodyResponse contains the browser's response
+// GetResponseBodyResult contains the browser's response
 // to calling the GetResponseBody CDP command with Do().
-type GetResponseBodyResponse struct {
+type GetResponseBodyResult struct {
 	// Response body.
 	Body string `json:"body"`
 	// True, if content was sent as base64.
@@ -847,7 +847,7 @@ type GetResponseBodyResponse struct {
 
 // Do sends the GetResponseBody CDP command to a browser,
 // and returns the browser's response.
-func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResponse, error) {
+func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -859,7 +859,7 @@ func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResponse, err
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetResponseBodyResponse{}
+	result := &GetResponseBodyResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -888,16 +888,16 @@ func NewGetRequestPostData(requestID string) *GetRequestPostData {
 	}
 }
 
-// GetRequestPostDataResponse contains the browser's response
+// GetRequestPostDataResult contains the browser's response
 // to calling the GetRequestPostData CDP command with Do().
-type GetRequestPostDataResponse struct {
+type GetRequestPostDataResult struct {
 	// Request body string, omitting files from multipart requests
 	PostData string `json:"postData"`
 }
 
 // Do sends the GetRequestPostData CDP command to a browser,
 // and returns the browser's response.
-func (t *GetRequestPostData) Do(ctx context.Context) (*GetRequestPostDataResponse, error) {
+func (t *GetRequestPostData) Do(ctx context.Context) (*GetRequestPostDataResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -909,7 +909,7 @@ func (t *GetRequestPostData) Do(ctx context.Context) (*GetRequestPostDataRespons
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetRequestPostDataResponse{}
+	result := &GetRequestPostDataResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -942,9 +942,9 @@ func NewGetResponseBodyForInterception(interceptionID string) *GetResponseBodyFo
 	}
 }
 
-// GetResponseBodyForInterceptionResponse contains the browser's response
+// GetResponseBodyForInterceptionResult contains the browser's response
 // to calling the GetResponseBodyForInterception CDP command with Do().
-type GetResponseBodyForInterceptionResponse struct {
+type GetResponseBodyForInterceptionResult struct {
 	// Response body.
 	Body string `json:"body"`
 	// True, if content was sent as base64.
@@ -953,7 +953,7 @@ type GetResponseBodyForInterceptionResponse struct {
 
 // Do sends the GetResponseBodyForInterception CDP command to a browser,
 // and returns the browser's response.
-func (t *GetResponseBodyForInterception) Do(ctx context.Context) (*GetResponseBodyForInterceptionResponse, error) {
+func (t *GetResponseBodyForInterception) Do(ctx context.Context) (*GetResponseBodyForInterceptionResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -965,7 +965,7 @@ func (t *GetResponseBodyForInterception) Do(ctx context.Context) (*GetResponseBo
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetResponseBodyForInterceptionResponse{}
+	result := &GetResponseBodyForInterceptionResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1000,15 +1000,15 @@ func NewTakeResponseBodyForInterceptionAsStream(interceptionID string) *TakeResp
 	}
 }
 
-// TakeResponseBodyForInterceptionAsStreamResponse contains the browser's response
+// TakeResponseBodyForInterceptionAsStreamResult contains the browser's response
 // to calling the TakeResponseBodyForInterceptionAsStream CDP command with Do().
-type TakeResponseBodyForInterceptionAsStreamResponse struct {
+type TakeResponseBodyForInterceptionAsStreamResult struct {
 	Stream string `json:"stream"`
 }
 
 // Do sends the TakeResponseBodyForInterceptionAsStream CDP command to a browser,
 // and returns the browser's response.
-func (t *TakeResponseBodyForInterceptionAsStream) Do(ctx context.Context) (*TakeResponseBodyForInterceptionAsStreamResponse, error) {
+func (t *TakeResponseBodyForInterceptionAsStream) Do(ctx context.Context) (*TakeResponseBodyForInterceptionAsStreamResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1020,7 +1020,7 @@ func (t *TakeResponseBodyForInterceptionAsStream) Do(ctx context.Context) (*Take
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &TakeResponseBodyForInterceptionAsStreamResponse{}
+	result := &TakeResponseBodyForInterceptionAsStreamResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1123,16 +1123,16 @@ func (t *SearchInResponseBody) SetIsRegex(v bool) *SearchInResponseBody {
 	return t
 }
 
-// SearchInResponseBodyResponse contains the browser's response
+// SearchInResponseBodyResult contains the browser's response
 // to calling the SearchInResponseBody CDP command with Do().
-type SearchInResponseBodyResponse struct {
+type SearchInResponseBodyResult struct {
 	// List of search matches.
 	Result []debugger.SearchMatch `json:"result"`
 }
 
 // Do sends the SearchInResponseBody CDP command to a browser,
 // and returns the browser's response.
-func (t *SearchInResponseBody) Do(ctx context.Context) (*SearchInResponseBodyResponse, error) {
+func (t *SearchInResponseBody) Do(ctx context.Context) (*SearchInResponseBodyResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1144,7 +1144,7 @@ func (t *SearchInResponseBody) Do(ctx context.Context) (*SearchInResponseBodyRes
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &SearchInResponseBodyResponse{}
+	result := &SearchInResponseBodyResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1444,9 +1444,9 @@ func (t *SetCookie) SetSourcePort(v int64) *SetCookie {
 	return t
 }
 
-// SetCookieResponse contains the browser's response
+// SetCookieResult contains the browser's response
 // to calling the SetCookie CDP command with Do().
-type SetCookieResponse struct {
+type SetCookieResult struct {
 	// Always set to true. If an error occurs, the response indicates protocol error.
 	//
 	// This CDP parameter is deprecated.
@@ -1455,7 +1455,7 @@ type SetCookieResponse struct {
 
 // Do sends the SetCookie CDP command to a browser,
 // and returns the browser's response.
-func (t *SetCookie) Do(ctx context.Context) (*SetCookieResponse, error) {
+func (t *SetCookie) Do(ctx context.Context) (*SetCookieResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1467,7 +1467,7 @@ func (t *SetCookie) Do(ctx context.Context) (*SetCookieResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &SetCookieResponse{}
+	result := &SetCookieResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1721,15 +1721,15 @@ func (t *GetSecurityIsolationStatus) SetFrameID(v string) *GetSecurityIsolationS
 	return t
 }
 
-// GetSecurityIsolationStatusResponse contains the browser's response
+// GetSecurityIsolationStatusResult contains the browser's response
 // to calling the GetSecurityIsolationStatus CDP command with Do().
-type GetSecurityIsolationStatusResponse struct {
+type GetSecurityIsolationStatusResult struct {
 	Status SecurityIsolationStatus `json:"status"`
 }
 
 // Do sends the GetSecurityIsolationStatus CDP command to a browser,
 // and returns the browser's response.
-func (t *GetSecurityIsolationStatus) Do(ctx context.Context) (*GetSecurityIsolationStatusResponse, error) {
+func (t *GetSecurityIsolationStatus) Do(ctx context.Context) (*GetSecurityIsolationStatusResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1741,7 +1741,7 @@ func (t *GetSecurityIsolationStatus) Do(ctx context.Context) (*GetSecurityIsolat
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetSecurityIsolationStatusResponse{}
+	result := &GetSecurityIsolationStatusResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1780,15 +1780,15 @@ func NewLoadNetworkResource(frameID string, url string, options LoadNetworkResou
 	}
 }
 
-// LoadNetworkResourceResponse contains the browser's response
+// LoadNetworkResourceResult contains the browser's response
 // to calling the LoadNetworkResource CDP command with Do().
-type LoadNetworkResourceResponse struct {
+type LoadNetworkResourceResult struct {
 	Resource LoadNetworkResourcePageResult `json:"resource"`
 }
 
 // Do sends the LoadNetworkResource CDP command to a browser,
 // and returns the browser's response.
-func (t *LoadNetworkResource) Do(ctx context.Context) (*LoadNetworkResourceResponse, error) {
+func (t *LoadNetworkResource) Do(ctx context.Context) (*LoadNetworkResourceResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1800,7 +1800,7 @@ func (t *LoadNetworkResource) Do(ctx context.Context) (*LoadNetworkResourceRespo
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &LoadNetworkResourceResponse{}
+	result := &LoadNetworkResourceResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

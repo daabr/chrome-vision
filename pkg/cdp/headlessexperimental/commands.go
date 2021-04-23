@@ -85,9 +85,9 @@ func (t *BeginFrame) SetScreenshot(v ScreenshotParams) *BeginFrame {
 	return t
 }
 
-// BeginFrameResponse contains the browser's response
+// BeginFrameResult contains the browser's response
 // to calling the BeginFrame CDP command with Do().
-type BeginFrameResponse struct {
+type BeginFrameResult struct {
 	// Whether the BeginFrame resulted in damage and, thus, a new frame was committed to the
 	// display. Reported for diagnostic uses, may be removed in the future.
 	HasDamage bool `json:"hasDamage"`
@@ -97,7 +97,7 @@ type BeginFrameResponse struct {
 
 // Do sends the BeginFrame CDP command to a browser,
 // and returns the browser's response.
-func (t *BeginFrame) Do(ctx context.Context) (*BeginFrameResponse, error) {
+func (t *BeginFrame) Do(ctx context.Context) (*BeginFrameResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -109,7 +109,7 @@ func (t *BeginFrame) Do(ctx context.Context) (*BeginFrameResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &BeginFrameResponse{}
+	result := &BeginFrameResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

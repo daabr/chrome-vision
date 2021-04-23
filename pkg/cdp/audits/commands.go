@@ -56,9 +56,9 @@ func (t *GetEncodedResponse) SetSizeOnly(v bool) *GetEncodedResponse {
 	return t
 }
 
-// GetEncodedResponseResponse contains the browser's response
+// GetEncodedResponseResult contains the browser's response
 // to calling the GetEncodedResponse CDP command with Do().
-type GetEncodedResponseResponse struct {
+type GetEncodedResponseResult struct {
 	// The encoded body as a base64 string. Omitted if sizeOnly is true. (Encoded as a base64 string when passed over JSON)
 	Body string `json:"body,omitempty"`
 	// Size before re-encoding.
@@ -69,7 +69,7 @@ type GetEncodedResponseResponse struct {
 
 // Do sends the GetEncodedResponse CDP command to a browser,
 // and returns the browser's response.
-func (t *GetEncodedResponse) Do(ctx context.Context) (*GetEncodedResponseResponse, error) {
+func (t *GetEncodedResponse) Do(ctx context.Context) (*GetEncodedResponseResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -81,7 +81,7 @@ func (t *GetEncodedResponse) Do(ctx context.Context) (*GetEncodedResponseRespons
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetEncodedResponseResponse{}
+	result := &GetEncodedResponseResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

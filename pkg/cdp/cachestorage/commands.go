@@ -111,16 +111,16 @@ func NewRequestCacheNames(securityOrigin string) *RequestCacheNames {
 	}
 }
 
-// RequestCacheNamesResponse contains the browser's response
+// RequestCacheNamesResult contains the browser's response
 // to calling the RequestCacheNames CDP command with Do().
-type RequestCacheNamesResponse struct {
+type RequestCacheNamesResult struct {
 	// Caches for the security origin.
 	Caches []Cache `json:"caches"`
 }
 
 // Do sends the RequestCacheNames CDP command to a browser,
 // and returns the browser's response.
-func (t *RequestCacheNames) Do(ctx context.Context) (*RequestCacheNamesResponse, error) {
+func (t *RequestCacheNames) Do(ctx context.Context) (*RequestCacheNamesResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -132,7 +132,7 @@ func (t *RequestCacheNames) Do(ctx context.Context) (*RequestCacheNamesResponse,
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &RequestCacheNamesResponse{}
+	result := &RequestCacheNamesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -167,16 +167,16 @@ func NewRequestCachedResponse(cacheID string, requestURL string, requestHeaders 
 	}
 }
 
-// RequestCachedResponseResponse contains the browser's response
+// RequestCachedResponseResult contains the browser's response
 // to calling the RequestCachedResponse CDP command with Do().
-type RequestCachedResponseResponse struct {
+type RequestCachedResponseResult struct {
 	// Response read from the cache.
 	Response CachedResponse `json:"response"`
 }
 
 // Do sends the RequestCachedResponse CDP command to a browser,
 // and returns the browser's response.
-func (t *RequestCachedResponse) Do(ctx context.Context) (*RequestCachedResponseResponse, error) {
+func (t *RequestCachedResponse) Do(ctx context.Context) (*RequestCachedResponseResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -188,7 +188,7 @@ func (t *RequestCachedResponse) Do(ctx context.Context) (*RequestCachedResponseR
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &RequestCachedResponseResponse{}
+	result := &RequestCachedResponseResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -250,9 +250,9 @@ func (t *RequestEntries) SetPathFilter(v string) *RequestEntries {
 	return t
 }
 
-// RequestEntriesResponse contains the browser's response
+// RequestEntriesResult contains the browser's response
 // to calling the RequestEntries CDP command with Do().
-type RequestEntriesResponse struct {
+type RequestEntriesResult struct {
 	// Array of object store data entries.
 	CacheDataEntries []DataEntry `json:"cacheDataEntries"`
 	// Count of returned entries from this storage. If pathFilter is empty, it
@@ -262,7 +262,7 @@ type RequestEntriesResponse struct {
 
 // Do sends the RequestEntries CDP command to a browser,
 // and returns the browser's response.
-func (t *RequestEntries) Do(ctx context.Context) (*RequestEntriesResponse, error) {
+func (t *RequestEntries) Do(ctx context.Context) (*RequestEntriesResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -274,7 +274,7 @@ func (t *RequestEntries) Do(ctx context.Context) (*RequestEntriesResponse, error
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &RequestEntriesResponse{}
+	result := &RequestEntriesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

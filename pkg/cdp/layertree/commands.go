@@ -31,9 +31,9 @@ func NewCompositingReasons(layerID string) *CompositingReasons {
 	}
 }
 
-// CompositingReasonsResponse contains the browser's response
+// CompositingReasonsResult contains the browser's response
 // to calling the CompositingReasons CDP command with Do().
-type CompositingReasonsResponse struct {
+type CompositingReasonsResult struct {
 	// A list of strings specifying reasons for the given layer to become composited.
 	//
 	// This CDP parameter is deprecated.
@@ -44,7 +44,7 @@ type CompositingReasonsResponse struct {
 
 // Do sends the CompositingReasons CDP command to a browser,
 // and returns the browser's response.
-func (t *CompositingReasons) Do(ctx context.Context) (*CompositingReasonsResponse, error) {
+func (t *CompositingReasons) Do(ctx context.Context) (*CompositingReasonsResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func (t *CompositingReasons) Do(ctx context.Context) (*CompositingReasonsRespons
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CompositingReasonsResponse{}
+	result := &CompositingReasonsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -145,16 +145,16 @@ func NewLoadSnapshot(tiles []PictureTile) *LoadSnapshot {
 	}
 }
 
-// LoadSnapshotResponse contains the browser's response
+// LoadSnapshotResult contains the browser's response
 // to calling the LoadSnapshot CDP command with Do().
-type LoadSnapshotResponse struct {
+type LoadSnapshotResult struct {
 	// The id of the snapshot.
 	SnapshotID string `json:"snapshotId"`
 }
 
 // Do sends the LoadSnapshot CDP command to a browser,
 // and returns the browser's response.
-func (t *LoadSnapshot) Do(ctx context.Context) (*LoadSnapshotResponse, error) {
+func (t *LoadSnapshot) Do(ctx context.Context) (*LoadSnapshotResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -166,7 +166,7 @@ func (t *LoadSnapshot) Do(ctx context.Context) (*LoadSnapshotResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &LoadSnapshotResponse{}
+	result := &LoadSnapshotResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -195,16 +195,16 @@ func NewMakeSnapshot(layerID string) *MakeSnapshot {
 	}
 }
 
-// MakeSnapshotResponse contains the browser's response
+// MakeSnapshotResult contains the browser's response
 // to calling the MakeSnapshot CDP command with Do().
-type MakeSnapshotResponse struct {
+type MakeSnapshotResult struct {
 	// The id of the layer snapshot.
 	SnapshotID string `json:"snapshotId"`
 }
 
 // Do sends the MakeSnapshot CDP command to a browser,
 // and returns the browser's response.
-func (t *MakeSnapshot) Do(ctx context.Context) (*MakeSnapshotResponse, error) {
+func (t *MakeSnapshot) Do(ctx context.Context) (*MakeSnapshotResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -216,7 +216,7 @@ func (t *MakeSnapshot) Do(ctx context.Context) (*MakeSnapshotResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &MakeSnapshotResponse{}
+	result := &MakeSnapshotResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -276,16 +276,16 @@ func (t *ProfileSnapshot) SetClipRect(v dom.Rect) *ProfileSnapshot {
 	return t
 }
 
-// ProfileSnapshotResponse contains the browser's response
+// ProfileSnapshotResult contains the browser's response
 // to calling the ProfileSnapshot CDP command with Do().
-type ProfileSnapshotResponse struct {
+type ProfileSnapshotResult struct {
 	// The array of paint profiles, one per run.
 	Timings []PaintProfile `json:"timings"`
 }
 
 // Do sends the ProfileSnapshot CDP command to a browser,
 // and returns the browser's response.
-func (t *ProfileSnapshot) Do(ctx context.Context) (*ProfileSnapshotResponse, error) {
+func (t *ProfileSnapshot) Do(ctx context.Context) (*ProfileSnapshotResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -297,7 +297,7 @@ func (t *ProfileSnapshot) Do(ctx context.Context) (*ProfileSnapshotResponse, err
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &ProfileSnapshotResponse{}
+	result := &ProfileSnapshotResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -398,16 +398,16 @@ func (t *ReplaySnapshot) SetScale(v float64) *ReplaySnapshot {
 	return t
 }
 
-// ReplaySnapshotResponse contains the browser's response
+// ReplaySnapshotResult contains the browser's response
 // to calling the ReplaySnapshot CDP command with Do().
-type ReplaySnapshotResponse struct {
+type ReplaySnapshotResult struct {
 	// A data: URL for resulting image.
 	DataURL string `json:"dataURL"`
 }
 
 // Do sends the ReplaySnapshot CDP command to a browser,
 // and returns the browser's response.
-func (t *ReplaySnapshot) Do(ctx context.Context) (*ReplaySnapshotResponse, error) {
+func (t *ReplaySnapshot) Do(ctx context.Context) (*ReplaySnapshotResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -419,7 +419,7 @@ func (t *ReplaySnapshot) Do(ctx context.Context) (*ReplaySnapshotResponse, error
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &ReplaySnapshotResponse{}
+	result := &ReplaySnapshotResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -448,16 +448,16 @@ func NewSnapshotCommandLog(snapshotID string) *SnapshotCommandLog {
 	}
 }
 
-// SnapshotCommandLogResponse contains the browser's response
+// SnapshotCommandLogResult contains the browser's response
 // to calling the SnapshotCommandLog CDP command with Do().
-type SnapshotCommandLogResponse struct {
+type SnapshotCommandLogResult struct {
 	// The array of canvas function calls.
 	CommandLog []json.RawMessage `json:"commandLog"`
 }
 
 // Do sends the SnapshotCommandLog CDP command to a browser,
 // and returns the browser's response.
-func (t *SnapshotCommandLog) Do(ctx context.Context) (*SnapshotCommandLogResponse, error) {
+func (t *SnapshotCommandLog) Do(ctx context.Context) (*SnapshotCommandLogResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -469,7 +469,7 @@ func (t *SnapshotCommandLog) Do(ctx context.Context) (*SnapshotCommandLogRespons
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &SnapshotCommandLogResponse{}
+	result := &SnapshotCommandLogResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

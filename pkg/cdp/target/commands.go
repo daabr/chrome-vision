@@ -82,16 +82,16 @@ func (t *AttachToTarget) SetFlatten(v bool) *AttachToTarget {
 	return t
 }
 
-// AttachToTargetResponse contains the browser's response
+// AttachToTargetResult contains the browser's response
 // to calling the AttachToTarget CDP command with Do().
-type AttachToTargetResponse struct {
+type AttachToTargetResult struct {
 	// Id assigned to the session.
 	SessionID string `json:"sessionId"`
 }
 
 // Do sends the AttachToTarget CDP command to a browser,
 // and returns the browser's response.
-func (t *AttachToTarget) Do(ctx context.Context) (*AttachToTargetResponse, error) {
+func (t *AttachToTarget) Do(ctx context.Context) (*AttachToTargetResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -103,7 +103,7 @@ func (t *AttachToTarget) Do(ctx context.Context) (*AttachToTargetResponse, error
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &AttachToTargetResponse{}
+	result := &AttachToTargetResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -131,16 +131,16 @@ func NewAttachToBrowserTarget() *AttachToBrowserTarget {
 	return &AttachToBrowserTarget{}
 }
 
-// AttachToBrowserTargetResponse contains the browser's response
+// AttachToBrowserTargetResult contains the browser's response
 // to calling the AttachToBrowserTarget CDP command with Do().
-type AttachToBrowserTargetResponse struct {
+type AttachToBrowserTargetResult struct {
 	// Id assigned to the session.
 	SessionID string `json:"sessionId"`
 }
 
 // Do sends the AttachToBrowserTarget CDP command to a browser,
 // and returns the browser's response.
-func (t *AttachToBrowserTarget) Do(ctx context.Context) (*AttachToBrowserTargetResponse, error) {
+func (t *AttachToBrowserTarget) Do(ctx context.Context) (*AttachToBrowserTargetResult, error) {
 	response, err := cdp.Send(ctx, "Target.attachToBrowserTarget", nil)
 	if err != nil {
 		return nil, err
@@ -148,7 +148,7 @@ func (t *AttachToBrowserTarget) Do(ctx context.Context) (*AttachToBrowserTargetR
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &AttachToBrowserTargetResponse{}
+	result := &AttachToBrowserTargetResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -176,9 +176,9 @@ func NewCloseTarget(targetID string) *CloseTarget {
 	}
 }
 
-// CloseTargetResponse contains the browser's response
+// CloseTargetResult contains the browser's response
 // to calling the CloseTarget CDP command with Do().
-type CloseTargetResponse struct {
+type CloseTargetResult struct {
 	// Always set to true. If an error occurs, the response indicates protocol error.
 	//
 	// This CDP parameter is deprecated.
@@ -187,7 +187,7 @@ type CloseTargetResponse struct {
 
 // Do sends the CloseTarget CDP command to a browser,
 // and returns the browser's response.
-func (t *CloseTarget) Do(ctx context.Context) (*CloseTargetResponse, error) {
+func (t *CloseTarget) Do(ctx context.Context) (*CloseTargetResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -199,7 +199,7 @@ func (t *CloseTarget) Do(ctx context.Context) (*CloseTargetResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CloseTargetResponse{}
+	result := &CloseTargetResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -322,16 +322,16 @@ func (t *CreateBrowserContext) SetProxyBypassList(v string) *CreateBrowserContex
 	return t
 }
 
-// CreateBrowserContextResponse contains the browser's response
+// CreateBrowserContextResult contains the browser's response
 // to calling the CreateBrowserContext CDP command with Do().
-type CreateBrowserContextResponse struct {
+type CreateBrowserContextResult struct {
 	// The id of the context created.
 	BrowserContextID string `json:"browserContextId"`
 }
 
 // Do sends the CreateBrowserContext CDP command to a browser,
 // and returns the browser's response.
-func (t *CreateBrowserContext) Do(ctx context.Context) (*CreateBrowserContextResponse, error) {
+func (t *CreateBrowserContext) Do(ctx context.Context) (*CreateBrowserContextResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -343,7 +343,7 @@ func (t *CreateBrowserContext) Do(ctx context.Context) (*CreateBrowserContextRes
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CreateBrowserContextResponse{}
+	result := &CreateBrowserContextResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -371,16 +371,16 @@ func NewGetBrowserContexts() *GetBrowserContexts {
 	return &GetBrowserContexts{}
 }
 
-// GetBrowserContextsResponse contains the browser's response
+// GetBrowserContextsResult contains the browser's response
 // to calling the GetBrowserContexts CDP command with Do().
-type GetBrowserContextsResponse struct {
+type GetBrowserContextsResult struct {
 	// An array of browser context ids.
 	BrowserContextIds []string `json:"browserContextIds"`
 }
 
 // Do sends the GetBrowserContexts CDP command to a browser,
 // and returns the browser's response.
-func (t *GetBrowserContexts) Do(ctx context.Context) (*GetBrowserContextsResponse, error) {
+func (t *GetBrowserContexts) Do(ctx context.Context) (*GetBrowserContextsResult, error) {
 	response, err := cdp.Send(ctx, "Target.getBrowserContexts", nil)
 	if err != nil {
 		return nil, err
@@ -388,7 +388,7 @@ func (t *GetBrowserContexts) Do(ctx context.Context) (*GetBrowserContextsRespons
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetBrowserContextsResponse{}
+	result := &GetBrowserContextsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -491,16 +491,16 @@ func (t *CreateTarget) SetBackground(v bool) *CreateTarget {
 	return t
 }
 
-// CreateTargetResponse contains the browser's response
+// CreateTargetResult contains the browser's response
 // to calling the CreateTarget CDP command with Do().
-type CreateTargetResponse struct {
+type CreateTargetResult struct {
 	// The id of the page opened.
 	TargetID string `json:"targetId"`
 }
 
 // Do sends the CreateTarget CDP command to a browser,
 // and returns the browser's response.
-func (t *CreateTarget) Do(ctx context.Context) (*CreateTargetResponse, error) {
+func (t *CreateTarget) Do(ctx context.Context) (*CreateTargetResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -512,7 +512,7 @@ func (t *CreateTarget) Do(ctx context.Context) (*CreateTargetResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CreateTargetResponse{}
+	result := &CreateTargetResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -653,15 +653,15 @@ func (t *GetTargetInfo) SetTargetID(v string) *GetTargetInfo {
 	return t
 }
 
-// GetTargetInfoResponse contains the browser's response
+// GetTargetInfoResult contains the browser's response
 // to calling the GetTargetInfo CDP command with Do().
-type GetTargetInfoResponse struct {
+type GetTargetInfoResult struct {
 	TargetInfo TargetInfo `json:"targetInfo"`
 }
 
 // Do sends the GetTargetInfo CDP command to a browser,
 // and returns the browser's response.
-func (t *GetTargetInfo) Do(ctx context.Context) (*GetTargetInfoResponse, error) {
+func (t *GetTargetInfo) Do(ctx context.Context) (*GetTargetInfoResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -673,7 +673,7 @@ func (t *GetTargetInfo) Do(ctx context.Context) (*GetTargetInfoResponse, error) 
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetTargetInfoResponse{}
+	result := &GetTargetInfoResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -697,16 +697,16 @@ func NewGetTargets() *GetTargets {
 	return &GetTargets{}
 }
 
-// GetTargetsResponse contains the browser's response
+// GetTargetsResult contains the browser's response
 // to calling the GetTargets CDP command with Do().
-type GetTargetsResponse struct {
+type GetTargetsResult struct {
 	// The list of targets.
 	TargetInfos []TargetInfo `json:"targetInfos"`
 }
 
 // Do sends the GetTargets CDP command to a browser,
 // and returns the browser's response.
-func (t *GetTargets) Do(ctx context.Context) (*GetTargetsResponse, error) {
+func (t *GetTargets) Do(ctx context.Context) (*GetTargetsResult, error) {
 	response, err := cdp.Send(ctx, "Target.getTargets", nil)
 	if err != nil {
 		return nil, err
@@ -714,7 +714,7 @@ func (t *GetTargets) Do(ctx context.Context) (*GetTargetsResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetTargetsResponse{}
+	result := &GetTargetsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

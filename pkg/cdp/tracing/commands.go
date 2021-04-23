@@ -55,16 +55,16 @@ func NewGetCategories() *GetCategories {
 	return &GetCategories{}
 }
 
-// GetCategoriesResponse contains the browser's response
+// GetCategoriesResult contains the browser's response
 // to calling the GetCategories CDP command with Do().
-type GetCategoriesResponse struct {
+type GetCategoriesResult struct {
 	// A list of supported tracing categories.
 	Categories []string `json:"categories"`
 }
 
 // Do sends the GetCategories CDP command to a browser,
 // and returns the browser's response.
-func (t *GetCategories) Do(ctx context.Context) (*GetCategoriesResponse, error) {
+func (t *GetCategories) Do(ctx context.Context) (*GetCategoriesResult, error) {
 	response, err := cdp.Send(ctx, "Tracing.getCategories", nil)
 	if err != nil {
 		return nil, err
@@ -72,7 +72,7 @@ func (t *GetCategories) Do(ctx context.Context) (*GetCategoriesResponse, error) 
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetCategoriesResponse{}
+	result := &GetCategoriesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -158,9 +158,9 @@ func (t *RequestMemoryDump) SetLevelOfDetail(v string) *RequestMemoryDump {
 	return t
 }
 
-// RequestMemoryDumpResponse contains the browser's response
+// RequestMemoryDumpResult contains the browser's response
 // to calling the RequestMemoryDump CDP command with Do().
-type RequestMemoryDumpResponse struct {
+type RequestMemoryDumpResult struct {
 	// GUID of the resulting global memory dump.
 	DumpGuid string `json:"dumpGuid"`
 	// True iff the global memory dump succeeded.
@@ -169,7 +169,7 @@ type RequestMemoryDumpResponse struct {
 
 // Do sends the RequestMemoryDump CDP command to a browser,
 // and returns the browser's response.
-func (t *RequestMemoryDump) Do(ctx context.Context) (*RequestMemoryDumpResponse, error) {
+func (t *RequestMemoryDump) Do(ctx context.Context) (*RequestMemoryDumpResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -181,7 +181,7 @@ func (t *RequestMemoryDump) Do(ctx context.Context) (*RequestMemoryDumpResponse,
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &RequestMemoryDumpResponse{}
+	result := &RequestMemoryDumpResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

@@ -37,16 +37,16 @@ func NewAddRule(styleSheetID string, ruleText string, location SourceRange) *Add
 	}
 }
 
-// AddRuleResponse contains the browser's response
+// AddRuleResult contains the browser's response
 // to calling the AddRule CDP command with Do().
-type AddRuleResponse struct {
+type AddRuleResult struct {
 	// The newly created rule.
 	Rule CSSRule `json:"rule"`
 }
 
 // Do sends the AddRule CDP command to a browser,
 // and returns the browser's response.
-func (t *AddRule) Do(ctx context.Context) (*AddRuleResponse, error) {
+func (t *AddRule) Do(ctx context.Context) (*AddRuleResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -58,7 +58,7 @@ func (t *AddRule) Do(ctx context.Context) (*AddRuleResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &AddRuleResponse{}
+	result := &AddRuleResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -86,16 +86,16 @@ func NewCollectClassNames(styleSheetID string) *CollectClassNames {
 	}
 }
 
-// CollectClassNamesResponse contains the browser's response
+// CollectClassNamesResult contains the browser's response
 // to calling the CollectClassNames CDP command with Do().
-type CollectClassNamesResponse struct {
+type CollectClassNamesResult struct {
 	// Class name list.
 	ClassNames []string `json:"classNames"`
 }
 
 // Do sends the CollectClassNames CDP command to a browser,
 // and returns the browser's response.
-func (t *CollectClassNames) Do(ctx context.Context) (*CollectClassNamesResponse, error) {
+func (t *CollectClassNames) Do(ctx context.Context) (*CollectClassNamesResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -107,7 +107,7 @@ func (t *CollectClassNames) Do(ctx context.Context) (*CollectClassNamesResponse,
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CollectClassNamesResponse{}
+	result := &CollectClassNamesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -136,16 +136,16 @@ func NewCreateStyleSheet(frameID string) *CreateStyleSheet {
 	}
 }
 
-// CreateStyleSheetResponse contains the browser's response
+// CreateStyleSheetResult contains the browser's response
 // to calling the CreateStyleSheet CDP command with Do().
-type CreateStyleSheetResponse struct {
+type CreateStyleSheetResult struct {
 	// Identifier of the created "via-inspector" stylesheet.
 	StyleSheetID string `json:"styleSheetId"`
 }
 
 // Do sends the CreateStyleSheet CDP command to a browser,
 // and returns the browser's response.
-func (t *CreateStyleSheet) Do(ctx context.Context) (*CreateStyleSheetResponse, error) {
+func (t *CreateStyleSheet) Do(ctx context.Context) (*CreateStyleSheetResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -157,7 +157,7 @@ func (t *CreateStyleSheet) Do(ctx context.Context) (*CreateStyleSheetResponse, e
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CreateStyleSheetResponse{}
+	result := &CreateStyleSheetResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -288,9 +288,9 @@ func NewGetBackgroundColors(nodeID int64) *GetBackgroundColors {
 	}
 }
 
-// GetBackgroundColorsResponse contains the browser's response
+// GetBackgroundColorsResult contains the browser's response
 // to calling the GetBackgroundColors CDP command with Do().
-type GetBackgroundColorsResponse struct {
+type GetBackgroundColorsResult struct {
 	// The range of background colors behind this element, if it contains any visible text. If no
 	// visible text is present, this will be undefined. In the case of a flat background color,
 	// this will consist of simply that color. In the case of a gradient, this will consist of each
@@ -306,7 +306,7 @@ type GetBackgroundColorsResponse struct {
 
 // Do sends the GetBackgroundColors CDP command to a browser,
 // and returns the browser's response.
-func (t *GetBackgroundColors) Do(ctx context.Context) (*GetBackgroundColorsResponse, error) {
+func (t *GetBackgroundColors) Do(ctx context.Context) (*GetBackgroundColorsResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -318,7 +318,7 @@ func (t *GetBackgroundColors) Do(ctx context.Context) (*GetBackgroundColorsRespo
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetBackgroundColorsResponse{}
+	result := &GetBackgroundColorsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -346,16 +346,16 @@ func NewGetComputedStyleForNode(nodeID int64) *GetComputedStyleForNode {
 	}
 }
 
-// GetComputedStyleForNodeResponse contains the browser's response
+// GetComputedStyleForNodeResult contains the browser's response
 // to calling the GetComputedStyleForNode CDP command with Do().
-type GetComputedStyleForNodeResponse struct {
+type GetComputedStyleForNodeResult struct {
 	// Computed style for the specified DOM node.
 	ComputedStyle []CSSComputedStyleProperty `json:"computedStyle"`
 }
 
 // Do sends the GetComputedStyleForNode CDP command to a browser,
 // and returns the browser's response.
-func (t *GetComputedStyleForNode) Do(ctx context.Context) (*GetComputedStyleForNodeResponse, error) {
+func (t *GetComputedStyleForNode) Do(ctx context.Context) (*GetComputedStyleForNodeResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -367,7 +367,7 @@ func (t *GetComputedStyleForNode) Do(ctx context.Context) (*GetComputedStyleForN
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetComputedStyleForNodeResponse{}
+	result := &GetComputedStyleForNodeResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -396,9 +396,9 @@ func NewGetInlineStylesForNode(nodeID int64) *GetInlineStylesForNode {
 	}
 }
 
-// GetInlineStylesForNodeResponse contains the browser's response
+// GetInlineStylesForNodeResult contains the browser's response
 // to calling the GetInlineStylesForNode CDP command with Do().
-type GetInlineStylesForNodeResponse struct {
+type GetInlineStylesForNodeResult struct {
 	// Inline style for the specified DOM node.
 	InlineStyle *CSSStyle `json:"inlineStyle,omitempty"`
 	// Attribute-defined element style (e.g. resulting from "width=20 height=100%").
@@ -407,7 +407,7 @@ type GetInlineStylesForNodeResponse struct {
 
 // Do sends the GetInlineStylesForNode CDP command to a browser,
 // and returns the browser's response.
-func (t *GetInlineStylesForNode) Do(ctx context.Context) (*GetInlineStylesForNodeResponse, error) {
+func (t *GetInlineStylesForNode) Do(ctx context.Context) (*GetInlineStylesForNodeResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -419,7 +419,7 @@ func (t *GetInlineStylesForNode) Do(ctx context.Context) (*GetInlineStylesForNod
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetInlineStylesForNodeResponse{}
+	result := &GetInlineStylesForNodeResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -447,9 +447,9 @@ func NewGetMatchedStylesForNode(nodeID int64) *GetMatchedStylesForNode {
 	}
 }
 
-// GetMatchedStylesForNodeResponse contains the browser's response
+// GetMatchedStylesForNodeResult contains the browser's response
 // to calling the GetMatchedStylesForNode CDP command with Do().
-type GetMatchedStylesForNodeResponse struct {
+type GetMatchedStylesForNodeResult struct {
 	// Inline style for the specified DOM node.
 	InlineStyle *CSSStyle `json:"inlineStyle,omitempty"`
 	// Attribute-defined element style (e.g. resulting from "width=20 height=100%").
@@ -466,7 +466,7 @@ type GetMatchedStylesForNodeResponse struct {
 
 // Do sends the GetMatchedStylesForNode CDP command to a browser,
 // and returns the browser's response.
-func (t *GetMatchedStylesForNode) Do(ctx context.Context) (*GetMatchedStylesForNodeResponse, error) {
+func (t *GetMatchedStylesForNode) Do(ctx context.Context) (*GetMatchedStylesForNodeResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -478,7 +478,7 @@ func (t *GetMatchedStylesForNode) Do(ctx context.Context) (*GetMatchedStylesForN
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetMatchedStylesForNodeResponse{}
+	result := &GetMatchedStylesForNodeResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -502,15 +502,15 @@ func NewGetMediaQueries() *GetMediaQueries {
 	return &GetMediaQueries{}
 }
 
-// GetMediaQueriesResponse contains the browser's response
+// GetMediaQueriesResult contains the browser's response
 // to calling the GetMediaQueries CDP command with Do().
-type GetMediaQueriesResponse struct {
+type GetMediaQueriesResult struct {
 	Medias []CSSMedia `json:"medias"`
 }
 
 // Do sends the GetMediaQueries CDP command to a browser,
 // and returns the browser's response.
-func (t *GetMediaQueries) Do(ctx context.Context) (*GetMediaQueriesResponse, error) {
+func (t *GetMediaQueries) Do(ctx context.Context) (*GetMediaQueriesResult, error) {
 	response, err := cdp.Send(ctx, "CSS.getMediaQueries", nil)
 	if err != nil {
 		return nil, err
@@ -518,7 +518,7 @@ func (t *GetMediaQueries) Do(ctx context.Context) (*GetMediaQueriesResponse, err
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetMediaQueriesResponse{}
+	result := &GetMediaQueriesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -547,16 +547,16 @@ func NewGetPlatformFontsForNode(nodeID int64) *GetPlatformFontsForNode {
 	}
 }
 
-// GetPlatformFontsForNodeResponse contains the browser's response
+// GetPlatformFontsForNodeResult contains the browser's response
 // to calling the GetPlatformFontsForNode CDP command with Do().
-type GetPlatformFontsForNodeResponse struct {
+type GetPlatformFontsForNodeResult struct {
 	// Usage statistics for every employed platform font.
 	Fonts []PlatformFontUsage `json:"fonts"`
 }
 
 // Do sends the GetPlatformFontsForNode CDP command to a browser,
 // and returns the browser's response.
-func (t *GetPlatformFontsForNode) Do(ctx context.Context) (*GetPlatformFontsForNodeResponse, error) {
+func (t *GetPlatformFontsForNode) Do(ctx context.Context) (*GetPlatformFontsForNodeResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -568,7 +568,7 @@ func (t *GetPlatformFontsForNode) Do(ctx context.Context) (*GetPlatformFontsForN
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetPlatformFontsForNodeResponse{}
+	result := &GetPlatformFontsForNodeResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -596,16 +596,16 @@ func NewGetStyleSheetText(styleSheetID string) *GetStyleSheetText {
 	}
 }
 
-// GetStyleSheetTextResponse contains the browser's response
+// GetStyleSheetTextResult contains the browser's response
 // to calling the GetStyleSheetText CDP command with Do().
-type GetStyleSheetTextResponse struct {
+type GetStyleSheetTextResult struct {
 	// The stylesheet text.
 	Text string `json:"text"`
 }
 
 // Do sends the GetStyleSheetText CDP command to a browser,
 // and returns the browser's response.
-func (t *GetStyleSheetText) Do(ctx context.Context) (*GetStyleSheetTextResponse, error) {
+func (t *GetStyleSheetText) Do(ctx context.Context) (*GetStyleSheetTextResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -617,7 +617,7 @@ func (t *GetStyleSheetText) Do(ctx context.Context) (*GetStyleSheetTextResponse,
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetStyleSheetTextResponse{}
+	result := &GetStyleSheetTextResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -692,16 +692,16 @@ func NewTakeComputedStyleUpdates() *TakeComputedStyleUpdates {
 	return &TakeComputedStyleUpdates{}
 }
 
-// TakeComputedStyleUpdatesResponse contains the browser's response
+// TakeComputedStyleUpdatesResult contains the browser's response
 // to calling the TakeComputedStyleUpdates CDP command with Do().
-type TakeComputedStyleUpdatesResponse struct {
+type TakeComputedStyleUpdatesResult struct {
 	// The list of node Ids that have their tracked computed styles updated
 	NodeIds []int64 `json:"nodeIds"`
 }
 
 // Do sends the TakeComputedStyleUpdates CDP command to a browser,
 // and returns the browser's response.
-func (t *TakeComputedStyleUpdates) Do(ctx context.Context) (*TakeComputedStyleUpdatesResponse, error) {
+func (t *TakeComputedStyleUpdates) Do(ctx context.Context) (*TakeComputedStyleUpdatesResult, error) {
 	response, err := cdp.Send(ctx, "CSS.takeComputedStyleUpdates", nil)
 	if err != nil {
 		return nil, err
@@ -709,7 +709,7 @@ func (t *TakeComputedStyleUpdates) Do(ctx context.Context) (*TakeComputedStyleUp
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &TakeComputedStyleUpdatesResponse{}
+	result := &TakeComputedStyleUpdatesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -785,16 +785,16 @@ func NewSetKeyframeKey(styleSheetID string, r SourceRange, keyText string) *SetK
 	}
 }
 
-// SetKeyframeKeyResponse contains the browser's response
+// SetKeyframeKeyResult contains the browser's response
 // to calling the SetKeyframeKey CDP command with Do().
-type SetKeyframeKeyResponse struct {
+type SetKeyframeKeyResult struct {
 	// The resulting key text after modification.
 	KeyText Value `json:"keyText"`
 }
 
 // Do sends the SetKeyframeKey CDP command to a browser,
 // and returns the browser's response.
-func (t *SetKeyframeKey) Do(ctx context.Context) (*SetKeyframeKeyResponse, error) {
+func (t *SetKeyframeKey) Do(ctx context.Context) (*SetKeyframeKeyResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -806,7 +806,7 @@ func (t *SetKeyframeKey) Do(ctx context.Context) (*SetKeyframeKeyResponse, error
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &SetKeyframeKeyResponse{}
+	result := &SetKeyframeKeyResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -838,16 +838,16 @@ func NewSetMediaText(styleSheetID string, r SourceRange, text string) *SetMediaT
 	}
 }
 
-// SetMediaTextResponse contains the browser's response
+// SetMediaTextResult contains the browser's response
 // to calling the SetMediaText CDP command with Do().
-type SetMediaTextResponse struct {
+type SetMediaTextResult struct {
 	// The resulting CSS media rule after modification.
 	Media CSSMedia `json:"media"`
 }
 
 // Do sends the SetMediaText CDP command to a browser,
 // and returns the browser's response.
-func (t *SetMediaText) Do(ctx context.Context) (*SetMediaTextResponse, error) {
+func (t *SetMediaText) Do(ctx context.Context) (*SetMediaTextResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -859,7 +859,7 @@ func (t *SetMediaText) Do(ctx context.Context) (*SetMediaTextResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &SetMediaTextResponse{}
+	result := &SetMediaTextResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -891,16 +891,16 @@ func NewSetRuleSelector(styleSheetID string, r SourceRange, selector string) *Se
 	}
 }
 
-// SetRuleSelectorResponse contains the browser's response
+// SetRuleSelectorResult contains the browser's response
 // to calling the SetRuleSelector CDP command with Do().
-type SetRuleSelectorResponse struct {
+type SetRuleSelectorResult struct {
 	// The resulting selector list after modification.
 	SelectorList SelectorList `json:"selectorList"`
 }
 
 // Do sends the SetRuleSelector CDP command to a browser,
 // and returns the browser's response.
-func (t *SetRuleSelector) Do(ctx context.Context) (*SetRuleSelectorResponse, error) {
+func (t *SetRuleSelector) Do(ctx context.Context) (*SetRuleSelectorResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -912,7 +912,7 @@ func (t *SetRuleSelector) Do(ctx context.Context) (*SetRuleSelectorResponse, err
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &SetRuleSelectorResponse{}
+	result := &SetRuleSelectorResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -942,16 +942,16 @@ func NewSetStyleSheetText(styleSheetID string, text string) *SetStyleSheetText {
 	}
 }
 
-// SetStyleSheetTextResponse contains the browser's response
+// SetStyleSheetTextResult contains the browser's response
 // to calling the SetStyleSheetText CDP command with Do().
-type SetStyleSheetTextResponse struct {
+type SetStyleSheetTextResult struct {
 	// URL of source map associated with script (if any).
 	SourceMapURL string `json:"sourceMapURL,omitempty"`
 }
 
 // Do sends the SetStyleSheetText CDP command to a browser,
 // and returns the browser's response.
-func (t *SetStyleSheetText) Do(ctx context.Context) (*SetStyleSheetTextResponse, error) {
+func (t *SetStyleSheetText) Do(ctx context.Context) (*SetStyleSheetTextResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -963,7 +963,7 @@ func (t *SetStyleSheetText) Do(ctx context.Context) (*SetStyleSheetTextResponse,
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &SetStyleSheetTextResponse{}
+	result := &SetStyleSheetTextResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -991,16 +991,16 @@ func NewSetStyleTexts(edits []StyleDeclarationEdit) *SetStyleTexts {
 	}
 }
 
-// SetStyleTextsResponse contains the browser's response
+// SetStyleTextsResult contains the browser's response
 // to calling the SetStyleTexts CDP command with Do().
-type SetStyleTextsResponse struct {
+type SetStyleTextsResult struct {
 	// The resulting styles after modification.
 	Styles []CSSStyle `json:"styles"`
 }
 
 // Do sends the SetStyleTexts CDP command to a browser,
 // and returns the browser's response.
-func (t *SetStyleTexts) Do(ctx context.Context) (*SetStyleTextsResponse, error) {
+func (t *SetStyleTexts) Do(ctx context.Context) (*SetStyleTextsResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1012,7 +1012,7 @@ func (t *SetStyleTexts) Do(ctx context.Context) (*SetStyleTextsResponse, error) 
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &SetStyleTextsResponse{}
+	result := &SetStyleTextsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1067,15 +1067,15 @@ func NewStopRuleUsageTracking() *StopRuleUsageTracking {
 	return &StopRuleUsageTracking{}
 }
 
-// StopRuleUsageTrackingResponse contains the browser's response
+// StopRuleUsageTrackingResult contains the browser's response
 // to calling the StopRuleUsageTracking CDP command with Do().
-type StopRuleUsageTrackingResponse struct {
+type StopRuleUsageTrackingResult struct {
 	RuleUsage []RuleUsage `json:"ruleUsage"`
 }
 
 // Do sends the StopRuleUsageTracking CDP command to a browser,
 // and returns the browser's response.
-func (t *StopRuleUsageTracking) Do(ctx context.Context) (*StopRuleUsageTrackingResponse, error) {
+func (t *StopRuleUsageTracking) Do(ctx context.Context) (*StopRuleUsageTrackingResult, error) {
 	response, err := cdp.Send(ctx, "CSS.stopRuleUsageTracking", nil)
 	if err != nil {
 		return nil, err
@@ -1083,7 +1083,7 @@ func (t *StopRuleUsageTracking) Do(ctx context.Context) (*StopRuleUsageTrackingR
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &StopRuleUsageTrackingResponse{}
+	result := &StopRuleUsageTrackingResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1108,9 +1108,9 @@ func NewTakeCoverageDelta() *TakeCoverageDelta {
 	return &TakeCoverageDelta{}
 }
 
-// TakeCoverageDeltaResponse contains the browser's response
+// TakeCoverageDeltaResult contains the browser's response
 // to calling the TakeCoverageDelta CDP command with Do().
-type TakeCoverageDeltaResponse struct {
+type TakeCoverageDeltaResult struct {
 	Coverage []RuleUsage `json:"coverage"`
 	// Monotonically increasing time, in seconds.
 	Timestamp float64 `json:"timestamp"`
@@ -1118,7 +1118,7 @@ type TakeCoverageDeltaResponse struct {
 
 // Do sends the TakeCoverageDelta CDP command to a browser,
 // and returns the browser's response.
-func (t *TakeCoverageDelta) Do(ctx context.Context) (*TakeCoverageDeltaResponse, error) {
+func (t *TakeCoverageDelta) Do(ctx context.Context) (*TakeCoverageDeltaResult, error) {
 	response, err := cdp.Send(ctx, "CSS.takeCoverageDelta", nil)
 	if err != nil {
 		return nil, err
@@ -1126,7 +1126,7 @@ func (t *TakeCoverageDelta) Do(ctx context.Context) (*TakeCoverageDeltaResponse,
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &TakeCoverageDeltaResponse{}
+	result := &TakeCoverageDeltaResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
