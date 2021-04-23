@@ -92,7 +92,10 @@ func TestUserDataDir(t *testing.T) {
 	parentCtx, cancel := context.WithTimeout(context.Background(), time.Minute)
 	defer cancel()
 
-	dir := os.TempDir()
+	dir, err := os.MkdirTemp("", "")
+	if err != nil {
+		t.Fatalf("os.MkdirTemp(%q, %q); got error: %s", "", "", err.Error())
+	}
 	defer func() {
 		os.RemoveAll(dir)
 	}()
