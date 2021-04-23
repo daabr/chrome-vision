@@ -248,9 +248,9 @@ func (t *RequestData) SetKeyRange(v KeyRange) *RequestData {
 	return t
 }
 
-// RequestDataResponse contains the browser's response
+// RequestDataResult contains the browser's response
 // to calling the RequestData CDP command with Do().
-type RequestDataResponse struct {
+type RequestDataResult struct {
 	// Array of object store data entries.
 	ObjectStoreDataEntries []DataEntry `json:"objectStoreDataEntries"`
 	// If true, there are more entries to fetch in the given range.
@@ -259,7 +259,7 @@ type RequestDataResponse struct {
 
 // Do sends the RequestData CDP command to a browser,
 // and returns the browser's response.
-func (t *RequestData) Do(ctx context.Context) (*RequestDataResponse, error) {
+func (t *RequestData) Do(ctx context.Context) (*RequestDataResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -271,7 +271,7 @@ func (t *RequestData) Do(ctx context.Context) (*RequestDataResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &RequestDataResponse{}
+	result := &RequestDataResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -306,9 +306,9 @@ func NewGetMetadata(securityOrigin string, databaseName string, objectStoreName 
 	}
 }
 
-// GetMetadataResponse contains the browser's response
+// GetMetadataResult contains the browser's response
 // to calling the GetMetadata CDP command with Do().
-type GetMetadataResponse struct {
+type GetMetadataResult struct {
 	// the entries count
 	EntriesCount float64 `json:"entriesCount"`
 	// the current value of key generator, to become the next inserted
@@ -319,7 +319,7 @@ type GetMetadataResponse struct {
 
 // Do sends the GetMetadata CDP command to a browser,
 // and returns the browser's response.
-func (t *GetMetadata) Do(ctx context.Context) (*GetMetadataResponse, error) {
+func (t *GetMetadata) Do(ctx context.Context) (*GetMetadataResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -331,7 +331,7 @@ func (t *GetMetadata) Do(ctx context.Context) (*GetMetadataResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetMetadataResponse{}
+	result := &GetMetadataResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -363,16 +363,16 @@ func NewRequestDatabase(securityOrigin string, databaseName string) *RequestData
 	}
 }
 
-// RequestDatabaseResponse contains the browser's response
+// RequestDatabaseResult contains the browser's response
 // to calling the RequestDatabase CDP command with Do().
-type RequestDatabaseResponse struct {
+type RequestDatabaseResult struct {
 	// Database with an array of object stores.
 	DatabaseWithObjectStores DatabaseWithObjectStores `json:"databaseWithObjectStores"`
 }
 
 // Do sends the RequestDatabase CDP command to a browser,
 // and returns the browser's response.
-func (t *RequestDatabase) Do(ctx context.Context) (*RequestDatabaseResponse, error) {
+func (t *RequestDatabase) Do(ctx context.Context) (*RequestDatabaseResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -384,7 +384,7 @@ func (t *RequestDatabase) Do(ctx context.Context) (*RequestDatabaseResponse, err
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &RequestDatabaseResponse{}
+	result := &RequestDatabaseResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -413,16 +413,16 @@ func NewRequestDatabaseNames(securityOrigin string) *RequestDatabaseNames {
 	}
 }
 
-// RequestDatabaseNamesResponse contains the browser's response
+// RequestDatabaseNamesResult contains the browser's response
 // to calling the RequestDatabaseNames CDP command with Do().
-type RequestDatabaseNamesResponse struct {
+type RequestDatabaseNamesResult struct {
 	// Database names for origin.
 	DatabaseNames []string `json:"databaseNames"`
 }
 
 // Do sends the RequestDatabaseNames CDP command to a browser,
 // and returns the browser's response.
-func (t *RequestDatabaseNames) Do(ctx context.Context) (*RequestDatabaseNamesResponse, error) {
+func (t *RequestDatabaseNames) Do(ctx context.Context) (*RequestDatabaseNamesResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -434,7 +434,7 @@ func (t *RequestDatabaseNames) Do(ctx context.Context) (*RequestDatabaseNamesRes
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &RequestDatabaseNamesResponse{}
+	result := &RequestDatabaseNamesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

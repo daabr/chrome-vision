@@ -148,16 +148,16 @@ func NewGetMetrics() *GetMetrics {
 	return &GetMetrics{}
 }
 
-// GetMetricsResponse contains the browser's response
+// GetMetricsResult contains the browser's response
 // to calling the GetMetrics CDP command with Do().
-type GetMetricsResponse struct {
+type GetMetricsResult struct {
 	// Current values for run-time metrics.
 	Metrics []Metric `json:"metrics"`
 }
 
 // Do sends the GetMetrics CDP command to a browser,
 // and returns the browser's response.
-func (t *GetMetrics) Do(ctx context.Context) (*GetMetricsResponse, error) {
+func (t *GetMetrics) Do(ctx context.Context) (*GetMetricsResult, error) {
 	response, err := cdp.Send(ctx, "Performance.getMetrics", nil)
 	if err != nil {
 		return nil, err
@@ -165,7 +165,7 @@ func (t *GetMetrics) Do(ctx context.Context) (*GetMetricsResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetMetricsResponse{}
+	result := &GetMetricsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

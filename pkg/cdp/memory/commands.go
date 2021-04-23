@@ -23,9 +23,9 @@ func NewGetDOMCounters() *GetDOMCounters {
 	return &GetDOMCounters{}
 }
 
-// GetDOMCountersResponse contains the browser's response
+// GetDOMCountersResult contains the browser's response
 // to calling the GetDOMCounters CDP command with Do().
-type GetDOMCountersResponse struct {
+type GetDOMCountersResult struct {
 	Documents        int64 `json:"documents"`
 	Nodes            int64 `json:"nodes"`
 	JsEventListeners int64 `json:"jsEventListeners"`
@@ -33,7 +33,7 @@ type GetDOMCountersResponse struct {
 
 // Do sends the GetDOMCounters CDP command to a browser,
 // and returns the browser's response.
-func (t *GetDOMCounters) Do(ctx context.Context) (*GetDOMCountersResponse, error) {
+func (t *GetDOMCounters) Do(ctx context.Context) (*GetDOMCountersResult, error) {
 	response, err := cdp.Send(ctx, "Memory.getDOMCounters", nil)
 	if err != nil {
 		return nil, err
@@ -41,7 +41,7 @@ func (t *GetDOMCounters) Do(ctx context.Context) (*GetDOMCountersResponse, error
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetDOMCountersResponse{}
+	result := &GetDOMCountersResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -289,15 +289,15 @@ func NewGetAllTimeSamplingProfile() *GetAllTimeSamplingProfile {
 	return &GetAllTimeSamplingProfile{}
 }
 
-// GetAllTimeSamplingProfileResponse contains the browser's response
+// GetAllTimeSamplingProfileResult contains the browser's response
 // to calling the GetAllTimeSamplingProfile CDP command with Do().
-type GetAllTimeSamplingProfileResponse struct {
+type GetAllTimeSamplingProfileResult struct {
 	Profile SamplingProfile `json:"profile"`
 }
 
 // Do sends the GetAllTimeSamplingProfile CDP command to a browser,
 // and returns the browser's response.
-func (t *GetAllTimeSamplingProfile) Do(ctx context.Context) (*GetAllTimeSamplingProfileResponse, error) {
+func (t *GetAllTimeSamplingProfile) Do(ctx context.Context) (*GetAllTimeSamplingProfileResult, error) {
 	response, err := cdp.Send(ctx, "Memory.getAllTimeSamplingProfile", nil)
 	if err != nil {
 		return nil, err
@@ -305,7 +305,7 @@ func (t *GetAllTimeSamplingProfile) Do(ctx context.Context) (*GetAllTimeSampling
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetAllTimeSamplingProfileResponse{}
+	result := &GetAllTimeSamplingProfileResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -330,15 +330,15 @@ func NewGetBrowserSamplingProfile() *GetBrowserSamplingProfile {
 	return &GetBrowserSamplingProfile{}
 }
 
-// GetBrowserSamplingProfileResponse contains the browser's response
+// GetBrowserSamplingProfileResult contains the browser's response
 // to calling the GetBrowserSamplingProfile CDP command with Do().
-type GetBrowserSamplingProfileResponse struct {
+type GetBrowserSamplingProfileResult struct {
 	Profile SamplingProfile `json:"profile"`
 }
 
 // Do sends the GetBrowserSamplingProfile CDP command to a browser,
 // and returns the browser's response.
-func (t *GetBrowserSamplingProfile) Do(ctx context.Context) (*GetBrowserSamplingProfileResponse, error) {
+func (t *GetBrowserSamplingProfile) Do(ctx context.Context) (*GetBrowserSamplingProfileResult, error) {
 	response, err := cdp.Send(ctx, "Memory.getBrowserSamplingProfile", nil)
 	if err != nil {
 		return nil, err
@@ -346,7 +346,7 @@ func (t *GetBrowserSamplingProfile) Do(ctx context.Context) (*GetBrowserSampling
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetBrowserSamplingProfileResponse{}
+	result := &GetBrowserSamplingProfileResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -371,15 +371,15 @@ func NewGetSamplingProfile() *GetSamplingProfile {
 	return &GetSamplingProfile{}
 }
 
-// GetSamplingProfileResponse contains the browser's response
+// GetSamplingProfileResult contains the browser's response
 // to calling the GetSamplingProfile CDP command with Do().
-type GetSamplingProfileResponse struct {
+type GetSamplingProfileResult struct {
 	Profile SamplingProfile `json:"profile"`
 }
 
 // Do sends the GetSamplingProfile CDP command to a browser,
 // and returns the browser's response.
-func (t *GetSamplingProfile) Do(ctx context.Context) (*GetSamplingProfileResponse, error) {
+func (t *GetSamplingProfile) Do(ctx context.Context) (*GetSamplingProfileResult, error) {
 	response, err := cdp.Send(ctx, "Memory.getSamplingProfile", nil)
 	if err != nil {
 		return nil, err
@@ -387,7 +387,7 @@ func (t *GetSamplingProfile) Do(ctx context.Context) (*GetSamplingProfileRespons
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetSamplingProfileResponse{}
+	result := &GetSamplingProfileResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

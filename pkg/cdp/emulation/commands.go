@@ -27,16 +27,16 @@ func NewCanEmulate() *CanEmulate {
 	return &CanEmulate{}
 }
 
-// CanEmulateResponse contains the browser's response
+// CanEmulateResult contains the browser's response
 // to calling the CanEmulate CDP command with Do().
-type CanEmulateResponse struct {
+type CanEmulateResult struct {
 	// True if emulation is supported.
 	Result bool `json:"result"`
 }
 
 // Do sends the CanEmulate CDP command to a browser,
 // and returns the browser's response.
-func (t *CanEmulate) Do(ctx context.Context) (*CanEmulateResponse, error) {
+func (t *CanEmulate) Do(ctx context.Context) (*CanEmulateResult, error) {
 	response, err := cdp.Send(ctx, "Emulation.canEmulate", nil)
 	if err != nil {
 		return nil, err
@@ -44,7 +44,7 @@ func (t *CanEmulate) Do(ctx context.Context) (*CanEmulateResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CanEmulateResponse{}
+	result := &CanEmulateResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1102,16 +1102,16 @@ func (t *SetVirtualTimePolicy) SetInitialVirtualTime(v float64) *SetVirtualTimeP
 	return t
 }
 
-// SetVirtualTimePolicyResponse contains the browser's response
+// SetVirtualTimePolicyResult contains the browser's response
 // to calling the SetVirtualTimePolicy CDP command with Do().
-type SetVirtualTimePolicyResponse struct {
+type SetVirtualTimePolicyResult struct {
 	// Absolute timestamp at which virtual time was first enabled (up time in milliseconds).
 	VirtualTimeTicksBase float64 `json:"virtualTimeTicksBase"`
 }
 
 // Do sends the SetVirtualTimePolicy CDP command to a browser,
 // and returns the browser's response.
-func (t *SetVirtualTimePolicy) Do(ctx context.Context) (*SetVirtualTimePolicyResponse, error) {
+func (t *SetVirtualTimePolicy) Do(ctx context.Context) (*SetVirtualTimePolicyResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1123,7 +1123,7 @@ func (t *SetVirtualTimePolicy) Do(ctx context.Context) (*SetVirtualTimePolicyRes
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &SetVirtualTimePolicyResponse{}
+	result := &SetVirtualTimePolicyResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

@@ -153,16 +153,16 @@ func NewGetHeapObjectID(objectID string) *GetHeapObjectID {
 	}
 }
 
-// GetHeapObjectIDResponse contains the browser's response
+// GetHeapObjectIDResult contains the browser's response
 // to calling the GetHeapObjectID CDP command with Do().
-type GetHeapObjectIDResponse struct {
+type GetHeapObjectIDResult struct {
 	// Id of the heap snapshot object corresponding to the passed remote object id.
 	HeapSnapshotObjectID string `json:"heapSnapshotObjectId"`
 }
 
 // Do sends the GetHeapObjectID CDP command to a browser,
 // and returns the browser's response.
-func (t *GetHeapObjectID) Do(ctx context.Context) (*GetHeapObjectIDResponse, error) {
+func (t *GetHeapObjectID) Do(ctx context.Context) (*GetHeapObjectIDResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -174,7 +174,7 @@ func (t *GetHeapObjectID) Do(ctx context.Context) (*GetHeapObjectIDResponse, err
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetHeapObjectIDResponse{}
+	result := &GetHeapObjectIDResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -211,16 +211,16 @@ func (t *GetObjectByHeapObjectID) SetObjectGroup(v string) *GetObjectByHeapObjec
 	return t
 }
 
-// GetObjectByHeapObjectIDResponse contains the browser's response
+// GetObjectByHeapObjectIDResult contains the browser's response
 // to calling the GetObjectByHeapObjectID CDP command with Do().
-type GetObjectByHeapObjectIDResponse struct {
+type GetObjectByHeapObjectIDResult struct {
 	// Evaluation result.
 	Result runtime.RemoteObject `json:"result"`
 }
 
 // Do sends the GetObjectByHeapObjectID CDP command to a browser,
 // and returns the browser's response.
-func (t *GetObjectByHeapObjectID) Do(ctx context.Context) (*GetObjectByHeapObjectIDResponse, error) {
+func (t *GetObjectByHeapObjectID) Do(ctx context.Context) (*GetObjectByHeapObjectIDResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -232,7 +232,7 @@ func (t *GetObjectByHeapObjectID) Do(ctx context.Context) (*GetObjectByHeapObjec
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetObjectByHeapObjectIDResponse{}
+	result := &GetObjectByHeapObjectIDResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -254,16 +254,16 @@ func NewGetSamplingProfile() *GetSamplingProfile {
 	return &GetSamplingProfile{}
 }
 
-// GetSamplingProfileResponse contains the browser's response
+// GetSamplingProfileResult contains the browser's response
 // to calling the GetSamplingProfile CDP command with Do().
-type GetSamplingProfileResponse struct {
+type GetSamplingProfileResult struct {
 	// Return the sampling profile being collected.
 	Profile SamplingHeapProfile `json:"profile"`
 }
 
 // Do sends the GetSamplingProfile CDP command to a browser,
 // and returns the browser's response.
-func (t *GetSamplingProfile) Do(ctx context.Context) (*GetSamplingProfileResponse, error) {
+func (t *GetSamplingProfile) Do(ctx context.Context) (*GetSamplingProfileResult, error) {
 	response, err := cdp.Send(ctx, "HeapProfiler.getSamplingProfile", nil)
 	if err != nil {
 		return nil, err
@@ -271,7 +271,7 @@ func (t *GetSamplingProfile) Do(ctx context.Context) (*GetSamplingProfileRespons
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetSamplingProfileResponse{}
+	result := &GetSamplingProfileResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -380,16 +380,16 @@ func NewStopSampling() *StopSampling {
 	return &StopSampling{}
 }
 
-// StopSamplingResponse contains the browser's response
+// StopSamplingResult contains the browser's response
 // to calling the StopSampling CDP command with Do().
-type StopSamplingResponse struct {
+type StopSamplingResult struct {
 	// Recorded sampling heap profile.
 	Profile SamplingHeapProfile `json:"profile"`
 }
 
 // Do sends the StopSampling CDP command to a browser,
 // and returns the browser's response.
-func (t *StopSampling) Do(ctx context.Context) (*StopSamplingResponse, error) {
+func (t *StopSampling) Do(ctx context.Context) (*StopSamplingResult, error) {
 	response, err := cdp.Send(ctx, "HeapProfiler.stopSampling", nil)
 	if err != nil {
 		return nil, err
@@ -397,7 +397,7 @@ func (t *StopSampling) Do(ctx context.Context) (*StopSamplingResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &StopSamplingResponse{}
+	result := &StopSamplingResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

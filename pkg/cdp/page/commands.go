@@ -38,16 +38,16 @@ func NewAddScriptToEvaluateOnLoad(scriptSource string) *AddScriptToEvaluateOnLoa
 	}
 }
 
-// AddScriptToEvaluateOnLoadResponse contains the browser's response
+// AddScriptToEvaluateOnLoadResult contains the browser's response
 // to calling the AddScriptToEvaluateOnLoad CDP command with Do().
-type AddScriptToEvaluateOnLoadResponse struct {
+type AddScriptToEvaluateOnLoadResult struct {
 	// Identifier of the added script.
 	Identifier string `json:"identifier"`
 }
 
 // Do sends the AddScriptToEvaluateOnLoad CDP command to a browser,
 // and returns the browser's response.
-func (t *AddScriptToEvaluateOnLoad) Do(ctx context.Context) (*AddScriptToEvaluateOnLoadResponse, error) {
+func (t *AddScriptToEvaluateOnLoad) Do(ctx context.Context) (*AddScriptToEvaluateOnLoadResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -59,7 +59,7 @@ func (t *AddScriptToEvaluateOnLoad) Do(ctx context.Context) (*AddScriptToEvaluat
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &AddScriptToEvaluateOnLoadResponse{}
+	result := &AddScriptToEvaluateOnLoadResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -106,16 +106,16 @@ func (t *AddScriptToEvaluateOnNewDocument) SetWorldName(v string) *AddScriptToEv
 	return t
 }
 
-// AddScriptToEvaluateOnNewDocumentResponse contains the browser's response
+// AddScriptToEvaluateOnNewDocumentResult contains the browser's response
 // to calling the AddScriptToEvaluateOnNewDocument CDP command with Do().
-type AddScriptToEvaluateOnNewDocumentResponse struct {
+type AddScriptToEvaluateOnNewDocumentResult struct {
 	// Identifier of the added script.
 	Identifier string `json:"identifier"`
 }
 
 // Do sends the AddScriptToEvaluateOnNewDocument CDP command to a browser,
 // and returns the browser's response.
-func (t *AddScriptToEvaluateOnNewDocument) Do(ctx context.Context) (*AddScriptToEvaluateOnNewDocumentResponse, error) {
+func (t *AddScriptToEvaluateOnNewDocument) Do(ctx context.Context) (*AddScriptToEvaluateOnNewDocumentResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -127,7 +127,7 @@ func (t *AddScriptToEvaluateOnNewDocument) Do(ctx context.Context) (*AddScriptTo
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &AddScriptToEvaluateOnNewDocumentResponse{}
+	result := &AddScriptToEvaluateOnNewDocumentResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -245,16 +245,16 @@ func (t *CaptureScreenshot) SetCaptureBeyondViewport(v bool) *CaptureScreenshot 
 	return t
 }
 
-// CaptureScreenshotResponse contains the browser's response
+// CaptureScreenshotResult contains the browser's response
 // to calling the CaptureScreenshot CDP command with Do().
-type CaptureScreenshotResponse struct {
+type CaptureScreenshotResult struct {
 	// Base64-encoded image data. (Encoded as a base64 string when passed over JSON)
 	Data string `json:"data"`
 }
 
 // Do sends the CaptureScreenshot CDP command to a browser,
 // and returns the browser's response.
-func (t *CaptureScreenshot) Do(ctx context.Context) (*CaptureScreenshotResponse, error) {
+func (t *CaptureScreenshot) Do(ctx context.Context) (*CaptureScreenshotResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -266,7 +266,7 @@ func (t *CaptureScreenshot) Do(ctx context.Context) (*CaptureScreenshotResponse,
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CaptureScreenshotResponse{}
+	result := &CaptureScreenshotResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -307,16 +307,16 @@ func (t *CaptureSnapshot) SetFormat(v string) *CaptureSnapshot {
 	return t
 }
 
-// CaptureSnapshotResponse contains the browser's response
+// CaptureSnapshotResult contains the browser's response
 // to calling the CaptureSnapshot CDP command with Do().
-type CaptureSnapshotResponse struct {
+type CaptureSnapshotResult struct {
 	// Serialized page data.
 	Data string `json:"data"`
 }
 
 // Do sends the CaptureSnapshot CDP command to a browser,
 // and returns the browser's response.
-func (t *CaptureSnapshot) Do(ctx context.Context) (*CaptureSnapshotResponse, error) {
+func (t *CaptureSnapshot) Do(ctx context.Context) (*CaptureSnapshotResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -328,7 +328,7 @@ func (t *CaptureSnapshot) Do(ctx context.Context) (*CaptureSnapshotResponse, err
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CaptureSnapshotResponse{}
+	result := &CaptureSnapshotResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -381,16 +381,16 @@ func (t *CreateIsolatedWorld) SetGrantUniveralAccess(v bool) *CreateIsolatedWorl
 	return t
 }
 
-// CreateIsolatedWorldResponse contains the browser's response
+// CreateIsolatedWorldResult contains the browser's response
 // to calling the CreateIsolatedWorld CDP command with Do().
-type CreateIsolatedWorldResponse struct {
+type CreateIsolatedWorldResult struct {
 	// Execution context of the isolated world.
 	ExecutionContextID runtime.ExecutionContextID `json:"executionContextId"`
 }
 
 // Do sends the CreateIsolatedWorld CDP command to a browser,
 // and returns the browser's response.
-func (t *CreateIsolatedWorld) Do(ctx context.Context) (*CreateIsolatedWorldResponse, error) {
+func (t *CreateIsolatedWorld) Do(ctx context.Context) (*CreateIsolatedWorldResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -402,7 +402,7 @@ func (t *CreateIsolatedWorld) Do(ctx context.Context) (*CreateIsolatedWorldRespo
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CreateIsolatedWorldResponse{}
+	result := &CreateIsolatedWorldResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -484,9 +484,9 @@ func NewGetAppManifest() *GetAppManifest {
 	return &GetAppManifest{}
 }
 
-// GetAppManifestResponse contains the browser's response
+// GetAppManifestResult contains the browser's response
 // to calling the GetAppManifest CDP command with Do().
-type GetAppManifestResponse struct {
+type GetAppManifestResult struct {
 	// Manifest location.
 	URL    string             `json:"url"`
 	Errors []AppManifestError `json:"errors"`
@@ -500,7 +500,7 @@ type GetAppManifestResponse struct {
 
 // Do sends the GetAppManifest CDP command to a browser,
 // and returns the browser's response.
-func (t *GetAppManifest) Do(ctx context.Context) (*GetAppManifestResponse, error) {
+func (t *GetAppManifest) Do(ctx context.Context) (*GetAppManifestResult, error) {
 	response, err := cdp.Send(ctx, "Page.getAppManifest", nil)
 	if err != nil {
 		return nil, err
@@ -508,7 +508,7 @@ func (t *GetAppManifest) Do(ctx context.Context) (*GetAppManifestResponse, error
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetAppManifestResponse{}
+	result := &GetAppManifestResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -534,15 +534,15 @@ func NewGetInstallabilityErrors() *GetInstallabilityErrors {
 	return &GetInstallabilityErrors{}
 }
 
-// GetInstallabilityErrorsResponse contains the browser's response
+// GetInstallabilityErrorsResult contains the browser's response
 // to calling the GetInstallabilityErrors CDP command with Do().
-type GetInstallabilityErrorsResponse struct {
+type GetInstallabilityErrorsResult struct {
 	InstallabilityErrors []InstallabilityError `json:"installabilityErrors"`
 }
 
 // Do sends the GetInstallabilityErrors CDP command to a browser,
 // and returns the browser's response.
-func (t *GetInstallabilityErrors) Do(ctx context.Context) (*GetInstallabilityErrorsResponse, error) {
+func (t *GetInstallabilityErrors) Do(ctx context.Context) (*GetInstallabilityErrorsResult, error) {
 	response, err := cdp.Send(ctx, "Page.getInstallabilityErrors", nil)
 	if err != nil {
 		return nil, err
@@ -550,7 +550,7 @@ func (t *GetInstallabilityErrors) Do(ctx context.Context) (*GetInstallabilityErr
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetInstallabilityErrorsResponse{}
+	result := &GetInstallabilityErrorsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -576,15 +576,15 @@ func NewGetManifestIcons() *GetManifestIcons {
 	return &GetManifestIcons{}
 }
 
-// GetManifestIconsResponse contains the browser's response
+// GetManifestIconsResult contains the browser's response
 // to calling the GetManifestIcons CDP command with Do().
-type GetManifestIconsResponse struct {
+type GetManifestIconsResult struct {
 	PrimaryIcon string `json:"primaryIcon,omitempty"`
 }
 
 // Do sends the GetManifestIcons CDP command to a browser,
 // and returns the browser's response.
-func (t *GetManifestIcons) Do(ctx context.Context) (*GetManifestIconsResponse, error) {
+func (t *GetManifestIcons) Do(ctx context.Context) (*GetManifestIconsResult, error) {
 	response, err := cdp.Send(ctx, "Page.getManifestIcons", nil)
 	if err != nil {
 		return nil, err
@@ -592,7 +592,7 @@ func (t *GetManifestIcons) Do(ctx context.Context) (*GetManifestIconsResponse, e
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetManifestIconsResponse{}
+	result := &GetManifestIconsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -616,16 +616,16 @@ func NewGetFrameTree() *GetFrameTree {
 	return &GetFrameTree{}
 }
 
-// GetFrameTreeResponse contains the browser's response
+// GetFrameTreeResult contains the browser's response
 // to calling the GetFrameTree CDP command with Do().
-type GetFrameTreeResponse struct {
+type GetFrameTreeResult struct {
 	// Present frame tree structure.
 	FrameTree FrameTree `json:"frameTree"`
 }
 
 // Do sends the GetFrameTree CDP command to a browser,
 // and returns the browser's response.
-func (t *GetFrameTree) Do(ctx context.Context) (*GetFrameTreeResponse, error) {
+func (t *GetFrameTree) Do(ctx context.Context) (*GetFrameTreeResult, error) {
 	response, err := cdp.Send(ctx, "Page.getFrameTree", nil)
 	if err != nil {
 		return nil, err
@@ -633,7 +633,7 @@ func (t *GetFrameTree) Do(ctx context.Context) (*GetFrameTreeResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetFrameTreeResponse{}
+	result := &GetFrameTreeResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -657,9 +657,9 @@ func NewGetLayoutMetrics() *GetLayoutMetrics {
 	return &GetLayoutMetrics{}
 }
 
-// GetLayoutMetricsResponse contains the browser's response
+// GetLayoutMetricsResult contains the browser's response
 // to calling the GetLayoutMetrics CDP command with Do().
-type GetLayoutMetricsResponse struct {
+type GetLayoutMetricsResult struct {
 	// Deprecated metrics relating to the layout viewport. Can be in DP or in CSS pixels depending on the `enable-use-zoom-for-dsf` flag. Use `cssLayoutViewport` instead.
 	//
 	// This CDP parameter is deprecated.
@@ -682,7 +682,7 @@ type GetLayoutMetricsResponse struct {
 
 // Do sends the GetLayoutMetrics CDP command to a browser,
 // and returns the browser's response.
-func (t *GetLayoutMetrics) Do(ctx context.Context) (*GetLayoutMetricsResponse, error) {
+func (t *GetLayoutMetrics) Do(ctx context.Context) (*GetLayoutMetricsResult, error) {
 	response, err := cdp.Send(ctx, "Page.getLayoutMetrics", nil)
 	if err != nil {
 		return nil, err
@@ -690,7 +690,7 @@ func (t *GetLayoutMetrics) Do(ctx context.Context) (*GetLayoutMetricsResponse, e
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetLayoutMetricsResponse{}
+	result := &GetLayoutMetricsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -714,9 +714,9 @@ func NewGetNavigationHistory() *GetNavigationHistory {
 	return &GetNavigationHistory{}
 }
 
-// GetNavigationHistoryResponse contains the browser's response
+// GetNavigationHistoryResult contains the browser's response
 // to calling the GetNavigationHistory CDP command with Do().
-type GetNavigationHistoryResponse struct {
+type GetNavigationHistoryResult struct {
 	// Index of the current navigation history entry.
 	CurrentIndex int64 `json:"currentIndex"`
 	// Array of navigation history entries.
@@ -725,7 +725,7 @@ type GetNavigationHistoryResponse struct {
 
 // Do sends the GetNavigationHistory CDP command to a browser,
 // and returns the browser's response.
-func (t *GetNavigationHistory) Do(ctx context.Context) (*GetNavigationHistoryResponse, error) {
+func (t *GetNavigationHistory) Do(ctx context.Context) (*GetNavigationHistoryResult, error) {
 	response, err := cdp.Send(ctx, "Page.getNavigationHistory", nil)
 	if err != nil {
 		return nil, err
@@ -733,7 +733,7 @@ func (t *GetNavigationHistory) Do(ctx context.Context) (*GetNavigationHistoryRes
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetNavigationHistoryResponse{}
+	result := &GetNavigationHistoryResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -799,9 +799,9 @@ func NewGetResourceContent(frameID string, url string) *GetResourceContent {
 	}
 }
 
-// GetResourceContentResponse contains the browser's response
+// GetResourceContentResult contains the browser's response
 // to calling the GetResourceContent CDP command with Do().
-type GetResourceContentResponse struct {
+type GetResourceContentResult struct {
 	// Resource content.
 	Content string `json:"content"`
 	// True, if content was served as base64.
@@ -810,7 +810,7 @@ type GetResourceContentResponse struct {
 
 // Do sends the GetResourceContent CDP command to a browser,
 // and returns the browser's response.
-func (t *GetResourceContent) Do(ctx context.Context) (*GetResourceContentResponse, error) {
+func (t *GetResourceContent) Do(ctx context.Context) (*GetResourceContentResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -822,7 +822,7 @@ func (t *GetResourceContent) Do(ctx context.Context) (*GetResourceContentRespons
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetResourceContentResponse{}
+	result := &GetResourceContentResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -850,16 +850,16 @@ func NewGetResourceTree() *GetResourceTree {
 	return &GetResourceTree{}
 }
 
-// GetResourceTreeResponse contains the browser's response
+// GetResourceTreeResult contains the browser's response
 // to calling the GetResourceTree CDP command with Do().
-type GetResourceTreeResponse struct {
+type GetResourceTreeResult struct {
 	// Present frame / resource tree structure.
 	FrameTree FrameResourceTree `json:"frameTree"`
 }
 
 // Do sends the GetResourceTree CDP command to a browser,
 // and returns the browser's response.
-func (t *GetResourceTree) Do(ctx context.Context) (*GetResourceTreeResponse, error) {
+func (t *GetResourceTree) Do(ctx context.Context) (*GetResourceTreeResult, error) {
 	response, err := cdp.Send(ctx, "Page.getResourceTree", nil)
 	if err != nil {
 		return nil, err
@@ -867,7 +867,7 @@ func (t *GetResourceTree) Do(ctx context.Context) (*GetResourceTreeResponse, err
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetResourceTreeResponse{}
+	result := &GetResourceTreeResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -996,9 +996,9 @@ func (t *Navigate) SetReferrerPolicy(v string) *Navigate {
 	return t
 }
 
-// NavigateResponse contains the browser's response
+// NavigateResult contains the browser's response
 // to calling the Navigate CDP command with Do().
-type NavigateResponse struct {
+type NavigateResult struct {
 	// Frame id that has navigated (or failed to navigate)
 	FrameID string `json:"frameId"`
 	// Loader identifier.
@@ -1009,7 +1009,7 @@ type NavigateResponse struct {
 
 // Do sends the Navigate CDP command to a browser,
 // and returns the browser's response.
-func (t *Navigate) Do(ctx context.Context) (*NavigateResponse, error) {
+func (t *Navigate) Do(ctx context.Context) (*NavigateResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1021,7 +1021,7 @@ func (t *Navigate) Do(ctx context.Context) (*NavigateResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &NavigateResponse{}
+	result := &NavigateResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1287,9 +1287,9 @@ func (t *PrintToPDF) SetTransferMode(v string) *PrintToPDF {
 	return t
 }
 
-// PrintToPDFResponse contains the browser's response
+// PrintToPDFResult contains the browser's response
 // to calling the PrintToPDF CDP command with Do().
-type PrintToPDFResponse struct {
+type PrintToPDFResult struct {
 	// Base64-encoded pdf data. Empty if |returnAsStream| is specified. (Encoded as a base64 string when passed over JSON)
 	Data string `json:"data"`
 	// A handle of the stream that holds resulting PDF data.
@@ -1300,7 +1300,7 @@ type PrintToPDFResponse struct {
 
 // Do sends the PrintToPDF CDP command to a browser,
 // and returns the browser's response.
-func (t *PrintToPDF) Do(ctx context.Context) (*PrintToPDFResponse, error) {
+func (t *PrintToPDF) Do(ctx context.Context) (*PrintToPDFResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1312,7 +1312,7 @@ func (t *PrintToPDF) Do(ctx context.Context) (*PrintToPDFResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &PrintToPDFResponse{}
+	result := &PrintToPDFResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1557,16 +1557,16 @@ func (t *SearchInResource) SetIsRegex(v bool) *SearchInResource {
 	return t
 }
 
-// SearchInResourceResponse contains the browser's response
+// SearchInResourceResult contains the browser's response
 // to calling the SearchInResource CDP command with Do().
-type SearchInResourceResponse struct {
+type SearchInResourceResult struct {
 	// List of search matches.
 	Result []debugger.SearchMatch `json:"result"`
 }
 
 // Do sends the SearchInResource CDP command to a browser,
 // and returns the browser's response.
-func (t *SearchInResource) Do(ctx context.Context) (*SearchInResourceResponse, error) {
+func (t *SearchInResource) Do(ctx context.Context) (*SearchInResourceResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1578,7 +1578,7 @@ func (t *SearchInResource) Do(ctx context.Context) (*SearchInResourceResponse, e
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &SearchInResourceResponse{}
+	result := &SearchInResourceResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1696,15 +1696,15 @@ func NewGetPermissionsPolicyState(frameID string) *GetPermissionsPolicyState {
 	}
 }
 
-// GetPermissionsPolicyStateResponse contains the browser's response
+// GetPermissionsPolicyStateResult contains the browser's response
 // to calling the GetPermissionsPolicyState CDP command with Do().
-type GetPermissionsPolicyStateResponse struct {
+type GetPermissionsPolicyStateResult struct {
 	States []PermissionsPolicyFeatureState `json:"states"`
 }
 
 // Do sends the GetPermissionsPolicyState CDP command to a browser,
 // and returns the browser's response.
-func (t *GetPermissionsPolicyState) Do(ctx context.Context) (*GetPermissionsPolicyStateResponse, error) {
+func (t *GetPermissionsPolicyState) Do(ctx context.Context) (*GetPermissionsPolicyStateResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1716,7 +1716,7 @@ func (t *GetPermissionsPolicyState) Do(ctx context.Context) (*GetPermissionsPoli
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetPermissionsPolicyStateResponse{}
+	result := &GetPermissionsPolicyStateResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

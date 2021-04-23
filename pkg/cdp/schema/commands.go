@@ -25,16 +25,16 @@ func NewGetDomains() *GetDomains {
 	return &GetDomains{}
 }
 
-// GetDomainsResponse contains the browser's response
+// GetDomainsResult contains the browser's response
 // to calling the GetDomains CDP command with Do().
-type GetDomainsResponse struct {
+type GetDomainsResult struct {
 	// List of supported domains.
 	Domains []Domain `json:"domains"`
 }
 
 // Do sends the GetDomains CDP command to a browser,
 // and returns the browser's response.
-func (t *GetDomains) Do(ctx context.Context) (*GetDomainsResponse, error) {
+func (t *GetDomains) Do(ctx context.Context) (*GetDomainsResult, error) {
 	response, err := cdp.Send(ctx, "Schema.getDomains", nil)
 	if err != nil {
 		return nil, err
@@ -42,7 +42,7 @@ func (t *GetDomains) Do(ctx context.Context) (*GetDomainsResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetDomainsResponse{}
+	result := &GetDomainsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

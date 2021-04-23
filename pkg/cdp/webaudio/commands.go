@@ -89,15 +89,15 @@ func NewGetRealtimeData(contextID string) *GetRealtimeData {
 	}
 }
 
-// GetRealtimeDataResponse contains the browser's response
+// GetRealtimeDataResult contains the browser's response
 // to calling the GetRealtimeData CDP command with Do().
-type GetRealtimeDataResponse struct {
+type GetRealtimeDataResult struct {
 	RealtimeData ContextRealtimeData `json:"realtimeData"`
 }
 
 // Do sends the GetRealtimeData CDP command to a browser,
 // and returns the browser's response.
-func (t *GetRealtimeData) Do(ctx context.Context) (*GetRealtimeDataResponse, error) {
+func (t *GetRealtimeData) Do(ctx context.Context) (*GetRealtimeDataResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -109,7 +109,7 @@ func (t *GetRealtimeData) Do(ctx context.Context) (*GetRealtimeDataResponse, err
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetRealtimeDataResponse{}
+	result := &GetRealtimeDataResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

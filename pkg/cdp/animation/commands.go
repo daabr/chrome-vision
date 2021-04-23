@@ -91,16 +91,16 @@ func NewGetCurrentTime(id string) *GetCurrentTime {
 	}
 }
 
-// GetCurrentTimeResponse contains the browser's response
+// GetCurrentTimeResult contains the browser's response
 // to calling the GetCurrentTime CDP command with Do().
-type GetCurrentTimeResponse struct {
+type GetCurrentTimeResult struct {
 	// Current time of the page.
 	CurrentTime float64 `json:"currentTime"`
 }
 
 // Do sends the GetCurrentTime CDP command to a browser,
 // and returns the browser's response.
-func (t *GetCurrentTime) Do(ctx context.Context) (*GetCurrentTimeResponse, error) {
+func (t *GetCurrentTime) Do(ctx context.Context) (*GetCurrentTimeResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -112,7 +112,7 @@ func (t *GetCurrentTime) Do(ctx context.Context) (*GetCurrentTimeResponse, error
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetCurrentTimeResponse{}
+	result := &GetCurrentTimeResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -136,16 +136,16 @@ func NewGetPlaybackRate() *GetPlaybackRate {
 	return &GetPlaybackRate{}
 }
 
-// GetPlaybackRateResponse contains the browser's response
+// GetPlaybackRateResult contains the browser's response
 // to calling the GetPlaybackRate CDP command with Do().
-type GetPlaybackRateResponse struct {
+type GetPlaybackRateResult struct {
 	// Playback rate for animations on page.
 	PlaybackRate float64 `json:"playbackRate"`
 }
 
 // Do sends the GetPlaybackRate CDP command to a browser,
 // and returns the browser's response.
-func (t *GetPlaybackRate) Do(ctx context.Context) (*GetPlaybackRateResponse, error) {
+func (t *GetPlaybackRate) Do(ctx context.Context) (*GetPlaybackRateResult, error) {
 	response, err := cdp.Send(ctx, "Animation.getPlaybackRate", nil)
 	if err != nil {
 		return nil, err
@@ -153,7 +153,7 @@ func (t *GetPlaybackRate) Do(ctx context.Context) (*GetPlaybackRateResponse, err
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetPlaybackRateResponse{}
+	result := &GetPlaybackRateResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -221,16 +221,16 @@ func NewResolveAnimation(animationID string) *ResolveAnimation {
 	}
 }
 
-// ResolveAnimationResponse contains the browser's response
+// ResolveAnimationResult contains the browser's response
 // to calling the ResolveAnimation CDP command with Do().
-type ResolveAnimationResponse struct {
+type ResolveAnimationResult struct {
 	// Corresponding remote object.
 	RemoteObject runtime.RemoteObject `json:"remoteObject"`
 }
 
 // Do sends the ResolveAnimation CDP command to a browser,
 // and returns the browser's response.
-func (t *ResolveAnimation) Do(ctx context.Context) (*ResolveAnimationResponse, error) {
+func (t *ResolveAnimation) Do(ctx context.Context) (*ResolveAnimationResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -242,7 +242,7 @@ func (t *ResolveAnimation) Do(ctx context.Context) (*ResolveAnimationResponse, e
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &ResolveAnimationResponse{}
+	result := &ResolveAnimationResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

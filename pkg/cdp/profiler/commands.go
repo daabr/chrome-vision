@@ -82,16 +82,16 @@ func NewGetBestEffortCoverage() *GetBestEffortCoverage {
 	return &GetBestEffortCoverage{}
 }
 
-// GetBestEffortCoverageResponse contains the browser's response
+// GetBestEffortCoverageResult contains the browser's response
 // to calling the GetBestEffortCoverage CDP command with Do().
-type GetBestEffortCoverageResponse struct {
+type GetBestEffortCoverageResult struct {
 	// Coverage data for the current isolate.
 	Result []ScriptCoverage `json:"result"`
 }
 
 // Do sends the GetBestEffortCoverage CDP command to a browser,
 // and returns the browser's response.
-func (t *GetBestEffortCoverage) Do(ctx context.Context) (*GetBestEffortCoverageResponse, error) {
+func (t *GetBestEffortCoverage) Do(ctx context.Context) (*GetBestEffortCoverageResult, error) {
 	response, err := cdp.Send(ctx, "Profiler.getBestEffortCoverage", nil)
 	if err != nil {
 		return nil, err
@@ -99,7 +99,7 @@ func (t *GetBestEffortCoverage) Do(ctx context.Context) (*GetBestEffortCoverageR
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetBestEffortCoverageResponse{}
+	result := &GetBestEffortCoverageResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -226,16 +226,16 @@ func (t *StartPreciseCoverage) SetAllowTriggeredUpdates(v bool) *StartPreciseCov
 	return t
 }
 
-// StartPreciseCoverageResponse contains the browser's response
+// StartPreciseCoverageResult contains the browser's response
 // to calling the StartPreciseCoverage CDP command with Do().
-type StartPreciseCoverageResponse struct {
+type StartPreciseCoverageResult struct {
 	// Monotonically increasing time (in seconds) when the coverage update was taken in the backend.
 	Timestamp float64 `json:"timestamp"`
 }
 
 // Do sends the StartPreciseCoverage CDP command to a browser,
 // and returns the browser's response.
-func (t *StartPreciseCoverage) Do(ctx context.Context) (*StartPreciseCoverageResponse, error) {
+func (t *StartPreciseCoverage) Do(ctx context.Context) (*StartPreciseCoverageResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -247,7 +247,7 @@ func (t *StartPreciseCoverage) Do(ctx context.Context) (*StartPreciseCoverageRes
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &StartPreciseCoverageResponse{}
+	result := &StartPreciseCoverageResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -303,16 +303,16 @@ func NewStop() *Stop {
 	return &Stop{}
 }
 
-// StopResponse contains the browser's response
+// StopResult contains the browser's response
 // to calling the Stop CDP command with Do().
-type StopResponse struct {
+type StopResult struct {
 	// Recorded profile.
 	Profile Profile `json:"profile"`
 }
 
 // Do sends the Stop CDP command to a browser,
 // and returns the browser's response.
-func (t *Stop) Do(ctx context.Context) (*StopResponse, error) {
+func (t *Stop) Do(ctx context.Context) (*StopResult, error) {
 	response, err := cdp.Send(ctx, "Profiler.stop", nil)
 	if err != nil {
 		return nil, err
@@ -320,7 +320,7 @@ func (t *Stop) Do(ctx context.Context) (*StopResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &StopResponse{}
+	result := &StopResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -410,9 +410,9 @@ func NewTakePreciseCoverage() *TakePreciseCoverage {
 	return &TakePreciseCoverage{}
 }
 
-// TakePreciseCoverageResponse contains the browser's response
+// TakePreciseCoverageResult contains the browser's response
 // to calling the TakePreciseCoverage CDP command with Do().
-type TakePreciseCoverageResponse struct {
+type TakePreciseCoverageResult struct {
 	// Coverage data for the current isolate.
 	Result []ScriptCoverage `json:"result"`
 	// Monotonically increasing time (in seconds) when the coverage update was taken in the backend.
@@ -421,7 +421,7 @@ type TakePreciseCoverageResponse struct {
 
 // Do sends the TakePreciseCoverage CDP command to a browser,
 // and returns the browser's response.
-func (t *TakePreciseCoverage) Do(ctx context.Context) (*TakePreciseCoverageResponse, error) {
+func (t *TakePreciseCoverage) Do(ctx context.Context) (*TakePreciseCoverageResult, error) {
 	response, err := cdp.Send(ctx, "Profiler.takePreciseCoverage", nil)
 	if err != nil {
 		return nil, err
@@ -429,7 +429,7 @@ func (t *TakePreciseCoverage) Do(ctx context.Context) (*TakePreciseCoverageRespo
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &TakePreciseCoverageResponse{}
+	result := &TakePreciseCoverageResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -457,16 +457,16 @@ func NewTakeTypeProfile() *TakeTypeProfile {
 	return &TakeTypeProfile{}
 }
 
-// TakeTypeProfileResponse contains the browser's response
+// TakeTypeProfileResult contains the browser's response
 // to calling the TakeTypeProfile CDP command with Do().
-type TakeTypeProfileResponse struct {
+type TakeTypeProfileResult struct {
 	// Type profile for all scripts since startTypeProfile() was turned on.
 	Result []ScriptTypeProfile `json:"result"`
 }
 
 // Do sends the TakeTypeProfile CDP command to a browser,
 // and returns the browser's response.
-func (t *TakeTypeProfile) Do(ctx context.Context) (*TakeTypeProfileResponse, error) {
+func (t *TakeTypeProfile) Do(ctx context.Context) (*TakeTypeProfileResult, error) {
 	response, err := cdp.Send(ctx, "Profiler.takeTypeProfile", nil)
 	if err != nil {
 		return nil, err
@@ -474,7 +474,7 @@ func (t *TakeTypeProfile) Do(ctx context.Context) (*TakeTypeProfileResponse, err
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &TakeTypeProfileResponse{}
+	result := &TakeTypeProfileResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -570,16 +570,16 @@ func NewGetCounters() *GetCounters {
 	return &GetCounters{}
 }
 
-// GetCountersResponse contains the browser's response
+// GetCountersResult contains the browser's response
 // to calling the GetCounters CDP command with Do().
-type GetCountersResponse struct {
+type GetCountersResult struct {
 	// Collected counters information.
 	Result []CounterInfo `json:"result"`
 }
 
 // Do sends the GetCounters CDP command to a browser,
 // and returns the browser's response.
-func (t *GetCounters) Do(ctx context.Context) (*GetCountersResponse, error) {
+func (t *GetCounters) Do(ctx context.Context) (*GetCountersResult, error) {
 	response, err := cdp.Send(ctx, "Profiler.getCounters", nil)
 	if err != nil {
 		return nil, err
@@ -587,7 +587,7 @@ func (t *GetCounters) Do(ctx context.Context) (*GetCountersResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetCountersResponse{}
+	result := &GetCountersResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -683,16 +683,16 @@ func NewGetRuntimeCallStats() *GetRuntimeCallStats {
 	return &GetRuntimeCallStats{}
 }
 
-// GetRuntimeCallStatsResponse contains the browser's response
+// GetRuntimeCallStatsResult contains the browser's response
 // to calling the GetRuntimeCallStats CDP command with Do().
-type GetRuntimeCallStatsResponse struct {
+type GetRuntimeCallStatsResult struct {
 	// Collected runtime call counter information.
 	Result []RuntimeCallCounterInfo `json:"result"`
 }
 
 // Do sends the GetRuntimeCallStats CDP command to a browser,
 // and returns the browser's response.
-func (t *GetRuntimeCallStats) Do(ctx context.Context) (*GetRuntimeCallStatsResponse, error) {
+func (t *GetRuntimeCallStats) Do(ctx context.Context) (*GetRuntimeCallStatsResult, error) {
 	response, err := cdp.Send(ctx, "Profiler.getRuntimeCallStats", nil)
 	if err != nil {
 		return nil, err
@@ -700,7 +700,7 @@ func (t *GetRuntimeCallStats) Do(ctx context.Context) (*GetRuntimeCallStatsRespo
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetRuntimeCallStatsResponse{}
+	result := &GetRuntimeCallStatsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

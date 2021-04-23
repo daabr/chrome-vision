@@ -123,15 +123,15 @@ func NewGetDOMStorageItems(storageID StorageID) *GetDOMStorageItems {
 	}
 }
 
-// GetDOMStorageItemsResponse contains the browser's response
+// GetDOMStorageItemsResult contains the browser's response
 // to calling the GetDOMStorageItems CDP command with Do().
-type GetDOMStorageItemsResponse struct {
+type GetDOMStorageItemsResult struct {
 	Entries []Item `json:"entries"`
 }
 
 // Do sends the GetDOMStorageItems CDP command to a browser,
 // and returns the browser's response.
-func (t *GetDOMStorageItems) Do(ctx context.Context) (*GetDOMStorageItemsResponse, error) {
+func (t *GetDOMStorageItems) Do(ctx context.Context) (*GetDOMStorageItemsResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -143,7 +143,7 @@ func (t *GetDOMStorageItems) Do(ctx context.Context) (*GetDOMStorageItemsRespons
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetDOMStorageItemsResponse{}
+	result := &GetDOMStorageItemsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

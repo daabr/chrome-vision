@@ -94,9 +94,9 @@ func (t *Read) SetSize(v int64) *Read {
 	return t
 }
 
-// ReadResponse contains the browser's response
+// ReadResult contains the browser's response
 // to calling the Read CDP command with Do().
-type ReadResponse struct {
+type ReadResult struct {
 	// Set if the data is base64-encoded
 	Base64Encoded bool `json:"base64Encoded,omitempty"`
 	// Data that were read.
@@ -107,7 +107,7 @@ type ReadResponse struct {
 
 // Do sends the Read CDP command to a browser,
 // and returns the browser's response.
-func (t *Read) Do(ctx context.Context) (*ReadResponse, error) {
+func (t *Read) Do(ctx context.Context) (*ReadResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -119,7 +119,7 @@ func (t *Read) Do(ctx context.Context) (*ReadResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &ReadResponse{}
+	result := &ReadResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -148,16 +148,16 @@ func NewResolveBlob(objectID runtime.RemoteObjectID) *ResolveBlob {
 	}
 }
 
-// ResolveBlobResponse contains the browser's response
+// ResolveBlobResult contains the browser's response
 // to calling the ResolveBlob CDP command with Do().
-type ResolveBlobResponse struct {
+type ResolveBlobResult struct {
 	// UUID of the specified Blob.
 	Uuid string `json:"uuid"`
 }
 
 // Do sends the ResolveBlob CDP command to a browser,
 // and returns the browser's response.
-func (t *ResolveBlob) Do(ctx context.Context) (*ResolveBlobResponse, error) {
+func (t *ResolveBlob) Do(ctx context.Context) (*ResolveBlobResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -169,7 +169,7 @@ func (t *ResolveBlob) Do(ctx context.Context) (*ResolveBlobResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &ResolveBlobResponse{}
+	result := &ResolveBlobResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

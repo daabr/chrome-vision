@@ -52,9 +52,9 @@ func (t *AwaitPromise) SetGeneratePreview(v bool) *AwaitPromise {
 	return t
 }
 
-// AwaitPromiseResponse contains the browser's response
+// AwaitPromiseResult contains the browser's response
 // to calling the AwaitPromise CDP command with Do().
-type AwaitPromiseResponse struct {
+type AwaitPromiseResult struct {
 	// Promise result. Will contain rejected value if promise was rejected.
 	Result RemoteObject `json:"result"`
 	// Exception details if stack strace is available.
@@ -63,7 +63,7 @@ type AwaitPromiseResponse struct {
 
 // Do sends the AwaitPromise CDP command to a browser,
 // and returns the browser's response.
-func (t *AwaitPromise) Do(ctx context.Context) (*AwaitPromiseResponse, error) {
+func (t *AwaitPromise) Do(ctx context.Context) (*AwaitPromiseResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -75,7 +75,7 @@ func (t *AwaitPromise) Do(ctx context.Context) (*AwaitPromiseResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &AwaitPromiseResponse{}
+	result := &AwaitPromiseResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -220,9 +220,9 @@ func (t *CallFunctionOn) SetObjectGroup(v string) *CallFunctionOn {
 	return t
 }
 
-// CallFunctionOnResponse contains the browser's response
+// CallFunctionOnResult contains the browser's response
 // to calling the CallFunctionOn CDP command with Do().
-type CallFunctionOnResponse struct {
+type CallFunctionOnResult struct {
 	// Call result.
 	Result RemoteObject `json:"result"`
 	// Exception details.
@@ -231,7 +231,7 @@ type CallFunctionOnResponse struct {
 
 // Do sends the CallFunctionOn CDP command to a browser,
 // and returns the browser's response.
-func (t *CallFunctionOn) Do(ctx context.Context) (*CallFunctionOnResponse, error) {
+func (t *CallFunctionOn) Do(ctx context.Context) (*CallFunctionOnResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -243,7 +243,7 @@ func (t *CallFunctionOn) Do(ctx context.Context) (*CallFunctionOnResponse, error
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CallFunctionOnResponse{}
+	result := &CallFunctionOnResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -291,9 +291,9 @@ func (t *CompileScript) SetExecutionContextID(v int64) *CompileScript {
 	return t
 }
 
-// CompileScriptResponse contains the browser's response
+// CompileScriptResult contains the browser's response
 // to calling the CompileScript CDP command with Do().
-type CompileScriptResponse struct {
+type CompileScriptResult struct {
 	// Id of the script.
 	ScriptID string `json:"scriptId,omitempty"`
 	// Exception details.
@@ -302,7 +302,7 @@ type CompileScriptResponse struct {
 
 // Do sends the CompileScript CDP command to a browser,
 // and returns the browser's response.
-func (t *CompileScript) Do(ctx context.Context) (*CompileScriptResponse, error) {
+func (t *CompileScript) Do(ctx context.Context) (*CompileScriptResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -314,7 +314,7 @@ func (t *CompileScript) Do(ctx context.Context) (*CompileScriptResponse, error) 
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &CompileScriptResponse{}
+	result := &CompileScriptResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -651,9 +651,9 @@ func (t *Evaluate) SetUniqueContextID(v string) *Evaluate {
 	return t
 }
 
-// EvaluateResponse contains the browser's response
+// EvaluateResult contains the browser's response
 // to calling the Evaluate CDP command with Do().
-type EvaluateResponse struct {
+type EvaluateResult struct {
 	// Evaluation result.
 	Result RemoteObject `json:"result"`
 	// Exception details.
@@ -662,7 +662,7 @@ type EvaluateResponse struct {
 
 // Do sends the Evaluate CDP command to a browser,
 // and returns the browser's response.
-func (t *Evaluate) Do(ctx context.Context) (*EvaluateResponse, error) {
+func (t *Evaluate) Do(ctx context.Context) (*EvaluateResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -674,7 +674,7 @@ func (t *Evaluate) Do(ctx context.Context) (*EvaluateResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &EvaluateResponse{}
+	result := &EvaluateResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -702,16 +702,16 @@ func NewGetIsolateID() *GetIsolateID {
 	return &GetIsolateID{}
 }
 
-// GetIsolateIDResponse contains the browser's response
+// GetIsolateIDResult contains the browser's response
 // to calling the GetIsolateID CDP command with Do().
-type GetIsolateIDResponse struct {
+type GetIsolateIDResult struct {
 	// The isolate id.
 	ID string `json:"id"`
 }
 
 // Do sends the GetIsolateID CDP command to a browser,
 // and returns the browser's response.
-func (t *GetIsolateID) Do(ctx context.Context) (*GetIsolateIDResponse, error) {
+func (t *GetIsolateID) Do(ctx context.Context) (*GetIsolateIDResult, error) {
 	response, err := cdp.Send(ctx, "Runtime.getIsolateId", nil)
 	if err != nil {
 		return nil, err
@@ -719,7 +719,7 @@ func (t *GetIsolateID) Do(ctx context.Context) (*GetIsolateIDResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetIsolateIDResponse{}
+	result := &GetIsolateIDResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -748,9 +748,9 @@ func NewGetHeapUsage() *GetHeapUsage {
 	return &GetHeapUsage{}
 }
 
-// GetHeapUsageResponse contains the browser's response
+// GetHeapUsageResult contains the browser's response
 // to calling the GetHeapUsage CDP command with Do().
-type GetHeapUsageResponse struct {
+type GetHeapUsageResult struct {
 	// Used heap size in bytes.
 	UsedSize float64 `json:"usedSize"`
 	// Allocated heap size in bytes.
@@ -759,7 +759,7 @@ type GetHeapUsageResponse struct {
 
 // Do sends the GetHeapUsage CDP command to a browser,
 // and returns the browser's response.
-func (t *GetHeapUsage) Do(ctx context.Context) (*GetHeapUsageResponse, error) {
+func (t *GetHeapUsage) Do(ctx context.Context) (*GetHeapUsageResult, error) {
 	response, err := cdp.Send(ctx, "Runtime.getHeapUsage", nil)
 	if err != nil {
 		return nil, err
@@ -767,7 +767,7 @@ func (t *GetHeapUsage) Do(ctx context.Context) (*GetHeapUsageResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetHeapUsageResponse{}
+	result := &GetHeapUsageResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -842,9 +842,9 @@ func (t *GetProperties) SetGeneratePreview(v bool) *GetProperties {
 	return t
 }
 
-// GetPropertiesResponse contains the browser's response
+// GetPropertiesResult contains the browser's response
 // to calling the GetProperties CDP command with Do().
-type GetPropertiesResponse struct {
+type GetPropertiesResult struct {
 	// Object properties.
 	Result []PropertyDescriptor `json:"result"`
 	// Internal object properties (only of the element itself).
@@ -859,7 +859,7 @@ type GetPropertiesResponse struct {
 
 // Do sends the GetProperties CDP command to a browser,
 // and returns the browser's response.
-func (t *GetProperties) Do(ctx context.Context) (*GetPropertiesResponse, error) {
+func (t *GetProperties) Do(ctx context.Context) (*GetPropertiesResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -871,7 +871,7 @@ func (t *GetProperties) Do(ctx context.Context) (*GetPropertiesResponse, error) 
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetPropertiesResponse{}
+	result := &GetPropertiesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -907,15 +907,15 @@ func (t *GlobalLexicalScopeNames) SetExecutionContextID(v int64) *GlobalLexicalS
 	return t
 }
 
-// GlobalLexicalScopeNamesResponse contains the browser's response
+// GlobalLexicalScopeNamesResult contains the browser's response
 // to calling the GlobalLexicalScopeNames CDP command with Do().
-type GlobalLexicalScopeNamesResponse struct {
+type GlobalLexicalScopeNamesResult struct {
 	Names []string `json:"names"`
 }
 
 // Do sends the GlobalLexicalScopeNames CDP command to a browser,
 // and returns the browser's response.
-func (t *GlobalLexicalScopeNames) Do(ctx context.Context) (*GlobalLexicalScopeNamesResponse, error) {
+func (t *GlobalLexicalScopeNames) Do(ctx context.Context) (*GlobalLexicalScopeNamesResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -927,7 +927,7 @@ func (t *GlobalLexicalScopeNames) Do(ctx context.Context) (*GlobalLexicalScopeNa
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GlobalLexicalScopeNamesResponse{}
+	result := &GlobalLexicalScopeNamesResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -965,16 +965,16 @@ func (t *QueryObjects) SetObjectGroup(v string) *QueryObjects {
 	return t
 }
 
-// QueryObjectsResponse contains the browser's response
+// QueryObjectsResult contains the browser's response
 // to calling the QueryObjects CDP command with Do().
-type QueryObjectsResponse struct {
+type QueryObjectsResult struct {
 	// Array with objects.
 	Objects RemoteObject `json:"objects"`
 }
 
 // Do sends the QueryObjects CDP command to a browser,
 // and returns the browser's response.
-func (t *QueryObjects) Do(ctx context.Context) (*QueryObjectsResponse, error) {
+func (t *QueryObjects) Do(ctx context.Context) (*QueryObjectsResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -986,7 +986,7 @@ func (t *QueryObjects) Do(ctx context.Context) (*QueryObjectsResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &QueryObjectsResponse{}
+	result := &QueryObjectsResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -1206,9 +1206,9 @@ func (t *RunScript) SetAwaitPromise(v bool) *RunScript {
 	return t
 }
 
-// RunScriptResponse contains the browser's response
+// RunScriptResult contains the browser's response
 // to calling the RunScript CDP command with Do().
-type RunScriptResponse struct {
+type RunScriptResult struct {
 	// Run result.
 	Result RemoteObject `json:"result"`
 	// Exception details.
@@ -1217,7 +1217,7 @@ type RunScriptResponse struct {
 
 // Do sends the RunScript CDP command to a browser,
 // and returns the browser's response.
-func (t *RunScript) Do(ctx context.Context) (*RunScriptResponse, error) {
+func (t *RunScript) Do(ctx context.Context) (*RunScriptResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -1229,7 +1229,7 @@ func (t *RunScript) Do(ctx context.Context) (*RunScriptResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &RunScriptResponse{}
+	result := &RunScriptResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

@@ -25,9 +25,9 @@ func NewGetInfo() *GetInfo {
 	return &GetInfo{}
 }
 
-// GetInfoResponse contains the browser's response
+// GetInfoResult contains the browser's response
 // to calling the GetInfo CDP command with Do().
-type GetInfoResponse struct {
+type GetInfoResult struct {
 	// Information about the GPUs on the system.
 	Gpu GPUInfo `json:"gpu"`
 	// A platform-dependent description of the model of the machine. On Mac OS, this is, for
@@ -43,7 +43,7 @@ type GetInfoResponse struct {
 
 // Do sends the GetInfo CDP command to a browser,
 // and returns the browser's response.
-func (t *GetInfo) Do(ctx context.Context) (*GetInfoResponse, error) {
+func (t *GetInfo) Do(ctx context.Context) (*GetInfoResult, error) {
 	response, err := cdp.Send(ctx, "SystemInfo.getInfo", nil)
 	if err != nil {
 		return nil, err
@@ -51,7 +51,7 @@ func (t *GetInfo) Do(ctx context.Context) (*GetInfoResponse, error) {
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetInfoResponse{}
+	result := &GetInfoResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -75,16 +75,16 @@ func NewGetProcessInfo() *GetProcessInfo {
 	return &GetProcessInfo{}
 }
 
-// GetProcessInfoResponse contains the browser's response
+// GetProcessInfoResult contains the browser's response
 // to calling the GetProcessInfo CDP command with Do().
-type GetProcessInfoResponse struct {
+type GetProcessInfoResult struct {
 	// An array of process info blocks.
 	ProcessInfo []ProcessInfo `json:"processInfo"`
 }
 
 // Do sends the GetProcessInfo CDP command to a browser,
 // and returns the browser's response.
-func (t *GetProcessInfo) Do(ctx context.Context) (*GetProcessInfoResponse, error) {
+func (t *GetProcessInfo) Do(ctx context.Context) (*GetProcessInfoResult, error) {
 	response, err := cdp.Send(ctx, "SystemInfo.getProcessInfo", nil)
 	if err != nil {
 		return nil, err
@@ -92,7 +92,7 @@ func (t *GetProcessInfo) Do(ctx context.Context) (*GetProcessInfoResponse, error
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetProcessInfoResponse{}
+	result := &GetProcessInfoResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}

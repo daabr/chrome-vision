@@ -136,16 +136,16 @@ func (t *GetHighlightObjectForTest) SetShowAccessibilityInfo(v bool) *GetHighlig
 	return t
 }
 
-// GetHighlightObjectForTestResponse contains the browser's response
+// GetHighlightObjectForTestResult contains the browser's response
 // to calling the GetHighlightObjectForTest CDP command with Do().
-type GetHighlightObjectForTestResponse struct {
+type GetHighlightObjectForTestResult struct {
 	// Highlight data for the node.
 	Highlight json.RawMessage `json:"highlight"`
 }
 
 // Do sends the GetHighlightObjectForTest CDP command to a browser,
 // and returns the browser's response.
-func (t *GetHighlightObjectForTest) Do(ctx context.Context) (*GetHighlightObjectForTestResponse, error) {
+func (t *GetHighlightObjectForTest) Do(ctx context.Context) (*GetHighlightObjectForTestResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -157,7 +157,7 @@ func (t *GetHighlightObjectForTest) Do(ctx context.Context) (*GetHighlightObject
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetHighlightObjectForTestResponse{}
+	result := &GetHighlightObjectForTestResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -186,16 +186,16 @@ func NewGetGridHighlightObjectsForTest(nodeIds []int64) *GetGridHighlightObjects
 	}
 }
 
-// GetGridHighlightObjectsForTestResponse contains the browser's response
+// GetGridHighlightObjectsForTestResult contains the browser's response
 // to calling the GetGridHighlightObjectsForTest CDP command with Do().
-type GetGridHighlightObjectsForTestResponse struct {
+type GetGridHighlightObjectsForTestResult struct {
 	// Grid Highlight data for the node ids provided.
 	Highlights json.RawMessage `json:"highlights"`
 }
 
 // Do sends the GetGridHighlightObjectsForTest CDP command to a browser,
 // and returns the browser's response.
-func (t *GetGridHighlightObjectsForTest) Do(ctx context.Context) (*GetGridHighlightObjectsForTestResponse, error) {
+func (t *GetGridHighlightObjectsForTest) Do(ctx context.Context) (*GetGridHighlightObjectsForTestResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -207,7 +207,7 @@ func (t *GetGridHighlightObjectsForTest) Do(ctx context.Context) (*GetGridHighli
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetGridHighlightObjectsForTestResponse{}
+	result := &GetGridHighlightObjectsForTestResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
@@ -236,16 +236,16 @@ func NewGetSourceOrderHighlightObjectForTest(nodeID int64) *GetSourceOrderHighli
 	}
 }
 
-// GetSourceOrderHighlightObjectForTestResponse contains the browser's response
+// GetSourceOrderHighlightObjectForTestResult contains the browser's response
 // to calling the GetSourceOrderHighlightObjectForTest CDP command with Do().
-type GetSourceOrderHighlightObjectForTestResponse struct {
+type GetSourceOrderHighlightObjectForTestResult struct {
 	// Source order highlight data for the node id provided.
 	Highlight json.RawMessage `json:"highlight"`
 }
 
 // Do sends the GetSourceOrderHighlightObjectForTest CDP command to a browser,
 // and returns the browser's response.
-func (t *GetSourceOrderHighlightObjectForTest) Do(ctx context.Context) (*GetSourceOrderHighlightObjectForTestResponse, error) {
+func (t *GetSourceOrderHighlightObjectForTest) Do(ctx context.Context) (*GetSourceOrderHighlightObjectForTestResult, error) {
 	b, err := json.Marshal(t)
 	if err != nil {
 		return nil, err
@@ -257,7 +257,7 @@ func (t *GetSourceOrderHighlightObjectForTest) Do(ctx context.Context) (*GetSour
 	if response.Error != nil {
 		return nil, errors.New(response.Error.Error())
 	}
-	result := &GetSourceOrderHighlightObjectForTestResponse{}
+	result := &GetSourceOrderHighlightObjectForTestResult{}
 	if err := json.Unmarshal(response.Result, result); err != nil {
 		return nil, err
 	}
