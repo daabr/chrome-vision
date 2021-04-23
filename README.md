@@ -4,7 +4,7 @@
 
 # Chrome Vision
 
-Advanced web automation with a convenient Go API.
+Advanced cross-platform web automation with a convenient Go API.
 
 This is based on the
 [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol)
