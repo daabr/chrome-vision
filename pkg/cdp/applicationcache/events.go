@@ -1,5 +1,7 @@
 package applicationcache
 
+// ApplicationCacheStatusUpdated asynchronous event.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#event-applicationCacheStatusUpdated
 type ApplicationCacheStatusUpdated struct {
 	// Identifier of the frame containing document whose application cache updated status.
@@ -10,6 +12,8 @@ type ApplicationCacheStatusUpdated struct {
 	Status int64 `json:"status"`
 }
 
+// NetworkStateUpdated asynchronous event.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#event-networkStateUpdated
 type NetworkStateUpdated struct {
 	IsNowOnline bool `json:"isNowOnline"`

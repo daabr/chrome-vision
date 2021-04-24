@@ -1,5 +1,7 @@
 package browser
 
+// DownloadWillBegin asynchronous event.
+//
 // Fired when page is about to start a download.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#event-downloadWillBegin
@@ -16,6 +18,8 @@ type DownloadWillBegin struct {
 	SuggestedFilename string `json:"suggestedFilename"`
 }
 
+// DownloadProgress asynchronous event.
+//
 // Fired when download makes progress. Last call has |done| == true.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#event-downloadProgress

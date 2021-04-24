@@ -2,11 +2,15 @@ package page
 
 import "github.com/daabr/chrome-vision/pkg/cdp/runtime"
 
+// DomContentEventFired asynchronous event.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-domContentEventFired
 type DomContentEventFired struct {
 	Timestamp float64 `json:"timestamp"`
 }
 
+// FileChooserOpened asynchronous event.
+//
 // Emitted only when `page.interceptFileChooser` is enabled.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-fileChooserOpened
@@ -23,6 +27,8 @@ type FileChooserOpened struct {
 	Mode string `json:"mode"`
 }
 
+// FrameAttached asynchronous event.
+//
 // Fired when frame has been attached to its parent.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-frameAttached
@@ -35,6 +41,8 @@ type FrameAttached struct {
 	Stack *runtime.StackTrace `json:"stack,omitempty"`
 }
 
+// FrameClearedScheduledNavigation asynchronous event.
+//
 // Fired when frame no longer has a scheduled navigation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-frameClearedScheduledNavigation
@@ -45,6 +53,8 @@ type FrameClearedScheduledNavigation struct {
 	FrameID string `json:"frameId"`
 }
 
+// FrameDetached asynchronous event.
+//
 // Fired when frame has been detached from its parent.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-frameDetached
@@ -55,6 +65,8 @@ type FrameDetached struct {
 	Reason string `json:"reason"`
 }
 
+// FrameNavigated asynchronous event.
+//
 // Fired once navigation of the frame has completed. Frame is now associated with the new loader.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-frameNavigated
@@ -65,6 +77,8 @@ type FrameNavigated struct {
 	Type string `json:"type"`
 }
 
+// DocumentOpened asynchronous event.
+//
 // Fired when opening document to write to.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-documentOpened
@@ -75,11 +89,15 @@ type DocumentOpened struct {
 	Frame Frame `json:"frame"`
 }
 
+// FrameResized asynchronous event.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-frameResized
 //
 // This CDP event is experimental.
 type FrameResized struct{}
 
+// FrameRequestedNavigation asynchronous event.
+//
 // Fired when a renderer-initiated navigation is requested.
 // Navigation may still be cancelled after the event is issued.
 //
@@ -97,6 +115,8 @@ type FrameRequestedNavigation struct {
 	Disposition string `json:"disposition"`
 }
 
+// FrameScheduledNavigation asynchronous event.
+//
 // Fired when frame schedules a potential navigation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-frameScheduledNavigation
@@ -114,6 +134,8 @@ type FrameScheduledNavigation struct {
 	URL string `json:"url"`
 }
 
+// FrameStartedLoading asynchronous event.
+//
 // Fired when frame has started loading.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-frameStartedLoading
@@ -124,6 +146,8 @@ type FrameStartedLoading struct {
 	FrameID string `json:"frameId"`
 }
 
+// FrameStoppedLoading asynchronous event.
+//
 // Fired when frame has stopped loading.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-frameStoppedLoading
@@ -134,6 +158,8 @@ type FrameStoppedLoading struct {
 	FrameID string `json:"frameId"`
 }
 
+// DownloadWillBegin asynchronous event.
+//
 // Fired when page is about to start a download.
 // Deprecated. Use Browser.downloadWillBegin instead.
 //
@@ -152,6 +178,8 @@ type DownloadWillBegin struct {
 	SuggestedFilename string `json:"suggestedFilename"`
 }
 
+// DownloadProgress asynchronous event.
+//
 // Fired when download makes progress. Last call has |done| == true.
 // Deprecated. Use Browser.downloadProgress instead.
 //
@@ -170,16 +198,22 @@ type DownloadProgress struct {
 	State string `json:"state"`
 }
 
+// InterstitialHidden asynchronous event.
+//
 // Fired when interstitial page was hidden
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-interstitialHidden
 type InterstitialHidden struct{}
 
+// InterstitialShown asynchronous event.
+//
 // Fired when interstitial page was shown
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-interstitialShown
 type InterstitialShown struct{}
 
+// JavascriptDialogClosed asynchronous event.
+//
 // Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) has been
 // closed.
 //
@@ -191,6 +225,8 @@ type JavascriptDialogClosed struct {
 	UserInput string `json:"userInput"`
 }
 
+// JavascriptDialogOpening asynchronous event.
+//
 // Fired when a JavaScript initiated dialog (alert, confirm, prompt, or onbeforeunload) is about to
 // open.
 //
@@ -210,6 +246,8 @@ type JavascriptDialogOpening struct {
 	DefaultPrompt string `json:"defaultPrompt,omitempty"`
 }
 
+// LifecycleEvent asynchronous event.
+//
 // Fired for top level page lifecycle events such as navigation, load, paint, etc.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-lifecycleEvent
@@ -222,6 +260,8 @@ type LifecycleEvent struct {
 	Timestamp float64 `json:"timestamp"`
 }
 
+// BackForwardCacheNotUsed asynchronous event.
+//
 // Fired for failed bfcache history navigations if BackForwardCache feature is enabled. Do
 // not assume any ordering with the Page.frameNavigated event. This event is fired only for
 // main-frame history navigation where the document changes (non-same-document navigations),
@@ -237,11 +277,15 @@ type BackForwardCacheNotUsed struct {
 	FrameID string `json:"frameId"`
 }
 
+// LoadEventFired asynchronous event.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-loadEventFired
 type LoadEventFired struct {
 	Timestamp float64 `json:"timestamp"`
 }
 
+// NavigatedWithinDocument asynchronous event.
+//
 // Fired when same-document navigation happens, e.g. due to history API usage or anchor navigation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-navigatedWithinDocument
@@ -254,6 +298,8 @@ type NavigatedWithinDocument struct {
 	URL string `json:"url"`
 }
 
+// ScreencastFrame asynchronous event.
+//
 // Compressed image data requested by the `startScreencast`.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-screencastFrame
@@ -268,6 +314,8 @@ type ScreencastFrame struct {
 	SessionID int64 `json:"sessionId"`
 }
 
+// ScreencastVisibilityChanged asynchronous event.
+//
 // Fired when the page with currently enabled screencast was shown or hidden `.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#event-screencastVisibilityChanged
@@ -278,6 +326,8 @@ type ScreencastVisibilityChanged struct {
 	Visible bool `json:"visible"`
 }
 
+// WindowOpen asynchronous event.
+//
 // Fired when a new window is going to be opened, via window.open(), link click, form submission,
 // etc.
 //
@@ -293,6 +343,8 @@ type WindowOpen struct {
 	UserGesture bool `json:"userGesture"`
 }
 
+// CompilationCacheProduced asynchronous event.
+//
 // Issued for every compilation cache generated. Is only available
 // if Page.setGenerateCompilationCache is enabled.
 //

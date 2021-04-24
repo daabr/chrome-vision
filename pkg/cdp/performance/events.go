@@ -1,5 +1,7 @@
 package performance
 
+// Metrics asynchronous event.
+//
 // Current values of the metrics.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Performance/#event-metrics
