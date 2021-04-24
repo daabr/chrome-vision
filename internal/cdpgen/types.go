@@ -20,7 +20,7 @@ func generateTypes(d Domain) string {
 		}
 		description := adjust(t.ID) + " data type."
 		if t.Description != nil {
-			if strings.HasPrefix(*t.Description, t.ID) {
+			if strings.HasPrefix(*t.Description, t.ID+" ") {
 				description = *t.Description
 			} else {
 				description += " " + *t.Description

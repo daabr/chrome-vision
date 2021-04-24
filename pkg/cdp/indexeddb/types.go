@@ -43,7 +43,7 @@ type ObjectStoreIndex struct {
 	MultiEntry bool `json:"multiEntry"`
 }
 
-// Key.
+// Key data type. Key.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#type-Key
 type Key struct {
