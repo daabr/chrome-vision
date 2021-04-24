@@ -12,7 +12,7 @@ func generateEvents(d Domain) string {
 	for _, e := range d.Events {
 		description := adjust(e.Name) + " asynchronous event."
 		if e.Description != nil {
-			if strings.HasPrefix(*e.Description, e.Name + " ") {
+			if strings.HasPrefix(*e.Description, e.Name+" ") {
 				description = *e.Description
 			} else {
 				description += " " + *e.Description
