@@ -8,7 +8,24 @@ on:
 
 jobs:
 
-  build:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.16
+
+    - name: Install dependencies
+      run: go get -u golang.org/x/lint/golint
+
+    - name: Lint
+      run: ~/go/bin/golint ./... # TODO: -set_exit_status
+
+  test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -26,4 +43,16 @@ jobs:
       run: go build -v ./...
 
     - name: Test
-      run: go test -v ./...
+      run: go test -v $(go list ./... | grep -v /pkg/cdp/)
+
+    - name: Race detection
+      run: go test -race -v $(go list ./... | grep -v /pkg/cdp/)
+
+    - name: Coverage analysis
+      run: |
+        go test -covermode=atomic -coverprofile=coverage.out -race $(go list ./... | grep -v /pkg/cdp/)
+        echo
+        cat coverage.out
+        echo
+        go tool cover -func=coverage.out
+        # Run manually with coverage.out: go tool cover -html=coverage.out
