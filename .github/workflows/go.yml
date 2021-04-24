@@ -22,9 +22,6 @@ jobs:
     - name: Install dependencies
       run: |
         go get -u golang.org/x/lint/golint
-        echo $PATH
-        echo $GOBIN
-        ls /usr/local/go/bin
         pwd
         ls ~/go/bin
 
@@ -53,7 +50,9 @@ jobs:
 
     - name: Coverage analysis
       run: |
-        go test -covermode=atomic -coverprofile=coverage.out -race -v $(go list ./... | grep -v /pkg/cdp/)
+        go test -covermode=atomic -coverprofile=coverage.out -race $(go list ./... | grep -v /pkg/cdp/)
+        echo
         cat coverage.out
+        echo
         go tool cover -func=coverage.out
-        # go tool cover -html=coverage.out
+        # Run manually with coverage.out: go tool cover -html=coverage.out
