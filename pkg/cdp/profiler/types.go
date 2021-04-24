@@ -21,7 +21,7 @@ type ProfileNode struct {
 	PositionTicks []PositionTickInfo `json:"positionTicks,omitempty"`
 }
 
-// Profile.
+// Profile data type. Profile.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-Profile
 type Profile struct {

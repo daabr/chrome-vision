@@ -184,7 +184,7 @@ type ShapeOutsideInfo struct {
 	MarginShape []json.RawMessage `json:"marginShape"`
 }
 
-// Rectangle.
+// Rect data type. Rectangle.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-Rect
 type Rect struct {
