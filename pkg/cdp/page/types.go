@@ -1,11 +1,11 @@
 package page
 
-// Unique frame identifier.
+// FrameID data type. Unique frame identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-FrameId
 type FrameID string
 
-// Indicates whether a frame has been identified as an ad.
+// AdFrameType data type. Indicates whether a frame has been identified as an ad.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-AdFrameType
 //
@@ -19,7 +19,7 @@ const (
 	AdFrameTypeRoot  AdFrameType = "root"
 )
 
-// Indicates whether the frame is a secure context and why it is the case.
+// SecureContextType data type. Indicates whether the frame is a secure context and why it is the case.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-SecureContextType
 //
@@ -34,7 +34,7 @@ const (
 	SecureContextTypeInsecureAncestor SecureContextType = "InsecureAncestor"
 )
 
-// Indicates whether the frame is cross-origin isolated and why it is the case.
+// CrossOriginIsolatedContextType data type. Indicates whether the frame is cross-origin isolated and why it is the case.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-CrossOriginIsolatedContextType
 //
@@ -48,6 +48,8 @@ const (
 	CrossOriginIsolatedContextTypeNotIsolatedFeatureDisabled CrossOriginIsolatedContextType = "NotIsolatedFeatureDisabled"
 )
 
+// GatedAPIFeatures data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-GatedAPIFeatures
 //
 // This CDP type is experimental.
@@ -61,7 +63,7 @@ const (
 	GatedAPIFeaturesPerformanceProfile                GatedAPIFeatures = "PerformanceProfile"
 )
 
-// All Permissions Policy features. This enum should match the one defined
+// PermissionsPolicyFeature data type. All Permissions Policy features. This enum should match the one defined
 // in renderer/core/feature_policy/feature_policy_features.json5.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-PermissionsPolicyFeature
@@ -126,7 +128,7 @@ const (
 	PermissionsPolicyFeatureXrSpatialTracking           PermissionsPolicyFeature = "xr-spatial-tracking"
 )
 
-// Reason for a permissions policy feature to be disabled.
+// PermissionsPolicyBlockReason data type. Reason for a permissions policy feature to be disabled.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-PermissionsPolicyBlockReason
 //
@@ -139,6 +141,8 @@ const (
 	PermissionsPolicyBlockReasonIframeAttribute PermissionsPolicyBlockReason = "IframeAttribute"
 )
 
+// PermissionsPolicyBlockLocator data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-PermissionsPolicyBlockLocator
 //
 // This CDP type is experimental.
@@ -147,6 +151,8 @@ type PermissionsPolicyBlockLocator struct {
 	BlockReason string `json:"blockReason"`
 }
 
+// PermissionsPolicyFeatureState data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-PermissionsPolicyFeatureState
 //
 // This CDP type is experimental.
@@ -156,7 +162,7 @@ type PermissionsPolicyFeatureState struct {
 	Locator *PermissionsPolicyBlockLocator `json:"locator,omitempty"`
 }
 
-// Information about the Frame on the page.
+// Frame data type. Information about the Frame on the page.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-Frame
 type Frame struct {
@@ -207,7 +213,7 @@ type Frame struct {
 	GatedAPIFeatures []GatedAPIFeatures `json:"gatedAPIFeatures"`
 }
 
-// Information about the Resource on the page.
+// FrameResource data type. Information about the Resource on the page.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-FrameResource
 //
@@ -229,7 +235,7 @@ type FrameResource struct {
 	Canceled bool `json:"canceled,omitempty"`
 }
 
-// Information about the Frame hierarchy along with their cached resources.
+// FrameResourceTree data type. Information about the Frame hierarchy along with their cached resources.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-FrameResourceTree
 //
@@ -243,7 +249,7 @@ type FrameResourceTree struct {
 	Resources []FrameResource `json:"resources"`
 }
 
-// Information about the Frame hierarchy.
+// FrameTree data type. Information about the Frame hierarchy.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-FrameTree
 type FrameTree struct {
@@ -253,12 +259,12 @@ type FrameTree struct {
 	ChildFrames []FrameTree `json:"childFrames,omitempty"`
 }
 
-// Unique script identifier.
+// ScriptIdentifier data type. Unique script identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-ScriptIdentifier
 type ScriptIdentifier string
 
-// Transition type.
+// TransitionType data type. Transition type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-TransitionType
 type TransitionType string
@@ -280,7 +286,7 @@ const (
 	TransitionTypeOther            TransitionType = "other"
 )
 
-// Navigation history entry.
+// NavigationEntry data type. Navigation history entry.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-NavigationEntry
 type NavigationEntry struct {
@@ -296,7 +302,7 @@ type NavigationEntry struct {
 	TransitionType string `json:"transitionType"`
 }
 
-// Screencast frame metadata.
+// ScreencastFrameMetadata data type. Screencast frame metadata.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-ScreencastFrameMetadata
 //
@@ -318,7 +324,7 @@ type ScreencastFrameMetadata struct {
 	Timestamp float64 `json:"timestamp,omitempty"`
 }
 
-// Javascript dialog type.
+// DialogType data type. Javascript dialog type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-DialogType
 type DialogType string
@@ -331,7 +337,7 @@ const (
 	DialogTypeBeforeunload DialogType = "beforeunload"
 )
 
-// Error while paring app manifest.
+// AppManifestError data type. Error while paring app manifest.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-AppManifestError
 type AppManifestError struct {
@@ -345,7 +351,7 @@ type AppManifestError struct {
 	Column int64 `json:"column"`
 }
 
-// Parsed app manifest properties.
+// AppManifestParsedProperties data type. Parsed app manifest properties.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-AppManifestParsedProperties
 //
@@ -355,7 +361,7 @@ type AppManifestParsedProperties struct {
 	Scope string `json:"scope"`
 }
 
-// Layout viewport position and dimensions.
+// LayoutViewport data type. Layout viewport position and dimensions.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-LayoutViewport
 type LayoutViewport struct {
@@ -369,7 +375,7 @@ type LayoutViewport struct {
 	ClientHeight int64 `json:"clientHeight"`
 }
 
-// Visual viewport position, dimensions, and scale.
+// VisualViewport data type. Visual viewport position, dimensions, and scale.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-VisualViewport
 type VisualViewport struct {
@@ -407,7 +413,7 @@ type Viewport struct {
 	Scale float64 `json:"scale"`
 }
 
-// Generic font families collection.
+// FontFamilies data type. Generic font families collection.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-FontFamilies
 //
@@ -429,7 +435,7 @@ type FontFamilies struct {
 	Pictograph string `json:"pictograph,omitempty"`
 }
 
-// Default font sizes.
+// FontSizes data type. Default font sizes.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-FontSizes
 //
@@ -441,6 +447,8 @@ type FontSizes struct {
 	Fixed int64 `json:"fixed,omitempty"`
 }
 
+// ClientNavigationReason data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-ClientNavigationReason
 //
 // This CDP type is experimental.
@@ -458,6 +466,8 @@ const (
 	ClientNavigationReasonAnchorClick           ClientNavigationReason = "anchorClick"
 )
 
+// ClientNavigationDisposition data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-ClientNavigationDisposition
 //
 // This CDP type is experimental.
@@ -471,6 +481,8 @@ const (
 	ClientNavigationDispositionDownload   ClientNavigationDisposition = "download"
 )
 
+// InstallabilityErrorArgument data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-InstallabilityErrorArgument
 //
 // This CDP type is experimental.
@@ -481,7 +493,7 @@ type InstallabilityErrorArgument struct {
 	Value string `json:"value"`
 }
 
-// The installability error
+// InstallabilityError data type. The installability error
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-InstallabilityError
 //
@@ -493,7 +505,7 @@ type InstallabilityError struct {
 	ErrorArguments []InstallabilityErrorArgument `json:"errorArguments"`
 }
 
-// The referring-policy used for the navigation.
+// ReferrerPolicy data type. The referring-policy used for the navigation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-ReferrerPolicy
 //
@@ -512,7 +524,7 @@ const (
 	ReferrerPolicyUnsafeURL                   ReferrerPolicy = "unsafeUrl"
 )
 
-// Per-script compilation cache parameters for `Page.produceCompilationCache`
+// CompilationCacheParams data type. Per-script compilation cache parameters for `Page.produceCompilationCache`
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-CompilationCacheParams
 //
@@ -525,7 +537,7 @@ type CompilationCacheParams struct {
 	Eager bool `json:"eager,omitempty"`
 }
 
-// The type of a frameNavigated event.
+// NavigationType data type. The type of a frameNavigated event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-NavigationType
 //

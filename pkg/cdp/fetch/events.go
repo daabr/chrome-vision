@@ -2,9 +2,7 @@ package fetch
 
 import "github.com/daabr/chrome-vision/pkg/cdp/network"
 
-// RequestPaused asynchronous event.
-//
-// Issued when the domain is enabled and the request URL matches the
+// RequestPaused asynchronous event. Issued when the domain is enabled and the request URL matches the
 // specified filter. The request is paused until the client responds
 // with one of continueRequest, failRequest or fulfillRequest.
 // The stage of the request can be determined by presence of responseErrorReason
@@ -32,9 +30,7 @@ type RequestPaused struct {
 	NetworkID string `json:"networkId,omitempty"`
 }
 
-// AuthRequired asynchronous event.
-//
-// Issued when the domain is enabled with handleAuthRequests set to true.
+// AuthRequired asynchronous event. Issued when the domain is enabled with handleAuthRequests set to true.
 // The request is paused until client responds with continueWithAuth.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#event-authRequired

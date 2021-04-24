@@ -1,6 +1,6 @@
 package storage
 
-// Enum of possible storage types.
+// StorageType data type. Enum of possible storage types.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#type-StorageType
 type StorageType string
@@ -20,7 +20,7 @@ const (
 	StorageTypeOther          StorageType = "other"
 )
 
-// Usage for a storage type.
+// UsageForType data type. Usage for a storage type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#type-UsageForType
 type UsageForType struct {
@@ -30,7 +30,7 @@ type UsageForType struct {
 	Usage float64 `json:"usage"`
 }
 
-// Pair of issuer origin and number of available (signed, but not used) Trust
+// TrustTokens data type. Pair of issuer origin and number of available (signed, but not used) Trust
 // Tokens from that issuer.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#type-TrustTokens

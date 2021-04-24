@@ -1,9 +1,11 @@
 package serviceworker
 
+// RegistrationID data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-RegistrationID
 type RegistrationID string
 
-// ServiceWorker registration.
+// ServiceWorkerRegistration data type. ServiceWorker registration.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerRegistration
 type ServiceWorkerRegistration struct {
@@ -12,6 +14,8 @@ type ServiceWorkerRegistration struct {
 	IsDeleted      bool   `json:"isDeleted"`
 }
 
+// ServiceWorkerVersionRunningStatus data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerVersionRunningStatus
 type ServiceWorkerVersionRunningStatus string
 
@@ -23,6 +27,8 @@ const (
 	ServiceWorkerVersionRunningStatusStopping ServiceWorkerVersionRunningStatus = "stopping"
 )
 
+// ServiceWorkerVersionStatus data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerVersionStatus
 type ServiceWorkerVersionStatus string
 
@@ -36,7 +42,7 @@ const (
 	ServiceWorkerVersionStatusRedundant  ServiceWorkerVersionStatus = "redundant"
 )
 
-// ServiceWorker version.
+// ServiceWorkerVersion data type. ServiceWorker version.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerVersion
 type ServiceWorkerVersion struct {
@@ -54,7 +60,7 @@ type ServiceWorkerVersion struct {
 	TargetID           string   `json:"targetId,omitempty"`
 }
 
-// ServiceWorker error message.
+// ServiceWorkerErrorMessage data type. ServiceWorker error message.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerErrorMessage
 type ServiceWorkerErrorMessage struct {

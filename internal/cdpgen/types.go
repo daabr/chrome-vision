@@ -18,6 +18,15 @@ func generateTypes(d Domain) string {
 			key := strings.ToLower(d.Domain) + "." + adjust(t.ID)
 			aliases[key] = transformType(t.Type, nil)
 		}
+		description := adjust(t.ID) + " data type."
+		if t.Description != nil {
+			if strings.HasPrefix(*t.Description, t.ID) {
+				description = *t.Description
+			} else {
+				description += " " + *t.Description
+			}
+		}
+		t.Description = &description
 		generateType(b, t, d.Domain, "type", nil)
 	}
 	return b.String()

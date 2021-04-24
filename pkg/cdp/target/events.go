@@ -1,8 +1,6 @@
 package target
 
-// AttachedToTarget asynchronous event.
-//
-// Issued when attached to target because of auto-attach or `attachToTarget` command.
+// AttachedToTarget asynchronous event. Issued when attached to target because of auto-attach or `attachToTarget` command.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#event-attachedToTarget
 //
@@ -14,9 +12,7 @@ type AttachedToTarget struct {
 	WaitingForDebugger bool       `json:"waitingForDebugger"`
 }
 
-// DetachedFromTarget asynchronous event.
-//
-// Issued when detached from target for any reason (including `detachFromTarget` command). Can be
+// DetachedFromTarget asynchronous event. Issued when detached from target for any reason (including `detachFromTarget` command). Can be
 // issued multiple times per target if multiple sessions have been attached to it.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#event-detachedFromTarget
@@ -31,9 +27,7 @@ type DetachedFromTarget struct {
 	TargetID string `json:"targetId,omitempty"`
 }
 
-// ReceivedMessageFromTarget asynchronous event.
-//
-// Notifies about a new protocol message received from the session (as reported in
+// ReceivedMessageFromTarget asynchronous event. Notifies about a new protocol message received from the session (as reported in
 // `attachedToTarget` event).
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#event-receivedMessageFromTarget
@@ -47,27 +41,21 @@ type ReceivedMessageFromTarget struct {
 	TargetID string `json:"targetId,omitempty"`
 }
 
-// TargetCreated asynchronous event.
-//
-// Issued when a possible inspection target is created.
+// TargetCreated asynchronous event. Issued when a possible inspection target is created.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#event-targetCreated
 type TargetCreated struct {
 	TargetInfo TargetInfo `json:"targetInfo"`
 }
 
-// TargetDestroyed asynchronous event.
-//
-// Issued when a target is destroyed.
+// TargetDestroyed asynchronous event. Issued when a target is destroyed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#event-targetDestroyed
 type TargetDestroyed struct {
 	TargetID string `json:"targetId"`
 }
 
-// TargetCrashed asynchronous event.
-//
-// Issued when a target has crashed.
+// TargetCrashed asynchronous event. Issued when a target has crashed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#event-targetCrashed
 type TargetCrashed struct {
@@ -78,9 +66,7 @@ type TargetCrashed struct {
 	ErrorCode int64 `json:"errorCode"`
 }
 
-// TargetInfoChanged asynchronous event.
-//
-// Issued when some information about a target has changed. This only happens between
+// TargetInfoChanged asynchronous event. Issued when some information about a target has changed. This only happens between
 // `targetCreated` and `targetDestroyed`.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#event-targetInfoChanged

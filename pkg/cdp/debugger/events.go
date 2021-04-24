@@ -6,9 +6,7 @@ import (
 	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
 )
 
-// BreakpointResolved asynchronous event.
-//
-// Fired when breakpoint is resolved to an actual script and location.
+// BreakpointResolved asynchronous event. Fired when breakpoint is resolved to an actual script and location.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#event-breakpointResolved
 type BreakpointResolved struct {
@@ -18,9 +16,7 @@ type BreakpointResolved struct {
 	Location Location `json:"location"`
 }
 
-// Paused asynchronous event.
-//
-// Fired when the virtual machine stopped on breakpoint or exception or any other stop criteria.
+// Paused asynchronous event. Fired when the virtual machine stopped on breakpoint or exception or any other stop criteria.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#event-paused
 type Paused struct {
@@ -45,16 +41,12 @@ type Paused struct {
 	AsyncCallStackTraceID *runtime.StackTraceID `json:"asyncCallStackTraceId,omitempty"`
 }
 
-// Resumed asynchronous event.
-//
-// Fired when the virtual machine resumed execution.
+// Resumed asynchronous event. Fired when the virtual machine resumed execution.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#event-resumed
 type Resumed struct{}
 
-// ScriptFailedToParse asynchronous event.
-//
-// Fired when virtual machine fails to parse the script.
+// ScriptFailedToParse asynchronous event. Fired when virtual machine fails to parse the script.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#event-scriptFailedToParse
 type ScriptFailedToParse struct {
@@ -102,9 +94,7 @@ type ScriptFailedToParse struct {
 	EmbedderName string `json:"embedderName,omitempty"`
 }
 
-// ScriptParsed asynchronous event.
-//
-// Fired when virtual machine parses script. This event is also fired for all known and uncollected
+// ScriptParsed asynchronous event. Fired when virtual machine parses script. This event is also fired for all known and uncollected
 // scripts upon enabling debugger.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#event-scriptParsed

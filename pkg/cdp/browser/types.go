@@ -1,16 +1,20 @@
 package browser
 
+// BrowserContextID data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-BrowserContextID
 //
 // This CDP type is experimental.
 type BrowserContextID string
 
+// WindowID data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-WindowID
 //
 // This CDP type is experimental.
 type WindowID int64
 
-// The state of the browser window.
+// WindowState data type. The state of the browser window.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-WindowState
 //
@@ -25,7 +29,7 @@ const (
 	WindowStateFullscreen WindowState = "fullscreen"
 )
 
-// Browser window bounds information
+// Bounds data type. Browser window bounds information
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-Bounds
 //
@@ -43,6 +47,8 @@ type Bounds struct {
 	WindowState string `json:"windowState,omitempty"`
 }
 
+// PermissionType data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-PermissionType
 //
 // This CDP type is experimental.
@@ -75,6 +81,8 @@ const (
 	PermissionTypeWakeLockSystem           PermissionType = "wakeLockSystem"
 )
 
+// PermissionSetting data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-PermissionSetting
 //
 // This CDP type is experimental.
@@ -87,7 +95,7 @@ const (
 	PermissionSettingPrompt  PermissionSetting = "prompt"
 )
 
-// Definition of PermissionDescriptor defined in the Permissions API:
+// PermissionDescriptor data type. Definition of PermissionDescriptor defined in the Permissions API:
 // https://w3c.github.io/permissions/#dictdef-permissiondescriptor.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-PermissionDescriptor
@@ -108,7 +116,7 @@ type PermissionDescriptor struct {
 	PanTiltZoom bool `json:"panTiltZoom,omitempty"`
 }
 
-// Browser command ids used by executeBrowserCommand.
+// BrowserCommandID data type. Browser command ids used by executeBrowserCommand.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-BrowserCommandId
 //
@@ -121,7 +129,7 @@ const (
 	BrowserCommandIDCloseTabSearch BrowserCommandID = "closeTabSearch"
 )
 
-// Chrome histogram bucket.
+// Bucket data type. Chrome histogram bucket.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-Bucket
 //
@@ -135,7 +143,7 @@ type Bucket struct {
 	Count int64 `json:"count"`
 }
 
-// Chrome histogram.
+// Histogram data type. Chrome histogram.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-Histogram
 //

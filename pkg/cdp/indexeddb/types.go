@@ -2,7 +2,7 @@ package indexeddb
 
 import "github.com/daabr/chrome-vision/pkg/cdp/runtime"
 
-// Database with an array of object stores.
+// DatabaseWithObjectStores data type. Database with an array of object stores.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#type-DatabaseWithObjectStores
 type DatabaseWithObjectStores struct {
@@ -15,7 +15,7 @@ type DatabaseWithObjectStores struct {
 	ObjectStores []ObjectStore `json:"objectStores"`
 }
 
-// Object store.
+// ObjectStore data type. Object store.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#type-ObjectStore
 type ObjectStore struct {
@@ -29,7 +29,7 @@ type ObjectStore struct {
 	Indexes []ObjectStoreIndex `json:"indexes"`
 }
 
-// Object store index.
+// ObjectStoreIndex data type. Object store index.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#type-ObjectStoreIndex
 type ObjectStoreIndex struct {
@@ -59,7 +59,7 @@ type Key struct {
 	Array []Key `json:"array,omitempty"`
 }
 
-// Key range.
+// KeyRange data type. Key range.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#type-KeyRange
 type KeyRange struct {
@@ -73,7 +73,7 @@ type KeyRange struct {
 	UpperOpen bool `json:"upperOpen"`
 }
 
-// Data entry.
+// DataEntry data type. Data entry.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#type-DataEntry
 type DataEntry struct {
@@ -85,7 +85,7 @@ type DataEntry struct {
 	Value runtime.RemoteObject `json:"value"`
 }
 
-// Key path.
+// KeyPath data type. Key path.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/IndexedDB/#type-KeyPath
 type KeyPath struct {

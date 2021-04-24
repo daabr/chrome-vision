@@ -7,9 +7,7 @@ type AddHeapSnapshotChunk struct {
 	Chunk string `json:"chunk"`
 }
 
-// HeapStatsUpdate asynchronous event.
-//
-// If heap objects tracking has been started then backend may send update for one or more fragments
+// HeapStatsUpdate asynchronous event. If heap objects tracking has been started then backend may send update for one or more fragments
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#event-heapStatsUpdate
 type HeapStatsUpdate struct {
@@ -19,9 +17,7 @@ type HeapStatsUpdate struct {
 	StatsUpdate []int64 `json:"statsUpdate"`
 }
 
-// LastSeenObjectID asynchronous event.
-//
-// If heap objects tracking has been started then backend regularly sends a current value for last
+// LastSeenObjectID asynchronous event. If heap objects tracking has been started then backend regularly sends a current value for last
 // seen object id and corresponding timestamp. If the were changes in the heap since last event
 // then one or more heapStatsUpdate events will be sent before a new lastSeenObjectId event.
 //

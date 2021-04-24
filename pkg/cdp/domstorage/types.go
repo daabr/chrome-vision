@@ -1,6 +1,6 @@
 package domstorage
 
-// DOM Storage identifier.
+// StorageID data type. DOM Storage identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#type-StorageId
 type StorageID struct {
@@ -10,7 +10,7 @@ type StorageID struct {
 	IsLocalStorage bool `json:"isLocalStorage"`
 }
 
-// DOM Storage item.
+// Item data type. DOM Storage item.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#type-Item
 type Item []string

@@ -1,5 +1,7 @@
 package input
 
+// TouchPoint data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#type-TouchPoint
 type TouchPoint struct {
 	// X coordinate of the event relative to the main frame's viewport in CSS pixels.
@@ -35,6 +37,8 @@ type TouchPoint struct {
 	ID float64 `json:"id,omitempty"`
 }
 
+// GestureSourceType data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#type-GestureSourceType
 //
 // This CDP type is experimental.
@@ -47,6 +51,8 @@ const (
 	GestureSourceTypeMouse   GestureSourceType = "mouse"
 )
 
+// MouseButton data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#type-MouseButton
 type MouseButton string
 
@@ -60,11 +66,13 @@ const (
 	MouseButtonForward MouseButton = "forward"
 )
 
-// UTC time in seconds, counted from January 1, 1970.
+// TimeSinceEpoch data type. UTC time in seconds, counted from January 1, 1970.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#type-TimeSinceEpoch
 type TimeSinceEpoch float64
 
+// DragDataItem data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#type-DragDataItem
 //
 // This CDP type is experimental.
@@ -81,6 +89,8 @@ type DragDataItem struct {
 	BaseURL string `json:"baseURL,omitempty"`
 }
 
+// DragData data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#type-DragData
 //
 // This CDP type is experimental.

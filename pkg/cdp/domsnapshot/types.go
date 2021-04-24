@@ -5,7 +5,7 @@ import (
 	"github.com/daabr/chrome-vision/pkg/cdp/domdebugger"
 )
 
-// A Node in the DOM tree.
+// DOMNode data type. A Node in the DOM tree.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-DOMNode
 type DOMNode struct {
@@ -72,7 +72,7 @@ type DOMNode struct {
 	ScrollOffsetY float64 `json:"scrollOffsetY,omitempty"`
 }
 
-// Details of post layout rendered text positions. The exact layout should not be regarded as
+// InlineTextBox data type. Details of post layout rendered text positions. The exact layout should not be regarded as
 // stable and may change between versions.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-InlineTextBox
@@ -87,7 +87,7 @@ type InlineTextBox struct {
 	NumCharacters int64 `json:"numCharacters"`
 }
 
-// Details of an element in the DOM tree with a LayoutObject.
+// LayoutTreeNode data type. Details of an element in the DOM tree with a LayoutObject.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-LayoutTreeNode
 type LayoutTreeNode struct {
@@ -109,7 +109,7 @@ type LayoutTreeNode struct {
 	IsStackingContext bool `json:"isStackingContext,omitempty"`
 }
 
-// A subset of the full ComputedStyle as defined by the request whitelist.
+// ComputedStyle data type. A subset of the full ComputedStyle as defined by the request whitelist.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-ComputedStyle
 type ComputedStyle struct {
@@ -117,7 +117,7 @@ type ComputedStyle struct {
 	Properties []NameValue `json:"properties"`
 }
 
-// A name/value pair.
+// NameValue data type. A name/value pair.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-NameValue
 type NameValue struct {
@@ -127,17 +127,17 @@ type NameValue struct {
 	Value string `json:"value"`
 }
 
-// Index of the string in the strings table.
+// StringIndex data type. Index of the string in the strings table.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-StringIndex
 type StringIndex int64
 
-// Index of the string in the strings table.
+// ArrayOfStrings data type. Index of the string in the strings table.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-ArrayOfStrings
 type ArrayOfStrings []StringIndex
 
-// Data that is only present on rare nodes.
+// RareStringData data type. Data that is only present on rare nodes.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-RareStringData
 type RareStringData struct {
@@ -145,21 +145,27 @@ type RareStringData struct {
 	Value []StringIndex `json:"value"`
 }
 
+// RareBooleanData data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-RareBooleanData
 type RareBooleanData struct {
 	Index []int64 `json:"index"`
 }
 
+// RareIntegerData data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-RareIntegerData
 type RareIntegerData struct {
 	Index []int64 `json:"index"`
 	Value []int64 `json:"value"`
 }
 
+// Rectangle data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-Rectangle
 type Rectangle []float64
 
-// Document snapshot.
+// DocumentSnapshot data type. Document snapshot.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-DocumentSnapshot
 type DocumentSnapshot struct {
@@ -195,7 +201,7 @@ type DocumentSnapshot struct {
 	ContentHeight float64 `json:"contentHeight,omitempty"`
 }
 
-// Table containing nodes.
+// NodeTreeSnapshot data type. Table containing nodes.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-NodeTreeSnapshot
 type NodeTreeSnapshot struct {
@@ -233,7 +239,7 @@ type NodeTreeSnapshot struct {
 	OriginURL *RareStringData `json:"originURL,omitempty"`
 }
 
-// Table of details of an element in the DOM tree with a LayoutObject.
+// LayoutTreeSnapshot data type. Table of details of an element in the DOM tree with a LayoutObject.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-LayoutTreeSnapshot
 type LayoutTreeSnapshot struct {
@@ -267,7 +273,7 @@ type LayoutTreeSnapshot struct {
 	TextColorOpacities []float64 `json:"textColorOpacities,omitempty"`
 }
 
-// Table of details of the post layout rendered text positions. The exact layout should not be regarded as
+// TextBoxSnapshot data type. Table of details of the post layout rendered text positions. The exact layout should not be regarded as
 // stable and may change between versions.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-TextBoxSnapshot

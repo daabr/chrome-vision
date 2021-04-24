@@ -1,6 +1,6 @@
 package applicationcache
 
-// Detailed application cache resource information.
+// ApplicationCacheResource data type. Detailed application cache resource information.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#type-ApplicationCacheResource
 type ApplicationCacheResource struct {
@@ -12,7 +12,7 @@ type ApplicationCacheResource struct {
 	Type string `json:"type"`
 }
 
-// Detailed application cache information.
+// ApplicationCache data type. Detailed application cache information.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#type-ApplicationCache
 type ApplicationCache struct {
@@ -28,7 +28,7 @@ type ApplicationCache struct {
 	Resources []ApplicationCacheResource `json:"resources"`
 }
 
-// Frame identifier - manifest URL pair.
+// FrameWithManifest data type. Frame identifier - manifest URL pair.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#type-FrameWithManifest
 type FrameWithManifest struct {

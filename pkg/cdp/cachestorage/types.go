@@ -1,11 +1,11 @@
 package cachestorage
 
-// Unique identifier of the Cache object.
+// CacheID data type. Unique identifier of the Cache object.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#type-CacheId
 type CacheID string
 
-// type of HTTP response cached
+// CachedResponseType data type. type of HTTP response cached
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#type-CachedResponseType
 type CachedResponseType string
@@ -20,7 +20,7 @@ const (
 	CachedResponseTypeOpaqueRedirect CachedResponseType = "opaqueRedirect"
 )
 
-// Data entry.
+// DataEntry data type. Data entry.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#type-DataEntry
 type DataEntry struct {
@@ -54,13 +54,15 @@ type Cache struct {
 	CacheName string `json:"cacheName"`
 }
 
+// Header data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#type-Header
 type Header struct {
 	Name  string `json:"name"`
 	Value string `json:"value"`
 }
 
-// Cached response
+// CachedResponse data type. Cached response
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#type-CachedResponse
 type CachedResponse struct {

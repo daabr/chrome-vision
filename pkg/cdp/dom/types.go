@@ -2,18 +2,18 @@ package dom
 
 import "encoding/json"
 
-// Unique DOM node identifier.
+// NodeID data type. Unique DOM node identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-NodeId
 type NodeID int64
 
-// Unique DOM node identifier used to reference a node that may not have been pushed to the
+// BackendNodeID data type. Unique DOM node identifier used to reference a node that may not have been pushed to the
 // front-end.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-BackendNodeId
 type BackendNodeID int64
 
-// Backend node with a friendly name.
+// BackendNode data type. Backend node with a friendly name.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-BackendNode
 type BackendNode struct {
@@ -24,7 +24,7 @@ type BackendNode struct {
 	BackendNodeID int64  `json:"backendNodeId"`
 }
 
-// Pseudo element type.
+// PseudoType data type. Pseudo element type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-PseudoType
 type PseudoType string
@@ -52,7 +52,7 @@ const (
 	PseudoTypeInputListButton     PseudoType = "input-list-button"
 )
 
-// Shadow root type.
+// ShadowRootType data type. Shadow root type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-ShadowRootType
 type ShadowRootType string
@@ -64,7 +64,7 @@ const (
 	ShadowRootTypeClosed    ShadowRootType = "closed"
 )
 
-// DOM interaction is implemented in terms of mirror objects that represent the actual DOM nodes.
+// Node data type. DOM interaction is implemented in terms of mirror objects that represent the actual DOM nodes.
 // DOMNode is a base node mirror type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-Node
@@ -133,7 +133,7 @@ type Node struct {
 	IsSVG bool `json:"isSVG,omitempty"`
 }
 
-// A structure holding an RGBA color.
+// RGBA data type. A structure holding an RGBA color.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-RGBA
 type RGBA struct {
@@ -147,12 +147,12 @@ type RGBA struct {
 	A float64 `json:"a,omitempty"`
 }
 
-// An array of quad vertices, x immediately followed by y for each point, points clock-wise.
+// Quad data type. An array of quad vertices, x immediately followed by y for each point, points clock-wise.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-Quad
 type Quad []float64
 
-// Box model.
+// BoxModel data type. Box model.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-BoxModel
 type BoxModel struct {
@@ -172,7 +172,7 @@ type BoxModel struct {
 	ShapeOutside *ShapeOutsideInfo `json:"shapeOutside,omitempty"`
 }
 
-// CSS Shape Outside details.
+// ShapeOutsideInfo data type. CSS Shape Outside details.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-ShapeOutsideInfo
 type ShapeOutsideInfo struct {
@@ -198,6 +198,8 @@ type Rect struct {
 	Height float64 `json:"height"`
 }
 
+// CSSComputedStyleProperty data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-CSSComputedStyleProperty
 type CSSComputedStyleProperty struct {
 	// Computed style property name.

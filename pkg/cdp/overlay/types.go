@@ -2,7 +2,7 @@ package overlay
 
 import "github.com/daabr/chrome-vision/pkg/cdp/dom"
 
-// Configuration data for drawing the source order of an elements children.
+// SourceOrderConfig data type. Configuration data for drawing the source order of an elements children.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-SourceOrderConfig
 type SourceOrderConfig struct {
@@ -12,7 +12,7 @@ type SourceOrderConfig struct {
 	ChildOutlineColor dom.RGBA `json:"childOutlineColor"`
 }
 
-// Configuration data for the highlighting of Grid elements.
+// GridHighlightConfig data type. Configuration data for the highlighting of Grid elements.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-GridHighlightConfig
 type GridHighlightConfig struct {
@@ -62,7 +62,7 @@ type GridHighlightConfig struct {
 	GridBackgroundColor *dom.RGBA `json:"gridBackgroundColor,omitempty"`
 }
 
-// Configuration data for the highlighting of Flex container elements.
+// FlexContainerHighlightConfig data type. Configuration data for the highlighting of Flex container elements.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-FlexContainerHighlightConfig
 type FlexContainerHighlightConfig struct {
@@ -84,7 +84,7 @@ type FlexContainerHighlightConfig struct {
 	CrossAlignment *LineStyle `json:"crossAlignment,omitempty"`
 }
 
-// Configuration data for the highlighting of Flex item elements.
+// FlexItemHighlightConfig data type. Configuration data for the highlighting of Flex item elements.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-FlexItemHighlightConfig
 type FlexItemHighlightConfig struct {
@@ -96,7 +96,7 @@ type FlexItemHighlightConfig struct {
 	FlexibilityArrow *LineStyle `json:"flexibilityArrow,omitempty"`
 }
 
-// Style information for drawing a line.
+// LineStyle data type. Style information for drawing a line.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-LineStyle
 type LineStyle struct {
@@ -106,7 +106,7 @@ type LineStyle struct {
 	Pattern string `json:"pattern,omitempty"`
 }
 
-// Style information for drawing a box.
+// BoxStyle data type. Style information for drawing a box.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-BoxStyle
 type BoxStyle struct {
@@ -116,6 +116,8 @@ type BoxStyle struct {
 	HatchColor *dom.RGBA `json:"hatchColor,omitempty"`
 }
 
+// ContrastAlgorithm data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ContrastAlgorithm
 type ContrastAlgorithm string
 
@@ -126,7 +128,7 @@ const (
 	ContrastAlgorithmApca ContrastAlgorithm = "apca"
 )
 
-// Configuration data for the highlighting of page elements.
+// HighlightConfig data type. Configuration data for the highlighting of page elements.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-HighlightConfig
 type HighlightConfig struct {
@@ -168,6 +170,8 @@ type HighlightConfig struct {
 	ContrastAlgorithm string `json:"contrastAlgorithm,omitempty"`
 }
 
+// ColorFormat data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ColorFormat
 type ColorFormat string
 
@@ -178,7 +182,7 @@ const (
 	ColorFormatHex ColorFormat = "hex"
 )
 
-// Configurations for Persistent Grid Highlight
+// GridNodeHighlightConfig data type. Configurations for Persistent Grid Highlight
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-GridNodeHighlightConfig
 type GridNodeHighlightConfig struct {
@@ -188,6 +192,8 @@ type GridNodeHighlightConfig struct {
 	NodeID int64 `json:"nodeId"`
 }
 
+// FlexNodeHighlightConfig data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-FlexNodeHighlightConfig
 type FlexNodeHighlightConfig struct {
 	// A descriptor for the highlight appearance of flex containers.
@@ -196,6 +202,8 @@ type FlexNodeHighlightConfig struct {
 	NodeID int64 `json:"nodeId"`
 }
 
+// ScrollSnapContainerHighlightConfig data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ScrollSnapContainerHighlightConfig
 type ScrollSnapContainerHighlightConfig struct {
 	// The style of the snapport border (default: transparent)
@@ -208,6 +216,8 @@ type ScrollSnapContainerHighlightConfig struct {
 	ScrollPaddingColor *dom.RGBA `json:"scrollPaddingColor,omitempty"`
 }
 
+// ScrollSnapHighlightConfig data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ScrollSnapHighlightConfig
 type ScrollSnapHighlightConfig struct {
 	// A descriptor for the highlight appearance of scroll snap containers.
@@ -216,7 +226,7 @@ type ScrollSnapHighlightConfig struct {
 	NodeID int64 `json:"nodeId"`
 }
 
-// Configuration for dual screen hinge
+// HingeConfig data type. Configuration for dual screen hinge
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-HingeConfig
 type HingeConfig struct {
@@ -228,6 +238,8 @@ type HingeConfig struct {
 	OutlineColor *dom.RGBA `json:"outlineColor,omitempty"`
 }
 
+// InspectMode data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-InspectMode
 type InspectMode string
 

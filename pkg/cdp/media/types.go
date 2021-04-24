@@ -1,14 +1,16 @@
 package media
 
-// Players will get an ID that is unique within the agent context.
+// PlayerID data type. Players will get an ID that is unique within the agent context.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#type-PlayerId
 type PlayerID string
 
+// Timestamp data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#type-Timestamp
 type Timestamp float64
 
-// Have one type per entry in MediaLogRecord::Type
+// PlayerMessage data type. Have one type per entry in MediaLogRecord::Type
 // Corresponds to kMessage
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#type-PlayerMessage
@@ -26,7 +28,7 @@ type PlayerMessage struct {
 	Message string `json:"message"`
 }
 
-// Corresponds to kMediaPropertyChange
+// PlayerProperty data type. Corresponds to kMediaPropertyChange
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#type-PlayerProperty
 type PlayerProperty struct {
@@ -34,7 +36,7 @@ type PlayerProperty struct {
 	Value string `json:"value"`
 }
 
-// Corresponds to kMediaEventTriggered
+// PlayerEvent data type. Corresponds to kMediaEventTriggered
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#type-PlayerEvent
 type PlayerEvent struct {
@@ -42,7 +44,7 @@ type PlayerEvent struct {
 	Value     string  `json:"value"`
 }
 
-// Corresponds to kMediaError
+// PlayerError data type. Corresponds to kMediaError
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#type-PlayerError
 type PlayerError struct {

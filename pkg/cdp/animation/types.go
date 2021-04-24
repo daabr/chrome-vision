@@ -53,7 +53,7 @@ type AnimationEffect struct {
 	Easing string `json:"easing"`
 }
 
-// Keyframes Rule
+// KeyframesRule data type. Keyframes Rule
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#type-KeyframesRule
 type KeyframesRule struct {
@@ -63,7 +63,7 @@ type KeyframesRule struct {
 	Keyframes []KeyframeStyle `json:"keyframes"`
 }
 
-// Keyframe Style
+// KeyframeStyle data type. Keyframe Style
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#type-KeyframeStyle
 type KeyframeStyle struct {

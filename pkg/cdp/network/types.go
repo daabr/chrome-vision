@@ -2,7 +2,7 @@ package network
 
 import "github.com/daabr/chrome-vision/pkg/cdp/runtime"
 
-// Resource type as it was perceived by the rendering engine.
+// ResourceType data type. Resource type as it was perceived by the rendering engine.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-ResourceType
 type ResourceType string
@@ -28,22 +28,22 @@ const (
 	ResourceTypeOther              ResourceType = "Other"
 )
 
-// Unique loader identifier.
+// LoaderID data type. Unique loader identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-LoaderId
 type LoaderID string
 
-// Unique request identifier.
+// RequestID data type. Unique request identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-RequestId
 type RequestID string
 
-// Unique intercepted request identifier.
+// InterceptionID data type. Unique intercepted request identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-InterceptionId
 type InterceptionID string
 
-// Network level fetch failure reason.
+// ErrorReason data type. Network level fetch failure reason.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-ErrorReason
 type ErrorReason string
@@ -66,22 +66,22 @@ const (
 	ErrorReasonBlockedByResponse    ErrorReason = "BlockedByResponse"
 )
 
-// UTC time in seconds, counted from January 1, 1970.
+// TimeSinceEpoch data type. UTC time in seconds, counted from January 1, 1970.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-TimeSinceEpoch
 type TimeSinceEpoch float64
 
-// Monotonically increasing time in seconds since an arbitrary point in the past.
+// MonotonicTime data type. Monotonically increasing time in seconds since an arbitrary point in the past.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-MonotonicTime
 type MonotonicTime float64
 
-// Request / response headers as keys / values of JSON object.
+// Headers data type. Request / response headers as keys / values of JSON object.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-Headers
 type Headers struct{}
 
-// The underlying connection technology that the browser is supposedly using.
+// ConnectionType data type. The underlying connection technology that the browser is supposedly using.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-ConnectionType
 type ConnectionType string
@@ -99,7 +99,7 @@ const (
 	ConnectionTypeOther      ConnectionType = "other"
 )
 
-// Represents the cookie's 'SameSite' status:
+// CookieSameSite data type. Represents the cookie's 'SameSite' status:
 // https://tools.ietf.org/html/draft-west-first-party-cookies
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CookieSameSite
@@ -112,7 +112,7 @@ const (
 	CookieSameSiteNone   CookieSameSite = "None"
 )
 
-// Represents the cookie's 'Priority' status:
+// CookiePriority data type. Represents the cookie's 'Priority' status:
 // https://tools.ietf.org/html/draft-west-cookie-priority-00
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CookiePriority
@@ -127,7 +127,7 @@ const (
 	CookiePriorityHigh   CookiePriority = "High"
 )
 
-// Represents the source scheme of the origin that originally set the cookie.
+// CookieSourceScheme data type. Represents the source scheme of the origin that originally set the cookie.
 // A value of "Unset" allows protocol clients to emulate legacy cookie scope for the scheme.
 // This is a temporary ability and it will be removed in the future.
 //
@@ -143,7 +143,7 @@ const (
 	CookieSourceSchemeSecure    CookieSourceScheme = "Secure"
 )
 
-// Timing information for the request.
+// ResourceTiming data type. Timing information for the request.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-ResourceTiming
 type ResourceTiming struct {
@@ -198,7 +198,7 @@ type ResourceTiming struct {
 	ReceiveHeadersEnd float64 `json:"receiveHeadersEnd"`
 }
 
-// Loading priority of a resource request.
+// ResourcePriority data type. Loading priority of a resource request.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-ResourcePriority
 type ResourcePriority string
@@ -212,14 +212,14 @@ const (
 	ResourcePriorityVeryHigh ResourcePriority = "VeryHigh"
 )
 
-// Post data entry for HTTP request
+// PostDataEntry data type. Post data entry for HTTP request
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-PostDataEntry
 type PostDataEntry struct {
 	Bytes string `json:"bytes,omitempty"`
 }
 
-// HTTP request data.
+// Request data type. HTTP request data.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-Request
 type Request struct {
@@ -254,7 +254,7 @@ type Request struct {
 	TrustTokenParams *TrustTokenParams `json:"trustTokenParams,omitempty"`
 }
 
-// Details of a signed certificate timestamp (SCT).
+// SignedCertificateTimestamp data type. Details of a signed certificate timestamp (SCT).
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-SignedCertificateTimestamp
 type SignedCertificateTimestamp struct {
@@ -276,7 +276,7 @@ type SignedCertificateTimestamp struct {
 	SignatureData string `json:"signatureData"`
 }
 
-// Security details about a request.
+// SecurityDetails data type. Security details about a request.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-SecurityDetails
 type SecurityDetails struct {
@@ -308,7 +308,7 @@ type SecurityDetails struct {
 	CertificateTransparencyCompliance string `json:"certificateTransparencyCompliance"`
 }
 
-// Whether the request complied with Certificate Transparency policy.
+// CertificateTransparencyCompliance data type. Whether the request complied with Certificate Transparency policy.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CertificateTransparencyCompliance
 type CertificateTransparencyCompliance string
@@ -320,7 +320,7 @@ const (
 	CertificateTransparencyComplianceCompliant    CertificateTransparencyCompliance = "compliant"
 )
 
-// The reason why request was blocked.
+// BlockedReason data type. The reason why request was blocked.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-BlockedReason
 type BlockedReason string
@@ -341,7 +341,7 @@ const (
 	BlockedReasonCorpNotSameSite                                   BlockedReason = "corp-not-same-site"
 )
 
-// The reason why request was blocked.
+// CorsError data type. The reason why request was blocked.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CorsError
 type CorsError string
@@ -375,13 +375,15 @@ const (
 	CorsErrorInsecurePrivateNetwork               CorsError = "InsecurePrivateNetwork"
 )
 
+// CorsErrorStatus data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CorsErrorStatus
 type CorsErrorStatus struct {
 	CorsError       string `json:"corsError"`
 	FailedParameter string `json:"failedParameter"`
 }
 
-// Source of serviceworker response.
+// ServiceWorkerResponseSource data type. Source of serviceworker response.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-ServiceWorkerResponseSource
 type ServiceWorkerResponseSource string
@@ -394,7 +396,7 @@ const (
 	ServiceWorkerResponseSourceNetwork      ServiceWorkerResponseSource = "network"
 )
 
-// Determines what type of Trust Token operation is executed and
+// TrustTokenParams data type. Determines what type of Trust Token operation is executed and
 // depending on the type, some additional parameters. The values
 // are specified in third_party/blink/renderer/core/fetch/trust_token.idl.
 //
@@ -411,6 +413,8 @@ type TrustTokenParams struct {
 	Issuers []string `json:"issuers,omitempty"`
 }
 
+// TrustTokenOperationType data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-TrustTokenOperationType
 //
 // This CDP type is experimental.
@@ -423,7 +427,7 @@ const (
 	TrustTokenOperationTypeSigning    TrustTokenOperationType = "Signing"
 )
 
-// HTTP response data.
+// Response data type. HTTP response data.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-Response
 type Response struct {
@@ -475,7 +479,7 @@ type Response struct {
 	SecurityDetails *SecurityDetails `json:"securityDetails,omitempty"`
 }
 
-// WebSocket request data.
+// WebSocketRequest data type. WebSocket request data.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-WebSocketRequest
 type WebSocketRequest struct {
@@ -483,7 +487,7 @@ type WebSocketRequest struct {
 	Headers Headers `json:"headers"`
 }
 
-// WebSocket response data.
+// WebSocketResponse data type. WebSocket response data.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-WebSocketResponse
 type WebSocketResponse struct {
@@ -501,7 +505,7 @@ type WebSocketResponse struct {
 	RequestHeadersText string `json:"requestHeadersText,omitempty"`
 }
 
-// WebSocket message data. This represents an entire WebSocket message, not just a fragmented frame as the name suggests.
+// WebSocketFrame data type. WebSocket message data. This represents an entire WebSocket message, not just a fragmented frame as the name suggests.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-WebSocketFrame
 type WebSocketFrame struct {
@@ -515,7 +519,7 @@ type WebSocketFrame struct {
 	PayloadData string `json:"payloadData"`
 }
 
-// Information about the cached resource.
+// CachedResource data type. Information about the cached resource.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CachedResource
 type CachedResource struct {
@@ -529,7 +533,7 @@ type CachedResource struct {
 	BodySize float64 `json:"bodySize"`
 }
 
-// Information about the request initiator.
+// Initiator data type. Information about the request initiator.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-Initiator
 type Initiator struct {
@@ -593,7 +597,7 @@ type Cookie struct {
 	SourcePort int64 `json:"sourcePort"`
 }
 
-// Types of reasons why a cookie may not be stored from a response.
+// SetCookieBlockedReason data type. Types of reasons why a cookie may not be stored from a response.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-SetCookieBlockedReason
 //
@@ -621,7 +625,7 @@ const (
 	SetCookieBlockedReasonSamePartyConflictsWithOtherAttributes    SetCookieBlockedReason = "SamePartyConflictsWithOtherAttributes"
 )
 
-// Types of reasons why a cookie may not be sent with a request.
+// CookieBlockedReason data type. Types of reasons why a cookie may not be sent with a request.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CookieBlockedReason
 //
@@ -645,7 +649,7 @@ const (
 	CookieBlockedReasonSamePartyFromCrossPartyContext           CookieBlockedReason = "SamePartyFromCrossPartyContext"
 )
 
-// A cookie which was not stored from a response with the corresponding reason.
+// BlockedSetCookieWithReason data type. A cookie which was not stored from a response with the corresponding reason.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-BlockedSetCookieWithReason
 //
@@ -662,7 +666,7 @@ type BlockedSetCookieWithReason struct {
 	Cookie *Cookie `json:"cookie,omitempty"`
 }
 
-// A cookie with was not sent with a request with the corresponding reason.
+// BlockedCookieWithReason data type. A cookie with was not sent with a request with the corresponding reason.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-BlockedCookieWithReason
 //
@@ -674,7 +678,7 @@ type BlockedCookieWithReason struct {
 	Cookie Cookie `json:"cookie"`
 }
 
-// Cookie parameter object
+// CookieParam data type. Cookie parameter object
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CookieParam
 type CookieParam struct {
@@ -717,7 +721,7 @@ type CookieParam struct {
 	SourcePort int64 `json:"sourcePort,omitempty"`
 }
 
-// Authorization challenge for HTTP status code 401 or 407.
+// AuthChallenge data type. Authorization challenge for HTTP status code 401 or 407.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-AuthChallenge
 //
@@ -733,7 +737,7 @@ type AuthChallenge struct {
 	Realm string `json:"realm"`
 }
 
-// Response to an AuthChallenge.
+// AuthChallengeResponse data type. Response to an AuthChallenge.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-AuthChallengeResponse
 //
@@ -751,7 +755,7 @@ type AuthChallengeResponse struct {
 	Password string `json:"password,omitempty"`
 }
 
-// Stages of the interception to begin intercepting. Request will intercept before the request is
+// InterceptionStage data type. Stages of the interception to begin intercepting. Request will intercept before the request is
 // sent. Response will intercept after the response is received.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-InterceptionStage
@@ -765,7 +769,7 @@ const (
 	InterceptionStageHeadersReceived InterceptionStage = "HeadersReceived"
 )
 
-// Request pattern for interception.
+// RequestPattern data type. Request pattern for interception.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-RequestPattern
 //
@@ -780,7 +784,7 @@ type RequestPattern struct {
 	InterceptionStage string `json:"interceptionStage,omitempty"`
 }
 
-// Information about a signed exchange signature.
+// SignedExchangeSignature data type. Information about a signed exchange signature.
 // https://wicg.github.io/webpackage/draft-yasskin-httpbis-origin-signed-exchanges-impl.html#rfc.section.3.1
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-SignedExchangeSignature
@@ -807,7 +811,7 @@ type SignedExchangeSignature struct {
 	Certificates []string `json:"certificates,omitempty"`
 }
 
-// Information about a signed exchange header.
+// SignedExchangeHeader data type. Information about a signed exchange header.
 // https://wicg.github.io/webpackage/draft-yasskin-httpbis-origin-signed-exchanges-impl.html#cbor-representation
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-SignedExchangeHeader
@@ -826,7 +830,7 @@ type SignedExchangeHeader struct {
 	HeaderIntegrity string `json:"headerIntegrity"`
 }
 
-// Field type for a signed exchange related error.
+// SignedExchangeErrorField data type. Field type for a signed exchange related error.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-SignedExchangeErrorField
 //
@@ -843,7 +847,7 @@ const (
 	SignedExchangeErrorFieldSignatureTimestamps  SignedExchangeErrorField = "signatureTimestamps"
 )
 
-// Information about a signed exchange response.
+// SignedExchangeError data type. Information about a signed exchange response.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-SignedExchangeError
 //
@@ -857,7 +861,7 @@ type SignedExchangeError struct {
 	ErrorField string `json:"errorField,omitempty"`
 }
 
-// Information about a signed exchange response.
+// SignedExchangeInfo data type. Information about a signed exchange response.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-SignedExchangeInfo
 //
@@ -873,7 +877,7 @@ type SignedExchangeInfo struct {
 	Errors []SignedExchangeError `json:"errors,omitempty"`
 }
 
-// List of content encodings supported by the backend.
+// ContentEncoding data type. List of content encodings supported by the backend.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-ContentEncoding
 //
@@ -887,6 +891,8 @@ const (
 	ContentEncodingBr      ContentEncoding = "br"
 )
 
+// PrivateNetworkRequestPolicy data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-PrivateNetworkRequestPolicy
 //
 // This CDP type is experimental.
@@ -899,6 +905,8 @@ const (
 	PrivateNetworkRequestPolicyWarnFromInsecureToMorePrivate  PrivateNetworkRequestPolicy = "WarnFromInsecureToMorePrivate"
 )
 
+// IPAddressSpace data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-IPAddressSpace
 //
 // This CDP type is experimental.
@@ -912,6 +920,8 @@ const (
 	IPAddressSpaceUnknown IPAddressSpace = "Unknown"
 )
 
+// ClientSecurityState data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-ClientSecurityState
 //
 // This CDP type is experimental.
@@ -921,6 +931,8 @@ type ClientSecurityState struct {
 	PrivateNetworkRequestPolicy string `json:"privateNetworkRequestPolicy"`
 }
 
+// CrossOriginOpenerPolicyValue data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CrossOriginOpenerPolicyValue
 //
 // This CDP type is experimental.
@@ -934,6 +946,8 @@ const (
 	CrossOriginOpenerPolicyValueSameOriginPlusCoep    CrossOriginOpenerPolicyValue = "SameOriginPlusCoep"
 )
 
+// CrossOriginOpenerPolicyStatus data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CrossOriginOpenerPolicyStatus
 //
 // This CDP type is experimental.
@@ -944,6 +958,8 @@ type CrossOriginOpenerPolicyStatus struct {
 	ReportOnlyReportingEndpoint string `json:"reportOnlyReportingEndpoint,omitempty"`
 }
 
+// CrossOriginEmbedderPolicyValue data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CrossOriginEmbedderPolicyValue
 //
 // This CDP type is experimental.
@@ -956,6 +972,8 @@ const (
 	CrossOriginEmbedderPolicyValueRequireCorp          CrossOriginEmbedderPolicyValue = "RequireCorp"
 )
 
+// CrossOriginEmbedderPolicyStatus data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CrossOriginEmbedderPolicyStatus
 //
 // This CDP type is experimental.
@@ -966,6 +984,8 @@ type CrossOriginEmbedderPolicyStatus struct {
 	ReportOnlyReportingEndpoint string `json:"reportOnlyReportingEndpoint,omitempty"`
 }
 
+// SecurityIsolationStatus data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-SecurityIsolationStatus
 //
 // This CDP type is experimental.
@@ -974,7 +994,7 @@ type SecurityIsolationStatus struct {
 	Coep *CrossOriginEmbedderPolicyStatus `json:"coep,omitempty"`
 }
 
-// An object providing the result of a network resource load.
+// LoadNetworkResourcePageResult data type. An object providing the result of a network resource load.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-LoadNetworkResourcePageResult
 //
@@ -991,7 +1011,7 @@ type LoadNetworkResourcePageResult struct {
 	Headers *Headers `json:"headers,omitempty"`
 }
 
-// An options object that may be extended later to better support CORS,
+// LoadNetworkResourceOptions data type. An options object that may be extended later to better support CORS,
 // CORB and streaming.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-LoadNetworkResourceOptions

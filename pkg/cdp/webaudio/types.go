@@ -1,11 +1,11 @@
 package webaudio
 
-// An unique ID for a graph object (AudioContext, AudioNode, AudioParam) in Web Audio API
+// GraphObjectID data type. An unique ID for a graph object (AudioContext, AudioNode, AudioParam) in Web Audio API
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-GraphObjectId
 type GraphObjectID string
 
-// Enum of BaseAudioContext types
+// ContextType data type. Enum of BaseAudioContext types
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-ContextType
 type ContextType string
@@ -16,7 +16,7 @@ const (
 	ContextTypeOffline  ContextType = "offline"
 )
 
-// Enum of AudioContextState from the spec
+// ContextState data type. Enum of AudioContextState from the spec
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-ContextState
 type ContextState string
@@ -28,12 +28,12 @@ const (
 	ContextStateClosed    ContextState = "closed"
 )
 
-// Enum of AudioNode types
+// NodeType data type. Enum of AudioNode types
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-NodeType
 type NodeType string
 
-// Enum of AudioNode::ChannelCountMode from the spec
+// ChannelCountMode data type. Enum of AudioNode::ChannelCountMode from the spec
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-ChannelCountMode
 type ChannelCountMode string
@@ -45,7 +45,7 @@ const (
 	ChannelCountModeMax        ChannelCountMode = "max"
 )
 
-// Enum of AudioNode::ChannelInterpretation from the spec
+// ChannelInterpretation data type. Enum of AudioNode::ChannelInterpretation from the spec
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-ChannelInterpretation
 type ChannelInterpretation string
@@ -56,12 +56,12 @@ const (
 	ChannelInterpretationSpeakers ChannelInterpretation = "speakers"
 )
 
-// Enum of AudioParam types
+// ParamType data type. Enum of AudioParam types
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-ParamType
 type ParamType string
 
-// Enum of AudioParam::AutomationRate from the spec
+// AutomationRate data type. Enum of AudioParam::AutomationRate from the spec
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-AutomationRate
 type AutomationRate string
@@ -72,7 +72,7 @@ const (
 	AutomationRateKRate AutomationRate = "k-rate"
 )
 
-// Fields in AudioContext that change in real-time.
+// ContextRealtimeData data type. Fields in AudioContext that change in real-time.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-ContextRealtimeData
 type ContextRealtimeData struct {
@@ -88,7 +88,7 @@ type ContextRealtimeData struct {
 	CallbackIntervalVariance float64 `json:"callbackIntervalVariance"`
 }
 
-// Protocol object for BaseAudioContext
+// BaseAudioContext data type. Protocol object for BaseAudioContext
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-BaseAudioContext
 type BaseAudioContext struct {
@@ -104,7 +104,7 @@ type BaseAudioContext struct {
 	SampleRate float64 `json:"sampleRate"`
 }
 
-// Protocol object for AudioListener
+// AudioListener data type. Protocol object for AudioListener
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-AudioListener
 type AudioListener struct {
@@ -112,7 +112,7 @@ type AudioListener struct {
 	ContextID  string `json:"contextId"`
 }
 
-// Protocol object for AudioNode
+// AudioNode data type. Protocol object for AudioNode
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-AudioNode
 type AudioNode struct {
@@ -126,7 +126,7 @@ type AudioNode struct {
 	ChannelInterpretation string  `json:"channelInterpretation"`
 }
 
-// Protocol object for AudioParam
+// AudioParam data type. Protocol object for AudioParam
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-AudioParam
 type AudioParam struct {

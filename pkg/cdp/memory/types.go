@@ -1,6 +1,6 @@
 package memory
 
-// Memory pressure level.
+// PressureLevel data type. Memory pressure level.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#type-PressureLevel
 type PressureLevel string
@@ -11,7 +11,7 @@ const (
 	PressureLevelCritical PressureLevel = "critical"
 )
 
-// Heap profile sample.
+// SamplingProfileNode data type. Heap profile sample.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#type-SamplingProfileNode
 type SamplingProfileNode struct {
@@ -23,7 +23,7 @@ type SamplingProfileNode struct {
 	Stack []string `json:"stack"`
 }
 
-// Array of heap profile samples.
+// SamplingProfile data type. Array of heap profile samples.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#type-SamplingProfile
 type SamplingProfile struct {
@@ -31,7 +31,7 @@ type SamplingProfile struct {
 	Modules []Module              `json:"modules"`
 }
 
-// Executable module information
+// Module data type. Executable module information
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#type-Module
 type Module struct {

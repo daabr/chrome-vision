@@ -1,6 +1,6 @@
 package emulation
 
-// Screen orientation.
+// ScreenOrientation data type. Screen orientation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#type-ScreenOrientation
 type ScreenOrientation struct {
@@ -10,6 +10,8 @@ type ScreenOrientation struct {
 	Angle int64 `json:"angle"`
 }
 
+// DisplayFeature data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#type-DisplayFeature
 type DisplayFeature struct {
 	// Orientation of a display feature in relation to screen
@@ -23,13 +25,15 @@ type DisplayFeature struct {
 	MaskLength int64 `json:"maskLength"`
 }
 
+// MediaFeature data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#type-MediaFeature
 type MediaFeature struct {
 	Name  string `json:"name"`
 	Value string `json:"value"`
 }
 
-// advance: If the scheduler runs out of immediate work, the virtual time base may fast forward to
+// VirtualTimePolicy data type. advance: If the scheduler runs out of immediate work, the virtual time base may fast forward to
 // allow the next delayed task (if any) to run; pause: The virtual time base may not advance;
 // pauseIfNetworkFetchesPending: The virtual time base may not advance if there are any pending
 // resource fetches.
@@ -46,7 +50,7 @@ const (
 	VirtualTimePolicyPauseIfNetworkFetchesPending VirtualTimePolicy = "pauseIfNetworkFetchesPending"
 )
 
-// Used to specify User Agent Cient Hints to emulate. See https://wicg.github.io/ua-client-hints
+// UserAgentBrandVersion data type. Used to specify User Agent Cient Hints to emulate. See https://wicg.github.io/ua-client-hints
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#type-UserAgentBrandVersion
 //
@@ -56,7 +60,7 @@ type UserAgentBrandVersion struct {
 	Version string `json:"version"`
 }
 
-// Used to specify User Agent Cient Hints to emulate. See https://wicg.github.io/ua-client-hints
+// UserAgentMetadata data type. Used to specify User Agent Cient Hints to emulate. See https://wicg.github.io/ua-client-hints
 // Missing optional values will be filled in by the target with what it would normally use.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#type-UserAgentMetadata
@@ -72,7 +76,7 @@ type UserAgentMetadata struct {
 	Mobile          bool                    `json:"mobile"`
 }
 
-// Enum of image types that can be disabled.
+// DisabledImageType data type. Enum of image types that can be disabled.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#type-DisabledImageType
 //
