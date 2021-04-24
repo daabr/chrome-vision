@@ -129,7 +129,7 @@ type SessionOption = func(*Session)
 // proxy logs, screenshots, etc.
 //
 // The default path for output directories is Go's `os.TempDir()`, but it can be
-// overriden with an optional environment variable (see `cdp.OutputRootEnv`).
+// overridden with an optional environment variable (see `cdp.OutputRootEnv`).
 func NewContext(parent context.Context, opts ...SessionOption) (context.Context, error) {
 	// Store the new session in a cancelable copy of the parent context.
 	ctx, cancel := context.WithCancel(parent)

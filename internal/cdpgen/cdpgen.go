@@ -32,7 +32,7 @@ type Version struct {
 }
 
 // Domain represents a CDP domain (group of related types, commands and
-// events within a protocl).
+// events within a protocol).
 type Domain struct {
 	Domain                   string
 	Description              *string
@@ -84,9 +84,9 @@ type Event struct {
 	Parameters               []Property
 }
 
-// Generate converts the given JSON-based CDP protocol to Go source code
+// Generate transforms the given JSON-based CDP protocol to Go source code
 // (one Go package per CDP domain, up to 4 files per package).
-func Generate(p Protocol) {
+func Generate(p *Protocol) {
 	for _, d := range p.Domains {
 		generateTypes(d) // Preparation for de-aliasing of built-in data types.
 	}
@@ -134,7 +134,7 @@ func adjust(s string) string {
 	s = strings.ReplaceAll(s, "Url", "URL")
 
 	if strings.Count(s, ".") > 0 {
-		// Convert CDP domain prefixes to Go package prefixes.
+		// Transform CDP domain prefixes to Go package prefixes.
 		re := regexp.MustCompile(`^(.*)\.`)
 		s = re.ReplaceAllStringFunc(s, strings.ToLower)
 
@@ -146,7 +146,7 @@ func adjust(s string) string {
 	return s
 }
 
-// Convert a JSON data type to a Go data type.
+// Transform a JSON data type to a Go data type.
 func transformType(t string, arrayTypes map[string]string) string {
 	switch t {
 	case "any", "object":

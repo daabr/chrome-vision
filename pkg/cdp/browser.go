@@ -127,7 +127,7 @@ func start(ctx context.Context, s *Session) error {
 //
 // Remember that this does not impact ancestor or parent contexts specified
 // in the `cdp.NewContext` function call, only contexts returned by it.
-// Context cancelation propogates only from ancestors to descendants.
+// Context cancelation propagates only from ancestors to descendants.
 func Cancel(ctx context.Context) {
 	if session, ok := FromContext(ctx); ok {
 		session.cancel()
