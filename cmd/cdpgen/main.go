@@ -26,8 +26,8 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		var p cdpgen.Protocol
-		json.Unmarshal([]byte(bytes), &p)
+		p := &cdpgen.Protocol{}
+		json.Unmarshal([]byte(bytes), p)
 		cdpgen.Generate(p)
 	}
 }
