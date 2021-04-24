@@ -1,8 +1,6 @@
 package backgroundservice
 
-// RecordingStateChanged asynchronous event.
-//
-// Called when the recording state for the service has been updated.
+// RecordingStateChanged asynchronous event. Called when the recording state for the service has been updated.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#event-recordingStateChanged
 type RecordingStateChanged struct {
@@ -10,9 +8,7 @@ type RecordingStateChanged struct {
 	Service     string `json:"service"`
 }
 
-// BackgroundServiceEventReceived asynchronous event.
-//
-// Called with all existing backgroundServiceEvents when enabled, and all new
+// BackgroundServiceEventReceived asynchronous event. Called with all existing backgroundServiceEvents when enabled, and all new
 // events afterwards if enabled and recording.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#event-backgroundServiceEventReceived

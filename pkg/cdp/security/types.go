@@ -1,11 +1,11 @@
 package security
 
-// An internal certificate ID value.
+// CertificateID data type. An internal certificate ID value.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-CertificateId
 type CertificateID int64
 
-// A description of mixed content (HTTP resources on HTTPS pages), as defined by
+// MixedContentType data type. A description of mixed content (HTTP resources on HTTPS pages), as defined by
 // https://www.w3.org/TR/mixed-content/#categories
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-MixedContentType
@@ -18,7 +18,7 @@ const (
 	MixedContentTypeNone                MixedContentType = "none"
 )
 
-// The security level of a page or resource.
+// SecurityState data type. The security level of a page or resource.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-SecurityState
 type SecurityState string
@@ -33,7 +33,7 @@ const (
 	SecurityStateInsecureBroken SecurityState = "insecure-broken"
 )
 
-// Details about the security state of the page certificate.
+// CertificateSecurityState data type. Details about the security state of the page certificate.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-CertificateSecurityState
 //
@@ -77,6 +77,8 @@ type CertificateSecurityState struct {
 	ObsoleteSslSignature bool `json:"obsoleteSslSignature"`
 }
 
+// SafetyTipStatus data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-SafetyTipStatus
 //
 // This CDP type is experimental.
@@ -88,6 +90,8 @@ const (
 	SafetyTipStatusLookalike     SafetyTipStatus = "lookalike"
 )
 
+// SafetyTipInfo data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-SafetyTipInfo
 //
 // This CDP type is experimental.
@@ -98,7 +102,7 @@ type SafetyTipInfo struct {
 	SafeURL string `json:"safeUrl,omitempty"`
 }
 
-// Security state information about the page.
+// VisibleSecurityState data type. Security state information about the page.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-VisibleSecurityState
 //
@@ -114,7 +118,7 @@ type VisibleSecurityState struct {
 	SecurityStateIssueIds []string `json:"securityStateIssueIds"`
 }
 
-// An explanation of an factor contributing to the security state.
+// SecurityStateExplanation data type. An explanation of an factor contributing to the security state.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-SecurityStateExplanation
 type SecurityStateExplanation struct {
@@ -134,7 +138,7 @@ type SecurityStateExplanation struct {
 	Recommendations []string `json:"recommendations,omitempty"`
 }
 
-// Information about insecure content on the page.
+// InsecureContentStatus data type. Information about insecure content on the page.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-InsecureContentStatus
 //
@@ -156,7 +160,7 @@ type InsecureContentStatus struct {
 	DisplayedInsecureContentStyle string `json:"displayedInsecureContentStyle"`
 }
 
-// The action to take when a certificate error occurs. continue will continue processing the
+// CertificateErrorAction data type. The action to take when a certificate error occurs. continue will continue processing the
 // request and cancel will cancel the request.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-CertificateErrorAction

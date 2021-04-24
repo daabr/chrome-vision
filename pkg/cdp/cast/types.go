@@ -1,5 +1,7 @@
 package cast
 
+// Sink data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Cast/#type-Sink
 type Sink struct {
 	Name string `json:"name"`

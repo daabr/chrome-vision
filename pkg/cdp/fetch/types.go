@@ -1,11 +1,11 @@
 package fetch
 
-// Unique request identifier.
+// RequestID data type. Unique request identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#type-RequestId
 type RequestID string
 
-// Stages of the request to handle. Request will intercept before the request is
+// RequestStage data type. Stages of the request to handle. Request will intercept before the request is
 // sent. Response will intercept after the response is received (but before response
 // body is received.
 //
@@ -18,6 +18,8 @@ const (
 	RequestStageResponse RequestStage = "Response"
 )
 
+// RequestPattern data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#type-RequestPattern
 type RequestPattern struct {
 	// Wildcards ('*' -> zero or more, '?' -> exactly one) are allowed. Escape character is
@@ -29,7 +31,7 @@ type RequestPattern struct {
 	RequestStage string `json:"requestStage,omitempty"`
 }
 
-// Response HTTP header entry
+// HeaderEntry data type. Response HTTP header entry
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#type-HeaderEntry
 type HeaderEntry struct {
@@ -37,7 +39,7 @@ type HeaderEntry struct {
 	Value string `json:"value"`
 }
 
-// Authorization challenge for HTTP status code 401 or 407.
+// AuthChallenge data type. Authorization challenge for HTTP status code 401 or 407.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#type-AuthChallenge
 type AuthChallenge struct {
@@ -51,7 +53,7 @@ type AuthChallenge struct {
 	Realm string `json:"realm"`
 }
 
-// Response to an AuthChallenge.
+// AuthChallengeResponse data type. Response to an AuthChallenge.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#type-AuthChallengeResponse
 type AuthChallengeResponse struct {

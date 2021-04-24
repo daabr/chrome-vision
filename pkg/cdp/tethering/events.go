@@ -1,8 +1,6 @@
 package tethering
 
-// Accepted asynchronous event.
-//
-// Informs that port was successfully bound and got a specified connection id.
+// Accepted asynchronous event. Informs that port was successfully bound and got a specified connection id.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tethering/#event-accepted
 type Accepted struct {

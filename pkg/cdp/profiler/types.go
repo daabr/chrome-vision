@@ -2,7 +2,7 @@ package profiler
 
 import "github.com/daabr/chrome-vision/pkg/cdp/runtime"
 
-// Profile node. Holds callsite information, execution statistics and child nodes.
+// ProfileNode data type. Profile node. Holds callsite information, execution statistics and child nodes.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-ProfileNode
 type ProfileNode struct {
@@ -38,7 +38,7 @@ type Profile struct {
 	TimeDeltas []int64 `json:"timeDeltas,omitempty"`
 }
 
-// Specifies a number of samples attributed to a certain source position.
+// PositionTickInfo data type. Specifies a number of samples attributed to a certain source position.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-PositionTickInfo
 type PositionTickInfo struct {
@@ -48,7 +48,7 @@ type PositionTickInfo struct {
 	Ticks int64 `json:"ticks"`
 }
 
-// Coverage data for a source range.
+// CoverageRange data type. Coverage data for a source range.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-CoverageRange
 type CoverageRange struct {
@@ -60,7 +60,7 @@ type CoverageRange struct {
 	Count int64 `json:"count"`
 }
 
-// Coverage data for a JavaScript function.
+// FunctionCoverage data type. Coverage data for a JavaScript function.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-FunctionCoverage
 type FunctionCoverage struct {
@@ -72,7 +72,7 @@ type FunctionCoverage struct {
 	IsBlockCoverage bool `json:"isBlockCoverage"`
 }
 
-// Coverage data for a JavaScript script.
+// ScriptCoverage data type. Coverage data for a JavaScript script.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-ScriptCoverage
 type ScriptCoverage struct {
@@ -84,7 +84,7 @@ type ScriptCoverage struct {
 	Functions []FunctionCoverage `json:"functions"`
 }
 
-// Describes a type collected during runtime.
+// TypeObject data type. Describes a type collected during runtime.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-TypeObject
 //
@@ -94,7 +94,7 @@ type TypeObject struct {
 	Name string `json:"name"`
 }
 
-// Source offset and types for a parameter or return value.
+// TypeProfileEntry data type. Source offset and types for a parameter or return value.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-TypeProfileEntry
 //
@@ -106,7 +106,7 @@ type TypeProfileEntry struct {
 	Types []TypeObject `json:"types"`
 }
 
-// Type profile data collected during runtime for a JavaScript script.
+// ScriptTypeProfile data type. Type profile data collected during runtime for a JavaScript script.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-ScriptTypeProfile
 //
@@ -120,7 +120,7 @@ type ScriptTypeProfile struct {
 	Entries []TypeProfileEntry `json:"entries"`
 }
 
-// Collected counter information.
+// CounterInfo data type. Collected counter information.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-CounterInfo
 //
@@ -132,7 +132,7 @@ type CounterInfo struct {
 	Value int64 `json:"value"`
 }
 
-// Runtime call counter information.
+// RuntimeCallCounterInfo data type. Runtime call counter information.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-RuntimeCallCounterInfo
 //

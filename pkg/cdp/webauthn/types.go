@@ -1,8 +1,12 @@
 package webauthn
 
+// AuthenticatorID data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#type-AuthenticatorId
 type AuthenticatorID string
 
+// AuthenticatorProtocol data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#type-AuthenticatorProtocol
 type AuthenticatorProtocol string
 
@@ -12,6 +16,8 @@ const (
 	AuthenticatorProtocolCtap2 AuthenticatorProtocol = "ctap2"
 )
 
+// Ctap2Version data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#type-Ctap2Version
 type Ctap2Version string
 
@@ -21,6 +27,8 @@ const (
 	Ctap2VersionCtap21 Ctap2Version = "ctap2_1"
 )
 
+// AuthenticatorTransport data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#type-AuthenticatorTransport
 type AuthenticatorTransport string
 
@@ -33,6 +41,8 @@ const (
 	AuthenticatorTransportInternal AuthenticatorTransport = "internal"
 )
 
+// VirtualAuthenticatorOptions data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#type-VirtualAuthenticatorOptions
 type VirtualAuthenticatorOptions struct {
 	Protocol string `json:"protocol"`
@@ -59,6 +69,8 @@ type VirtualAuthenticatorOptions struct {
 	IsUserVerified bool `json:"isUserVerified,omitempty"`
 }
 
+// Credential data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#type-Credential
 type Credential struct {
 	CredentialID         string `json:"credentialId"`

@@ -1,6 +1,6 @@
 package performance
 
-// Run-time execution metric.
+// Metric data type. Run-time execution metric.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Performance/#type-Metric
 type Metric struct {

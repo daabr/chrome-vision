@@ -2,7 +2,7 @@ package log
 
 import "github.com/daabr/chrome-vision/pkg/cdp/runtime"
 
-// Log entry.
+// LogEntry data type. Log entry.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Log/#type-LogEntry
 type LogEntry struct {
@@ -28,7 +28,7 @@ type LogEntry struct {
 	Args []runtime.RemoteObject `json:"args,omitempty"`
 }
 
-// Violation configuration setting.
+// ViolationSetting data type. Violation configuration setting.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Log/#type-ViolationSetting
 type ViolationSetting struct {

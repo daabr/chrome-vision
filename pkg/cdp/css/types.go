@@ -1,9 +1,11 @@
 package css
 
+// StyleSheetID data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-StyleSheetId
 type StyleSheetID string
 
-// Stylesheet type: "injected" for stylesheets injected via extension, "user-agent" for user-agent
+// StyleSheetOrigin data type. Stylesheet type: "injected" for stylesheets injected via extension, "user-agent" for user-agent
 // stylesheets, "inspector" for stylesheets created by the inspector (i.e. those holding the "via
 // inspector" rules), "regular" for regular stylesheets.
 //
@@ -18,7 +20,7 @@ const (
 	StyleSheetOriginRegular   StyleSheetOrigin = "regular"
 )
 
-// CSS rule collection for a single pseudo style.
+// PseudoElementMatches data type. CSS rule collection for a single pseudo style.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-PseudoElementMatches
 type PseudoElementMatches struct {
@@ -28,7 +30,7 @@ type PseudoElementMatches struct {
 	Matches []RuleMatch `json:"matches"`
 }
 
-// Inherited CSS rule collection from ancestor node.
+// InheritedStyleEntry data type. Inherited CSS rule collection from ancestor node.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-InheritedStyleEntry
 type InheritedStyleEntry struct {
@@ -38,7 +40,7 @@ type InheritedStyleEntry struct {
 	MatchedCSSRules []RuleMatch `json:"matchedCSSRules"`
 }
 
-// Match data for a CSS rule.
+// RuleMatch data type. Match data for a CSS rule.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-RuleMatch
 type RuleMatch struct {
@@ -48,7 +50,7 @@ type RuleMatch struct {
 	MatchingSelectors []int64 `json:"matchingSelectors"`
 }
 
-// Data for a simple selector (these are delimited by commas in a selector list).
+// Value data type. Data for a simple selector (these are delimited by commas in a selector list).
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-Value
 type Value struct {
@@ -58,7 +60,7 @@ type Value struct {
 	Range *SourceRange `json:"range,omitempty"`
 }
 
-// Selector list data.
+// SelectorList data type. Selector list data.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-SelectorList
 type SelectorList struct {
@@ -68,7 +70,7 @@ type SelectorList struct {
 	Text string `json:"text"`
 }
 
-// CSS stylesheet metainformation.
+// CSSStyleSheetHeader data type. CSS stylesheet metainformation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSStyleSheetHeader
 type CSSStyleSheetHeader struct {
@@ -112,7 +114,7 @@ type CSSStyleSheetHeader struct {
 	EndColumn float64 `json:"endColumn"`
 }
 
-// CSS rule representation.
+// CSSRule data type. CSS rule representation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSRule
 type CSSRule struct {
@@ -130,7 +132,7 @@ type CSSRule struct {
 	Media []CSSMedia `json:"media,omitempty"`
 }
 
-// CSS coverage information.
+// RuleUsage data type. CSS coverage information.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-RuleUsage
 type RuleUsage struct {
@@ -145,7 +147,7 @@ type RuleUsage struct {
 	Used bool `json:"used"`
 }
 
-// Text range within a resource. All numbers are zero-based.
+// SourceRange data type. Text range within a resource. All numbers are zero-based.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-SourceRange
 type SourceRange struct {
@@ -159,6 +161,8 @@ type SourceRange struct {
 	EndColumn int64 `json:"endColumn"`
 }
 
+// ShorthandEntry data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-ShorthandEntry
 type ShorthandEntry struct {
 	// Shorthand name.
@@ -169,6 +173,8 @@ type ShorthandEntry struct {
 	Important bool `json:"important,omitempty"`
 }
 
+// CSSComputedStyleProperty data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSComputedStyleProperty
 type CSSComputedStyleProperty struct {
 	// Computed style property name.
@@ -177,7 +183,7 @@ type CSSComputedStyleProperty struct {
 	Value string `json:"value"`
 }
 
-// CSS style representation.
+// CSSStyle data type. CSS style representation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSStyle
 type CSSStyle struct {
@@ -194,7 +200,7 @@ type CSSStyle struct {
 	Range *SourceRange `json:"range,omitempty"`
 }
 
-// CSS property declaration data.
+// CSSProperty data type. CSS property declaration data.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSProperty
 type CSSProperty struct {
@@ -216,7 +222,7 @@ type CSSProperty struct {
 	Range *SourceRange `json:"range,omitempty"`
 }
 
-// CSS media rule descriptor.
+// CSSMedia data type. CSS media rule descriptor.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSMedia
 type CSSMedia struct {
@@ -238,7 +244,7 @@ type CSSMedia struct {
 	MediaList []MediaQuery `json:"mediaList,omitempty"`
 }
 
-// Media query descriptor.
+// MediaQuery data type. Media query descriptor.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-MediaQuery
 type MediaQuery struct {
@@ -248,7 +254,7 @@ type MediaQuery struct {
 	Active bool `json:"active"`
 }
 
-// Media query expression descriptor.
+// MediaQueryExpression data type. Media query expression descriptor.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-MediaQueryExpression
 type MediaQueryExpression struct {
@@ -264,7 +270,7 @@ type MediaQueryExpression struct {
 	ComputedLength float64 `json:"computedLength,omitempty"`
 }
 
-// Information about amount of glyphs that were rendered with given font.
+// PlatformFontUsage data type. Information about amount of glyphs that were rendered with given font.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-PlatformFontUsage
 type PlatformFontUsage struct {
@@ -276,7 +282,7 @@ type PlatformFontUsage struct {
 	GlyphCount float64 `json:"glyphCount"`
 }
 
-// Information about font variation axes for variable fonts
+// FontVariationAxis data type. Information about font variation axes for variable fonts
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-FontVariationAxis
 type FontVariationAxis struct {
@@ -292,7 +298,7 @@ type FontVariationAxis struct {
 	DefaultValue float64 `json:"defaultValue"`
 }
 
-// Properties of a web font: https://www.w3.org/TR/2008/REC-CSS2-20080411/fonts.html#font-descriptions
+// FontFace data type. Properties of a web font: https://www.w3.org/TR/2008/REC-CSS2-20080411/fonts.html#font-descriptions
 // and additional information such as platformFontFamily and fontVariationAxes.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-FontFace
@@ -317,7 +323,7 @@ type FontFace struct {
 	FontVariationAxes []FontVariationAxis `json:"fontVariationAxes,omitempty"`
 }
 
-// CSS keyframes rule representation.
+// CSSKeyframesRule data type. CSS keyframes rule representation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSKeyframesRule
 type CSSKeyframesRule struct {
@@ -327,7 +333,7 @@ type CSSKeyframesRule struct {
 	Keyframes []CSSKeyframeRule `json:"keyframes"`
 }
 
-// CSS keyframe rule representation.
+// CSSKeyframeRule data type. CSS keyframe rule representation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSKeyframeRule
 type CSSKeyframeRule struct {
@@ -342,7 +348,7 @@ type CSSKeyframeRule struct {
 	Style CSSStyle `json:"style"`
 }
 
-// A descriptor of operation to mutate style declaration text.
+// StyleDeclarationEdit data type. A descriptor of operation to mutate style declaration text.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-StyleDeclarationEdit
 type StyleDeclarationEdit struct {

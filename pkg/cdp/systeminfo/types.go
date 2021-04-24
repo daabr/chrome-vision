@@ -2,7 +2,7 @@ package systeminfo
 
 import "encoding/json"
 
-// Describes a single graphics processor (GPU).
+// GPUDevice data type. Describes a single graphics processor (GPU).
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/SystemInfo/#type-GPUDevice
 type GPUDevice struct {
@@ -24,7 +24,7 @@ type GPUDevice struct {
 	DriverVersion string `json:"driverVersion"`
 }
 
-// Describes the width and height dimensions of an entity.
+// Size data type. Describes the width and height dimensions of an entity.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/SystemInfo/#type-Size
 type Size struct {
@@ -34,7 +34,7 @@ type Size struct {
 	Height int64 `json:"height"`
 }
 
-// Describes a supported video decoding profile with its associated minimum and
+// VideoDecodeAcceleratorCapability data type. Describes a supported video decoding profile with its associated minimum and
 // maximum resolutions.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/SystemInfo/#type-VideoDecodeAcceleratorCapability
@@ -47,7 +47,7 @@ type VideoDecodeAcceleratorCapability struct {
 	MinResolution Size `json:"minResolution"`
 }
 
-// Describes a supported video encoding profile with its associated maximum
+// VideoEncodeAcceleratorCapability data type. Describes a supported video encoding profile with its associated maximum
 // resolution and maximum framerate.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/SystemInfo/#type-VideoEncodeAcceleratorCapability
@@ -63,7 +63,7 @@ type VideoEncodeAcceleratorCapability struct {
 	MaxFramerateDenominator int64 `json:"maxFramerateDenominator"`
 }
 
-// YUV subsampling type of the pixels of a given image.
+// SubsamplingFormat data type. YUV subsampling type of the pixels of a given image.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/SystemInfo/#type-SubsamplingFormat
 type SubsamplingFormat string
@@ -75,7 +75,7 @@ const (
 	SubsamplingFormatYuv444 SubsamplingFormat = "yuv444"
 )
 
-// Image format of a given image.
+// ImageType data type. Image format of a given image.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/SystemInfo/#type-ImageType
 type ImageType string
@@ -87,7 +87,7 @@ const (
 	ImageTypeUnknown ImageType = "unknown"
 )
 
-// Describes a supported image decoding profile with its associated minimum and
+// ImageDecodeAcceleratorCapability data type. Describes a supported image decoding profile with its associated minimum and
 // maximum resolutions and subsampling.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/SystemInfo/#type-ImageDecodeAcceleratorCapability
@@ -102,7 +102,7 @@ type ImageDecodeAcceleratorCapability struct {
 	Subsamplings []SubsamplingFormat `json:"subsamplings"`
 }
 
-// Provides information about the GPU(s) on the system.
+// GPUInfo data type. Provides information about the GPU(s) on the system.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/SystemInfo/#type-GPUInfo
 type GPUInfo struct {
@@ -122,7 +122,7 @@ type GPUInfo struct {
 	ImageDecoding []ImageDecodeAcceleratorCapability `json:"imageDecoding"`
 }
 
-// Represents process info.
+// ProcessInfo data type. Represents process info.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/SystemInfo/#type-ProcessInfo
 type ProcessInfo struct {

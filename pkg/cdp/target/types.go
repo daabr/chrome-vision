@@ -1,13 +1,17 @@
 package target
 
+// TargetID data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#type-TargetID
 type TargetID string
 
-// Unique identifier of attached debugging session.
+// SessionID data type. Unique identifier of attached debugging session.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#type-SessionID
 type SessionID string
 
+// TargetInfo data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#type-TargetInfo
 type TargetInfo struct {
 	TargetID string `json:"targetId"`
@@ -30,6 +34,8 @@ type TargetInfo struct {
 	BrowserContextID string `json:"browserContextId,omitempty"`
 }
 
+// RemoteLocation data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#type-RemoteLocation
 //
 // This CDP type is experimental.

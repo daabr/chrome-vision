@@ -2,12 +2,12 @@ package debugger
 
 import "github.com/daabr/chrome-vision/pkg/cdp/runtime"
 
-// Breakpoint identifier.
+// BreakpointID data type. Breakpoint identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-BreakpointId
 type BreakpointID string
 
-// Call frame identifier.
+// CallFrameID data type. Call frame identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-CallFrameId
 type CallFrameID string
@@ -24,7 +24,7 @@ type Location struct {
 	ColumnNumber int64 `json:"columnNumber,omitempty"`
 }
 
-// Location in the source code.
+// ScriptPosition data type. Location in the source code.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-ScriptPosition
 //
@@ -34,7 +34,7 @@ type ScriptPosition struct {
 	ColumnNumber int64 `json:"columnNumber"`
 }
 
-// Location range within one script.
+// LocationRange data type. Location range within one script.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-LocationRange
 //
@@ -45,7 +45,7 @@ type LocationRange struct {
 	End      ScriptPosition `json:"end"`
 }
 
-// JavaScript call frame. Array of call frames form the call stack.
+// CallFrame data type. JavaScript call frame. Array of call frames form the call stack.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-CallFrame
 type CallFrame struct {
@@ -84,7 +84,7 @@ type Scope struct {
 	EndLocation *Location `json:"endLocation,omitempty"`
 }
 
-// Search match for resource.
+// SearchMatch data type. Search match for resource.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-SearchMatch
 type SearchMatch struct {
@@ -94,6 +94,8 @@ type SearchMatch struct {
 	LineContent string `json:"lineContent"`
 }
 
+// BreakLocation data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-BreakLocation
 type BreakLocation struct {
 	// Script identifier as reported in the `Debugger.scriptParsed`.
@@ -105,7 +107,7 @@ type BreakLocation struct {
 	Type         string `json:"type,omitempty"`
 }
 
-// Enum of possible script languages.
+// ScriptLanguage data type. Enum of possible script languages.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-ScriptLanguage
 type ScriptLanguage string
@@ -116,7 +118,7 @@ const (
 	ScriptLanguageWebAssembly ScriptLanguage = "WebAssembly"
 )
 
-// Debug symbols available for a wasm script.
+// DebugSymbols data type. Debug symbols available for a wasm script.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-DebugSymbols
 type DebugSymbols struct {

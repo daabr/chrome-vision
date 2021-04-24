@@ -2,12 +2,12 @@ package accessibility
 
 import "encoding/json"
 
-// Unique accessibility node identifier.
+// AXNodeID data type. Unique accessibility node identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXNodeId
 type AXNodeID string
 
-// Enum of possible property types.
+// AXValueType data type. Enum of possible property types.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXValueType
 type AXValueType string
@@ -33,7 +33,7 @@ const (
 	AXValueTypeValueUndefined     AXValueType = "valueUndefined"
 )
 
-// Enum of possible property sources.
+// AXValueSourceType data type. Enum of possible property sources.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXValueSourceType
 type AXValueSourceType string
@@ -48,7 +48,7 @@ const (
 	AXValueSourceTypeRelatedElement AXValueSourceType = "relatedElement"
 )
 
-// Enum of possible native property sources (as a subtype of a particular AXValueSourceType).
+// AXValueNativeSourceType data type. Enum of possible native property sources (as a subtype of a particular AXValueSourceType).
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXValueNativeSourceType
 type AXValueNativeSourceType string
@@ -66,7 +66,7 @@ const (
 	AXValueNativeSourceTypeOther          AXValueNativeSourceType = "other"
 )
 
-// A single source for a computed AX property.
+// AXValueSource data type. A single source for a computed AX property.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXValueSource
 type AXValueSource struct {
@@ -90,6 +90,8 @@ type AXValueSource struct {
 	InvalidReason string `json:"invalidReason,omitempty"`
 }
 
+// AXRelatedNode data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXRelatedNode
 type AXRelatedNode struct {
 	// The BackendNodeId of the related DOM node.
@@ -100,6 +102,8 @@ type AXRelatedNode struct {
 	Text string `json:"text,omitempty"`
 }
 
+// AXProperty data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXProperty
 type AXProperty struct {
 	// The name of this property.
@@ -108,7 +112,7 @@ type AXProperty struct {
 	Value AXValue `json:"value"`
 }
 
-// A single computed AX property.
+// AXValue data type. A single computed AX property.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXValue
 type AXValue struct {
@@ -122,7 +126,7 @@ type AXValue struct {
 	Sources []AXValueSource `json:"sources,omitempty"`
 }
 
-// Values of AXProperty name:
+// AXPropertyName data type. Values of AXProperty name:
 // - from 'busy' to 'roledescription': states which apply to every AX node
 // - from 'live' to 'root': attributes which apply to nodes in live regions
 // - from 'autocomplete' to 'valuetext': attributes which apply to widgets
@@ -175,7 +179,7 @@ const (
 	AXPropertyNameOwns             AXPropertyName = "owns"
 )
 
-// A node in the accessibility tree.
+// AXNode data type. A node in the accessibility tree.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXNode
 type AXNode struct {

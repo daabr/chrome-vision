@@ -1,6 +1,6 @@
 package backgroundservice
 
-// The Background Service that will be associated with the commands/events.
+// ServiceName data type. The Background Service that will be associated with the commands/events.
 // Every Background Service operates independently, but they share the same
 // API.
 //
@@ -17,7 +17,7 @@ const (
 	ServiceNamePeriodicBackgroundSync ServiceName = "periodicBackgroundSync"
 )
 
-// A key-value pair for additional event information to pass along.
+// EventMetadata data type. A key-value pair for additional event information to pass along.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#type-EventMetadata
 type EventMetadata struct {
@@ -25,6 +25,8 @@ type EventMetadata struct {
 	Value string `json:"value"`
 }
 
+// BackgroundServiceEvent data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#type-BackgroundServiceEvent
 type BackgroundServiceEvent struct {
 	// Timestamp of the event (in seconds).

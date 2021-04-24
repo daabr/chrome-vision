@@ -1,6 +1,6 @@
 package schema
 
-// Description of the protocol domain.
+// Domain data type. Description of the protocol domain.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Schema/#type-Domain
 type Domain struct {

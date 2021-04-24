@@ -2,7 +2,7 @@ package performancetimeline
 
 import "github.com/daabr/chrome-vision/pkg/cdp/dom"
 
-// See https://github.com/WICG/LargestContentfulPaint and largest_contentful_paint.idl
+// LargestContentfulPaint data type. See https://github.com/WICG/LargestContentfulPaint and largest_contentful_paint.idl
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/PerformanceTimeline/#type-LargestContentfulPaint
 type LargestContentfulPaint struct {
@@ -17,6 +17,8 @@ type LargestContentfulPaint struct {
 	NodeID int64  `json:"nodeId,omitempty"`
 }
 
+// LayoutShiftAttribution data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/PerformanceTimeline/#type-LayoutShiftAttribution
 type LayoutShiftAttribution struct {
 	PreviousRect dom.Rect `json:"previousRect"`
@@ -24,7 +26,7 @@ type LayoutShiftAttribution struct {
 	NodeID       int64    `json:"nodeId,omitempty"`
 }
 
-// See https://wicg.github.io/layout-instability/#sec-layout-shift and layout_shift.idl
+// LayoutShift data type. See https://wicg.github.io/layout-instability/#sec-layout-shift and layout_shift.idl
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/PerformanceTimeline/#type-LayoutShift
 type LayoutShift struct {
@@ -35,6 +37,8 @@ type LayoutShift struct {
 	Sources        []LayoutShiftAttribution `json:"sources"`
 }
 
+// TimelineEvent data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/PerformanceTimeline/#type-TimelineEvent
 type TimelineEvent struct {
 	// Identifies the frame that this event is related to. Empty for non-frame targets.

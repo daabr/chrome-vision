@@ -2,17 +2,17 @@ package layertree
 
 import "github.com/daabr/chrome-vision/pkg/cdp/dom"
 
-// Unique Layer identifier.
+// LayerID data type. Unique Layer identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#type-LayerId
 type LayerID string
 
-// Unique snapshot identifier.
+// SnapshotID data type. Unique snapshot identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#type-SnapshotId
 type SnapshotID string
 
-// Rectangle where scrolling happens on the main thread.
+// ScrollRect data type. Rectangle where scrolling happens on the main thread.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#type-ScrollRect
 type ScrollRect struct {
@@ -22,7 +22,7 @@ type ScrollRect struct {
 	Type string `json:"type"`
 }
 
-// Sticky position constraints.
+// StickyPositionConstraint data type. Sticky position constraints.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#type-StickyPositionConstraint
 type StickyPositionConstraint struct {
@@ -36,7 +36,7 @@ type StickyPositionConstraint struct {
 	NearestLayerShiftingContainingBlock string `json:"nearestLayerShiftingContainingBlock,omitempty"`
 }
 
-// Serialized fragment of layer picture along with its offset within the layer.
+// PictureTile data type. Serialized fragment of layer picture along with its offset within the layer.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#type-PictureTile
 type PictureTile struct {
@@ -48,7 +48,7 @@ type PictureTile struct {
 	Picture string `json:"picture"`
 }
 
-// Information about a compositing layer.
+// Layer data type. Information about a compositing layer.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#type-Layer
 type Layer struct {
@@ -87,7 +87,7 @@ type Layer struct {
 	StickyPositionConstraint *StickyPositionConstraint `json:"stickyPositionConstraint,omitempty"`
 }
 
-// Array of timings, one per paint step.
+// PaintProfile data type. Array of timings, one per paint step.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#type-PaintProfile
 type PaintProfile []float64

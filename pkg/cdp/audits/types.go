@@ -5,7 +5,7 @@ import (
 	"github.com/daabr/chrome-vision/pkg/cdp/runtime"
 )
 
-// Information about a cookie that is affected by an inspector issue.
+// AffectedCookie data type. Information about a cookie that is affected by an inspector issue.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-AffectedCookie
 type AffectedCookie struct {
@@ -15,7 +15,7 @@ type AffectedCookie struct {
 	Domain string `json:"domain"`
 }
 
-// Information about a request that is affected by an inspector issue.
+// AffectedRequest data type. Information about a request that is affected by an inspector issue.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-AffectedRequest
 type AffectedRequest struct {
@@ -24,13 +24,15 @@ type AffectedRequest struct {
 	URL       string `json:"url,omitempty"`
 }
 
-// Information about the frame affected by an inspector issue.
+// AffectedFrame data type. Information about the frame affected by an inspector issue.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-AffectedFrame
 type AffectedFrame struct {
 	FrameID string `json:"frameId"`
 }
 
+// SameSiteCookieExclusionReason data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-SameSiteCookieExclusionReason
 type SameSiteCookieExclusionReason string
 
@@ -42,6 +44,8 @@ const (
 	SameSiteCookieExclusionReasonExcludeSameSiteStrict                  SameSiteCookieExclusionReason = "ExcludeSameSiteStrict"
 )
 
+// SameSiteCookieWarningReason data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-SameSiteCookieWarningReason
 type SameSiteCookieWarningReason string
 
@@ -57,6 +61,8 @@ const (
 	SameSiteCookieWarningReasonWarnSameSiteLaxCrossDowngradeLax        SameSiteCookieWarningReason = "WarnSameSiteLaxCrossDowngradeLax"
 )
 
+// SameSiteCookieOperation data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-SameSiteCookieOperation
 type SameSiteCookieOperation string
 
@@ -66,7 +72,7 @@ const (
 	SameSiteCookieOperationReadCookie SameSiteCookieOperation = "ReadCookie"
 )
 
-// This information is currently necessary, as the front-end has a difficult
+// SameSiteCookieIssueDetails data type. This information is currently necessary, as the front-end has a difficult
 // time finding a specific cookie. With this, we can convey specific error
 // information without the cookie.
 //
@@ -83,6 +89,8 @@ type SameSiteCookieIssueDetails struct {
 	Request        *AffectedRequest `json:"request,omitempty"`
 }
 
+// MixedContentResolutionStatus data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-MixedContentResolutionStatus
 type MixedContentResolutionStatus string
 
@@ -93,6 +101,8 @@ const (
 	MixedContentResolutionStatusMixedContentWarning               MixedContentResolutionStatus = "MixedContentWarning"
 )
 
+// MixedContentResourceType data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-MixedContentResourceType
 type MixedContentResourceType string
 
@@ -126,6 +136,8 @@ const (
 	MixedContentResourceTypeXSLT           MixedContentResourceType = "XSLT"
 )
 
+// MixedContentIssueDetails data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-MixedContentIssueDetails
 type MixedContentIssueDetails struct {
 	// The type of resource causing the mixed content issue (css, js, iframe,
@@ -146,7 +158,7 @@ type MixedContentIssueDetails struct {
 	Frame *AffectedFrame `json:"frame,omitempty"`
 }
 
-// Enum indicating the reason a response has been blocked. These reasons are
+// BlockedByResponseReason data type. Enum indicating the reason a response has been blocked. These reasons are
 // refinements of the net error BLOCKED_BY_RESPONSE.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-BlockedByResponseReason
@@ -161,7 +173,7 @@ const (
 	BlockedByResponseReasonCorpNotSameSite                                   BlockedByResponseReason = "CorpNotSameSite"
 )
 
-// Details for a request that has been blocked with the BLOCKED_BY_RESPONSE
+// BlockedByResponseIssueDetails data type. Details for a request that has been blocked with the BLOCKED_BY_RESPONSE
 // code. Currently only used for COEP/COOP, but may be extended to include
 // some CSP errors in the future.
 //
@@ -173,6 +185,8 @@ type BlockedByResponseIssueDetails struct {
 	Reason       string          `json:"reason"`
 }
 
+// HeavyAdResolutionStatus data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-HeavyAdResolutionStatus
 type HeavyAdResolutionStatus string
 
@@ -182,6 +196,8 @@ const (
 	HeavyAdResolutionStatusHeavyAdWarning HeavyAdResolutionStatus = "HeavyAdWarning"
 )
 
+// HeavyAdReason data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-HeavyAdReason
 type HeavyAdReason string
 
@@ -192,6 +208,8 @@ const (
 	HeavyAdReasonCpuPeakLimit      HeavyAdReason = "CpuPeakLimit"
 )
 
+// HeavyAdIssueDetails data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-HeavyAdIssueDetails
 type HeavyAdIssueDetails struct {
 	// The resolution status, either blocking the content or warning.
@@ -202,6 +220,8 @@ type HeavyAdIssueDetails struct {
 	Frame AffectedFrame `json:"frame"`
 }
 
+// ContentSecurityPolicyViolationType data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-ContentSecurityPolicyViolationType
 type ContentSecurityPolicyViolationType string
 
@@ -214,6 +234,8 @@ const (
 	ContentSecurityPolicyViolationTypeKTrustedTypesPolicyViolation ContentSecurityPolicyViolationType = "kTrustedTypesPolicyViolation"
 )
 
+// SourceCodeLocation data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-SourceCodeLocation
 type SourceCodeLocation struct {
 	ScriptID     *runtime.ScriptID `json:"scriptId,omitempty"`
@@ -222,6 +244,8 @@ type SourceCodeLocation struct {
 	ColumnNumber int64             `json:"columnNumber"`
 }
 
+// ContentSecurityPolicyIssueDetails data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-ContentSecurityPolicyIssueDetails
 type ContentSecurityPolicyIssueDetails struct {
 	// The url not included in allowed sources.
@@ -235,6 +259,8 @@ type ContentSecurityPolicyIssueDetails struct {
 	ViolatingNodeID                    int64               `json:"violatingNodeId,omitempty"`
 }
 
+// SharedArrayBufferIssueType data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-SharedArrayBufferIssueType
 type SharedArrayBufferIssueType string
 
@@ -244,7 +270,7 @@ const (
 	SharedArrayBufferIssueTypeCreationIssue SharedArrayBufferIssueType = "CreationIssue"
 )
 
-// Details for a issue arising from an SAB being instantiated in, or
+// SharedArrayBufferIssueDetails data type. Details for a issue arising from an SAB being instantiated in, or
 // transfered to a context that is not cross-origin isolated.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-SharedArrayBufferIssueDetails
@@ -254,6 +280,8 @@ type SharedArrayBufferIssueDetails struct {
 	Type               string             `json:"type"`
 }
 
+// TwaQualityEnforcementViolationType data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-TwaQualityEnforcementViolationType
 type TwaQualityEnforcementViolationType string
 
@@ -264,6 +292,8 @@ const (
 	TwaQualityEnforcementViolationTypeKDigitalAssetLinks  TwaQualityEnforcementViolationType = "kDigitalAssetLinks"
 )
 
+// TrustedWebActivityIssueDetails data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-TrustedWebActivityIssueDetails
 type TrustedWebActivityIssueDetails struct {
 	// The url that triggers the violation.
@@ -278,6 +308,8 @@ type TrustedWebActivityIssueDetails struct {
 	Signature string `json:"signature,omitempty"`
 }
 
+// LowTextContrastIssueDetails data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-LowTextContrastIssueDetails
 type LowTextContrastIssueDetails struct {
 	ViolatingNodeID       int64   `json:"violatingNodeId"`
@@ -289,7 +321,7 @@ type LowTextContrastIssueDetails struct {
 	FontWeight            string  `json:"fontWeight"`
 }
 
-// Details for a CORS related issue, e.g. a warning or error related to
+// CorsIssueDetails data type. Details for a CORS related issue, e.g. a warning or error related to
 // CORS RFC1918 enforcement.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-CorsIssueDetails
@@ -302,6 +334,8 @@ type CorsIssueDetails struct {
 	ClientSecurityState    *network.ClientSecurityState `json:"clientSecurityState,omitempty"`
 }
 
+// AttributionReportingIssueType data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-AttributionReportingIssueType
 type AttributionReportingIssueType string
 
@@ -311,7 +345,7 @@ const (
 	AttributionReportingIssueTypeInvalidAttributionData   AttributionReportingIssueType = "InvalidAttributionData"
 )
 
-// Details for issues around "Attribution Reporting API" usage.
+// AttributionReportingIssueDetails data type. Details for issues around "Attribution Reporting API" usage.
 // Explainer: https://github.com/WICG/conversion-measurement-api
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-AttributionReportingIssueDetails
@@ -323,7 +357,7 @@ type AttributionReportingIssueDetails struct {
 	InvalidParameter string           `json:"invalidParameter,omitempty"`
 }
 
-// A unique identifier for the type of issue. Each type may use one of the
+// InspectorIssueCode data type. A unique identifier for the type of issue. Each type may use one of the
 // optional fields in InspectorIssueDetails to convey more specific
 // information about the kind of issue.
 //
@@ -344,7 +378,7 @@ const (
 	InspectorIssueCodeAttributionReportingIssue  InspectorIssueCode = "AttributionReportingIssue"
 )
 
-// This struct holds a list of optional fields with additional information
+// InspectorIssueDetails data type. This struct holds a list of optional fields with additional information
 // specific to the kind of issue. When adding a new issue code, please also
 // add a new optional field to this type.
 //
@@ -362,7 +396,7 @@ type InspectorIssueDetails struct {
 	AttributionReportingIssueDetails  *AttributionReportingIssueDetails  `json:"attributionReportingIssueDetails,omitempty"`
 }
 
-// An inspector issue reported from the back-end.
+// InspectorIssue data type. An inspector issue reported from the back-end.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-InspectorIssue
 type InspectorIssue struct {

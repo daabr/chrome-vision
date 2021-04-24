@@ -1,6 +1,6 @@
 package database
 
-// Unique identifier of Database object.
+// DatabaseID data type. Unique identifier of Database object.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Database/#type-DatabaseId
 type DatabaseID string
@@ -19,7 +19,7 @@ type Database struct {
 	Version string `json:"version"`
 }
 
-// Database error.
+// Error data type. Database error.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Database/#type-Error
 type Error struct {

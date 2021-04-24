@@ -1,10 +1,12 @@
 package tracing
 
-// Configuration for memory dump. Used only when "memory-infra" category is enabled.
+// MemoryDumpConfig data type. Configuration for memory dump. Used only when "memory-infra" category is enabled.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#type-MemoryDumpConfig
 type MemoryDumpConfig struct{}
 
+// TraceConfig data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#type-TraceConfig
 type TraceConfig struct {
 	// Controls how the trace buffer stores data.
@@ -25,7 +27,7 @@ type TraceConfig struct {
 	MemoryDumpConfig *MemoryDumpConfig `json:"memoryDumpConfig,omitempty"`
 }
 
-// Data format of a trace. Can be either the legacy JSON format or the
+// StreamFormat data type. Data format of a trace. Can be either the legacy JSON format or the
 // protocol buffer format. Note that the JSON format will be deprecated soon.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#type-StreamFormat
@@ -37,7 +39,7 @@ const (
 	StreamFormatProto StreamFormat = "proto"
 )
 
-// Compression type to use for traces returned via streams.
+// StreamCompression data type. Compression type to use for traces returned via streams.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#type-StreamCompression
 type StreamCompression string
@@ -48,7 +50,7 @@ const (
 	StreamCompressionGzip StreamCompression = "gzip"
 )
 
-// Details exposed when memory request explicitly declared.
+// MemoryDumpLevelOfDetail data type. Details exposed when memory request explicitly declared.
 // Keep consistent with memory_dump_request_args.h and
 // memory_instrumentation.mojom
 //
@@ -62,7 +64,7 @@ const (
 	MemoryDumpLevelOfDetailDetailed   MemoryDumpLevelOfDetail = "detailed"
 )
 
-// Backend type to use for tracing. `chrome` uses the Chrome-integrated
+// TracingBackend data type. Backend type to use for tracing. `chrome` uses the Chrome-integrated
 // tracing service and is supported on all platforms. `system` is only
 // supported on Chrome OS and uses the Perfetto system tracing service.
 // `auto` chooses `system` when the perfettoConfig provided to Tracing.start

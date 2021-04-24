@@ -2,12 +2,12 @@ package heapprofiler
 
 import "github.com/daabr/chrome-vision/pkg/cdp/runtime"
 
-// Heap snapshot object id.
+// HeapSnapshotObjectID data type. Heap snapshot object id.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#type-HeapSnapshotObjectId
 type HeapSnapshotObjectID string
 
-// Sampling Heap Profile node. Holds callsite information, allocation statistics and child nodes.
+// SamplingHeapProfileNode data type. Sampling Heap Profile node. Holds callsite information, allocation statistics and child nodes.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#type-SamplingHeapProfileNode
 type SamplingHeapProfileNode struct {
@@ -21,7 +21,7 @@ type SamplingHeapProfileNode struct {
 	Children []SamplingHeapProfileNode `json:"children"`
 }
 
-// A single sample from a sampling profile.
+// SamplingHeapProfileSample data type. A single sample from a sampling profile.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#type-SamplingHeapProfileSample
 type SamplingHeapProfileSample struct {
@@ -34,7 +34,7 @@ type SamplingHeapProfileSample struct {
 	Ordinal float64 `json:"ordinal"`
 }
 
-// Sampling profile.
+// SamplingHeapProfile data type. Sampling profile.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#type-SamplingHeapProfile
 type SamplingHeapProfile struct {

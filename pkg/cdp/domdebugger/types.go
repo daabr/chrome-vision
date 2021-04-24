@@ -2,7 +2,7 @@ package domdebugger
 
 import "github.com/daabr/chrome-vision/pkg/cdp/runtime"
 
-// DOM breakpoint type.
+// DOMBreakpointType data type. DOM breakpoint type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#type-DOMBreakpointType
 type DOMBreakpointType string
@@ -14,7 +14,7 @@ const (
 	DOMBreakpointTypeNodeRemoved       DOMBreakpointType = "node-removed"
 )
 
-// CSP Violation type.
+// CSPViolationType data type. CSP Violation type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#type-CSPViolationType
 //
@@ -27,7 +27,7 @@ const (
 	CSPViolationTypeTrustedtypePolicyViolation CSPViolationType = "trustedtype-policy-violation"
 )
 
-// Object event listener.
+// EventListener data type. Object event listener.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#type-EventListener
 type EventListener struct {

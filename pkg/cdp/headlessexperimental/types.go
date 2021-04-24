@@ -1,6 +1,6 @@
 package headlessexperimental
 
-// Encoding options for a screenshot.
+// ScreenshotParams data type. Encoding options for a screenshot.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeadlessExperimental/#type-ScreenshotParams
 type ScreenshotParams struct {

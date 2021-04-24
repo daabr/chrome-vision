@@ -2,23 +2,23 @@ package runtime
 
 import "encoding/json"
 
-// Unique script identifier.
+// ScriptID data type. Unique script identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-ScriptId
 type ScriptID string
 
-// Unique object identifier.
+// RemoteObjectID data type. Unique object identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-RemoteObjectId
 type RemoteObjectID string
 
-// Primitive value which cannot be JSON-stringified. Includes values `-0`, `NaN`, `Infinity`,
+// UnserializableValue data type. Primitive value which cannot be JSON-stringified. Includes values `-0`, `NaN`, `Infinity`,
 // `-Infinity`, and bigint literals.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-UnserializableValue
 type UnserializableValue string
 
-// Mirror object referencing original JavaScript object.
+// RemoteObject data type. Mirror object referencing original JavaScript object.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-RemoteObject
 type RemoteObject struct {
@@ -47,6 +47,8 @@ type RemoteObject struct {
 	CustomPreview *CustomPreview `json:"customPreview,omitempty"`
 }
 
+// CustomPreview data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-CustomPreview
 //
 // This CDP type is experimental.
@@ -60,7 +62,7 @@ type CustomPreview struct {
 	BodyGetterID string `json:"bodyGetterId,omitempty"`
 }
 
-// Object containing abbreviated remote object value.
+// ObjectPreview data type. Object containing abbreviated remote object value.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-ObjectPreview
 //
@@ -80,6 +82,8 @@ type ObjectPreview struct {
 	Entries []EntryPreview `json:"entries,omitempty"`
 }
 
+// PropertyPreview data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-PropertyPreview
 //
 // This CDP type is experimental.
@@ -96,6 +100,8 @@ type PropertyPreview struct {
 	Subtype string `json:"subtype,omitempty"`
 }
 
+// EntryPreview data type.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-EntryPreview
 //
 // This CDP type is experimental.
@@ -106,7 +112,7 @@ type EntryPreview struct {
 	Value ObjectPreview `json:"value"`
 }
 
-// Object property descriptor.
+// PropertyDescriptor data type. Object property descriptor.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-PropertyDescriptor
 type PropertyDescriptor struct {
@@ -136,7 +142,7 @@ type PropertyDescriptor struct {
 	Symbol *RemoteObject `json:"symbol,omitempty"`
 }
 
-// Object internal property descriptor. This property isn't normally visible in JavaScript code.
+// InternalPropertyDescriptor data type. Object internal property descriptor. This property isn't normally visible in JavaScript code.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-InternalPropertyDescriptor
 type InternalPropertyDescriptor struct {
@@ -146,7 +152,7 @@ type InternalPropertyDescriptor struct {
 	Value *RemoteObject `json:"value,omitempty"`
 }
 
-// Object private field descriptor.
+// PrivatePropertyDescriptor data type. Object private field descriptor.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-PrivatePropertyDescriptor
 //
@@ -164,7 +170,7 @@ type PrivatePropertyDescriptor struct {
 	Set *RemoteObject `json:"set,omitempty"`
 }
 
-// Represents function call argument. Either remote object id `objectId`, primitive `value`,
+// CallArgument data type. Represents function call argument. Either remote object id `objectId`, primitive `value`,
 // unserializable primitive value or neither of (for undefined) them should be specified.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-CallArgument
@@ -177,12 +183,12 @@ type CallArgument struct {
 	ObjectID string `json:"objectId,omitempty"`
 }
 
-// Id of an execution context.
+// ExecutionContextID data type. Id of an execution context.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-ExecutionContextId
 type ExecutionContextID int64
 
-// Description of an isolated world.
+// ExecutionContextDescription data type. Description of an isolated world.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-ExecutionContextDescription
 type ExecutionContextDescription struct {
@@ -203,7 +209,7 @@ type ExecutionContextDescription struct {
 	AuxData json.RawMessage `json:"auxData,omitempty"`
 }
 
-// Detailed information about exception (or error) that was thrown during script compilation or
+// ExceptionDetails data type. Detailed information about exception (or error) that was thrown during script compilation or
 // execution.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-ExceptionDetails
@@ -228,17 +234,17 @@ type ExceptionDetails struct {
 	ExecutionContextID int64 `json:"executionContextId,omitempty"`
 }
 
-// Number of milliseconds since epoch.
+// Timestamp data type. Number of milliseconds since epoch.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-Timestamp
 type Timestamp float64
 
-// Number of milliseconds.
+// TimeDelta data type. Number of milliseconds.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-TimeDelta
 type TimeDelta float64
 
-// Stack entry for runtime errors and assertions.
+// CallFrame data type. Stack entry for runtime errors and assertions.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-CallFrame
 type CallFrame struct {
@@ -254,7 +260,7 @@ type CallFrame struct {
 	ColumnNumber int64 `json:"columnNumber"`
 }
 
-// Call frames for assertions or error messages.
+// StackTrace data type. Call frames for assertions or error messages.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-StackTrace
 type StackTrace struct {
@@ -271,14 +277,14 @@ type StackTrace struct {
 	ParentID *StackTraceID `json:"parentId,omitempty"`
 }
 
-// Unique identifier of current debugger.
+// UniqueDebuggerID data type. Unique identifier of current debugger.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-UniqueDebuggerId
 //
 // This CDP type is experimental.
 type UniqueDebuggerID string
 
-// If `debuggerId` is set stack trace comes from another debugger and can be resolved there. This
+// StackTraceID data type. If `debuggerId` is set stack trace comes from another debugger and can be resolved there. This
 // allows to track cross-debugger calls. See `Runtime.StackTrace` and `Debugger.paused` for usages.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-StackTraceId
