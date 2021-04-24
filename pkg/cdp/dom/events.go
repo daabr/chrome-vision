@@ -1,5 +1,7 @@
 package dom
 
+// AttributeModified asynchronous event.
+//
 // Fired when `Element`'s attribute is modified.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-attributeModified
@@ -12,6 +14,8 @@ type AttributeModified struct {
 	Value string `json:"value"`
 }
 
+// AttributeRemoved asynchronous event.
+//
 // Fired when `Element`'s attribute is removed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-attributeRemoved
@@ -22,6 +26,8 @@ type AttributeRemoved struct {
 	Name string `json:"name"`
 }
 
+// CharacterDataModified asynchronous event.
+//
 // Mirrors `DOMCharacterDataModified` event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-characterDataModified
@@ -32,6 +38,8 @@ type CharacterDataModified struct {
 	CharacterData string `json:"characterData"`
 }
 
+// ChildNodeCountUpdated asynchronous event.
+//
 // Fired when `Container`'s child node count has changed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-childNodeCountUpdated
@@ -42,6 +50,8 @@ type ChildNodeCountUpdated struct {
 	ChildNodeCount int64 `json:"childNodeCount"`
 }
 
+// ChildNodeInserted asynchronous event.
+//
 // Mirrors `DOMNodeInserted` event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-childNodeInserted
@@ -54,6 +64,8 @@ type ChildNodeInserted struct {
 	Node Node `json:"node"`
 }
 
+// ChildNodeRemoved asynchronous event.
+//
 // Mirrors `DOMNodeRemoved` event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-childNodeRemoved
@@ -64,6 +76,8 @@ type ChildNodeRemoved struct {
 	NodeID int64 `json:"nodeId"`
 }
 
+// DistributedNodesUpdated asynchronous event.
+//
 // Called when distrubution is changed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-distributedNodesUpdated
@@ -76,11 +90,15 @@ type DistributedNodesUpdated struct {
 	DistributedNodes []BackendNode `json:"distributedNodes"`
 }
 
+// DocumentUpdated asynchronous event.
+//
 // Fired when `Document` has been totally updated. Node ids are no longer valid.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-documentUpdated
 type DocumentUpdated struct{}
 
+// InlineStyleInvalidated asynchronous event.
+//
 // Fired when `Element`'s inline style is modified via a CSS property modification.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-inlineStyleInvalidated
@@ -91,6 +109,8 @@ type InlineStyleInvalidated struct {
 	NodeIds []NodeID `json:"nodeIds"`
 }
 
+// PseudoElementAdded asynchronous event.
+//
 // Called when a pseudo element is added to an element.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-pseudoElementAdded
@@ -103,6 +123,8 @@ type PseudoElementAdded struct {
 	PseudoElement Node `json:"pseudoElement"`
 }
 
+// PseudoElementRemoved asynchronous event.
+//
 // Called when a pseudo element is removed from an element.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-pseudoElementRemoved
@@ -115,6 +137,8 @@ type PseudoElementRemoved struct {
 	PseudoElementID int64 `json:"pseudoElementId"`
 }
 
+// SetChildNodes asynchronous event.
+//
 // Fired when backend wants to provide client with the missing DOM structure. This happens upon
 // most of the calls requesting node ids.
 //
@@ -126,6 +150,8 @@ type SetChildNodes struct {
 	Nodes []Node `json:"nodes"`
 }
 
+// ShadowRootPopped asynchronous event.
+//
 // Called when shadow root is popped from the element.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-shadowRootPopped
@@ -138,6 +164,8 @@ type ShadowRootPopped struct {
 	RootID int64 `json:"rootId"`
 }
 
+// ShadowRootPushed asynchronous event.
+//
 // Called when shadow root is pushed into the element.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-shadowRootPushed

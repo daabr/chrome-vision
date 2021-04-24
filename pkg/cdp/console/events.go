@@ -1,5 +1,7 @@
 package console
 
+// MessageAdded asynchronous event.
+//
 // Issued when new console message is added.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Console/#event-messageAdded

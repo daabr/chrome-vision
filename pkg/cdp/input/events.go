@@ -1,5 +1,7 @@
 package input
 
+// DragIntercepted asynchronous event.
+//
 // Emitted only when `Input.setInterceptDrags` is enabled. Use this data with `Input.dispatchDragEvent` to
 // restore normal drag and drop behavior.
 //

@@ -1,10 +1,14 @@
 package heapprofiler
 
+// AddHeapSnapshotChunk asynchronous event.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#event-addHeapSnapshotChunk
 type AddHeapSnapshotChunk struct {
 	Chunk string `json:"chunk"`
 }
 
+// HeapStatsUpdate asynchronous event.
+//
 // If heap objects tracking has been started then backend may send update for one or more fragments
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#event-heapStatsUpdate
@@ -15,6 +19,8 @@ type HeapStatsUpdate struct {
 	StatsUpdate []int64 `json:"statsUpdate"`
 }
 
+// LastSeenObjectID asynchronous event.
+//
 // If heap objects tracking has been started then backend regularly sends a current value for last
 // seen object id and corresponding timestamp. If the were changes in the heap since last event
 // then one or more heapStatsUpdate events will be sent before a new lastSeenObjectId event.
@@ -25,6 +31,8 @@ type LastSeenObjectID struct {
 	Timestamp        float64 `json:"timestamp"`
 }
 
+// ReportHeapSnapshotProgress asynchronous event.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#event-reportHeapSnapshotProgress
 type ReportHeapSnapshotProgress struct {
 	Done     int64 `json:"done"`
@@ -32,5 +40,7 @@ type ReportHeapSnapshotProgress struct {
 	Finished bool  `json:"finished,omitempty"`
 }
 
+// ResetProfiles asynchronous event.
+//
 // https://chromedevtools.github.io/devtools-protocol/tot/HeapProfiler/#event-resetProfiles
 type ResetProfiles struct{}

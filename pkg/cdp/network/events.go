@@ -1,5 +1,7 @@
 package network
 
+// DataReceived asynchronous event.
+//
 // Fired when data chunk was received over the network.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-dataReceived
@@ -14,6 +16,8 @@ type DataReceived struct {
 	EncodedDataLength int64 `json:"encodedDataLength"`
 }
 
+// EventSourceMessageReceived asynchronous event.
+//
 // Fired when EventSource message is received.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-eventSourceMessageReceived
@@ -30,6 +34,8 @@ type EventSourceMessageReceived struct {
 	Data string `json:"data"`
 }
 
+// LoadingFailed asynchronous event.
+//
 // Fired when HTTP request has failed to load.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-loadingFailed
@@ -50,6 +56,8 @@ type LoadingFailed struct {
 	CorsErrorStatus *CorsErrorStatus `json:"corsErrorStatus,omitempty"`
 }
 
+// LoadingFinished asynchronous event.
+//
 // Fired when HTTP request has finished loading.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-loadingFinished
@@ -65,6 +73,8 @@ type LoadingFinished struct {
 	ShouldReportCorbBlocking bool `json:"shouldReportCorbBlocking,omitempty"`
 }
 
+// RequestIntercepted asynchronous event.
+//
 // Details of an intercepted HTTP request, which must be either allowed, blocked, modified or
 // mocked.
 // Deprecated, use Fetch.requestPaused instead.
@@ -107,6 +117,8 @@ type RequestIntercepted struct {
 	RequestID string `json:"requestId,omitempty"`
 }
 
+// RequestServedFromCache asynchronous event.
+//
 // Fired if request ended up loading from cache.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-requestServedFromCache
@@ -115,6 +127,8 @@ type RequestServedFromCache struct {
 	RequestID string `json:"requestId"`
 }
 
+// RequestWillBeSent asynchronous event.
+//
 // Fired when page is about to send HTTP request.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-requestWillBeSent
@@ -143,6 +157,8 @@ type RequestWillBeSent struct {
 	HasUserGesture bool `json:"hasUserGesture,omitempty"`
 }
 
+// ResourceChangedPriority asynchronous event.
+//
 // Fired when resource loading priority is changed
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-resourceChangedPriority
@@ -157,6 +173,8 @@ type ResourceChangedPriority struct {
 	Timestamp float64 `json:"timestamp"`
 }
 
+// SignedExchangeReceived asynchronous event.
+//
 // Fired when a signed exchange was received over the network
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-signedExchangeReceived
@@ -169,6 +187,8 @@ type SignedExchangeReceived struct {
 	Info SignedExchangeInfo `json:"info"`
 }
 
+// ResponseReceived asynchronous event.
+//
 // Fired when HTTP response is available.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-responseReceived
@@ -187,6 +207,8 @@ type ResponseReceived struct {
 	FrameID string `json:"frameId,omitempty"`
 }
 
+// WebSocketClosed asynchronous event.
+//
 // Fired when WebSocket is closed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webSocketClosed
@@ -197,6 +219,8 @@ type WebSocketClosed struct {
 	Timestamp float64 `json:"timestamp"`
 }
 
+// WebSocketCreated asynchronous event.
+//
 // Fired upon WebSocket creation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webSocketCreated
@@ -209,6 +233,8 @@ type WebSocketCreated struct {
 	Initiator *Initiator `json:"initiator,omitempty"`
 }
 
+// WebSocketFrameError asynchronous event.
+//
 // Fired when WebSocket message error occurs.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webSocketFrameError
@@ -221,6 +247,8 @@ type WebSocketFrameError struct {
 	ErrorMessage string `json:"errorMessage"`
 }
 
+// WebSocketFrameReceived asynchronous event.
+//
 // Fired when WebSocket message is received.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webSocketFrameReceived
@@ -233,6 +261,8 @@ type WebSocketFrameReceived struct {
 	Response WebSocketFrame `json:"response"`
 }
 
+// WebSocketFrameSent asynchronous event.
+//
 // Fired when WebSocket message is sent.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webSocketFrameSent
@@ -245,6 +275,8 @@ type WebSocketFrameSent struct {
 	Response WebSocketFrame `json:"response"`
 }
 
+// WebSocketHandshakeResponseReceived asynchronous event.
+//
 // Fired when WebSocket handshake response becomes available.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webSocketHandshakeResponseReceived
@@ -257,6 +289,8 @@ type WebSocketHandshakeResponseReceived struct {
 	Response WebSocketResponse `json:"response"`
 }
 
+// WebSocketWillSendHandshakeRequest asynchronous event.
+//
 // Fired when WebSocket is about to initiate handshake.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webSocketWillSendHandshakeRequest
@@ -271,6 +305,8 @@ type WebSocketWillSendHandshakeRequest struct {
 	Request WebSocketRequest `json:"request"`
 }
 
+// WebTransportCreated asynchronous event.
+//
 // Fired upon WebTransport creation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webTransportCreated
@@ -285,6 +321,8 @@ type WebTransportCreated struct {
 	Initiator *Initiator `json:"initiator,omitempty"`
 }
 
+// WebTransportConnectionEstablished asynchronous event.
+//
 // Fired when WebTransport handshake is finished.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webTransportConnectionEstablished
@@ -295,6 +333,8 @@ type WebTransportConnectionEstablished struct {
 	Timestamp float64 `json:"timestamp"`
 }
 
+// WebTransportClosed asynchronous event.
+//
 // Fired when WebTransport is disposed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-webTransportClosed
@@ -305,6 +345,8 @@ type WebTransportClosed struct {
 	Timestamp float64 `json:"timestamp"`
 }
 
+// RequestWillBeSentExtraInfo asynchronous event.
+//
 // Fired when additional information about a requestWillBeSent event is available from the
 // network stack. Not every requestWillBeSent event will have an additional
 // requestWillBeSentExtraInfo fired for it, and there is no guarantee whether requestWillBeSent
@@ -325,6 +367,8 @@ type RequestWillBeSentExtraInfo struct {
 	ClientSecurityState *ClientSecurityState `json:"clientSecurityState,omitempty"`
 }
 
+// ResponseReceivedExtraInfo asynchronous event.
+//
 // Fired when additional information about a responseReceived event is available from the network
 // stack. Not every responseReceived event will have an additional responseReceivedExtraInfo for
 // it, and responseReceivedExtraInfo may be fired before or after responseReceived.
@@ -349,6 +393,8 @@ type ResponseReceivedExtraInfo struct {
 	HeadersText string `json:"headersText,omitempty"`
 }
 
+// TrustTokenOperationDone asynchronous event.
+//
 // Fired exactly once for each Trust Token operation. Depending on
 // the type of the operation and whether the operation succeeded or
 // failed, the event is fired before the corresponding request was sent
