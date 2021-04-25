@@ -54,9 +54,9 @@ type DOMNode struct {
 	// `getSnapshot`, if any.
 	ContentDocumentIndex int64 `json:"contentDocumentIndex,omitempty"`
 	// Type of a pseudo element node.
-	PseudoType string `json:"pseudoType,omitempty"`
+	PseudoType *dom.PseudoType `json:"pseudoType,omitempty"`
 	// Shadow root type.
-	ShadowRootType string `json:"shadowRootType,omitempty"`
+	ShadowRootType *dom.ShadowRootType `json:"shadowRootType,omitempty"`
 	// Whether this DOM node responds to mouse clicks. This includes nodes that have had click
 	// event listeners attached via JavaScript as well as anchor tags that naturally navigate when
 	// clicked.

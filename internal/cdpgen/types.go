@@ -13,7 +13,7 @@ func generateTypes(d Domain) string {
 	fmt.Fprintf(b, "package %s\n", strings.ToLower(d.Domain))
 
 	for _, t := range d.Types {
-		if t.Type != "array" && t.Type != "object" {
+		if t.Type != "array" && t.Type != "object" && len(t.Enum) == 0 {
 			aliases[adjust(t.ID)] = transformType(t.Type, nil)
 			key := strings.ToLower(d.Domain) + "." + adjust(t.ID)
 			aliases[key] = transformType(t.Type, nil)

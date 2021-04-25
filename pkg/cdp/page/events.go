@@ -64,7 +64,7 @@ type FrameNavigated struct {
 	// Frame object.
 	Frame Frame `json:"frame"`
 	// This CDP parameter is experimental.
-	Type string `json:"type"`
+	Type NavigationType `json:"type"`
 }
 
 // DocumentOpened asynchronous event. Fired when opening document to write to.
@@ -94,11 +94,11 @@ type FrameRequestedNavigation struct {
 	// Id of the frame that is being navigated.
 	FrameID string `json:"frameId"`
 	// The reason for the navigation.
-	Reason string `json:"reason"`
+	Reason ClientNavigationReason `json:"reason"`
 	// The destination URL for the requested navigation.
 	URL string `json:"url"`
 	// The disposition for the navigation.
-	Disposition string `json:"disposition"`
+	Disposition ClientNavigationDisposition `json:"disposition"`
 }
 
 // FrameScheduledNavigation asynchronous event. Fired when frame schedules a potential navigation.
@@ -113,7 +113,7 @@ type FrameScheduledNavigation struct {
 	// guaranteed to start.
 	Delay float64 `json:"delay"`
 	// The reason for the navigation.
-	Reason string `json:"reason"`
+	Reason ClientNavigationReason `json:"reason"`
 	// The destination URL for the scheduled navigation.
 	URL string `json:"url"`
 }
@@ -205,7 +205,7 @@ type JavascriptDialogOpening struct {
 	// Message that will be displayed by the dialog.
 	Message string `json:"message"`
 	// Dialog type.
-	Type string `json:"type"`
+	Type DialogType `json:"type"`
 	// True iff browser is capable showing or acting on the given dialog. When browser has no
 	// dialog handler for given target, calling alert while Page domain is engaged will stall
 	// the page execution. Execution can be resumed via calling Page.handleJavaScriptDialog.

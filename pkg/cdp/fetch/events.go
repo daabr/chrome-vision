@@ -18,9 +18,9 @@ type RequestPaused struct {
 	// The id of the frame that initiated the request.
 	FrameID string `json:"frameId"`
 	// How the requested resource will be used.
-	ResourceType string `json:"resourceType"`
+	ResourceType network.ResourceType `json:"resourceType"`
 	// Response error if intercepted at response stage.
-	ResponseErrorReason string `json:"responseErrorReason,omitempty"`
+	ResponseErrorReason *network.ErrorReason `json:"responseErrorReason,omitempty"`
 	// Response code if intercepted at response stage.
 	ResponseStatusCode int64 `json:"responseStatusCode,omitempty"`
 	// Response headers if intercepted at the response stage.
@@ -42,7 +42,7 @@ type AuthRequired struct {
 	// The id of the frame that initiated the request.
 	FrameID string `json:"frameId"`
 	// How the requested resource will be used.
-	ResourceType string `json:"resourceType"`
+	ResourceType network.ResourceType `json:"resourceType"`
 	// Details of the Authorization Challenge encountered.
 	// If this is set, client should respond with continueRequest that
 	// contains AuthChallengeResponse.

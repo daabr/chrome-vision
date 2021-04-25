@@ -87,7 +87,7 @@ type ScriptFailedToParse struct {
 	// The language of the script.
 	//
 	// This CDP parameter is experimental.
-	ScriptLanguage string `json:"scriptLanguage,omitempty"`
+	ScriptLanguage *ScriptLanguage `json:"scriptLanguage,omitempty"`
 	// The name the embedder supplied for this script.
 	//
 	// This CDP parameter is experimental.
@@ -140,7 +140,7 @@ type ScriptParsed struct {
 	// The language of the script.
 	//
 	// This CDP parameter is experimental.
-	ScriptLanguage string `json:"scriptLanguage,omitempty"`
+	ScriptLanguage *ScriptLanguage `json:"scriptLanguage,omitempty"`
 	// If the scriptLanguage is WebASsembly, the source of debug symbols for the module.
 	//
 	// This CDP parameter is experimental.

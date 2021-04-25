@@ -46,11 +46,11 @@ const (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerVersion
 type ServiceWorkerVersion struct {
-	VersionID      string `json:"versionId"`
-	RegistrationID string `json:"registrationId"`
-	ScriptURL      string `json:"scriptURL"`
-	RunningStatus  string `json:"runningStatus"`
-	Status         string `json:"status"`
+	VersionID      string                            `json:"versionId"`
+	RegistrationID string                            `json:"registrationId"`
+	ScriptURL      string                            `json:"scriptURL"`
+	RunningStatus  ServiceWorkerVersionRunningStatus `json:"runningStatus"`
+	Status         ServiceWorkerVersionStatus        `json:"status"`
 	// The Last-Modified header value of the main script.
 	ScriptLastModified float64 `json:"scriptLastModified,omitempty"`
 	// The time at which the response headers of the main script were received from the server.

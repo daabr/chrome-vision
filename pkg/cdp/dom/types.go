@@ -108,9 +108,9 @@ type Node struct {
 	// `Attr`'s value.
 	Value string `json:"value,omitempty"`
 	// Pseudo element type for this node.
-	PseudoType string `json:"pseudoType,omitempty"`
+	PseudoType *PseudoType `json:"pseudoType,omitempty"`
 	// Shadow root type.
-	ShadowRootType string `json:"shadowRootType,omitempty"`
+	ShadowRootType *ShadowRootType `json:"shadowRootType,omitempty"`
 	// Frame ID for frame owner elements.
 	FrameID string `json:"frameId,omitempty"`
 	// Content document for frame owner elements.

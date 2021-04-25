@@ -348,7 +348,7 @@ type DispatchMouseEvent struct {
 	// Time at which the event occurred.
 	Timestamp float64 `json:"timestamp,omitempty"`
 	// Mouse button (default: "none").
-	Button string `json:"button,omitempty"`
+	Button *MouseButton `json:"button,omitempty"`
 	// A number indicating which buttons are pressed on the mouse when a mouse event is triggered.
 	// Left=1, Right=2, Middle=4, Back=8, Forward=16, None=0.
 	Buttons int64 `json:"buttons,omitempty"`
@@ -418,8 +418,8 @@ func (t *DispatchMouseEvent) SetTimestamp(v float64) *DispatchMouseEvent {
 // parameter `button` in the DispatchMouseEvent CDP command.
 //
 // Mouse button (default: "none").
-func (t *DispatchMouseEvent) SetButton(v string) *DispatchMouseEvent {
-	t.Button = v
+func (t *DispatchMouseEvent) SetButton(v MouseButton) *DispatchMouseEvent {
+	t.Button = &v
 	return t
 }
 
@@ -626,7 +626,7 @@ type EmulateTouchFromMouseEvent struct {
 	// Y coordinate of the mouse pointer in DIP.
 	Y int64 `json:"y"`
 	// Mouse button. Only "none", "left", "right" are supported.
-	Button string `json:"button"`
+	Button MouseButton `json:"button"`
 	// Time at which the event occurred (default: current time).
 	Timestamp float64 `json:"timestamp,omitempty"`
 	// X delta in DIP for mouse wheel event (default: 0).
@@ -647,7 +647,7 @@ type EmulateTouchFromMouseEvent struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-emulateTouchFromMouseEvent
 //
 // This CDP method is experimental.
-func NewEmulateTouchFromMouseEvent(t string, x int64, y int64, button string) *EmulateTouchFromMouseEvent {
+func NewEmulateTouchFromMouseEvent(t string, x int64, y int64, button MouseButton) *EmulateTouchFromMouseEvent {
 	return &EmulateTouchFromMouseEvent{
 		Type:   t,
 		X:      x,
@@ -820,7 +820,7 @@ type SynthesizePinchGesture struct {
 	RelativeSpeed int64 `json:"relativeSpeed,omitempty"`
 	// Which type of input events to be generated (default: 'default', which queries the platform
 	// for the preferred input type).
-	GestureSourceType string `json:"gestureSourceType,omitempty"`
+	GestureSourceType *GestureSourceType `json:"gestureSourceType,omitempty"`
 }
 
 // NewSynthesizePinchGesture constructs a new SynthesizePinchGesture struct instance, with
@@ -852,8 +852,8 @@ func (t *SynthesizePinchGesture) SetRelativeSpeed(v int64) *SynthesizePinchGestu
 //
 // Which type of input events to be generated (default: 'default', which queries the platform
 // for the preferred input type).
-func (t *SynthesizePinchGesture) SetGestureSourceType(v string) *SynthesizePinchGesture {
-	t.GestureSourceType = v
+func (t *SynthesizePinchGesture) SetGestureSourceType(v GestureSourceType) *SynthesizePinchGesture {
+	t.GestureSourceType = &v
 	return t
 }
 
@@ -903,7 +903,7 @@ type SynthesizeScrollGesture struct {
 	Speed int64 `json:"speed,omitempty"`
 	// Which type of input events to be generated (default: 'default', which queries the platform
 	// for the preferred input type).
-	GestureSourceType string `json:"gestureSourceType,omitempty"`
+	GestureSourceType *GestureSourceType `json:"gestureSourceType,omitempty"`
 	// The number of times to repeat the gesture (default: 0).
 	RepeatCount int64 `json:"repeatCount,omitempty"`
 	// The number of milliseconds delay between each repeat. (default: 250).
@@ -987,8 +987,8 @@ func (t *SynthesizeScrollGesture) SetSpeed(v int64) *SynthesizeScrollGesture {
 //
 // Which type of input events to be generated (default: 'default', which queries the platform
 // for the preferred input type).
-func (t *SynthesizeScrollGesture) SetGestureSourceType(v string) *SynthesizeScrollGesture {
-	t.GestureSourceType = v
+func (t *SynthesizeScrollGesture) SetGestureSourceType(v GestureSourceType) *SynthesizeScrollGesture {
+	t.GestureSourceType = &v
 	return t
 }
 
@@ -1055,7 +1055,7 @@ type SynthesizeTapGesture struct {
 	TapCount int64 `json:"tapCount,omitempty"`
 	// Which type of input events to be generated (default: 'default', which queries the platform
 	// for the preferred input type).
-	GestureSourceType string `json:"gestureSourceType,omitempty"`
+	GestureSourceType *GestureSourceType `json:"gestureSourceType,omitempty"`
 }
 
 // NewSynthesizeTapGesture constructs a new SynthesizeTapGesture struct instance, with
@@ -1095,8 +1095,8 @@ func (t *SynthesizeTapGesture) SetTapCount(v int64) *SynthesizeTapGesture {
 //
 // Which type of input events to be generated (default: 'default', which queries the platform
 // for the preferred input type).
-func (t *SynthesizeTapGesture) SetGestureSourceType(v string) *SynthesizeTapGesture {
-	t.GestureSourceType = v
+func (t *SynthesizeTapGesture) SetGestureSourceType(v GestureSourceType) *SynthesizeTapGesture {
+	t.GestureSourceType = &v
 	return t
 }
 

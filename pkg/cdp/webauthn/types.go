@@ -45,10 +45,10 @@ const (
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#type-VirtualAuthenticatorOptions
 type VirtualAuthenticatorOptions struct {
-	Protocol string `json:"protocol"`
+	Protocol AuthenticatorProtocol `json:"protocol"`
 	// Defaults to ctap2_0. Ignored if |protocol| == u2f.
-	Ctap2Version string `json:"ctap2Version,omitempty"`
-	Transport    string `json:"transport"`
+	Ctap2Version *Ctap2Version          `json:"ctap2Version,omitempty"`
+	Transport    AuthenticatorTransport `json:"transport"`
 	// Defaults to false.
 	HasResidentKey bool `json:"hasResidentKey,omitempty"`
 	// Defaults to false.

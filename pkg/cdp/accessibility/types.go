@@ -71,7 +71,7 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXValueSource
 type AXValueSource struct {
 	// What type of source this is.
-	Type string `json:"type"`
+	Type AXValueSourceType `json:"type"`
 	// The value of this property source.
 	Value *AXValue `json:"value,omitempty"`
 	// The name of the relevant attribute, if any.
@@ -81,7 +81,7 @@ type AXValueSource struct {
 	// Whether this source is superseded by a higher priority source.
 	Superseded bool `json:"superseded,omitempty"`
 	// The native markup source for this value, e.g. a <label> element.
-	NativeSource string `json:"nativeSource,omitempty"`
+	NativeSource *AXValueNativeSourceType `json:"nativeSource,omitempty"`
 	// The value, such as a node or node list, of the native source.
 	NativeSourceValue *AXValue `json:"nativeSourceValue,omitempty"`
 	// Whether the value for this property is invalid.
@@ -107,7 +107,7 @@ type AXRelatedNode struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXProperty
 type AXProperty struct {
 	// The name of this property.
-	Name string `json:"name"`
+	Name AXPropertyName `json:"name"`
 	// The value of this property.
 	Value AXValue `json:"value"`
 }
@@ -117,7 +117,7 @@ type AXProperty struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXValue
 type AXValue struct {
 	// The type of this value.
-	Type string `json:"type"`
+	Type AXValueType `json:"type"`
 	// The computed value of this property.
 	Value json.RawMessage `json:"value,omitempty"`
 	// One or more related nodes, if applicable.

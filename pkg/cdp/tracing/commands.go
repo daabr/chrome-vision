@@ -128,7 +128,7 @@ type RequestMemoryDump struct {
 	// Enables more deterministic results by forcing garbage collection
 	Deterministic bool `json:"deterministic,omitempty"`
 	// Specifies level of details in memory dump. Defaults to "detailed".
-	LevelOfDetail string `json:"levelOfDetail,omitempty"`
+	LevelOfDetail *MemoryDumpLevelOfDetail `json:"levelOfDetail,omitempty"`
 }
 
 // NewRequestMemoryDump constructs a new RequestMemoryDump struct instance, with
@@ -153,8 +153,8 @@ func (t *RequestMemoryDump) SetDeterministic(v bool) *RequestMemoryDump {
 // parameter `levelOfDetail` in the RequestMemoryDump CDP command.
 //
 // Specifies level of details in memory dump. Defaults to "detailed".
-func (t *RequestMemoryDump) SetLevelOfDetail(v string) *RequestMemoryDump {
-	t.LevelOfDetail = v
+func (t *RequestMemoryDump) SetLevelOfDetail(v MemoryDumpLevelOfDetail) *RequestMemoryDump {
+	t.LevelOfDetail = &v
 	return t
 }
 
@@ -210,17 +210,17 @@ type Start struct {
 	TransferMode string `json:"transferMode,omitempty"`
 	// Trace data format to use. This only applies when using `ReturnAsStream`
 	// transfer mode (defaults to `json`).
-	StreamFormat string `json:"streamFormat,omitempty"`
+	StreamFormat *StreamFormat `json:"streamFormat,omitempty"`
 	// Compression format to use. This only applies when using `ReturnAsStream`
 	// transfer mode (defaults to `none`)
-	StreamCompression string       `json:"streamCompression,omitempty"`
-	TraceConfig       *TraceConfig `json:"traceConfig,omitempty"`
+	StreamCompression *StreamCompression `json:"streamCompression,omitempty"`
+	TraceConfig       *TraceConfig       `json:"traceConfig,omitempty"`
 	// Base64-encoded serialized perfetto.protos.TraceConfig protobuf message
 	// When specified, the parameters `categories`, `options`, `traceConfig`
 	// are ignored. (Encoded as a base64 string when passed over JSON)
 	PerfettoConfig string `json:"perfettoConfig,omitempty"`
 	// Backend type (defaults to `auto`)
-	TracingBackend string `json:"tracingBackend,omitempty"`
+	TracingBackend *TracingBackend `json:"tracingBackend,omitempty"`
 }
 
 // NewStart constructs a new Start struct instance, with
@@ -278,8 +278,8 @@ func (t *Start) SetTransferMode(v string) *Start {
 //
 // Trace data format to use. This only applies when using `ReturnAsStream`
 // transfer mode (defaults to `json`).
-func (t *Start) SetStreamFormat(v string) *Start {
-	t.StreamFormat = v
+func (t *Start) SetStreamFormat(v StreamFormat) *Start {
+	t.StreamFormat = &v
 	return t
 }
 
@@ -288,8 +288,8 @@ func (t *Start) SetStreamFormat(v string) *Start {
 //
 // Compression format to use. This only applies when using `ReturnAsStream`
 // transfer mode (defaults to `none`)
-func (t *Start) SetStreamCompression(v string) *Start {
-	t.StreamCompression = v
+func (t *Start) SetStreamCompression(v StreamCompression) *Start {
+	t.StreamCompression = &v
 	return t
 }
 
@@ -315,8 +315,8 @@ func (t *Start) SetPerfettoConfig(v string) *Start {
 // parameter `tracingBackend` in the Start CDP command.
 //
 // Backend type (defaults to `auto`)
-func (t *Start) SetTracingBackend(v string) *Start {
-	t.TracingBackend = v
+func (t *Start) SetTracingBackend(v TracingBackend) *Start {
+	t.TracingBackend = &v
 	return t
 }
 

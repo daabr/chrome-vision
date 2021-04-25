@@ -1,5 +1,7 @@
 package page
 
+import "github.com/daabr/chrome-vision/pkg/cdp/network"
+
 // FrameID data type. Unique frame identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-FrameId
@@ -147,8 +149,8 @@ const (
 //
 // This CDP type is experimental.
 type PermissionsPolicyBlockLocator struct {
-	FrameID     string `json:"frameId"`
-	BlockReason string `json:"blockReason"`
+	FrameID     string                       `json:"frameId"`
+	BlockReason PermissionsPolicyBlockReason `json:"blockReason"`
 }
 
 // PermissionsPolicyFeatureState data type.
@@ -157,7 +159,7 @@ type PermissionsPolicyBlockLocator struct {
 //
 // This CDP type is experimental.
 type PermissionsPolicyFeatureState struct {
-	Feature string                         `json:"feature"`
+	Feature PermissionsPolicyFeature       `json:"feature"`
 	Allowed bool                           `json:"allowed"`
 	Locator *PermissionsPolicyBlockLocator `json:"locator,omitempty"`
 }
@@ -198,15 +200,15 @@ type Frame struct {
 	// Indicates whether this frame was tagged as an ad.
 	//
 	// This CDP property is experimental.
-	AdFrameType string `json:"adFrameType,omitempty"`
+	AdFrameType *AdFrameType `json:"adFrameType,omitempty"`
 	// Indicates whether the main document is a secure context and explains why that is the case.
 	//
 	// This CDP property is experimental.
-	SecureContextType string `json:"secureContextType"`
+	SecureContextType SecureContextType `json:"secureContextType"`
 	// Indicates whether this is a cross origin isolated context.
 	//
 	// This CDP property is experimental.
-	CrossOriginIsolatedContextType string `json:"crossOriginIsolatedContextType"`
+	CrossOriginIsolatedContextType CrossOriginIsolatedContextType `json:"crossOriginIsolatedContextType"`
 	// Indicated which gated APIs / features are available.
 	//
 	// This CDP property is experimental.
@@ -222,7 +224,7 @@ type FrameResource struct {
 	// Resource URL.
 	URL string `json:"url"`
 	// Type of this resource.
-	Type string `json:"type"`
+	Type network.ResourceType `json:"type"`
 	// Resource mimeType as determined by the browser.
 	MimeType string `json:"mimeType"`
 	// last-modified timestamp as reported by server.
@@ -299,7 +301,7 @@ type NavigationEntry struct {
 	// Title of the navigation history entry.
 	Title string `json:"title"`
 	// Transition type.
-	TransitionType string `json:"transitionType"`
+	TransitionType TransitionType `json:"transitionType"`
 }
 
 // ScreencastFrameMetadata data type. Screencast frame metadata.

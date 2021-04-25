@@ -39,13 +39,13 @@ type LoadingFailed struct {
 	// Timestamp.
 	Timestamp float64 `json:"timestamp"`
 	// Resource type.
-	Type string `json:"type"`
+	Type ResourceType `json:"type"`
 	// User friendly error message.
 	ErrorText string `json:"errorText"`
 	// True if loading was canceled.
 	Canceled bool `json:"canceled,omitempty"`
 	// The reason why loading was blocked, if any.
-	BlockedReason string `json:"blockedReason,omitempty"`
+	BlockedReason *BlockedReason `json:"blockedReason,omitempty"`
 	// The reason why loading was blocked by CORS, if any.
 	CorsErrorStatus *CorsErrorStatus `json:"corsErrorStatus,omitempty"`
 }
@@ -82,7 +82,7 @@ type RequestIntercepted struct {
 	// The id of the frame that initiated the request.
 	FrameID string `json:"frameId"`
 	// How the requested resource will be used.
-	ResourceType string `json:"resourceType"`
+	ResourceType ResourceType `json:"resourceType"`
 	// Whether this is a navigation request, which can abort the navigation completely.
 	IsNavigationRequest bool `json:"isNavigationRequest"`
 	// Set if the request is a navigation that will result in a download.
@@ -95,7 +95,7 @@ type RequestIntercepted struct {
 	AuthChallenge *AuthChallenge `json:"authChallenge,omitempty"`
 	// Response error if intercepted at response stage or if redirect occurred while intercepting
 	// request.
-	ResponseErrorReason string `json:"responseErrorReason,omitempty"`
+	ResponseErrorReason *ErrorReason `json:"responseErrorReason,omitempty"`
 	// Response code if intercepted at response stage or if redirect occurred while intercepting
 	// request or auth retry occurred.
 	ResponseStatusCode int64 `json:"responseStatusCode,omitempty"`
@@ -136,7 +136,7 @@ type RequestWillBeSent struct {
 	// Redirect response data.
 	RedirectResponse *Response `json:"redirectResponse,omitempty"`
 	// Type of this resource.
-	Type string `json:"type,omitempty"`
+	Type *ResourceType `json:"type,omitempty"`
 	// Frame identifier.
 	FrameID string `json:"frameId,omitempty"`
 	// Whether the request is initiated by a user gesture. Defaults to false.
@@ -152,7 +152,7 @@ type ResourceChangedPriority struct {
 	// Request identifier.
 	RequestID string `json:"requestId"`
 	// New priority
-	NewPriority string `json:"newPriority"`
+	NewPriority ResourcePriority `json:"newPriority"`
 	// Timestamp.
 	Timestamp float64 `json:"timestamp"`
 }
@@ -180,7 +180,7 @@ type ResponseReceived struct {
 	// Timestamp.
 	Timestamp float64 `json:"timestamp"`
 	// Resource type.
-	Type string `json:"type"`
+	Type ResourceType `json:"type"`
 	// Response data.
 	Response Response `json:"response"`
 	// Frame identifier.
@@ -343,7 +343,7 @@ type ResponseReceivedExtraInfo struct {
 	Headers Headers `json:"headers"`
 	// The IP address space of the resource. The address space can only be determined once the transport
 	// established the connection, so we can't send it in `requestWillBeSentExtraInfo`.
-	ResourceIPAddressSpace string `json:"resourceIPAddressSpace"`
+	ResourceIPAddressSpace IPAddressSpace `json:"resourceIPAddressSpace"`
 	// Raw response header text as it was received over the wire. The raw text may not always be
 	// available, such as in the case of HTTP/2 or QUIC.
 	HeadersText string `json:"headersText,omitempty"`
@@ -362,9 +362,9 @@ type TrustTokenOperationDone struct {
 	// 'AlreadyExists' also signifies a successful operation, as the result
 	// of the operation already exists und thus, the operation was abort
 	// preemptively (e.g. a cache hit).
-	Status    string `json:"status"`
-	Type      string `json:"type"`
-	RequestID string `json:"requestId"`
+	Status    string                  `json:"status"`
+	Type      TrustTokenOperationType `json:"type"`
+	RequestID string                  `json:"requestId"`
 	// Top level origin. The context in which the operation was attempted.
 	TopLevelOrigin string `json:"topLevelOrigin,omitempty"`
 	// Origin of the issuer in case of a "Issuance" or "Redemption" operation.
