@@ -1,8 +1,8 @@
+# Chrome Vision
+
 [![Go Reference](https://pkg.go.dev/badge/github.com/daabr/chrome-vision.svg)](https://pkg.go.dev/github.com/daabr/chrome-vision)
 [![Go Report Card](https://goreportcard.com/badge/github.com/daabr/chrome-vision)](https://goreportcard.com/report/github.com/daabr/chrome-vision)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/daabr/chrome-vision/Go/main)](https://github.com/daabr/chrome-vision/actions/workflows/go.yml?query=branch:main)
-
-# Chrome Vision
 
 Advanced cross-platform web automation with a convenient Go API.
 
