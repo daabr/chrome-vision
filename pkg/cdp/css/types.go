@@ -1,5 +1,7 @@
 package css
 
+import "github.com/daabr/chrome-vision/pkg/cdp/dom"
+
 // StyleSheetID data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-StyleSheetId
@@ -25,7 +27,7 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-PseudoElementMatches
 type PseudoElementMatches struct {
 	// Pseudo element type.
-	PseudoType string `json:"pseudoType"`
+	PseudoType dom.PseudoType `json:"pseudoType"`
 	// Matches of CSS rules applicable to the pseudo style.
 	Matches []RuleMatch `json:"matches"`
 }
@@ -83,7 +85,7 @@ type CSSStyleSheetHeader struct {
 	// URL of source map associated with the stylesheet (if any).
 	SourceMapURL string `json:"sourceMapURL,omitempty"`
 	// Stylesheet origin.
-	Origin string `json:"origin"`
+	Origin StyleSheetOrigin `json:"origin"`
 	// Stylesheet title.
 	Title string `json:"title"`
 	// The backend id for the owner node of the stylesheet.
@@ -124,7 +126,7 @@ type CSSRule struct {
 	// Rule selector data.
 	SelectorList SelectorList `json:"selectorList"`
 	// Parent stylesheet's origin.
-	Origin string `json:"origin"`
+	Origin StyleSheetOrigin `json:"origin"`
 	// Associated style declaration.
 	Style CSSStyle `json:"style"`
 	// Media list array (for rules involving media queries). The array enumerates media queries
@@ -341,7 +343,7 @@ type CSSKeyframeRule struct {
 	// stylesheet rules) this rule came from.
 	StyleSheetID string `json:"styleSheetId,omitempty"`
 	// Parent stylesheet's origin.
-	Origin string `json:"origin"`
+	Origin StyleSheetOrigin `json:"origin"`
 	// Associated key text.
 	KeyText Value `json:"keyText"`
 	// Associated style declaration.

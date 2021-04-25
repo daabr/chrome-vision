@@ -6,6 +6,7 @@ import (
 	"errors"
 
 	"github.com/daabr/chrome-vision/pkg/cdp"
+	"github.com/daabr/chrome-vision/pkg/cdp/network"
 )
 
 // Disable contains the parameters, and acts as
@@ -112,7 +113,7 @@ type FailRequest struct {
 	// An id the client received in requestPaused event.
 	RequestID string `json:"requestId"`
 	// Causes the request to fail with the given reason.
-	ErrorReason string `json:"errorReason"`
+	ErrorReason network.ErrorReason `json:"errorReason"`
 }
 
 // NewFailRequest constructs a new FailRequest struct instance, with
@@ -120,7 +121,7 @@ type FailRequest struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-failRequest
-func NewFailRequest(requestID string, errorReason string) *FailRequest {
+func NewFailRequest(requestID string, errorReason network.ErrorReason) *FailRequest {
 	return &FailRequest{
 		RequestID:   requestID,
 		ErrorReason: errorReason,

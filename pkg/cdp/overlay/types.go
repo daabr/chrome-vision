@@ -159,7 +159,7 @@ type HighlightConfig struct {
 	// The grid layout color (default: transparent).
 	CssGridColor *dom.RGBA `json:"cssGridColor,omitempty"`
 	// The color format used to format color styles (default: hex).
-	ColorFormat string `json:"colorFormat,omitempty"`
+	ColorFormat *ColorFormat `json:"colorFormat,omitempty"`
 	// The grid layout highlight configuration (default: all transparent).
 	GridHighlightConfig *GridHighlightConfig `json:"gridHighlightConfig,omitempty"`
 	// The flex container highlight configuration (default: all transparent).
@@ -167,7 +167,7 @@ type HighlightConfig struct {
 	// The flex item highlight configuration (default: all transparent).
 	FlexItemHighlightConfig *FlexItemHighlightConfig `json:"flexItemHighlightConfig,omitempty"`
 	// The contrast algorithm to use for the contrast ratio (default: aa).
-	ContrastAlgorithm string `json:"contrastAlgorithm,omitempty"`
+	ContrastAlgorithm *ContrastAlgorithm `json:"contrastAlgorithm,omitempty"`
 }
 
 // ColorFormat data type.

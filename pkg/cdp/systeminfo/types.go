@@ -93,7 +93,7 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/SystemInfo/#type-ImageDecodeAcceleratorCapability
 type ImageDecodeAcceleratorCapability struct {
 	// Image coded, e.g. Jpeg.
-	ImageType string `json:"imageType"`
+	ImageType ImageType `json:"imageType"`
 	// Maximum supported dimensions of the image in pixels.
 	MaxDimensions Size `json:"maxDimensions"`
 	// Minimum supported dimensions of the image in pixels.

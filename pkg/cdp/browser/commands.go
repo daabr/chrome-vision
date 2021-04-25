@@ -20,7 +20,7 @@ type SetPermission struct {
 	// Descriptor of permission to override.
 	Permission PermissionDescriptor `json:"permission"`
 	// Setting of the permission.
-	Setting string `json:"setting"`
+	Setting PermissionSetting `json:"setting"`
 	// Origin the permission applies to, all origins if not specified.
 	Origin string `json:"origin,omitempty"`
 	// Context to override. When omitted, default browser context is used.
@@ -34,7 +34,7 @@ type SetPermission struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-setPermission
 //
 // This CDP method is experimental.
-func NewSetPermission(permission PermissionDescriptor, setting string) *SetPermission {
+func NewSetPermission(permission PermissionDescriptor, setting PermissionSetting) *SetPermission {
 	return &SetPermission{
 		Permission: permission,
 		Setting:    setting,
@@ -891,7 +891,7 @@ func (t *SetDockTile) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type ExecuteBrowserCommand struct {
-	CommandID string `json:"commandId"`
+	CommandID BrowserCommandID `json:"commandId"`
 }
 
 // NewExecuteBrowserCommand constructs a new ExecuteBrowserCommand struct instance, with
@@ -901,7 +901,7 @@ type ExecuteBrowserCommand struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-executeBrowserCommand
 //
 // This CDP method is experimental.
-func NewExecuteBrowserCommand(commandID string) *ExecuteBrowserCommand {
+func NewExecuteBrowserCommand(commandID BrowserCommandID) *ExecuteBrowserCommand {
 	return &ExecuteBrowserCommand{
 		CommandID: commandID,
 	}

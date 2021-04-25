@@ -97,7 +97,7 @@ const (
 // This CDP type is experimental.
 type SafetyTipInfo struct {
 	// Describes whether the page triggers any safety tips or reputation warnings. Default is unknown.
-	SafetyTipStatus string `json:"safetyTipStatus"`
+	SafetyTipStatus SafetyTipStatus `json:"safetyTipStatus"`
 	// The URL the safety tip suggested ("Did you mean?"). Only filled in for lookalike matches.
 	SafeURL string `json:"safeUrl,omitempty"`
 }
@@ -109,7 +109,7 @@ type SafetyTipInfo struct {
 // This CDP type is experimental.
 type VisibleSecurityState struct {
 	// The security level of the page.
-	SecurityState string `json:"securityState"`
+	SecurityState SecurityState `json:"securityState"`
 	// Security state details about the page certificate.
 	CertificateSecurityState *CertificateSecurityState `json:"certificateSecurityState,omitempty"`
 	// The type of Safety Tip triggered on the page. Note that this field will be set even if the Safety Tip UI was not actually shown.
@@ -123,7 +123,7 @@ type VisibleSecurityState struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-SecurityStateExplanation
 type SecurityStateExplanation struct {
 	// Security state representing the severity of the factor being explained.
-	SecurityState string `json:"securityState"`
+	SecurityState SecurityState `json:"securityState"`
 	// Title describing the type of factor.
 	Title string `json:"title"`
 	// Short phrase describing the type of factor.
@@ -131,7 +131,7 @@ type SecurityStateExplanation struct {
 	// Full text explanation of the factor.
 	Description string `json:"description"`
 	// The type of mixed content described by the explanation.
-	MixedContentType string `json:"mixedContentType"`
+	MixedContentType MixedContentType `json:"mixedContentType"`
 	// Page certificate.
 	Certificate []string `json:"certificate"`
 	// Recommendations to fix any issues.
@@ -155,9 +155,9 @@ type InsecureContentStatus struct {
 	// Always false.
 	DisplayedContentWithCertErrors bool `json:"displayedContentWithCertErrors"`
 	// Always set to unknown.
-	RanInsecureContentStyle string `json:"ranInsecureContentStyle"`
+	RanInsecureContentStyle SecurityState `json:"ranInsecureContentStyle"`
 	// Always set to unknown.
-	DisplayedInsecureContentStyle string `json:"displayedInsecureContentStyle"`
+	DisplayedInsecureContentStyle SecurityState `json:"displayedInsecureContentStyle"`
 }
 
 // CertificateErrorAction data type. The action to take when a certificate error occurs. continue will continue processing the

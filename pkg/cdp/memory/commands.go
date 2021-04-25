@@ -153,7 +153,7 @@ func (t *SetPressureNotificationsSuppressed) Do(ctx context.Context) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#method-simulatePressureNotification
 type SimulatePressureNotification struct {
 	// Memory pressure level of the notification.
-	Level string `json:"level"`
+	Level PressureLevel `json:"level"`
 }
 
 // NewSimulatePressureNotification constructs a new SimulatePressureNotification struct instance, with
@@ -161,7 +161,7 @@ type SimulatePressureNotification struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#method-simulatePressureNotification
-func NewSimulatePressureNotification(level string) *SimulatePressureNotification {
+func NewSimulatePressureNotification(level PressureLevel) *SimulatePressureNotification {
 	return &SimulatePressureNotification{
 		Level: level,
 	}

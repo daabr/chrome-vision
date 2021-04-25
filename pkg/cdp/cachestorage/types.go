@@ -37,7 +37,7 @@ type DataEntry struct {
 	// HTTP response status text.
 	ResponseStatusText string `json:"responseStatusText"`
 	// HTTP response type
-	ResponseType string `json:"responseType"`
+	ResponseType CachedResponseType `json:"responseType"`
 	// Response headers
 	ResponseHeaders []Header `json:"responseHeaders"`
 }

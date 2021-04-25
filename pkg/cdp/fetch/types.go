@@ -1,5 +1,7 @@
 package fetch
 
+import "github.com/daabr/chrome-vision/pkg/cdp/network"
+
 // RequestID data type. Unique request identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#type-RequestId
@@ -26,9 +28,9 @@ type RequestPattern struct {
 	// backslash. Omitting is equivalent to "*".
 	URLPattern string `json:"urlPattern,omitempty"`
 	// If set, only requests for matching resource types will be intercepted.
-	ResourceType string `json:"resourceType,omitempty"`
+	ResourceType *network.ResourceType `json:"resourceType,omitempty"`
 	// Stage at wich to begin intercepting requests. Default is Request.
-	RequestStage string `json:"requestStage,omitempty"`
+	RequestStage *RequestStage `json:"requestStage,omitempty"`
 }
 
 // HeaderEntry data type. Response HTTP header entry

@@ -44,7 +44,7 @@ type Bounds struct {
 	// The window height in pixels.
 	Height int64 `json:"height,omitempty"`
 	// The window state. Default to normal.
-	WindowState string `json:"windowState,omitempty"`
+	WindowState *WindowState `json:"windowState,omitempty"`
 }
 
 // PermissionType data type.

@@ -25,7 +25,7 @@ const (
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#type-UsageForType
 type UsageForType struct {
 	// Name of storage type.
-	StorageType string `json:"storageType"`
+	StorageType StorageType `json:"storageType"`
 	// Storage usage (bytes).
 	Usage float64 `json:"usage"`
 }

@@ -299,7 +299,7 @@ type ContinueInterceptedRequest struct {
 	// If set this causes the request to fail with the given reason. Passing `Aborted` for requests
 	// marked with `isNavigationRequest` also cancels the navigation. Must not be set in response
 	// to an authChallenge.
-	ErrorReason string `json:"errorReason,omitempty"`
+	ErrorReason *ErrorReason `json:"errorReason,omitempty"`
 	// If set the requests completes using with the provided base64 encoded raw response, including
 	// HTTP status line and headers etc... Must not be set in response to an authChallenge. (Encoded as a base64 string when passed over JSON)
 	RawResponse string `json:"rawResponse,omitempty"`
@@ -338,8 +338,8 @@ func NewContinueInterceptedRequest(interceptionID string) *ContinueInterceptedRe
 // If set this causes the request to fail with the given reason. Passing `Aborted` for requests
 // marked with `isNavigationRequest` also cancels the navigation. Must not be set in response
 // to an authChallenge.
-func (t *ContinueInterceptedRequest) SetErrorReason(v string) *ContinueInterceptedRequest {
-	t.ErrorReason = v
+func (t *ContinueInterceptedRequest) SetErrorReason(v ErrorReason) *ContinueInterceptedRequest {
+	t.ErrorReason = &v
 	return t
 }
 
@@ -538,7 +538,7 @@ type EmulateNetworkConditions struct {
 	// Maximal aggregated upload throughput (bytes/sec).  -1 disables upload throttling.
 	UploadThroughput float64 `json:"uploadThroughput"`
 	// Connection type if known.
-	ConnectionType string `json:"connectionType,omitempty"`
+	ConnectionType *ConnectionType `json:"connectionType,omitempty"`
 }
 
 // NewEmulateNetworkConditions constructs a new EmulateNetworkConditions struct instance, with
@@ -559,8 +559,8 @@ func NewEmulateNetworkConditions(offline bool, latency float64, downloadThroughp
 // parameter `connectionType` in the EmulateNetworkConditions CDP command.
 //
 // Connection type if known.
-func (t *EmulateNetworkConditions) SetConnectionType(v string) *EmulateNetworkConditions {
-	t.ConnectionType = v
+func (t *EmulateNetworkConditions) SetConnectionType(v ConnectionType) *EmulateNetworkConditions {
+	t.ConnectionType = &v
 	return t
 }
 
@@ -1299,13 +1299,13 @@ type SetCookie struct {
 	// True if cookie is http-only.
 	HttpOnly bool `json:"httpOnly,omitempty"`
 	// Cookie SameSite type.
-	SameSite string `json:"sameSite,omitempty"`
+	SameSite *CookieSameSite `json:"sameSite,omitempty"`
 	// Cookie expiration date, session cookie if not set
 	Expires float64 `json:"expires,omitempty"`
 	// Cookie Priority type.
 	//
 	// This CDP parameter is experimental.
-	Priority string `json:"priority,omitempty"`
+	Priority *CookiePriority `json:"priority,omitempty"`
 	// True if cookie is SameParty.
 	//
 	// This CDP parameter is experimental.
@@ -1313,7 +1313,7 @@ type SetCookie struct {
 	// Cookie source scheme type.
 	//
 	// This CDP parameter is experimental.
-	SourceScheme string `json:"sourceScheme,omitempty"`
+	SourceScheme *CookieSourceScheme `json:"sourceScheme,omitempty"`
 	// Cookie source port. Valid values are {-1, [1, 65535]}, -1 indicates an unspecified port.
 	// An unspecified port value allows protocol clients to emulate legacy cookie scope for the port.
 	// This is a temporary ability and it will be removed in the future.
@@ -1384,8 +1384,8 @@ func (t *SetCookie) SetHttpOnly(v bool) *SetCookie {
 // parameter `sameSite` in the SetCookie CDP command.
 //
 // Cookie SameSite type.
-func (t *SetCookie) SetSameSite(v string) *SetCookie {
-	t.SameSite = v
+func (t *SetCookie) SetSameSite(v CookieSameSite) *SetCookie {
+	t.SameSite = &v
 	return t
 }
 
@@ -1404,8 +1404,8 @@ func (t *SetCookie) SetExpires(v float64) *SetCookie {
 // Cookie Priority type.
 //
 // This CDP parameter is experimental.
-func (t *SetCookie) SetPriority(v string) *SetCookie {
-	t.Priority = v
+func (t *SetCookie) SetPriority(v CookiePriority) *SetCookie {
+	t.Priority = &v
 	return t
 }
 
@@ -1426,8 +1426,8 @@ func (t *SetCookie) SetSameParty(v bool) *SetCookie {
 // Cookie source scheme type.
 //
 // This CDP parameter is experimental.
-func (t *SetCookie) SetSourceScheme(v string) *SetCookie {
-	t.SourceScheme = v
+func (t *SetCookie) SetSourceScheme(v CookieSourceScheme) *SetCookie {
+	t.SourceScheme = &v
 	return t
 }
 

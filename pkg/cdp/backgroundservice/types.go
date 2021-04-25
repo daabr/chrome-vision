@@ -36,7 +36,7 @@ type BackgroundServiceEvent struct {
 	// The Service Worker ID that initiated the event.
 	ServiceWorkerRegistrationID string `json:"serviceWorkerRegistrationId"`
 	// The Background Service this event belongs to.
-	Service string `json:"service"`
+	Service ServiceName `json:"service"`
 	// A description of the event.
 	EventName string `json:"eventName"`
 	// An identifier that groups related events together.

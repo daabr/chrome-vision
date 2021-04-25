@@ -938,13 +938,13 @@ type Navigate struct {
 	// Referrer URL.
 	Referrer string `json:"referrer,omitempty"`
 	// Intended transition type.
-	TransitionType string `json:"transitionType,omitempty"`
+	TransitionType *TransitionType `json:"transitionType,omitempty"`
 	// Frame id to navigate, if not specified navigates the top frame.
 	FrameID string `json:"frameId,omitempty"`
 	// Referrer-policy used for the navigation.
 	//
 	// This CDP parameter is experimental.
-	ReferrerPolicy string `json:"referrerPolicy,omitempty"`
+	ReferrerPolicy *ReferrerPolicy `json:"referrerPolicy,omitempty"`
 }
 
 // NewNavigate constructs a new Navigate struct instance, with
@@ -971,8 +971,8 @@ func (t *Navigate) SetReferrer(v string) *Navigate {
 // parameter `transitionType` in the Navigate CDP command.
 //
 // Intended transition type.
-func (t *Navigate) SetTransitionType(v string) *Navigate {
-	t.TransitionType = v
+func (t *Navigate) SetTransitionType(v TransitionType) *Navigate {
+	t.TransitionType = &v
 	return t
 }
 
@@ -991,8 +991,8 @@ func (t *Navigate) SetFrameID(v string) *Navigate {
 // Referrer-policy used for the navigation.
 //
 // This CDP parameter is experimental.
-func (t *Navigate) SetReferrerPolicy(v string) *Navigate {
-	t.ReferrerPolicy = v
+func (t *Navigate) SetReferrerPolicy(v ReferrerPolicy) *Navigate {
+	t.ReferrerPolicy = &v
 	return t
 }
 
