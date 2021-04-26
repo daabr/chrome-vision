@@ -78,7 +78,7 @@ const (
 type ContextRealtimeData struct {
 	// The current context time in second in BaseAudioContext.
 	CurrentTime float64 `json:"currentTime"`
-	// The time spent on rendering graph divided by render qunatum duration,
+	// The time spent on rendering graph divided by render quantum duration,
 	// and multiplied by 100. 100 means the audio renderer reached the full
 	// capacity and glitch may occur.
 	RenderCapacity float64 `json:"renderCapacity"`

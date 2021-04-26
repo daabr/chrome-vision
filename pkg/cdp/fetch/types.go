@@ -29,7 +29,7 @@ type RequestPattern struct {
 	URLPattern string `json:"urlPattern,omitempty"`
 	// If set, only requests for matching resource types will be intercepted.
 	ResourceType *network.ResourceType `json:"resourceType,omitempty"`
-	// Stage at wich to begin intercepting requests. Default is Request.
+	// Stage at which to begin intercepting requests. Default is Request.
 	RequestStage *RequestStage `json:"requestStage,omitempty"`
 }
 

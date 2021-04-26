@@ -101,7 +101,7 @@ type ReadResult struct {
 	Base64Encoded bool `json:"base64Encoded,omitempty"`
 	// Data that were read.
 	Data string `json:"data"`
-	// Set if the end-of-file condition occured while reading.
+	// Set if the end-of-file condition occurred while reading.
 	Eof bool `json:"eof"`
 }
 

@@ -54,7 +54,7 @@ func (t *CanEmulate) Do(ctx context.Context) (*CanEmulateResult, error) {
 // ClearDeviceMetricsOverride contains the parameters, and acts as
 // a Go receiver, for the CDP command `clearDeviceMetricsOverride`.
 //
-// Clears the overriden device metrics.
+// Clears the overridden device metrics.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-clearDeviceMetricsOverride
 type ClearDeviceMetricsOverride struct{}
@@ -84,7 +84,7 @@ func (t *ClearDeviceMetricsOverride) Do(ctx context.Context) error {
 // ClearGeolocationOverride contains the parameters, and acts as
 // a Go receiver, for the CDP command `clearGeolocationOverride`.
 //
-// Clears the overriden Geolocation Position and Error.
+// Clears the overridden Geolocation Position and Error.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-clearGeolocationOverride
 type ClearGeolocationOverride struct{}
@@ -1046,7 +1046,7 @@ type SetVirtualTimePolicy struct {
 	// If set the virtual time policy change should be deferred until any frame starts navigating.
 	// Note any previous deferred policy change is superseded.
 	WaitForNavigation bool `json:"waitForNavigation,omitempty"`
-	// If set, base::Time::Now will be overriden to initially return this value.
+	// If set, base::Time::Now will be overridden to initially return this value.
 	InitialVirtualTime float64 `json:"initialVirtualTime,omitempty"`
 }
 
@@ -1096,7 +1096,7 @@ func (t *SetVirtualTimePolicy) SetWaitForNavigation(v bool) *SetVirtualTimePolic
 // SetInitialVirtualTime adds or modifies the value of the optional
 // parameter `initialVirtualTime` in the SetVirtualTimePolicy CDP command.
 //
-// If set, base::Time::Now will be overriden to initially return this value.
+// If set, base::Time::Now will be overridden to initially return this value.
 func (t *SetVirtualTimePolicy) SetInitialVirtualTime(v float64) *SetVirtualTimePolicy {
 	t.InitialVirtualTime = v
 	return t

@@ -205,7 +205,7 @@ type SetDownloadBehavior struct {
 	Behavior string `json:"behavior"`
 	// BrowserContext to set download behavior. When omitted, default browser context is used.
 	BrowserContextID string `json:"browserContextId,omitempty"`
-	// The default path to save downloaded files to. This is requred if behavior is set to 'allow'
+	// The default path to save downloaded files to. This is required if behavior is set to 'allow'
 	// or 'allowAndName'.
 	DownloadPath string `json:"downloadPath,omitempty"`
 	// Whether to emit download events (defaults to false).
@@ -237,7 +237,7 @@ func (t *SetDownloadBehavior) SetBrowserContextID(v string) *SetDownloadBehavior
 // SetDownloadPath adds or modifies the value of the optional
 // parameter `downloadPath` in the SetDownloadBehavior CDP command.
 //
-// The default path to save downloaded files to. This is requred if behavior is set to 'allow'
+// The default path to save downloaded files to. This is required if behavior is set to 'allow'
 // or 'allowAndName'.
 func (t *SetDownloadBehavior) SetDownloadPath(v string) *SetDownloadBehavior {
 	t.DownloadPath = v
