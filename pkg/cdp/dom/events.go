@@ -64,13 +64,13 @@ type ChildNodeRemoved struct {
 	NodeID int64 `json:"nodeId"`
 }
 
-// DistributedNodesUpdated asynchronous event. Called when distrubution is changed.
+// DistributedNodesUpdated asynchronous event. Called when distribution is changed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#event-distributedNodesUpdated
 //
 // This CDP event is experimental.
 type DistributedNodesUpdated struct {
-	// Insertion point where distrubuted nodes were updated.
+	// Insertion point where distributed nodes were updated.
 	InsertionPointID int64 `json:"insertionPointId"`
 	// Distributed nodes for given insertion point.
 	DistributedNodes []BackendNode `json:"distributedNodes"`

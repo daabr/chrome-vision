@@ -272,7 +272,7 @@ type OverrideQuotaForOrigin struct {
 	// Security origin.
 	Origin string `json:"origin"`
 	// The quota size (in bytes) to override the original quota with.
-	// If this is called multiple times, the overriden quota will be equal to
+	// If this is called multiple times, the overridden quota will be equal to
 	// the quotaSize provided in the final call. If this is called without
 	// specifying a quotaSize, the quota will be reset to the default value for
 	// the specified origin. If this is called multiple times with different
@@ -298,7 +298,7 @@ func NewOverrideQuotaForOrigin(origin string) *OverrideQuotaForOrigin {
 // parameter `quotaSize` in the OverrideQuotaForOrigin CDP command.
 //
 // The quota size (in bytes) to override the original quota with.
-// If this is called multiple times, the overriden quota will be equal to
+// If this is called multiple times, the overridden quota will be equal to
 // the quotaSize provided in the final call. If this is called without
 // specifying a quotaSize, the quota will be reset to the default value for
 // the specified origin. If this is called multiple times with different

@@ -1864,7 +1864,7 @@ type SetDownloadBehavior struct {
 	// Whether to allow all or deny all download requests, or use default Chrome behavior if
 	// available (otherwise deny).
 	Behavior string `json:"behavior"`
-	// The default path to save downloaded files to. This is requred if behavior is set to 'allow'
+	// The default path to save downloaded files to. This is required if behavior is set to 'allow'
 	DownloadPath string `json:"downloadPath,omitempty"`
 }
 
@@ -1885,7 +1885,7 @@ func NewSetDownloadBehavior(behavior string) *SetDownloadBehavior {
 // SetDownloadPath adds or modifies the value of the optional
 // parameter `downloadPath` in the SetDownloadBehavior CDP command.
 //
-// The default path to save downloaded files to. This is requred if behavior is set to 'allow'
+// The default path to save downloaded files to. This is required if behavior is set to 'allow'
 func (t *SetDownloadBehavior) SetDownloadPath(v string) *SetDownloadBehavior {
 	t.DownloadPath = v
 	return t

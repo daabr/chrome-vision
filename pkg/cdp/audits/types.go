@@ -271,7 +271,7 @@ const (
 )
 
 // SharedArrayBufferIssueDetails data type. Details for a issue arising from an SAB being instantiated in, or
-// transfered to a context that is not cross-origin isolated.
+// transferred to a context that is not cross-origin isolated.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-SharedArrayBufferIssueDetails
 type SharedArrayBufferIssueDetails struct {
