@@ -341,8 +341,11 @@ type AttributionReportingIssueType string
 
 // AttributionReportingIssueType valid values.
 const (
-	AttributionReportingIssueTypePermissionPolicyDisabled AttributionReportingIssueType = "PermissionPolicyDisabled"
-	AttributionReportingIssueTypeInvalidAttributionData   AttributionReportingIssueType = "InvalidAttributionData"
+	AttributionReportingIssueTypePermissionPolicyDisabled             AttributionReportingIssueType = "PermissionPolicyDisabled"
+	AttributionReportingIssueTypeInvalidAttributionSourceEventID      AttributionReportingIssueType = "InvalidAttributionSourceEventId"
+	AttributionReportingIssueTypeInvalidAttributionData               AttributionReportingIssueType = "InvalidAttributionData"
+	AttributionReportingIssueTypeAttributionSourceUntrustworthyOrigin AttributionReportingIssueType = "AttributionSourceUntrustworthyOrigin"
+	AttributionReportingIssueTypeAttributionUntrustworthyOrigin       AttributionReportingIssueType = "AttributionUntrustworthyOrigin"
 )
 
 // AttributionReportingIssueDetails data type. Details for issues around "Attribution Reporting API" usage.
