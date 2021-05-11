@@ -360,6 +360,20 @@ type AttributionReportingIssueDetails struct {
 	InvalidParameter string                        `json:"invalidParameter,omitempty"`
 }
 
+// QuirksModeIssueDetails data type. Details for issues about documents in Quirks Mode
+// or Limited Quirks Mode that affects page layouting.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-QuirksModeIssueDetails
+type QuirksModeIssueDetails struct {
+	// If false, it means the document's mode is "quirks"
+	// instead of "limited-quirks".
+	IsLimitedQuirksMode bool   `json:"isLimitedQuirksMode"`
+	DocumentNodeID      int64  `json:"documentNodeId"`
+	URL                 string `json:"url"`
+	FrameID             string `json:"frameId"`
+	LoaderID            string `json:"loaderId"`
+}
+
 // InspectorIssueCode data type. A unique identifier for the type of issue. Each type may use one of the
 // optional fields in InspectorIssueDetails to convey more specific
 // information about the kind of issue.
@@ -379,6 +393,7 @@ const (
 	InspectorIssueCodeLowTextContrastIssue       InspectorIssueCode = "LowTextContrastIssue"
 	InspectorIssueCodeCorsIssue                  InspectorIssueCode = "CorsIssue"
 	InspectorIssueCodeAttributionReportingIssue  InspectorIssueCode = "AttributionReportingIssue"
+	InspectorIssueCodeQuirksModeIssue            InspectorIssueCode = "QuirksModeIssue"
 )
 
 // InspectorIssueDetails data type. This struct holds a list of optional fields with additional information
@@ -397,6 +412,7 @@ type InspectorIssueDetails struct {
 	LowTextContrastIssueDetails       *LowTextContrastIssueDetails       `json:"lowTextContrastIssueDetails,omitempty"`
 	CorsIssueDetails                  *CorsIssueDetails                  `json:"corsIssueDetails,omitempty"`
 	AttributionReportingIssueDetails  *AttributionReportingIssueDetails  `json:"attributionReportingIssueDetails,omitempty"`
+	QuirksModeIssueDetails            *QuirksModeIssueDetails            `json:"quirksModeIssueDetails,omitempty"`
 }
 
 // InspectorIssue data type. An inspector issue reported from the back-end.
