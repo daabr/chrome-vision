@@ -98,6 +98,7 @@ const (
 	PermissionsPolicyFeatureClipboardWrite              PermissionsPolicyFeature = "clipboard-write"
 	PermissionsPolicyFeatureConversionMeasurement       PermissionsPolicyFeature = "conversion-measurement"
 	PermissionsPolicyFeatureCrossOriginIsolated         PermissionsPolicyFeature = "cross-origin-isolated"
+	PermissionsPolicyFeatureDirectSockets               PermissionsPolicyFeature = "direct-sockets"
 	PermissionsPolicyFeatureDisplayCapture              PermissionsPolicyFeature = "display-capture"
 	PermissionsPolicyFeatureDocumentDomain              PermissionsPolicyFeature = "document-domain"
 	PermissionsPolicyFeatureEncryptedMedia              PermissionsPolicyFeature = "encrypted-media"
@@ -121,6 +122,7 @@ const (
 	PermissionsPolicyFeaturePublickeyCredentialsGet     PermissionsPolicyFeature = "publickey-credentials-get"
 	PermissionsPolicyFeatureScreenWakeLock              PermissionsPolicyFeature = "screen-wake-lock"
 	PermissionsPolicyFeatureSerial                      PermissionsPolicyFeature = "serial"
+	PermissionsPolicyFeatureSharedAutofill              PermissionsPolicyFeature = "shared-autofill"
 	PermissionsPolicyFeatureStorageAccessApi            PermissionsPolicyFeature = "storage-access-api"
 	PermissionsPolicyFeatureSyncXhr                     PermissionsPolicyFeature = "sync-xhr"
 	PermissionsPolicyFeatureTrustTokenRedemption        PermissionsPolicyFeature = "trust-token-redemption"
@@ -162,6 +164,95 @@ type PermissionsPolicyFeatureState struct {
 	Feature PermissionsPolicyFeature       `json:"feature"`
 	Allowed bool                           `json:"allowed"`
 	Locator *PermissionsPolicyBlockLocator `json:"locator,omitempty"`
+}
+
+// OriginTrialTokenStatus data type. Origin Trial(https://www.chromium.org/blink/origin-trials) support.
+// Status for an Origin Trial token.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-OriginTrialTokenStatus
+//
+// This CDP type is experimental.
+type OriginTrialTokenStatus string
+
+// OriginTrialTokenStatus valid values.
+const (
+	OriginTrialTokenStatusSuccess                OriginTrialTokenStatus = "Success"
+	OriginTrialTokenStatusNotSupported           OriginTrialTokenStatus = "NotSupported"
+	OriginTrialTokenStatusInsecure               OriginTrialTokenStatus = "Insecure"
+	OriginTrialTokenStatusExpired                OriginTrialTokenStatus = "Expired"
+	OriginTrialTokenStatusWrongOrigin            OriginTrialTokenStatus = "WrongOrigin"
+	OriginTrialTokenStatusInvalidSignature       OriginTrialTokenStatus = "InvalidSignature"
+	OriginTrialTokenStatusMalformed              OriginTrialTokenStatus = "Malformed"
+	OriginTrialTokenStatusWrongVersion           OriginTrialTokenStatus = "WrongVersion"
+	OriginTrialTokenStatusFeatureDisabled        OriginTrialTokenStatus = "FeatureDisabled"
+	OriginTrialTokenStatusTokenDisabled          OriginTrialTokenStatus = "TokenDisabled"
+	OriginTrialTokenStatusFeatureDisabledForUser OriginTrialTokenStatus = "FeatureDisabledForUser"
+)
+
+// OriginTrialStatus data type. Status for an Origin Trial.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-OriginTrialStatus
+//
+// This CDP type is experimental.
+type OriginTrialStatus string
+
+// OriginTrialStatus valid values.
+const (
+	OriginTrialStatusEnabled               OriginTrialStatus = "Enabled"
+	OriginTrialStatusValidTokenNotProvided OriginTrialStatus = "ValidTokenNotProvided"
+	OriginTrialStatusOSNotSupported        OriginTrialStatus = "OSNotSupported"
+	OriginTrialStatusTrialNotAllowed       OriginTrialStatus = "TrialNotAllowed"
+)
+
+// OriginTrialUsageRestriction data type.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-OriginTrialUsageRestriction
+//
+// This CDP type is experimental.
+type OriginTrialUsageRestriction string
+
+// OriginTrialUsageRestriction valid values.
+const (
+	OriginTrialUsageRestrictionNone   OriginTrialUsageRestriction = "None"
+	OriginTrialUsageRestrictionSubset OriginTrialUsageRestriction = "Subset"
+)
+
+// OriginTrialToken data type.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-OriginTrialToken
+//
+// This CDP type is experimental.
+type OriginTrialToken struct {
+	Origin           string                      `json:"origin"`
+	MatchSubDomains  bool                        `json:"matchSubDomains"`
+	TrialName        string                      `json:"trialName"`
+	ExpiryTime       float64                     `json:"expiryTime"`
+	IsThirdParty     bool                        `json:"isThirdParty"`
+	UsageRestriction OriginTrialUsageRestriction `json:"usageRestriction"`
+}
+
+// OriginTrialTokenWithStatus data type.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-OriginTrialTokenWithStatus
+//
+// This CDP type is experimental.
+type OriginTrialTokenWithStatus struct {
+	RawTokenText string `json:"rawTokenText"`
+	// `parsedToken` is present only when the token is extractable and
+	// parsable.
+	ParsedToken *OriginTrialToken      `json:"parsedToken,omitempty"`
+	Status      OriginTrialTokenStatus `json:"status"`
+}
+
+// OriginTrial data type.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-OriginTrial
+//
+// This CDP type is experimental.
+type OriginTrial struct {
+	TrialName        string                       `json:"trialName"`
+	Status           OriginTrialStatus            `json:"status"`
+	TokensWithStatus []OriginTrialTokenWithStatus `json:"tokensWithStatus"`
 }
 
 // Frame data type. Information about the Frame on the page.
@@ -213,6 +304,10 @@ type Frame struct {
 	//
 	// This CDP property is experimental.
 	GatedAPIFeatures []GatedAPIFeatures `json:"gatedAPIFeatures"`
+	// Frame document's origin trials with at least one token present.
+	//
+	// This CDP property is experimental.
+	OriginTrials []OriginTrial `json:"originTrials,omitempty"`
 }
 
 // FrameResource data type. Information about the Resource on the page.

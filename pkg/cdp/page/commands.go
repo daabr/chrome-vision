@@ -80,6 +80,11 @@ type AddScriptToEvaluateOnNewDocument struct {
 	//
 	// This CDP parameter is experimental.
 	WorldName string `json:"worldName,omitempty"`
+	// Specifies whether command line API should be available to the script, defaults
+	// to false.
+	//
+	// This CDP parameter is experimental.
+	IncludeCommandLineAPI bool `json:"includeCommandLineAPI,omitempty"`
 }
 
 // NewAddScriptToEvaluateOnNewDocument constructs a new AddScriptToEvaluateOnNewDocument struct instance, with
@@ -103,6 +108,18 @@ func NewAddScriptToEvaluateOnNewDocument(source string) *AddScriptToEvaluateOnNe
 // This CDP parameter is experimental.
 func (t *AddScriptToEvaluateOnNewDocument) SetWorldName(v string) *AddScriptToEvaluateOnNewDocument {
 	t.WorldName = v
+	return t
+}
+
+// SetIncludeCommandLineAPI adds or modifies the value of the optional
+// parameter `includeCommandLineAPI` in the AddScriptToEvaluateOnNewDocument CDP command.
+//
+// Specifies whether command line API should be available to the script, defaults
+// to false.
+//
+// This CDP parameter is experimental.
+func (t *AddScriptToEvaluateOnNewDocument) SetIncludeCommandLineAPI(v bool) *AddScriptToEvaluateOnNewDocument {
+	t.IncludeCommandLineAPI = v
 	return t
 }
 

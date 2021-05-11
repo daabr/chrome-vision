@@ -778,8 +778,8 @@ const (
 //
 // This CDP type is experimental.
 type RequestPattern struct {
-	// Wildcards ('*' -> zero or more, '?' -> exactly one) are allowed. Escape character is
-	// backslash. Omitting is equivalent to "*".
+	// Wildcards (`'*'` -> zero or more, `'?'` -> exactly one) are allowed. Escape character is
+	// backslash. Omitting is equivalent to `"*"`.
 	URLPattern string `json:"urlPattern,omitempty"`
 	// If set, only requests for matching resource types will be intercepted.
 	ResourceType *ResourceType `json:"resourceType,omitempty"`
