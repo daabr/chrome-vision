@@ -208,13 +208,13 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 
 		// Attach this session to the first tab.
 		session.targetID, session.sessionID = newID(), newID()
-		setDiscoverTargets(ctx)
-
-		targetID, err := fetchTargetID(ctx)
-		if err != nil {
-			// TODO: cancel context instead of just a warning?
-			log.Printf(`WARNING: "Target.getTargets" command error: %v`, err)
-			return ctx, err
+		var targetID string
+		for {
+			time.Sleep(100 * time.Millisecond)
+			if targetID, err = fetchTargetID(ctx); err == nil {
+				break
+			}
+			log.Printf(`"Target.getTargets" command error: %v`, err)
 		}
 		sessionID, err := attach(ctx, targetID)
 		if err != nil {
@@ -229,6 +229,7 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 
 		// TODO: Runtime.enable, Log.enable, Network.enable, Inspector.enable,
 		// Page.enable, DOM.enable, CSS.enable, Page.setLifecycleEventsEnabled?
+		// Target.setDiscoverTargets
 	}
 
 	return ctx, nil
@@ -247,20 +248,6 @@ func mkdirOutput() (string, error) {
 	}
 	log.Printf("Session output directory: %s\n", path)
 	return path, nil
-}
-
-// Enable receiving target state update events from the browser. We don't
-// actually use these events, but this command blocks until the browser
-// initializes its first tab and sends the first two events (about the
-// creation of the browser and page targets), which ensures that we
-// don't call the function `fetchTargetID` too soon.
-func setDiscoverTargets(ctx context.Context) {
-	// https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-setDiscoverTargets
-	// (we don't use the target sub-package to avoid circular dependencies).
-	method, params := "Target.setDiscoverTargets", `{"discover":true}`
-	if _, err := Send(ctx, method, []byte(params)); err != nil {
-		log.Printf("WARNING: %q command error: %v", method, err)
-	}
 }
 
 // Return the ID of the browser's first unattached page target.
