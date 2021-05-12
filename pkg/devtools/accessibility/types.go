@@ -33,6 +33,11 @@ const (
 	AXValueTypeValueUndefined     AXValueType = "valueUndefined"
 )
 
+// String returns the AXValueType value as a built-in string.
+func (t AXValueType) String() string {
+	return string(t)
+}
+
 // AXValueSourceType data type. Enum of possible property sources.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXValueSourceType
@@ -47,6 +52,11 @@ const (
 	AXValueSourceTypePlaceholder    AXValueSourceType = "placeholder"
 	AXValueSourceTypeRelatedElement AXValueSourceType = "relatedElement"
 )
+
+// String returns the AXValueSourceType value as a built-in string.
+func (t AXValueSourceType) String() string {
+	return string(t)
+}
 
 // AXValueNativeSourceType data type. Enum of possible native property sources (as a subtype of a particular AXValueSourceType).
 //
@@ -65,6 +75,11 @@ const (
 	AXValueNativeSourceTypeTitle          AXValueNativeSourceType = "title"
 	AXValueNativeSourceTypeOther          AXValueNativeSourceType = "other"
 )
+
+// String returns the AXValueNativeSourceType value as a built-in string.
+func (t AXValueNativeSourceType) String() string {
+	return string(t)
+}
 
 // AXValueSource data type. A single source for a computed AX property.
 //
@@ -179,6 +194,11 @@ const (
 	AXPropertyNameOwns             AXPropertyName = "owns"
 )
 
+// String returns the AXPropertyName value as a built-in string.
+func (t AXPropertyName) String() string {
+	return string(t)
+}
+
 // AXNode data type. A node in the accessibility tree.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#type-AXNode
@@ -200,7 +220,7 @@ type AXNode struct {
 	// All other properties
 	Properties []AXProperty `json:"properties,omitempty"`
 	// IDs for each of this node's child nodes.
-	ChildIds []AXNodeID `json:"childIds,omitempty"`
+	ChildIds []string `json:"childIds,omitempty"`
 	// The backend ID for the associated DOM node, if any.
 	BackendDOMNodeID int64 `json:"backendDOMNodeId,omitempty"`
 }

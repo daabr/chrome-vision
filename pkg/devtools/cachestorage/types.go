@@ -20,6 +20,11 @@ const (
 	CachedResponseTypeOpaqueRedirect CachedResponseType = "opaqueRedirect"
 )
 
+// String returns the CachedResponseType value as a built-in string.
+func (t CachedResponseType) String() string {
+	return string(t)
+}
+
 // DataEntry data type. Data entry.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CacheStorage/#type-DataEntry

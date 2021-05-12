@@ -83,6 +83,11 @@ func generateType(b *strings.Builder, t Type, domain, usage string, redirect *st
 				fmt.Fprintf(b, "\t%s%s %s = %q\n", id, adjust(s), id, s)
 			}
 			fmt.Fprintln(b, ")")
+			// Implement the Stringer interface.
+			fmt.Fprintf(b, "\n// String returns the %s value as a built-in string.\n", id)
+			fmt.Fprintf(b, "func (t %s) String() string {\n", id)
+			fmt.Fprintln(b, "\treturn string(t)")
+			fmt.Fprintln(b, "}")
 		}
 	default:
 		fmt.Fprintf(b, "type %s %s\n", id, transformType(t.Type, t.Items))
@@ -109,11 +114,17 @@ func generateProperty(b *strings.Builder, p Property, usage, domain string) {
 
 	// Struct field type.
 	if p.Type != nil {
-		fmt.Fprint(b, transformType(*p.Type, p.Items))
+		t := transformType(*p.Type, p.Items)
+		if strings.HasPrefix(t, "[]") {
+			if a, ok := aliases[t[2:]]; ok {
+				t = "[]" + a // De-alias built-in data types (https://crbug.com/1193242).
+			}
+		}
+		fmt.Fprint(b, t)
 	} else {
 		r := strings.ReplaceAll(adjust(*p.Ref), strings.ToLower(domain)+".", "")
-		if t, ok := aliases[r]; ok {
-			r = t // De-alias built-in data types (https://crbug.com/1193242).
+		if a, ok := aliases[r]; ok {
+			r = a // De-alias built-in data types (https://crbug.com/1193242).
 		}
 		if p.Optional && r != "int64" && r != "float64" && r != "string" {
 			fmt.Fprint(b, "*")

@@ -75,6 +75,11 @@ const (
 	SubsamplingFormatYuv444 SubsamplingFormat = "yuv444"
 )
 
+// String returns the SubsamplingFormat value as a built-in string.
+func (t SubsamplingFormat) String() string {
+	return string(t)
+}
+
 // ImageType data type. Image format of a given image.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/SystemInfo/#type-ImageType
@@ -86,6 +91,11 @@ const (
 	ImageTypeWebp    ImageType = "webp"
 	ImageTypeUnknown ImageType = "unknown"
 )
+
+// String returns the ImageType value as a built-in string.
+func (t ImageType) String() string {
+	return string(t)
+}
 
 // ImageDecodeAcceleratorCapability data type. Describes a supported image decoding profile with its associated minimum and
 // maximum resolutions and subsampling.

@@ -141,8 +141,8 @@ type ArrayOfStrings []StringIndex
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMSnapshot/#type-RareStringData
 type RareStringData struct {
-	Index []int64       `json:"index"`
-	Value []StringIndex `json:"value"`
+	Index []int64 `json:"index"`
+	Value []int64 `json:"value"`
 }
 
 // RareBooleanData data type.
@@ -210,9 +210,9 @@ type NodeTreeSnapshot struct {
 	// `Node`'s nodeType.
 	NodeType []int64 `json:"nodeType,omitempty"`
 	// `Node`'s nodeName.
-	NodeName []StringIndex `json:"nodeName,omitempty"`
+	NodeName []int64 `json:"nodeName,omitempty"`
 	// `Node`'s nodeValue.
-	NodeValue []StringIndex `json:"nodeValue,omitempty"`
+	NodeValue []int64 `json:"nodeValue,omitempty"`
 	// `Node`'s id, corresponds to DOM.Node.backendNodeId.
 	BackendNodeID []int64 `json:"backendNodeId,omitempty"`
 	// Attributes of an `Element` node. Flatten name, value pairs.
@@ -250,7 +250,7 @@ type LayoutTreeSnapshot struct {
 	// The absolute position bounding box.
 	Bounds []Rectangle `json:"bounds"`
 	// Contents of the LayoutText, if any.
-	Text []StringIndex `json:"text"`
+	Text []int64 `json:"text"`
 	// Stacking context information.
 	StackingContexts RareBooleanData `json:"stackingContexts"`
 	// Global paint order index, which is determined by the stacking order of the nodes. Nodes
@@ -266,7 +266,7 @@ type LayoutTreeSnapshot struct {
 	// The list of background colors that are blended with colors of overlapping elements.
 	//
 	// This CDP property is experimental.
-	BlendedBackgroundColors []StringIndex `json:"blendedBackgroundColors,omitempty"`
+	BlendedBackgroundColors []int64 `json:"blendedBackgroundColors,omitempty"`
 	// The list of computed text opacities.
 	//
 	// This CDP property is experimental.

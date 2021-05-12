@@ -18,6 +18,11 @@ const (
 	MixedContentTypeNone                MixedContentType = "none"
 )
 
+// String returns the MixedContentType value as a built-in string.
+func (t MixedContentType) String() string {
+	return string(t)
+}
+
 // SecurityState data type. The security level of a page or resource.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-SecurityState
@@ -32,6 +37,11 @@ const (
 	SecurityStateInfo           SecurityState = "info"
 	SecurityStateInsecureBroken SecurityState = "insecure-broken"
 )
+
+// String returns the SecurityState value as a built-in string.
+func (t SecurityState) String() string {
+	return string(t)
+}
 
 // CertificateSecurityState data type. Details about the security state of the page certificate.
 //
@@ -89,6 +99,11 @@ const (
 	SafetyTipStatusBadReputation SafetyTipStatus = "badReputation"
 	SafetyTipStatusLookalike     SafetyTipStatus = "lookalike"
 )
+
+// String returns the SafetyTipStatus value as a built-in string.
+func (t SafetyTipStatus) String() string {
+	return string(t)
+}
 
 // SafetyTipInfo data type.
 //
@@ -171,3 +186,8 @@ const (
 	CertificateErrorActionContinue CertificateErrorAction = "continue"
 	CertificateErrorActionCancel   CertificateErrorAction = "cancel"
 )
+
+// String returns the CertificateErrorAction value as a built-in string.
+func (t CertificateErrorAction) String() string {
+	return string(t)
+}

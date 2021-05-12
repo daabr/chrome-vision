@@ -50,6 +50,11 @@ const (
 	VirtualTimePolicyPauseIfNetworkFetchesPending VirtualTimePolicy = "pauseIfNetworkFetchesPending"
 )
 
+// String returns the VirtualTimePolicy value as a built-in string.
+func (t VirtualTimePolicy) String() string {
+	return string(t)
+}
+
 // UserAgentBrandVersion data type. Used to specify User Agent Cient Hints to emulate. See https://wicg.github.io/ua-client-hints
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#type-UserAgentBrandVersion
@@ -89,3 +94,8 @@ const (
 	DisabledImageTypeJxl  DisabledImageType = "jxl"
 	DisabledImageTypeWebp DisabledImageType = "webp"
 )
+
+// String returns the DisabledImageType value as a built-in string.
+func (t DisabledImageType) String() string {
+	return string(t)
+}

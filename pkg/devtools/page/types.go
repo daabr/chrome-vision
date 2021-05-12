@@ -21,6 +21,11 @@ const (
 	AdFrameTypeRoot  AdFrameType = "root"
 )
 
+// String returns the AdFrameType value as a built-in string.
+func (t AdFrameType) String() string {
+	return string(t)
+}
+
 // SecureContextType data type. Indicates whether the frame is a secure context and why it is the case.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-SecureContextType
@@ -36,6 +41,11 @@ const (
 	SecureContextTypeInsecureAncestor SecureContextType = "InsecureAncestor"
 )
 
+// String returns the SecureContextType value as a built-in string.
+func (t SecureContextType) String() string {
+	return string(t)
+}
+
 // CrossOriginIsolatedContextType data type. Indicates whether the frame is cross-origin isolated and why it is the case.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-CrossOriginIsolatedContextType
@@ -49,6 +59,11 @@ const (
 	CrossOriginIsolatedContextTypeNotIsolated                CrossOriginIsolatedContextType = "NotIsolated"
 	CrossOriginIsolatedContextTypeNotIsolatedFeatureDisabled CrossOriginIsolatedContextType = "NotIsolatedFeatureDisabled"
 )
+
+// String returns the CrossOriginIsolatedContextType value as a built-in string.
+func (t CrossOriginIsolatedContextType) String() string {
+	return string(t)
+}
 
 // GatedAPIFeatures data type.
 //
@@ -64,6 +79,11 @@ const (
 	GatedAPIFeaturesPerformanceMeasureMemory          GatedAPIFeatures = "PerformanceMeasureMemory"
 	GatedAPIFeaturesPerformanceProfile                GatedAPIFeatures = "PerformanceProfile"
 )
+
+// String returns the GatedAPIFeatures value as a built-in string.
+func (t GatedAPIFeatures) String() string {
+	return string(t)
+}
 
 // PermissionsPolicyFeature data type. All Permissions Policy features. This enum should match the one defined
 // in renderer/core/feature_policy/feature_policy_features.json5.
@@ -132,6 +152,11 @@ const (
 	PermissionsPolicyFeatureXrSpatialTracking           PermissionsPolicyFeature = "xr-spatial-tracking"
 )
 
+// String returns the PermissionsPolicyFeature value as a built-in string.
+func (t PermissionsPolicyFeature) String() string {
+	return string(t)
+}
+
 // PermissionsPolicyBlockReason data type. Reason for a permissions policy feature to be disabled.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-PermissionsPolicyBlockReason
@@ -144,6 +169,11 @@ const (
 	PermissionsPolicyBlockReasonHeader          PermissionsPolicyBlockReason = "Header"
 	PermissionsPolicyBlockReasonIframeAttribute PermissionsPolicyBlockReason = "IframeAttribute"
 )
+
+// String returns the PermissionsPolicyBlockReason value as a built-in string.
+func (t PermissionsPolicyBlockReason) String() string {
+	return string(t)
+}
 
 // PermissionsPolicyBlockLocator data type.
 //
@@ -189,6 +219,11 @@ const (
 	OriginTrialTokenStatusFeatureDisabledForUser OriginTrialTokenStatus = "FeatureDisabledForUser"
 )
 
+// String returns the OriginTrialTokenStatus value as a built-in string.
+func (t OriginTrialTokenStatus) String() string {
+	return string(t)
+}
+
 // OriginTrialStatus data type. Status for an Origin Trial.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-OriginTrialStatus
@@ -204,6 +239,11 @@ const (
 	OriginTrialStatusTrialNotAllowed       OriginTrialStatus = "TrialNotAllowed"
 )
 
+// String returns the OriginTrialStatus value as a built-in string.
+func (t OriginTrialStatus) String() string {
+	return string(t)
+}
+
 // OriginTrialUsageRestriction data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-OriginTrialUsageRestriction
@@ -216,6 +256,11 @@ const (
 	OriginTrialUsageRestrictionNone   OriginTrialUsageRestriction = "None"
 	OriginTrialUsageRestrictionSubset OriginTrialUsageRestriction = "Subset"
 )
+
+// String returns the OriginTrialUsageRestriction value as a built-in string.
+func (t OriginTrialUsageRestriction) String() string {
+	return string(t)
+}
 
 // OriginTrialToken data type.
 //
@@ -383,6 +428,11 @@ const (
 	TransitionTypeOther            TransitionType = "other"
 )
 
+// String returns the TransitionType value as a built-in string.
+func (t TransitionType) String() string {
+	return string(t)
+}
+
 // NavigationEntry data type. Navigation history entry.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-NavigationEntry
@@ -433,6 +483,11 @@ const (
 	DialogTypePrompt       DialogType = "prompt"
 	DialogTypeBeforeunload DialogType = "beforeunload"
 )
+
+// String returns the DialogType value as a built-in string.
+func (t DialogType) String() string {
+	return string(t)
+}
 
 // AppManifestError data type. Error while paring app manifest.
 //
@@ -563,6 +618,11 @@ const (
 	ClientNavigationReasonAnchorClick           ClientNavigationReason = "anchorClick"
 )
 
+// String returns the ClientNavigationReason value as a built-in string.
+func (t ClientNavigationReason) String() string {
+	return string(t)
+}
+
 // ClientNavigationDisposition data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-ClientNavigationDisposition
@@ -577,6 +637,11 @@ const (
 	ClientNavigationDispositionNewWindow  ClientNavigationDisposition = "newWindow"
 	ClientNavigationDispositionDownload   ClientNavigationDisposition = "download"
 )
+
+// String returns the ClientNavigationDisposition value as a built-in string.
+func (t ClientNavigationDisposition) String() string {
+	return string(t)
+}
 
 // InstallabilityErrorArgument data type.
 //
@@ -621,6 +686,11 @@ const (
 	ReferrerPolicyUnsafeURL                   ReferrerPolicy = "unsafeUrl"
 )
 
+// String returns the ReferrerPolicy value as a built-in string.
+func (t ReferrerPolicy) String() string {
+	return string(t)
+}
+
 // CompilationCacheParams data type. Per-script compilation cache parameters for `Page.produceCompilationCache`
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-CompilationCacheParams
@@ -646,3 +716,8 @@ const (
 	NavigationTypeNavigation              NavigationType = "Navigation"
 	NavigationTypeBackForwardCacheRestore NavigationType = "BackForwardCacheRestore"
 )
+
+// String returns the NavigationType value as a built-in string.
+func (t NavigationType) String() string {
+	return string(t)
+}

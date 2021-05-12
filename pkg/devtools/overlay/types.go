@@ -128,6 +128,11 @@ const (
 	ContrastAlgorithmApca ContrastAlgorithm = "apca"
 )
 
+// String returns the ContrastAlgorithm value as a built-in string.
+func (t ContrastAlgorithm) String() string {
+	return string(t)
+}
+
 // HighlightConfig data type. Configuration data for the highlighting of page elements.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-HighlightConfig
@@ -181,6 +186,11 @@ const (
 	ColorFormatHsl ColorFormat = "hsl"
 	ColorFormatHex ColorFormat = "hex"
 )
+
+// String returns the ColorFormat value as a built-in string.
+func (t ColorFormat) String() string {
+	return string(t)
+}
 
 // GridNodeHighlightConfig data type. Configurations for Persistent Grid Highlight
 //
@@ -251,3 +261,8 @@ const (
 	InspectModeShowDistances         InspectMode = "showDistances"
 	InspectModeNone                  InspectMode = "none"
 )
+
+// String returns the InspectMode value as a built-in string.
+func (t InspectMode) String() string {
+	return string(t)
+}

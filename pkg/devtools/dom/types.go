@@ -52,6 +52,11 @@ const (
 	PseudoTypeInputListButton     PseudoType = "input-list-button"
 )
 
+// String returns the PseudoType value as a built-in string.
+func (t PseudoType) String() string {
+	return string(t)
+}
+
 // ShadowRootType data type. Shadow root type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-ShadowRootType
@@ -63,6 +68,11 @@ const (
 	ShadowRootTypeOpen      ShadowRootType = "open"
 	ShadowRootTypeClosed    ShadowRootType = "closed"
 )
+
+// String returns the ShadowRootType value as a built-in string.
+func (t ShadowRootType) String() string {
+	return string(t)
+}
 
 // Node data type. DOM interaction is implemented in terms of mirror objects that represent the actual DOM nodes.
 // DOMNode is a base node mirror type.

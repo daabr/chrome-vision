@@ -14,6 +14,11 @@ const (
 	DOMBreakpointTypeNodeRemoved       DOMBreakpointType = "node-removed"
 )
 
+// String returns the DOMBreakpointType value as a built-in string.
+func (t DOMBreakpointType) String() string {
+	return string(t)
+}
+
 // CSPViolationType data type. CSP Violation type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMDebugger/#type-CSPViolationType
@@ -26,6 +31,11 @@ const (
 	CSPViolationTypeTrustedtypeSinkViolation   CSPViolationType = "trustedtype-sink-violation"
 	CSPViolationTypeTrustedtypePolicyViolation CSPViolationType = "trustedtype-policy-violation"
 )
+
+// String returns the CSPViolationType value as a built-in string.
+func (t CSPViolationType) String() string {
+	return string(t)
+}
 
 // EventListener data type. Object event listener.
 //
