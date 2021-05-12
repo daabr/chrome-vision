@@ -14,10 +14,10 @@ import (
 )
 
 const (
-	cdpRoot   = "../../pkg/cdp"
+	cdpRoot   = "../../pkg/devtools"
 	cdpURL    = "https://chromedevtools.github.io/devtools-protocol/tot"
 	genURL    = "https://github.com/daabr/chrome-vision/cmd/cdpgen"
-	importURL = "github.com/daabr/chrome-vision/pkg/cdp"
+	importURL = "github.com/daabr/chrome-vision/pkg/devtools"
 )
 
 // Protocol represents a CDP file (browser_protocol.json, js_protocol.json).

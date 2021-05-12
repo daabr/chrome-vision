@@ -8,7 +8,7 @@
 
 go generate ./cmd/cdpgen
 
-for f in ./pkg/cdp/**/*.go; do
+for f in ./pkg/devtools/**/*.go; do
     ~/go/bin/goimports $f > ./tmp.go
     mv -f ./tmp.go $f
 done
