@@ -51,6 +51,11 @@ const (
 	GestureSourceTypeMouse   GestureSourceType = "mouse"
 )
 
+// String returns the GestureSourceType value as a built-in string.
+func (t GestureSourceType) String() string {
+	return string(t)
+}
+
 // MouseButton data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Input/#type-MouseButton
@@ -65,6 +70,11 @@ const (
 	MouseButtonBack    MouseButton = "back"
 	MouseButtonForward MouseButton = "forward"
 )
+
+// String returns the MouseButton value as a built-in string.
+func (t MouseButton) String() string {
+	return string(t)
+}
 
 // TimeSinceEpoch data type. UTC time in seconds, counted from January 1, 1970.
 //

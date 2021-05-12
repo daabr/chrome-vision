@@ -27,6 +27,11 @@ const (
 	ServiceWorkerVersionRunningStatusStopping ServiceWorkerVersionRunningStatus = "stopping"
 )
 
+// String returns the ServiceWorkerVersionRunningStatus value as a built-in string.
+func (t ServiceWorkerVersionRunningStatus) String() string {
+	return string(t)
+}
+
 // ServiceWorkerVersionStatus data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerVersionStatus
@@ -41,6 +46,11 @@ const (
 	ServiceWorkerVersionStatusActivated  ServiceWorkerVersionStatus = "activated"
 	ServiceWorkerVersionStatusRedundant  ServiceWorkerVersionStatus = "redundant"
 )
+
+// String returns the ServiceWorkerVersionStatus value as a built-in string.
+func (t ServiceWorkerVersionStatus) String() string {
+	return string(t)
+}
 
 // ServiceWorkerVersion data type. ServiceWorker version.
 //

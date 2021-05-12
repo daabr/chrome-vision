@@ -44,6 +44,11 @@ const (
 	SameSiteCookieExclusionReasonExcludeSameSiteStrict                  SameSiteCookieExclusionReason = "ExcludeSameSiteStrict"
 )
 
+// String returns the SameSiteCookieExclusionReason value as a built-in string.
+func (t SameSiteCookieExclusionReason) String() string {
+	return string(t)
+}
+
 // SameSiteCookieWarningReason data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-SameSiteCookieWarningReason
@@ -61,6 +66,11 @@ const (
 	SameSiteCookieWarningReasonWarnSameSiteLaxCrossDowngradeLax        SameSiteCookieWarningReason = "WarnSameSiteLaxCrossDowngradeLax"
 )
 
+// String returns the SameSiteCookieWarningReason value as a built-in string.
+func (t SameSiteCookieWarningReason) String() string {
+	return string(t)
+}
+
 // SameSiteCookieOperation data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-SameSiteCookieOperation
@@ -71,6 +81,11 @@ const (
 	SameSiteCookieOperationSetCookie  SameSiteCookieOperation = "SetCookie"
 	SameSiteCookieOperationReadCookie SameSiteCookieOperation = "ReadCookie"
 )
+
+// String returns the SameSiteCookieOperation value as a built-in string.
+func (t SameSiteCookieOperation) String() string {
+	return string(t)
+}
 
 // SameSiteCookieIssueDetails data type. This information is currently necessary, as the front-end has a difficult
 // time finding a specific cookie. With this, we can convey specific error
@@ -100,6 +115,11 @@ const (
 	MixedContentResolutionStatusMixedContentAutomaticallyUpgraded MixedContentResolutionStatus = "MixedContentAutomaticallyUpgraded"
 	MixedContentResolutionStatusMixedContentWarning               MixedContentResolutionStatus = "MixedContentWarning"
 )
+
+// String returns the MixedContentResolutionStatus value as a built-in string.
+func (t MixedContentResolutionStatus) String() string {
+	return string(t)
+}
 
 // MixedContentResourceType data type.
 //
@@ -135,6 +155,11 @@ const (
 	MixedContentResourceTypeXMLHttpRequest MixedContentResourceType = "XMLHttpRequest"
 	MixedContentResourceTypeXSLT           MixedContentResourceType = "XSLT"
 )
+
+// String returns the MixedContentResourceType value as a built-in string.
+func (t MixedContentResourceType) String() string {
+	return string(t)
+}
 
 // MixedContentIssueDetails data type.
 //
@@ -173,6 +198,11 @@ const (
 	BlockedByResponseReasonCorpNotSameSite                                   BlockedByResponseReason = "CorpNotSameSite"
 )
 
+// String returns the BlockedByResponseReason value as a built-in string.
+func (t BlockedByResponseReason) String() string {
+	return string(t)
+}
+
 // BlockedByResponseIssueDetails data type. Details for a request that has been blocked with the BLOCKED_BY_RESPONSE
 // code. Currently only used for COEP/COOP, but may be extended to include
 // some CSP errors in the future.
@@ -196,6 +226,11 @@ const (
 	HeavyAdResolutionStatusHeavyAdWarning HeavyAdResolutionStatus = "HeavyAdWarning"
 )
 
+// String returns the HeavyAdResolutionStatus value as a built-in string.
+func (t HeavyAdResolutionStatus) String() string {
+	return string(t)
+}
+
 // HeavyAdReason data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-HeavyAdReason
@@ -207,6 +242,11 @@ const (
 	HeavyAdReasonCpuTotalLimit     HeavyAdReason = "CpuTotalLimit"
 	HeavyAdReasonCpuPeakLimit      HeavyAdReason = "CpuPeakLimit"
 )
+
+// String returns the HeavyAdReason value as a built-in string.
+func (t HeavyAdReason) String() string {
+	return string(t)
+}
 
 // HeavyAdIssueDetails data type.
 //
@@ -233,6 +273,11 @@ const (
 	ContentSecurityPolicyViolationTypeKTrustedTypesSinkViolation   ContentSecurityPolicyViolationType = "kTrustedTypesSinkViolation"
 	ContentSecurityPolicyViolationTypeKTrustedTypesPolicyViolation ContentSecurityPolicyViolationType = "kTrustedTypesPolicyViolation"
 )
+
+// String returns the ContentSecurityPolicyViolationType value as a built-in string.
+func (t ContentSecurityPolicyViolationType) String() string {
+	return string(t)
+}
 
 // SourceCodeLocation data type.
 //
@@ -270,6 +315,11 @@ const (
 	SharedArrayBufferIssueTypeCreationIssue SharedArrayBufferIssueType = "CreationIssue"
 )
 
+// String returns the SharedArrayBufferIssueType value as a built-in string.
+func (t SharedArrayBufferIssueType) String() string {
+	return string(t)
+}
+
 // SharedArrayBufferIssueDetails data type. Details for a issue arising from an SAB being instantiated in, or
 // transferred to a context that is not cross-origin isolated.
 //
@@ -291,6 +341,11 @@ const (
 	TwaQualityEnforcementViolationTypeKUnavailableOffline TwaQualityEnforcementViolationType = "kUnavailableOffline"
 	TwaQualityEnforcementViolationTypeKDigitalAssetLinks  TwaQualityEnforcementViolationType = "kDigitalAssetLinks"
 )
+
+// String returns the TwaQualityEnforcementViolationType value as a built-in string.
+func (t TwaQualityEnforcementViolationType) String() string {
+	return string(t)
+}
 
 // TrustedWebActivityIssueDetails data type.
 //
@@ -348,6 +403,11 @@ const (
 	AttributionReportingIssueTypeAttributionUntrustworthyOrigin       AttributionReportingIssueType = "AttributionUntrustworthyOrigin"
 )
 
+// String returns the AttributionReportingIssueType value as a built-in string.
+func (t AttributionReportingIssueType) String() string {
+	return string(t)
+}
+
 // AttributionReportingIssueDetails data type. Details for issues around "Attribution Reporting API" usage.
 // Explainer: https://github.com/WICG/conversion-measurement-api
 //
@@ -358,20 +418,6 @@ type AttributionReportingIssueDetails struct {
 	Request          *AffectedRequest              `json:"request,omitempty"`
 	ViolatingNodeID  int64                         `json:"violatingNodeId,omitempty"`
 	InvalidParameter string                        `json:"invalidParameter,omitempty"`
-}
-
-// QuirksModeIssueDetails data type. Details for issues about documents in Quirks Mode
-// or Limited Quirks Mode that affects page layouting.
-//
-// https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-QuirksModeIssueDetails
-type QuirksModeIssueDetails struct {
-	// If false, it means the document's mode is "quirks"
-	// instead of "limited-quirks".
-	IsLimitedQuirksMode bool   `json:"isLimitedQuirksMode"`
-	DocumentNodeID      int64  `json:"documentNodeId"`
-	URL                 string `json:"url"`
-	FrameID             string `json:"frameId"`
-	LoaderID            string `json:"loaderId"`
 }
 
 // InspectorIssueCode data type. A unique identifier for the type of issue. Each type may use one of the
@@ -393,8 +439,12 @@ const (
 	InspectorIssueCodeLowTextContrastIssue       InspectorIssueCode = "LowTextContrastIssue"
 	InspectorIssueCodeCorsIssue                  InspectorIssueCode = "CorsIssue"
 	InspectorIssueCodeAttributionReportingIssue  InspectorIssueCode = "AttributionReportingIssue"
-	InspectorIssueCodeQuirksModeIssue            InspectorIssueCode = "QuirksModeIssue"
 )
+
+// String returns the InspectorIssueCode value as a built-in string.
+func (t InspectorIssueCode) String() string {
+	return string(t)
+}
 
 // InspectorIssueDetails data type. This struct holds a list of optional fields with additional information
 // specific to the kind of issue. When adding a new issue code, please also
@@ -412,7 +462,6 @@ type InspectorIssueDetails struct {
 	LowTextContrastIssueDetails       *LowTextContrastIssueDetails       `json:"lowTextContrastIssueDetails,omitempty"`
 	CorsIssueDetails                  *CorsIssueDetails                  `json:"corsIssueDetails,omitempty"`
 	AttributionReportingIssueDetails  *AttributionReportingIssueDetails  `json:"attributionReportingIssueDetails,omitempty"`
-	QuirksModeIssueDetails            *QuirksModeIssueDetails            `json:"quirksModeIssueDetails,omitempty"`
 }
 
 // InspectorIssue data type. An inspector issue reported from the back-end.

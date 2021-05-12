@@ -16,6 +16,11 @@ const (
 	AuthenticatorProtocolCtap2 AuthenticatorProtocol = "ctap2"
 )
 
+// String returns the AuthenticatorProtocol value as a built-in string.
+func (t AuthenticatorProtocol) String() string {
+	return string(t)
+}
+
 // Ctap2Version data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAuthn/#type-Ctap2Version
@@ -26,6 +31,11 @@ const (
 	Ctap2VersionCtap20 Ctap2Version = "ctap2_0"
 	Ctap2VersionCtap21 Ctap2Version = "ctap2_1"
 )
+
+// String returns the Ctap2Version value as a built-in string.
+func (t Ctap2Version) String() string {
+	return string(t)
+}
 
 // AuthenticatorTransport data type.
 //
@@ -40,6 +50,11 @@ const (
 	AuthenticatorTransportCable    AuthenticatorTransport = "cable"
 	AuthenticatorTransportInternal AuthenticatorTransport = "internal"
 )
+
+// String returns the AuthenticatorTransport value as a built-in string.
+func (t AuthenticatorTransport) String() string {
+	return string(t)
+}
 
 // VirtualAuthenticatorOptions data type.
 //

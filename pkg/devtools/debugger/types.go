@@ -118,6 +118,11 @@ const (
 	ScriptLanguageWebAssembly ScriptLanguage = "WebAssembly"
 )
 
+// String returns the ScriptLanguage value as a built-in string.
+func (t ScriptLanguage) String() string {
+	return string(t)
+}
+
 // DebugSymbols data type. Debug symbols available for a wasm script.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#type-DebugSymbols

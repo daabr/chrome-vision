@@ -39,6 +39,11 @@ const (
 	StreamFormatProto StreamFormat = "proto"
 )
 
+// String returns the StreamFormat value as a built-in string.
+func (t StreamFormat) String() string {
+	return string(t)
+}
+
 // StreamCompression data type. Compression type to use for traces returned via streams.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#type-StreamCompression
@@ -49,6 +54,11 @@ const (
 	StreamCompressionNone StreamCompression = "none"
 	StreamCompressionGzip StreamCompression = "gzip"
 )
+
+// String returns the StreamCompression value as a built-in string.
+func (t StreamCompression) String() string {
+	return string(t)
+}
 
 // MemoryDumpLevelOfDetail data type. Details exposed when memory request explicitly declared.
 // Keep consistent with memory_dump_request_args.h and
@@ -63,6 +73,11 @@ const (
 	MemoryDumpLevelOfDetailLight      MemoryDumpLevelOfDetail = "light"
 	MemoryDumpLevelOfDetailDetailed   MemoryDumpLevelOfDetail = "detailed"
 )
+
+// String returns the MemoryDumpLevelOfDetail value as a built-in string.
+func (t MemoryDumpLevelOfDetail) String() string {
+	return string(t)
+}
 
 // TracingBackend data type. Backend type to use for tracing. `chrome` uses the Chrome-integrated
 // tracing service and is supported on all platforms. `system` is only
@@ -79,3 +94,8 @@ const (
 	TracingBackendChrome TracingBackend = "chrome"
 	TracingBackendSystem TracingBackend = "system"
 )
+
+// String returns the TracingBackend value as a built-in string.
+func (t TracingBackend) String() string {
+	return string(t)
+}

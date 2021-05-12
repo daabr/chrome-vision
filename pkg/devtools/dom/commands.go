@@ -908,7 +908,7 @@ func (t *GetNodesForSubtreeByStyle) SetPierce(v bool) *GetNodesForSubtreeByStyle
 // to calling the GetNodesForSubtreeByStyle CDP command with Do().
 type GetNodesForSubtreeByStyleResult struct {
 	// Resulting nodes.
-	NodeIds []NodeID `json:"nodeIds"`
+	NodeIds []int64 `json:"nodeIds"`
 }
 
 // Do sends the GetNodesForSubtreeByStyle CDP command to a browser,
@@ -1182,7 +1182,7 @@ func NewGetSearchResults(searchID string, fromIndex int64, toIndex int64) *GetSe
 // to calling the GetSearchResults CDP command with Do().
 type GetSearchResultsResult struct {
 	// Ids of the search result nodes.
-	NodeIds []NodeID `json:"nodeIds"`
+	NodeIds []int64 `json:"nodeIds"`
 }
 
 // Do sends the GetSearchResults CDP command to a browser,
@@ -1438,7 +1438,7 @@ func (t *PushNodeByPathToFrontend) Do(ctx context.Context) (*PushNodeByPathToFro
 // This CDP method is experimental.
 type PushNodesByBackendIdsToFrontend struct {
 	// The array of backend node ids.
-	BackendNodeIds []BackendNodeID `json:"backendNodeIds"`
+	BackendNodeIds []int64 `json:"backendNodeIds"`
 }
 
 // NewPushNodesByBackendIdsToFrontend constructs a new PushNodesByBackendIdsToFrontend struct instance, with
@@ -1448,7 +1448,7 @@ type PushNodesByBackendIdsToFrontend struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-pushNodesByBackendIdsToFrontend
 //
 // This CDP method is experimental.
-func NewPushNodesByBackendIdsToFrontend(backendNodeIds []BackendNodeID) *PushNodesByBackendIdsToFrontend {
+func NewPushNodesByBackendIdsToFrontend(backendNodeIds []int64) *PushNodesByBackendIdsToFrontend {
 	return &PushNodesByBackendIdsToFrontend{
 		BackendNodeIds: backendNodeIds,
 	}
@@ -1459,7 +1459,7 @@ func NewPushNodesByBackendIdsToFrontend(backendNodeIds []BackendNodeID) *PushNod
 type PushNodesByBackendIdsToFrontendResult struct {
 	// The array of ids of pushed nodes that correspond to the backend ids specified in
 	// backendNodeIds.
-	NodeIds []NodeID `json:"nodeIds"`
+	NodeIds []int64 `json:"nodeIds"`
 }
 
 // Do sends the PushNodesByBackendIdsToFrontend CDP command to a browser,
@@ -1565,7 +1565,7 @@ func NewQuerySelectorAll(nodeID int64, selector string) *QuerySelectorAll {
 // to calling the QuerySelectorAll CDP command with Do().
 type QuerySelectorAllResult struct {
 	// Query selector result.
-	NodeIds []NodeID `json:"nodeIds"`
+	NodeIds []int64 `json:"nodeIds"`
 }
 
 // Do sends the QuerySelectorAll CDP command to a browser,

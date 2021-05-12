@@ -16,6 +16,11 @@ const (
 	ContextTypeOffline  ContextType = "offline"
 )
 
+// String returns the ContextType value as a built-in string.
+func (t ContextType) String() string {
+	return string(t)
+}
+
 // ContextState data type. Enum of AudioContextState from the spec
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-ContextState
@@ -27,6 +32,11 @@ const (
 	ContextStateRunning   ContextState = "running"
 	ContextStateClosed    ContextState = "closed"
 )
+
+// String returns the ContextState value as a built-in string.
+func (t ContextState) String() string {
+	return string(t)
+}
 
 // NodeType data type. Enum of AudioNode types
 //
@@ -45,6 +55,11 @@ const (
 	ChannelCountModeMax        ChannelCountMode = "max"
 )
 
+// String returns the ChannelCountMode value as a built-in string.
+func (t ChannelCountMode) String() string {
+	return string(t)
+}
+
 // ChannelInterpretation data type. Enum of AudioNode::ChannelInterpretation from the spec
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/WebAudio/#type-ChannelInterpretation
@@ -55,6 +70,11 @@ const (
 	ChannelInterpretationDiscrete ChannelInterpretation = "discrete"
 	ChannelInterpretationSpeakers ChannelInterpretation = "speakers"
 )
+
+// String returns the ChannelInterpretation value as a built-in string.
+func (t ChannelInterpretation) String() string {
+	return string(t)
+}
 
 // ParamType data type. Enum of AudioParam types
 //
@@ -71,6 +91,11 @@ const (
 	AutomationRateARate AutomationRate = "a-rate"
 	AutomationRateKRate AutomationRate = "k-rate"
 )
+
+// String returns the AutomationRate value as a built-in string.
+func (t AutomationRate) String() string {
+	return string(t)
+}
 
 // ContextRealtimeData data type. Fields in AudioContext that change in real-time.
 //

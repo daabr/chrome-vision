@@ -31,6 +31,11 @@ const (
 	ResourceTypeOther              ResourceType = "Other"
 )
 
+// String returns the ResourceType value as a built-in string.
+func (t ResourceType) String() string {
+	return string(t)
+}
+
 // LoaderID data type. Unique loader identifier.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-LoaderId
@@ -69,6 +74,11 @@ const (
 	ErrorReasonBlockedByResponse    ErrorReason = "BlockedByResponse"
 )
 
+// String returns the ErrorReason value as a built-in string.
+func (t ErrorReason) String() string {
+	return string(t)
+}
+
 // TimeSinceEpoch data type. UTC time in seconds, counted from January 1, 1970.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-TimeSinceEpoch
@@ -102,6 +112,11 @@ const (
 	ConnectionTypeOther      ConnectionType = "other"
 )
 
+// String returns the ConnectionType value as a built-in string.
+func (t ConnectionType) String() string {
+	return string(t)
+}
+
 // CookieSameSite data type. Represents the cookie's 'SameSite' status:
 // https://tools.ietf.org/html/draft-west-first-party-cookies
 //
@@ -114,6 +129,11 @@ const (
 	CookieSameSiteLax    CookieSameSite = "Lax"
 	CookieSameSiteNone   CookieSameSite = "None"
 )
+
+// String returns the CookieSameSite value as a built-in string.
+func (t CookieSameSite) String() string {
+	return string(t)
+}
 
 // CookiePriority data type. Represents the cookie's 'Priority' status:
 // https://tools.ietf.org/html/draft-west-cookie-priority-00
@@ -130,6 +150,11 @@ const (
 	CookiePriorityHigh   CookiePriority = "High"
 )
 
+// String returns the CookiePriority value as a built-in string.
+func (t CookiePriority) String() string {
+	return string(t)
+}
+
 // CookieSourceScheme data type. Represents the source scheme of the origin that originally set the cookie.
 // A value of "Unset" allows protocol clients to emulate legacy cookie scope for the scheme.
 // This is a temporary ability and it will be removed in the future.
@@ -145,6 +170,11 @@ const (
 	CookieSourceSchemeNonSecure CookieSourceScheme = "NonSecure"
 	CookieSourceSchemeSecure    CookieSourceScheme = "Secure"
 )
+
+// String returns the CookieSourceScheme value as a built-in string.
+func (t CookieSourceScheme) String() string {
+	return string(t)
+}
 
 // ResourceTiming data type. Timing information for the request.
 //
@@ -214,6 +244,11 @@ const (
 	ResourcePriorityHigh     ResourcePriority = "High"
 	ResourcePriorityVeryHigh ResourcePriority = "VeryHigh"
 )
+
+// String returns the ResourcePriority value as a built-in string.
+func (t ResourcePriority) String() string {
+	return string(t)
+}
 
 // PostDataEntry data type. Post data entry for HTTP request
 //
@@ -323,6 +358,11 @@ const (
 	CertificateTransparencyComplianceCompliant    CertificateTransparencyCompliance = "compliant"
 )
 
+// String returns the CertificateTransparencyCompliance value as a built-in string.
+func (t CertificateTransparencyCompliance) String() string {
+	return string(t)
+}
+
 // BlockedReason data type. The reason why request was blocked.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-BlockedReason
@@ -343,6 +383,11 @@ const (
 	BlockedReasonCorpNotSameOriginAfterDefaultedToSameOriginByCoep BlockedReason = "corp-not-same-origin-after-defaulted-to-same-origin-by-coep"
 	BlockedReasonCorpNotSameSite                                   BlockedReason = "corp-not-same-site"
 )
+
+// String returns the BlockedReason value as a built-in string.
+func (t BlockedReason) String() string {
+	return string(t)
+}
 
 // CorsError data type. The reason why request was blocked.
 //
@@ -378,6 +423,11 @@ const (
 	CorsErrorInsecurePrivateNetwork               CorsError = "InsecurePrivateNetwork"
 )
 
+// String returns the CorsError value as a built-in string.
+func (t CorsError) String() string {
+	return string(t)
+}
+
 // CorsErrorStatus data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CorsErrorStatus
@@ -398,6 +448,11 @@ const (
 	ServiceWorkerResponseSourceFallbackCode ServiceWorkerResponseSource = "fallback-code"
 	ServiceWorkerResponseSourceNetwork      ServiceWorkerResponseSource = "network"
 )
+
+// String returns the ServiceWorkerResponseSource value as a built-in string.
+func (t ServiceWorkerResponseSource) String() string {
+	return string(t)
+}
 
 // TrustTokenParams data type. Determines what type of Trust Token operation is executed and
 // depending on the type, some additional parameters. The values
@@ -429,6 +484,11 @@ const (
 	TrustTokenOperationTypeRedemption TrustTokenOperationType = "Redemption"
 	TrustTokenOperationTypeSigning    TrustTokenOperationType = "Signing"
 )
+
+// String returns the TrustTokenOperationType value as a built-in string.
+func (t TrustTokenOperationType) String() string {
+	return string(t)
+}
 
 // Response data type. HTTP response data.
 //
@@ -628,6 +688,11 @@ const (
 	SetCookieBlockedReasonSamePartyConflictsWithOtherAttributes    SetCookieBlockedReason = "SamePartyConflictsWithOtherAttributes"
 )
 
+// String returns the SetCookieBlockedReason value as a built-in string.
+func (t SetCookieBlockedReason) String() string {
+	return string(t)
+}
+
 // CookieBlockedReason data type. Types of reasons why a cookie may not be sent with a request.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CookieBlockedReason
@@ -651,6 +716,11 @@ const (
 	CookieBlockedReasonSchemefulSameSiteUnspecifiedTreatedAsLax CookieBlockedReason = "SchemefulSameSiteUnspecifiedTreatedAsLax"
 	CookieBlockedReasonSamePartyFromCrossPartyContext           CookieBlockedReason = "SamePartyFromCrossPartyContext"
 )
+
+// String returns the CookieBlockedReason value as a built-in string.
+func (t CookieBlockedReason) String() string {
+	return string(t)
+}
 
 // BlockedSetCookieWithReason data type. A cookie which was not stored from a response with the corresponding reason.
 //
@@ -772,6 +842,11 @@ const (
 	InterceptionStageHeadersReceived InterceptionStage = "HeadersReceived"
 )
 
+// String returns the InterceptionStage value as a built-in string.
+func (t InterceptionStage) String() string {
+	return string(t)
+}
+
 // RequestPattern data type. Request pattern for interception.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-RequestPattern
@@ -850,6 +925,11 @@ const (
 	SignedExchangeErrorFieldSignatureTimestamps  SignedExchangeErrorField = "signatureTimestamps"
 )
 
+// String returns the SignedExchangeErrorField value as a built-in string.
+func (t SignedExchangeErrorField) String() string {
+	return string(t)
+}
+
 // SignedExchangeError data type. Information about a signed exchange response.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-SignedExchangeError
@@ -894,6 +974,11 @@ const (
 	ContentEncodingBr      ContentEncoding = "br"
 )
 
+// String returns the ContentEncoding value as a built-in string.
+func (t ContentEncoding) String() string {
+	return string(t)
+}
+
 // PrivateNetworkRequestPolicy data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-PrivateNetworkRequestPolicy
@@ -907,6 +992,11 @@ const (
 	PrivateNetworkRequestPolicyBlockFromInsecureToMorePrivate PrivateNetworkRequestPolicy = "BlockFromInsecureToMorePrivate"
 	PrivateNetworkRequestPolicyWarnFromInsecureToMorePrivate  PrivateNetworkRequestPolicy = "WarnFromInsecureToMorePrivate"
 )
+
+// String returns the PrivateNetworkRequestPolicy value as a built-in string.
+func (t PrivateNetworkRequestPolicy) String() string {
+	return string(t)
+}
 
 // IPAddressSpace data type.
 //
@@ -922,6 +1012,11 @@ const (
 	IPAddressSpacePublic  IPAddressSpace = "Public"
 	IPAddressSpaceUnknown IPAddressSpace = "Unknown"
 )
+
+// String returns the IPAddressSpace value as a built-in string.
+func (t IPAddressSpace) String() string {
+	return string(t)
+}
 
 // ClientSecurityState data type.
 //
@@ -949,6 +1044,11 @@ const (
 	CrossOriginOpenerPolicyValueSameOriginPlusCoep    CrossOriginOpenerPolicyValue = "SameOriginPlusCoep"
 )
 
+// String returns the CrossOriginOpenerPolicyValue value as a built-in string.
+func (t CrossOriginOpenerPolicyValue) String() string {
+	return string(t)
+}
+
 // CrossOriginOpenerPolicyStatus data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-CrossOriginOpenerPolicyStatus
@@ -974,6 +1074,11 @@ const (
 	CrossOriginEmbedderPolicyValueCorsOrCredentialless CrossOriginEmbedderPolicyValue = "CorsOrCredentialless"
 	CrossOriginEmbedderPolicyValueRequireCorp          CrossOriginEmbedderPolicyValue = "RequireCorp"
 )
+
+// String returns the CrossOriginEmbedderPolicyValue value as a built-in string.
+func (t CrossOriginEmbedderPolicyValue) String() string {
+	return string(t)
+}
 
 // CrossOriginEmbedderPolicyStatus data type.
 //

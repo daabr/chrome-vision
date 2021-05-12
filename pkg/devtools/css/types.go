@@ -22,6 +22,11 @@ const (
 	StyleSheetOriginRegular   StyleSheetOrigin = "regular"
 )
 
+// String returns the StyleSheetOrigin value as a built-in string.
+func (t StyleSheetOrigin) String() string {
+	return string(t)
+}
+
 // PseudoElementMatches data type. CSS rule collection for a single pseudo style.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-PseudoElementMatches

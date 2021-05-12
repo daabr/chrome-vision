@@ -29,6 +29,11 @@ const (
 	WindowStateFullscreen WindowState = "fullscreen"
 )
 
+// String returns the WindowState value as a built-in string.
+func (t WindowState) String() string {
+	return string(t)
+}
+
 // Bounds data type. Browser window bounds information
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-Bounds
@@ -81,6 +86,11 @@ const (
 	PermissionTypeWakeLockSystem           PermissionType = "wakeLockSystem"
 )
 
+// String returns the PermissionType value as a built-in string.
+func (t PermissionType) String() string {
+	return string(t)
+}
+
 // PermissionSetting data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-PermissionSetting
@@ -94,6 +104,11 @@ const (
 	PermissionSettingDenied  PermissionSetting = "denied"
 	PermissionSettingPrompt  PermissionSetting = "prompt"
 )
+
+// String returns the PermissionSetting value as a built-in string.
+func (t PermissionSetting) String() string {
+	return string(t)
+}
 
 // PermissionDescriptor data type. Definition of PermissionDescriptor defined in the Permissions API:
 // https://w3c.github.io/permissions/#dictdef-permissiondescriptor.
@@ -128,6 +143,11 @@ const (
 	BrowserCommandIDOpenTabSearch  BrowserCommandID = "openTabSearch"
 	BrowserCommandIDCloseTabSearch BrowserCommandID = "closeTabSearch"
 )
+
+// String returns the BrowserCommandID value as a built-in string.
+func (t BrowserCommandID) String() string {
+	return string(t)
+}
 
 // Bucket data type. Chrome histogram bucket.
 //

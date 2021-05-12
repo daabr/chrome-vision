@@ -139,8 +139,8 @@ func adjust(s string) string {
 		s = re.ReplaceAllStringFunc(s, strings.ToLower)
 
 		// Avoid circular dependencies (https://crbug.com/1193242).
-		if t, ok := aliases[s]; ok {
-			s = t
+		if a, ok := aliases[s]; ok {
+			s = a
 		}
 	}
 	return s

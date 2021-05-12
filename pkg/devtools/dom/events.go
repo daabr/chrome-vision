@@ -88,7 +88,7 @@ type DocumentUpdated struct{}
 // This CDP event is experimental.
 type InlineStyleInvalidated struct {
 	// Ids of the nodes for which the inline styles have been invalidated.
-	NodeIds []NodeID `json:"nodeIds"`
+	NodeIds []int64 `json:"nodeIds"`
 }
 
 // PseudoElementAdded asynchronous event. Called when a pseudo element is added to an element.

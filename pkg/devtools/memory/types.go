@@ -11,6 +11,11 @@ const (
 	PressureLevelCritical PressureLevel = "critical"
 )
 
+// String returns the PressureLevel value as a built-in string.
+func (t PressureLevel) String() string {
+	return string(t)
+}
+
 // SamplingProfileNode data type. Heap profile sample.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Memory/#type-SamplingProfileNode

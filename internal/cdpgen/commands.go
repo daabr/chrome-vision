@@ -173,11 +173,17 @@ func generateRequiredParameter(b *strings.Builder, p Property) {
 
 	// Type.
 	if p.Type != nil {
-		fmt.Fprint(b, transformType(*p.Type, p.Items))
+		t := transformType(*p.Type, p.Items)
+		if strings.HasPrefix(t, "[]") {
+			if a, ok := aliases[t[2:]]; ok {
+				t = "[]" + a // De-alias built-in data types (https://crbug.com/1193242).
+			}
+		}
+		fmt.Fprint(b, t)
 	} else {
 		r := adjust(*p.Ref)
-		if t, ok := aliases[r]; ok {
-			r = t // De-alias built-in data types (https://crbug.com/1193242).
+		if a, ok := aliases[r]; ok {
+			r = a // De-alias built-in data types (https://crbug.com/1193242).
 		}
 		if p.Optional {
 			fmt.Fprintf(b, "*%s", r)
@@ -210,8 +216,8 @@ func generateOptionalParameter(b *strings.Builder, domain, cmd string, p Propert
 		fmt.Fprint(b, transformType(*p.Type, p.Items))
 	} else {
 		r := strings.ReplaceAll(adjust(*p.Ref), strings.ToLower(domain)+".", "")
-		if t, ok := aliases[r]; ok {
-			r = t // De-alias built-in data types (https://crbug.com/1193242).
+		if a, ok := aliases[r]; ok {
+			r = a // De-alias built-in data types (https://crbug.com/1193242).
 		}
 		fmt.Fprintf(b, "%s", r)
 	}
@@ -223,8 +229,8 @@ func generateOptionalParameter(b *strings.Builder, domain, cmd string, p Propert
 		fmt.Fprintln(b, "v") // By value - built-in JSON types.
 	} else {
 		r := strings.ReplaceAll(adjust(*p.Ref), strings.ToLower(domain)+".", "")
-		if t, ok := aliases[r]; ok {
-			r = t // De-alias built-in data types (https://crbug.com/1193242).
+		if a, ok := aliases[r]; ok {
+			r = a // De-alias built-in data types (https://crbug.com/1193242).
 		}
 		if r == "int64" || r == "float64" || r == "string" {
 			fmt.Fprintln(b, "v") // By value - aliased built-in JSON types.

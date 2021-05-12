@@ -40,5 +40,5 @@ type PlayerErrorsRaised struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Media/#event-playersCreated
 type PlayersCreated struct {
-	Players []PlayerID `json:"players"`
+	Players []string `json:"players"`
 }

@@ -20,6 +20,11 @@ const (
 	RequestStageResponse RequestStage = "Response"
 )
 
+// String returns the RequestStage value as a built-in string.
+func (t RequestStage) String() string {
+	return string(t)
+}
+
 // RequestPattern data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#type-RequestPattern

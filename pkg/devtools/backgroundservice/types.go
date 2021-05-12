@@ -17,6 +17,11 @@ const (
 	ServiceNamePeriodicBackgroundSync ServiceName = "periodicBackgroundSync"
 )
 
+// String returns the ServiceName value as a built-in string.
+func (t ServiceName) String() string {
+	return string(t)
+}
+
 // EventMetadata data type. A key-value pair for additional event information to pass along.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#type-EventMetadata

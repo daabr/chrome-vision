@@ -20,6 +20,11 @@ const (
 	StorageTypeOther          StorageType = "other"
 )
 
+// String returns the StorageType value as a built-in string.
+func (t StorageType) String() string {
+	return string(t)
+}
+
 // UsageForType data type. Usage for a storage type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#type-UsageForType
