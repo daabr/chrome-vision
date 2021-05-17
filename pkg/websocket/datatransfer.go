@@ -15,7 +15,9 @@
 // in this use-case, and are in fact wasteful and unnecessarily slow.
 //
 // More readaing materials about other WebSocket implementations:
+//
 // * https://centrifugal.github.io/centrifugo/blog/scaling_websocket/
+//
 // * https://www.freecodecamp.org/news/million-websockets-and-go-cc58418460bb/
 package websocket
 
