@@ -27,6 +27,8 @@ type Conn struct {
 }
 
 // NewConn initializes a WebSocket connection based on an open TCP connection.
+// This does not initiate a WebSocket handshake, nor do you need to call it
+// directly. Instead, call the `Handshake` function.
 func NewConn(c net.Conn) *Conn {
 	rw := bufio.NewReadWriter(bufio.NewReader(c), bufio.NewWriter(c))
 	return &Conn{nc: c, rw: rw}
