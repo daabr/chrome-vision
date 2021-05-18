@@ -1,14 +1,14 @@
-// Package websocket is a minimal client implementation of the WebSocket protocol
-// (IETF RFC 6455 - https://www.rfc-editor.org/rfc/inline-errata/rfc6455.html).
-// It is designed specifically for idiomatic and very efficient client-side
-// communication with Chrome DevTools in Blink-based browsers.
+// Package websocket is a lightweight client implementation of the WebSocket
+// protocol (RFC 6455). It is designed specifically for fast, efficient and
+// idiomatic client-side communication with Chrome DevTools in Blink-based
+// browsers.
 //
 // Examples for unsupported features: server-side functionality, proxies, TLS
 // for "wss://" addresses, and handshake customizations such as sub-protocols,
 // extensions, and other HTTP headers (e.g. authentication, cookies).
 //
 // Specifically, this implementation does not support the "permessage-deflate"
-// extension (IETF RFC 7692), for the same reasons it doesn't support TLS: all
+// extension (RFC 7692), for the same reasons it doesn't support TLS: all
 // communication with Chrome DevTools should happen on the same localhost, and
 // almost all transactions involve very small amounts of data, so the security
 // benefits of TLS and performance benefits of compression become irrelevant
@@ -44,9 +44,9 @@ const (
 	_
 	_
 	_
-	// TODO: connectionCloseFrame
-	// TODO: pingFrame
-	// TODO: pongFrame
+	connectionCloseFrame
+	pingFrame
+	pongFrame
 	// Opcodes 11-15 are reserved for further control frames.
 )
 
@@ -148,12 +148,10 @@ func (c *Conn) readFrame() (f frame, closeConnection bool, err error) {
 
 	// Unmasked payload data (variable length).
 	f.payloadData = make([]byte, f.payloadLength)
-	// if f.payloadData > 0 {
 	_, err = io.ReadFull(c.rw, f.payloadData)
 	if err != nil {
 		return f, false, fmt.Errorf("failed to read the payload: %v", err)
 	}
-	// }
 	return f, false, nil
 }
 
@@ -162,22 +160,12 @@ func (c *Conn) readFrame() (f frame, closeConnection bool, err error) {
 // https://datatracker.ietf.org/doc/html/rfc6455#section-5.5,
 // and https://datatracker.ietf.org/doc/html/rfc6455#section-7.
 func (c *Conn) readMessage() ([]byte, error) {
-	// TODO: implement and test this...
-	// Control frames (see Section 5.5) MAY be injected in the middle of a
-	// fragmented message. Control frames themselves MUST NOT be fragmented.
-	// (https://datatracker.ietf.org/doc/html/rfc6455#section-5.5)
-
-	// TODO: test this...
-	// The fragments of one message MUST NOT be interleaved between the fragments of
-	// another message unless an extension has been negotiated that can interpret
-	// the interleaving.
-
 	msg := bytes.NewBuffer([]byte{})
 	for {
 		f, close, err := c.readFrame()
 		if close {
 			log.Printf("Closing WebSocket connection due to protocol error: %v", err)
-			// TODO: close with status code 1002 (without returning - done below).
+			c.Close(1002, []byte{})
 		}
 		if err != nil {
 			if err == io.EOF {
@@ -185,18 +173,42 @@ func (c *Conn) readMessage() ([]byte, error) {
 			}
 			return nil, err
 		}
+		// Control frames (see Section 5.5) MAY be injected in the middle of a
+		// fragmented message. Control frames themselves MUST NOT be fragmented.
+		// (https://datatracker.ietf.org/doc/html/rfc6455#section-5.5)
+		if f.opcode == connectionCloseFrame {
+			statusCode := uint16(1005) // Status not specified (RFC 6455 section 7.4.1).
+			if f.payloadLength >= 2 {
+				statusCode = binary.BigEndian.Uint16(f.payloadData[0:2])
+			}
+			c.Close(statusCode, f.payloadData[2:])
+			s := "WebSocket server closing connection: status code"
+			return nil, fmt.Errorf("%s %d, reason %q", s, statusCode, f.payloadData[2:])
+		}
+		if f.opcode == pingFrame {
+			log.Printf("Received ping control frame from WebSocket server: %q", f.payloadData)
+			c.WritePong(f.payloadData)
+			continue
+		}
+		if f.opcode == pongFrame {
+			log.Printf("Received pong control frame from WebSocket server: %q", f.payloadData)
+			continue
+		}
+		// Handle data frames. The fragments of one message MUST NOT be interleaved
+		// between the fragments of another message unless an extension has been
+		// negotiated that can interpret the interleaving.
 		if f.fin {
 			// An unfragmented message consists of a single frame with the FIN
 			// bit set (Section 5.2) and an opcode other than 0.
-			if f.opcode != 0 {
-				return f.payloadData, err
+			if f.opcode != continuationFrame {
+				return f.payloadData, nil
 			}
 			// A fragmented message [...] terminated by a single frame with
 			// the FIN bit set and an opcode of 0.
 			msg.Write(f.payloadData)
 			return msg.Bytes(), nil
 		}
-		if f.opcode != 0 {
+		if f.opcode != continuationFrame {
 			// A fragmented message consists of a single frame with the
 			// FIN bit clear and an opcode other than 0...
 			msg = bytes.NewBuffer(f.payloadData)
@@ -206,17 +218,6 @@ func (c *Conn) readMessage() ([]byte, error) {
 			msg.Write(f.payloadData)
 		}
 	}
-}
-
-// Read receives a full message from a WebSocket server. It handles all
-// the implementation details internally, such as frame de/fragmentation,
-// masking, and handling control frames.
-func (c *Conn) Read() ([]byte, error) {
-	b, err := c.readMessage()
-	if err != nil {
-		err = fmt.Errorf("failed to read message from WebSocket: %v", err)
-	}
-	return b, err
 }
 
 // Based on https://datatracker.ietf.org/doc/html/rfc6455#section-5.2
@@ -308,6 +309,17 @@ func (c *Conn) writeMessage(o opcode, msg []byte) error {
 	return c.writeFrame(f)
 }
 
+// Read receives a full message from a WebSocket server. It handles all
+// the implementation details internally, such as frame de/fragmentation,
+// masking, and handling control frames.
+func (c *Conn) Read() ([]byte, error) {
+	b, err := c.readMessage()
+	if err != nil {
+		err = fmt.Errorf("failed to read message from WebSocket: %v", err)
+	}
+	return b, err
+}
+
 // WriteText sends a full UTF-8 text message to a WebSocket server. It handles
 // all the implementation details internally, such as frame de/fragmentation,
 // masking, and handling control frames.
@@ -328,4 +340,48 @@ func (c *Conn) WriteBinary(msg []byte) error {
 		err = fmt.Errorf("failed to write binary message to WebSocket: %v", err)
 	}
 	return err
+}
+
+// WritePing sends a "ping" control frame to a WebSocket server, as a
+// keep-alive or as a means to verify that the server is still responsive.
+// Based on https://datatracker.ietf.org/doc/html/rfc6455#section-5.5.2.
+func (c *Conn) WritePing(appData []byte) error {
+	if len(appData) > 125 {
+		return errors.New("control frames must have a payload of 0-125 bytes")
+	}
+	err := c.writeMessage(pingFrame, appData)
+	if err != nil {
+		err = fmt.Errorf("failed to write ping control frame to WebSocket: %v", err)
+	}
+	return err
+}
+
+// WritePong sends a "pong" control frame to a WebSocket server, as a
+// response to a "ping" (with the ping's "application data" payload),
+// or as an unsolicited unidirectional heartbeat. Based on
+// https://datatracker.ietf.org/doc/html/rfc6455#section-5.5.3.
+func (c *Conn) WritePong(appData []byte) error {
+	if len(appData) > 125 {
+		return errors.New("control frames must have a payload of 0-125 bytes")
+	}
+	err := c.writeMessage(pongFrame, appData)
+	if err != nil {
+		err = fmt.Errorf("failed to write pong control frame to WebSocket: %v", err)
+	}
+	return err
+}
+
+// Close sends a "connection close" control frame to a WebSocket server, and
+// then closes the underlying TCP network connection. Valid status codes are
+// described in https://datatracker.ietf.org/doc/html/rfc6455#section-7.4.1,
+// and the reason is a UTF-8-encoded string which may be empty. Based on
+// https://datatracker.ietf.org/doc/html/rfc6455#section-5.5.1 and
+// https://datatracker.ietf.org/doc/html/rfc6455#section-7.
+func (c *Conn) Close(statusCode uint16, reason []byte) error {
+	b := make([]byte, 2)
+	binary.BigEndian.PutUint16(b, statusCode)
+	c.writeMessage(connectionCloseFrame, append(b, reason...))
+	// The client SHOULD wait for the server to close the connection but MAY close
+	// the connection at any time after sending and receiving a Close message.
+	return c.nc.Close()
 }

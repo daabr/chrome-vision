@@ -36,6 +36,7 @@ func TestReadErrors(t *testing.T) {
 
 		go func() {
 			server.Write(tc.b)
+			server.Read(make([]byte, 8))
 		}()
 
 		got, err := conn.Read()
@@ -86,7 +87,45 @@ func TestReadThreeFrames(t *testing.T) {
 	}
 }
 
-// TODO: test reading two frames with control frames in the middles.
+func TestReadWithControlFrames(t *testing.T) {
+	server, client := net.Pipe()
+	conn := websocket.NewConn(client)
+	defer server.Close()
+	defer client.Close()
+
+	go func() {
+		b := []byte{0x01, 0x01, 0xaa, 0x89, 0x04, 0x70, 0x69, 0x6e, 0x67, 0x8a, 0x00, 0x80, 0x03, 0xdd, 0xee, 0xff}
+		server.Write(b)
+		server.Read(make([]byte, 10))
+	}()
+
+	got, err := conn.Read()
+	want := []byte{0xaa, 0xdd, 0xee, 0xff}
+	if err != nil {
+		t.Fatalf("Conn.Read(); got unexpected error: %v", err)
+	}
+	if !cmp.Equal(got, want) {
+		t.Errorf("Conn.Read() = %#v, want %#v", got, want)
+	}
+}
+
+func TestCloseDuringRead(t *testing.T) {
+	server, client := net.Pipe()
+	conn := websocket.NewConn(client)
+	defer server.Close()
+	defer client.Close()
+
+	go func() {
+		b := []byte{0x01, 0x01, 0xaa, 0x88, 0x08, 0x03, 0xe9, 0x72, 0x65, 0x61, 0x73, 0x6f, 0x6e}
+		server.Write(b)
+		server.Read(make([]byte, 14))
+	}()
+
+	got, err := conn.Read()
+	if err == nil {
+		t.Errorf("Conn.Read() = %#v, want connection closing error", got)
+	}
+}
 
 func TestRead1KB(t *testing.T) {
 	server, client := net.Pipe()
@@ -252,5 +291,92 @@ func TestWrite1MB(t *testing.T) {
 	}
 	if b[1] != 0xff { // Mask, payload length 127.
 		t.Errorf("server.Read(b); b[1] = %b, want %b", b[1], 0xff)
+	}
+}
+
+func TestWritePing(t *testing.T) {
+	server, client := net.Pipe()
+	conn := websocket.NewConn(client)
+	defer server.Close()
+	defer client.Close()
+
+	go func() {
+		conn.WritePing([]byte("ping"))
+	}()
+
+	// 2 (minimum header) + 4 (masking key) + 4 (payload)
+	// + 1 (to detect unexpected bytes).
+	want := 2 + 4 + 4
+	b := make([]byte, want+1)
+	n, err := server.Read(b)
+	if err != nil {
+		t.Fatalf("server.Read(b); got unexpected error: %v", err)
+	}
+	if n != want {
+		t.Errorf("server.Read(b) = %d, want %d", n, want)
+	}
+	if b[0] != 0x89 { // Fin, ping control frame.
+		t.Errorf("server.Read(b); b[0] = %b, want %b", b[0], 0x89)
+	}
+	if b[1] != 0x84 { // Mask, payload length 4.
+		t.Errorf("server.Read(b); b[1] = %b, want %b", b[1], 0x84)
+	}
+}
+
+func TestWritePong(t *testing.T) {
+	server, client := net.Pipe()
+	conn := websocket.NewConn(client)
+	defer server.Close()
+	defer client.Close()
+
+	go func() {
+		conn.WritePong([]byte{})
+	}()
+
+	// 2 (minimum header) + 4 (masking key) + 0 (payload)
+	// + 1 (to detect unexpected bytes).
+	want := 2 + 4 + 0
+	b := make([]byte, want+1)
+	n, err := server.Read(b)
+	if err != nil {
+		t.Fatalf("server.Read(b); got unexpected error: %v", err)
+	}
+	if n != want {
+		t.Errorf("server.Read(b) = %d, want %d", n, want)
+	}
+	if b[0] != 0x8a { // Fin, pong control frame.
+		t.Errorf("server.Read(b); b[0] = %b, want %b", b[0], 0x8a)
+	}
+	if b[1] != 0x80 { // Mask, payload length 0.
+		t.Errorf("server.Read(b); b[1] = %b, want %b", b[1], 0x80)
+	}
+}
+
+func TestClose(t *testing.T) {
+	server, client := net.Pipe()
+	conn := websocket.NewConn(client)
+	defer server.Close()
+	defer client.Close()
+
+	go func() {
+		conn.Close(1001, []byte("reason"))
+	}()
+
+	// 2 (minimum header) + 4 (masking key) + 8 (payload)
+	// + 1 (to detect unexpected bytes).
+	want := 2 + 4 + 8
+	b := make([]byte, want+1)
+	n, err := server.Read(b)
+	if err != nil {
+		t.Fatalf("server.Read(b); got unexpected error: %v", err)
+	}
+	if n != want {
+		t.Errorf("server.Read(b) = %d, want %d", n, want)
+	}
+	if b[0] != 0x88 { // Fin, pong control frame.
+		t.Errorf("server.Read(b); b[0] = %b, want %b", b[0], 0x88)
+	}
+	if b[1] != 0x88 { // Mask, payload length 8.
+		t.Errorf("server.Read(b); b[1] = %b, want %b", b[1], 0x88)
 	}
 }
