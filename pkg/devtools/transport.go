@@ -7,7 +7,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"log"
+	"regexp"
+	"time"
 )
 
 // Error details passed within a CDP response message.
@@ -55,18 +58,18 @@ func receiveFromPipe(s *Session) {
 		// Parse the raw JSON content.
 		m := &Message{}
 		if err := json.Unmarshal(b, m); err != nil {
-			log.Printf("JSON error: %v\n", err)
+			log.Printf("JSON error: %v", err)
 			continue
 		}
 		if len(m.Method) == 0 {
 			// Solicited response.
-			log.Printf("Received response: ID %d (%d bytes)\n", m.ID, len(b))
+			log.Printf("Received response: ID %d (%d bytes)", m.ID, len(b))
 			if ch, ok := s.responseSubscribers[m.ID]; ok {
 				ch <- m
 			}
 		} else {
 			// Unsolicited event.
-			log.Printf("Received event: %q (%d bytes)\n", m.Method, len(b))
+			log.Printf("Received event: %q (%d bytes)", m.Method, len(b))
 			if subscribers, ok := s.eventSubscribers[m.Method]; ok {
 				for _, ch := range subscribers {
 					ch <- m
@@ -100,19 +103,64 @@ func scanMessages(data []byte, atEOF bool) (int, []byte, error) {
 	return 0, nil, nil
 }
 
-// Construct and send CDP messages to the browser through a POSIX pipe on non-Windows
-// operating systems, in a thread-safe manner (https://blog.golang.org/codelab-share).
-// Called in a goroutine in `session.go` as long as the browser is running.
-func sendToPipe(s *Session, async asyncMessage) {
+// Parse and relay incoming CDP messages (solicited responses or unsolicited
+// events), received from the browser through a WebSocket on Windows operating
+// systems, as long as it is open. Called as a goroutine in `browser.go`.
+func receiveFromWebSocket(s *Session) {
+	for {
+		// Receive a new messsage.
+		b, err := s.webSocket.Read()
+		if err != nil {
+			if err == io.EOF {
+				continue
+			}
+			log.Printf("WARNING: failed to read incoming CDP message: %v", err)
+			return
+		}
+
+		// TODO: all the following should be a shared func with the pipe func.
+
+		s.msgLog.Printf("<- %s\n", b)
+		// Parse the raw JSON content.
+		m := &Message{}
+		if err := json.Unmarshal(b, m); err != nil {
+			log.Printf("JSON error: %v", err)
+			continue
+		}
+		if len(m.Method) == 0 {
+			// Solicited response.
+			log.Printf("Received response: ID %d (%d bytes)", m.ID, len(b))
+			if ch, ok := s.responseSubscribers[m.ID]; ok {
+				ch <- m
+			}
+		} else {
+			// Unsolicited event.
+			log.Printf("Received event: %q (%d bytes)", m.Method, len(b))
+			if subscribers, ok := s.eventSubscribers[m.Method]; ok {
+				for _, ch := range subscribers {
+					ch <- m
+				}
+				switch len(subscribers) {
+				case 1:
+					log.Printf("Relayed to 1 subscriber")
+				default:
+					log.Printf("Relayed to %d subscribers", len(subscribers))
+				}
+			}
+		}
+	}
+}
+
+func preSend(s *Session, async *asyncMessage) ([]byte, error) {
 	// Discard malformed data.
 	if len(async.requestMsg.Method) == 0 {
-		log.Printf("Discarding malformed message: %#v\n", async.requestMsg)
+		log.Printf("Discarding malformed message: %#v", async.requestMsg)
 		if async.responseChan != nil {
 			m := &Message{ID: s.msgID, Error: &Error{}}
 			m.Error.Message = fmt.Sprintf("malformed message: %#v", async.requestMsg)
 			async.responseChan <- m
 		}
-		return
+		return nil, errors.New("malformed message")
 	}
 	// Construct the JSON message, and prepare to receive the response.
 	async.requestMsg.ID = s.msgID
@@ -120,11 +168,35 @@ func sendToPipe(s *Session, async asyncMessage) {
 	if err != nil {
 		m := &Message{ID: s.msgID, Error: &Error{Message: err.Error()}}
 		async.responseChan <- m
-		return
+		return nil, errors.New(m.Error.Message)
 	}
+
 	s.responseSubscribers[s.msgID] = make(chan *Message)
+	log.Printf("Sending: %s", b)
+	return b, nil
+}
+
+func postSend(s *Session, async asyncMessage, b []byte) {
+	// Wait for the response, clean-up, and relay back to the caller of devtools.Send.
+	s.msgLog.Printf("-> %s\n", b)
+	m := <-s.responseSubscribers[s.msgID]
+
+	close(s.responseSubscribers[s.msgID])
+	delete(s.responseSubscribers, m.ID)
+
+	async.responseChan <- m
+}
+
+// Construct and send CDP messages to the browser through a POSIX pipe on non-Windows
+// operating systems, in a thread-safe manner (https://blog.golang.org/codelab-share).
+// Called in a goroutine in `session.go` as long as the browser is running.
+func sendToPipe(s *Session, async asyncMessage) {
+	b, err := preSend(s, &async)
+	if err != nil {
+		return // Already reported to the caller by marshalJSON().
+	}
+
 	// Send the JSON message.
-	log.Printf("Sending: %s\n", b)
 	n, err := s.browserInputWriter.Write(b)
 	if err != nil {
 		m := &Message{ID: s.msgID, Error: &Error{Message: err.Error()}}
@@ -149,19 +221,45 @@ func sendToPipe(s *Session, async asyncMessage) {
 		async.responseChan <- m
 		return
 	}
-	// Wait for the response, clean-up, and relay back to the caller of devtools.Send.
-	s.msgLog.Printf("-> %s\n", b)
-	m := <-s.responseSubscribers[s.msgID]
 
-	close(s.responseSubscribers[s.msgID])
-	delete(s.responseSubscribers, m.ID)
+	postSend(s, async, b)
+}
 
-	async.responseChan <- m
+// Construct and send CDP messages to the browser through a WebSocket on Windows
+// operating systems, in a thread-safe manner (https://blog.golang.org/codelab-share).
+// Called in a goroutine in `session.go` as long as the browser is running.
+func sendToWebSocket(s *Session, async asyncMessage) {
+	b, err := preSend(s, &async)
+	if err != nil {
+		return // Already reported to the caller by preSend.
+	}
+
+	// Send the JSON message.
+	err = s.webSocket.WriteText(b)
+	if err != nil {
+		m := &Message{ID: s.msgID, Error: &Error{Message: err.Error()}}
+		async.responseChan <- m
+		return
+	}
+
+	postSend(s, async, b)
+}
+
+// TODO: https://stackoverflow.com/q/38420618
+func browserWebSocket(s *Session) (string, string, error) {
+	re := regexp.MustCompile(`ws://(.+:\d+)(/devtools/browser/[\w-]{36})`)
+	var m [][]byte
+	for m == nil {
+		time.Sleep(100 * time.Millisecond)
+		m = re.FindSubmatch(s.windowsStderr.Bytes())
+	}
+	log.Printf("WebSocket address: %s", m[0])
+	return string(m[1]), string(m[2]), nil
 }
 
 // Send constructs and sends a CDP message to the browser associated
 // with the given context, and returns the browser's response message.
-// This is guaranteed to be thread-safe.
+// Multiple goroutines may call this function simultaneously.
 func Send(ctx context.Context, method string, params json.RawMessage) (*Message, error) {
 	s, ok := FromContext(ctx)
 	if !ok {

@@ -5,6 +5,7 @@
 package devtools
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
@@ -12,15 +13,18 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"runtime"
 	"sync"
 	"time"
+
+	"github.com/daabr/chrome-vision/pkg/websocket"
 )
 
 // OutputRootEnv is the name of an optional environment variable to override
 // the default path for CDP output directories instead of Go's `os.TempDir()`.
 const OutputRootEnv = "CDP_OUTPUT_ROOT"
 
-// Thread-safe string.
+// "Thread-safe" string: multiple goroutines may read/write it simultaneously.
 type id struct {
 	mu sync.RWMutex
 	id string
@@ -51,7 +55,7 @@ type Session struct {
 
 	// Data directory per browser process. Created under Go's `os.TempDir()`,
 	// or the path specified in the environment variable "CDP_OUTPUT_ROOT",
-	// if set (see `devtools.OutputRootEnv`). Contains stdout and stderr dumps,
+	// if set (see `devtools.OutputRootEnv`). Contains STDOUT and STDERR dumps,
 	// logs, user profile data, screenshots, etc. Not deleted automatically!
 	OutputDir string
 	// User data directory per browser process, instead of the system's
@@ -71,6 +75,9 @@ type Session struct {
 	browserDone chan struct{}
 
 	browserInputWriter, browserOutputReader *os.File
+	// Windows-only, for using a WebSocket to communicate with browser.
+	windowsStderr *bytes.Buffer
+	webSocket     *websocket.Conn
 
 	msgLog *log.Logger
 	msgID  int64
@@ -85,7 +92,6 @@ type Session struct {
 	// because they create their own tabs, targets and sessions IDs. See also:
 	// https://github.com/aslushnikov/getting-started-with-cdp#targets--sessions.
 	targetID, sessionID *id
-	// TODO: delete targetID, sessionID string
 }
 
 type sessionKey struct{}
@@ -142,7 +148,7 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 	// bottom of the start function in browser.go.
 	go func() {
 		<-ctx.Done()
-		log.Printf("CDP context ending reason: %v\n", ctx.Err())
+		log.Printf("CDP context ending reason: %v", ctx.Err())
 	}()
 
 	if ps, ok := FromContext(parent); ok {
@@ -155,6 +161,8 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 		session.browserDone = ps.browserDone
 		session.browserInputWriter = ps.browserInputWriter
 		session.browserOutputReader = ps.browserOutputReader
+		session.windowsStderr = ps.windowsStderr
+		session.webSocket = ps.webSocket
 
 		session.msgLog = ps.msgLog
 		session.msgID = ps.msgID
@@ -201,7 +209,11 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 					// goroutine at the bottom of the start function in browser.go).
 					return
 				}
-				sendToPipe(s, asyncMsg)
+				if runtime.GOOS != "windows" {
+					sendToPipe(s, asyncMsg)
+				} else {
+					sendToWebSocket(s, asyncMsg)
+				}
 				s.msgID++
 			}
 		}(session)
@@ -222,8 +234,8 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 			log.Printf(`WARNING: "Target.attachToTarget" command error: %v`, err)
 			return ctx, err
 		}
-		log.Printf("Target ID: %s\n", targetID)
-		log.Printf("Session ID: %s\n", sessionID)
+		log.Printf("Target ID: %s", targetID)
+		log.Printf("Session ID: %s", sessionID)
 		session.targetID.write(targetID)
 		session.sessionID.write(sessionID)
 
@@ -246,7 +258,7 @@ func mkdirOutput() (string, error) {
 	if err := os.MkdirAll(path, 0755); err != nil {
 		return "", nil
 	}
-	log.Printf("Session output directory: %s\n", path)
+	log.Printf("Session output directory: %s", path)
 	return path, nil
 }
 

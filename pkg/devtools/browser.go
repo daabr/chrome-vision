@@ -7,13 +7,17 @@
 package devtools
 
 import (
+	"bytes"
 	"context"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"runtime"
+
+	"github.com/daabr/chrome-vision/pkg/websocket"
 )
 
 func start(ctx context.Context, s *Session) error {
@@ -32,14 +36,14 @@ func start(ctx context.Context, s *Session) error {
 			return exec.ErrNotFound
 		}
 	}
-	log.Printf("Browser executable path: %s\n", *p)
+	log.Printf("Browser executable path: %s", *p)
 
 	// Initialize the command-line.
 	if len(s.browserFlags) == 0 {
 		s.browserFlags = DefaultBrowserFlags()
 	}
 	args := append(adjustFlags(s), "about:blank")
-	log.Printf("Browser command-line args: %q\n", args)
+	log.Printf("Browser command-line args: %q", args)
 	cmd := exec.CommandContext(ctx, *p, args...)
 
 	// Ensure that the user data directory exists, whether it's the
@@ -55,17 +59,24 @@ func start(ctx context.Context, s *Session) error {
 	// Redirect the browser process's output to files.
 	stdout, err := os.Create(filepath.Join(s.OutputDir, "stdout.txt"))
 	if err != nil {
-		return fmt.Errorf("failed to initialize browser process's stdout file: %v", err)
+		return fmt.Errorf("failed to initialize browser process's STDOUT file: %v", err)
 	}
 	stderr, err := os.Create(filepath.Join(s.OutputDir, "stderr.txt"))
 	if err != nil {
-		return fmt.Errorf("failed to initialize browser process's stderr file: %v", err)
+		return fmt.Errorf("failed to initialize browser process's STDERR file: %v", err)
 	}
 	cmd.Stdout = stdout
-	cmd.Stderr = stderr
+	if runtime.GOOS != "windows" {
+		cmd.Stderr = stderr
+	} else {
+		s.windowsStderr = &bytes.Buffer{}
+		// On Windows, we also need to read STDERR during runtime,
+		// in order to know how to communicate with the browser.
+		cmd.Stderr = io.MultiWriter(stderr, s.windowsStderr)
+	}
 
 	// On POSIX-compliant operating systems, prepare input and output pipes to
-	// communicate with the browser process. On Windows, we have to use websockets.
+	// communicate with the browser process. On Windows, we use a WebSocket.
 	if runtime.GOOS != "windows" {
 		inputReader, inputWriter, err := os.Pipe()
 		if err != nil {
@@ -78,31 +89,41 @@ func start(ctx context.Context, s *Session) error {
 		s.browserInputWriter, s.browserOutputReader = inputWriter, outputReader
 		cmd.ExtraFiles = []*os.File{inputReader, outputWriter}
 	}
-	// TODO: initialize websockets otherwise.
 
 	// Start a new broswer process.
 	if err := cmd.Start(); err != nil {
 		return fmt.Errorf("failed to start browser process: %v", err)
 	}
-	log.Printf("Browser process started: PID %d\n", cmd.Process.Pid)
+	log.Printf("Browser process started: PID %d", cmd.Process.Pid)
 	s.browserDone = make(chan struct{})
 
-	// On POSIX-compliant operating systems, start using the
-	// previously-prepared pipes to communicate with the browser.
 	if runtime.GOOS != "windows" {
+		// On POSIX-compliant operating systems, start using the
+		// previously-prepared pipes to communicate with the browser.
 		go receiveFromPipe(s)
+	} else {
+		// On Windows, initialize a WebSocket to communicate with the browser.
+		address, path, err := browserWebSocket(s)
+		if err != nil {
+			return fmt.Errorf("failed to find WebSocket in browser's STDERR: %v", err)
+		}
+		conn, err := websocket.Handshake(ctx, address, path)
+		if err != nil {
+			return err
+		}
+		s.webSocket = conn
+		go receiveFromWebSocket(s)
 	}
-	// TODO: use websockets otherwise.
 
 	// Wait in the background for the browser process to end, and clean-up
 	// any resources associated with it. See also the goroutine in the
 	// NewContext function in session.go.
 	go func(s *Session, c *exec.Cmd) {
-		log.Println("Waiting for the browser process to end")
+		log.Print("Waiting in the background for the browser process to end")
 		if err := c.Wait(); err != nil {
-			log.Printf("Browser process has ended with an error: %v\n", err)
+			log.Printf("Browser process has ended with an error: %v", err)
 		} else {
-			log.Println("Browser process has ended without an error")
+			log.Print("Browser process has ended without an error")
 		}
 		s.cancel()
 
