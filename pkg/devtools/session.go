@@ -12,34 +12,42 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"runtime"
 	"sync"
 	"time"
+
+	"github.com/daabr/chrome-vision/pkg/websocket"
 )
 
-// OutputRootEnv is the name of an optional environment variable to override
-// the default path for CDP output directories instead of Go's `os.TempDir()`.
-const OutputRootEnv = "CDP_OUTPUT_ROOT"
+const (
+	// OutputRootEnv is the name of an optional environment variable to override
+	// the default path for CDP output directories instead of Go's `os.TempDir()`.
+	OutputRootEnv = "CDP_OUTPUT_ROOT"
+	// TargetTimeout is the maximum amount of time to wait for the browser to start
+	// using a new tab, when constructing a new session by calling `NewContext`.
+	TargetTimeout = 1 * time.Minute
+)
 
-// Thread-safe string.
-type id struct {
+// "Thread-safe" string: multiple goroutines may read/write it simultaneously.
+type safeString struct {
 	mu sync.RWMutex
-	id string
+	string
 }
 
-func newID() *id {
-	return &id{mu: sync.RWMutex{}}
+func newSafeString() *safeString {
+	return &safeString{mu: sync.RWMutex{}}
 }
 
-func (i *id) read() string {
-	i.mu.RLock()
-	defer i.mu.RUnlock()
-	return i.id
+func (t *safeString) read() string {
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	return t.string
 }
 
-func (i *id) write(s string) {
-	i.mu.Lock()
-	defer i.mu.Unlock()
-	i.id = s
+func (t *safeString) write(s string) {
+	t.mu.Lock()
+	defer t.mu.Unlock()
+	t.string = s
 }
 
 // Session contains CDP runtime details, stored in a `context.Context`,
@@ -51,7 +59,7 @@ type Session struct {
 
 	// Data directory per browser process. Created under Go's `os.TempDir()`,
 	// or the path specified in the environment variable "CDP_OUTPUT_ROOT",
-	// if set (see `devtools.OutputRootEnv`). Contains stdout and stderr dumps,
+	// if set (see `devtools.OutputRootEnv`). Contains STDOUT and STDERR dumps,
 	// logs, user profile data, screenshots, etc. Not deleted automatically!
 	OutputDir string
 	// User data directory per browser process, instead of the system's
@@ -70,7 +78,12 @@ type Session struct {
 
 	browserDone chan struct{}
 
+	// Communication with the browser...
+	// ...On POSIX-compliant operating systems - via pipes.
 	browserInputWriter, browserOutputReader *os.File
+	// ...On Windows - via WebSocket.
+	wsAddress, wsPath *safeString
+	webSocket         *websocket.Conn
 
 	msgLog *log.Logger
 	msgID  int64
@@ -84,8 +97,7 @@ type Session struct {
 	// IDs for the attached browser tab. Not shared with descendant contexts
 	// because they create their own tabs, targets and sessions IDs. See also:
 	// https://github.com/aslushnikov/getting-started-with-cdp#targets--sessions.
-	targetID, sessionID *id
-	// TODO: delete targetID, sessionID string
+	targetID, sessionID *safeString
 }
 
 type sessionKey struct{}
@@ -142,7 +154,7 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 	// bottom of the start function in browser.go.
 	go func() {
 		<-ctx.Done()
-		log.Printf("CDP context ending reason: %v\n", ctx.Err())
+		log.Printf("CDP context ending reason: %v", ctx.Err())
 	}()
 
 	if ps, ok := FromContext(parent); ok {
@@ -155,6 +167,7 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 		session.browserDone = ps.browserDone
 		session.browserInputWriter = ps.browserInputWriter
 		session.browserOutputReader = ps.browserOutputReader
+		session.webSocket = ps.webSocket
 
 		session.msgLog = ps.msgLog
 		session.msgID = ps.msgID
@@ -201,29 +214,29 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 					// goroutine at the bottom of the start function in browser.go).
 					return
 				}
-				sendToPipe(s, asyncMsg)
+				if runtime.GOOS != "windows" {
+					sendToPipe(s, asyncMsg)
+				} else {
+					sendToWebSocket(s, asyncMsg)
+				}
 				s.msgID++
 			}
 		}(session)
 
 		// Attach this session to the first tab.
-		session.targetID, session.sessionID = newID(), newID()
-		var targetID string
-		for {
-			time.Sleep(100 * time.Millisecond)
-			if targetID, err = fetchTargetID(ctx); err == nil {
-				break
-			}
-			log.Printf(`"Target.getTargets" command error: %v`, err)
+		session.targetID, session.sessionID = newSafeString(), newSafeString()
+		targetID, err := fetchTargetID(ctx)
+		if err != nil {
+			session.cancel()
+			return parent, fmt.Errorf(`"Target.getTargets" command error: %v`, err)
 		}
 		sessionID, err := attach(ctx, targetID)
 		if err != nil {
-			// TODO: cancel context instead of just a warning?
-			log.Printf(`WARNING: "Target.attachToTarget" command error: %v`, err)
-			return ctx, err
+			session.cancel()
+			return parent, fmt.Errorf(`"Target.attachToTarget" command error: %v`, err)
 		}
-		log.Printf("Target ID: %s\n", targetID)
-		log.Printf("Session ID: %s\n", sessionID)
+		log.Printf("Target ID: %s", targetID)
+		log.Printf("Session ID: %s", sessionID)
 		session.targetID.write(targetID)
 		session.sessionID.write(sessionID)
 
@@ -246,31 +259,46 @@ func mkdirOutput() (string, error) {
 	if err := os.MkdirAll(path, 0755); err != nil {
 		return "", nil
 	}
-	log.Printf("Session output directory: %s\n", path)
+	log.Printf("Session output directory: %s", path)
 	return path, nil
 }
 
 // Return the ID of the browser's first unattached page target.
 func fetchTargetID(ctx context.Context) (string, error) {
-	// https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-getTargets
-	// (we don't use the target sub-package to avoid circular dependencies).
-	response, err := Send(ctx, "Target.getTargets", nil)
-	if err != nil {
-		return "", err
-	}
-	if response.Error != nil {
-		return "", errors.New(response.Error.Error())
-	}
-	result := &getTargetsResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
-		return "", err
-	}
-	for _, t := range result.TargetInfos {
-		if t.Type == "page" && !t.Attached {
-			return t.TargetID, nil
+	ticker := time.NewTicker(10 * time.Millisecond)
+	timer := time.NewTimer(TargetTimeout)
+	defer ticker.Stop()
+	defer timer.Stop()
+	var lastErr error
+	for {
+		select {
+		case <-ticker.C:
+			// https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-getTargets
+			// (we don't use the target sub-package to avoid circular dependencies).
+			response, err := Send(ctx, "Target.getTargets", nil)
+			if err != nil {
+				lastErr = err
+				break
+			}
+			if response.Error != nil {
+				lastErr = errors.New(response.Error.Error())
+				break
+			}
+			result := &getTargetsResult{}
+			if err := json.Unmarshal(response.Result, result); err != nil {
+				lastErr = err
+				break
+			}
+			for _, t := range result.TargetInfos {
+				if t.Type == "page" && !t.Attached {
+					return t.TargetID, nil // Success.
+				}
+			}
+			lastErr = errors.New("unattached page target not found")
+		case <-timer.C:
+			return "", lastErr // Timeout - return the last recorded error.
 		}
 	}
-	return "", errors.New("unattached page target not found")
 }
 
 // Attach to the given target and return the resulting session ID.

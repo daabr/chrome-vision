@@ -105,7 +105,7 @@ func DefaultBrowserFlags() map[string]interface{} {
 func adjustFlags(s *Session) []string {
 	// Runtime adjustments to set-up communication with the browser process.
 	if runtime.GOOS != "windows" {
-		// Prefer pipes over websockets in POSIX-compliant operating systems.
+		// Prefer pipes over WebSockets in POSIX-compliant operating systems.
 		s.browserFlags["remote-debugging-pipe"] = true
 		delete(s.browserFlags, "remote-debugging-port")
 	} else {
