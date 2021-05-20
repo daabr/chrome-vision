@@ -40,46 +40,52 @@ type asyncMessage struct {
 	responseChan chan<- *Message
 }
 
-// Parse and relay incoming CDP messages (solicited responses or unsolicited events),
-// received from the browser through a POSIX pipe on non-Windows operating systems,
-// as long as the pipe is open. Called as a goroutine in `browser.go`.
+// Parse and relay incoming CDP messages.
+func parseAndRelay(s *Session, b []byte) {
+	s.msgLog.Printf("<- %s\n", b)
+
+	// Parse the raw JSON content.
+	m := &Message{}
+	if err := json.Unmarshal(b, m); err != nil {
+		log.Printf("JSON error: %v", err)
+		return
+	}
+
+	if len(m.Method) == 0 {
+		// Solicited response: relay to the request caller.
+		log.Printf("Received response: ID %d (%d bytes)", m.ID, len(b))
+		if ch, ok := s.responseSubscribers[m.ID]; ok {
+			ch <- m
+		}
+	} else {
+		// Unsolicited event: relay to any subscribers.
+		log.Printf("Received event: %q (%d bytes)", m.Method, len(b))
+		if subscribers, ok := s.eventSubscribers[m.Method]; ok {
+			for _, ch := range subscribers {
+				ch <- m
+			}
+			switch len(subscribers) {
+			case 1:
+				log.Printf("Relayed to 1 subscriber")
+			default:
+				log.Printf("Relayed to %d subscribers", len(subscribers))
+			}
+		}
+	}
+}
+
+// Asynchronously receive incoming CDP messages from the browser through a
+// POSIX pipe on non-Windows operating systems, as long as the pipe is open.
+// Called as a goroutine in the `start` function in `browser.go`.
 func receiveFromPipe(s *Session) {
 	// This scanner wraps the browser's POSIX pipe, which is closed when the
-	// browser process ends (see the goroutine at the bottom of the start
+	// browser process ends (see the goroutine at the bottom of the `start`
 	// function in `browser.go`).
 	scanner := bufio.NewScanner(s.browserOutputReader)
 	scanner.Split(scanMessages)
 	for scanner.Scan() {
-		// Receive a new messsage.
 		b := scanner.Bytes()
-		s.msgLog.Printf("<- %s\n", b)
-		// Parse the raw JSON content.
-		m := &Message{}
-		if err := json.Unmarshal(b, m); err != nil {
-			log.Printf("JSON error: %v", err)
-			continue
-		}
-		if len(m.Method) == 0 {
-			// Solicited response.
-			log.Printf("Received response: ID %d (%d bytes)", m.ID, len(b))
-			if ch, ok := s.responseSubscribers[m.ID]; ok {
-				ch <- m
-			}
-		} else {
-			// Unsolicited event.
-			log.Printf("Received event: %q (%d bytes)", m.Method, len(b))
-			if subscribers, ok := s.eventSubscribers[m.Method]; ok {
-				for _, ch := range subscribers {
-					ch <- m
-				}
-				switch len(subscribers) {
-				case 1:
-					log.Printf("Relayed to 1 subscriber")
-				default:
-					log.Printf("Relayed to %d subscribers", len(subscribers))
-				}
-			}
-		}
+		parseAndRelay(s, b)
 	}
 }
 
@@ -101,12 +107,11 @@ func scanMessages(data []byte, atEOF bool) (int, []byte, error) {
 	return 0, nil, nil
 }
 
-// Parse and relay incoming CDP messages (solicited responses or unsolicited
-// events), received from the browser through a WebSocket on Windows operating
-// systems, as long as it is open. Called as a goroutine in `browser.go`.
+// Asynchronously receive incoming CDP messages from the browser through a
+// WebSocket on Windows operating systems, as long as the connection is open.
+// Called as a goroutine in the `start` function in `browser.go`.
 func receiveFromWebSocket(s *Session) {
 	for {
-		// Receive a new messsage.
 		b, err := s.webSocket.Read()
 		if err != nil {
 			if err == io.EOF {
@@ -115,37 +120,7 @@ func receiveFromWebSocket(s *Session) {
 			log.Printf("WARNING: failed to read incoming CDP message: %v", err)
 			return
 		}
-
-		// TODO: all the following should be a shared func with the pipe func.
-
-		s.msgLog.Printf("<- %s\n", b)
-		// Parse the raw JSON content.
-		m := &Message{}
-		if err := json.Unmarshal(b, m); err != nil {
-			log.Printf("JSON error: %v", err)
-			continue
-		}
-		if len(m.Method) == 0 {
-			// Solicited response.
-			log.Printf("Received response: ID %d (%d bytes)", m.ID, len(b))
-			if ch, ok := s.responseSubscribers[m.ID]; ok {
-				ch <- m
-			}
-		} else {
-			// Unsolicited event.
-			log.Printf("Received event: %q (%d bytes)", m.Method, len(b))
-			if subscribers, ok := s.eventSubscribers[m.Method]; ok {
-				for _, ch := range subscribers {
-					ch <- m
-				}
-				switch len(subscribers) {
-				case 1:
-					log.Printf("Relayed to 1 subscriber")
-				default:
-					log.Printf("Relayed to %d subscribers", len(subscribers))
-				}
-			}
-		}
+		parseAndRelay(s, b)
 	}
 }
 
