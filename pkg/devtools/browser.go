@@ -7,18 +7,51 @@
 package devtools
 
 import (
-	"bytes"
 	"context"
+	"errors"
 	"fmt"
-	"io"
 	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"runtime"
+	"time"
 
 	"github.com/daabr/chrome-vision/pkg/websocket"
 )
+
+// WebSocketTimeout is the maximum amount of time to wait for the browser to
+// report its WebSocket address via STDERR, in order to perform a handshake.
+const WebSocketTimeout = 5 * time.Second
+
+type windowsStderrWriter struct {
+	session *Session
+	stderr  *os.File
+}
+
+func (w *windowsStderrWriter) Close() error {
+	return w.stderr.Close()
+}
+
+func (w *windowsStderrWriter) Sync() error {
+	return w.stderr.Sync()
+}
+
+// Pass lines from the browser's STDERR to our log file, but also extract
+// and remember the browser's WebSocket address for initialization.
+func (w *windowsStderrWriter) Write(b []byte) (n int, err error) {
+	if w.session.wsAddress.read() == "" {
+		re := regexp.MustCompile(`ws://(.+:\d+)(/devtools/browser/[\w-]{36})`)
+		m := re.FindSubmatch(b)
+		if m != nil {
+			log.Printf("WebSocket address: %s", m[0])
+			w.session.wsAddress.write(string(m[1]))
+			w.session.wsPath.write(string(m[2]))
+		}
+	}
+	return w.stderr.Write(b)
+}
 
 func start(ctx context.Context, s *Session) error {
 	// Find the executable if it's not specified. Compare with:
@@ -69,10 +102,10 @@ func start(ctx context.Context, s *Session) error {
 	if runtime.GOOS != "windows" {
 		cmd.Stderr = stderr
 	} else {
-		s.windowsStderr = &bytes.Buffer{}
 		// On Windows, we also need to read STDERR during runtime,
 		// in order to know how to communicate with the browser.
-		cmd.Stderr = io.MultiWriter(stderr, s.windowsStderr)
+		s.wsAddress, s.wsPath = newSafeString(), newSafeString()
+		cmd.Stderr = &windowsStderrWriter{session: s, stderr: stderr}
 	}
 
 	// On POSIX-compliant operating systems, prepare input and output pipes to
@@ -103,12 +136,22 @@ func start(ctx context.Context, s *Session) error {
 		go receiveFromPipe(s)
 	} else {
 		// On Windows, initialize a WebSocket to communicate with the browser.
-		address, path, err := browserWebSocket(s)
-		if err != nil {
-			return fmt.Errorf("failed to find WebSocket in browser's STDERR: %v", err)
+		ticker := time.NewTicker(10 * time.Millisecond)
+		timer := time.NewTimer(WebSocketTimeout)
+		defer ticker.Stop()
+		defer timer.Stop()
+		for s.wsPath.read() == "" {
+			select {
+			case <-ticker.C:
+				continue // Recheck the loop condition.
+			case <-timer.C:
+				s.cancel()
+				return errors.New("failed to detect WebSocket address in STDERR")
+			}
 		}
-		conn, err := websocket.Handshake(ctx, address, path)
+		conn, err := websocket.Handshake(ctx, s.wsAddress.read(), s.wsPath.read())
 		if err != nil {
+			s.cancel()
 			return err
 		}
 		s.webSocket = conn
@@ -128,8 +171,10 @@ func start(ctx context.Context, s *Session) error {
 		s.cancel()
 
 		close(s.msgQ)
-		s.browserInputWriter.Close()
-		s.browserOutputReader.Close()
+		if runtime.GOOS != "windows" {
+			s.browserInputWriter.Close()
+			s.browserOutputReader.Close()
+		}
 		s.msgLog.Writer().(*os.File).Sync()
 		s.msgLog.Writer().(*os.File).Close()
 		// TODO: unsubscribe (close channels) for all existing subscribers.

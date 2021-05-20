@@ -9,8 +9,6 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"regexp"
-	"time"
 )
 
 // Error details passed within a CDP response message.
@@ -243,18 +241,6 @@ func sendToWebSocket(s *Session, async asyncMessage) {
 	}
 
 	postSend(s, async, b)
-}
-
-// TODO: https://stackoverflow.com/q/38420618
-func browserWebSocket(s *Session) (string, string, error) {
-	re := regexp.MustCompile(`ws://(.+:\d+)(/devtools/browser/[\w-]{36})`)
-	var m [][]byte
-	for m == nil {
-		time.Sleep(100 * time.Millisecond)
-		m = re.FindSubmatch(s.windowsStderr.Bytes())
-	}
-	log.Printf("WebSocket address: %s", m[0])
-	return string(m[1]), string(m[2]), nil
 }
 
 // Send constructs and sends a CDP message to the browser associated
