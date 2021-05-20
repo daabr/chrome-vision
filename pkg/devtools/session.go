@@ -19,14 +19,13 @@ import (
 	"github.com/daabr/chrome-vision/pkg/websocket"
 )
 
-const (
-	// OutputRootEnv is the name of an optional environment variable to override
-	// the default path for CDP output directories instead of Go's `os.TempDir()`.
-	OutputRootEnv = "CDP_OUTPUT_ROOT"
-	// TargetTimeout is the maximum amount of time to wait for the browser to start
-	// using a new tab, when constructing a new session by calling `NewContext`.
-	TargetTimeout = 1 * time.Minute
-)
+// OutputRootEnv is the name of an optional environment variable to override
+// the default path for CDP output directories instead of Go's `os.TempDir()`.
+const OutputRootEnv = "CDP_OUTPUT_ROOT"
+
+// TargetTimeout is the maximum amount of time to wait for the browser to start
+// using a new tab, when constructing a new session by calling `NewContext`.
+const TargetTimeout = 1 * time.Minute
 
 // "Thread-safe" string: multiple goroutines may read/write it simultaneously.
 type safeString struct {
