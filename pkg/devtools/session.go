@@ -25,7 +25,7 @@ const (
 	OutputRootEnv = "CDP_OUTPUT_ROOT"
 	// TargetTimeout is the maximum amount of time to wait for the browser to start
 	// using a new tab, when constructing a new session by calling `NewContext`.
-	TargetTimeout = 5 * time.Second
+	TargetTimeout = 1 * time.Minute
 )
 
 // "Thread-safe" string: multiple goroutines may read/write it simultaneously.

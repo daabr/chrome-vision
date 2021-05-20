@@ -23,7 +23,7 @@ import (
 
 // WebSocketTimeout is the maximum amount of time to wait for the browser to
 // report its WebSocket address via STDERR, in order to perform a handshake.
-const WebSocketTimeout = 5 * time.Second
+const WebSocketTimeout = 1 * time.Minute
 
 type windowsStderrWriter struct {
 	session *Session
