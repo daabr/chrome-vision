@@ -30,16 +30,8 @@ type windowsStderrWriter struct {
 	stderr  *os.File
 }
 
-func (w *windowsStderrWriter) Close() error {
-	return w.stderr.Close()
-}
-
-func (w *windowsStderrWriter) Sync() error {
-	return w.stderr.Sync()
-}
-
-// Pass lines from the browser's STDERR to our log file, but also extract
-// and remember the browser's WebSocket address for initialization.
+// Write passes lines from the browser's STDERR to our log file, but also
+// extracts and remembers the browser's WebSocket address for initialization.
 func (w *windowsStderrWriter) Write(b []byte) (n int, err error) {
 	if w.session.wsAddress.read() == "" {
 		re := regexp.MustCompile(`ws://(.+:\d+)(/devtools/browser/[\w-]{36})`)
