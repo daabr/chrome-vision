@@ -51,8 +51,5 @@ jobs:
     - name: Coverage analysis
       run: |
         go test -covermode=atomic -coverprofile=coverage.out -race $(go list ./... | grep -v /pkg/devtools/)
-        echo ""
-        cat coverage.out
-        echo ""
         go tool cover -func=coverage.out
         # Run manually with coverage.out: go tool cover -html=coverage.out
