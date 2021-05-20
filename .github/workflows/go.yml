@@ -43,16 +43,16 @@ jobs:
       run: go build -v ./...
 
     - name: Test
-      run: go test -v $(go list ./... | grep -v /pkg/cdp/)
+      run: go test -v $(go list ./... | grep -v /pkg/devtools/)
 
     - name: Race detection
-      run: go test -race -v $(go list ./... | grep -v /pkg/cdp/)
+      run: go test -race -v $(go list ./... | grep -v /pkg/devtools/)
 
     - name: Coverage analysis
       run: |
-        go test -covermode=atomic -coverprofile=coverage.out -race $(go list ./... | grep -v /pkg/cdp/)
-        echo
+        go test -covermode=atomic -coverprofile=coverage.out -race $(go list ./... | grep -v /pkg/devtools/)
+        echo ""
         cat coverage.out
-        echo
+        echo ""
         go tool cover -func=coverage.out
         # Run manually with coverage.out: go tool cover -html=coverage.out
