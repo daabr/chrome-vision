@@ -16,9 +16,9 @@
 //
 // More readaing materials about other WebSocket implementations:
 //
-// * https://centrifugal.github.io/centrifugo/blog/scaling_websocket/
+// • https://centrifugal.github.io/centrifugo/blog/scaling_websocket/
 //
-// * https://www.freecodecamp.org/news/million-websockets-and-go-cc58418460bb/
+// • https://www.freecodecamp.org/news/million-websockets-and-go-cc58418460bb/
 package websocket
 
 import (
