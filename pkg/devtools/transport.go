@@ -227,7 +227,7 @@ func Send(ctx context.Context, method string, params json.RawMessage) (*Message,
 		return nil, errors.New("context not initialized with devtools.NewContext")
 	}
 	// https://github.com/aslushnikov/getting-started-with-cdp#targets--sessions
-	m := &Message{Method: method, SessionID: s.sessionID.read(), Params: params}
+	m := &Message{Method: method, SessionID: s.SessionID.Read(), Params: params}
 	ch := make(chan *Message)
 	// https://blog.golang.org/codelab-share
 	s.msgQ <- asyncMessage{requestMsg: *m, responseChan: ch}

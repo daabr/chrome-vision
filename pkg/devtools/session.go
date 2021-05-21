@@ -20,30 +20,32 @@ import (
 )
 
 // OutputRootEnv is the name of an optional environment variable to override
-// the default path for CDP output directories instead of Go's `os.TempDir()`.
+// the default path for CDP output directories (Go's `os.TempDir()` -
+// see https://golang.org/pkg/os/#TempDir)
 const OutputRootEnv = "CDP_OUTPUT_ROOT"
 
 // TargetTimeout is the maximum amount of time to wait for the browser to start
 // using a new tab, when constructing a new session by calling `NewContext`.
 const TargetTimeout = 1 * time.Minute
 
-// "Thread-safe" string: multiple goroutines may read/write it simultaneously.
-type safeString struct {
+// SafeString is a "thread-safe" string: multiple goroutines may
+// read and write it simultaneously.
+type SafeString struct {
 	mu sync.RWMutex
 	string
 }
 
-func newSafeString() *safeString {
-	return &safeString{mu: sync.RWMutex{}}
+func newSafeString() *SafeString {
+	return &SafeString{mu: sync.RWMutex{}}
 }
 
-func (t *safeString) read() string {
+func (t *SafeString) Read() string {
 	t.mu.RLock()
 	defer t.mu.RUnlock()
 	return t.string
 }
 
-func (t *safeString) write(s string) {
+func (t *SafeString) Write(s string) {
 	t.mu.Lock()
 	defer t.mu.Unlock()
 	t.string = s
@@ -81,7 +83,7 @@ type Session struct {
 	// ...On POSIX-compliant operating systems - via pipes.
 	browserInputWriter, browserOutputReader *os.File
 	// ...On Windows - via WebSocket.
-	wsAddress, wsPath *safeString
+	wsAddress, wsPath *SafeString
 	webSocket         *websocket.Conn
 
 	msgLog *log.Logger
@@ -96,19 +98,24 @@ type Session struct {
 	// IDs for the attached browser tab. Not shared with descendant contexts
 	// because they create their own tabs, targets and sessions IDs. See also:
 	// https://github.com/aslushnikov/getting-started-with-cdp#targets--sessions.
-	targetID, sessionID *safeString
+	TargetID, SessionID *SafeString
 }
 
 type sessionKey struct{}
 
-// Partial copy of `target.TargetInfo`, for parsing target state.
+// Copy of `target.CreateTargetResult`, for parsing the created target ID.
+type createTargetResult struct {
+	TargetID string `json:"targetId"`
+}
+
+// Partial copy of `target.TargetInfo`, for parsing target states.
 type targetInfo struct {
 	TargetID string `json:"targetId"`
 	Type     string `json:"type"`
 	Attached bool   `json:"attached"`
 }
 
-// Copy of `target.GetTargetsResult`, for parsing target state.
+// Copy of `target.GetTargetsResult`, for parsing target states.
 type getTargetsResult struct {
 	TargetInfos []targetInfo `json:"targetInfos"`
 }
@@ -175,7 +182,14 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 		session.responseSubscribers = ps.responseSubscribers
 		session.eventSubscribers = ps.eventSubscribers
 
-		// TODO: open a new tab, attach to the target, and set the session ID.
+		// Open a new tab.
+		session.TargetID, session.SessionID = newSafeString(), newSafeString()
+		targetID, err := createTarget(ctx)
+		if err != nil {
+			session.cancel()
+			return parent, fmt.Errorf(`"Target.createTarget" command error: %v`, err)
+		}
+		session.TargetID.Write(targetID)
 	} else {
 		// Construct a new session.
 
@@ -222,28 +236,29 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 			}
 		}(session)
 
+		// TODO: Runtime.enable, Log.enable, Network.enable, Inspector.enable,
+		// Page.enable, DOM.enable, CSS.enable, Page.setLifecycleEventsEnabled,
+		// Target.setDiscoverTargets?
+
 		// Attach this session to the first tab.
-		session.targetID, session.sessionID = newSafeString(), newSafeString()
+		session.TargetID, session.SessionID = newSafeString(), newSafeString()
 		targetID, err := fetchTargetID(ctx)
 		if err != nil {
 			session.cancel()
 			return parent, fmt.Errorf(`"Target.getTargets" command error: %v`, err)
 		}
-		sessionID, err := attach(ctx, targetID)
-		if err != nil {
-			session.cancel()
-			return parent, fmt.Errorf(`"Target.attachToTarget" command error: %v`, err)
-		}
-		log.Printf("Target ID: %s", targetID)
-		log.Printf("Session ID: %s", sessionID)
-		session.targetID.write(targetID)
-		session.sessionID.write(sessionID)
-
-		// TODO: Runtime.enable, Log.enable, Network.enable, Inspector.enable,
-		// Page.enable, DOM.enable, CSS.enable, Page.setLifecycleEventsEnabled?
-		// Target.setDiscoverTargets
+		session.TargetID.Write(targetID)
 	}
 
+	// Finish attaching this session to a browser tab.
+	sessionID, err := attach(ctx, session.TargetID.Read())
+	if err != nil {
+		session.cancel()
+		return parent, fmt.Errorf(`"Target.attachToTarget" command error: %v`, err)
+	}
+	log.Printf("Target ID: %s", session.TargetID.Read())
+	log.Printf("Session ID: %s", sessionID)
+	session.SessionID.Write(sessionID)
 	return ctx, nil
 }
 
@@ -260,6 +275,24 @@ func mkdirOutput() (string, error) {
 	}
 	log.Printf("Session output directory: %s", path)
 	return path, nil
+}
+
+// Create a new browser tab and return its target ID.
+func createTarget(ctx context.Context) (string, error) {
+	// https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-createTarget
+	// (we don't use the target sub-package to avoid circular dependencies).
+	response, err := Send(ctx, "Target.createTarget", []byte(`{"url":""}`))
+	if err != nil {
+		return "", err
+	}
+	if response.Error != nil {
+		return "", errors.New(response.Error.Error())
+	}
+	result := &createTargetResult{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return "", err
+	}
+	return result.TargetID, nil
 }
 
 // Return the ID of the browser's first unattached page target.

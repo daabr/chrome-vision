@@ -33,13 +33,13 @@ type windowsStderrWriter struct {
 // Write passes lines from the browser's STDERR to our log file, but also
 // extracts and remembers the browser's WebSocket address for initialization.
 func (w *windowsStderrWriter) Write(b []byte) (n int, err error) {
-	if w.session.wsAddress.read() == "" {
+	if w.session.wsAddress.Read() == "" {
 		re := regexp.MustCompile(`ws://(.+:\d+)(/devtools/browser/[\w-]{36})`)
 		m := re.FindSubmatch(b)
 		if m != nil {
 			log.Printf("WebSocket address: %s", m[0])
-			w.session.wsAddress.write(string(m[1]))
-			w.session.wsPath.write(string(m[2]))
+			w.session.wsAddress.Write(string(m[1]))
+			w.session.wsPath.Write(string(m[2]))
 		}
 	}
 	return w.stderr.Write(b)
@@ -132,7 +132,7 @@ func start(ctx context.Context, s *Session) error {
 		timer := time.NewTimer(WebSocketTimeout)
 		defer ticker.Stop()
 		defer timer.Stop()
-		for s.wsPath.read() == "" {
+		for s.wsPath.Read() == "" {
 			select {
 			case <-ticker.C:
 				continue // Recheck the loop condition.
@@ -141,7 +141,7 @@ func start(ctx context.Context, s *Session) error {
 				return errors.New("failed to detect WebSocket address in STDERR")
 			}
 		}
-		conn, err := websocket.Handshake(ctx, s.wsAddress.read(), s.wsPath.read())
+		conn, err := websocket.Handshake(ctx, s.wsAddress.Read(), s.wsPath.Read())
 		if err != nil {
 			s.cancel()
 			return err
