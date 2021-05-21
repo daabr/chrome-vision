@@ -17,11 +17,13 @@ func main() {
 	ExampleMinimalSession()
 	ExampleSessionTimeout()
 	ExampleBrowserCustomizations()
-	ExamplehMultipleBrowserTabs()
+	ExampleMultipleBrowsers()
+	ExampleMultipleBrowserTabs()
 	ExampleCleanupAfterSession()
 	ExampleCustomOutputDir()
 }
 
+// ExampleMinimalSession is an example of a minimalistic session initialization.
 func ExampleMinimalSession() {
 	// Start a new browser.
 	ctx, err := devtools.NewContext(context.Background())
@@ -39,9 +41,11 @@ func ExampleMinimalSession() {
 	devtools.Close(ctx)
 }
 
+// ExampleSessionTimeout is an example of a browsing session with a timeout
+// for the entire session's lifetime.
 func ExampleSessionTimeout() {
 	// Set an idiomatic timeout (or deadline) for the entire session,
-	// i.e. the browser will be killed immediately when the time comes.
+	// i.e. the browser will be killed as soon as the timeout expires.
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
@@ -61,6 +65,8 @@ func ExampleSessionTimeout() {
 	devtools.Close(ctx)
 }
 
+// ExampleBrowserCustomizations is an example of customizing the browser during
+// initialization, by modifying its command-line flags.
 func ExampleBrowserCustomizations() {
 	// Customize the browser command-line flags, before starting it.
 	flags := devtools.DefaultBrowserFlags()
@@ -84,7 +90,41 @@ func ExampleBrowserCustomizations() {
 	devtools.Close(ctx)
 }
 
-func ExamplehMultipleBrowserTabs() {
+// ExampleMultipleBrowsers is an example of initializaing
+// multiple browsers side-by-side.
+func ExampleMultipleBrowsers() {
+	ctx := context.Background()
+
+	// Start the first new browser.
+	ctx1, err := devtools.NewContext(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer devtools.Cancel(ctx1)
+
+	// Start the second new browser.
+	ctx2, err := devtools.NewContext(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer devtools.Cancel(ctx2)
+
+	// Do stuff in the first browser...
+	nav := page.NewNavigate("https://en.wikipedia.org/wiki/1")
+	if _, err := nav.Do(ctx1); err != nil {
+		log.Fatal(err)
+	}
+
+	// Do stuff in the second browser...
+	nav = page.NewNavigate("https://en.wikipedia.org/wiki/2")
+	if _, err := nav.Do(ctx2); err != nil {
+		log.Fatal(err)
+	}
+}
+
+// ExampleMultipleBrowserTabs is an example of multi-tab browsing, with
+// "chain" initialization of a secondary session based on the primary one.
+func ExampleMultipleBrowserTabs() {
 	// Chrome doesn't allow using tabs in headless mode.
 	flags := devtools.DefaultBrowserFlags()
 	flags["window-size"] = "1920,1080"
@@ -131,6 +171,9 @@ func ExamplehMultipleBrowserTabs() {
 	}
 }
 
+// ExampleCleanupAfterSession is an example of cleaning-up Chrome
+// Vision's output directory (which contains logs and user data)
+// after the browsing session is done.
 func ExampleCleanupAfterSession() {
 	// Start a new browser.
 	ctx, err := devtools.NewContext(context.Background())
@@ -151,6 +194,9 @@ func ExampleCleanupAfterSession() {
 	// Do stuff...
 }
 
+// ExampleCustomOutputDir is an example of changing (and ultimately deleting)
+// the default root directory where Chrome Vision's output directories (which
+// contain logs and user data) are created.
 func ExampleCustomOutputDir() {
 	customDir, err := os.MkdirTemp("", "foo_*")
 	if err != nil {
@@ -160,8 +206,8 @@ func ExampleCustomOutputDir() {
 		os.RemoveAll(customDir)
 	}()
 
-	// We create an output directory per browser process, which contains logs,
-	// user data, screenshots, etc. By default, this directory is created under
+	// We create an output directory per browser process, which contains
+	// logs and user data. By default, this directory is created under
 	// Go's `os.TempDir()` - see https://golang.org/pkg/os/#TempDir). The
 	// optional environment variable "CDP_OUTPUT_ROOT" overrides this path.
 	os.Setenv(devtools.OutputRootEnv, customDir)

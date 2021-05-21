@@ -9,5 +9,6 @@ multiple implementations of the same workflow, using different API layers:
 
 ## Initialization
 
-Initialization and customization of browser sessions ([code](./init),
-[godoc](https://pkg.go.dev/github.com/daabr/chrome-vision/pkg/devtools)).
+Initialization and customization of browser sessions
+([code](../../blob/main/examples/init/main.go),
+[godoc](https://pkg.go.dev/github.com/daabr/chrome-vision/examples/init)).
