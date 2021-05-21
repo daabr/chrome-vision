@@ -68,8 +68,6 @@ func TestBrowserFlags(t *testing.T) {
 
 	flags := devtools.DefaultBrowserFlags()
 	flags["disable-gpu"] = true
-	flags["window-size"] = "1920,1080"
-	delete(flags, "headless")
 
 	// Test.
 	_, err = devtools.NewContext(ctx, devtools.BrowserFlags(flags))
