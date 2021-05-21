@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"os"
+	"path"
 	"testing"
 	"time"
 
@@ -11,8 +12,9 @@ import (
 )
 
 func ExampleNewContext() {
-	ctx1 := context.Background()
-	ctx1, cancel := context.WithTimeout(ctx1, 2*time.Second)
+	// Set an idiomatic timeout (or deadline) for the entire session,
+	// i.e. the browser will be killed immediately when the time comes.
+	ctx1, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	// Start a new browser.
@@ -32,11 +34,10 @@ func ExampleNewContext() {
 }
 
 func ExampleBrowserFlags() {
-	ctx := context.Background()
-	ctx, cancel := context.WithTimeout(ctx, 1*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	// Customize the browser flags, before starting the browser.
+	// Customize the browser command-line flags, before starting it.
 	flags := devtools.DefaultBrowserFlags()
 	flags["disable-gpu"] = true // https://crbug.com/765284
 	flags["window-size"] = "1920,1080"
@@ -50,23 +51,50 @@ func ExampleBrowserFlags() {
 	devtools.Close(ctx)
 }
 
-func TestFromContext(t *testing.T) {
+func TestBrowserFlags(t *testing.T) {
 	// Set up.
-	parentCtx, cancel := context.WithTimeout(context.Background(), time.Minute)
-	defer cancel()
-
-	ctx, err := devtools.NewContext(parentCtx)
+	dir, err := os.MkdirTemp("", "")
 	if err != nil {
-		t.Fatalf("devtools.NewContext(ctx); got error: %s", err.Error())
+		t.Fatalf(`os.MkdirTemp("", ""); got error: %v`, err)
 	}
 	defer func() {
-		// Tear down.
-		devtools.Cancel(ctx)
-		devtools.Wait(ctx)
-		if session, ok := devtools.FromContext(ctx); ok {
-			os.RemoveAll(session.OutputDir)
-		}
+		os.RemoveAll(dir)
 	}()
+	os.Setenv(devtools.OutputRootEnv, dir)
+	defer os.Unsetenv(devtools.OutputRootEnv)
+
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+	defer cancel()
+
+	flags := devtools.DefaultBrowserFlags()
+	flags["disable-gpu"] = true
+	flags["window-size"] = "1920,1080"
+	delete(flags, "headless")
+
+	// Test.
+	_, err = devtools.NewContext(ctx, devtools.BrowserFlags(flags))
+	if err != nil {
+		t.Errorf("devtools.NewContext(ctx, flags); got error: %v", err)
+	}
+}
+
+func TestFromContext(t *testing.T) {
+	// Set up.
+	dir, err := os.MkdirTemp("", "")
+	if err != nil {
+		t.Fatalf(`os.MkdirTemp("", ""); got error: %v`, err)
+	}
+	defer func() {
+		os.RemoveAll(dir)
+	}()
+	os.Setenv(devtools.OutputRootEnv, dir)
+	defer os.Unsetenv(devtools.OutputRootEnv)
+
+	ctx, err := devtools.NewContext(context.Background())
+	if err != nil {
+		t.Fatalf("devtools.NewContext(ctx); got error: %v", err)
+	}
+	defer devtools.Cancel(ctx)
 
 	// Test.
 	session, ok := devtools.FromContext(ctx)
@@ -77,49 +105,55 @@ func TestFromContext(t *testing.T) {
 		t.Error(`session.OutputDir = "", want != ""`)
 	}
 	if _, err := os.Stat(session.OutputDir); err != nil {
-		t.Errorf("os.Stat(session.OutputDir); got error: %s", err.Error())
+		t.Errorf("os.Stat(session.OutputDir); got error: %v", err)
 	}
 	if session.UserDataDir == "" {
 		t.Error(`session.UserDataDir = "", want != ""`)
 	}
 	if _, err := os.Stat(session.UserDataDir); err != nil {
-		t.Errorf("os.Stat(session.UserDataDir); got error: %s", err.Error())
+		t.Errorf("os.Stat(session.UserDataDir); got error: %v", err)
+	}
+	if session.TargetID.Read() == "" {
+		t.Error(`session.TargetID.Read() = "", want != ""`)
+	}
+	if session.SessionID.Read() == "" {
+		t.Error(`session.SessionID.Read() = "", want != ""`)
 	}
 }
 
 func TestUserDataDir(t *testing.T) {
 	// Set up.
-	parentCtx, cancel := context.WithTimeout(context.Background(), time.Minute)
-	defer cancel()
-
 	dir, err := os.MkdirTemp("", "")
 	if err != nil {
-		t.Fatalf("os.MkdirTemp(%q, %q); got error: %s", "", "", err.Error())
+		t.Fatalf(`os.MkdirTemp("", ""); got error: %v`, err)
 	}
 	defer func() {
 		os.RemoveAll(dir)
 	}()
+	os.Setenv(devtools.OutputRootEnv, dir)
+	defer os.Unsetenv(devtools.OutputRootEnv)
 
-	ctx, err := devtools.NewContext(parentCtx, devtools.UserDataDir(dir))
+	userDir := path.Join(dir, "userDir")
+
+	ctx, err := devtools.NewContext(context.Background(), devtools.UserDataDir(userDir))
 	if err != nil {
-		t.Fatalf("devtools.NewContext(ctx); got error: %s", err.Error())
+		t.Fatalf("devtools.NewContext(ctx, userDir); got error: %v", err)
 	}
 	session, ok := devtools.FromContext(ctx)
 	if !ok {
 		t.Fatalf("devtools.FromContext(ctx); ok = %v, want %v", ok, !ok)
 	}
 	defer func() {
-		// Tear down.
 		devtools.Cancel(ctx)
 		devtools.Wait(ctx)
 		os.RemoveAll(session.OutputDir)
 	}()
 
 	// Test.
-	if session.UserDataDir == "" {
-		t.Fatalf(`session.UserDataDir = "", want != ""`)
+	if session.UserDataDir != userDir {
+		t.Errorf("session.UserDataDir = %q, want %q", session.UserDataDir, userDir)
 	}
-	if session.UserDataDir != dir {
-		t.Errorf("session.UserDataDir = %v, want %v", session.UserDataDir, dir)
+	if _, err := os.Stat(session.UserDataDir); err != nil {
+		t.Errorf("os.Stat(session.UserDataDir); got error: %v", err)
 	}
 }
