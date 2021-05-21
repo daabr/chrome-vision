@@ -14,15 +14,17 @@ import (
 )
 
 func main() {
-	ExampleMinimalSession()
-	ExampleSessionTimeout()
-	ExampleBrowserCustomizations()
-	ExamplehMultipleBrowserTabs()
-	ExampleCleanupAfterSession()
-	ExampleCustomOutputDir()
+	MinimalSession()
+	SessionWithTimeout()
+	BrowserCustomizations()
+	MultipleBrowsers()
+	MultipleBrowserTabs()
+	CleanupAfterSession()
+	CustomOutputRootDir()
 }
 
-func ExampleMinimalSession() {
+// MinimalSession is an example of a minimalistic session initialization.
+func MinimalSession() {
 	// Start a new browser.
 	ctx, err := devtools.NewContext(context.Background())
 	if err != nil {
@@ -39,9 +41,11 @@ func ExampleMinimalSession() {
 	devtools.Close(ctx)
 }
 
-func ExampleSessionTimeout() {
+// SessionWithTimeout is an example of a browsing session with a timeout
+// for the entire session's lifetime.
+func SessionWithTimeout() {
 	// Set an idiomatic timeout (or deadline) for the entire session,
-	// i.e. the browser will be killed immediately when the time comes.
+	// i.e. the browser will be killed as soon as the timeout expires.
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
@@ -61,7 +65,9 @@ func ExampleSessionTimeout() {
 	devtools.Close(ctx)
 }
 
-func ExampleBrowserCustomizations() {
+// BrowserCustomizations is an example of customizing the browser during
+// initialization, by modifying its execution path and command-line flags.
+func BrowserCustomizations() {
 	// Customize the browser command-line flags, before starting it.
 	flags := devtools.DefaultBrowserFlags()
 	flags["disable-gpu"] = true // https://crbug.com/765284
@@ -84,7 +90,40 @@ func ExampleBrowserCustomizations() {
 	devtools.Close(ctx)
 }
 
-func ExamplehMultipleBrowserTabs() {
+// MultipleBrowsers is an example of running multiple browsers side-by-side.
+func MultipleBrowsers() {
+	ctx := context.Background()
+
+	// Start the first new browser.
+	ctx1, err := devtools.NewContext(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer devtools.Cancel(ctx1)
+
+	// Start the second new browser.
+	ctx2, err := devtools.NewContext(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer devtools.Cancel(ctx2)
+
+	// Do stuff in the first browser...
+	nav := page.NewNavigate("https://en.wikipedia.org/wiki/1")
+	if _, err := nav.Do(ctx1); err != nil {
+		log.Fatal(err)
+	}
+
+	// Do stuff in the second browser...
+	nav = page.NewNavigate("https://en.wikipedia.org/wiki/2")
+	if _, err := nav.Do(ctx2); err != nil {
+		log.Fatal(err)
+	}
+}
+
+// MultipleBrowserTabs is an example of multi-tab browsing, with "chain"
+// initialization of a second session as a descendant of the first one.
+func MultipleBrowserTabs() {
 	// Chrome doesn't allow using tabs in headless mode.
 	flags := devtools.DefaultBrowserFlags()
 	flags["window-size"] = "1920,1080"
@@ -131,7 +170,9 @@ func ExamplehMultipleBrowserTabs() {
 	}
 }
 
-func ExampleCleanupAfterSession() {
+// CleanupAfterSession is an example of cleaning-up Chrome Vision's output
+// directory (which contains logs and user data) after the session is done.
+func CleanupAfterSession() {
 	// Start a new browser.
 	ctx, err := devtools.NewContext(context.Background())
 	if err != nil {
@@ -151,7 +192,10 @@ func ExampleCleanupAfterSession() {
 	// Do stuff...
 }
 
-func ExampleCustomOutputDir() {
+// CustomOutputRootDir is an example of changing (and ultimately deleting)
+// the default root directory where Chrome Vision's output directories
+// (which contain logs and user data) are created.
+func CustomOutputRootDir() {
 	customDir, err := os.MkdirTemp("", "foo_*")
 	if err != nil {
 		log.Fatalf(`os.MkdirTemp("", "foo_*"); got unexpected error: %v`, err)
@@ -160,8 +204,8 @@ func ExampleCustomOutputDir() {
 		os.RemoveAll(customDir)
 	}()
 
-	// We create an output directory per browser process, which contains logs,
-	// user data, screenshots, etc. By default, this directory is created under
+	// We create an output directory per browser process, which contains
+	// logs and user data. By default, this directory is created under
 	// Go's `os.TempDir()` - see https://golang.org/pkg/os/#TempDir). The
 	// optional environment variable "CDP_OUTPUT_ROOT" overrides this path.
 	os.Setenv(devtools.OutputRootEnv, customDir)
