@@ -144,6 +144,7 @@ func TestUserDataDir(t *testing.T) {
 		t.Fatalf("devtools.FromContext(ctx); ok = %v, want %v", ok, !ok)
 	}
 	defer func() {
+		// Tear down.
 		devtools.Cancel(ctx)
 		devtools.Wait(ctx)
 		os.RemoveAll(session.OutputDir)
