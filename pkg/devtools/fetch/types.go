@@ -9,7 +9,7 @@ type RequestID string
 
 // RequestStage data type. Stages of the request to handle. Request will intercept before the request is
 // sent. Response will intercept after the response is received (but before response
-// body is received.
+// body is received).
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#type-RequestStage
 type RequestStage string
