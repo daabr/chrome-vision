@@ -74,6 +74,23 @@ func (t ShadowRootType) String() string {
 	return string(t)
 }
 
+// CompatibilityMode data type. Document compatibility mode.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-CompatibilityMode
+type CompatibilityMode string
+
+// CompatibilityMode valid values.
+const (
+	CompatibilityModeQuirksMode        CompatibilityMode = "QuirksMode"
+	CompatibilityModeLimitedQuirksMode CompatibilityMode = "LimitedQuirksMode"
+	CompatibilityModeNoQuirksMode      CompatibilityMode = "NoQuirksMode"
+)
+
+// String returns the CompatibilityMode value as a built-in string.
+func (t CompatibilityMode) String() string {
+	return string(t)
+}
+
 // Node data type. DOM interaction is implemented in terms of mirror objects that represent the actual DOM nodes.
 // DOMNode is a base node mirror type.
 //
@@ -140,7 +157,8 @@ type Node struct {
 	// Distributed nodes for given insertion point.
 	DistributedNodes []BackendNode `json:"distributedNodes,omitempty"`
 	// Whether the node is SVG.
-	IsSVG bool `json:"isSVG,omitempty"`
+	IsSVG             bool               `json:"isSVG,omitempty"`
+	CompatibilityMode *CompatibilityMode `json:"compatibilityMode,omitempty"`
 }
 
 // RGBA data type. A structure holding an RGBA color.

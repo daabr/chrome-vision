@@ -86,7 +86,7 @@ func (t GatedAPIFeatures) String() string {
 }
 
 // PermissionsPolicyFeature data type. All Permissions Policy features. This enum should match the one defined
-// in renderer/core/feature_policy/feature_policy_features.json5.
+// in third_party/blink/renderer/core/permissions_policy/permissions_policy_features.json5.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-PermissionsPolicyFeature
 //
@@ -97,6 +97,7 @@ type PermissionsPolicyFeature string
 const (
 	PermissionsPolicyFeatureAccelerometer               PermissionsPolicyFeature = "accelerometer"
 	PermissionsPolicyFeatureAmbientLightSensor          PermissionsPolicyFeature = "ambient-light-sensor"
+	PermissionsPolicyFeatureAttributionReporting        PermissionsPolicyFeature = "attribution-reporting"
 	PermissionsPolicyFeatureAutoplay                    PermissionsPolicyFeature = "autoplay"
 	PermissionsPolicyFeatureCamera                      PermissionsPolicyFeature = "camera"
 	PermissionsPolicyFeatureChDpr                       PermissionsPolicyFeature = "ch-dpr"
@@ -104,6 +105,7 @@ const (
 	PermissionsPolicyFeatureChDownlink                  PermissionsPolicyFeature = "ch-downlink"
 	PermissionsPolicyFeatureChEct                       PermissionsPolicyFeature = "ch-ect"
 	PermissionsPolicyFeatureChLang                      PermissionsPolicyFeature = "ch-lang"
+	PermissionsPolicyFeatureChPrefersColorScheme        PermissionsPolicyFeature = "ch-prefers-color-scheme"
 	PermissionsPolicyFeatureChRtt                       PermissionsPolicyFeature = "ch-rtt"
 	PermissionsPolicyFeatureChUa                        PermissionsPolicyFeature = "ch-ua"
 	PermissionsPolicyFeatureChUaArch                    PermissionsPolicyFeature = "ch-ua-arch"
@@ -116,7 +118,6 @@ const (
 	PermissionsPolicyFeatureChWidth                     PermissionsPolicyFeature = "ch-width"
 	PermissionsPolicyFeatureClipboardRead               PermissionsPolicyFeature = "clipboard-read"
 	PermissionsPolicyFeatureClipboardWrite              PermissionsPolicyFeature = "clipboard-write"
-	PermissionsPolicyFeatureConversionMeasurement       PermissionsPolicyFeature = "conversion-measurement"
 	PermissionsPolicyFeatureCrossOriginIsolated         PermissionsPolicyFeature = "cross-origin-isolated"
 	PermissionsPolicyFeatureDirectSockets               PermissionsPolicyFeature = "direct-sockets"
 	PermissionsPolicyFeatureDisplayCapture              PermissionsPolicyFeature = "display-capture"
@@ -149,6 +150,7 @@ const (
 	PermissionsPolicyFeatureUsb                         PermissionsPolicyFeature = "usb"
 	PermissionsPolicyFeatureVerticalScroll              PermissionsPolicyFeature = "vertical-scroll"
 	PermissionsPolicyFeatureWebShare                    PermissionsPolicyFeature = "web-share"
+	PermissionsPolicyFeatureWindowPlacement             PermissionsPolicyFeature = "window-placement"
 	PermissionsPolicyFeatureXrSpatialTracking           PermissionsPolicyFeature = "xr-spatial-tracking"
 )
 

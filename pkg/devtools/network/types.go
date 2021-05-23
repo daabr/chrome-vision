@@ -421,6 +421,7 @@ const (
 	CorsErrorHeaderDisallowedByPreflightResponse  CorsError = "HeaderDisallowedByPreflightResponse"
 	CorsErrorRedirectContainsCredentials          CorsError = "RedirectContainsCredentials"
 	CorsErrorInsecurePrivateNetwork               CorsError = "InsecurePrivateNetwork"
+	CorsErrorNoCorsRedirectModeNotFollow          CorsError = "NoCorsRedirectModeNotFollow"
 )
 
 // String returns the CorsError value as a built-in string.

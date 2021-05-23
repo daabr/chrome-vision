@@ -372,3 +372,63 @@ type TrustTokenOperationDone struct {
 	// The number of obtained Trust Tokens on a successful "Issuance" operation.
 	IssuedTokenCount int64 `json:"issuedTokenCount,omitempty"`
 }
+
+// SubresourceWebBundleMetadataReceived asynchronous event. Fired once when parsing the .wbn file has succeeded.
+// The event contains the information about the web bundle contents.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-subresourceWebBundleMetadataReceived
+//
+// This CDP event is experimental.
+type SubresourceWebBundleMetadataReceived struct {
+	// Request identifier. Used to match this information to another event.
+	RequestID string `json:"requestId"`
+	// A list of URLs of resources in the subresource Web Bundle.
+	URLs []string `json:"urls"`
+}
+
+// SubresourceWebBundleMetadataError asynchronous event. Fired once when parsing the .wbn file has failed.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-subresourceWebBundleMetadataError
+//
+// This CDP event is experimental.
+type SubresourceWebBundleMetadataError struct {
+	// Request identifier. Used to match this information to another event.
+	RequestID string `json:"requestId"`
+	// Error message
+	ErrorMessage string `json:"errorMessage"`
+}
+
+// SubresourceWebBundleInnerResponseParsed asynchronous event. Fired when handling requests for resources within a .wbn file.
+// Note: this will only be fired for resources that are requested by the webpage.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-subresourceWebBundleInnerResponseParsed
+//
+// This CDP event is experimental.
+type SubresourceWebBundleInnerResponseParsed struct {
+	// Request identifier of the subresource request
+	InnerRequestID string `json:"innerRequestId"`
+	// URL of the subresource resource.
+	InnerRequestURL string `json:"innerRequestURL"`
+	// Bundle request identifier. Used to match this information to another event.
+	// This made be absent in case when the instrumentation was enabled only
+	// after webbundle was parsed.
+	BundleRequestID string `json:"bundleRequestId,omitempty"`
+}
+
+// SubresourceWebBundleInnerResponseError asynchronous event. Fired when request for resources within a .wbn file failed.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-subresourceWebBundleInnerResponseError
+//
+// This CDP event is experimental.
+type SubresourceWebBundleInnerResponseError struct {
+	// Request identifier of the subresource request
+	InnerRequestID string `json:"innerRequestId"`
+	// URL of the subresource resource.
+	InnerRequestURL string `json:"innerRequestURL"`
+	// Error message
+	ErrorMessage string `json:"errorMessage"`
+	// Bundle request identifier. Used to match this information to another event.
+	// This made be absent in case when the instrumentation was enabled only
+	// after webbundle was parsed.
+	BundleRequestID string `json:"bundleRequestId,omitempty"`
+}
