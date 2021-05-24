@@ -236,10 +236,6 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 			}
 		}(session)
 
-		// TODO: Runtime.enable, Log.enable, Network.enable, Inspector.enable,
-		// Page.enable, DOM.enable, CSS.enable, Page.setLifecycleEventsEnabled,
-		// Target.setDiscoverTargets?
-
 		// Attach this session to the first tab.
 		session.TargetID, session.SessionID = newSafeString(), newSafeString()
 		targetID, err := fetchTargetID(ctx)
@@ -259,6 +255,18 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 	log.Printf("Target ID: %s", session.TargetID.Read())
 	log.Printf("Session ID: %s", sessionID)
 	session.SessionID.Write(sessionID)
+
+	// Enable receiving various asynchronous events from the browser.
+	if _, err := Send(ctx, "Page.enable", nil); err != nil {
+		session.cancel()
+		return parent, err
+	}
+	params := []byte(`{"enabled":true}`)
+	if _, err := Send(ctx, "Page.setLifecycleEventsEnabled", params); err != nil {
+		session.cancel()
+		return parent, err
+	}
+
 	return ctx, nil
 }
 
