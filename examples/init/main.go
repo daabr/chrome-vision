@@ -1,4 +1,4 @@
-// The init program contains several examples of initialization and
+// The init program contains various examples of initialization and
 // customization of browser sessions in Chrome Vision.
 package main
 
