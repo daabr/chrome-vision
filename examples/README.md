@@ -9,8 +9,9 @@ multiple implementations of the same workflow, using different API layers:
 
 ## Initialization
 
-Initialization and customization of browser sessions ([code](./init/main.go),
-[godoc](https://pkg.go.dev/github.com/daabr/chrome-vision/examples/init)).
+Various initializations and customizations of browser sessions.
+
+* [CDP](./init/main.go)
 
 ## Google Search
 
@@ -22,3 +23,5 @@ Initialization and customization of browser sessions ([code](./init/main.go),
 3. Click the "Images" tab to show image search results
 4. Scroll down to the bottom of the page
 5. Print the title and URL of the last result
+
+* [CDP](./googlesearch/devtools/main.go)
