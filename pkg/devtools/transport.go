@@ -51,6 +51,8 @@ func parseAndRelay(s *Session, b []byte) {
 		return
 	}
 
+	// TODO: Discard messags intended for other sessions.
+
 	if len(m.Method) == 0 {
 		// Solicited response: relay to the request caller.
 		log.Printf("Received response: ID %d (%d bytes)", m.ID, len(b))
@@ -74,6 +76,13 @@ func parseAndRelay(s *Session, b []byte) {
 	}
 }
 
+const (
+	// Source: `startBufSize` in https://golang.org/src/bufio/scan.go.
+	startScannerSize = 4096
+	// Replaces `Scanner.MaxScanTokenSize` (65536 = 16 KiB) with 1 MiB.
+	maxScannerSize = 1024 * 1024
+)
+
 // Asynchronously receive incoming CDP messages from the browser through a
 // POSIX pipe on non-Windows operating systems, as long as the pipe is open.
 // Called as a goroutine in the `start` function in `browser.go`.
@@ -82,6 +91,8 @@ func receiveFromPipe(s *Session) {
 	// browser process ends (see the goroutine at the bottom of the `start`
 	// function in `browser.go`).
 	scanner := bufio.NewScanner(s.browserOutputReader)
+	// A capacity of `Scanner.MaxScanTokenSize` (16 KiB) is too small.
+	scanner.Buffer(make([]byte, startScannerSize, maxScannerSize), maxScannerSize)
 	scanner.Split(scanMessages)
 	for scanner.Scan() {
 		b := scanner.Bytes()
