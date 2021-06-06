@@ -137,6 +137,11 @@ type CSSRule struct {
 	// Media list array (for rules involving media queries). The array enumerates media queries
 	// starting with the innermost one, going outwards.
 	Media []CSSMedia `json:"media,omitempty"`
+	// Container query list array (for rules involving container queries).
+	// The array enumerates container queries starting with the innermost one, going outwards.
+	//
+	// This CDP property is experimental.
+	ContainerQueries []CSSContainerQuery `json:"containerQueries,omitempty"`
 }
 
 // RuleUsage data type. CSS coverage information.
@@ -275,6 +280,21 @@ type MediaQueryExpression struct {
 	ValueRange *SourceRange `json:"valueRange,omitempty"`
 	// Computed length of media query expression (if applicable).
 	ComputedLength float64 `json:"computedLength,omitempty"`
+}
+
+// CSSContainerQuery data type. CSS container query rule descriptor.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSContainerQuery
+//
+// This CDP type is experimental.
+type CSSContainerQuery struct {
+	// Container query text.
+	Text string `json:"text"`
+	// The associated rule header range in the enclosing stylesheet (if
+	// available).
+	Range *SourceRange `json:"range,omitempty"`
+	// Identifier of the stylesheet containing this object (if exists).
+	StyleSheetID string `json:"styleSheetId,omitempty"`
 }
 
 // PlatformFontUsage data type. Information about amount of glyphs that were rendered with given font.

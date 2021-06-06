@@ -42,6 +42,7 @@ const (
 	SameSiteCookieExclusionReasonExcludeSameSiteNoneInsecure            SameSiteCookieExclusionReason = "ExcludeSameSiteNoneInsecure"
 	SameSiteCookieExclusionReasonExcludeSameSiteLax                     SameSiteCookieExclusionReason = "ExcludeSameSiteLax"
 	SameSiteCookieExclusionReasonExcludeSameSiteStrict                  SameSiteCookieExclusionReason = "ExcludeSameSiteStrict"
+	SameSiteCookieExclusionReasonExcludeInvalidSameParty                SameSiteCookieExclusionReason = "ExcludeInvalidSameParty"
 )
 
 // String returns the SameSiteCookieExclusionReason value as a built-in string.
@@ -93,7 +94,12 @@ func (t SameSiteCookieOperation) String() string {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-SameSiteCookieIssueDetails
 type SameSiteCookieIssueDetails struct {
-	Cookie                 AffectedCookie                  `json:"cookie"`
+	// If AffectedCookie is not set then rawCookieLine contains the raw
+	// Set-Cookie header string. This hints at a problem where the
+	// cookie line is syntactically or semantically malformed in a way
+	// that no valid cookie could be created.
+	Cookie                 *AffectedCookie                 `json:"cookie,omitempty"`
+	RawCookieLine          string                          `json:"rawCookieLine,omitempty"`
 	CookieWarningReasons   []SameSiteCookieWarningReason   `json:"cookieWarningReasons"`
 	CookieExclusionReasons []SameSiteCookieExclusionReason `json:"cookieExclusionReasons"`
 	// Optionally identifies the site-for-cookies and the cookie url, which
@@ -497,4 +503,7 @@ type InspectorIssueDetails struct {
 type InspectorIssue struct {
 	Code    InspectorIssueCode    `json:"code"`
 	Details InspectorIssueDetails `json:"details"`
+	// A unique id for this issue. May be omitted if no other entity (e.g.
+	// exception, CDP message, etc.) is referencing this issue.
+	IssueID string `json:"issueId,omitempty"`
 }
