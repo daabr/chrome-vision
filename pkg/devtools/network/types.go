@@ -1071,9 +1071,9 @@ type CrossOriginEmbedderPolicyValue string
 
 // CrossOriginEmbedderPolicyValue valid values.
 const (
-	CrossOriginEmbedderPolicyValueNone                 CrossOriginEmbedderPolicyValue = "None"
-	CrossOriginEmbedderPolicyValueCorsOrCredentialless CrossOriginEmbedderPolicyValue = "CorsOrCredentialless"
-	CrossOriginEmbedderPolicyValueRequireCorp          CrossOriginEmbedderPolicyValue = "RequireCorp"
+	CrossOriginEmbedderPolicyValueNone           CrossOriginEmbedderPolicyValue = "None"
+	CrossOriginEmbedderPolicyValueCredentialless CrossOriginEmbedderPolicyValue = "Credentialless"
+	CrossOriginEmbedderPolicyValueRequireCorp    CrossOriginEmbedderPolicyValue = "RequireCorp"
 )
 
 // String returns the CrossOriginEmbedderPolicyValue value as a built-in string.
