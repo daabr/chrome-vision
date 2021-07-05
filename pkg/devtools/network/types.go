@@ -290,6 +290,11 @@ type Request struct {
 	//
 	// This CDP property is experimental.
 	TrustTokenParams *TrustTokenParams `json:"trustTokenParams,omitempty"`
+	// True if this resource request is considered to be the 'same site' as the
+	// request correspondinfg to the main frame.
+	//
+	// This CDP property is experimental.
+	IsSameSite bool `json:"isSameSite,omitempty"`
 }
 
 // SignedCertificateTimestamp data type. Details of a signed certificate timestamp (SCT).

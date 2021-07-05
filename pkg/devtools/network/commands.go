@@ -1513,52 +1513,6 @@ func (t *SetCookies) Do(ctx context.Context) error {
 	return nil
 }
 
-// SetDataSizeLimitsForTest contains the parameters, and acts as
-// a Go receiver, for the CDP command `setDataSizeLimitsForTest`.
-//
-// For testing.
-//
-// https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-setDataSizeLimitsForTest
-//
-// This CDP method is experimental.
-type SetDataSizeLimitsForTest struct {
-	// Maximum total buffer size.
-	MaxTotalSize int64 `json:"maxTotalSize"`
-	// Maximum per-resource size.
-	MaxResourceSize int64 `json:"maxResourceSize"`
-}
-
-// NewSetDataSizeLimitsForTest constructs a new SetDataSizeLimitsForTest struct instance, with
-// all (but only) the required parameters. Optional parameters
-// may be added using the builder-like methods below.
-//
-// https://chromedevtools.github.io/devtools-protocol/tot/Network/#method-setDataSizeLimitsForTest
-//
-// This CDP method is experimental.
-func NewSetDataSizeLimitsForTest(maxTotalSize int64, maxResourceSize int64) *SetDataSizeLimitsForTest {
-	return &SetDataSizeLimitsForTest{
-		MaxTotalSize:    maxTotalSize,
-		MaxResourceSize: maxResourceSize,
-	}
-}
-
-// Do sends the SetDataSizeLimitsForTest CDP command to a browser,
-// and returns the browser's response.
-func (t *SetDataSizeLimitsForTest) Do(ctx context.Context) error {
-	b, err := json.Marshal(t)
-	if err != nil {
-		return err
-	}
-	response, err := devtools.Send(ctx, "Network.setDataSizeLimitsForTest", b)
-	if err != nil {
-		return err
-	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
-	}
-	return nil
-}
-
 // SetExtraHTTPHeaders contains the parameters, and acts as
 // a Go receiver, for the CDP command `setExtraHTTPHeaders`.
 //

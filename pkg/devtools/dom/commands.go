@@ -2506,3 +2506,66 @@ func (t *GetFrameOwner) Do(ctx context.Context) (*GetFrameOwnerResult, error) {
 	}
 	return result, nil
 }
+
+// GetContainerForNode contains the parameters, and acts as
+// a Go receiver, for the CDP command `getContainerForNode`.
+//
+// Returns the container of the given node based on container query conditions.
+// If containerName is given, it will find the nearest container with a matching name;
+// otherwise it will find the nearest container regardless of its container name.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getContainerForNode
+//
+// This CDP method is experimental.
+type GetContainerForNode struct {
+	NodeID        int64  `json:"nodeId"`
+	ContainerName string `json:"containerName,omitempty"`
+}
+
+// NewGetContainerForNode constructs a new GetContainerForNode struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getContainerForNode
+//
+// This CDP method is experimental.
+func NewGetContainerForNode(nodeID int64) *GetContainerForNode {
+	return &GetContainerForNode{
+		NodeID: nodeID,
+	}
+}
+
+// SetContainerName adds or modifies the value of the optional
+// parameter `containerName` in the GetContainerForNode CDP command.
+func (t *GetContainerForNode) SetContainerName(v string) *GetContainerForNode {
+	t.ContainerName = v
+	return t
+}
+
+// GetContainerForNodeResult contains the browser's response
+// to calling the GetContainerForNode CDP command with Do().
+type GetContainerForNodeResult struct {
+	// The container node for the given node, or null if not found.
+	NodeID int64 `json:"nodeId,omitempty"`
+}
+
+// Do sends the GetContainerForNode CDP command to a browser,
+// and returns the browser's response.
+func (t *GetContainerForNode) Do(ctx context.Context) (*GetContainerForNodeResult, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := devtools.Send(ctx, "DOM.getContainerForNode", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &GetContainerForNodeResult{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}

@@ -866,6 +866,63 @@ func (t *SetMediaText) Do(ctx context.Context) (*SetMediaTextResult, error) {
 	return result, nil
 }
 
+// SetContainerQueryText contains the parameters, and acts as
+// a Go receiver, for the CDP command `setContainerQueryText`.
+//
+// Modifies the expression of a container query.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setContainerQueryText
+//
+// This CDP method is experimental.
+type SetContainerQueryText struct {
+	StyleSheetID string      `json:"styleSheetId"`
+	Range        SourceRange `json:"range"`
+	Text         string      `json:"text"`
+}
+
+// NewSetContainerQueryText constructs a new SetContainerQueryText struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-setContainerQueryText
+//
+// This CDP method is experimental.
+func NewSetContainerQueryText(styleSheetID string, r SourceRange, text string) *SetContainerQueryText {
+	return &SetContainerQueryText{
+		StyleSheetID: styleSheetID,
+		Range:        r,
+		Text:         text,
+	}
+}
+
+// SetContainerQueryTextResult contains the browser's response
+// to calling the SetContainerQueryText CDP command with Do().
+type SetContainerQueryTextResult struct {
+	// The resulting CSS container query rule after modification.
+	ContainerQuery CSSContainerQuery `json:"containerQuery"`
+}
+
+// Do sends the SetContainerQueryText CDP command to a browser,
+// and returns the browser's response.
+func (t *SetContainerQueryText) Do(ctx context.Context) (*SetContainerQueryTextResult, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	response, err := devtools.Send(ctx, "CSS.setContainerQueryText", b)
+	if err != nil {
+		return nil, err
+	}
+	if response.Error != nil {
+		return nil, errors.New(response.Error.Error())
+	}
+	result := &SetContainerQueryTextResult{}
+	if err := json.Unmarshal(response.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // SetRuleSelector contains the parameters, and acts as
 // a Go receiver, for the CDP command `setRuleSelector`.
 //
