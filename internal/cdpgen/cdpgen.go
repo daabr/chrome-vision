@@ -131,7 +131,17 @@ func adjust(s string) string {
 
 	re := regexp.MustCompile(`(Id)$`)
 	s = re.ReplaceAllLiteralString(s, "ID")
+	s = strings.ReplaceAll(s, "Css", "CSS")
+	s = strings.ReplaceAll(s, "Cpu", "CPU")
+	s = strings.ReplaceAll(s, "Dns", "DNS")
+	s = strings.ReplaceAll(s, "Eof", "EOF")
+	s = strings.ReplaceAll(s, "Html", "HTML")
+	s = strings.ReplaceAll(s, "Http", "HTTP")
+	s = strings.ReplaceAll(s, "Json", "JSON")
+	s = strings.ReplaceAll(s, "Sql", "SQL")
 	s = strings.ReplaceAll(s, "Url", "URL")
+	s = strings.ReplaceAll(s, "Uuid", "UUID")
+	s = strings.ReplaceAll(s, "Xml", "XML")
 
 	if strings.Count(s, ".") > 0 {
 		// Transform CDP domain prefixes to Go package prefixes.

@@ -642,7 +642,7 @@ type ClientNavigationReason string
 const (
 	ClientNavigationReasonFormSubmissionGet     ClientNavigationReason = "formSubmissionGet"
 	ClientNavigationReasonFormSubmissionPost    ClientNavigationReason = "formSubmissionPost"
-	ClientNavigationReasonHttpHeaderRefresh     ClientNavigationReason = "httpHeaderRefresh"
+	ClientNavigationReasonHTTPHeaderRefresh     ClientNavigationReason = "httpHeaderRefresh"
 	ClientNavigationReasonScriptInitiated       ClientNavigationReason = "scriptInitiated"
 	ClientNavigationReasonMetaTagRefresh        ClientNavigationReason = "metaTagRefresh"
 	ClientNavigationReasonPageBlockInterstitial ClientNavigationReason = "pageBlockInterstitial"

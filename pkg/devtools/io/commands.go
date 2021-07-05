@@ -102,7 +102,7 @@ type ReadResult struct {
 	// Data that were read.
 	Data string `json:"data"`
 	// Set if the end-of-file condition occurred while reading.
-	Eof bool `json:"eof"`
+	EOF bool `json:"eof"`
 }
 
 // Do sends the Read CDP command to a browser,
@@ -152,7 +152,7 @@ func NewResolveBlob(objectID runtime.RemoteObjectID) *ResolveBlob {
 // to calling the ResolveBlob CDP command with Do().
 type ResolveBlobResult struct {
 	// UUID of the specified Blob.
-	Uuid string `json:"uuid"`
+	UUID string `json:"uuid"`
 }
 
 // Do sends the ResolveBlob CDP command to a browser,

@@ -142,5 +142,5 @@ type ProcessInfo struct {
 	ID int64 `json:"id"`
 	// Specifies cumulative CPU usage in seconds across all threads of the
 	// process since the process start.
-	CpuTime float64 `json:"cpuTime"`
+	CPUTime float64 `json:"cpuTime"`
 }

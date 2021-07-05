@@ -24,7 +24,7 @@ type Animation struct {
 	Source *AnimationEffect `json:"source,omitempty"`
 	// A unique ID for `Animation` representing the sources that triggered this CSS
 	// animation/transition.
-	CssID string `json:"cssId,omitempty"`
+	CSSID string `json:"cssId,omitempty"`
 }
 
 // AnimationEffect instance

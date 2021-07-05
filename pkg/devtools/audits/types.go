@@ -158,7 +158,7 @@ const (
 	MixedContentResourceTypeTrack          MixedContentResourceType = "Track"
 	MixedContentResourceTypeVideo          MixedContentResourceType = "Video"
 	MixedContentResourceTypeWorker         MixedContentResourceType = "Worker"
-	MixedContentResourceTypeXMLHttpRequest MixedContentResourceType = "XMLHttpRequest"
+	MixedContentResourceTypeXMLHTTPRequest MixedContentResourceType = "XMLHttpRequest"
 	MixedContentResourceTypeXSLT           MixedContentResourceType = "XSLT"
 )
 
@@ -245,8 +245,8 @@ type HeavyAdReason string
 // HeavyAdReason valid values.
 const (
 	HeavyAdReasonNetworkTotalLimit HeavyAdReason = "NetworkTotalLimit"
-	HeavyAdReasonCpuTotalLimit     HeavyAdReason = "CpuTotalLimit"
-	HeavyAdReasonCpuPeakLimit      HeavyAdReason = "CpuPeakLimit"
+	HeavyAdReasonCPUTotalLimit     HeavyAdReason = "CpuTotalLimit"
+	HeavyAdReasonCPUPeakLimit      HeavyAdReason = "CpuPeakLimit"
 )
 
 // String returns the HeavyAdReason value as a built-in string.
@@ -343,7 +343,7 @@ type TwaQualityEnforcementViolationType string
 
 // TwaQualityEnforcementViolationType valid values.
 const (
-	TwaQualityEnforcementViolationTypeKHttpError          TwaQualityEnforcementViolationType = "kHttpError"
+	TwaQualityEnforcementViolationTypeKHTTPError          TwaQualityEnforcementViolationType = "kHttpError"
 	TwaQualityEnforcementViolationTypeKUnavailableOffline TwaQualityEnforcementViolationType = "kUnavailableOffline"
 	TwaQualityEnforcementViolationTypeKDigitalAssetLinks  TwaQualityEnforcementViolationType = "kDigitalAssetLinks"
 )
@@ -360,7 +360,7 @@ type TrustedWebActivityIssueDetails struct {
 	// The url that triggers the violation.
 	URL            string                             `json:"url"`
 	ViolationType  TwaQualityEnforcementViolationType `json:"violationType"`
-	HttpStatusCode int64                              `json:"httpStatusCode,omitempty"`
+	HTTPStatusCode int64                              `json:"httpStatusCode,omitempty"`
 	// The package name of the Trusted Web Activity client app. This field is
 	// only used when violation type is kDigitalAssetLinks.
 	PackageName string `json:"packageName,omitempty"`
