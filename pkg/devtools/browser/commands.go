@@ -280,7 +280,7 @@ func (t *SetDownloadBehavior) Do(ctx context.Context) error {
 // This CDP method is experimental.
 type CancelDownload struct {
 	// Global unique identifier of the download.
-	Guid string `json:"guid"`
+	GUID string `json:"guid"`
 	// BrowserContext to perform the action in. When omitted, default browser context is used.
 	BrowserContextID string `json:"browserContextId,omitempty"`
 }
@@ -294,7 +294,7 @@ type CancelDownload struct {
 // This CDP method is experimental.
 func NewCancelDownload(guid string) *CancelDownload {
 	return &CancelDownload{
-		Guid: guid,
+		GUID: guid,
 	}
 }
 

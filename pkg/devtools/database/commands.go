@@ -94,7 +94,7 @@ func NewExecuteSQL(databaseID string, query string) *ExecuteSQL {
 type ExecuteSQLResult struct {
 	ColumnNames []string          `json:"columnNames,omitempty"`
 	Values      []json.RawMessage `json:"values,omitempty"`
-	SqlError    *Error            `json:"sqlError,omitempty"`
+	SQLError    *Error            `json:"sqlError,omitempty"`
 }
 
 // Do sends the ExecuteSQL CDP command to a browser,

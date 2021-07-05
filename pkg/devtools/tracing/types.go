@@ -35,7 +35,7 @@ type StreamFormat string
 
 // StreamFormat valid values.
 const (
-	StreamFormatJson  StreamFormat = "json"
+	StreamFormatJSON  StreamFormat = "json"
 	StreamFormatProto StreamFormat = "proto"
 )
 

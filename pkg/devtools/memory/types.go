@@ -43,7 +43,7 @@ type Module struct {
 	// Name of the module.
 	Name string `json:"name"`
 	// UUID of the module.
-	Uuid string `json:"uuid"`
+	UUID string `json:"uuid"`
 	// Base address where the module is loaded into memory. Encoded as a decimal
 	// or hexadecimal (0x prefixed) string.
 	BaseAddress string `json:"baseAddress"`

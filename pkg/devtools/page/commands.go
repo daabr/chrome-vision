@@ -690,11 +690,11 @@ type GetLayoutMetricsResult struct {
 	// This CDP parameter is deprecated.
 	ContentSize dom.Rect `json:"contentSize"`
 	// Metrics relating to the layout viewport in CSS pixels.
-	CssLayoutViewport LayoutViewport `json:"cssLayoutViewport"`
+	CSSLayoutViewport LayoutViewport `json:"cssLayoutViewport"`
 	// Metrics relating to the visual viewport in CSS pixels.
-	CssVisualViewport VisualViewport `json:"cssVisualViewport"`
+	CSSVisualViewport VisualViewport `json:"cssVisualViewport"`
 	// Size of scrollable area in CSS pixels.
-	CssContentSize dom.Rect `json:"cssContentSize"`
+	CSSContentSize dom.Rect `json:"cssContentSize"`
 }
 
 // Do sends the GetLayoutMetrics CDP command to a browser,
@@ -1836,7 +1836,7 @@ type SetDocumentContent struct {
 	// Frame id to set HTML for.
 	FrameID string `json:"frameId"`
 	// HTML content to set.
-	Html string `json:"html"`
+	HTML string `json:"html"`
 }
 
 // NewSetDocumentContent constructs a new SetDocumentContent struct instance, with
@@ -1847,7 +1847,7 @@ type SetDocumentContent struct {
 func NewSetDocumentContent(frameID string, html string) *SetDocumentContent {
 	return &SetDocumentContent{
 		FrameID: frameID,
-		Html:    html,
+		HTML:    html,
 	}
 }
 

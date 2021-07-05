@@ -461,7 +461,7 @@ type GetMatchedStylesForNodeResult struct {
 	// A chain of inherited styles (from the immediate node parent up to the DOM tree root).
 	Inherited []InheritedStyleEntry `json:"inherited,omitempty"`
 	// A list of CSS keyframed animations matching this node.
-	CssKeyframesRules []CSSKeyframesRule `json:"cssKeyframesRules,omitempty"`
+	CSSKeyframesRules []CSSKeyframesRule `json:"cssKeyframesRules,omitempty"`
 }
 
 // Do sends the GetMatchedStylesForNode CDP command to a browser,

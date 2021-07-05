@@ -6,6 +6,7 @@
 package cdpgen
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -129,9 +130,18 @@ func adjust(s string) string {
 	// See https://golang.org/doc/effective_go#mixed-caps.
 	s = strings.ReplaceAll(s, "-", "")
 
-	re := regexp.MustCompile(`(Id)$`)
-	s = re.ReplaceAllLiteralString(s, "ID")
-	s = strings.ReplaceAll(s, "Url", "URL")
+	// See https://github.com/golang/go/wiki/CodeReviewComments#initialisms
+	// (and https://github.com/golang/lint/blob/master/lint.go#L770).
+	for _, initialism := range []string{"Api", "Guid", "Id"} {
+		re := regexp.MustCompile(fmt.Sprintf(`(%s)$`, initialism))
+		s = re.ReplaceAllLiteralString(s, strings.ToUpper(initialism))
+	}
+	for _, initialism := range []string{"Css", "Cpu", "Dns", "Eof", "Html", "Http"} {
+		s = strings.ReplaceAll(s, initialism, strings.ToUpper(initialism))
+	}
+	for _, initialism := range []string{"Json", "Sql", "Url", "Uuid", "Xml"} {
+		s = strings.ReplaceAll(s, initialism, strings.ToUpper(initialism))
+	}
 
 	if strings.Count(s, ".") > 0 {
 		// Transform CDP domain prefixes to Go package prefixes.

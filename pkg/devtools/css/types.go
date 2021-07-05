@@ -206,11 +206,11 @@ type CSSStyle struct {
 	// stylesheet rules) this rule came from.
 	StyleSheetID string `json:"styleSheetId,omitempty"`
 	// CSS properties in the style.
-	CssProperties []CSSProperty `json:"cssProperties"`
+	CSSProperties []CSSProperty `json:"cssProperties"`
 	// Computed values for all shorthands found in the style.
 	ShorthandEntries []ShorthandEntry `json:"shorthandEntries"`
 	// Style declaration text (if available).
-	CssText string `json:"cssText,omitempty"`
+	CSSText string `json:"cssText,omitempty"`
 	// Style declaration range in the enclosing stylesheet (if available).
 	Range *SourceRange `json:"range,omitempty"`
 }

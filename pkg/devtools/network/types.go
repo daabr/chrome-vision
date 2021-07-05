@@ -188,9 +188,9 @@ type ResourceTiming struct {
 	// Finished resolving proxy.
 	ProxyEnd float64 `json:"proxyEnd"`
 	// Started DNS address resolve.
-	DnsStart float64 `json:"dnsStart"`
+	DNSStart float64 `json:"dnsStart"`
 	// Finished DNS address resolve.
-	DnsEnd float64 `json:"dnsEnd"`
+	DNSEnd float64 `json:"dnsEnd"`
 	// Started connecting to the remote host.
 	ConnectStart float64 `json:"connectStart"`
 	// Connected to the remote host.
@@ -450,7 +450,7 @@ type ServiceWorkerResponseSource string
 // ServiceWorkerResponseSource valid values.
 const (
 	ServiceWorkerResponseSourceCacheStorage ServiceWorkerResponseSource = "cache-storage"
-	ServiceWorkerResponseSourceHttpCache    ServiceWorkerResponseSource = "http-cache"
+	ServiceWorkerResponseSourceHTTPCache    ServiceWorkerResponseSource = "http-cache"
 	ServiceWorkerResponseSourceFallbackCode ServiceWorkerResponseSource = "fallback-code"
 	ServiceWorkerResponseSourceNetwork      ServiceWorkerResponseSource = "network"
 )
@@ -639,7 +639,7 @@ type Cookie struct {
 	// Cookie size.
 	Size int64 `json:"size"`
 	// True if cookie is http-only.
-	HttpOnly bool `json:"httpOnly"`
+	HTTPOnly bool `json:"httpOnly"`
 	// True if cookie is secure.
 	Secure bool `json:"secure"`
 	// True in case of session cookie.
@@ -775,7 +775,7 @@ type CookieParam struct {
 	// True if cookie is secure.
 	Secure bool `json:"secure,omitempty"`
 	// True if cookie is http-only.
-	HttpOnly bool `json:"httpOnly,omitempty"`
+	HTTPOnly bool `json:"httpOnly,omitempty"`
 	// Cookie SameSite type.
 	SameSite *CookieSameSite `json:"sameSite,omitempty"`
 	// Cookie expiration date, session cookie if not set
@@ -1118,7 +1118,7 @@ type LoadNetworkResourcePageResult struct {
 	// Optional values used for error reporting.
 	NetError       float64 `json:"netError,omitempty"`
 	NetErrorName   string  `json:"netErrorName,omitempty"`
-	HttpStatusCode float64 `json:"httpStatusCode,omitempty"`
+	HTTPStatusCode float64 `json:"httpStatusCode,omitempty"`
 	// If successful, one of the following two fields holds the result.
 	Stream string `json:"stream,omitempty"`
 	// Response headers.

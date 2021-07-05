@@ -1297,7 +1297,7 @@ type SetCookie struct {
 	// True if cookie is secure.
 	Secure bool `json:"secure,omitempty"`
 	// True if cookie is http-only.
-	HttpOnly bool `json:"httpOnly,omitempty"`
+	HTTPOnly bool `json:"httpOnly,omitempty"`
 	// Cookie SameSite type.
 	SameSite *CookieSameSite `json:"sameSite,omitempty"`
 	// Cookie expiration date, session cookie if not set
@@ -1371,12 +1371,12 @@ func (t *SetCookie) SetSecure(v bool) *SetCookie {
 	return t
 }
 
-// SetHttpOnly adds or modifies the value of the optional
+// SetHTTPOnly adds or modifies the value of the optional
 // parameter `httpOnly` in the SetCookie CDP command.
 //
 // True if cookie is http-only.
-func (t *SetCookie) SetHttpOnly(v bool) *SetCookie {
-	t.HttpOnly = v
+func (t *SetCookie) SetHTTPOnly(v bool) *SetCookie {
+	t.HTTPOnly = v
 	return t
 }
 

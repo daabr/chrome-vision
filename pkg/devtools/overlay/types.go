@@ -162,7 +162,7 @@ type HighlightConfig struct {
 	// The shape margin fill color (default: transparent).
 	ShapeMarginColor *dom.RGBA `json:"shapeMarginColor,omitempty"`
 	// The grid layout color (default: transparent).
-	CssGridColor *dom.RGBA `json:"cssGridColor,omitempty"`
+	CSSGridColor *dom.RGBA `json:"cssGridColor,omitempty"`
 	// The color format used to format color styles (default: hex).
 	ColorFormat *ColorFormat `json:"colorFormat,omitempty"`
 	// The grid layout highlight configuration (default: all transparent).

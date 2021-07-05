@@ -162,7 +162,7 @@ func (t *RequestMemoryDump) SetLevelOfDetail(v MemoryDumpLevelOfDetail) *Request
 // to calling the RequestMemoryDump CDP command with Do().
 type RequestMemoryDumpResult struct {
 	// GUID of the resulting global memory dump.
-	DumpGuid string `json:"dumpGuid"`
+	DumpGUID string `json:"dumpGuid"`
 	// True iff the global memory dump succeeded.
 	Success bool `json:"success"`
 }

@@ -130,7 +130,7 @@ type Node struct {
 	// `DocumentType`'s internalSubset.
 	InternalSubset string `json:"internalSubset,omitempty"`
 	// `Document`'s XML version in case of XML documents.
-	XmlVersion string `json:"xmlVersion,omitempty"`
+	XMLVersion string `json:"xmlVersion,omitempty"`
 	// `Attr`'s name.
 	Name string `json:"name,omitempty"`
 	// `Attr`'s value.

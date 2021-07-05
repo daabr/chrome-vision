@@ -174,7 +174,7 @@ const (
 	PermissionsPolicyFeatureScreenWakeLock              PermissionsPolicyFeature = "screen-wake-lock"
 	PermissionsPolicyFeatureSerial                      PermissionsPolicyFeature = "serial"
 	PermissionsPolicyFeatureSharedAutofill              PermissionsPolicyFeature = "shared-autofill"
-	PermissionsPolicyFeatureStorageAccessApi            PermissionsPolicyFeature = "storage-access-api"
+	PermissionsPolicyFeatureStorageAccessAPI            PermissionsPolicyFeature = "storage-access-api"
 	PermissionsPolicyFeatureSyncXhr                     PermissionsPolicyFeature = "sync-xhr"
 	PermissionsPolicyFeatureTrustTokenRedemption        PermissionsPolicyFeature = "trust-token-redemption"
 	PermissionsPolicyFeatureUsb                         PermissionsPolicyFeature = "usb"
@@ -642,7 +642,7 @@ type ClientNavigationReason string
 const (
 	ClientNavigationReasonFormSubmissionGet     ClientNavigationReason = "formSubmissionGet"
 	ClientNavigationReasonFormSubmissionPost    ClientNavigationReason = "formSubmissionPost"
-	ClientNavigationReasonHttpHeaderRefresh     ClientNavigationReason = "httpHeaderRefresh"
+	ClientNavigationReasonHTTPHeaderRefresh     ClientNavigationReason = "httpHeaderRefresh"
 	ClientNavigationReasonScriptInitiated       ClientNavigationReason = "scriptInitiated"
 	ClientNavigationReasonMetaTagRefresh        ClientNavigationReason = "metaTagRefresh"
 	ClientNavigationReasonPageBlockInterstitial ClientNavigationReason = "pageBlockInterstitial"
