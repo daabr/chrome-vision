@@ -9,7 +9,7 @@ type DownloadWillBegin struct {
 	// Id of the frame that caused the download to begin.
 	FrameID string `json:"frameId"`
 	// Global unique identifier of the download.
-	Guid string `json:"guid"`
+	GUID string `json:"guid"`
 	// URL of the resource being downloaded.
 	URL string `json:"url"`
 	// Suggested file name of the resource (the actual name of the file saved on disk may differ).
@@ -23,7 +23,7 @@ type DownloadWillBegin struct {
 // This CDP event is experimental.
 type DownloadProgress struct {
 	// Global unique identifier of the download.
-	Guid string `json:"guid"`
+	GUID string `json:"guid"`
 	// Total expected bytes to download.
 	TotalBytes float64 `json:"totalBytes"`
 	// Total bytes received.
