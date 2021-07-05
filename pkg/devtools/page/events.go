@@ -239,6 +239,8 @@ type BackForwardCacheNotUsed struct {
 	LoaderID string `json:"loaderId"`
 	// The frame id of the associated frame.
 	FrameID string `json:"frameId"`
+	// Array of reasons why the page could not be cached. This must not be empty.
+	NotRestoredExplanations []BackForwardCacheNotRestoredExplanation `json:"notRestoredExplanations"`
 }
 
 // LoadEventFired asynchronous event.

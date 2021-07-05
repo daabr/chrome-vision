@@ -85,7 +85,9 @@ type CSSStyleSheetHeader struct {
 	StyleSheetID string `json:"styleSheetId"`
 	// Owner frame identifier.
 	FrameID string `json:"frameId"`
-	// Stylesheet resource URL.
+	// Stylesheet resource URL. Empty if this is a constructed stylesheet created using
+	// new CSSStyleSheet() (but non-empty if this is a constructed sylesheet imported
+	// as a CSS module script).
 	SourceURL string `json:"sourceURL"`
 	// URL of source map associated with the stylesheet (if any).
 	SourceMapURL string `json:"sourceMapURL,omitempty"`
@@ -107,7 +109,8 @@ type CSSStyleSheetHeader struct {
 	// <link> element's stylesheets become mutable only if DevTools modifies them.
 	// Constructed stylesheets (new CSSStyleSheet()) are mutable immediately after creation.
 	IsMutable bool `json:"isMutable"`
-	// Whether this stylesheet is a constructed stylesheet (created using new CSSStyleSheet()).
+	// True if this stylesheet is created through new CSSStyleSheet() or imported as a
+	// CSS module script.
 	IsConstructed bool `json:"isConstructed"`
 	// Line offset of the stylesheet within the resource (zero based).
 	StartLine float64 `json:"startLine"`
@@ -295,6 +298,8 @@ type CSSContainerQuery struct {
 	Range *SourceRange `json:"range,omitempty"`
 	// Identifier of the stylesheet containing this object (if exists).
 	StyleSheetID string `json:"styleSheetId,omitempty"`
+	// Optional name for the container.
+	Name string `json:"name,omitempty"`
 }
 
 // PlatformFontUsage data type. Information about amount of glyphs that were rendered with given font.
