@@ -20,7 +20,7 @@ type MediaQueryResultChanged struct{}
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#event-styleSheetAdded
 type StyleSheetAdded struct {
 	// Added stylesheet metainfo.
-	Header CSSStyleSheetHeader `json:"header"`
+	Header StyleSheetHeader `json:"header"`
 }
 
 // StyleSheetChanged asynchronous event. Fired whenever a stylesheet is changed as a result of the client operation.

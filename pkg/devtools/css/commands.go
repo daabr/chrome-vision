@@ -41,7 +41,7 @@ func NewAddRule(styleSheetID string, ruleText string, location SourceRange) *Add
 // to calling the AddRule CDP command with Do().
 type AddRuleResult struct {
 	// The newly created rule.
-	Rule CSSRule `json:"rule"`
+	Rule Rule `json:"rule"`
 }
 
 // Do sends the AddRule CDP command to a browser,
@@ -350,7 +350,7 @@ func NewGetComputedStyleForNode(nodeID int64) *GetComputedStyleForNode {
 // to calling the GetComputedStyleForNode CDP command with Do().
 type GetComputedStyleForNodeResult struct {
 	// Computed style for the specified DOM node.
-	ComputedStyle []CSSComputedStyleProperty `json:"computedStyle"`
+	ComputedStyle []ComputedStyleProperty `json:"computedStyle"`
 }
 
 // Do sends the GetComputedStyleForNode CDP command to a browser,
@@ -400,9 +400,9 @@ func NewGetInlineStylesForNode(nodeID int64) *GetInlineStylesForNode {
 // to calling the GetInlineStylesForNode CDP command with Do().
 type GetInlineStylesForNodeResult struct {
 	// Inline style for the specified DOM node.
-	InlineStyle *CSSStyle `json:"inlineStyle,omitempty"`
+	InlineStyle *Style `json:"inlineStyle,omitempty"`
 	// Attribute-defined element style (e.g. resulting from "width=20 height=100%").
-	AttributesStyle *CSSStyle `json:"attributesStyle,omitempty"`
+	AttributesStyle *Style `json:"attributesStyle,omitempty"`
 }
 
 // Do sends the GetInlineStylesForNode CDP command to a browser,
@@ -451,9 +451,9 @@ func NewGetMatchedStylesForNode(nodeID int64) *GetMatchedStylesForNode {
 // to calling the GetMatchedStylesForNode CDP command with Do().
 type GetMatchedStylesForNodeResult struct {
 	// Inline style for the specified DOM node.
-	InlineStyle *CSSStyle `json:"inlineStyle,omitempty"`
+	InlineStyle *Style `json:"inlineStyle,omitempty"`
 	// Attribute-defined element style (e.g. resulting from "width=20 height=100%").
-	AttributesStyle *CSSStyle `json:"attributesStyle,omitempty"`
+	AttributesStyle *Style `json:"attributesStyle,omitempty"`
 	// CSS rules matching this node, from all applicable stylesheets.
 	MatchedCSSRules []RuleMatch `json:"matchedCSSRules,omitempty"`
 	// Pseudo style matches for this node.
@@ -461,7 +461,7 @@ type GetMatchedStylesForNodeResult struct {
 	// A chain of inherited styles (from the immediate node parent up to the DOM tree root).
 	Inherited []InheritedStyleEntry `json:"inherited,omitempty"`
 	// A list of CSS keyframed animations matching this node.
-	CSSKeyframesRules []CSSKeyframesRule `json:"cssKeyframesRules,omitempty"`
+	CSSKeyframesRules []KeyframesRule `json:"cssKeyframesRules,omitempty"`
 }
 
 // Do sends the GetMatchedStylesForNode CDP command to a browser,
@@ -505,7 +505,7 @@ func NewGetMediaQueries() *GetMediaQueries {
 // GetMediaQueriesResult contains the browser's response
 // to calling the GetMediaQueries CDP command with Do().
 type GetMediaQueriesResult struct {
-	Medias []CSSMedia `json:"medias"`
+	Medias []Media `json:"medias"`
 }
 
 // Do sends the GetMediaQueries CDP command to a browser,
@@ -638,7 +638,7 @@ func (t *GetStyleSheetText) Do(ctx context.Context) (*GetStyleSheetTextResult, e
 //
 // This CDP method is experimental.
 type TrackComputedStyleUpdates struct {
-	PropertiesToTrack []CSSComputedStyleProperty `json:"propertiesToTrack"`
+	PropertiesToTrack []ComputedStyleProperty `json:"propertiesToTrack"`
 }
 
 // NewTrackComputedStyleUpdates constructs a new TrackComputedStyleUpdates struct instance, with
@@ -648,7 +648,7 @@ type TrackComputedStyleUpdates struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-trackComputedStyleUpdates
 //
 // This CDP method is experimental.
-func NewTrackComputedStyleUpdates(propertiesToTrack []CSSComputedStyleProperty) *TrackComputedStyleUpdates {
+func NewTrackComputedStyleUpdates(propertiesToTrack []ComputedStyleProperty) *TrackComputedStyleUpdates {
 	return &TrackComputedStyleUpdates{
 		PropertiesToTrack: propertiesToTrack,
 	}
@@ -842,7 +842,7 @@ func NewSetMediaText(styleSheetID string, r SourceRange, text string) *SetMediaT
 // to calling the SetMediaText CDP command with Do().
 type SetMediaTextResult struct {
 	// The resulting CSS media rule after modification.
-	Media CSSMedia `json:"media"`
+	Media Media `json:"media"`
 }
 
 // Do sends the SetMediaText CDP command to a browser,
@@ -899,7 +899,7 @@ func NewSetContainerQueryText(styleSheetID string, r SourceRange, text string) *
 // to calling the SetContainerQueryText CDP command with Do().
 type SetContainerQueryTextResult struct {
 	// The resulting CSS container query rule after modification.
-	ContainerQuery CSSContainerQuery `json:"containerQuery"`
+	ContainerQuery ContainerQuery `json:"containerQuery"`
 }
 
 // Do sends the SetContainerQueryText CDP command to a browser,
@@ -1052,7 +1052,7 @@ func NewSetStyleTexts(edits []StyleDeclarationEdit) *SetStyleTexts {
 // to calling the SetStyleTexts CDP command with Do().
 type SetStyleTextsResult struct {
 	// The resulting styles after modification.
-	Styles []CSSStyle `json:"styles"`
+	Styles []Style `json:"styles"`
 }
 
 // Do sends the SetStyleTexts CDP command to a browser,

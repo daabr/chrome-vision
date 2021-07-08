@@ -3,7 +3,7 @@ package target
 // TargetID data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#type-TargetID
-type TargetID string
+type ID string
 
 // SessionID data type. Unique identifier of attached debugging session.
 //
@@ -13,7 +13,7 @@ type SessionID string
 // TargetInfo data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#type-TargetInfo
-type TargetInfo struct {
+type Info struct {
 	TargetID string `json:"targetId"`
 	Type     string `json:"type"`
 	Title    string `json:"title"`

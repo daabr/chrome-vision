@@ -12,6 +12,6 @@ type RecordingStateChanged struct {
 // events afterwards if enabled and recording.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#event-backgroundServiceEventReceived
-type BackgroundServiceEventReceived struct {
-	BackgroundServiceEvent BackgroundServiceEvent `json:"backgroundServiceEvent"`
+type EventReceived struct {
+	BackgroundServiceEvent Event `json:"backgroundServiceEvent"`
 }

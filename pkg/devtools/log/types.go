@@ -5,7 +5,7 @@ import "github.com/daabr/chrome-vision/pkg/devtools/runtime"
 // LogEntry data type. Log entry.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Log/#type-LogEntry
-type LogEntry struct {
+type Entry struct {
 	// Log entry source.
 	Source string `json:"source"`
 	// Log entry severity.

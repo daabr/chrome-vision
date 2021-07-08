@@ -122,8 +122,8 @@ func writeFile(dir, file, content string) {
 	}
 }
 
-// Apply Go naming conventions to CDP types and struct field names,
-// and avoid circular dependencies (https://crbug.com/1193242).
+// Apply Go naming conventions to CDP types and struct field names to resolve
+// lint warnings, and avoid circular dependencies.
 func adjust(s string) string {
 	// "-" enables word capitalization by string.Title(), "_" doesn't.
 	s = strings.Title(strings.ReplaceAll(s, "_", "-"))
@@ -145,7 +145,7 @@ func adjust(s string) string {
 
 	if strings.Count(s, ".") > 0 {
 		// Transform CDP domain prefixes to Go package prefixes.
-		re := regexp.MustCompile(`^(.*)\.`)
+		re := regexp.MustCompile(`^(.+)\.`)
 		s = re.ReplaceAllStringFunc(s, strings.ToLower)
 
 		// Avoid circular dependencies (https://crbug.com/1193242).
@@ -177,4 +177,23 @@ func transformType(t string, arrayTypes map[string]string) string {
 	default:
 		return ""
 	}
+}
+
+// Avoid repetition/"stuttering", i.e. package names as prefixes in type
+// and function names (https://golang.org/doc/effective_go#package-names).
+func discardRepetitivePrefix(name, domain string) string {
+	if strings.HasPrefix(name, "[]") || strings.HasPrefix(name, "*") {
+		return name
+	}
+	// If name starts with domain (case-insensitive), remove this prefix.
+	if re := regexp.MustCompile(`(?i)^` + domain + `(.)`); re.MatchString(name) {
+		name = re.ReplaceAllString(name, "$1")
+	}
+	// If name is in the form "foo.FooBar" (case-insensitive), remove "Foo".
+	if re := regexp.MustCompile(`^(.+)\.`); re.MatchString(name) {
+		domain = re.FindStringSubmatch(name)[1]
+		re = regexp.MustCompile(`(?i)\.` + domain)
+		name = re.ReplaceAllString(name, ".")
+	}
+	return name
 }

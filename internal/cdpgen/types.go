@@ -57,7 +57,7 @@ func generateType(b *strings.Builder, t Type, domain, usage string, redirect *st
 	}
 
 	// Type declaration.
-	id := adjust(t.ID)
+	id := discardRepetitivePrefix(adjust(t.ID), domain)
 	switch t.Type {
 	case "object":
 		fmt.Fprintf(b, "type %s struct", id)
@@ -119,7 +119,9 @@ func generateProperty(b *strings.Builder, p Property, usage, domain string) {
 			if a, ok := aliases[t[2:]]; ok {
 				t = "[]" + a // De-alias built-in data types (https://crbug.com/1193242).
 			}
+			t = "[]" + discardRepetitivePrefix(t[2:], domain)
 		}
+		t = discardRepetitivePrefix(t, domain)
 		fmt.Fprint(b, t)
 	} else {
 		r := strings.ReplaceAll(adjust(*p.Ref), strings.ToLower(domain)+".", "")
@@ -129,6 +131,7 @@ func generateProperty(b *strings.Builder, p Property, usage, domain string) {
 		if p.Optional && r != "int64" && r != "float64" && r != "string" {
 			fmt.Fprint(b, "*")
 		}
+		r = discardRepetitivePrefix(r, domain)
 		fmt.Fprint(b, r)
 	}
 

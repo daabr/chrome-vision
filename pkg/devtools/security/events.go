@@ -30,16 +30,16 @@ type VisibleSecurityStateChanged struct {
 // SecurityStateChanged asynchronous event. The security state of the page changed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#event-securityStateChanged
-type SecurityStateChanged struct {
+type StateChanged struct {
 	// Security state.
-	SecurityState SecurityState `json:"securityState"`
+	SecurityState State `json:"securityState"`
 	// True if the page was loaded over cryptographic transport such as HTTPS.
 	//
 	// This CDP parameter is deprecated.
 	SchemeIsCryptographic bool `json:"schemeIsCryptographic"`
 	// List of explanations for the security state. If the overall security state is `insecure` or
 	// `warning`, at least one corresponding explanation should be included.
-	Explanations []SecurityStateExplanation `json:"explanations"`
+	Explanations []StateExplanation `json:"explanations"`
 	// Information about insecure content on the page.
 	//
 	// This CDP parameter is deprecated.

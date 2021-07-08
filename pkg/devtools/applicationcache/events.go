@@ -3,7 +3,7 @@ package applicationcache
 // ApplicationCacheStatusUpdated asynchronous event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#event-applicationCacheStatusUpdated
-type ApplicationCacheStatusUpdated struct {
+type StatusUpdated struct {
 	// Identifier of the frame containing document whose application cache updated status.
 	FrameID string `json:"frameId"`
 	// Manifest URL.

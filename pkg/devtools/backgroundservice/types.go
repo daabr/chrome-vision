@@ -33,7 +33,7 @@ type EventMetadata struct {
 // BackgroundServiceEvent data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#type-BackgroundServiceEvent
-type BackgroundServiceEvent struct {
+type Event struct {
 	// Timestamp of the event (in seconds).
 	Timestamp float64 `json:"timestamp"`
 	// The origin this event belongs to.

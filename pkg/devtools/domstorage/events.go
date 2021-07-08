@@ -3,7 +3,7 @@ package domstorage
 // DomStorageItemAdded asynchronous event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#event-domStorageItemAdded
-type DomStorageItemAdded struct {
+type ItemAdded struct {
 	StorageID StorageID `json:"storageId"`
 	Key       string    `json:"key"`
 	NewValue  string    `json:"newValue"`
@@ -12,7 +12,7 @@ type DomStorageItemAdded struct {
 // DomStorageItemRemoved asynchronous event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#event-domStorageItemRemoved
-type DomStorageItemRemoved struct {
+type ItemRemoved struct {
 	StorageID StorageID `json:"storageId"`
 	Key       string    `json:"key"`
 }
@@ -20,7 +20,7 @@ type DomStorageItemRemoved struct {
 // DomStorageItemUpdated asynchronous event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#event-domStorageItemUpdated
-type DomStorageItemUpdated struct {
+type ItemUpdated struct {
 	StorageID StorageID `json:"storageId"`
 	Key       string    `json:"key"`
 	OldValue  string    `json:"oldValue"`
@@ -30,6 +30,6 @@ type DomStorageItemUpdated struct {
 // DomStorageItemsCleared asynchronous event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#event-domStorageItemsCleared
-type DomStorageItemsCleared struct {
+type ItemsCleared struct {
 	StorageID StorageID `json:"storageId"`
 }

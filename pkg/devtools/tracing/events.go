@@ -28,7 +28,7 @@ type DataCollected struct {
 // delivered via dataCollected events.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#event-tracingComplete
-type TracingComplete struct {
+type Complete struct {
 	// Indicates whether some trace data is known to have been lost, e.g. because the trace ring
 	// buffer wrapped around.
 	DataLossOccurred bool `json:"dataLossOccurred"`

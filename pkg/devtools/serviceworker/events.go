@@ -4,19 +4,19 @@ package serviceworker
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#event-workerErrorReported
 type WorkerErrorReported struct {
-	ErrorMessage ServiceWorkerErrorMessage `json:"errorMessage"`
+	ErrorMessage ErrorMessage `json:"errorMessage"`
 }
 
 // WorkerRegistrationUpdated asynchronous event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#event-workerRegistrationUpdated
 type WorkerRegistrationUpdated struct {
-	Registrations []ServiceWorkerRegistration `json:"registrations"`
+	Registrations []Registration `json:"registrations"`
 }
 
 // WorkerVersionUpdated asynchronous event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#event-workerVersionUpdated
 type WorkerVersionUpdated struct {
-	Versions []ServiceWorkerVersion `json:"versions"`
+	Versions []Version `json:"versions"`
 }

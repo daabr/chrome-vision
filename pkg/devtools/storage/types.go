@@ -3,25 +3,25 @@ package storage
 // StorageType data type. Enum of possible storage types.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#type-StorageType
-type StorageType string
+type Type string
 
-// StorageType valid values.
+// Type valid values.
 const (
-	StorageTypeAppcache       StorageType = "appcache"
-	StorageTypeCookies        StorageType = "cookies"
-	StorageTypeFileSystems    StorageType = "file_systems"
-	StorageTypeIndexeddb      StorageType = "indexeddb"
-	StorageTypeLocalStorage   StorageType = "local_storage"
-	StorageTypeShaderCache    StorageType = "shader_cache"
-	StorageTypeWebsql         StorageType = "websql"
-	StorageTypeServiceWorkers StorageType = "service_workers"
-	StorageTypeCacheStorage   StorageType = "cache_storage"
-	StorageTypeAll            StorageType = "all"
-	StorageTypeOther          StorageType = "other"
+	TypeAppcache       Type = "appcache"
+	TypeCookies        Type = "cookies"
+	TypeFileSystems    Type = "file_systems"
+	TypeIndexeddb      Type = "indexeddb"
+	TypeLocalStorage   Type = "local_storage"
+	TypeShaderCache    Type = "shader_cache"
+	TypeWebsql         Type = "websql"
+	TypeServiceWorkers Type = "service_workers"
+	TypeCacheStorage   Type = "cache_storage"
+	TypeAll            Type = "all"
+	TypeOther          Type = "other"
 )
 
-// String returns the StorageType value as a built-in string.
-func (t StorageType) String() string {
+// String returns the Type value as a built-in string.
+func (t Type) String() string {
 	return string(t)
 }
 
@@ -30,7 +30,7 @@ func (t StorageType) String() string {
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#type-UsageForType
 type UsageForType struct {
 	// Name of storage type.
-	StorageType StorageType `json:"storageType"`
+	StorageType Type `json:"storageType"`
 	// Storage usage (bytes).
 	Usage float64 `json:"usage"`
 }

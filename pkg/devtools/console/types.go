@@ -3,7 +3,7 @@ package console
 // ConsoleMessage data type. Console message.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Console/#type-ConsoleMessage
-type ConsoleMessage struct {
+type Message struct {
 	// Message source.
 	Source string `json:"source"`
 	// Message severity.

@@ -220,7 +220,7 @@ type Start struct {
 	// are ignored. (Encoded as a base64 string when passed over JSON)
 	PerfettoConfig string `json:"perfettoConfig,omitempty"`
 	// Backend type (defaults to `auto`)
-	TracingBackend *TracingBackend `json:"tracingBackend,omitempty"`
+	TracingBackend *Backend `json:"tracingBackend,omitempty"`
 }
 
 // NewStart constructs a new Start struct instance, with
@@ -315,7 +315,7 @@ func (t *Start) SetPerfettoConfig(v string) *Start {
 // parameter `tracingBackend` in the Start CDP command.
 //
 // Backend type (defaults to `auto`)
-func (t *Start) SetTracingBackend(v TracingBackend) *Start {
+func (t *Start) SetTracingBackend(v Backend) *Start {
 	t.TracingBackend = &v
 	return t
 }
