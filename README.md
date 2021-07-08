@@ -16,11 +16,17 @@ products such as [Selenium WebDriver](https://www.selenium.dev/documentation),
 The first two are very popular, but only the last one offers integration with
 [Go](https://golang.org) without heavy non-Go dependencies.
 
-This is an experimental project, aiming to:
+This project aims to:
 
-* Learn more about the Chrome DevTools Protocol
+* Make the Chrome DevTools Protocol more accessible
 * Simplify the low-level API even more than ChromeDP
 * Support the [WebDriver API specification](https://www.w3.org/TR/webdriver)
   as a higher-level API layer
-* Add Computer Vision (CV) and Optical Character Recognition (OCR) capabilities,
+* Add Computer Vision (CV) and Optical Character Recognition (OCR) capabilities,\
   which are missing in all of the above
+
+## Main Differences From ChromeDP
+
+* Simpler session initialization, and simpler customization of browser flags
+  (see [example](https://github.com/daabr/chrome-vision/blob/main/examples/init/main.go>))
+* Simpler CDP command execution API
