@@ -22,7 +22,8 @@ func generateTypes(d Domain) string {
 		description += " data type."
 		if t.Description != nil {
 			if strings.HasPrefix(*t.Description, t.ID+" ") {
-				description = *t.Description
+				s := discardRepetitivePrefix(t.ID, d.Domain)
+				description = strings.ReplaceAll(*t.Description, t.ID, s)
 			} else {
 				description += " " + *t.Description
 			}

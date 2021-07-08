@@ -27,7 +27,7 @@ type Animation struct {
 	CSSID string `json:"cssId,omitempty"`
 }
 
-// AnimationEffect instance
+// Effect instance
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#type-AnimationEffect
 type Effect struct {
