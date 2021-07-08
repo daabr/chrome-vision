@@ -79,23 +79,23 @@ func (t MemoryDumpLevelOfDetail) String() string {
 	return string(t)
 }
 
-// TracingBackend data type. Backend type to use for tracing. `chrome` uses the Chrome-integrated
+// Backend data type. Backend type to use for tracing. `chrome` uses the Chrome-integrated
 // tracing service and is supported on all platforms. `system` is only
 // supported on Chrome OS and uses the Perfetto system tracing service.
 // `auto` chooses `system` when the perfettoConfig provided to Tracing.start
 // specifies at least one non-Chrome data source; otherwise uses `chrome`.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#type-TracingBackend
-type TracingBackend string
+type Backend string
 
-// TracingBackend valid values.
+// Backend valid values.
 const (
-	TracingBackendAuto   TracingBackend = "auto"
-	TracingBackendChrome TracingBackend = "chrome"
-	TracingBackendSystem TracingBackend = "system"
+	BackendAuto   Backend = "auto"
+	BackendChrome Backend = "chrome"
+	BackendSystem Backend = "system"
 )
 
-// String returns the TracingBackend value as a built-in string.
-func (t TracingBackend) String() string {
+// String returns the Backend value as a built-in string.
+func (t Backend) String() string {
 	return string(t)
 }

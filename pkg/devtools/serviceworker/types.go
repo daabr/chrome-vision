@@ -5,62 +5,62 @@ package serviceworker
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-RegistrationID
 type RegistrationID string
 
-// ServiceWorkerRegistration data type. ServiceWorker registration.
+// Registration data type. ServiceWorker registration.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerRegistration
-type ServiceWorkerRegistration struct {
+type Registration struct {
 	RegistrationID string `json:"registrationId"`
 	ScopeURL       string `json:"scopeURL"`
 	IsDeleted      bool   `json:"isDeleted"`
 }
 
-// ServiceWorkerVersionRunningStatus data type.
+// VersionRunningStatus data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerVersionRunningStatus
-type ServiceWorkerVersionRunningStatus string
+type VersionRunningStatus string
 
-// ServiceWorkerVersionRunningStatus valid values.
+// VersionRunningStatus valid values.
 const (
-	ServiceWorkerVersionRunningStatusStopped  ServiceWorkerVersionRunningStatus = "stopped"
-	ServiceWorkerVersionRunningStatusStarting ServiceWorkerVersionRunningStatus = "starting"
-	ServiceWorkerVersionRunningStatusRunning  ServiceWorkerVersionRunningStatus = "running"
-	ServiceWorkerVersionRunningStatusStopping ServiceWorkerVersionRunningStatus = "stopping"
+	VersionRunningStatusStopped  VersionRunningStatus = "stopped"
+	VersionRunningStatusStarting VersionRunningStatus = "starting"
+	VersionRunningStatusRunning  VersionRunningStatus = "running"
+	VersionRunningStatusStopping VersionRunningStatus = "stopping"
 )
 
-// String returns the ServiceWorkerVersionRunningStatus value as a built-in string.
-func (t ServiceWorkerVersionRunningStatus) String() string {
+// String returns the VersionRunningStatus value as a built-in string.
+func (t VersionRunningStatus) String() string {
 	return string(t)
 }
 
-// ServiceWorkerVersionStatus data type.
+// VersionStatus data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerVersionStatus
-type ServiceWorkerVersionStatus string
+type VersionStatus string
 
-// ServiceWorkerVersionStatus valid values.
+// VersionStatus valid values.
 const (
-	ServiceWorkerVersionStatusNew        ServiceWorkerVersionStatus = "new"
-	ServiceWorkerVersionStatusInstalling ServiceWorkerVersionStatus = "installing"
-	ServiceWorkerVersionStatusInstalled  ServiceWorkerVersionStatus = "installed"
-	ServiceWorkerVersionStatusActivating ServiceWorkerVersionStatus = "activating"
-	ServiceWorkerVersionStatusActivated  ServiceWorkerVersionStatus = "activated"
-	ServiceWorkerVersionStatusRedundant  ServiceWorkerVersionStatus = "redundant"
+	VersionStatusNew        VersionStatus = "new"
+	VersionStatusInstalling VersionStatus = "installing"
+	VersionStatusInstalled  VersionStatus = "installed"
+	VersionStatusActivating VersionStatus = "activating"
+	VersionStatusActivated  VersionStatus = "activated"
+	VersionStatusRedundant  VersionStatus = "redundant"
 )
 
-// String returns the ServiceWorkerVersionStatus value as a built-in string.
-func (t ServiceWorkerVersionStatus) String() string {
+// String returns the VersionStatus value as a built-in string.
+func (t VersionStatus) String() string {
 	return string(t)
 }
 
-// ServiceWorkerVersion data type. ServiceWorker version.
+// Version data type. ServiceWorker version.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerVersion
-type ServiceWorkerVersion struct {
-	VersionID      string                            `json:"versionId"`
-	RegistrationID string                            `json:"registrationId"`
-	ScriptURL      string                            `json:"scriptURL"`
-	RunningStatus  ServiceWorkerVersionRunningStatus `json:"runningStatus"`
-	Status         ServiceWorkerVersionStatus        `json:"status"`
+type Version struct {
+	VersionID      string               `json:"versionId"`
+	RegistrationID string               `json:"registrationId"`
+	ScriptURL      string               `json:"scriptURL"`
+	RunningStatus  VersionRunningStatus `json:"runningStatus"`
+	Status         VersionStatus        `json:"status"`
 	// The Last-Modified header value of the main script.
 	ScriptLastModified float64 `json:"scriptLastModified,omitempty"`
 	// The time at which the response headers of the main script were received from the server.
@@ -70,10 +70,10 @@ type ServiceWorkerVersion struct {
 	TargetID           string   `json:"targetId,omitempty"`
 }
 
-// ServiceWorkerErrorMessage data type. ServiceWorker error message.
+// ErrorMessage data type. ServiceWorker error message.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ServiceWorker/#type-ServiceWorkerErrorMessage
-type ServiceWorkerErrorMessage struct {
+type ErrorMessage struct {
 	ErrorMessage   string `json:"errorMessage"`
 	RegistrationID string `json:"registrationId"`
 	VersionID      string `json:"versionId"`

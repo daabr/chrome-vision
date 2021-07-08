@@ -23,23 +23,23 @@ func (t MixedContentType) String() string {
 	return string(t)
 }
 
-// SecurityState data type. The security level of a page or resource.
+// State data type. The security level of a page or resource.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-SecurityState
-type SecurityState string
+type State string
 
-// SecurityState valid values.
+// State valid values.
 const (
-	SecurityStateUnknown        SecurityState = "unknown"
-	SecurityStateNeutral        SecurityState = "neutral"
-	SecurityStateInsecure       SecurityState = "insecure"
-	SecurityStateSecure         SecurityState = "secure"
-	SecurityStateInfo           SecurityState = "info"
-	SecurityStateInsecureBroken SecurityState = "insecure-broken"
+	StateUnknown        State = "unknown"
+	StateNeutral        State = "neutral"
+	StateInsecure       State = "insecure"
+	StateSecure         State = "secure"
+	StateInfo           State = "info"
+	StateInsecureBroken State = "insecure-broken"
 )
 
-// String returns the SecurityState value as a built-in string.
-func (t SecurityState) String() string {
+// String returns the State value as a built-in string.
+func (t State) String() string {
 	return string(t)
 }
 
@@ -124,7 +124,7 @@ type SafetyTipInfo struct {
 // This CDP type is experimental.
 type VisibleSecurityState struct {
 	// The security level of the page.
-	SecurityState SecurityState `json:"securityState"`
+	SecurityState State `json:"securityState"`
 	// Security state details about the page certificate.
 	CertificateSecurityState *CertificateSecurityState `json:"certificateSecurityState,omitempty"`
 	// The type of Safety Tip triggered on the page. Note that this field will be set even if the Safety Tip UI was not actually shown.
@@ -133,12 +133,12 @@ type VisibleSecurityState struct {
 	SecurityStateIssueIds []string `json:"securityStateIssueIds"`
 }
 
-// SecurityStateExplanation data type. An explanation of an factor contributing to the security state.
+// StateExplanation data type. An explanation of an factor contributing to the security state.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-SecurityStateExplanation
-type SecurityStateExplanation struct {
+type StateExplanation struct {
 	// Security state representing the severity of the factor being explained.
-	SecurityState SecurityState `json:"securityState"`
+	SecurityState State `json:"securityState"`
 	// Title describing the type of factor.
 	Title string `json:"title"`
 	// Short phrase describing the type of factor.
@@ -170,9 +170,9 @@ type InsecureContentStatus struct {
 	// Always false.
 	DisplayedContentWithCertErrors bool `json:"displayedContentWithCertErrors"`
 	// Always set to unknown.
-	RanInsecureContentStyle SecurityState `json:"ranInsecureContentStyle"`
+	RanInsecureContentStyle State `json:"ranInsecureContentStyle"`
 	// Always set to unknown.
-	DisplayedInsecureContentStyle SecurityState `json:"displayedInsecureContentStyle"`
+	DisplayedInsecureContentStyle State `json:"displayedInsecureContentStyle"`
 }
 
 // CertificateErrorAction data type. The action to take when a certificate error occurs. continue will continue processing the

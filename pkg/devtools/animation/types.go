@@ -21,16 +21,16 @@ type Animation struct {
 	// Animation type of `Animation`.
 	Type string `json:"type"`
 	// `Animation`'s source animation node.
-	Source *AnimationEffect `json:"source,omitempty"`
+	Source *Effect `json:"source,omitempty"`
 	// A unique ID for `Animation` representing the sources that triggered this CSS
 	// animation/transition.
 	CSSID string `json:"cssId,omitempty"`
 }
 
-// AnimationEffect instance
+// Effect instance
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#type-AnimationEffect
-type AnimationEffect struct {
+type Effect struct {
 	// `AnimationEffect`'s delay.
 	Delay float64 `json:"delay"`
 	// `AnimationEffect`'s end delay.

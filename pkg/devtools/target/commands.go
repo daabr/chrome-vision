@@ -656,7 +656,7 @@ func (t *GetTargetInfo) SetTargetID(v string) *GetTargetInfo {
 // GetTargetInfoResult contains the browser's response
 // to calling the GetTargetInfo CDP command with Do().
 type GetTargetInfoResult struct {
-	TargetInfo TargetInfo `json:"targetInfo"`
+	TargetInfo Info `json:"targetInfo"`
 }
 
 // Do sends the GetTargetInfo CDP command to a browser,
@@ -701,7 +701,7 @@ func NewGetTargets() *GetTargets {
 // to calling the GetTargets CDP command with Do().
 type GetTargetsResult struct {
 	// The list of targets.
-	TargetInfos []TargetInfo `json:"targetInfos"`
+	TargetInfos []Info `json:"targetInfos"`
 }
 
 // Do sends the GetTargets CDP command to a browser,

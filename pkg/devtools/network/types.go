@@ -543,7 +543,7 @@ type Response struct {
 	// Protocol used to fetch this request.
 	Protocol string `json:"protocol,omitempty"`
 	// Security state of the request resource.
-	SecurityState security.SecurityState `json:"securityState"`
+	SecurityState security.State `json:"securityState"`
 	// Security details for the request.
 	SecurityDetails *SecurityDetails `json:"securityDetails,omitempty"`
 }

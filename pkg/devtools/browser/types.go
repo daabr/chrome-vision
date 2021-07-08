@@ -1,11 +1,11 @@
 package browser
 
-// BrowserContextID data type.
+// ContextID data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-BrowserContextID
 //
 // This CDP type is experimental.
-type BrowserContextID string
+type ContextID string
 
 // WindowID data type.
 //
@@ -131,21 +131,21 @@ type PermissionDescriptor struct {
 	PanTiltZoom bool `json:"panTiltZoom,omitempty"`
 }
 
-// BrowserCommandID data type. Browser command ids used by executeBrowserCommand.
+// CommandID data type. Browser command ids used by executeBrowserCommand.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-BrowserCommandId
 //
 // This CDP type is experimental.
-type BrowserCommandID string
+type CommandID string
 
-// BrowserCommandID valid values.
+// CommandID valid values.
 const (
-	BrowserCommandIDOpenTabSearch  BrowserCommandID = "openTabSearch"
-	BrowserCommandIDCloseTabSearch BrowserCommandID = "closeTabSearch"
+	CommandIDOpenTabSearch  CommandID = "openTabSearch"
+	CommandIDCloseTabSearch CommandID = "closeTabSearch"
 )
 
-// String returns the BrowserCommandID value as a built-in string.
-func (t BrowserCommandID) String() string {
+// String returns the CommandID value as a built-in string.
+func (t CommandID) String() string {
 	return string(t)
 }
 

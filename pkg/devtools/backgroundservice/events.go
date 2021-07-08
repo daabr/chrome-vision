@@ -8,10 +8,10 @@ type RecordingStateChanged struct {
 	Service     ServiceName `json:"service"`
 }
 
-// BackgroundServiceEventReceived asynchronous event. Called with all existing backgroundServiceEvents when enabled, and all new
+// EventReceived asynchronous event. Called with all existing backgroundServiceEvents when enabled, and all new
 // events afterwards if enabled and recording.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#event-backgroundServiceEventReceived
-type BackgroundServiceEventReceived struct {
-	BackgroundServiceEvent BackgroundServiceEvent `json:"backgroundServiceEvent"`
+type EventReceived struct {
+	BackgroundServiceEvent Event `json:"backgroundServiceEvent"`
 }

@@ -891,7 +891,7 @@ func (t *SetDockTile) Do(ctx context.Context) error {
 //
 // This CDP method is experimental.
 type ExecuteBrowserCommand struct {
-	CommandID BrowserCommandID `json:"commandId"`
+	CommandID CommandID `json:"commandId"`
 }
 
 // NewExecuteBrowserCommand constructs a new ExecuteBrowserCommand struct instance, with
@@ -901,7 +901,7 @@ type ExecuteBrowserCommand struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-executeBrowserCommand
 //
 // This CDP method is experimental.
-func NewExecuteBrowserCommand(commandID BrowserCommandID) *ExecuteBrowserCommand {
+func NewExecuteBrowserCommand(commandID CommandID) *ExecuteBrowserCommand {
 	return &ExecuteBrowserCommand{
 		CommandID: commandID,
 	}

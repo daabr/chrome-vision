@@ -1,9 +1,9 @@
 package database
 
-// DatabaseID data type. Unique identifier of Database object.
+// ID data type. Unique identifier of Database object.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Database/#type-DatabaseId
-type DatabaseID string
+type ID string
 
 // Database object.
 //

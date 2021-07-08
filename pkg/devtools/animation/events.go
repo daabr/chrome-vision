@@ -1,25 +1,25 @@
 package animation
 
-// AnimationCanceled asynchronous event. Event for when an animation has been cancelled.
+// Canceled asynchronous event. Event for when an animation has been cancelled.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#event-animationCanceled
-type AnimationCanceled struct {
+type Canceled struct {
 	// Id of the animation that was cancelled.
 	ID string `json:"id"`
 }
 
-// AnimationCreated asynchronous event. Event for each animation that has been created.
+// Created asynchronous event. Event for each animation that has been created.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#event-animationCreated
-type AnimationCreated struct {
+type Created struct {
 	// Id of the animation that was created.
 	ID string `json:"id"`
 }
 
-// AnimationStarted asynchronous event. Event for animation that has been started.
+// Started asynchronous event. Event for animation that has been started.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Animation/#event-animationStarted
-type AnimationStarted struct {
+type Started struct {
 	// Animation that was started.
 	Animation Animation `json:"animation"`
 }

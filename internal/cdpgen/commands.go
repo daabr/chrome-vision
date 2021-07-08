@@ -61,7 +61,7 @@ func generateCommands(d Domain) string {
 			}
 		}
 		for i, p := range required {
-			generateRequiredParameter(b, p)
+			generateRequiredParameter(b, p, d.Domain)
 			if i+1 < len(required) {
 				fmt.Fprint(b, ", ")
 			}
@@ -159,10 +159,10 @@ func generateCommands(d Domain) string {
 	return b.String()
 }
 
-func generateRequiredParameter(b *strings.Builder, p Property) {
+func generateRequiredParameter(b *strings.Builder, p Property, domain string) {
 	// Name.
 	if p.Name == "range" || p.Name == "type" {
-		// Don't use Go keywords as a parameter names
+		// Don't use Go keywords as parameter names
 		// (e.g. CSS.NewSetKeyframeKey, DOMDebugger.NewRemoveDOMBreakpoint).
 		fmt.Fprintf(b, "%s ", string(p.Name[0]))
 	} else {
@@ -179,12 +179,13 @@ func generateRequiredParameter(b *strings.Builder, p Property) {
 				t = "[]" + a // De-alias built-in data types (https://crbug.com/1193242).
 			}
 		}
-		fmt.Fprint(b, t)
+		fmt.Fprint(b, discardRepetitivePrefix(t, domain))
 	} else {
 		r := adjust(*p.Ref)
 		if a, ok := aliases[r]; ok {
 			r = a // De-alias built-in data types (https://crbug.com/1193242).
 		}
+		r = discardRepetitivePrefix(r, domain)
 		if p.Optional {
 			fmt.Fprintf(b, "*%s", r)
 		} else {
@@ -219,6 +220,7 @@ func generateOptionalParameter(b *strings.Builder, domain, cmd string, p Propert
 		if a, ok := aliases[r]; ok {
 			r = a // De-alias built-in data types (https://crbug.com/1193242).
 		}
+		r = discardRepetitivePrefix(r, domain)
 		fmt.Fprintf(b, "%s", r)
 	}
 	fmt.Fprintf(b, ") *%s {\n", cmd)

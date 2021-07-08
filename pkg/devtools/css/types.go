@@ -42,7 +42,7 @@ type PseudoElementMatches struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-InheritedStyleEntry
 type InheritedStyleEntry struct {
 	// The ancestor node's inline style, if any, in the style inheritance chain.
-	InlineStyle *CSSStyle `json:"inlineStyle,omitempty"`
+	InlineStyle *Style `json:"inlineStyle,omitempty"`
 	// Matches of CSS rules matching the ancestor node in the style inheritance chain.
 	MatchedCSSRules []RuleMatch `json:"matchedCSSRules"`
 }
@@ -52,7 +52,7 @@ type InheritedStyleEntry struct {
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-RuleMatch
 type RuleMatch struct {
 	// CSS rule in the match.
-	Rule CSSRule `json:"rule"`
+	Rule Rule `json:"rule"`
 	// Matching selector indices in the rule's selectorList selectors (0-based).
 	MatchingSelectors []int64 `json:"matchingSelectors"`
 }
@@ -77,10 +77,10 @@ type SelectorList struct {
 	Text string `json:"text"`
 }
 
-// CSSStyleSheetHeader data type. CSS stylesheet metainformation.
+// StyleSheetHeader data type. CSS stylesheet metainformation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSStyleSheetHeader
-type CSSStyleSheetHeader struct {
+type StyleSheetHeader struct {
 	// The stylesheet identifier.
 	StyleSheetID string `json:"styleSheetId"`
 	// Owner frame identifier.
@@ -124,10 +124,10 @@ type CSSStyleSheetHeader struct {
 	EndColumn float64 `json:"endColumn"`
 }
 
-// CSSRule data type. CSS rule representation.
+// Rule data type. CSS rule representation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSRule
-type CSSRule struct {
+type Rule struct {
 	// The css style sheet identifier (absent for user agent stylesheet and user-specified
 	// stylesheet rules) this rule came from.
 	StyleSheetID string `json:"styleSheetId,omitempty"`
@@ -136,15 +136,15 @@ type CSSRule struct {
 	// Parent stylesheet's origin.
 	Origin StyleSheetOrigin `json:"origin"`
 	// Associated style declaration.
-	Style CSSStyle `json:"style"`
+	Style Style `json:"style"`
 	// Media list array (for rules involving media queries). The array enumerates media queries
 	// starting with the innermost one, going outwards.
-	Media []CSSMedia `json:"media,omitempty"`
+	Media []Media `json:"media,omitempty"`
 	// Container query list array (for rules involving container queries).
 	// The array enumerates container queries starting with the innermost one, going outwards.
 	//
 	// This CDP property is experimental.
-	ContainerQueries []CSSContainerQuery `json:"containerQueries,omitempty"`
+	ContainerQueries []ContainerQuery `json:"containerQueries,omitempty"`
 }
 
 // RuleUsage data type. CSS coverage information.
@@ -188,25 +188,25 @@ type ShorthandEntry struct {
 	Important bool `json:"important,omitempty"`
 }
 
-// CSSComputedStyleProperty data type.
+// ComputedStyleProperty data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSComputedStyleProperty
-type CSSComputedStyleProperty struct {
+type ComputedStyleProperty struct {
 	// Computed style property name.
 	Name string `json:"name"`
 	// Computed style property value.
 	Value string `json:"value"`
 }
 
-// CSSStyle data type. CSS style representation.
+// Style data type. CSS style representation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSStyle
-type CSSStyle struct {
+type Style struct {
 	// The css style sheet identifier (absent for user agent stylesheet and user-specified
 	// stylesheet rules) this rule came from.
 	StyleSheetID string `json:"styleSheetId,omitempty"`
 	// CSS properties in the style.
-	CSSProperties []CSSProperty `json:"cssProperties"`
+	CSSProperties []Property `json:"cssProperties"`
 	// Computed values for all shorthands found in the style.
 	ShorthandEntries []ShorthandEntry `json:"shorthandEntries"`
 	// Style declaration text (if available).
@@ -215,10 +215,10 @@ type CSSStyle struct {
 	Range *SourceRange `json:"range,omitempty"`
 }
 
-// CSSProperty data type. CSS property declaration data.
+// Property data type. CSS property declaration data.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSProperty
-type CSSProperty struct {
+type Property struct {
 	// The property name.
 	Name string `json:"name"`
 	// The property value.
@@ -237,10 +237,10 @@ type CSSProperty struct {
 	Range *SourceRange `json:"range,omitempty"`
 }
 
-// CSSMedia data type. CSS media rule descriptor.
+// Media data type. CSS media rule descriptor.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSMedia
-type CSSMedia struct {
+type Media struct {
 	// Media query text.
 	Text string `json:"text"`
 	// Source of the media query: "mediaRule" if specified by a @media rule, "importRule" if
@@ -285,12 +285,12 @@ type MediaQueryExpression struct {
 	ComputedLength float64 `json:"computedLength,omitempty"`
 }
 
-// CSSContainerQuery data type. CSS container query rule descriptor.
+// ContainerQuery data type. CSS container query rule descriptor.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSContainerQuery
 //
 // This CDP type is experimental.
-type CSSContainerQuery struct {
+type ContainerQuery struct {
 	// Container query text.
 	Text string `json:"text"`
 	// The associated rule header range in the enclosing stylesheet (if
@@ -355,20 +355,20 @@ type FontFace struct {
 	FontVariationAxes []FontVariationAxis `json:"fontVariationAxes,omitempty"`
 }
 
-// CSSKeyframesRule data type. CSS keyframes rule representation.
+// KeyframesRule data type. CSS keyframes rule representation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSKeyframesRule
-type CSSKeyframesRule struct {
+type KeyframesRule struct {
 	// Animation name.
 	AnimationName Value `json:"animationName"`
 	// List of keyframes.
-	Keyframes []CSSKeyframeRule `json:"keyframes"`
+	Keyframes []KeyframeRule `json:"keyframes"`
 }
 
-// CSSKeyframeRule data type. CSS keyframe rule representation.
+// KeyframeRule data type. CSS keyframe rule representation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSKeyframeRule
-type CSSKeyframeRule struct {
+type KeyframeRule struct {
 	// The css style sheet identifier (absent for user agent stylesheet and user-specified
 	// stylesheet rules) this rule came from.
 	StyleSheetID string `json:"styleSheetId,omitempty"`
@@ -377,7 +377,7 @@ type CSSKeyframeRule struct {
 	// Associated key text.
 	KeyText Value `json:"keyText"`
 	// Associated style declaration.
-	Style CSSStyle `json:"style"`
+	Style Style `json:"style"`
 }
 
 // StyleDeclarationEdit data type. A descriptor of operation to mutate style declaration text.
