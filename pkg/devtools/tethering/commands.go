@@ -37,7 +37,7 @@ func (t *Bind) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Tethering.bind", b)
+	response, err := devtools.SendAndWait(ctx, "Tethering.bind", b)
 	if err != nil {
 		return err
 	}
@@ -76,7 +76,7 @@ func (t *Unbind) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Tethering.unbind", b)
+	response, err := devtools.SendAndWait(ctx, "Tethering.unbind", b)
 	if err != nil {
 		return err
 	}

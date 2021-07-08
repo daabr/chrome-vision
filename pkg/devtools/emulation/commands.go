@@ -37,7 +37,7 @@ type CanEmulateResult struct {
 // Do sends the CanEmulate CDP command to a browser,
 // and returns the browser's response.
 func (t *CanEmulate) Do(ctx context.Context) (*CanEmulateResult, error) {
-	response, err := devtools.Send(ctx, "Emulation.canEmulate", nil)
+	response, err := devtools.SendAndWait(ctx, "Emulation.canEmulate", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ func NewClearDeviceMetricsOverride() *ClearDeviceMetricsOverride {
 // Do sends the ClearDeviceMetricsOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearDeviceMetricsOverride) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Emulation.clearDeviceMetricsOverride", nil)
+	response, err := devtools.SendAndWait(ctx, "Emulation.clearDeviceMetricsOverride", nil)
 	if err != nil {
 		return err
 	}
@@ -101,7 +101,7 @@ func NewClearGeolocationOverride() *ClearGeolocationOverride {
 // Do sends the ClearGeolocationOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearGeolocationOverride) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Emulation.clearGeolocationOverride", nil)
+	response, err := devtools.SendAndWait(ctx, "Emulation.clearGeolocationOverride", nil)
 	if err != nil {
 		return err
 	}
@@ -135,7 +135,7 @@ func NewResetPageScaleFactor() *ResetPageScaleFactor {
 // Do sends the ResetPageScaleFactor CDP command to a browser,
 // and returns the browser's response.
 func (t *ResetPageScaleFactor) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Emulation.resetPageScaleFactor", nil)
+	response, err := devtools.SendAndWait(ctx, "Emulation.resetPageScaleFactor", nil)
 	if err != nil {
 		return err
 	}
@@ -178,7 +178,7 @@ func (t *SetFocusEmulationEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setFocusEmulationEnabled", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setFocusEmulationEnabled", b)
 	if err != nil {
 		return err
 	}
@@ -221,7 +221,7 @@ func (t *SetCPUThrottlingRate) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setCPUThrottlingRate", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setCPUThrottlingRate", b)
 	if err != nil {
 		return err
 	}
@@ -270,7 +270,7 @@ func (t *SetDefaultBackgroundColorOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setDefaultBackgroundColorOverride", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setDefaultBackgroundColorOverride", b)
 	if err != nil {
 		return err
 	}
@@ -456,7 +456,7 @@ func (t *SetDeviceMetricsOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setDeviceMetricsOverride", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setDeviceMetricsOverride", b)
 	if err != nil {
 		return err
 	}
@@ -497,7 +497,7 @@ func (t *SetScrollbarsHidden) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setScrollbarsHidden", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setScrollbarsHidden", b)
 	if err != nil {
 		return err
 	}
@@ -538,7 +538,7 @@ func (t *SetDocumentCookieDisabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setDocumentCookieDisabled", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setDocumentCookieDisabled", b)
 	if err != nil {
 		return err
 	}
@@ -590,7 +590,7 @@ func (t *SetEmitTouchEventsForMouse) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setEmitTouchEventsForMouse", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setEmitTouchEventsForMouse", b)
 	if err != nil {
 		return err
 	}
@@ -647,7 +647,7 @@ func (t *SetEmulatedMedia) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setEmulatedMedia", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setEmulatedMedia", b)
 	if err != nil {
 		return err
 	}
@@ -690,7 +690,7 @@ func (t *SetEmulatedVisionDeficiency) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setEmulatedVisionDeficiency", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setEmulatedVisionDeficiency", b)
 	if err != nil {
 		return err
 	}
@@ -759,7 +759,7 @@ func (t *SetGeolocationOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setGeolocationOverride", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setGeolocationOverride", b)
 	if err != nil {
 		return err
 	}
@@ -805,7 +805,7 @@ func (t *SetIdleOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setIdleOverride", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setIdleOverride", b)
 	if err != nil {
 		return err
 	}
@@ -839,7 +839,7 @@ func NewClearIdleOverride() *ClearIdleOverride {
 // Do sends the ClearIdleOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearIdleOverride) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Emulation.clearIdleOverride", nil)
+	response, err := devtools.SendAndWait(ctx, "Emulation.clearIdleOverride", nil)
 	if err != nil {
 		return err
 	}
@@ -884,7 +884,7 @@ func (t *SetNavigatorOverrides) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setNavigatorOverrides", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setNavigatorOverrides", b)
 	if err != nil {
 		return err
 	}
@@ -927,7 +927,7 @@ func (t *SetPageScaleFactor) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setPageScaleFactor", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setPageScaleFactor", b)
 	if err != nil {
 		return err
 	}
@@ -966,7 +966,7 @@ func (t *SetScriptExecutionDisabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setScriptExecutionDisabled", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setScriptExecutionDisabled", b)
 	if err != nil {
 		return err
 	}
@@ -1016,7 +1016,7 @@ func (t *SetTouchEmulationEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setTouchEmulationEnabled", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setTouchEmulationEnabled", b)
 	if err != nil {
 		return err
 	}
@@ -1116,7 +1116,7 @@ func (t *SetVirtualTimePolicy) Do(ctx context.Context) (*SetVirtualTimePolicyRes
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setVirtualTimePolicy", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setVirtualTimePolicy", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1172,7 +1172,7 @@ func (t *SetLocaleOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setLocaleOverride", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setLocaleOverride", b)
 	if err != nil {
 		return err
 	}
@@ -1216,7 +1216,7 @@ func (t *SetTimezoneOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setTimezoneOverride", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setTimezoneOverride", b)
 	if err != nil {
 		return err
 	}
@@ -1266,7 +1266,7 @@ func (t *SetVisibleSize) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setVisibleSize", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setVisibleSize", b)
 	if err != nil {
 		return err
 	}
@@ -1307,7 +1307,7 @@ func (t *SetDisabledImageTypes) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setDisabledImageTypes", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setDisabledImageTypes", b)
 	if err != nil {
 		return err
 	}
@@ -1383,7 +1383,7 @@ func (t *SetUserAgentOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Emulation.setUserAgentOverride", b)
+	response, err := devtools.SendAndWait(ctx, "Emulation.setUserAgentOverride", b)
 	if err != nil {
 		return err
 	}

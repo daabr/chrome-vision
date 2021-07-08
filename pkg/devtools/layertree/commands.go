@@ -49,7 +49,7 @@ func (t *CompositingReasons) Do(ctx context.Context) (*CompositingReasonsResult,
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "LayerTree.compositingReasons", b)
+	response, err := devtools.SendAndWait(ctx, "LayerTree.compositingReasons", b)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +83,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "LayerTree.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "LayerTree.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -113,7 +113,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "LayerTree.enable", nil)
+	response, err := devtools.SendAndWait(ctx, "LayerTree.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -159,7 +159,7 @@ func (t *LoadSnapshot) Do(ctx context.Context) (*LoadSnapshotResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "LayerTree.loadSnapshot", b)
+	response, err := devtools.SendAndWait(ctx, "LayerTree.loadSnapshot", b)
 	if err != nil {
 		return nil, err
 	}
@@ -209,7 +209,7 @@ func (t *MakeSnapshot) Do(ctx context.Context) (*MakeSnapshotResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "LayerTree.makeSnapshot", b)
+	response, err := devtools.SendAndWait(ctx, "LayerTree.makeSnapshot", b)
 	if err != nil {
 		return nil, err
 	}
@@ -290,7 +290,7 @@ func (t *ProfileSnapshot) Do(ctx context.Context) (*ProfileSnapshotResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "LayerTree.profileSnapshot", b)
+	response, err := devtools.SendAndWait(ctx, "LayerTree.profileSnapshot", b)
 	if err != nil {
 		return nil, err
 	}
@@ -333,7 +333,7 @@ func (t *ReleaseSnapshot) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "LayerTree.releaseSnapshot", b)
+	response, err := devtools.SendAndWait(ctx, "LayerTree.releaseSnapshot", b)
 	if err != nil {
 		return err
 	}
@@ -412,7 +412,7 @@ func (t *ReplaySnapshot) Do(ctx context.Context) (*ReplaySnapshotResult, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "LayerTree.replaySnapshot", b)
+	response, err := devtools.SendAndWait(ctx, "LayerTree.replaySnapshot", b)
 	if err != nil {
 		return nil, err
 	}
@@ -462,7 +462,7 @@ func (t *SnapshotCommandLog) Do(ctx context.Context) (*SnapshotCommandLogResult,
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "LayerTree.snapshotCommandLog", b)
+	response, err := devtools.SendAndWait(ctx, "LayerTree.snapshotCommandLog", b)
 	if err != nil {
 		return nil, err
 	}

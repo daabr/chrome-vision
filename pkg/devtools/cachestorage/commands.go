@@ -37,7 +37,7 @@ func (t *DeleteCache) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "CacheStorage.deleteCache", b)
+	response, err := devtools.SendAndWait(ctx, "CacheStorage.deleteCache", b)
 	if err != nil {
 		return err
 	}
@@ -79,7 +79,7 @@ func (t *DeleteEntry) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "CacheStorage.deleteEntry", b)
+	response, err := devtools.SendAndWait(ctx, "CacheStorage.deleteEntry", b)
 	if err != nil {
 		return err
 	}
@@ -125,7 +125,7 @@ func (t *RequestCacheNames) Do(ctx context.Context) (*RequestCacheNamesResult, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CacheStorage.requestCacheNames", b)
+	response, err := devtools.SendAndWait(ctx, "CacheStorage.requestCacheNames", b)
 	if err != nil {
 		return nil, err
 	}
@@ -181,7 +181,7 @@ func (t *RequestCachedResponse) Do(ctx context.Context) (*RequestCachedResponseR
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CacheStorage.requestCachedResponse", b)
+	response, err := devtools.SendAndWait(ctx, "CacheStorage.requestCachedResponse", b)
 	if err != nil {
 		return nil, err
 	}
@@ -267,7 +267,7 @@ func (t *RequestEntries) Do(ctx context.Context) (*RequestEntriesResult, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CacheStorage.requestEntries", b)
+	response, err := devtools.SendAndWait(ctx, "CacheStorage.requestEntries", b)
 	if err != nil {
 		return nil, err
 	}

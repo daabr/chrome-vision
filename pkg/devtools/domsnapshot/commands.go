@@ -28,7 +28,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "DOMSnapshot.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "DOMSnapshot.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -58,7 +58,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "DOMSnapshot.enable", nil)
+	response, err := devtools.SendAndWait(ctx, "DOMSnapshot.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -148,7 +148,7 @@ func (t *GetSnapshot) Do(ctx context.Context) (*GetSnapshotResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOMSnapshot.getSnapshot", b)
+	response, err := devtools.SendAndWait(ctx, "DOMSnapshot.getSnapshot", b)
 	if err != nil {
 		return nil, err
 	}
@@ -263,7 +263,7 @@ func (t *CaptureSnapshot) Do(ctx context.Context) (*CaptureSnapshotResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOMSnapshot.captureSnapshot", b)
+	response, err := devtools.SendAndWait(ctx, "DOMSnapshot.captureSnapshot", b)
 	if err != nil {
 		return nil, err
 	}

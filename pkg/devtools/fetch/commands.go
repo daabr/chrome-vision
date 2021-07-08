@@ -29,7 +29,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Fetch.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "Fetch.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -93,7 +93,7 @@ func (t *Enable) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Fetch.enable", b)
+	response, err := devtools.SendAndWait(ctx, "Fetch.enable", b)
 	if err != nil {
 		return err
 	}
@@ -135,7 +135,7 @@ func (t *FailRequest) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Fetch.failRequest", b)
+	response, err := devtools.SendAndWait(ctx, "Fetch.failRequest", b)
 	if err != nil {
 		return err
 	}
@@ -229,7 +229,7 @@ func (t *FulfillRequest) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Fetch.fulfillRequest", b)
+	response, err := devtools.SendAndWait(ctx, "Fetch.fulfillRequest", b)
 	if err != nil {
 		return err
 	}
@@ -312,7 +312,7 @@ func (t *ContinueRequest) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Fetch.continueRequest", b)
+	response, err := devtools.SendAndWait(ctx, "Fetch.continueRequest", b)
 	if err != nil {
 		return err
 	}
@@ -354,7 +354,7 @@ func (t *ContinueWithAuth) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Fetch.continueWithAuth", b)
+	response, err := devtools.SendAndWait(ctx, "Fetch.continueWithAuth", b)
 	if err != nil {
 		return err
 	}
@@ -407,7 +407,7 @@ func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Fetch.getResponseBody", b)
+	response, err := devtools.SendAndWait(ctx, "Fetch.getResponseBody", b)
 	if err != nil {
 		return nil, err
 	}
@@ -464,7 +464,7 @@ func (t *TakeResponseBodyAsStream) Do(ctx context.Context) (*TakeResponseBodyAsS
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Fetch.takeResponseBodyAsStream", b)
+	response, err := devtools.SendAndWait(ctx, "Fetch.takeResponseBodyAsStream", b)
 	if err != nil {
 		return nil, err
 	}

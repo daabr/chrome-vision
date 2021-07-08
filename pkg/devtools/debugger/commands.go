@@ -46,7 +46,7 @@ func (t *ContinueToLocation) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Debugger.continueToLocation", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.continueToLocation", b)
 	if err != nil {
 		return err
 	}
@@ -76,7 +76,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Debugger.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "Debugger.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -138,7 +138,7 @@ func (t *Enable) Do(ctx context.Context) (*EnableResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Debugger.enable", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.enable", b)
 	if err != nil {
 		return nil, err
 	}
@@ -284,7 +284,7 @@ func (t *EvaluateOnCallFrame) Do(ctx context.Context) (*EvaluateOnCallFrameResul
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Debugger.evaluateOnCallFrame", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.evaluateOnCallFrame", b)
 	if err != nil {
 		return nil, err
 	}
@@ -359,7 +359,7 @@ func (t *GetPossibleBreakpoints) Do(ctx context.Context) (*GetPossibleBreakpoint
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Debugger.getPossibleBreakpoints", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.getPossibleBreakpoints", b)
 	if err != nil {
 		return nil, err
 	}
@@ -411,7 +411,7 @@ func (t *GetScriptSource) Do(ctx context.Context) (*GetScriptSourceResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Debugger.getScriptSource", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.getScriptSource", b)
 	if err != nil {
 		return nil, err
 	}
@@ -465,7 +465,7 @@ func (t *GetWasmBytecode) Do(ctx context.Context) (*GetWasmBytecodeResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Debugger.getWasmBytecode", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.getWasmBytecode", b)
 	if err != nil {
 		return nil, err
 	}
@@ -517,7 +517,7 @@ func (t *GetStackTrace) Do(ctx context.Context) (*GetStackTraceResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Debugger.getStackTrace", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.getStackTrace", b)
 	if err != nil {
 		return nil, err
 	}
@@ -551,7 +551,7 @@ func NewPause() *Pause {
 // Do sends the Pause CDP command to a browser,
 // and returns the browser's response.
 func (t *Pause) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Debugger.pause", nil)
+	response, err := devtools.SendAndWait(ctx, "Debugger.pause", nil)
 	if err != nil {
 		return err
 	}
@@ -594,7 +594,7 @@ func (t *PauseOnAsyncCall) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Debugger.pauseOnAsyncCall", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.pauseOnAsyncCall", b)
 	if err != nil {
 		return err
 	}
@@ -632,7 +632,7 @@ func (t *RemoveBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Debugger.removeBreakpoint", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.removeBreakpoint", b)
 	if err != nil {
 		return err
 	}
@@ -684,7 +684,7 @@ func (t *RestartFrame) Do(ctx context.Context) (*RestartFrameResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Debugger.restartFrame", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.restartFrame", b)
 	if err != nil {
 		return nil, err
 	}
@@ -742,7 +742,7 @@ func (t *Resume) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Debugger.resume", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.resume", b)
 	if err != nil {
 		return err
 	}
@@ -813,7 +813,7 @@ func (t *SearchInContent) Do(ctx context.Context) (*SearchInContentResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Debugger.searchInContent", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.searchInContent", b)
 	if err != nil {
 		return nil, err
 	}
@@ -857,7 +857,7 @@ func (t *SetAsyncCallStackDepth) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Debugger.setAsyncCallStackDepth", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.setAsyncCallStackDepth", b)
 	if err != nil {
 		return err
 	}
@@ -902,7 +902,7 @@ func (t *SetBlackboxPatterns) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Debugger.setBlackboxPatterns", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.setBlackboxPatterns", b)
 	if err != nil {
 		return err
 	}
@@ -950,7 +950,7 @@ func (t *SetBlackboxedRanges) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Debugger.setBlackboxedRanges", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.setBlackboxedRanges", b)
 	if err != nil {
 		return err
 	}
@@ -1011,7 +1011,7 @@ func (t *SetBreakpoint) Do(ctx context.Context) (*SetBreakpointResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Debugger.setBreakpoint", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.setBreakpoint", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1061,7 +1061,7 @@ func (t *SetInstrumentationBreakpoint) Do(ctx context.Context) (*SetInstrumentat
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Debugger.setInstrumentationBreakpoint", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.setInstrumentationBreakpoint", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1175,7 +1175,7 @@ func (t *SetBreakpointByURL) Do(ctx context.Context) (*SetBreakpointByURLResult,
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Debugger.setBreakpointByUrl", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.setBreakpointByUrl", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1244,7 +1244,7 @@ func (t *SetBreakpointOnFunctionCall) Do(ctx context.Context) (*SetBreakpointOnF
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Debugger.setBreakpointOnFunctionCall", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.setBreakpointOnFunctionCall", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1287,7 +1287,7 @@ func (t *SetBreakpointsActive) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Debugger.setBreakpointsActive", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.setBreakpointsActive", b)
 	if err != nil {
 		return err
 	}
@@ -1327,7 +1327,7 @@ func (t *SetPauseOnExceptions) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Debugger.setPauseOnExceptions", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.setPauseOnExceptions", b)
 	if err != nil {
 		return err
 	}
@@ -1370,7 +1370,7 @@ func (t *SetReturnValue) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Debugger.setReturnValue", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.setReturnValue", b)
 	if err != nil {
 		return err
 	}
@@ -1442,7 +1442,7 @@ func (t *SetScriptSource) Do(ctx context.Context) (*SetScriptSourceResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Debugger.setScriptSource", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.setScriptSource", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1485,7 +1485,7 @@ func (t *SetSkipAllPauses) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Debugger.setSkipAllPauses", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.setSkipAllPauses", b)
 	if err != nil {
 		return err
 	}
@@ -1535,7 +1535,7 @@ func (t *SetVariableValue) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Debugger.setVariableValue", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.setVariableValue", b)
 	if err != nil {
 		return err
 	}
@@ -1602,7 +1602,7 @@ func (t *StepInto) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Debugger.stepInto", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.stepInto", b)
 	if err != nil {
 		return err
 	}
@@ -1632,7 +1632,7 @@ func NewStepOut() *StepOut {
 // Do sends the StepOut CDP command to a browser,
 // and returns the browser's response.
 func (t *StepOut) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Debugger.stepOut", nil)
+	response, err := devtools.SendAndWait(ctx, "Debugger.stepOut", nil)
 	if err != nil {
 		return err
 	}
@@ -1682,7 +1682,7 @@ func (t *StepOver) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Debugger.stepOver", b)
+	response, err := devtools.SendAndWait(ctx, "Debugger.stepOver", b)
 	if err != nil {
 		return err
 	}

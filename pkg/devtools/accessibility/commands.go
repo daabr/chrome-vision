@@ -29,7 +29,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Accessibility.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "Accessibility.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -60,7 +60,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Accessibility.enable", nil)
+	response, err := devtools.SendAndWait(ctx, "Accessibility.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -151,7 +151,7 @@ func (t *GetPartialAXTree) Do(ctx context.Context) (*GetPartialAXTreeResult, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Accessibility.getPartialAXTree", b)
+	response, err := devtools.SendAndWait(ctx, "Accessibility.getPartialAXTree", b)
 	if err != nil {
 		return nil, err
 	}
@@ -213,7 +213,7 @@ func (t *GetFullAXTree) Do(ctx context.Context) (*GetFullAXTreeResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Accessibility.getFullAXTree", b)
+	response, err := devtools.SendAndWait(ctx, "Accessibility.getFullAXTree", b)
 	if err != nil {
 		return nil, err
 	}
@@ -266,7 +266,7 @@ func (t *GetChildAXNodes) Do(ctx context.Context) (*GetChildAXNodesResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Accessibility.getChildAXNodes", b)
+	response, err := devtools.SendAndWait(ctx, "Accessibility.getChildAXNodes", b)
 	if err != nil {
 		return nil, err
 	}
@@ -376,7 +376,7 @@ func (t *QueryAXTree) Do(ctx context.Context) (*QueryAXTreeResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Accessibility.queryAXTree", b)
+	response, err := devtools.SendAndWait(ctx, "Accessibility.queryAXTree", b)
 	if err != nil {
 		return nil, err
 	}

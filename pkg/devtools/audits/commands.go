@@ -74,7 +74,7 @@ func (t *GetEncodedResponse) Do(ctx context.Context) (*GetEncodedResponseResult,
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Audits.getEncodedResponse", b)
+	response, err := devtools.SendAndWait(ctx, "Audits.getEncodedResponse", b)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Audits.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "Audits.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -139,7 +139,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Audits.enable", nil)
+	response, err := devtools.SendAndWait(ctx, "Audits.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -186,7 +186,7 @@ func (t *CheckContrast) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Audits.checkContrast", b)
+	response, err := devtools.SendAndWait(ctx, "Audits.checkContrast", b)
 	if err != nil {
 		return err
 	}

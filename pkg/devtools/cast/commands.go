@@ -45,7 +45,7 @@ func (t *Enable) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Cast.enable", b)
+	response, err := devtools.SendAndWait(ctx, "Cast.enable", b)
 	if err != nil {
 		return err
 	}
@@ -75,7 +75,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Cast.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "Cast.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -114,7 +114,7 @@ func (t *SetSinkToUse) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Cast.setSinkToUse", b)
+	response, err := devtools.SendAndWait(ctx, "Cast.setSinkToUse", b)
 	if err != nil {
 		return err
 	}
@@ -152,7 +152,7 @@ func (t *StartTabMirroring) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Cast.startTabMirroring", b)
+	response, err := devtools.SendAndWait(ctx, "Cast.startTabMirroring", b)
 	if err != nil {
 		return err
 	}
@@ -190,7 +190,7 @@ func (t *StopCasting) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Cast.stopCasting", b)
+	response, err := devtools.SendAndWait(ctx, "Cast.stopCasting", b)
 	if err != nil {
 		return err
 	}

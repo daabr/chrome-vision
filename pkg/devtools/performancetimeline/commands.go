@@ -42,7 +42,7 @@ func (t *Enable) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "PerformanceTimeline.enable", b)
+	response, err := devtools.SendAndWait(ctx, "PerformanceTimeline.enable", b)
 	if err != nil {
 		return err
 	}

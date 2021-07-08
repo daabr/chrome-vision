@@ -117,7 +117,7 @@ func generateCommands(d Domain) string {
 			fmt.Fprintf(b, "(*%sResult, error) {\n", cmd)
 		}
 		if len(required)+len(optional) == 0 {
-			fmt.Fprint(b, "\tresponse, err := devtools.Send(ctx, ")
+			fmt.Fprint(b, "\tresponse, err := devtools.SendAndWait(ctx, ")
 			fmt.Fprintf(b, "\"%s.%s\", nil)\n", d.Domain, c.Name)
 		} else {
 			fmt.Fprintln(b, "\tb, err := json.Marshal(t)")
@@ -128,7 +128,7 @@ func generateCommands(d Domain) string {
 				fmt.Fprintln(b, "\t\treturn nil, err")
 			}
 			fmt.Fprintln(b, "\t}")
-			fmt.Fprint(b, "\tresponse, err := devtools.Send(ctx, ")
+			fmt.Fprint(b, "\tresponse, err := devtools.SendAndWait(ctx, ")
 			fmt.Fprintf(b, "\"%s.%s\", b)\n", d.Domain, c.Name)
 		}
 		fmt.Fprintln(b, "\tif err != nil {")

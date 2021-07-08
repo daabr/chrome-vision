@@ -28,7 +28,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Performance.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "Performance.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -74,7 +74,7 @@ func (t *Enable) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Performance.enable", b)
+	response, err := devtools.SendAndWait(ctx, "Performance.enable", b)
 	if err != nil {
 		return err
 	}
@@ -121,7 +121,7 @@ func (t *SetTimeDomain) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Performance.setTimeDomain", b)
+	response, err := devtools.SendAndWait(ctx, "Performance.setTimeDomain", b)
 	if err != nil {
 		return err
 	}
@@ -158,7 +158,7 @@ type GetMetricsResult struct {
 // Do sends the GetMetrics CDP command to a browser,
 // and returns the browser's response.
 func (t *GetMetrics) Do(ctx context.Context) (*GetMetricsResult, error) {
-	response, err := devtools.Send(ctx, "Performance.getMetrics", nil)
+	response, err := devtools.SendAndWait(ctx, "Performance.getMetrics", nil)
 	if err != nil {
 		return nil, err
 	}

@@ -41,7 +41,7 @@ func (t *ClearDataForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Storage.clearDataForOrigin", b)
+	response, err := devtools.SendAndWait(ctx, "Storage.clearDataForOrigin", b)
 	if err != nil {
 		return err
 	}
@@ -94,7 +94,7 @@ func (t *GetCookies) Do(ctx context.Context) (*GetCookiesResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Storage.getCookies", b)
+	response, err := devtools.SendAndWait(ctx, "Storage.getCookies", b)
 	if err != nil {
 		return nil, err
 	}
@@ -148,7 +148,7 @@ func (t *SetCookies) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Storage.setCookies", b)
+	response, err := devtools.SendAndWait(ctx, "Storage.setCookies", b)
 	if err != nil {
 		return err
 	}
@@ -194,7 +194,7 @@ func (t *ClearCookies) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Storage.clearCookies", b)
+	response, err := devtools.SendAndWait(ctx, "Storage.clearCookies", b)
 	if err != nil {
 		return err
 	}
@@ -246,7 +246,7 @@ func (t *GetUsageAndQuota) Do(ctx context.Context) (*GetUsageAndQuotaResult, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Storage.getUsageAndQuota", b)
+	response, err := devtools.SendAndWait(ctx, "Storage.getUsageAndQuota", b)
 	if err != nil {
 		return nil, err
 	}
@@ -316,7 +316,7 @@ func (t *OverrideQuotaForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Storage.overrideQuotaForOrigin", b)
+	response, err := devtools.SendAndWait(ctx, "Storage.overrideQuotaForOrigin", b)
 	if err != nil {
 		return err
 	}
@@ -355,7 +355,7 @@ func (t *TrackCacheStorageForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Storage.trackCacheStorageForOrigin", b)
+	response, err := devtools.SendAndWait(ctx, "Storage.trackCacheStorageForOrigin", b)
 	if err != nil {
 		return err
 	}
@@ -394,7 +394,7 @@ func (t *TrackIndexedDBForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Storage.trackIndexedDBForOrigin", b)
+	response, err := devtools.SendAndWait(ctx, "Storage.trackIndexedDBForOrigin", b)
 	if err != nil {
 		return err
 	}
@@ -433,7 +433,7 @@ func (t *UntrackCacheStorageForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Storage.untrackCacheStorageForOrigin", b)
+	response, err := devtools.SendAndWait(ctx, "Storage.untrackCacheStorageForOrigin", b)
 	if err != nil {
 		return err
 	}
@@ -472,7 +472,7 @@ func (t *UntrackIndexedDBForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Storage.untrackIndexedDBForOrigin", b)
+	response, err := devtools.SendAndWait(ctx, "Storage.untrackIndexedDBForOrigin", b)
 	if err != nil {
 		return err
 	}
@@ -513,7 +513,7 @@ type GetTrustTokensResult struct {
 // Do sends the GetTrustTokens CDP command to a browser,
 // and returns the browser's response.
 func (t *GetTrustTokens) Do(ctx context.Context) (*GetTrustTokensResult, error) {
-	response, err := devtools.Send(ctx, "Storage.getTrustTokens", nil)
+	response, err := devtools.SendAndWait(ctx, "Storage.getTrustTokens", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -567,7 +567,7 @@ func (t *ClearTrustTokens) Do(ctx context.Context) (*ClearTrustTokensResult, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Storage.clearTrustTokens", b)
+	response, err := devtools.SendAndWait(ctx, "Storage.clearTrustTokens", b)
 	if err != nil {
 		return nil, err
 	}

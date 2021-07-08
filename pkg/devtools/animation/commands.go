@@ -29,7 +29,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Animation.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "Animation.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -59,7 +59,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Animation.enable", nil)
+	response, err := devtools.SendAndWait(ctx, "Animation.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -105,7 +105,7 @@ func (t *GetCurrentTime) Do(ctx context.Context) (*GetCurrentTimeResult, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Animation.getCurrentTime", b)
+	response, err := devtools.SendAndWait(ctx, "Animation.getCurrentTime", b)
 	if err != nil {
 		return nil, err
 	}
@@ -146,7 +146,7 @@ type GetPlaybackRateResult struct {
 // Do sends the GetPlaybackRate CDP command to a browser,
 // and returns the browser's response.
 func (t *GetPlaybackRate) Do(ctx context.Context) (*GetPlaybackRateResult, error) {
-	response, err := devtools.Send(ctx, "Animation.getPlaybackRate", nil)
+	response, err := devtools.SendAndWait(ctx, "Animation.getPlaybackRate", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -189,7 +189,7 @@ func (t *ReleaseAnimations) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Animation.releaseAnimations", b)
+	response, err := devtools.SendAndWait(ctx, "Animation.releaseAnimations", b)
 	if err != nil {
 		return err
 	}
@@ -235,7 +235,7 @@ func (t *ResolveAnimation) Do(ctx context.Context) (*ResolveAnimationResult, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Animation.resolveAnimation", b)
+	response, err := devtools.SendAndWait(ctx, "Animation.resolveAnimation", b)
 	if err != nil {
 		return nil, err
 	}
@@ -281,7 +281,7 @@ func (t *SeekAnimations) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Animation.seekAnimations", b)
+	response, err := devtools.SendAndWait(ctx, "Animation.seekAnimations", b)
 	if err != nil {
 		return err
 	}
@@ -323,7 +323,7 @@ func (t *SetPaused) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Animation.setPaused", b)
+	response, err := devtools.SendAndWait(ctx, "Animation.setPaused", b)
 	if err != nil {
 		return err
 	}
@@ -362,7 +362,7 @@ func (t *SetPlaybackRate) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Animation.setPlaybackRate", b)
+	response, err := devtools.SendAndWait(ctx, "Animation.setPlaybackRate", b)
 	if err != nil {
 		return err
 	}
@@ -407,7 +407,7 @@ func (t *SetTiming) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Animation.setTiming", b)
+	response, err := devtools.SendAndWait(ctx, "Animation.setTiming", b)
 	if err != nil {
 		return err
 	}

@@ -52,7 +52,7 @@ func (t *AddScriptToEvaluateOnLoad) Do(ctx context.Context) (*AddScriptToEvaluat
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Page.addScriptToEvaluateOnLoad", b)
+	response, err := devtools.SendAndWait(ctx, "Page.addScriptToEvaluateOnLoad", b)
 	if err != nil {
 		return nil, err
 	}
@@ -137,7 +137,7 @@ func (t *AddScriptToEvaluateOnNewDocument) Do(ctx context.Context) (*AddScriptTo
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Page.addScriptToEvaluateOnNewDocument", b)
+	response, err := devtools.SendAndWait(ctx, "Page.addScriptToEvaluateOnNewDocument", b)
 	if err != nil {
 		return nil, err
 	}
@@ -171,7 +171,7 @@ func NewBringToFront() *BringToFront {
 // Do sends the BringToFront CDP command to a browser,
 // and returns the browser's response.
 func (t *BringToFront) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Page.bringToFront", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.bringToFront", nil)
 	if err != nil {
 		return err
 	}
@@ -276,7 +276,7 @@ func (t *CaptureScreenshot) Do(ctx context.Context) (*CaptureScreenshotResult, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Page.captureScreenshot", b)
+	response, err := devtools.SendAndWait(ctx, "Page.captureScreenshot", b)
 	if err != nil {
 		return nil, err
 	}
@@ -338,7 +338,7 @@ func (t *CaptureSnapshot) Do(ctx context.Context) (*CaptureSnapshotResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Page.captureSnapshot", b)
+	response, err := devtools.SendAndWait(ctx, "Page.captureSnapshot", b)
 	if err != nil {
 		return nil, err
 	}
@@ -412,7 +412,7 @@ func (t *CreateIsolatedWorld) Do(ctx context.Context) (*CreateIsolatedWorldResul
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Page.createIsolatedWorld", b)
+	response, err := devtools.SendAndWait(ctx, "Page.createIsolatedWorld", b)
 	if err != nil {
 		return nil, err
 	}
@@ -446,7 +446,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Page.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -476,7 +476,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Page.enable", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -518,7 +518,7 @@ type GetAppManifestResult struct {
 // Do sends the GetAppManifest CDP command to a browser,
 // and returns the browser's response.
 func (t *GetAppManifest) Do(ctx context.Context) (*GetAppManifestResult, error) {
-	response, err := devtools.Send(ctx, "Page.getAppManifest", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.getAppManifest", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -560,7 +560,7 @@ type GetInstallabilityErrorsResult struct {
 // Do sends the GetInstallabilityErrors CDP command to a browser,
 // and returns the browser's response.
 func (t *GetInstallabilityErrors) Do(ctx context.Context) (*GetInstallabilityErrorsResult, error) {
-	response, err := devtools.Send(ctx, "Page.getInstallabilityErrors", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.getInstallabilityErrors", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -602,7 +602,7 @@ type GetManifestIconsResult struct {
 // Do sends the GetManifestIcons CDP command to a browser,
 // and returns the browser's response.
 func (t *GetManifestIcons) Do(ctx context.Context) (*GetManifestIconsResult, error) {
-	response, err := devtools.Send(ctx, "Page.getManifestIcons", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.getManifestIcons", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -643,7 +643,7 @@ type GetFrameTreeResult struct {
 // Do sends the GetFrameTree CDP command to a browser,
 // and returns the browser's response.
 func (t *GetFrameTree) Do(ctx context.Context) (*GetFrameTreeResult, error) {
-	response, err := devtools.Send(ctx, "Page.getFrameTree", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.getFrameTree", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -700,7 +700,7 @@ type GetLayoutMetricsResult struct {
 // Do sends the GetLayoutMetrics CDP command to a browser,
 // and returns the browser's response.
 func (t *GetLayoutMetrics) Do(ctx context.Context) (*GetLayoutMetricsResult, error) {
-	response, err := devtools.Send(ctx, "Page.getLayoutMetrics", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.getLayoutMetrics", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -743,7 +743,7 @@ type GetNavigationHistoryResult struct {
 // Do sends the GetNavigationHistory CDP command to a browser,
 // and returns the browser's response.
 func (t *GetNavigationHistory) Do(ctx context.Context) (*GetNavigationHistoryResult, error) {
-	response, err := devtools.Send(ctx, "Page.getNavigationHistory", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.getNavigationHistory", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -777,7 +777,7 @@ func NewResetNavigationHistory() *ResetNavigationHistory {
 // Do sends the ResetNavigationHistory CDP command to a browser,
 // and returns the browser's response.
 func (t *ResetNavigationHistory) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Page.resetNavigationHistory", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.resetNavigationHistory", nil)
 	if err != nil {
 		return err
 	}
@@ -832,7 +832,7 @@ func (t *GetResourceContent) Do(ctx context.Context) (*GetResourceContentResult,
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Page.getResourceContent", b)
+	response, err := devtools.SendAndWait(ctx, "Page.getResourceContent", b)
 	if err != nil {
 		return nil, err
 	}
@@ -877,7 +877,7 @@ type GetResourceTreeResult struct {
 // Do sends the GetResourceTree CDP command to a browser,
 // and returns the browser's response.
 func (t *GetResourceTree) Do(ctx context.Context) (*GetResourceTreeResult, error) {
-	response, err := devtools.Send(ctx, "Page.getResourceTree", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.getResourceTree", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -933,7 +933,7 @@ func (t *HandleJavaScriptDialog) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.handleJavaScriptDialog", b)
+	response, err := devtools.SendAndWait(ctx, "Page.handleJavaScriptDialog", b)
 	if err != nil {
 		return err
 	}
@@ -1031,7 +1031,7 @@ func (t *Navigate) Do(ctx context.Context) (*NavigateResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Page.navigate", b)
+	response, err := devtools.SendAndWait(ctx, "Page.navigate", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1074,7 +1074,7 @@ func (t *NavigateToHistoryEntry) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.navigateToHistoryEntry", b)
+	response, err := devtools.SendAndWait(ctx, "Page.navigateToHistoryEntry", b)
 	if err != nil {
 		return err
 	}
@@ -1322,7 +1322,7 @@ func (t *PrintToPDF) Do(ctx context.Context) (*PrintToPDFResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Page.printToPDF", b)
+	response, err := devtools.SendAndWait(ctx, "Page.printToPDF", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1385,7 +1385,7 @@ func (t *Reload) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.reload", b)
+	response, err := devtools.SendAndWait(ctx, "Page.reload", b)
 	if err != nil {
 		return err
 	}
@@ -1429,7 +1429,7 @@ func (t *RemoveScriptToEvaluateOnLoad) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.removeScriptToEvaluateOnLoad", b)
+	response, err := devtools.SendAndWait(ctx, "Page.removeScriptToEvaluateOnLoad", b)
 	if err != nil {
 		return err
 	}
@@ -1467,7 +1467,7 @@ func (t *RemoveScriptToEvaluateOnNewDocument) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.removeScriptToEvaluateOnNewDocument", b)
+	response, err := devtools.SendAndWait(ctx, "Page.removeScriptToEvaluateOnNewDocument", b)
 	if err != nil {
 		return err
 	}
@@ -1510,7 +1510,7 @@ func (t *ScreencastFrameAck) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.screencastFrameAck", b)
+	response, err := devtools.SendAndWait(ctx, "Page.screencastFrameAck", b)
 	if err != nil {
 		return err
 	}
@@ -1588,7 +1588,7 @@ func (t *SearchInResource) Do(ctx context.Context) (*SearchInResourceResult, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Page.searchInResource", b)
+	response, err := devtools.SendAndWait(ctx, "Page.searchInResource", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1635,7 +1635,7 @@ func (t *SetAdBlockingEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.setAdBlockingEnabled", b)
+	response, err := devtools.SendAndWait(ctx, "Page.setAdBlockingEnabled", b)
 	if err != nil {
 		return err
 	}
@@ -1678,7 +1678,7 @@ func (t *SetBypassCSP) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.setBypassCSP", b)
+	response, err := devtools.SendAndWait(ctx, "Page.setBypassCSP", b)
 	if err != nil {
 		return err
 	}
@@ -1726,7 +1726,7 @@ func (t *GetPermissionsPolicyState) Do(ctx context.Context) (*GetPermissionsPoli
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Page.getPermissionsPolicyState", b)
+	response, err := devtools.SendAndWait(ctx, "Page.getPermissionsPolicyState", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1773,7 +1773,7 @@ func (t *SetFontFamilies) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.setFontFamilies", b)
+	response, err := devtools.SendAndWait(ctx, "Page.setFontFamilies", b)
 	if err != nil {
 		return err
 	}
@@ -1816,7 +1816,7 @@ func (t *SetFontSizes) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.setFontSizes", b)
+	response, err := devtools.SendAndWait(ctx, "Page.setFontSizes", b)
 	if err != nil {
 		return err
 	}
@@ -1858,7 +1858,7 @@ func (t *SetDocumentContent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.setDocumentContent", b)
+	response, err := devtools.SendAndWait(ctx, "Page.setDocumentContent", b)
 	if err != nil {
 		return err
 	}
@@ -1915,7 +1915,7 @@ func (t *SetDownloadBehavior) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.setDownloadBehavior", b)
+	response, err := devtools.SendAndWait(ctx, "Page.setDownloadBehavior", b)
 	if err != nil {
 		return err
 	}
@@ -1958,7 +1958,7 @@ func (t *SetLifecycleEventsEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.setLifecycleEventsEnabled", b)
+	response, err := devtools.SendAndWait(ctx, "Page.setLifecycleEventsEnabled", b)
 	if err != nil {
 		return err
 	}
@@ -2052,7 +2052,7 @@ func (t *StartScreencast) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.startScreencast", b)
+	response, err := devtools.SendAndWait(ctx, "Page.startScreencast", b)
 	if err != nil {
 		return err
 	}
@@ -2082,7 +2082,7 @@ func NewStopLoading() *StopLoading {
 // Do sends the StopLoading CDP command to a browser,
 // and returns the browser's response.
 func (t *StopLoading) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Page.stopLoading", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.stopLoading", nil)
 	if err != nil {
 		return err
 	}
@@ -2116,7 +2116,7 @@ func NewCrash() *Crash {
 // Do sends the Crash CDP command to a browser,
 // and returns the browser's response.
 func (t *Crash) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Page.crash", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.crash", nil)
 	if err != nil {
 		return err
 	}
@@ -2150,7 +2150,7 @@ func NewClose() *Close {
 // Do sends the Close CDP command to a browser,
 // and returns the browser's response.
 func (t *Close) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Page.close", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.close", nil)
 	if err != nil {
 		return err
 	}
@@ -2195,7 +2195,7 @@ func (t *SetWebLifecycleState) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.setWebLifecycleState", b)
+	response, err := devtools.SendAndWait(ctx, "Page.setWebLifecycleState", b)
 	if err != nil {
 		return err
 	}
@@ -2229,7 +2229,7 @@ func NewStopScreencast() *StopScreencast {
 // Do sends the StopScreencast CDP command to a browser,
 // and returns the browser's response.
 func (t *StopScreencast) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Page.stopScreencast", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.stopScreencast", nil)
 	if err != nil {
 		return err
 	}
@@ -2272,7 +2272,7 @@ func (t *SetProduceCompilationCache) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.setProduceCompilationCache", b)
+	response, err := devtools.SendAndWait(ctx, "Page.setProduceCompilationCache", b)
 	if err != nil {
 		return err
 	}
@@ -2322,7 +2322,7 @@ func (t *ProduceCompilationCache) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.produceCompilationCache", b)
+	response, err := devtools.SendAndWait(ctx, "Page.produceCompilationCache", b)
 	if err != nil {
 		return err
 	}
@@ -2368,7 +2368,7 @@ func (t *AddCompilationCache) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.addCompilationCache", b)
+	response, err := devtools.SendAndWait(ctx, "Page.addCompilationCache", b)
 	if err != nil {
 		return err
 	}
@@ -2402,7 +2402,7 @@ func NewClearCompilationCache() *ClearCompilationCache {
 // Do sends the ClearCompilationCache CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearCompilationCache) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Page.clearCompilationCache", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.clearCompilationCache", nil)
 	if err != nil {
 		return err
 	}
@@ -2456,7 +2456,7 @@ func (t *GenerateTestReport) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.generateTestReport", b)
+	response, err := devtools.SendAndWait(ctx, "Page.generateTestReport", b)
 	if err != nil {
 		return err
 	}
@@ -2490,7 +2490,7 @@ func NewWaitForDebugger() *WaitForDebugger {
 // Do sends the WaitForDebugger CDP command to a browser,
 // and returns the browser's response.
 func (t *WaitForDebugger) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Page.waitForDebugger", nil)
+	response, err := devtools.SendAndWait(ctx, "Page.waitForDebugger", nil)
 	if err != nil {
 		return err
 	}
@@ -2534,7 +2534,7 @@ func (t *SetInterceptFileChooserDialog) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Page.setInterceptFileChooserDialog", b)
+	response, err := devtools.SendAndWait(ctx, "Page.setInterceptFileChooserDialog", b)
 	if err != nil {
 		return err
 	}

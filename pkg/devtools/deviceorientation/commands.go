@@ -28,7 +28,7 @@ func NewClearDeviceOrientationOverride() *ClearDeviceOrientationOverride {
 // Do sends the ClearDeviceOrientationOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearDeviceOrientationOverride) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "DeviceOrientation.clearDeviceOrientationOverride", nil)
+	response, err := devtools.SendAndWait(ctx, "DeviceOrientation.clearDeviceOrientationOverride", nil)
 	if err != nil {
 		return err
 	}
@@ -73,7 +73,7 @@ func (t *SetDeviceOrientationOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DeviceOrientation.setDeviceOrientationOverride", b)
+	response, err := devtools.SendAndWait(ctx, "DeviceOrientation.setDeviceOrientationOverride", b)
 	if err != nil {
 		return err
 	}

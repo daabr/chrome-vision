@@ -36,7 +36,7 @@ func (t *StartObserving) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "BackgroundService.startObserving", b)
+	response, err := devtools.SendAndWait(ctx, "BackgroundService.startObserving", b)
 	if err != nil {
 		return err
 	}
@@ -74,7 +74,7 @@ func (t *StopObserving) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "BackgroundService.stopObserving", b)
+	response, err := devtools.SendAndWait(ctx, "BackgroundService.stopObserving", b)
 	if err != nil {
 		return err
 	}
@@ -114,7 +114,7 @@ func (t *SetRecording) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "BackgroundService.setRecording", b)
+	response, err := devtools.SendAndWait(ctx, "BackgroundService.setRecording", b)
 	if err != nil {
 		return err
 	}
@@ -152,7 +152,7 @@ func (t *ClearEvents) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "BackgroundService.clearEvents", b)
+	response, err := devtools.SendAndWait(ctx, "BackgroundService.clearEvents", b)
 	if err != nil {
 		return err
 	}

@@ -34,7 +34,7 @@ func (t *Clear) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOMStorage.clear", b)
+	response, err := devtools.SendAndWait(ctx, "DOMStorage.clear", b)
 	if err != nil {
 		return err
 	}
@@ -64,7 +64,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "DOMStorage.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "DOMStorage.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -94,7 +94,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "DOMStorage.enable", nil)
+	response, err := devtools.SendAndWait(ctx, "DOMStorage.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -136,7 +136,7 @@ func (t *GetDOMStorageItems) Do(ctx context.Context) (*GetDOMStorageItemsResult,
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOMStorage.getDOMStorageItems", b)
+	response, err := devtools.SendAndWait(ctx, "DOMStorage.getDOMStorageItems", b)
 	if err != nil {
 		return nil, err
 	}
@@ -178,7 +178,7 @@ func (t *RemoveDOMStorageItem) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOMStorage.removeDOMStorageItem", b)
+	response, err := devtools.SendAndWait(ctx, "DOMStorage.removeDOMStorageItem", b)
 	if err != nil {
 		return err
 	}
@@ -218,7 +218,7 @@ func (t *SetDOMStorageItem) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOMStorage.setDOMStorageItem", b)
+	response, err := devtools.SendAndWait(ctx, "DOMStorage.setDOMStorageItem", b)
 	if err != nil {
 		return err
 	}

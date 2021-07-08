@@ -38,7 +38,7 @@ func (t *DeliverPushMessage) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "ServiceWorker.deliverPushMessage", b)
+	response, err := devtools.SendAndWait(ctx, "ServiceWorker.deliverPushMessage", b)
 	if err != nil {
 		return err
 	}
@@ -66,7 +66,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "ServiceWorker.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "ServiceWorker.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -108,7 +108,7 @@ func (t *DispatchSyncEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "ServiceWorker.dispatchSyncEvent", b)
+	response, err := devtools.SendAndWait(ctx, "ServiceWorker.dispatchSyncEvent", b)
 	if err != nil {
 		return err
 	}
@@ -148,7 +148,7 @@ func (t *DispatchPeriodicSyncEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "ServiceWorker.dispatchPeriodicSyncEvent", b)
+	response, err := devtools.SendAndWait(ctx, "ServiceWorker.dispatchPeriodicSyncEvent", b)
 	if err != nil {
 		return err
 	}
@@ -176,7 +176,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "ServiceWorker.enable", nil)
+	response, err := devtools.SendAndWait(ctx, "ServiceWorker.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -212,7 +212,7 @@ func (t *InspectWorker) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "ServiceWorker.inspectWorker", b)
+	response, err := devtools.SendAndWait(ctx, "ServiceWorker.inspectWorker", b)
 	if err != nil {
 		return err
 	}
@@ -248,7 +248,7 @@ func (t *SetForceUpdateOnPageLoad) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "ServiceWorker.setForceUpdateOnPageLoad", b)
+	response, err := devtools.SendAndWait(ctx, "ServiceWorker.setForceUpdateOnPageLoad", b)
 	if err != nil {
 		return err
 	}
@@ -284,7 +284,7 @@ func (t *SkipWaiting) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "ServiceWorker.skipWaiting", b)
+	response, err := devtools.SendAndWait(ctx, "ServiceWorker.skipWaiting", b)
 	if err != nil {
 		return err
 	}
@@ -320,7 +320,7 @@ func (t *StartWorker) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "ServiceWorker.startWorker", b)
+	response, err := devtools.SendAndWait(ctx, "ServiceWorker.startWorker", b)
 	if err != nil {
 		return err
 	}
@@ -348,7 +348,7 @@ func NewStopAllWorkers() *StopAllWorkers {
 // Do sends the StopAllWorkers CDP command to a browser,
 // and returns the browser's response.
 func (t *StopAllWorkers) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "ServiceWorker.stopAllWorkers", nil)
+	response, err := devtools.SendAndWait(ctx, "ServiceWorker.stopAllWorkers", nil)
 	if err != nil {
 		return err
 	}
@@ -384,7 +384,7 @@ func (t *StopWorker) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "ServiceWorker.stopWorker", b)
+	response, err := devtools.SendAndWait(ctx, "ServiceWorker.stopWorker", b)
 	if err != nil {
 		return err
 	}
@@ -420,7 +420,7 @@ func (t *Unregister) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "ServiceWorker.unregister", b)
+	response, err := devtools.SendAndWait(ctx, "ServiceWorker.unregister", b)
 	if err != nil {
 		return err
 	}
@@ -456,7 +456,7 @@ func (t *UpdateRegistration) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "ServiceWorker.updateRegistration", b)
+	response, err := devtools.SendAndWait(ctx, "ServiceWorker.updateRegistration", b)
 	if err != nil {
 		return err
 	}

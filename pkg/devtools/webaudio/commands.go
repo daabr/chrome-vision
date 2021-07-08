@@ -28,7 +28,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "WebAudio.enable", nil)
+	response, err := devtools.SendAndWait(ctx, "WebAudio.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -58,7 +58,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "WebAudio.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "WebAudio.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -102,7 +102,7 @@ func (t *GetRealtimeData) Do(ctx context.Context) (*GetRealtimeDataResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "WebAudio.getRealtimeData", b)
+	response, err := devtools.SendAndWait(ctx, "WebAudio.getRealtimeData", b)
 	if err != nil {
 		return nil, err
 	}

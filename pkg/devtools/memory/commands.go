@@ -34,7 +34,7 @@ type GetDOMCountersResult struct {
 // Do sends the GetDOMCounters CDP command to a browser,
 // and returns the browser's response.
 func (t *GetDOMCounters) Do(ctx context.Context) (*GetDOMCountersResult, error) {
-	response, err := devtools.Send(ctx, "Memory.getDOMCounters", nil)
+	response, err := devtools.SendAndWait(ctx, "Memory.getDOMCounters", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ func NewPrepareForLeakDetection() *PrepareForLeakDetection {
 // Do sends the PrepareForLeakDetection CDP command to a browser,
 // and returns the browser's response.
 func (t *PrepareForLeakDetection) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Memory.prepareForLeakDetection", nil)
+	response, err := devtools.SendAndWait(ctx, "Memory.prepareForLeakDetection", nil)
 	if err != nil {
 		return err
 	}
@@ -96,7 +96,7 @@ func NewForciblyPurgeJavaScriptMemory() *ForciblyPurgeJavaScriptMemory {
 // Do sends the ForciblyPurgeJavaScriptMemory CDP command to a browser,
 // and returns the browser's response.
 func (t *ForciblyPurgeJavaScriptMemory) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Memory.forciblyPurgeJavaScriptMemory", nil)
+	response, err := devtools.SendAndWait(ctx, "Memory.forciblyPurgeJavaScriptMemory", nil)
 	if err != nil {
 		return err
 	}
@@ -135,7 +135,7 @@ func (t *SetPressureNotificationsSuppressed) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Memory.setPressureNotificationsSuppressed", b)
+	response, err := devtools.SendAndWait(ctx, "Memory.setPressureNotificationsSuppressed", b)
 	if err != nil {
 		return err
 	}
@@ -174,7 +174,7 @@ func (t *SimulatePressureNotification) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Memory.simulatePressureNotification", b)
+	response, err := devtools.SendAndWait(ctx, "Memory.simulatePressureNotification", b)
 	if err != nil {
 		return err
 	}
@@ -231,7 +231,7 @@ func (t *StartSampling) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Memory.startSampling", b)
+	response, err := devtools.SendAndWait(ctx, "Memory.startSampling", b)
 	if err != nil {
 		return err
 	}
@@ -261,7 +261,7 @@ func NewStopSampling() *StopSampling {
 // Do sends the StopSampling CDP command to a browser,
 // and returns the browser's response.
 func (t *StopSampling) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Memory.stopSampling", nil)
+	response, err := devtools.SendAndWait(ctx, "Memory.stopSampling", nil)
 	if err != nil {
 		return err
 	}
@@ -298,7 +298,7 @@ type GetAllTimeSamplingProfileResult struct {
 // Do sends the GetAllTimeSamplingProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *GetAllTimeSamplingProfile) Do(ctx context.Context) (*GetAllTimeSamplingProfileResult, error) {
-	response, err := devtools.Send(ctx, "Memory.getAllTimeSamplingProfile", nil)
+	response, err := devtools.SendAndWait(ctx, "Memory.getAllTimeSamplingProfile", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -339,7 +339,7 @@ type GetBrowserSamplingProfileResult struct {
 // Do sends the GetBrowserSamplingProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *GetBrowserSamplingProfile) Do(ctx context.Context) (*GetBrowserSamplingProfileResult, error) {
-	response, err := devtools.Send(ctx, "Memory.getBrowserSamplingProfile", nil)
+	response, err := devtools.SendAndWait(ctx, "Memory.getBrowserSamplingProfile", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -380,7 +380,7 @@ type GetSamplingProfileResult struct {
 // Do sends the GetSamplingProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *GetSamplingProfile) Do(ctx context.Context) (*GetSamplingProfileResult, error) {
-	response, err := devtools.Send(ctx, "Memory.getSamplingProfile", nil)
+	response, err := devtools.SendAndWait(ctx, "Memory.getSamplingProfile", nil)
 	if err != nil {
 		return nil, err
 	}
