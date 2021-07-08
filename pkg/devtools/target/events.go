@@ -41,21 +41,21 @@ type ReceivedMessageFromTarget struct {
 	TargetID string `json:"targetId,omitempty"`
 }
 
-// TargetCreated asynchronous event. Issued when a possible inspection target is created.
+// Created asynchronous event. Issued when a possible inspection target is created.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#event-targetCreated
 type Created struct {
 	TargetInfo Info `json:"targetInfo"`
 }
 
-// TargetDestroyed asynchronous event. Issued when a target is destroyed.
+// Destroyed asynchronous event. Issued when a target is destroyed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#event-targetDestroyed
 type Destroyed struct {
 	TargetID string `json:"targetId"`
 }
 
-// TargetCrashed asynchronous event. Issued when a target has crashed.
+// Crashed asynchronous event. Issued when a target has crashed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#event-targetCrashed
 type Crashed struct {
@@ -66,7 +66,7 @@ type Crashed struct {
 	ErrorCode int64 `json:"errorCode"`
 }
 
-// TargetInfoChanged asynchronous event. Issued when some information about a target has changed. This only happens between
+// InfoChanged asynchronous event. Issued when some information about a target has changed. This only happens between
 // `targetCreated` and `targetDestroyed`.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#event-targetInfoChanged

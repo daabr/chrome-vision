@@ -24,7 +24,7 @@ type DataCollected struct {
 	Value []json.RawMessage `json:"value"`
 }
 
-// TracingComplete asynchronous event. Signals that tracing is stopped and there is no trace buffers pending flush, all data were
+// Complete asynchronous event. Signals that tracing is stopped and there is no trace buffers pending flush, all data were
 // delivered via dataCollected events.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Tracing/#event-tracingComplete

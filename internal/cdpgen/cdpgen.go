@@ -182,14 +182,15 @@ func transformType(t string, arrayTypes map[string]string) string {
 // Avoid repetition/"stuttering", i.e. package names as prefixes in type
 // and function names (https://golang.org/doc/effective_go#package-names).
 func discardRepetitivePrefix(name, domain string) string {
-	if strings.HasPrefix(name, "[]") || strings.HasPrefix(name, "*") {
-		return name
+	// Slices need to be evalauated without the "[]" prefix.
+	if strings.HasPrefix(name, "[]") {
+		return "[]" + discardRepetitivePrefix(name[2:], domain)
 	}
 	// If name starts with domain (case-insensitive), remove this prefix.
 	if re := regexp.MustCompile(`(?i)^` + domain + `(.)`); re.MatchString(name) {
 		name = re.ReplaceAllString(name, "$1")
 	}
-	// If name is in the form "foo.FooBar" (case-insensitive), remove "Foo".
+	// If name is in the form "foo.FooBar", return "foo.Bar".
 	if re := regexp.MustCompile(`^(.+)\.`); re.MatchString(name) {
 		domain = re.FindStringSubmatch(name)[1]
 		re = regexp.MustCompile(`(?i)\.` + domain)

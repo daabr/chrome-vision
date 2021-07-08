@@ -18,7 +18,8 @@ func generateTypes(d Domain) string {
 			key := strings.ToLower(d.Domain) + "." + adjust(t.ID)
 			aliases[key] = transformType(t.Type, nil)
 		}
-		description := adjust(t.ID) + " data type."
+		description := discardRepetitivePrefix(adjust(t.ID), d.Domain)
+		description += " data type."
 		if t.Description != nil {
 			if strings.HasPrefix(*t.Description, t.ID+" ") {
 				description = *t.Description
@@ -119,10 +120,8 @@ func generateProperty(b *strings.Builder, p Property, usage, domain string) {
 			if a, ok := aliases[t[2:]]; ok {
 				t = "[]" + a // De-alias built-in data types (https://crbug.com/1193242).
 			}
-			t = "[]" + discardRepetitivePrefix(t[2:], domain)
 		}
-		t = discardRepetitivePrefix(t, domain)
-		fmt.Fprint(b, t)
+		fmt.Fprint(b, discardRepetitivePrefix(t, domain))
 	} else {
 		r := strings.ReplaceAll(adjust(*p.Ref), strings.ToLower(domain)+".", "")
 		if a, ok := aliases[r]; ok {
@@ -131,8 +130,7 @@ func generateProperty(b *strings.Builder, p Property, usage, domain string) {
 		if p.Optional && r != "int64" && r != "float64" && r != "string" {
 			fmt.Fprint(b, "*")
 		}
-		r = discardRepetitivePrefix(r, domain)
-		fmt.Fprint(b, r)
+		fmt.Fprint(b, discardRepetitivePrefix(r, domain))
 	}
 
 	// JSON key hint.

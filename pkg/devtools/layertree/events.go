@@ -12,7 +12,7 @@ type LayerPainted struct {
 	Clip dom.Rect `json:"clip"`
 }
 
-// LayerTreeDidChange asynchronous event.
+// DidChange asynchronous event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/#event-layerTreeDidChange
 type DidChange struct {

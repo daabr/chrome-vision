@@ -178,10 +178,8 @@ func generateRequiredParameter(b *strings.Builder, p Property, domain string) {
 			if a, ok := aliases[t[2:]]; ok {
 				t = "[]" + a // De-alias built-in data types (https://crbug.com/1193242).
 			}
-			t = "[]" + discardRepetitivePrefix(t[2:], domain)
 		}
-		t = discardRepetitivePrefix(t, domain)
-		fmt.Fprint(b, t)
+		fmt.Fprint(b, discardRepetitivePrefix(t, domain))
 	} else {
 		r := adjust(*p.Ref)
 		if a, ok := aliases[r]; ok {

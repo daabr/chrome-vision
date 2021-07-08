@@ -23,7 +23,7 @@ func (t MixedContentType) String() string {
 	return string(t)
 }
 
-// SecurityState data type. The security level of a page or resource.
+// State data type. The security level of a page or resource.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-SecurityState
 type State string
@@ -133,7 +133,7 @@ type VisibleSecurityState struct {
 	SecurityStateIssueIds []string `json:"securityStateIssueIds"`
 }
 
-// SecurityStateExplanation data type. An explanation of an factor contributing to the security state.
+// StateExplanation data type. An explanation of an factor contributing to the security state.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#type-SecurityStateExplanation
 type StateExplanation struct {

@@ -1,6 +1,6 @@
 package domstorage
 
-// DomStorageItemAdded asynchronous event.
+// ItemAdded asynchronous event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#event-domStorageItemAdded
 type ItemAdded struct {
@@ -9,7 +9,7 @@ type ItemAdded struct {
 	NewValue  string    `json:"newValue"`
 }
 
-// DomStorageItemRemoved asynchronous event.
+// ItemRemoved asynchronous event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#event-domStorageItemRemoved
 type ItemRemoved struct {
@@ -17,7 +17,7 @@ type ItemRemoved struct {
 	Key       string    `json:"key"`
 }
 
-// DomStorageItemUpdated asynchronous event.
+// ItemUpdated asynchronous event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#event-domStorageItemUpdated
 type ItemUpdated struct {
@@ -27,7 +27,7 @@ type ItemUpdated struct {
 	NewValue  string    `json:"newValue"`
 }
 
-// DomStorageItemsCleared asynchronous event.
+// ItemsCleared asynchronous event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/DOMStorage/#event-domStorageItemsCleared
 type ItemsCleared struct {

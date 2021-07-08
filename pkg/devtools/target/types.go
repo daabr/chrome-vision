@@ -1,6 +1,6 @@
 package target
 
-// TargetID data type.
+// ID data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#type-TargetID
 type ID string
@@ -10,7 +10,7 @@ type ID string
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#type-SessionID
 type SessionID string
 
-// TargetInfo data type.
+// Info data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#type-TargetInfo
 type Info struct {

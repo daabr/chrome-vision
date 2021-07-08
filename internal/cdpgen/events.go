@@ -10,7 +10,8 @@ func generateEvents(d Domain) string {
 	fmt.Fprintf(b, "package %s\n", strings.ToLower(d.Domain))
 
 	for _, e := range d.Events {
-		description := adjust(e.Name) + " asynchronous event."
+		description := discardRepetitivePrefix(adjust(e.Name), d.Domain)
+		description += " asynchronous event."
 		if e.Description != nil {
 			if strings.HasPrefix(*e.Description, e.Name+" ") {
 				description = *e.Description

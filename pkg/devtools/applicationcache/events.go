@@ -1,6 +1,6 @@
 package applicationcache
 
-// ApplicationCacheStatusUpdated asynchronous event.
+// StatusUpdated asynchronous event.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#event-applicationCacheStatusUpdated
 type StatusUpdated struct {

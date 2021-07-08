@@ -2,7 +2,7 @@ package log
 
 import "github.com/daabr/chrome-vision/pkg/devtools/runtime"
 
-// LogEntry data type. Log entry.
+// Entry data type. Log entry.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Log/#type-LogEntry
 type Entry struct {

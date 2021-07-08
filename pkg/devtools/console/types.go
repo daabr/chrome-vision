@@ -1,6 +1,6 @@
 package console
 
-// ConsoleMessage data type. Console message.
+// Message data type. Console message.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Console/#type-ConsoleMessage
 type Message struct {

@@ -1,6 +1,6 @@
 package storage
 
-// StorageType data type. Enum of possible storage types.
+// Type data type. Enum of possible storage types.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Storage/#type-StorageType
 type Type string

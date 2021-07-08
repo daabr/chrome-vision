@@ -1,6 +1,6 @@
 package browser
 
-// BrowserContextID data type.
+// ContextID data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-BrowserContextID
 //
@@ -131,7 +131,7 @@ type PermissionDescriptor struct {
 	PanTiltZoom bool `json:"panTiltZoom,omitempty"`
 }
 
-// BrowserCommandID data type. Browser command ids used by executeBrowserCommand.
+// CommandID data type. Browser command ids used by executeBrowserCommand.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Browser/#type-BrowserCommandId
 //

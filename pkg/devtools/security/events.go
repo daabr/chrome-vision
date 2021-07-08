@@ -27,7 +27,7 @@ type VisibleSecurityStateChanged struct {
 	VisibleSecurityState VisibleSecurityState `json:"visibleSecurityState"`
 }
 
-// SecurityStateChanged asynchronous event. The security state of the page changed.
+// StateChanged asynchronous event. The security state of the page changed.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#event-securityStateChanged
 type StateChanged struct {

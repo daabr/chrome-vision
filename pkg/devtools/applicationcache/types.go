@@ -1,6 +1,6 @@
 package applicationcache
 
-// ApplicationCacheResource data type. Detailed application cache resource information.
+// Resource data type. Detailed application cache resource information.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/ApplicationCache/#type-ApplicationCacheResource
 type Resource struct {

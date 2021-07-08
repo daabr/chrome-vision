@@ -77,7 +77,7 @@ type SelectorList struct {
 	Text string `json:"text"`
 }
 
-// CSSStyleSheetHeader data type. CSS stylesheet metainformation.
+// StyleSheetHeader data type. CSS stylesheet metainformation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSStyleSheetHeader
 type StyleSheetHeader struct {
@@ -124,7 +124,7 @@ type StyleSheetHeader struct {
 	EndColumn float64 `json:"endColumn"`
 }
 
-// CSSRule data type. CSS rule representation.
+// Rule data type. CSS rule representation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSRule
 type Rule struct {
@@ -188,7 +188,7 @@ type ShorthandEntry struct {
 	Important bool `json:"important,omitempty"`
 }
 
-// CSSComputedStyleProperty data type.
+// ComputedStyleProperty data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSComputedStyleProperty
 type ComputedStyleProperty struct {
@@ -198,7 +198,7 @@ type ComputedStyleProperty struct {
 	Value string `json:"value"`
 }
 
-// CSSStyle data type. CSS style representation.
+// Style data type. CSS style representation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSStyle
 type Style struct {
@@ -215,7 +215,7 @@ type Style struct {
 	Range *SourceRange `json:"range,omitempty"`
 }
 
-// CSSProperty data type. CSS property declaration data.
+// Property data type. CSS property declaration data.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSProperty
 type Property struct {
@@ -237,7 +237,7 @@ type Property struct {
 	Range *SourceRange `json:"range,omitempty"`
 }
 
-// CSSMedia data type. CSS media rule descriptor.
+// Media data type. CSS media rule descriptor.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSMedia
 type Media struct {
@@ -285,7 +285,7 @@ type MediaQueryExpression struct {
 	ComputedLength float64 `json:"computedLength,omitempty"`
 }
 
-// CSSContainerQuery data type. CSS container query rule descriptor.
+// ContainerQuery data type. CSS container query rule descriptor.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSContainerQuery
 //
@@ -355,7 +355,7 @@ type FontFace struct {
 	FontVariationAxes []FontVariationAxis `json:"fontVariationAxes,omitempty"`
 }
 
-// CSSKeyframesRule data type. CSS keyframes rule representation.
+// KeyframesRule data type. CSS keyframes rule representation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSKeyframesRule
 type KeyframesRule struct {
@@ -365,7 +365,7 @@ type KeyframesRule struct {
 	Keyframes []KeyframeRule `json:"keyframes"`
 }
 
-// CSSKeyframeRule data type. CSS keyframe rule representation.
+// KeyframeRule data type. CSS keyframe rule representation.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSKeyframeRule
 type KeyframeRule struct {

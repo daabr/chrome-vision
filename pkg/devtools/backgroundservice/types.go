@@ -30,7 +30,7 @@ type EventMetadata struct {
 	Value string `json:"value"`
 }
 
-// BackgroundServiceEvent data type.
+// Event data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/BackgroundService/#type-BackgroundServiceEvent
 type Event struct {
