@@ -71,7 +71,7 @@ func (t *GetEventListeners) Do(ctx context.Context) (*GetEventListenersResult, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOMDebugger.getEventListeners", b)
+	response, err := devtools.SendAndWait(ctx, "DOMDebugger.getEventListeners", b)
 	if err != nil {
 		return nil, err
 	}
@@ -117,7 +117,7 @@ func (t *RemoveDOMBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOMDebugger.removeDOMBreakpoint", b)
+	response, err := devtools.SendAndWait(ctx, "DOMDebugger.removeDOMBreakpoint", b)
 	if err != nil {
 		return err
 	}
@@ -171,7 +171,7 @@ func (t *RemoveEventListenerBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOMDebugger.removeEventListenerBreakpoint", b)
+	response, err := devtools.SendAndWait(ctx, "DOMDebugger.removeEventListenerBreakpoint", b)
 	if err != nil {
 		return err
 	}
@@ -214,7 +214,7 @@ func (t *RemoveInstrumentationBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOMDebugger.removeInstrumentationBreakpoint", b)
+	response, err := devtools.SendAndWait(ctx, "DOMDebugger.removeInstrumentationBreakpoint", b)
 	if err != nil {
 		return err
 	}
@@ -253,7 +253,7 @@ func (t *RemoveXHRBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOMDebugger.removeXHRBreakpoint", b)
+	response, err := devtools.SendAndWait(ctx, "DOMDebugger.removeXHRBreakpoint", b)
 	if err != nil {
 		return err
 	}
@@ -296,7 +296,7 @@ func (t *SetBreakOnCSPViolation) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOMDebugger.setBreakOnCSPViolation", b)
+	response, err := devtools.SendAndWait(ctx, "DOMDebugger.setBreakOnCSPViolation", b)
 	if err != nil {
 		return err
 	}
@@ -338,7 +338,7 @@ func (t *SetDOMBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOMDebugger.setDOMBreakpoint", b)
+	response, err := devtools.SendAndWait(ctx, "DOMDebugger.setDOMBreakpoint", b)
 	if err != nil {
 		return err
 	}
@@ -394,7 +394,7 @@ func (t *SetEventListenerBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOMDebugger.setEventListenerBreakpoint", b)
+	response, err := devtools.SendAndWait(ctx, "DOMDebugger.setEventListenerBreakpoint", b)
 	if err != nil {
 		return err
 	}
@@ -437,7 +437,7 @@ func (t *SetInstrumentationBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOMDebugger.setInstrumentationBreakpoint", b)
+	response, err := devtools.SendAndWait(ctx, "DOMDebugger.setInstrumentationBreakpoint", b)
 	if err != nil {
 		return err
 	}
@@ -476,7 +476,7 @@ func (t *SetXHRBreakpoint) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOMDebugger.setXHRBreakpoint", b)
+	response, err := devtools.SendAndWait(ctx, "DOMDebugger.setXHRBreakpoint", b)
 	if err != nil {
 		return err
 	}

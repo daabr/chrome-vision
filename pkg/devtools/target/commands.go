@@ -36,7 +36,7 @@ func (t *ActivateTarget) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Target.activateTarget", b)
+	response, err := devtools.SendAndWait(ctx, "Target.activateTarget", b)
 	if err != nil {
 		return err
 	}
@@ -96,7 +96,7 @@ func (t *AttachToTarget) Do(ctx context.Context) (*AttachToTargetResult, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Target.attachToTarget", b)
+	response, err := devtools.SendAndWait(ctx, "Target.attachToTarget", b)
 	if err != nil {
 		return nil, err
 	}
@@ -141,7 +141,7 @@ type AttachToBrowserTargetResult struct {
 // Do sends the AttachToBrowserTarget CDP command to a browser,
 // and returns the browser's response.
 func (t *AttachToBrowserTarget) Do(ctx context.Context) (*AttachToBrowserTargetResult, error) {
-	response, err := devtools.Send(ctx, "Target.attachToBrowserTarget", nil)
+	response, err := devtools.SendAndWait(ctx, "Target.attachToBrowserTarget", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -192,7 +192,7 @@ func (t *CloseTarget) Do(ctx context.Context) (*CloseTargetResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Target.closeTarget", b)
+	response, err := devtools.SendAndWait(ctx, "Target.closeTarget", b)
 	if err != nil {
 		return nil, err
 	}
@@ -256,7 +256,7 @@ func (t *ExposeDevToolsProtocol) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Target.exposeDevToolsProtocol", b)
+	response, err := devtools.SendAndWait(ctx, "Target.exposeDevToolsProtocol", b)
 	if err != nil {
 		return err
 	}
@@ -336,7 +336,7 @@ func (t *CreateBrowserContext) Do(ctx context.Context) (*CreateBrowserContextRes
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Target.createBrowserContext", b)
+	response, err := devtools.SendAndWait(ctx, "Target.createBrowserContext", b)
 	if err != nil {
 		return nil, err
 	}
@@ -381,7 +381,7 @@ type GetBrowserContextsResult struct {
 // Do sends the GetBrowserContexts CDP command to a browser,
 // and returns the browser's response.
 func (t *GetBrowserContexts) Do(ctx context.Context) (*GetBrowserContextsResult, error) {
-	response, err := devtools.Send(ctx, "Target.getBrowserContexts", nil)
+	response, err := devtools.SendAndWait(ctx, "Target.getBrowserContexts", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -505,7 +505,7 @@ func (t *CreateTarget) Do(ctx context.Context) (*CreateTargetResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Target.createTarget", b)
+	response, err := devtools.SendAndWait(ctx, "Target.createTarget", b)
 	if err != nil {
 		return nil, err
 	}
@@ -570,7 +570,7 @@ func (t *DetachFromTarget) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Target.detachFromTarget", b)
+	response, err := devtools.SendAndWait(ctx, "Target.detachFromTarget", b)
 	if err != nil {
 		return err
 	}
@@ -613,7 +613,7 @@ func (t *DisposeBrowserContext) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Target.disposeBrowserContext", b)
+	response, err := devtools.SendAndWait(ctx, "Target.disposeBrowserContext", b)
 	if err != nil {
 		return err
 	}
@@ -666,7 +666,7 @@ func (t *GetTargetInfo) Do(ctx context.Context) (*GetTargetInfoResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Target.getTargetInfo", b)
+	response, err := devtools.SendAndWait(ctx, "Target.getTargetInfo", b)
 	if err != nil {
 		return nil, err
 	}
@@ -707,7 +707,7 @@ type GetTargetsResult struct {
 // Do sends the GetTargets CDP command to a browser,
 // and returns the browser's response.
 func (t *GetTargets) Do(ctx context.Context) (*GetTargetsResult, error) {
-	response, err := devtools.Send(ctx, "Target.getTargets", nil)
+	response, err := devtools.SendAndWait(ctx, "Target.getTargets", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -781,7 +781,7 @@ func (t *SendMessageToTarget) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Target.sendMessageToTarget", b)
+	response, err := devtools.SendAndWait(ctx, "Target.sendMessageToTarget", b)
 	if err != nil {
 		return err
 	}
@@ -845,7 +845,7 @@ func (t *SetAutoAttach) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Target.setAutoAttach", b)
+	response, err := devtools.SendAndWait(ctx, "Target.setAutoAttach", b)
 	if err != nil {
 		return err
 	}
@@ -885,7 +885,7 @@ func (t *SetDiscoverTargets) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Target.setDiscoverTargets", b)
+	response, err := devtools.SendAndWait(ctx, "Target.setDiscoverTargets", b)
 	if err != nil {
 		return err
 	}
@@ -929,7 +929,7 @@ func (t *SetRemoteLocations) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Target.setRemoteLocations", b)
+	response, err := devtools.SendAndWait(ctx, "Target.setRemoteLocations", b)
 	if err != nil {
 		return err
 	}

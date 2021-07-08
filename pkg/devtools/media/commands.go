@@ -27,7 +27,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Media.enable", nil)
+	response, err := devtools.SendAndWait(ctx, "Media.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -57,7 +57,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Media.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "Media.disable", nil)
 	if err != nil {
 		return err
 	}

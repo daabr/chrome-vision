@@ -42,7 +42,7 @@ func (t *SetAcceptedEncodings) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Network.setAcceptedEncodings", b)
+	response, err := devtools.SendAndWait(ctx, "Network.setAcceptedEncodings", b)
 	if err != nil {
 		return err
 	}
@@ -76,7 +76,7 @@ func NewClearAcceptedEncodingsOverride() *ClearAcceptedEncodingsOverride {
 // Do sends the ClearAcceptedEncodingsOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearAcceptedEncodingsOverride) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Network.clearAcceptedEncodingsOverride", nil)
+	response, err := devtools.SendAndWait(ctx, "Network.clearAcceptedEncodingsOverride", nil)
 	if err != nil {
 		return err
 	}
@@ -117,7 +117,7 @@ type CanClearBrowserCacheResult struct {
 // Do sends the CanClearBrowserCache CDP command to a browser,
 // and returns the browser's response.
 func (t *CanClearBrowserCache) Do(ctx context.Context) (*CanClearBrowserCacheResult, error) {
-	response, err := devtools.Send(ctx, "Network.canClearBrowserCache", nil)
+	response, err := devtools.SendAndWait(ctx, "Network.canClearBrowserCache", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -162,7 +162,7 @@ type CanClearBrowserCookiesResult struct {
 // Do sends the CanClearBrowserCookies CDP command to a browser,
 // and returns the browser's response.
 func (t *CanClearBrowserCookies) Do(ctx context.Context) (*CanClearBrowserCookiesResult, error) {
-	response, err := devtools.Send(ctx, "Network.canClearBrowserCookies", nil)
+	response, err := devtools.SendAndWait(ctx, "Network.canClearBrowserCookies", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -207,7 +207,7 @@ type CanEmulateNetworkConditionsResult struct {
 // Do sends the CanEmulateNetworkConditions CDP command to a browser,
 // and returns the browser's response.
 func (t *CanEmulateNetworkConditions) Do(ctx context.Context) (*CanEmulateNetworkConditionsResult, error) {
-	response, err := devtools.Send(ctx, "Network.canEmulateNetworkConditions", nil)
+	response, err := devtools.SendAndWait(ctx, "Network.canEmulateNetworkConditions", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -241,7 +241,7 @@ func NewClearBrowserCache() *ClearBrowserCache {
 // Do sends the ClearBrowserCache CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearBrowserCache) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Network.clearBrowserCache", nil)
+	response, err := devtools.SendAndWait(ctx, "Network.clearBrowserCache", nil)
 	if err != nil {
 		return err
 	}
@@ -271,7 +271,7 @@ func NewClearBrowserCookies() *ClearBrowserCookies {
 // Do sends the ClearBrowserCookies CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearBrowserCookies) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Network.clearBrowserCookies", nil)
+	response, err := devtools.SendAndWait(ctx, "Network.clearBrowserCookies", nil)
 	if err != nil {
 		return err
 	}
@@ -408,7 +408,7 @@ func (t *ContinueInterceptedRequest) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Network.continueInterceptedRequest", b)
+	response, err := devtools.SendAndWait(ctx, "Network.continueInterceptedRequest", b)
 	if err != nil {
 		return err
 	}
@@ -482,7 +482,7 @@ func (t *DeleteCookies) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Network.deleteCookies", b)
+	response, err := devtools.SendAndWait(ctx, "Network.deleteCookies", b)
 	if err != nil {
 		return err
 	}
@@ -512,7 +512,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Network.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "Network.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -571,7 +571,7 @@ func (t *EmulateNetworkConditions) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Network.emulateNetworkConditions", b)
+	response, err := devtools.SendAndWait(ctx, "Network.emulateNetworkConditions", b)
 	if err != nil {
 		return err
 	}
@@ -647,7 +647,7 @@ func (t *Enable) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Network.enable", b)
+	response, err := devtools.SendAndWait(ctx, "Network.enable", b)
 	if err != nil {
 		return err
 	}
@@ -685,7 +685,7 @@ type GetAllCookiesResult struct {
 // Do sends the GetAllCookies CDP command to a browser,
 // and returns the browser's response.
 func (t *GetAllCookies) Do(ctx context.Context) (*GetAllCookiesResult, error) {
-	response, err := devtools.Send(ctx, "Network.getAllCookies", nil)
+	response, err := devtools.SendAndWait(ctx, "Network.getAllCookies", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -738,7 +738,7 @@ func (t *GetCertificate) Do(ctx context.Context) (*GetCertificateResult, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Network.getCertificate", b)
+	response, err := devtools.SendAndWait(ctx, "Network.getCertificate", b)
 	if err != nil {
 		return nil, err
 	}
@@ -800,7 +800,7 @@ func (t *GetCookies) Do(ctx context.Context) (*GetCookiesResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Network.getCookies", b)
+	response, err := devtools.SendAndWait(ctx, "Network.getCookies", b)
 	if err != nil {
 		return nil, err
 	}
@@ -852,7 +852,7 @@ func (t *GetResponseBody) Do(ctx context.Context) (*GetResponseBodyResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Network.getResponseBody", b)
+	response, err := devtools.SendAndWait(ctx, "Network.getResponseBody", b)
 	if err != nil {
 		return nil, err
 	}
@@ -902,7 +902,7 @@ func (t *GetRequestPostData) Do(ctx context.Context) (*GetRequestPostDataResult,
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Network.getRequestPostData", b)
+	response, err := devtools.SendAndWait(ctx, "Network.getRequestPostData", b)
 	if err != nil {
 		return nil, err
 	}
@@ -958,7 +958,7 @@ func (t *GetResponseBodyForInterception) Do(ctx context.Context) (*GetResponseBo
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Network.getResponseBodyForInterception", b)
+	response, err := devtools.SendAndWait(ctx, "Network.getResponseBodyForInterception", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1013,7 +1013,7 @@ func (t *TakeResponseBodyForInterceptionAsStream) Do(ctx context.Context) (*Take
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Network.takeResponseBodyForInterceptionAsStream", b)
+	response, err := devtools.SendAndWait(ctx, "Network.takeResponseBodyForInterceptionAsStream", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1062,7 +1062,7 @@ func (t *ReplayXHR) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Network.replayXHR", b)
+	response, err := devtools.SendAndWait(ctx, "Network.replayXHR", b)
 	if err != nil {
 		return err
 	}
@@ -1137,7 +1137,7 @@ func (t *SearchInResponseBody) Do(ctx context.Context) (*SearchInResponseBodyRes
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Network.searchInResponseBody", b)
+	response, err := devtools.SendAndWait(ctx, "Network.searchInResponseBody", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1184,7 +1184,7 @@ func (t *SetBlockedURLs) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Network.setBlockedURLs", b)
+	response, err := devtools.SendAndWait(ctx, "Network.setBlockedURLs", b)
 	if err != nil {
 		return err
 	}
@@ -1227,7 +1227,7 @@ func (t *SetBypassServiceWorker) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Network.setBypassServiceWorker", b)
+	response, err := devtools.SendAndWait(ctx, "Network.setBypassServiceWorker", b)
 	if err != nil {
 		return err
 	}
@@ -1266,7 +1266,7 @@ func (t *SetCacheDisabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Network.setCacheDisabled", b)
+	response, err := devtools.SendAndWait(ctx, "Network.setCacheDisabled", b)
 	if err != nil {
 		return err
 	}
@@ -1460,7 +1460,7 @@ func (t *SetCookie) Do(ctx context.Context) (*SetCookieResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Network.setCookie", b)
+	response, err := devtools.SendAndWait(ctx, "Network.setCookie", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1503,7 +1503,7 @@ func (t *SetCookies) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Network.setCookies", b)
+	response, err := devtools.SendAndWait(ctx, "Network.setCookies", b)
 	if err != nil {
 		return err
 	}
@@ -1542,7 +1542,7 @@ func (t *SetExtraHTTPHeaders) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Network.setExtraHTTPHeaders", b)
+	response, err := devtools.SendAndWait(ctx, "Network.setExtraHTTPHeaders", b)
 	if err != nil {
 		return err
 	}
@@ -1585,7 +1585,7 @@ func (t *SetAttachDebugStack) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Network.setAttachDebugStack", b)
+	response, err := devtools.SendAndWait(ctx, "Network.setAttachDebugStack", b)
 	if err != nil {
 		return err
 	}
@@ -1632,7 +1632,7 @@ func (t *SetRequestInterception) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Network.setRequestInterception", b)
+	response, err := devtools.SendAndWait(ctx, "Network.setRequestInterception", b)
 	if err != nil {
 		return err
 	}
@@ -1688,7 +1688,7 @@ func (t *GetSecurityIsolationStatus) Do(ctx context.Context) (*GetSecurityIsolat
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Network.getSecurityIsolationStatus", b)
+	response, err := devtools.SendAndWait(ctx, "Network.getSecurityIsolationStatus", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1747,7 +1747,7 @@ func (t *LoadNetworkResource) Do(ctx context.Context) (*LoadNetworkResourceResul
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Network.loadNetworkResource", b)
+	response, err := devtools.SendAndWait(ctx, "Network.loadNetworkResource", b)
 	if err != nil {
 		return nil, err
 	}

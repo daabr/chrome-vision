@@ -43,7 +43,7 @@ func (t *ClearObjectStore) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "IndexedDB.clearObjectStore", b)
+	response, err := devtools.SendAndWait(ctx, "IndexedDB.clearObjectStore", b)
 	if err != nil {
 		return err
 	}
@@ -85,7 +85,7 @@ func (t *DeleteDatabase) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "IndexedDB.deleteDatabase", b)
+	response, err := devtools.SendAndWait(ctx, "IndexedDB.deleteDatabase", b)
 	if err != nil {
 		return err
 	}
@@ -130,7 +130,7 @@ func (t *DeleteObjectStoreEntries) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "IndexedDB.deleteObjectStoreEntries", b)
+	response, err := devtools.SendAndWait(ctx, "IndexedDB.deleteObjectStoreEntries", b)
 	if err != nil {
 		return err
 	}
@@ -160,7 +160,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "IndexedDB.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "IndexedDB.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -190,7 +190,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "IndexedDB.enable", nil)
+	response, err := devtools.SendAndWait(ctx, "IndexedDB.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -264,7 +264,7 @@ func (t *RequestData) Do(ctx context.Context) (*RequestDataResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "IndexedDB.requestData", b)
+	response, err := devtools.SendAndWait(ctx, "IndexedDB.requestData", b)
 	if err != nil {
 		return nil, err
 	}
@@ -324,7 +324,7 @@ func (t *GetMetadata) Do(ctx context.Context) (*GetMetadataResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "IndexedDB.getMetadata", b)
+	response, err := devtools.SendAndWait(ctx, "IndexedDB.getMetadata", b)
 	if err != nil {
 		return nil, err
 	}
@@ -377,7 +377,7 @@ func (t *RequestDatabase) Do(ctx context.Context) (*RequestDatabaseResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "IndexedDB.requestDatabase", b)
+	response, err := devtools.SendAndWait(ctx, "IndexedDB.requestDatabase", b)
 	if err != nil {
 		return nil, err
 	}
@@ -427,7 +427,7 @@ func (t *RequestDatabaseNames) Do(ctx context.Context) (*RequestDatabaseNamesRes
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "IndexedDB.requestDatabaseNames", b)
+	response, err := devtools.SendAndWait(ctx, "IndexedDB.requestDatabaseNames", b)
 	if err != nil {
 		return nil, err
 	}

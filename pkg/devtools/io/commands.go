@@ -38,7 +38,7 @@ func (t *Close) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "IO.close", b)
+	response, err := devtools.SendAndWait(ctx, "IO.close", b)
 	if err != nil {
 		return err
 	}
@@ -112,7 +112,7 @@ func (t *Read) Do(ctx context.Context) (*ReadResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "IO.read", b)
+	response, err := devtools.SendAndWait(ctx, "IO.read", b)
 	if err != nil {
 		return nil, err
 	}
@@ -162,7 +162,7 @@ func (t *ResolveBlob) Do(ctx context.Context) (*ResolveBlobResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "IO.resolveBlob", b)
+	response, err := devtools.SendAndWait(ctx, "IO.resolveBlob", b)
 	if err != nil {
 		return nil, err
 	}

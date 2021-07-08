@@ -213,7 +213,7 @@ func Close(ctx context.Context) {
 	if _, ok := FromContext(ctx); ok {
 		// https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-close
 		// (we don't use the browser sub-package to avoid circular dependencies).
-		Send(ctx, "Browser.close", nil)
+		SendAndWait(ctx, "Browser.close", nil)
 		Wait(ctx)
 	}
 }

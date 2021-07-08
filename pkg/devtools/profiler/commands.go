@@ -26,7 +26,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Profiler.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "Profiler.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -54,7 +54,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Profiler.enable", nil)
+	response, err := devtools.SendAndWait(ctx, "Profiler.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -92,7 +92,7 @@ type GetBestEffortCoverageResult struct {
 // Do sends the GetBestEffortCoverage CDP command to a browser,
 // and returns the browser's response.
 func (t *GetBestEffortCoverage) Do(ctx context.Context) (*GetBestEffortCoverageResult, error) {
-	response, err := devtools.Send(ctx, "Profiler.getBestEffortCoverage", nil)
+	response, err := devtools.SendAndWait(ctx, "Profiler.getBestEffortCoverage", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -135,7 +135,7 @@ func (t *SetSamplingInterval) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Profiler.setSamplingInterval", b)
+	response, err := devtools.SendAndWait(ctx, "Profiler.setSamplingInterval", b)
 	if err != nil {
 		return err
 	}
@@ -163,7 +163,7 @@ func NewStart() *Start {
 // Do sends the Start CDP command to a browser,
 // and returns the browser's response.
 func (t *Start) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Profiler.start", nil)
+	response, err := devtools.SendAndWait(ctx, "Profiler.start", nil)
 	if err != nil {
 		return err
 	}
@@ -240,7 +240,7 @@ func (t *StartPreciseCoverage) Do(ctx context.Context) (*StartPreciseCoverageRes
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Profiler.startPreciseCoverage", b)
+	response, err := devtools.SendAndWait(ctx, "Profiler.startPreciseCoverage", b)
 	if err != nil {
 		return nil, err
 	}
@@ -278,7 +278,7 @@ func NewStartTypeProfile() *StartTypeProfile {
 // Do sends the StartTypeProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *StartTypeProfile) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Profiler.startTypeProfile", nil)
+	response, err := devtools.SendAndWait(ctx, "Profiler.startTypeProfile", nil)
 	if err != nil {
 		return err
 	}
@@ -313,7 +313,7 @@ type StopResult struct {
 // Do sends the Stop CDP command to a browser,
 // and returns the browser's response.
 func (t *Stop) Do(ctx context.Context) (*StopResult, error) {
-	response, err := devtools.Send(ctx, "Profiler.stop", nil)
+	response, err := devtools.SendAndWait(ctx, "Profiler.stop", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -348,7 +348,7 @@ func NewStopPreciseCoverage() *StopPreciseCoverage {
 // Do sends the StopPreciseCoverage CDP command to a browser,
 // and returns the browser's response.
 func (t *StopPreciseCoverage) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Profiler.stopPreciseCoverage", nil)
+	response, err := devtools.SendAndWait(ctx, "Profiler.stopPreciseCoverage", nil)
 	if err != nil {
 		return err
 	}
@@ -382,7 +382,7 @@ func NewStopTypeProfile() *StopTypeProfile {
 // Do sends the StopTypeProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *StopTypeProfile) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Profiler.stopTypeProfile", nil)
+	response, err := devtools.SendAndWait(ctx, "Profiler.stopTypeProfile", nil)
 	if err != nil {
 		return err
 	}
@@ -422,7 +422,7 @@ type TakePreciseCoverageResult struct {
 // Do sends the TakePreciseCoverage CDP command to a browser,
 // and returns the browser's response.
 func (t *TakePreciseCoverage) Do(ctx context.Context) (*TakePreciseCoverageResult, error) {
-	response, err := devtools.Send(ctx, "Profiler.takePreciseCoverage", nil)
+	response, err := devtools.SendAndWait(ctx, "Profiler.takePreciseCoverage", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -467,7 +467,7 @@ type TakeTypeProfileResult struct {
 // Do sends the TakeTypeProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *TakeTypeProfile) Do(ctx context.Context) (*TakeTypeProfileResult, error) {
-	response, err := devtools.Send(ctx, "Profiler.takeTypeProfile", nil)
+	response, err := devtools.SendAndWait(ctx, "Profiler.takeTypeProfile", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -505,7 +505,7 @@ func NewEnableCounters() *EnableCounters {
 // Do sends the EnableCounters CDP command to a browser,
 // and returns the browser's response.
 func (t *EnableCounters) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Profiler.enableCounters", nil)
+	response, err := devtools.SendAndWait(ctx, "Profiler.enableCounters", nil)
 	if err != nil {
 		return err
 	}
@@ -539,7 +539,7 @@ func NewDisableCounters() *DisableCounters {
 // Do sends the DisableCounters CDP command to a browser,
 // and returns the browser's response.
 func (t *DisableCounters) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Profiler.disableCounters", nil)
+	response, err := devtools.SendAndWait(ctx, "Profiler.disableCounters", nil)
 	if err != nil {
 		return err
 	}
@@ -580,7 +580,7 @@ type GetCountersResult struct {
 // Do sends the GetCounters CDP command to a browser,
 // and returns the browser's response.
 func (t *GetCounters) Do(ctx context.Context) (*GetCountersResult, error) {
-	response, err := devtools.Send(ctx, "Profiler.getCounters", nil)
+	response, err := devtools.SendAndWait(ctx, "Profiler.getCounters", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -618,7 +618,7 @@ func NewEnableRuntimeCallStats() *EnableRuntimeCallStats {
 // Do sends the EnableRuntimeCallStats CDP command to a browser,
 // and returns the browser's response.
 func (t *EnableRuntimeCallStats) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Profiler.enableRuntimeCallStats", nil)
+	response, err := devtools.SendAndWait(ctx, "Profiler.enableRuntimeCallStats", nil)
 	if err != nil {
 		return err
 	}
@@ -652,7 +652,7 @@ func NewDisableRuntimeCallStats() *DisableRuntimeCallStats {
 // Do sends the DisableRuntimeCallStats CDP command to a browser,
 // and returns the browser's response.
 func (t *DisableRuntimeCallStats) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Profiler.disableRuntimeCallStats", nil)
+	response, err := devtools.SendAndWait(ctx, "Profiler.disableRuntimeCallStats", nil)
 	if err != nil {
 		return err
 	}
@@ -693,7 +693,7 @@ type GetRuntimeCallStatsResult struct {
 // Do sends the GetRuntimeCallStats CDP command to a browser,
 // and returns the browser's response.
 func (t *GetRuntimeCallStats) Do(ctx context.Context) (*GetRuntimeCallStatsResult, error) {
-	response, err := devtools.Send(ctx, "Profiler.getRuntimeCallStats", nil)
+	response, err := devtools.SendAndWait(ctx, "Profiler.getRuntimeCallStats", nil)
 	if err != nil {
 		return nil, err
 	}

@@ -229,10 +229,11 @@ func sendToWebSocket(s *Session, async asyncMessage) {
 	postSend(s, async, b)
 }
 
-// Send constructs and sends a CDP message to the browser associated
-// with the given context, and returns the browser's response message.
+// Send constructs and sends a CDP message to the browser associated with the
+// given context, and returns a channel to receive for the browser's response
+// message. Callers need to explicitly close these returned channels.
 // Multiple goroutines may call this function simultaneously.
-func Send(ctx context.Context, method string, params json.RawMessage) (*Message, error) {
+func Send(ctx context.Context, method string, params json.RawMessage) (chan *Message, error) {
 	s, ok := FromContext(ctx)
 	if !ok {
 		return nil, errors.New("context not initialized with devtools.NewContext")
@@ -242,7 +243,18 @@ func Send(ctx context.Context, method string, params json.RawMessage) (*Message,
 	ch := make(chan *Message)
 	// https://blog.golang.org/codelab-share
 	s.msgQ <- asyncMessage{requestMsg: *m, responseChan: ch}
-	m = <-ch
+	return ch, nil
+}
+
+// Send constructs and sends a CDP message to the browser associated with the
+// given context, and returns the browser's response message when processing
+// is completed. Multiple goroutines may call this function simultaneously.
+func SendAndWait(ctx context.Context, method string, params json.RawMessage) (*Message, error) {
+	ch, err := Send(ctx, method, params)
+	if err != nil {
+		return nil, err
+	}
+	m := <-ch
 	close(ch)
 	return m, nil
 }

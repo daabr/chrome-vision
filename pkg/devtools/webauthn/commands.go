@@ -29,7 +29,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "WebAuthn.enable", nil)
+	response, err := devtools.SendAndWait(ctx, "WebAuthn.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -59,7 +59,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "WebAuthn.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "WebAuthn.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -103,7 +103,7 @@ func (t *AddVirtualAuthenticator) Do(ctx context.Context) (*AddVirtualAuthentica
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "WebAuthn.addVirtualAuthenticator", b)
+	response, err := devtools.SendAndWait(ctx, "WebAuthn.addVirtualAuthenticator", b)
 	if err != nil {
 		return nil, err
 	}
@@ -145,7 +145,7 @@ func (t *RemoveVirtualAuthenticator) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "WebAuthn.removeVirtualAuthenticator", b)
+	response, err := devtools.SendAndWait(ctx, "WebAuthn.removeVirtualAuthenticator", b)
 	if err != nil {
 		return err
 	}
@@ -185,7 +185,7 @@ func (t *AddCredential) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "WebAuthn.addCredential", b)
+	response, err := devtools.SendAndWait(ctx, "WebAuthn.addCredential", b)
 	if err != nil {
 		return err
 	}
@@ -232,7 +232,7 @@ func (t *GetCredential) Do(ctx context.Context) (*GetCredentialResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "WebAuthn.getCredential", b)
+	response, err := devtools.SendAndWait(ctx, "WebAuthn.getCredential", b)
 	if err != nil {
 		return nil, err
 	}
@@ -280,7 +280,7 @@ func (t *GetCredentials) Do(ctx context.Context) (*GetCredentialsResult, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "WebAuthn.getCredentials", b)
+	response, err := devtools.SendAndWait(ctx, "WebAuthn.getCredentials", b)
 	if err != nil {
 		return nil, err
 	}
@@ -324,7 +324,7 @@ func (t *RemoveCredential) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "WebAuthn.removeCredential", b)
+	response, err := devtools.SendAndWait(ctx, "WebAuthn.removeCredential", b)
 	if err != nil {
 		return err
 	}
@@ -362,7 +362,7 @@ func (t *ClearCredentials) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "WebAuthn.clearCredentials", b)
+	response, err := devtools.SendAndWait(ctx, "WebAuthn.clearCredentials", b)
 	if err != nil {
 		return err
 	}
@@ -403,7 +403,7 @@ func (t *SetUserVerified) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "WebAuthn.setUserVerified", b)
+	response, err := devtools.SendAndWait(ctx, "WebAuthn.setUserVerified", b)
 	if err != nil {
 		return err
 	}
@@ -444,7 +444,7 @@ func (t *SetAutomaticPresenceSimulation) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "WebAuthn.setAutomaticPresenceSimulation", b)
+	response, err := devtools.SendAndWait(ctx, "WebAuthn.setAutomaticPresenceSimulation", b)
 	if err != nil {
 		return err
 	}

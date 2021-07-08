@@ -257,12 +257,12 @@ func NewContext(parent context.Context, opts ...SessionOption) (context.Context,
 	session.SessionID.Write(sessionID)
 
 	// Enable receiving various asynchronous events from the browser.
-	if _, err := Send(ctx, "Page.enable", nil); err != nil {
+	if _, err := SendAndWait(ctx, "Page.enable", nil); err != nil {
 		session.cancel()
 		return parent, err
 	}
 	params := []byte(`{"enabled":true}`)
-	if _, err := Send(ctx, "Page.setLifecycleEventsEnabled", params); err != nil {
+	if _, err := SendAndWait(ctx, "Page.setLifecycleEventsEnabled", params); err != nil {
 		session.cancel()
 		return parent, err
 	}
@@ -289,7 +289,7 @@ func mkdirOutput() (string, error) {
 func createTarget(ctx context.Context) (string, error) {
 	// https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-createTarget
 	// (we don't use the target sub-package to avoid circular dependencies).
-	response, err := Send(ctx, "Target.createTarget", []byte(`{"url":""}`))
+	response, err := SendAndWait(ctx, "Target.createTarget", []byte(`{"url":""}`))
 	if err != nil {
 		return "", err
 	}
@@ -315,7 +315,7 @@ func fetchTargetID(ctx context.Context) (string, error) {
 		case <-ticker.C:
 			// https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-getTargets
 			// (we don't use the target sub-package to avoid circular dependencies).
-			response, err := Send(ctx, "Target.getTargets", nil)
+			response, err := SendAndWait(ctx, "Target.getTargets", nil)
 			if err != nil {
 				lastErr = err
 				break
@@ -346,7 +346,7 @@ func attach(ctx context.Context, targetID string) (string, error) {
 	// https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-attachToTarget
 	// (we don't use the target sub-package to avoid circular dependencies).
 	params := fmt.Sprintf(`{"targetId":%q,"flatten":true}`, targetID)
-	response, err := Send(ctx, "Target.attachToTarget", []byte(params))
+	response, err := SendAndWait(ctx, "Target.attachToTarget", []byte(params))
 	if err != nil {
 		return "", err
 	}

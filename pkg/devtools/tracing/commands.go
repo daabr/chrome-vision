@@ -28,7 +28,7 @@ func NewEnd() *End {
 // Do sends the End CDP command to a browser,
 // and returns the browser's response.
 func (t *End) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Tracing.end", nil)
+	response, err := devtools.SendAndWait(ctx, "Tracing.end", nil)
 	if err != nil {
 		return err
 	}
@@ -65,7 +65,7 @@ type GetCategoriesResult struct {
 // Do sends the GetCategories CDP command to a browser,
 // and returns the browser's response.
 func (t *GetCategories) Do(ctx context.Context) (*GetCategoriesResult, error) {
-	response, err := devtools.Send(ctx, "Tracing.getCategories", nil)
+	response, err := devtools.SendAndWait(ctx, "Tracing.getCategories", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ func (t *RecordClockSyncMarker) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Tracing.recordClockSyncMarker", b)
+	response, err := devtools.SendAndWait(ctx, "Tracing.recordClockSyncMarker", b)
 	if err != nil {
 		return err
 	}
@@ -174,7 +174,7 @@ func (t *RequestMemoryDump) Do(ctx context.Context) (*RequestMemoryDumpResult, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "Tracing.requestMemoryDump", b)
+	response, err := devtools.SendAndWait(ctx, "Tracing.requestMemoryDump", b)
 	if err != nil {
 		return nil, err
 	}
@@ -327,7 +327,7 @@ func (t *Start) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Tracing.start", b)
+	response, err := devtools.SendAndWait(ctx, "Tracing.start", b)
 	if err != nil {
 		return err
 	}

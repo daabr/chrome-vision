@@ -63,7 +63,7 @@ func (t *DispatchDragEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Input.dispatchDragEvent", b)
+	response, err := devtools.SendAndWait(ctx, "Input.dispatchDragEvent", b)
 	if err != nil {
 		return err
 	}
@@ -274,7 +274,7 @@ func (t *DispatchKeyEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Input.dispatchKeyEvent", b)
+	response, err := devtools.SendAndWait(ctx, "Input.dispatchKeyEvent", b)
 	if err != nil {
 		return err
 	}
@@ -318,7 +318,7 @@ func (t *InsertText) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Input.insertText", b)
+	response, err := devtools.SendAndWait(ctx, "Input.insertText", b)
 	if err != nil {
 		return err
 	}
@@ -531,7 +531,7 @@ func (t *DispatchMouseEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Input.dispatchMouseEvent", b)
+	response, err := devtools.SendAndWait(ctx, "Input.dispatchMouseEvent", b)
 	if err != nil {
 		return err
 	}
@@ -600,7 +600,7 @@ func (t *DispatchTouchEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Input.dispatchTouchEvent", b)
+	response, err := devtools.SendAndWait(ctx, "Input.dispatchTouchEvent", b)
 	if err != nil {
 		return err
 	}
@@ -709,7 +709,7 @@ func (t *EmulateTouchFromMouseEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Input.emulateTouchFromMouseEvent", b)
+	response, err := devtools.SendAndWait(ctx, "Input.emulateTouchFromMouseEvent", b)
 	if err != nil {
 		return err
 	}
@@ -748,7 +748,7 @@ func (t *SetIgnoreInputEvents) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Input.setIgnoreInputEvents", b)
+	response, err := devtools.SendAndWait(ctx, "Input.setIgnoreInputEvents", b)
 	if err != nil {
 		return err
 	}
@@ -791,7 +791,7 @@ func (t *SetInterceptDrags) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Input.setInterceptDrags", b)
+	response, err := devtools.SendAndWait(ctx, "Input.setInterceptDrags", b)
 	if err != nil {
 		return err
 	}
@@ -864,7 +864,7 @@ func (t *SynthesizePinchGesture) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Input.synthesizePinchGesture", b)
+	response, err := devtools.SendAndWait(ctx, "Input.synthesizePinchGesture", b)
 	if err != nil {
 		return err
 	}
@@ -1026,7 +1026,7 @@ func (t *SynthesizeScrollGesture) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Input.synthesizeScrollGesture", b)
+	response, err := devtools.SendAndWait(ctx, "Input.synthesizeScrollGesture", b)
 	if err != nil {
 		return err
 	}
@@ -1107,7 +1107,7 @@ func (t *SynthesizeTapGesture) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "Input.synthesizeTapGesture", b)
+	response, err := devtools.SendAndWait(ctx, "Input.synthesizeTapGesture", b)
 	if err != nil {
 		return err
 	}

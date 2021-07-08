@@ -27,7 +27,7 @@ func NewClearMessages() *ClearMessages {
 // Do sends the ClearMessages CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearMessages) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Console.clearMessages", nil)
+	response, err := devtools.SendAndWait(ctx, "Console.clearMessages", nil)
 	if err != nil {
 		return err
 	}
@@ -57,7 +57,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Console.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "Console.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -88,7 +88,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "Console.enable", nil)
+	response, err := devtools.SendAndWait(ctx, "Console.enable", nil)
 	if err != nil {
 		return err
 	}

@@ -49,7 +49,7 @@ func (t *CollectClassNamesFromSubtree) Do(ctx context.Context) (*CollectClassNam
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.collectClassNamesFromSubtree", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.collectClassNamesFromSubtree", b)
 	if err != nil {
 		return nil, err
 	}
@@ -120,7 +120,7 @@ func (t *CopyTo) Do(ctx context.Context) (*CopyToResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.copyTo", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.copyTo", b)
 	if err != nil {
 		return nil, err
 	}
@@ -226,7 +226,7 @@ func (t *DescribeNode) Do(ctx context.Context) (*DescribeNodeResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.describeNode", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.describeNode", b)
 	if err != nil {
 		return nil, err
 	}
@@ -317,7 +317,7 @@ func (t *ScrollIntoViewIfNeeded) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOM.scrollIntoViewIfNeeded", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.scrollIntoViewIfNeeded", b)
 	if err != nil {
 		return err
 	}
@@ -347,7 +347,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "DOM.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "DOM.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -391,7 +391,7 @@ func (t *DiscardSearchResults) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOM.discardSearchResults", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.discardSearchResults", b)
 	if err != nil {
 		return err
 	}
@@ -421,7 +421,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "DOM.enable", nil)
+	response, err := devtools.SendAndWait(ctx, "DOM.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -489,7 +489,7 @@ func (t *Focus) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOM.focus", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.focus", b)
 	if err != nil {
 		return err
 	}
@@ -535,7 +535,7 @@ func (t *GetAttributes) Do(ctx context.Context) (*GetAttributesResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.getAttributes", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.getAttributes", b)
 	if err != nil {
 		return nil, err
 	}
@@ -614,7 +614,7 @@ func (t *GetBoxModel) Do(ctx context.Context) (*GetBoxModelResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.getBoxModel", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.getBoxModel", b)
 	if err != nil {
 		return nil, err
 	}
@@ -698,7 +698,7 @@ func (t *GetContentQuads) Do(ctx context.Context) (*GetContentQuadsResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.getContentQuads", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.getContentQuads", b)
 	if err != nil {
 		return nil, err
 	}
@@ -770,7 +770,7 @@ func (t *GetDocument) Do(ctx context.Context) (*GetDocumentResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.getDocument", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.getDocument", b)
 	if err != nil {
 		return nil, err
 	}
@@ -848,7 +848,7 @@ func (t *GetFlattenedDocument) Do(ctx context.Context) (*GetFlattenedDocumentRes
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.getFlattenedDocument", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.getFlattenedDocument", b)
 	if err != nil {
 		return nil, err
 	}
@@ -918,7 +918,7 @@ func (t *GetNodesForSubtreeByStyle) Do(ctx context.Context) (*GetNodesForSubtree
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.getNodesForSubtreeByStyle", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.getNodesForSubtreeByStyle", b)
 	if err != nil {
 		return nil, err
 	}
@@ -998,7 +998,7 @@ func (t *GetNodeForLocation) Do(ctx context.Context) (*GetNodeForLocationResult,
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.getNodeForLocation", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.getNodeForLocation", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1077,7 +1077,7 @@ func (t *GetOuterHTML) Do(ctx context.Context) (*GetOuterHTMLResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.getOuterHTML", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.getOuterHTML", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1131,7 +1131,7 @@ func (t *GetRelayoutBoundary) Do(ctx context.Context) (*GetRelayoutBoundaryResul
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.getRelayoutBoundary", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.getRelayoutBoundary", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1192,7 +1192,7 @@ func (t *GetSearchResults) Do(ctx context.Context) (*GetSearchResultsResult, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.getSearchResults", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.getSearchResults", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1230,7 +1230,7 @@ func NewMarkUndoableState() *MarkUndoableState {
 // Do sends the MarkUndoableState CDP command to a browser,
 // and returns the browser's response.
 func (t *MarkUndoableState) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "DOM.markUndoableState", nil)
+	response, err := devtools.SendAndWait(ctx, "DOM.markUndoableState", nil)
 	if err != nil {
 		return err
 	}
@@ -1292,7 +1292,7 @@ func (t *MoveTo) Do(ctx context.Context) (*MoveToResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.moveTo", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.moveTo", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1360,7 +1360,7 @@ func (t *PerformSearch) Do(ctx context.Context) (*PerformSearchResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.performSearch", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.performSearch", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1414,7 +1414,7 @@ func (t *PushNodeByPathToFrontend) Do(ctx context.Context) (*PushNodeByPathToFro
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.pushNodeByPathToFrontend", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.pushNodeByPathToFrontend", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1469,7 +1469,7 @@ func (t *PushNodesByBackendIdsToFrontend) Do(ctx context.Context) (*PushNodesByB
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.pushNodesByBackendIdsToFrontend", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.pushNodesByBackendIdsToFrontend", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1522,7 +1522,7 @@ func (t *QuerySelector) Do(ctx context.Context) (*QuerySelectorResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.querySelector", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.querySelector", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1575,7 +1575,7 @@ func (t *QuerySelectorAll) Do(ctx context.Context) (*QuerySelectorAllResult, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.querySelectorAll", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.querySelectorAll", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1613,7 +1613,7 @@ func NewRedo() *Redo {
 // Do sends the Redo CDP command to a browser,
 // and returns the browser's response.
 func (t *Redo) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "DOM.redo", nil)
+	response, err := devtools.SendAndWait(ctx, "DOM.redo", nil)
 	if err != nil {
 		return err
 	}
@@ -1655,7 +1655,7 @@ func (t *RemoveAttribute) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOM.removeAttribute", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.removeAttribute", b)
 	if err != nil {
 		return err
 	}
@@ -1694,7 +1694,7 @@ func (t *RemoveNode) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOM.removeNode", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.removeNode", b)
 	if err != nil {
 		return err
 	}
@@ -1761,7 +1761,7 @@ func (t *RequestChildNodes) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOM.requestChildNodes", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.requestChildNodes", b)
 	if err != nil {
 		return err
 	}
@@ -1809,7 +1809,7 @@ func (t *RequestNode) Do(ctx context.Context) (*RequestNodeResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.requestNode", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.requestNode", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1899,7 +1899,7 @@ func (t *ResolveNode) Do(ctx context.Context) (*ResolveNodeResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.resolveNode", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.resolveNode", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1948,7 +1948,7 @@ func (t *SetAttributeValue) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOM.setAttributeValue", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.setAttributeValue", b)
 	if err != nil {
 		return err
 	}
@@ -2004,7 +2004,7 @@ func (t *SetAttributesAsText) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOM.setAttributesAsText", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.setAttributesAsText", b)
 	if err != nil {
 		return err
 	}
@@ -2076,7 +2076,7 @@ func (t *SetFileInputFiles) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOM.setFileInputFiles", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.setFileInputFiles", b)
 	if err != nil {
 		return err
 	}
@@ -2119,7 +2119,7 @@ func (t *SetNodeStackTracesEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOM.setNodeStackTracesEnabled", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.setNodeStackTracesEnabled", b)
 	if err != nil {
 		return err
 	}
@@ -2169,7 +2169,7 @@ func (t *GetNodeStackTraces) Do(ctx context.Context) (*GetNodeStackTracesResult,
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.getNodeStackTraces", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.getNodeStackTraces", b)
 	if err != nil {
 		return nil, err
 	}
@@ -2223,7 +2223,7 @@ func (t *GetFileInfo) Do(ctx context.Context) (*GetFileInfoResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.getFileInfo", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.getFileInfo", b)
 	if err != nil {
 		return nil, err
 	}
@@ -2271,7 +2271,7 @@ func (t *SetInspectedNode) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOM.setInspectedNode", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.setInspectedNode", b)
 	if err != nil {
 		return err
 	}
@@ -2320,7 +2320,7 @@ func (t *SetNodeName) Do(ctx context.Context) (*SetNodeNameResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.setNodeName", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.setNodeName", b)
 	if err != nil {
 		return nil, err
 	}
@@ -2366,7 +2366,7 @@ func (t *SetNodeValue) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOM.setNodeValue", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.setNodeValue", b)
 	if err != nil {
 		return err
 	}
@@ -2408,7 +2408,7 @@ func (t *SetOuterHTML) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "DOM.setOuterHTML", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.setOuterHTML", b)
 	if err != nil {
 		return err
 	}
@@ -2442,7 +2442,7 @@ func NewUndo() *Undo {
 // Do sends the Undo CDP command to a browser,
 // and returns the browser's response.
 func (t *Undo) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "DOM.undo", nil)
+	response, err := devtools.SendAndWait(ctx, "DOM.undo", nil)
 	if err != nil {
 		return err
 	}
@@ -2493,7 +2493,7 @@ func (t *GetFrameOwner) Do(ctx context.Context) (*GetFrameOwnerResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.getFrameOwner", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.getFrameOwner", b)
 	if err != nil {
 		return nil, err
 	}
@@ -2556,7 +2556,7 @@ func (t *GetContainerForNode) Do(ctx context.Context) (*GetContainerForNodeResul
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "DOM.getContainerForNode", b)
+	response, err := devtools.SendAndWait(ctx, "DOM.getContainerForNode", b)
 	if err != nil {
 		return nil, err
 	}

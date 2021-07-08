@@ -51,7 +51,7 @@ func (t *AddRule) Do(ctx context.Context) (*AddRuleResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CSS.addRule", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.addRule", b)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ func (t *CollectClassNames) Do(ctx context.Context) (*CollectClassNamesResult, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CSS.collectClassNames", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.collectClassNames", b)
 	if err != nil {
 		return nil, err
 	}
@@ -150,7 +150,7 @@ func (t *CreateStyleSheet) Do(ctx context.Context) (*CreateStyleSheetResult, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CSS.createStyleSheet", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.createStyleSheet", b)
 	if err != nil {
 		return nil, err
 	}
@@ -184,7 +184,7 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "CSS.disable", nil)
+	response, err := devtools.SendAndWait(ctx, "CSS.disable", nil)
 	if err != nil {
 		return err
 	}
@@ -215,7 +215,7 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "CSS.enable", nil)
+	response, err := devtools.SendAndWait(ctx, "CSS.enable", nil)
 	if err != nil {
 		return err
 	}
@@ -258,7 +258,7 @@ func (t *ForcePseudoState) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "CSS.forcePseudoState", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.forcePseudoState", b)
 	if err != nil {
 		return err
 	}
@@ -311,7 +311,7 @@ func (t *GetBackgroundColors) Do(ctx context.Context) (*GetBackgroundColorsResul
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CSS.getBackgroundColors", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.getBackgroundColors", b)
 	if err != nil {
 		return nil, err
 	}
@@ -360,7 +360,7 @@ func (t *GetComputedStyleForNode) Do(ctx context.Context) (*GetComputedStyleForN
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CSS.getComputedStyleForNode", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.getComputedStyleForNode", b)
 	if err != nil {
 		return nil, err
 	}
@@ -412,7 +412,7 @@ func (t *GetInlineStylesForNode) Do(ctx context.Context) (*GetInlineStylesForNod
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CSS.getInlineStylesForNode", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.getInlineStylesForNode", b)
 	if err != nil {
 		return nil, err
 	}
@@ -471,7 +471,7 @@ func (t *GetMatchedStylesForNode) Do(ctx context.Context) (*GetMatchedStylesForN
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CSS.getMatchedStylesForNode", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.getMatchedStylesForNode", b)
 	if err != nil {
 		return nil, err
 	}
@@ -511,7 +511,7 @@ type GetMediaQueriesResult struct {
 // Do sends the GetMediaQueries CDP command to a browser,
 // and returns the browser's response.
 func (t *GetMediaQueries) Do(ctx context.Context) (*GetMediaQueriesResult, error) {
-	response, err := devtools.Send(ctx, "CSS.getMediaQueries", nil)
+	response, err := devtools.SendAndWait(ctx, "CSS.getMediaQueries", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -561,7 +561,7 @@ func (t *GetPlatformFontsForNode) Do(ctx context.Context) (*GetPlatformFontsForN
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CSS.getPlatformFontsForNode", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.getPlatformFontsForNode", b)
 	if err != nil {
 		return nil, err
 	}
@@ -610,7 +610,7 @@ func (t *GetStyleSheetText) Do(ctx context.Context) (*GetStyleSheetTextResult, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CSS.getStyleSheetText", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.getStyleSheetText", b)
 	if err != nil {
 		return nil, err
 	}
@@ -661,7 +661,7 @@ func (t *TrackComputedStyleUpdates) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "CSS.trackComputedStyleUpdates", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.trackComputedStyleUpdates", b)
 	if err != nil {
 		return err
 	}
@@ -702,7 +702,7 @@ type TakeComputedStyleUpdatesResult struct {
 // Do sends the TakeComputedStyleUpdates CDP command to a browser,
 // and returns the browser's response.
 func (t *TakeComputedStyleUpdates) Do(ctx context.Context) (*TakeComputedStyleUpdatesResult, error) {
-	response, err := devtools.Send(ctx, "CSS.takeComputedStyleUpdates", nil)
+	response, err := devtools.SendAndWait(ctx, "CSS.takeComputedStyleUpdates", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -750,7 +750,7 @@ func (t *SetEffectivePropertyValueForNode) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "CSS.setEffectivePropertyValueForNode", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.setEffectivePropertyValueForNode", b)
 	if err != nil {
 		return err
 	}
@@ -799,7 +799,7 @@ func (t *SetKeyframeKey) Do(ctx context.Context) (*SetKeyframeKeyResult, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CSS.setKeyframeKey", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.setKeyframeKey", b)
 	if err != nil {
 		return nil, err
 	}
@@ -852,7 +852,7 @@ func (t *SetMediaText) Do(ctx context.Context) (*SetMediaTextResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CSS.setMediaText", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.setMediaText", b)
 	if err != nil {
 		return nil, err
 	}
@@ -909,7 +909,7 @@ func (t *SetContainerQueryText) Do(ctx context.Context) (*SetContainerQueryTextR
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CSS.setContainerQueryText", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.setContainerQueryText", b)
 	if err != nil {
 		return nil, err
 	}
@@ -962,7 +962,7 @@ func (t *SetRuleSelector) Do(ctx context.Context) (*SetRuleSelectorResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CSS.setRuleSelector", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.setRuleSelector", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1013,7 +1013,7 @@ func (t *SetStyleSheetText) Do(ctx context.Context) (*SetStyleSheetTextResult, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CSS.setStyleSheetText", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.setStyleSheetText", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1062,7 +1062,7 @@ func (t *SetStyleTexts) Do(ctx context.Context) (*SetStyleTextsResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.Send(ctx, "CSS.setStyleTexts", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.setStyleTexts", b)
 	if err != nil {
 		return nil, err
 	}
@@ -1096,7 +1096,7 @@ func NewStartRuleUsageTracking() *StartRuleUsageTracking {
 // Do sends the StartRuleUsageTracking CDP command to a browser,
 // and returns the browser's response.
 func (t *StartRuleUsageTracking) Do(ctx context.Context) error {
-	response, err := devtools.Send(ctx, "CSS.startRuleUsageTracking", nil)
+	response, err := devtools.SendAndWait(ctx, "CSS.startRuleUsageTracking", nil)
 	if err != nil {
 		return err
 	}
@@ -1133,7 +1133,7 @@ type StopRuleUsageTrackingResult struct {
 // Do sends the StopRuleUsageTracking CDP command to a browser,
 // and returns the browser's response.
 func (t *StopRuleUsageTracking) Do(ctx context.Context) (*StopRuleUsageTrackingResult, error) {
-	response, err := devtools.Send(ctx, "CSS.stopRuleUsageTracking", nil)
+	response, err := devtools.SendAndWait(ctx, "CSS.stopRuleUsageTracking", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1176,7 +1176,7 @@ type TakeCoverageDeltaResult struct {
 // Do sends the TakeCoverageDelta CDP command to a browser,
 // and returns the browser's response.
 func (t *TakeCoverageDelta) Do(ctx context.Context) (*TakeCoverageDeltaResult, error) {
-	response, err := devtools.Send(ctx, "CSS.takeCoverageDelta", nil)
+	response, err := devtools.SendAndWait(ctx, "CSS.takeCoverageDelta", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -1223,7 +1223,7 @@ func (t *SetLocalFontsEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.Send(ctx, "CSS.setLocalFontsEnabled", b)
+	response, err := devtools.SendAndWait(ctx, "CSS.setLocalFontsEnabled", b)
 	if err != nil {
 		return err
 	}
