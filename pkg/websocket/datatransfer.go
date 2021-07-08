@@ -8,9 +8,9 @@
 // extensions, and other HTTP headers (e.g. authentication, cookies).
 //
 // Specifically, this implementation does not support the "permessage-deflate"
-// extension (RFC 7692), for the same reasons it doesn't support TLS: all
-// communication with Chrome DevTools should happen on the same localhost, and
-// almost all transactions involve very small amounts of data, so the security
+// extension (RFC 7692), for the same reasons it doesn't support TLS: almost
+// all communication with Chrome DevTools should happen on the same localhost,
+// and most transactions involve very small amounts of data, so the security
 // benefits of TLS and performance benefits of compression become irrelevant
 // in this use-case, and are in fact wasteful and unnecessarily slow.
 //
