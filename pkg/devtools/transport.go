@@ -246,9 +246,9 @@ func Send(ctx context.Context, method string, params json.RawMessage) (chan *Mes
 	return ch, nil
 }
 
-// Send constructs and sends a CDP message to the browser associated with the
-// given context, and returns the browser's response message when processing
-// is completed. Multiple goroutines may call this function simultaneously.
+// SendAndWait constructs and sends a CDP message to the browser associated
+// with the given context, and returns the browser's response message when
+// it arrives. Multiple goroutines may call this function simultaneously.
 func SendAndWait(ctx context.Context, method string, params json.RawMessage) (*Message, error) {
 	ch, err := Send(ctx, method, params)
 	if err != nil {
