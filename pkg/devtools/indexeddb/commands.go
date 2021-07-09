@@ -43,12 +43,30 @@ func (t *ClearObjectStore) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "IndexedDB.clearObjectStore", b)
+	m, err := devtools.SendAndWait(ctx, "IndexedDB.clearObjectStore", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ClearObjectStore CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ClearObjectStore) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "IndexedDB.clearObjectStore", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ClearObjectStore CDP command.
+func (t *ClearObjectStore) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -85,12 +103,30 @@ func (t *DeleteDatabase) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "IndexedDB.deleteDatabase", b)
+	m, err := devtools.SendAndWait(ctx, "IndexedDB.deleteDatabase", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the DeleteDatabase CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *DeleteDatabase) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "IndexedDB.deleteDatabase", b)
+}
+
+// ParseResponse parses the browser's response
+// to the DeleteDatabase CDP command.
+func (t *DeleteDatabase) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -130,12 +166,30 @@ func (t *DeleteObjectStoreEntries) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "IndexedDB.deleteObjectStoreEntries", b)
+	m, err := devtools.SendAndWait(ctx, "IndexedDB.deleteObjectStoreEntries", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the DeleteObjectStoreEntries CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *DeleteObjectStoreEntries) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "IndexedDB.deleteObjectStoreEntries", b)
+}
+
+// ParseResponse parses the browser's response
+// to the DeleteObjectStoreEntries CDP command.
+func (t *DeleteObjectStoreEntries) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -160,12 +214,26 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "IndexedDB.disable", nil)
+	m, err := devtools.SendAndWait(ctx, "IndexedDB.disable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Disable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Disable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "IndexedDB.disable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Disable CDP command.
+func (t *Disable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -190,12 +258,26 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "IndexedDB.enable", nil)
+	m, err := devtools.SendAndWait(ctx, "IndexedDB.enable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Enable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Enable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "IndexedDB.enable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Enable CDP command.
+func (t *Enable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -264,15 +346,33 @@ func (t *RequestData) Do(ctx context.Context) (*RequestDataResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "IndexedDB.requestData", b)
+	m, err := devtools.SendAndWait(ctx, "IndexedDB.requestData", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the RequestData CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *RequestData) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "IndexedDB.requestData", b)
+}
+
+// ParseResponse parses the browser's response
+// to the RequestData CDP command.
+func (t *RequestData) ParseResponse(m *devtools.Message) (*RequestDataResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &RequestDataResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -324,15 +424,33 @@ func (t *GetMetadata) Do(ctx context.Context) (*GetMetadataResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "IndexedDB.getMetadata", b)
+	m, err := devtools.SendAndWait(ctx, "IndexedDB.getMetadata", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetMetadata CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetMetadata) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "IndexedDB.getMetadata", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetMetadata CDP command.
+func (t *GetMetadata) ParseResponse(m *devtools.Message) (*GetMetadataResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetMetadataResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -377,15 +495,33 @@ func (t *RequestDatabase) Do(ctx context.Context) (*RequestDatabaseResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "IndexedDB.requestDatabase", b)
+	m, err := devtools.SendAndWait(ctx, "IndexedDB.requestDatabase", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the RequestDatabase CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *RequestDatabase) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "IndexedDB.requestDatabase", b)
+}
+
+// ParseResponse parses the browser's response
+// to the RequestDatabase CDP command.
+func (t *RequestDatabase) ParseResponse(m *devtools.Message) (*RequestDatabaseResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &RequestDatabaseResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -427,15 +563,33 @@ func (t *RequestDatabaseNames) Do(ctx context.Context) (*RequestDatabaseNamesRes
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "IndexedDB.requestDatabaseNames", b)
+	m, err := devtools.SendAndWait(ctx, "IndexedDB.requestDatabaseNames", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the RequestDatabaseNames CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *RequestDatabaseNames) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "IndexedDB.requestDatabaseNames", b)
+}
+
+// ParseResponse parses the browser's response
+// to the RequestDatabaseNames CDP command.
+func (t *RequestDatabaseNames) ParseResponse(m *devtools.Message) (*RequestDatabaseNamesResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &RequestDatabaseNamesResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil

@@ -38,12 +38,30 @@ func (t *DeliverPushMessage) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "ServiceWorker.deliverPushMessage", b)
+	m, err := devtools.SendAndWait(ctx, "ServiceWorker.deliverPushMessage", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the DeliverPushMessage CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *DeliverPushMessage) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "ServiceWorker.deliverPushMessage", b)
+}
+
+// ParseResponse parses the browser's response
+// to the DeliverPushMessage CDP command.
+func (t *DeliverPushMessage) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -66,12 +84,26 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "ServiceWorker.disable", nil)
+	m, err := devtools.SendAndWait(ctx, "ServiceWorker.disable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Disable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Disable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "ServiceWorker.disable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Disable CDP command.
+func (t *Disable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -108,12 +140,30 @@ func (t *DispatchSyncEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "ServiceWorker.dispatchSyncEvent", b)
+	m, err := devtools.SendAndWait(ctx, "ServiceWorker.dispatchSyncEvent", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the DispatchSyncEvent CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *DispatchSyncEvent) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "ServiceWorker.dispatchSyncEvent", b)
+}
+
+// ParseResponse parses the browser's response
+// to the DispatchSyncEvent CDP command.
+func (t *DispatchSyncEvent) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -148,12 +198,30 @@ func (t *DispatchPeriodicSyncEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "ServiceWorker.dispatchPeriodicSyncEvent", b)
+	m, err := devtools.SendAndWait(ctx, "ServiceWorker.dispatchPeriodicSyncEvent", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the DispatchPeriodicSyncEvent CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *DispatchPeriodicSyncEvent) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "ServiceWorker.dispatchPeriodicSyncEvent", b)
+}
+
+// ParseResponse parses the browser's response
+// to the DispatchPeriodicSyncEvent CDP command.
+func (t *DispatchPeriodicSyncEvent) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -176,12 +244,26 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "ServiceWorker.enable", nil)
+	m, err := devtools.SendAndWait(ctx, "ServiceWorker.enable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Enable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Enable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "ServiceWorker.enable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Enable CDP command.
+func (t *Enable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -212,12 +294,30 @@ func (t *InspectWorker) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "ServiceWorker.inspectWorker", b)
+	m, err := devtools.SendAndWait(ctx, "ServiceWorker.inspectWorker", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the InspectWorker CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *InspectWorker) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "ServiceWorker.inspectWorker", b)
+}
+
+// ParseResponse parses the browser's response
+// to the InspectWorker CDP command.
+func (t *InspectWorker) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -248,12 +348,30 @@ func (t *SetForceUpdateOnPageLoad) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "ServiceWorker.setForceUpdateOnPageLoad", b)
+	m, err := devtools.SendAndWait(ctx, "ServiceWorker.setForceUpdateOnPageLoad", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetForceUpdateOnPageLoad CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetForceUpdateOnPageLoad) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "ServiceWorker.setForceUpdateOnPageLoad", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetForceUpdateOnPageLoad CDP command.
+func (t *SetForceUpdateOnPageLoad) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -284,12 +402,30 @@ func (t *SkipWaiting) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "ServiceWorker.skipWaiting", b)
+	m, err := devtools.SendAndWait(ctx, "ServiceWorker.skipWaiting", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SkipWaiting CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SkipWaiting) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "ServiceWorker.skipWaiting", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SkipWaiting CDP command.
+func (t *SkipWaiting) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -320,12 +456,30 @@ func (t *StartWorker) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "ServiceWorker.startWorker", b)
+	m, err := devtools.SendAndWait(ctx, "ServiceWorker.startWorker", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the StartWorker CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *StartWorker) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "ServiceWorker.startWorker", b)
+}
+
+// ParseResponse parses the browser's response
+// to the StartWorker CDP command.
+func (t *StartWorker) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -348,12 +502,26 @@ func NewStopAllWorkers() *StopAllWorkers {
 // Do sends the StopAllWorkers CDP command to a browser,
 // and returns the browser's response.
 func (t *StopAllWorkers) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "ServiceWorker.stopAllWorkers", nil)
+	m, err := devtools.SendAndWait(ctx, "ServiceWorker.stopAllWorkers", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the StopAllWorkers CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *StopAllWorkers) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "ServiceWorker.stopAllWorkers", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the StopAllWorkers CDP command.
+func (t *StopAllWorkers) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -384,12 +552,30 @@ func (t *StopWorker) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "ServiceWorker.stopWorker", b)
+	m, err := devtools.SendAndWait(ctx, "ServiceWorker.stopWorker", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the StopWorker CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *StopWorker) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "ServiceWorker.stopWorker", b)
+}
+
+// ParseResponse parses the browser's response
+// to the StopWorker CDP command.
+func (t *StopWorker) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -420,12 +606,30 @@ func (t *Unregister) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "ServiceWorker.unregister", b)
+	m, err := devtools.SendAndWait(ctx, "ServiceWorker.unregister", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Unregister CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Unregister) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "ServiceWorker.unregister", b)
+}
+
+// ParseResponse parses the browser's response
+// to the Unregister CDP command.
+func (t *Unregister) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -456,12 +660,30 @@ func (t *UpdateRegistration) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "ServiceWorker.updateRegistration", b)
+	m, err := devtools.SendAndWait(ctx, "ServiceWorker.updateRegistration", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the UpdateRegistration CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *UpdateRegistration) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "ServiceWorker.updateRegistration", b)
+}
+
+// ParseResponse parses the browser's response
+// to the UpdateRegistration CDP command.
+func (t *UpdateRegistration) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }

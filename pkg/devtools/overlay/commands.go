@@ -30,12 +30,26 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Overlay.disable", nil)
+	m, err := devtools.SendAndWait(ctx, "Overlay.disable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Disable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Disable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Overlay.disable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Disable CDP command.
+func (t *Disable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -60,12 +74,26 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Overlay.enable", nil)
+	m, err := devtools.SendAndWait(ctx, "Overlay.enable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Enable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Enable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Overlay.enable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Enable CDP command.
+func (t *Enable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -150,15 +178,33 @@ func (t *GetHighlightObjectForTest) Do(ctx context.Context) (*GetHighlightObject
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.getHighlightObjectForTest", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.getHighlightObjectForTest", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetHighlightObjectForTest CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetHighlightObjectForTest) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.getHighlightObjectForTest", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetHighlightObjectForTest CDP command.
+func (t *GetHighlightObjectForTest) ParseResponse(m *devtools.Message) (*GetHighlightObjectForTestResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetHighlightObjectForTestResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -200,15 +246,33 @@ func (t *GetGridHighlightObjectsForTest) Do(ctx context.Context) (*GetGridHighli
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.getGridHighlightObjectsForTest", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.getGridHighlightObjectsForTest", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetGridHighlightObjectsForTest CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetGridHighlightObjectsForTest) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.getGridHighlightObjectsForTest", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetGridHighlightObjectsForTest CDP command.
+func (t *GetGridHighlightObjectsForTest) ParseResponse(m *devtools.Message) (*GetGridHighlightObjectsForTestResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetGridHighlightObjectsForTestResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -250,15 +314,33 @@ func (t *GetSourceOrderHighlightObjectForTest) Do(ctx context.Context) (*GetSour
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.getSourceOrderHighlightObjectForTest", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.getSourceOrderHighlightObjectForTest", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetSourceOrderHighlightObjectForTest CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetSourceOrderHighlightObjectForTest) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.getSourceOrderHighlightObjectForTest", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetSourceOrderHighlightObjectForTest CDP command.
+func (t *GetSourceOrderHighlightObjectForTest) ParseResponse(m *devtools.Message) (*GetSourceOrderHighlightObjectForTestResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetSourceOrderHighlightObjectForTestResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -284,12 +366,26 @@ func NewHideHighlight() *HideHighlight {
 // Do sends the HideHighlight CDP command to a browser,
 // and returns the browser's response.
 func (t *HideHighlight) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Overlay.hideHighlight", nil)
+	m, err := devtools.SendAndWait(ctx, "Overlay.hideHighlight", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the HideHighlight CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *HideHighlight) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Overlay.hideHighlight", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the HideHighlight CDP command.
+func (t *HideHighlight) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -345,12 +441,30 @@ func (t *HighlightFrame) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.highlightFrame", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.highlightFrame", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the HighlightFrame CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *HighlightFrame) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.highlightFrame", b)
+}
+
+// ParseResponse parses the browser's response
+// to the HighlightFrame CDP command.
+func (t *HighlightFrame) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -429,12 +543,30 @@ func (t *HighlightNode) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.highlightNode", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.highlightNode", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the HighlightNode CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *HighlightNode) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.highlightNode", b)
+}
+
+// ParseResponse parses the browser's response
+// to the HighlightNode CDP command.
+func (t *HighlightNode) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -490,12 +622,30 @@ func (t *HighlightQuad) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.highlightQuad", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.highlightQuad", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the HighlightQuad CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *HighlightQuad) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.highlightQuad", b)
+}
+
+// ParseResponse parses the browser's response
+// to the HighlightQuad CDP command.
+func (t *HighlightQuad) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -560,12 +710,30 @@ func (t *HighlightRect) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.highlightRect", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.highlightRect", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the HighlightRect CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *HighlightRect) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.highlightRect", b)
+}
+
+// ParseResponse parses the browser's response
+// to the HighlightRect CDP command.
+func (t *HighlightRect) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -633,12 +801,30 @@ func (t *HighlightSourceOrder) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.highlightSourceOrder", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.highlightSourceOrder", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the HighlightSourceOrder CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *HighlightSourceOrder) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.highlightSourceOrder", b)
+}
+
+// ParseResponse parses the browser's response
+// to the HighlightSourceOrder CDP command.
+func (t *HighlightSourceOrder) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -686,12 +872,30 @@ func (t *SetInspectMode) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.setInspectMode", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.setInspectMode", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetInspectMode CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetInspectMode) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setInspectMode", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetInspectMode CDP command.
+func (t *SetInspectMode) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -725,12 +929,30 @@ func (t *SetShowAdHighlights) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.setShowAdHighlights", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.setShowAdHighlights", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetShowAdHighlights CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetShowAdHighlights) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setShowAdHighlights", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetShowAdHighlights CDP command.
+func (t *SetShowAdHighlights) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -769,12 +991,30 @@ func (t *SetPausedInDebuggerMessage) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.setPausedInDebuggerMessage", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.setPausedInDebuggerMessage", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetPausedInDebuggerMessage CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetPausedInDebuggerMessage) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setPausedInDebuggerMessage", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetPausedInDebuggerMessage CDP command.
+func (t *SetPausedInDebuggerMessage) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -808,12 +1048,30 @@ func (t *SetShowDebugBorders) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.setShowDebugBorders", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.setShowDebugBorders", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetShowDebugBorders CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetShowDebugBorders) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setShowDebugBorders", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetShowDebugBorders CDP command.
+func (t *SetShowDebugBorders) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -847,12 +1105,30 @@ func (t *SetShowFPSCounter) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.setShowFPSCounter", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.setShowFPSCounter", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetShowFPSCounter CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetShowFPSCounter) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setShowFPSCounter", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetShowFPSCounter CDP command.
+func (t *SetShowFPSCounter) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -886,12 +1162,30 @@ func (t *SetShowGridOverlays) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.setShowGridOverlays", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.setShowGridOverlays", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetShowGridOverlays CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetShowGridOverlays) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setShowGridOverlays", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetShowGridOverlays CDP command.
+func (t *SetShowGridOverlays) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -923,12 +1217,30 @@ func (t *SetShowFlexOverlays) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.setShowFlexOverlays", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.setShowFlexOverlays", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetShowFlexOverlays CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetShowFlexOverlays) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setShowFlexOverlays", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetShowFlexOverlays CDP command.
+func (t *SetShowFlexOverlays) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -960,12 +1272,85 @@ func (t *SetShowScrollSnapOverlays) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.setShowScrollSnapOverlays", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.setShowScrollSnapOverlays", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetShowScrollSnapOverlays CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetShowScrollSnapOverlays) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setShowScrollSnapOverlays", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetShowScrollSnapOverlays CDP command.
+func (t *SetShowScrollSnapOverlays) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
+	}
+	return nil
+}
+
+// SetShowContainerQueryOverlays contains the parameters, and acts as
+// a Go receiver, for the CDP command `setShowContainerQueryOverlays`.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowContainerQueryOverlays
+type SetShowContainerQueryOverlays struct {
+	// An array of node identifiers and descriptors for the highlight appearance.
+	ContainerQueryHighlightConfigs []ContainerQueryHighlightConfig `json:"containerQueryHighlightConfigs"`
+}
+
+// NewSetShowContainerQueryOverlays constructs a new SetShowContainerQueryOverlays struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowContainerQueryOverlays
+func NewSetShowContainerQueryOverlays(containerQueryHighlightConfigs []ContainerQueryHighlightConfig) *SetShowContainerQueryOverlays {
+	return &SetShowContainerQueryOverlays{
+		ContainerQueryHighlightConfigs: containerQueryHighlightConfigs,
+	}
+}
+
+// Do sends the SetShowContainerQueryOverlays CDP command to a browser,
+// and returns the browser's response.
+func (t *SetShowContainerQueryOverlays) Do(ctx context.Context) error {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	m, err := devtools.SendAndWait(ctx, "Overlay.setShowContainerQueryOverlays", b)
+	if err != nil {
+		return err
+	}
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetShowContainerQueryOverlays CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetShowContainerQueryOverlays) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setShowContainerQueryOverlays", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetShowContainerQueryOverlays CDP command.
+func (t *SetShowContainerQueryOverlays) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -999,12 +1384,30 @@ func (t *SetShowPaintRects) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.setShowPaintRects", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.setShowPaintRects", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetShowPaintRects CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetShowPaintRects) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setShowPaintRects", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetShowPaintRects CDP command.
+func (t *SetShowPaintRects) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1038,12 +1441,30 @@ func (t *SetShowLayoutShiftRegions) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.setShowLayoutShiftRegions", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.setShowLayoutShiftRegions", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetShowLayoutShiftRegions CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetShowLayoutShiftRegions) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setShowLayoutShiftRegions", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetShowLayoutShiftRegions CDP command.
+func (t *SetShowLayoutShiftRegions) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1077,12 +1498,30 @@ func (t *SetShowScrollBottleneckRects) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.setShowScrollBottleneckRects", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.setShowScrollBottleneckRects", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetShowScrollBottleneckRects CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetShowScrollBottleneckRects) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setShowScrollBottleneckRects", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetShowScrollBottleneckRects CDP command.
+func (t *SetShowScrollBottleneckRects) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1116,12 +1555,30 @@ func (t *SetShowHitTestBorders) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.setShowHitTestBorders", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.setShowHitTestBorders", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetShowHitTestBorders CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetShowHitTestBorders) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setShowHitTestBorders", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetShowHitTestBorders CDP command.
+func (t *SetShowHitTestBorders) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1154,12 +1611,30 @@ func (t *SetShowWebVitals) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.setShowWebVitals", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.setShowWebVitals", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetShowWebVitals CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetShowWebVitals) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setShowWebVitals", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetShowWebVitals CDP command.
+func (t *SetShowWebVitals) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1193,12 +1668,30 @@ func (t *SetShowViewportSizeOnResize) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.setShowViewportSizeOnResize", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.setShowViewportSizeOnResize", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetShowViewportSizeOnResize CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetShowViewportSizeOnResize) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setShowViewportSizeOnResize", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetShowViewportSizeOnResize CDP command.
+func (t *SetShowViewportSizeOnResize) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1239,12 +1732,30 @@ func (t *SetShowHinge) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Overlay.setShowHinge", b)
+	m, err := devtools.SendAndWait(ctx, "Overlay.setShowHinge", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetShowHinge CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetShowHinge) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setShowHinge", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetShowHinge CDP command.
+func (t *SetShowHinge) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }

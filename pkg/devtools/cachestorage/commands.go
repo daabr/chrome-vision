@@ -37,12 +37,30 @@ func (t *DeleteCache) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "CacheStorage.deleteCache", b)
+	m, err := devtools.SendAndWait(ctx, "CacheStorage.deleteCache", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the DeleteCache CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *DeleteCache) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CacheStorage.deleteCache", b)
+}
+
+// ParseResponse parses the browser's response
+// to the DeleteCache CDP command.
+func (t *DeleteCache) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -79,12 +97,30 @@ func (t *DeleteEntry) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "CacheStorage.deleteEntry", b)
+	m, err := devtools.SendAndWait(ctx, "CacheStorage.deleteEntry", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the DeleteEntry CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *DeleteEntry) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CacheStorage.deleteEntry", b)
+}
+
+// ParseResponse parses the browser's response
+// to the DeleteEntry CDP command.
+func (t *DeleteEntry) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -125,15 +161,33 @@ func (t *RequestCacheNames) Do(ctx context.Context) (*RequestCacheNamesResult, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CacheStorage.requestCacheNames", b)
+	m, err := devtools.SendAndWait(ctx, "CacheStorage.requestCacheNames", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the RequestCacheNames CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *RequestCacheNames) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CacheStorage.requestCacheNames", b)
+}
+
+// ParseResponse parses the browser's response
+// to the RequestCacheNames CDP command.
+func (t *RequestCacheNames) ParseResponse(m *devtools.Message) (*RequestCacheNamesResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &RequestCacheNamesResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -181,15 +235,33 @@ func (t *RequestCachedResponse) Do(ctx context.Context) (*RequestCachedResponseR
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CacheStorage.requestCachedResponse", b)
+	m, err := devtools.SendAndWait(ctx, "CacheStorage.requestCachedResponse", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the RequestCachedResponse CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *RequestCachedResponse) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CacheStorage.requestCachedResponse", b)
+}
+
+// ParseResponse parses the browser's response
+// to the RequestCachedResponse CDP command.
+func (t *RequestCachedResponse) ParseResponse(m *devtools.Message) (*RequestCachedResponseResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &RequestCachedResponseResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -267,15 +339,33 @@ func (t *RequestEntries) Do(ctx context.Context) (*RequestEntriesResult, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CacheStorage.requestEntries", b)
+	m, err := devtools.SendAndWait(ctx, "CacheStorage.requestEntries", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the RequestEntries CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *RequestEntries) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CacheStorage.requestEntries", b)
+}
+
+// ParseResponse parses the browser's response
+// to the RequestEntries CDP command.
+func (t *RequestEntries) ParseResponse(m *devtools.Message) (*RequestEntriesResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &RequestEntriesResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil

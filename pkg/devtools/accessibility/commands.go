@@ -29,12 +29,26 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Accessibility.disable", nil)
+	m, err := devtools.SendAndWait(ctx, "Accessibility.disable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Disable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Disable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Accessibility.disable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Disable CDP command.
+func (t *Disable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -60,12 +74,26 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Accessibility.enable", nil)
+	m, err := devtools.SendAndWait(ctx, "Accessibility.enable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Enable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Enable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Accessibility.enable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Enable CDP command.
+func (t *Enable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -151,15 +179,33 @@ func (t *GetPartialAXTree) Do(ctx context.Context) (*GetPartialAXTreeResult, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Accessibility.getPartialAXTree", b)
+	m, err := devtools.SendAndWait(ctx, "Accessibility.getPartialAXTree", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetPartialAXTree CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetPartialAXTree) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Accessibility.getPartialAXTree", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetPartialAXTree CDP command.
+func (t *GetPartialAXTree) ParseResponse(m *devtools.Message) (*GetPartialAXTreeResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetPartialAXTreeResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -213,15 +259,33 @@ func (t *GetFullAXTree) Do(ctx context.Context) (*GetFullAXTreeResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Accessibility.getFullAXTree", b)
+	m, err := devtools.SendAndWait(ctx, "Accessibility.getFullAXTree", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetFullAXTree CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetFullAXTree) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Accessibility.getFullAXTree", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetFullAXTree CDP command.
+func (t *GetFullAXTree) ParseResponse(m *devtools.Message) (*GetFullAXTreeResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetFullAXTreeResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -266,15 +330,33 @@ func (t *GetChildAXNodes) Do(ctx context.Context) (*GetChildAXNodesResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Accessibility.getChildAXNodes", b)
+	m, err := devtools.SendAndWait(ctx, "Accessibility.getChildAXNodes", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetChildAXNodes CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetChildAXNodes) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Accessibility.getChildAXNodes", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetChildAXNodes CDP command.
+func (t *GetChildAXNodes) ParseResponse(m *devtools.Message) (*GetChildAXNodesResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetChildAXNodesResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -376,15 +458,33 @@ func (t *QueryAXTree) Do(ctx context.Context) (*QueryAXTreeResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Accessibility.queryAXTree", b)
+	m, err := devtools.SendAndWait(ctx, "Accessibility.queryAXTree", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the QueryAXTree CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *QueryAXTree) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Accessibility.queryAXTree", b)
+}
+
+// ParseResponse parses the browser's response
+// to the QueryAXTree CDP command.
+func (t *QueryAXTree) ParseResponse(m *devtools.Message) (*QueryAXTreeResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &QueryAXTreeResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil

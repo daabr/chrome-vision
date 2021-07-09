@@ -37,15 +37,29 @@ type CanEmulateResult struct {
 // Do sends the CanEmulate CDP command to a browser,
 // and returns the browser's response.
 func (t *CanEmulate) Do(ctx context.Context) (*CanEmulateResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Emulation.canEmulate", nil)
+	m, err := devtools.SendAndWait(ctx, "Emulation.canEmulate", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the CanEmulate CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *CanEmulate) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Emulation.canEmulate", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the CanEmulate CDP command.
+func (t *CanEmulate) ParseResponse(m *devtools.Message) (*CanEmulateResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &CanEmulateResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -71,12 +85,26 @@ func NewClearDeviceMetricsOverride() *ClearDeviceMetricsOverride {
 // Do sends the ClearDeviceMetricsOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearDeviceMetricsOverride) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Emulation.clearDeviceMetricsOverride", nil)
+	m, err := devtools.SendAndWait(ctx, "Emulation.clearDeviceMetricsOverride", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ClearDeviceMetricsOverride CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ClearDeviceMetricsOverride) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Emulation.clearDeviceMetricsOverride", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the ClearDeviceMetricsOverride CDP command.
+func (t *ClearDeviceMetricsOverride) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -101,12 +129,26 @@ func NewClearGeolocationOverride() *ClearGeolocationOverride {
 // Do sends the ClearGeolocationOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearGeolocationOverride) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Emulation.clearGeolocationOverride", nil)
+	m, err := devtools.SendAndWait(ctx, "Emulation.clearGeolocationOverride", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ClearGeolocationOverride CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ClearGeolocationOverride) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Emulation.clearGeolocationOverride", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the ClearGeolocationOverride CDP command.
+func (t *ClearGeolocationOverride) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -135,12 +177,26 @@ func NewResetPageScaleFactor() *ResetPageScaleFactor {
 // Do sends the ResetPageScaleFactor CDP command to a browser,
 // and returns the browser's response.
 func (t *ResetPageScaleFactor) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Emulation.resetPageScaleFactor", nil)
+	m, err := devtools.SendAndWait(ctx, "Emulation.resetPageScaleFactor", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ResetPageScaleFactor CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ResetPageScaleFactor) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Emulation.resetPageScaleFactor", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the ResetPageScaleFactor CDP command.
+func (t *ResetPageScaleFactor) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -178,12 +234,30 @@ func (t *SetFocusEmulationEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setFocusEmulationEnabled", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setFocusEmulationEnabled", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetFocusEmulationEnabled CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetFocusEmulationEnabled) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setFocusEmulationEnabled", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetFocusEmulationEnabled CDP command.
+func (t *SetFocusEmulationEnabled) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -221,12 +295,30 @@ func (t *SetCPUThrottlingRate) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setCPUThrottlingRate", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setCPUThrottlingRate", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetCPUThrottlingRate CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetCPUThrottlingRate) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setCPUThrottlingRate", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetCPUThrottlingRate CDP command.
+func (t *SetCPUThrottlingRate) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -270,12 +362,30 @@ func (t *SetDefaultBackgroundColorOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setDefaultBackgroundColorOverride", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setDefaultBackgroundColorOverride", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetDefaultBackgroundColorOverride CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetDefaultBackgroundColorOverride) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setDefaultBackgroundColorOverride", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetDefaultBackgroundColorOverride CDP command.
+func (t *SetDefaultBackgroundColorOverride) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -456,12 +566,30 @@ func (t *SetDeviceMetricsOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setDeviceMetricsOverride", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setDeviceMetricsOverride", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetDeviceMetricsOverride CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetDeviceMetricsOverride) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setDeviceMetricsOverride", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetDeviceMetricsOverride CDP command.
+func (t *SetDeviceMetricsOverride) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -497,12 +625,30 @@ func (t *SetScrollbarsHidden) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setScrollbarsHidden", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setScrollbarsHidden", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetScrollbarsHidden CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetScrollbarsHidden) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setScrollbarsHidden", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetScrollbarsHidden CDP command.
+func (t *SetScrollbarsHidden) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -538,12 +684,30 @@ func (t *SetDocumentCookieDisabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setDocumentCookieDisabled", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setDocumentCookieDisabled", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetDocumentCookieDisabled CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetDocumentCookieDisabled) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setDocumentCookieDisabled", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetDocumentCookieDisabled CDP command.
+func (t *SetDocumentCookieDisabled) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -590,12 +754,30 @@ func (t *SetEmitTouchEventsForMouse) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setEmitTouchEventsForMouse", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setEmitTouchEventsForMouse", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetEmitTouchEventsForMouse CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetEmitTouchEventsForMouse) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setEmitTouchEventsForMouse", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetEmitTouchEventsForMouse CDP command.
+func (t *SetEmitTouchEventsForMouse) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -647,12 +829,30 @@ func (t *SetEmulatedMedia) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setEmulatedMedia", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setEmulatedMedia", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetEmulatedMedia CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetEmulatedMedia) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setEmulatedMedia", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetEmulatedMedia CDP command.
+func (t *SetEmulatedMedia) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -690,12 +890,30 @@ func (t *SetEmulatedVisionDeficiency) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setEmulatedVisionDeficiency", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setEmulatedVisionDeficiency", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetEmulatedVisionDeficiency CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetEmulatedVisionDeficiency) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setEmulatedVisionDeficiency", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetEmulatedVisionDeficiency CDP command.
+func (t *SetEmulatedVisionDeficiency) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -759,12 +977,30 @@ func (t *SetGeolocationOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setGeolocationOverride", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setGeolocationOverride", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetGeolocationOverride CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetGeolocationOverride) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setGeolocationOverride", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetGeolocationOverride CDP command.
+func (t *SetGeolocationOverride) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -805,12 +1041,30 @@ func (t *SetIdleOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setIdleOverride", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setIdleOverride", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetIdleOverride CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetIdleOverride) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setIdleOverride", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetIdleOverride CDP command.
+func (t *SetIdleOverride) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -839,12 +1093,26 @@ func NewClearIdleOverride() *ClearIdleOverride {
 // Do sends the ClearIdleOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearIdleOverride) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Emulation.clearIdleOverride", nil)
+	m, err := devtools.SendAndWait(ctx, "Emulation.clearIdleOverride", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ClearIdleOverride CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ClearIdleOverride) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Emulation.clearIdleOverride", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the ClearIdleOverride CDP command.
+func (t *ClearIdleOverride) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -884,12 +1152,30 @@ func (t *SetNavigatorOverrides) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setNavigatorOverrides", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setNavigatorOverrides", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetNavigatorOverrides CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetNavigatorOverrides) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setNavigatorOverrides", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetNavigatorOverrides CDP command.
+func (t *SetNavigatorOverrides) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -927,12 +1213,30 @@ func (t *SetPageScaleFactor) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setPageScaleFactor", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setPageScaleFactor", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetPageScaleFactor CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetPageScaleFactor) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setPageScaleFactor", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetPageScaleFactor CDP command.
+func (t *SetPageScaleFactor) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -966,12 +1270,30 @@ func (t *SetScriptExecutionDisabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setScriptExecutionDisabled", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setScriptExecutionDisabled", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetScriptExecutionDisabled CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetScriptExecutionDisabled) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setScriptExecutionDisabled", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetScriptExecutionDisabled CDP command.
+func (t *SetScriptExecutionDisabled) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1016,12 +1338,30 @@ func (t *SetTouchEmulationEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setTouchEmulationEnabled", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setTouchEmulationEnabled", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetTouchEmulationEnabled CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetTouchEmulationEnabled) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setTouchEmulationEnabled", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetTouchEmulationEnabled CDP command.
+func (t *SetTouchEmulationEnabled) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1116,15 +1456,33 @@ func (t *SetVirtualTimePolicy) Do(ctx context.Context) (*SetVirtualTimePolicyRes
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setVirtualTimePolicy", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setVirtualTimePolicy", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetVirtualTimePolicy CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetVirtualTimePolicy) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setVirtualTimePolicy", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetVirtualTimePolicy CDP command.
+func (t *SetVirtualTimePolicy) ParseResponse(m *devtools.Message) (*SetVirtualTimePolicyResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &SetVirtualTimePolicyResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -1172,12 +1530,30 @@ func (t *SetLocaleOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setLocaleOverride", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setLocaleOverride", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetLocaleOverride CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetLocaleOverride) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setLocaleOverride", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetLocaleOverride CDP command.
+func (t *SetLocaleOverride) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1216,12 +1592,30 @@ func (t *SetTimezoneOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setTimezoneOverride", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setTimezoneOverride", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetTimezoneOverride CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetTimezoneOverride) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setTimezoneOverride", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetTimezoneOverride CDP command.
+func (t *SetTimezoneOverride) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1266,12 +1660,30 @@ func (t *SetVisibleSize) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setVisibleSize", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setVisibleSize", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetVisibleSize CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetVisibleSize) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setVisibleSize", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetVisibleSize CDP command.
+func (t *SetVisibleSize) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1307,12 +1719,30 @@ func (t *SetDisabledImageTypes) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setDisabledImageTypes", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setDisabledImageTypes", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetDisabledImageTypes CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetDisabledImageTypes) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setDisabledImageTypes", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetDisabledImageTypes CDP command.
+func (t *SetDisabledImageTypes) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1383,12 +1813,30 @@ func (t *SetUserAgentOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Emulation.setUserAgentOverride", b)
+	m, err := devtools.SendAndWait(ctx, "Emulation.setUserAgentOverride", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetUserAgentOverride CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetUserAgentOverride) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setUserAgentOverride", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetUserAgentOverride CDP command.
+func (t *SetUserAgentOverride) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }

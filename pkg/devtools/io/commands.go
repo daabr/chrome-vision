@@ -38,12 +38,30 @@ func (t *Close) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "IO.close", b)
+	m, err := devtools.SendAndWait(ctx, "IO.close", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Close CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Close) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "IO.close", b)
+}
+
+// ParseResponse parses the browser's response
+// to the Close CDP command.
+func (t *Close) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -112,15 +130,33 @@ func (t *Read) Do(ctx context.Context) (*ReadResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "IO.read", b)
+	m, err := devtools.SendAndWait(ctx, "IO.read", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Read CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Read) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "IO.read", b)
+}
+
+// ParseResponse parses the browser's response
+// to the Read CDP command.
+func (t *Read) ParseResponse(m *devtools.Message) (*ReadResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &ReadResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -162,15 +198,33 @@ func (t *ResolveBlob) Do(ctx context.Context) (*ResolveBlobResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "IO.resolveBlob", b)
+	m, err := devtools.SendAndWait(ctx, "IO.resolveBlob", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ResolveBlob CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ResolveBlob) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "IO.resolveBlob", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ResolveBlob CDP command.
+func (t *ResolveBlob) ParseResponse(m *devtools.Message) (*ResolveBlobResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &ResolveBlobResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil

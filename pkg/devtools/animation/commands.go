@@ -29,12 +29,26 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Animation.disable", nil)
+	m, err := devtools.SendAndWait(ctx, "Animation.disable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Disable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Disable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Animation.disable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Disable CDP command.
+func (t *Disable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -59,12 +73,26 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Animation.enable", nil)
+	m, err := devtools.SendAndWait(ctx, "Animation.enable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Enable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Enable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Animation.enable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Enable CDP command.
+func (t *Enable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -105,15 +133,33 @@ func (t *GetCurrentTime) Do(ctx context.Context) (*GetCurrentTimeResult, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Animation.getCurrentTime", b)
+	m, err := devtools.SendAndWait(ctx, "Animation.getCurrentTime", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetCurrentTime CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetCurrentTime) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Animation.getCurrentTime", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetCurrentTime CDP command.
+func (t *GetCurrentTime) ParseResponse(m *devtools.Message) (*GetCurrentTimeResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetCurrentTimeResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -146,15 +192,29 @@ type GetPlaybackRateResult struct {
 // Do sends the GetPlaybackRate CDP command to a browser,
 // and returns the browser's response.
 func (t *GetPlaybackRate) Do(ctx context.Context) (*GetPlaybackRateResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Animation.getPlaybackRate", nil)
+	m, err := devtools.SendAndWait(ctx, "Animation.getPlaybackRate", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetPlaybackRate CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetPlaybackRate) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Animation.getPlaybackRate", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetPlaybackRate CDP command.
+func (t *GetPlaybackRate) ParseResponse(m *devtools.Message) (*GetPlaybackRateResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetPlaybackRateResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -189,12 +249,30 @@ func (t *ReleaseAnimations) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Animation.releaseAnimations", b)
+	m, err := devtools.SendAndWait(ctx, "Animation.releaseAnimations", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ReleaseAnimations CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ReleaseAnimations) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Animation.releaseAnimations", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ReleaseAnimations CDP command.
+func (t *ReleaseAnimations) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -235,15 +313,33 @@ func (t *ResolveAnimation) Do(ctx context.Context) (*ResolveAnimationResult, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Animation.resolveAnimation", b)
+	m, err := devtools.SendAndWait(ctx, "Animation.resolveAnimation", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ResolveAnimation CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ResolveAnimation) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Animation.resolveAnimation", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ResolveAnimation CDP command.
+func (t *ResolveAnimation) ParseResponse(m *devtools.Message) (*ResolveAnimationResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &ResolveAnimationResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -281,12 +377,30 @@ func (t *SeekAnimations) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Animation.seekAnimations", b)
+	m, err := devtools.SendAndWait(ctx, "Animation.seekAnimations", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SeekAnimations CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SeekAnimations) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Animation.seekAnimations", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SeekAnimations CDP command.
+func (t *SeekAnimations) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -323,12 +437,30 @@ func (t *SetPaused) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Animation.setPaused", b)
+	m, err := devtools.SendAndWait(ctx, "Animation.setPaused", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetPaused CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetPaused) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Animation.setPaused", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetPaused CDP command.
+func (t *SetPaused) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -362,12 +494,30 @@ func (t *SetPlaybackRate) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Animation.setPlaybackRate", b)
+	m, err := devtools.SendAndWait(ctx, "Animation.setPlaybackRate", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetPlaybackRate CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetPlaybackRate) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Animation.setPlaybackRate", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetPlaybackRate CDP command.
+func (t *SetPlaybackRate) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -407,12 +557,30 @@ func (t *SetTiming) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Animation.setTiming", b)
+	m, err := devtools.SendAndWait(ctx, "Animation.setTiming", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetTiming CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetTiming) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Animation.setTiming", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetTiming CDP command.
+func (t *SetTiming) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }

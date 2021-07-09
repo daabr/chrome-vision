@@ -63,12 +63,30 @@ func (t *DispatchDragEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Input.dispatchDragEvent", b)
+	m, err := devtools.SendAndWait(ctx, "Input.dispatchDragEvent", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the DispatchDragEvent CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *DispatchDragEvent) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Input.dispatchDragEvent", b)
+}
+
+// ParseResponse parses the browser's response
+// to the DispatchDragEvent CDP command.
+func (t *DispatchDragEvent) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -274,12 +292,30 @@ func (t *DispatchKeyEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Input.dispatchKeyEvent", b)
+	m, err := devtools.SendAndWait(ctx, "Input.dispatchKeyEvent", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the DispatchKeyEvent CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *DispatchKeyEvent) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Input.dispatchKeyEvent", b)
+}
+
+// ParseResponse parses the browser's response
+// to the DispatchKeyEvent CDP command.
+func (t *DispatchKeyEvent) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -318,12 +354,30 @@ func (t *InsertText) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Input.insertText", b)
+	m, err := devtools.SendAndWait(ctx, "Input.insertText", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the InsertText CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *InsertText) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Input.insertText", b)
+}
+
+// ParseResponse parses the browser's response
+// to the InsertText CDP command.
+func (t *InsertText) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -531,12 +585,30 @@ func (t *DispatchMouseEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Input.dispatchMouseEvent", b)
+	m, err := devtools.SendAndWait(ctx, "Input.dispatchMouseEvent", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the DispatchMouseEvent CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *DispatchMouseEvent) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Input.dispatchMouseEvent", b)
+}
+
+// ParseResponse parses the browser's response
+// to the DispatchMouseEvent CDP command.
+func (t *DispatchMouseEvent) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -600,12 +672,30 @@ func (t *DispatchTouchEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Input.dispatchTouchEvent", b)
+	m, err := devtools.SendAndWait(ctx, "Input.dispatchTouchEvent", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the DispatchTouchEvent CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *DispatchTouchEvent) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Input.dispatchTouchEvent", b)
+}
+
+// ParseResponse parses the browser's response
+// to the DispatchTouchEvent CDP command.
+func (t *DispatchTouchEvent) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -709,12 +799,30 @@ func (t *EmulateTouchFromMouseEvent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Input.emulateTouchFromMouseEvent", b)
+	m, err := devtools.SendAndWait(ctx, "Input.emulateTouchFromMouseEvent", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the EmulateTouchFromMouseEvent CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *EmulateTouchFromMouseEvent) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Input.emulateTouchFromMouseEvent", b)
+}
+
+// ParseResponse parses the browser's response
+// to the EmulateTouchFromMouseEvent CDP command.
+func (t *EmulateTouchFromMouseEvent) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -748,12 +856,30 @@ func (t *SetIgnoreInputEvents) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Input.setIgnoreInputEvents", b)
+	m, err := devtools.SendAndWait(ctx, "Input.setIgnoreInputEvents", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetIgnoreInputEvents CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetIgnoreInputEvents) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Input.setIgnoreInputEvents", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetIgnoreInputEvents CDP command.
+func (t *SetIgnoreInputEvents) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -791,12 +917,30 @@ func (t *SetInterceptDrags) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Input.setInterceptDrags", b)
+	m, err := devtools.SendAndWait(ctx, "Input.setInterceptDrags", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetInterceptDrags CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetInterceptDrags) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Input.setInterceptDrags", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetInterceptDrags CDP command.
+func (t *SetInterceptDrags) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -864,12 +1008,30 @@ func (t *SynthesizePinchGesture) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Input.synthesizePinchGesture", b)
+	m, err := devtools.SendAndWait(ctx, "Input.synthesizePinchGesture", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SynthesizePinchGesture CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SynthesizePinchGesture) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Input.synthesizePinchGesture", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SynthesizePinchGesture CDP command.
+func (t *SynthesizePinchGesture) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1026,12 +1188,30 @@ func (t *SynthesizeScrollGesture) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Input.synthesizeScrollGesture", b)
+	m, err := devtools.SendAndWait(ctx, "Input.synthesizeScrollGesture", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SynthesizeScrollGesture CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SynthesizeScrollGesture) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Input.synthesizeScrollGesture", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SynthesizeScrollGesture CDP command.
+func (t *SynthesizeScrollGesture) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1107,12 +1287,30 @@ func (t *SynthesizeTapGesture) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Input.synthesizeTapGesture", b)
+	m, err := devtools.SendAndWait(ctx, "Input.synthesizeTapGesture", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SynthesizeTapGesture CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SynthesizeTapGesture) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Input.synthesizeTapGesture", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SynthesizeTapGesture CDP command.
+func (t *SynthesizeTapGesture) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }

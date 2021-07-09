@@ -28,12 +28,26 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "ApplicationCache.enable", nil)
+	m, err := devtools.SendAndWait(ctx, "ApplicationCache.enable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Enable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Enable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "ApplicationCache.enable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Enable CDP command.
+func (t *Enable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -74,15 +88,33 @@ func (t *GetApplicationCacheForFrame) Do(ctx context.Context) (*GetApplicationCa
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "ApplicationCache.getApplicationCacheForFrame", b)
+	m, err := devtools.SendAndWait(ctx, "ApplicationCache.getApplicationCacheForFrame", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetApplicationCacheForFrame CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetApplicationCacheForFrame) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "ApplicationCache.getApplicationCacheForFrame", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetApplicationCacheForFrame CDP command.
+func (t *GetApplicationCacheForFrame) ParseResponse(m *devtools.Message) (*GetApplicationCacheForFrameResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetApplicationCacheForFrameResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -117,15 +149,29 @@ type GetFramesWithManifestsResult struct {
 // Do sends the GetFramesWithManifests CDP command to a browser,
 // and returns the browser's response.
 func (t *GetFramesWithManifests) Do(ctx context.Context) (*GetFramesWithManifestsResult, error) {
-	response, err := devtools.SendAndWait(ctx, "ApplicationCache.getFramesWithManifests", nil)
+	m, err := devtools.SendAndWait(ctx, "ApplicationCache.getFramesWithManifests", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetFramesWithManifests CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetFramesWithManifests) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "ApplicationCache.getFramesWithManifests", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetFramesWithManifests CDP command.
+func (t *GetFramesWithManifests) ParseResponse(m *devtools.Message) (*GetFramesWithManifestsResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetFramesWithManifestsResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -167,15 +213,33 @@ func (t *GetManifestForFrame) Do(ctx context.Context) (*GetManifestForFrameResul
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "ApplicationCache.getManifestForFrame", b)
+	m, err := devtools.SendAndWait(ctx, "ApplicationCache.getManifestForFrame", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetManifestForFrame CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetManifestForFrame) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "ApplicationCache.getManifestForFrame", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetManifestForFrame CDP command.
+func (t *GetManifestForFrame) ParseResponse(m *devtools.Message) (*GetManifestForFrameResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetManifestForFrameResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil

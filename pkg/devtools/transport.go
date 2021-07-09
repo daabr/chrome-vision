@@ -231,8 +231,9 @@ func sendToWebSocket(s *Session, async asyncMessage) {
 
 // Send constructs and sends a CDP message to the browser associated with the
 // given context, and returns a channel to receive for the browser's response
-// message. Callers need to explicitly close these returned channels.
-// Multiple goroutines may call this function simultaneously.
+// message. Callers should close the returned channel on their own, although
+// closing unused channels isn't strictly required in Go. Multiple goroutines
+// may call this function simultaneously.
 func Send(ctx context.Context, method string, params json.RawMessage) (chan *Message, error) {
 	s, ok := FromContext(ctx)
 	if !ok {
@@ -254,9 +255,8 @@ func SendAndWait(ctx context.Context, method string, params json.RawMessage) (*M
 	if err != nil {
 		return nil, err
 	}
-	m := <-ch
-	close(ch)
-	return m, nil
+	defer close(ch)
+	return <-ch, nil
 }
 
 // SubscribeEvent returns a channel to receive event messages of

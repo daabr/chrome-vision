@@ -28,12 +28,26 @@ func NewClearDeviceOrientationOverride() *ClearDeviceOrientationOverride {
 // Do sends the ClearDeviceOrientationOverride CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearDeviceOrientationOverride) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "DeviceOrientation.clearDeviceOrientationOverride", nil)
+	m, err := devtools.SendAndWait(ctx, "DeviceOrientation.clearDeviceOrientationOverride", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ClearDeviceOrientationOverride CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ClearDeviceOrientationOverride) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "DeviceOrientation.clearDeviceOrientationOverride", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the ClearDeviceOrientationOverride CDP command.
+func (t *ClearDeviceOrientationOverride) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -73,12 +87,30 @@ func (t *SetDeviceOrientationOverride) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "DeviceOrientation.setDeviceOrientationOverride", b)
+	m, err := devtools.SendAndWait(ctx, "DeviceOrientation.setDeviceOrientationOverride", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetDeviceOrientationOverride CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetDeviceOrientationOverride) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "DeviceOrientation.setDeviceOrientationOverride", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetDeviceOrientationOverride CDP command.
+func (t *SetDeviceOrientationOverride) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }

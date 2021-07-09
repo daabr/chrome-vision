@@ -44,15 +44,29 @@ type GetInfoResult struct {
 // Do sends the GetInfo CDP command to a browser,
 // and returns the browser's response.
 func (t *GetInfo) Do(ctx context.Context) (*GetInfoResult, error) {
-	response, err := devtools.SendAndWait(ctx, "SystemInfo.getInfo", nil)
+	m, err := devtools.SendAndWait(ctx, "SystemInfo.getInfo", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetInfo CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetInfo) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "SystemInfo.getInfo", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetInfo CDP command.
+func (t *GetInfo) ParseResponse(m *devtools.Message) (*GetInfoResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetInfoResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -85,15 +99,29 @@ type GetProcessInfoResult struct {
 // Do sends the GetProcessInfo CDP command to a browser,
 // and returns the browser's response.
 func (t *GetProcessInfo) Do(ctx context.Context) (*GetProcessInfoResult, error) {
-	response, err := devtools.SendAndWait(ctx, "SystemInfo.getProcessInfo", nil)
+	m, err := devtools.SendAndWait(ctx, "SystemInfo.getProcessInfo", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetProcessInfo CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetProcessInfo) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "SystemInfo.getProcessInfo", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetProcessInfo CDP command.
+func (t *GetProcessInfo) ParseResponse(m *devtools.Message) (*GetProcessInfoResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetProcessInfoResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil

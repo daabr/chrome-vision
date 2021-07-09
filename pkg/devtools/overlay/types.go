@@ -173,6 +173,8 @@ type HighlightConfig struct {
 	FlexItemHighlightConfig *FlexItemHighlightConfig `json:"flexItemHighlightConfig,omitempty"`
 	// The contrast algorithm to use for the contrast ratio (default: aa).
 	ContrastAlgorithm *ContrastAlgorithm `json:"contrastAlgorithm,omitempty"`
+	// The container query container highlight configuration (default: all transparent).
+	ContainerQueryContainerHighlightConfig *ContainerQueryContainerHighlightConfig `json:"containerQueryContainerHighlightConfig,omitempty"`
 }
 
 // ColorFormat data type.
@@ -246,6 +248,24 @@ type HingeConfig struct {
 	ContentColor *dom.RGBA `json:"contentColor,omitempty"`
 	// The content box highlight outline color (default: transparent).
 	OutlineColor *dom.RGBA `json:"outlineColor,omitempty"`
+}
+
+// ContainerQueryHighlightConfig data type.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ContainerQueryHighlightConfig
+type ContainerQueryHighlightConfig struct {
+	// A descriptor for the highlight appearance of container query containers.
+	ContainerQueryContainerHighlightConfig ContainerQueryContainerHighlightConfig `json:"containerQueryContainerHighlightConfig"`
+	// Identifier of the container node to highlight.
+	NodeID int64 `json:"nodeId"`
+}
+
+// ContainerQueryContainerHighlightConfig data type.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ContainerQueryContainerHighlightConfig
+type ContainerQueryContainerHighlightConfig struct {
+	// The style of the container border
+	ContainerBorder *LineStyle `json:"containerBorder,omitempty"`
 }
 
 // InspectMode data type.

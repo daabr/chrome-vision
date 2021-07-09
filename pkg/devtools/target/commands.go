@@ -36,12 +36,30 @@ func (t *ActivateTarget) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Target.activateTarget", b)
+	m, err := devtools.SendAndWait(ctx, "Target.activateTarget", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ActivateTarget CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ActivateTarget) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Target.activateTarget", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ActivateTarget CDP command.
+func (t *ActivateTarget) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -96,15 +114,33 @@ func (t *AttachToTarget) Do(ctx context.Context) (*AttachToTargetResult, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Target.attachToTarget", b)
+	m, err := devtools.SendAndWait(ctx, "Target.attachToTarget", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the AttachToTarget CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *AttachToTarget) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Target.attachToTarget", b)
+}
+
+// ParseResponse parses the browser's response
+// to the AttachToTarget CDP command.
+func (t *AttachToTarget) ParseResponse(m *devtools.Message) (*AttachToTargetResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &AttachToTargetResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -141,15 +177,29 @@ type AttachToBrowserTargetResult struct {
 // Do sends the AttachToBrowserTarget CDP command to a browser,
 // and returns the browser's response.
 func (t *AttachToBrowserTarget) Do(ctx context.Context) (*AttachToBrowserTargetResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Target.attachToBrowserTarget", nil)
+	m, err := devtools.SendAndWait(ctx, "Target.attachToBrowserTarget", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the AttachToBrowserTarget CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *AttachToBrowserTarget) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Target.attachToBrowserTarget", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the AttachToBrowserTarget CDP command.
+func (t *AttachToBrowserTarget) ParseResponse(m *devtools.Message) (*AttachToBrowserTargetResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &AttachToBrowserTargetResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -192,15 +242,33 @@ func (t *CloseTarget) Do(ctx context.Context) (*CloseTargetResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Target.closeTarget", b)
+	m, err := devtools.SendAndWait(ctx, "Target.closeTarget", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the CloseTarget CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *CloseTarget) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Target.closeTarget", b)
+}
+
+// ParseResponse parses the browser's response
+// to the CloseTarget CDP command.
+func (t *CloseTarget) ParseResponse(m *devtools.Message) (*CloseTargetResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &CloseTargetResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -256,12 +324,30 @@ func (t *ExposeDevToolsProtocol) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Target.exposeDevToolsProtocol", b)
+	m, err := devtools.SendAndWait(ctx, "Target.exposeDevToolsProtocol", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ExposeDevToolsProtocol CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ExposeDevToolsProtocol) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Target.exposeDevToolsProtocol", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ExposeDevToolsProtocol CDP command.
+func (t *ExposeDevToolsProtocol) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -336,15 +422,33 @@ func (t *CreateBrowserContext) Do(ctx context.Context) (*CreateBrowserContextRes
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Target.createBrowserContext", b)
+	m, err := devtools.SendAndWait(ctx, "Target.createBrowserContext", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the CreateBrowserContext CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *CreateBrowserContext) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Target.createBrowserContext", b)
+}
+
+// ParseResponse parses the browser's response
+// to the CreateBrowserContext CDP command.
+func (t *CreateBrowserContext) ParseResponse(m *devtools.Message) (*CreateBrowserContextResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &CreateBrowserContextResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -381,15 +485,29 @@ type GetBrowserContextsResult struct {
 // Do sends the GetBrowserContexts CDP command to a browser,
 // and returns the browser's response.
 func (t *GetBrowserContexts) Do(ctx context.Context) (*GetBrowserContextsResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Target.getBrowserContexts", nil)
+	m, err := devtools.SendAndWait(ctx, "Target.getBrowserContexts", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetBrowserContexts CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetBrowserContexts) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Target.getBrowserContexts", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetBrowserContexts CDP command.
+func (t *GetBrowserContexts) ParseResponse(m *devtools.Message) (*GetBrowserContextsResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetBrowserContextsResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -505,15 +623,33 @@ func (t *CreateTarget) Do(ctx context.Context) (*CreateTargetResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Target.createTarget", b)
+	m, err := devtools.SendAndWait(ctx, "Target.createTarget", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the CreateTarget CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *CreateTarget) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Target.createTarget", b)
+}
+
+// ParseResponse parses the browser's response
+// to the CreateTarget CDP command.
+func (t *CreateTarget) ParseResponse(m *devtools.Message) (*CreateTargetResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &CreateTargetResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -570,12 +706,30 @@ func (t *DetachFromTarget) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Target.detachFromTarget", b)
+	m, err := devtools.SendAndWait(ctx, "Target.detachFromTarget", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the DetachFromTarget CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *DetachFromTarget) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Target.detachFromTarget", b)
+}
+
+// ParseResponse parses the browser's response
+// to the DetachFromTarget CDP command.
+func (t *DetachFromTarget) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -613,12 +767,30 @@ func (t *DisposeBrowserContext) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Target.disposeBrowserContext", b)
+	m, err := devtools.SendAndWait(ctx, "Target.disposeBrowserContext", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the DisposeBrowserContext CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *DisposeBrowserContext) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Target.disposeBrowserContext", b)
+}
+
+// ParseResponse parses the browser's response
+// to the DisposeBrowserContext CDP command.
+func (t *DisposeBrowserContext) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -666,15 +838,33 @@ func (t *GetTargetInfo) Do(ctx context.Context) (*GetTargetInfoResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Target.getTargetInfo", b)
+	m, err := devtools.SendAndWait(ctx, "Target.getTargetInfo", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetTargetInfo CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetTargetInfo) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Target.getTargetInfo", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetTargetInfo CDP command.
+func (t *GetTargetInfo) ParseResponse(m *devtools.Message) (*GetTargetInfoResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetTargetInfoResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -707,15 +897,29 @@ type GetTargetsResult struct {
 // Do sends the GetTargets CDP command to a browser,
 // and returns the browser's response.
 func (t *GetTargets) Do(ctx context.Context) (*GetTargetsResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Target.getTargets", nil)
+	m, err := devtools.SendAndWait(ctx, "Target.getTargets", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetTargets CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetTargets) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Target.getTargets", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetTargets CDP command.
+func (t *GetTargets) ParseResponse(m *devtools.Message) (*GetTargetsResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetTargetsResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -781,12 +985,30 @@ func (t *SendMessageToTarget) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Target.sendMessageToTarget", b)
+	m, err := devtools.SendAndWait(ctx, "Target.sendMessageToTarget", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SendMessageToTarget CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SendMessageToTarget) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Target.sendMessageToTarget", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SendMessageToTarget CDP command.
+func (t *SendMessageToTarget) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -845,12 +1067,30 @@ func (t *SetAutoAttach) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Target.setAutoAttach", b)
+	m, err := devtools.SendAndWait(ctx, "Target.setAutoAttach", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetAutoAttach CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetAutoAttach) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Target.setAutoAttach", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetAutoAttach CDP command.
+func (t *SetAutoAttach) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -885,12 +1125,30 @@ func (t *SetDiscoverTargets) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Target.setDiscoverTargets", b)
+	m, err := devtools.SendAndWait(ctx, "Target.setDiscoverTargets", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetDiscoverTargets CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetDiscoverTargets) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Target.setDiscoverTargets", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetDiscoverTargets CDP command.
+func (t *SetDiscoverTargets) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -929,12 +1187,30 @@ func (t *SetRemoteLocations) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Target.setRemoteLocations", b)
+	m, err := devtools.SendAndWait(ctx, "Target.setRemoteLocations", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetRemoteLocations CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetRemoteLocations) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Target.setRemoteLocations", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetRemoteLocations CDP command.
+func (t *SetRemoteLocations) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }

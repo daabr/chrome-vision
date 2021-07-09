@@ -52,15 +52,33 @@ func (t *AddScriptToEvaluateOnLoad) Do(ctx context.Context) (*AddScriptToEvaluat
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.addScriptToEvaluateOnLoad", b)
+	m, err := devtools.SendAndWait(ctx, "Page.addScriptToEvaluateOnLoad", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the AddScriptToEvaluateOnLoad CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *AddScriptToEvaluateOnLoad) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.addScriptToEvaluateOnLoad", b)
+}
+
+// ParseResponse parses the browser's response
+// to the AddScriptToEvaluateOnLoad CDP command.
+func (t *AddScriptToEvaluateOnLoad) ParseResponse(m *devtools.Message) (*AddScriptToEvaluateOnLoadResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &AddScriptToEvaluateOnLoadResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -137,15 +155,33 @@ func (t *AddScriptToEvaluateOnNewDocument) Do(ctx context.Context) (*AddScriptTo
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.addScriptToEvaluateOnNewDocument", b)
+	m, err := devtools.SendAndWait(ctx, "Page.addScriptToEvaluateOnNewDocument", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the AddScriptToEvaluateOnNewDocument CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *AddScriptToEvaluateOnNewDocument) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.addScriptToEvaluateOnNewDocument", b)
+}
+
+// ParseResponse parses the browser's response
+// to the AddScriptToEvaluateOnNewDocument CDP command.
+func (t *AddScriptToEvaluateOnNewDocument) ParseResponse(m *devtools.Message) (*AddScriptToEvaluateOnNewDocumentResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &AddScriptToEvaluateOnNewDocumentResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -171,12 +207,26 @@ func NewBringToFront() *BringToFront {
 // Do sends the BringToFront CDP command to a browser,
 // and returns the browser's response.
 func (t *BringToFront) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Page.bringToFront", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.bringToFront", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the BringToFront CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *BringToFront) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.bringToFront", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the BringToFront CDP command.
+func (t *BringToFront) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -276,15 +326,33 @@ func (t *CaptureScreenshot) Do(ctx context.Context) (*CaptureScreenshotResult, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.captureScreenshot", b)
+	m, err := devtools.SendAndWait(ctx, "Page.captureScreenshot", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the CaptureScreenshot CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *CaptureScreenshot) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.captureScreenshot", b)
+}
+
+// ParseResponse parses the browser's response
+// to the CaptureScreenshot CDP command.
+func (t *CaptureScreenshot) ParseResponse(m *devtools.Message) (*CaptureScreenshotResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &CaptureScreenshotResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -338,15 +406,33 @@ func (t *CaptureSnapshot) Do(ctx context.Context) (*CaptureSnapshotResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.captureSnapshot", b)
+	m, err := devtools.SendAndWait(ctx, "Page.captureSnapshot", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the CaptureSnapshot CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *CaptureSnapshot) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.captureSnapshot", b)
+}
+
+// ParseResponse parses the browser's response
+// to the CaptureSnapshot CDP command.
+func (t *CaptureSnapshot) ParseResponse(m *devtools.Message) (*CaptureSnapshotResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &CaptureSnapshotResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -412,15 +498,33 @@ func (t *CreateIsolatedWorld) Do(ctx context.Context) (*CreateIsolatedWorldResul
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.createIsolatedWorld", b)
+	m, err := devtools.SendAndWait(ctx, "Page.createIsolatedWorld", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the CreateIsolatedWorld CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *CreateIsolatedWorld) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.createIsolatedWorld", b)
+}
+
+// ParseResponse parses the browser's response
+// to the CreateIsolatedWorld CDP command.
+func (t *CreateIsolatedWorld) ParseResponse(m *devtools.Message) (*CreateIsolatedWorldResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &CreateIsolatedWorldResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -446,12 +550,26 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Page.disable", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.disable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Disable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Disable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.disable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Disable CDP command.
+func (t *Disable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -476,12 +594,26 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Page.enable", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.enable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Enable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Enable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.enable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Enable CDP command.
+func (t *Enable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -518,15 +650,29 @@ type GetAppManifestResult struct {
 // Do sends the GetAppManifest CDP command to a browser,
 // and returns the browser's response.
 func (t *GetAppManifest) Do(ctx context.Context) (*GetAppManifestResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Page.getAppManifest", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.getAppManifest", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetAppManifest CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetAppManifest) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.getAppManifest", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetAppManifest CDP command.
+func (t *GetAppManifest) ParseResponse(m *devtools.Message) (*GetAppManifestResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetAppManifestResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -560,15 +706,29 @@ type GetInstallabilityErrorsResult struct {
 // Do sends the GetInstallabilityErrors CDP command to a browser,
 // and returns the browser's response.
 func (t *GetInstallabilityErrors) Do(ctx context.Context) (*GetInstallabilityErrorsResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Page.getInstallabilityErrors", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.getInstallabilityErrors", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetInstallabilityErrors CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetInstallabilityErrors) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.getInstallabilityErrors", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetInstallabilityErrors CDP command.
+func (t *GetInstallabilityErrors) ParseResponse(m *devtools.Message) (*GetInstallabilityErrorsResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetInstallabilityErrorsResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -602,15 +762,29 @@ type GetManifestIconsResult struct {
 // Do sends the GetManifestIcons CDP command to a browser,
 // and returns the browser's response.
 func (t *GetManifestIcons) Do(ctx context.Context) (*GetManifestIconsResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Page.getManifestIcons", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.getManifestIcons", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetManifestIcons CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetManifestIcons) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.getManifestIcons", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetManifestIcons CDP command.
+func (t *GetManifestIcons) ParseResponse(m *devtools.Message) (*GetManifestIconsResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetManifestIconsResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -643,15 +817,29 @@ type GetFrameTreeResult struct {
 // Do sends the GetFrameTree CDP command to a browser,
 // and returns the browser's response.
 func (t *GetFrameTree) Do(ctx context.Context) (*GetFrameTreeResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Page.getFrameTree", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.getFrameTree", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetFrameTree CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetFrameTree) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.getFrameTree", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetFrameTree CDP command.
+func (t *GetFrameTree) ParseResponse(m *devtools.Message) (*GetFrameTreeResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetFrameTreeResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -700,15 +888,29 @@ type GetLayoutMetricsResult struct {
 // Do sends the GetLayoutMetrics CDP command to a browser,
 // and returns the browser's response.
 func (t *GetLayoutMetrics) Do(ctx context.Context) (*GetLayoutMetricsResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Page.getLayoutMetrics", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.getLayoutMetrics", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetLayoutMetrics CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetLayoutMetrics) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.getLayoutMetrics", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetLayoutMetrics CDP command.
+func (t *GetLayoutMetrics) ParseResponse(m *devtools.Message) (*GetLayoutMetricsResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetLayoutMetricsResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -743,15 +945,29 @@ type GetNavigationHistoryResult struct {
 // Do sends the GetNavigationHistory CDP command to a browser,
 // and returns the browser's response.
 func (t *GetNavigationHistory) Do(ctx context.Context) (*GetNavigationHistoryResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Page.getNavigationHistory", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.getNavigationHistory", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetNavigationHistory CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetNavigationHistory) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.getNavigationHistory", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetNavigationHistory CDP command.
+func (t *GetNavigationHistory) ParseResponse(m *devtools.Message) (*GetNavigationHistoryResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetNavigationHistoryResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -777,12 +993,26 @@ func NewResetNavigationHistory() *ResetNavigationHistory {
 // Do sends the ResetNavigationHistory CDP command to a browser,
 // and returns the browser's response.
 func (t *ResetNavigationHistory) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Page.resetNavigationHistory", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.resetNavigationHistory", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ResetNavigationHistory CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ResetNavigationHistory) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.resetNavigationHistory", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the ResetNavigationHistory CDP command.
+func (t *ResetNavigationHistory) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -832,15 +1062,33 @@ func (t *GetResourceContent) Do(ctx context.Context) (*GetResourceContentResult,
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.getResourceContent", b)
+	m, err := devtools.SendAndWait(ctx, "Page.getResourceContent", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetResourceContent CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetResourceContent) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.getResourceContent", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetResourceContent CDP command.
+func (t *GetResourceContent) ParseResponse(m *devtools.Message) (*GetResourceContentResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetResourceContentResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -877,15 +1125,29 @@ type GetResourceTreeResult struct {
 // Do sends the GetResourceTree CDP command to a browser,
 // and returns the browser's response.
 func (t *GetResourceTree) Do(ctx context.Context) (*GetResourceTreeResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Page.getResourceTree", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.getResourceTree", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetResourceTree CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetResourceTree) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.getResourceTree", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetResourceTree CDP command.
+func (t *GetResourceTree) ParseResponse(m *devtools.Message) (*GetResourceTreeResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetResourceTreeResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -933,12 +1195,30 @@ func (t *HandleJavaScriptDialog) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.handleJavaScriptDialog", b)
+	m, err := devtools.SendAndWait(ctx, "Page.handleJavaScriptDialog", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the HandleJavaScriptDialog CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *HandleJavaScriptDialog) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.handleJavaScriptDialog", b)
+}
+
+// ParseResponse parses the browser's response
+// to the HandleJavaScriptDialog CDP command.
+func (t *HandleJavaScriptDialog) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1031,15 +1311,33 @@ func (t *Navigate) Do(ctx context.Context) (*NavigateResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.navigate", b)
+	m, err := devtools.SendAndWait(ctx, "Page.navigate", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Navigate CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Navigate) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.navigate", b)
+}
+
+// ParseResponse parses the browser's response
+// to the Navigate CDP command.
+func (t *Navigate) ParseResponse(m *devtools.Message) (*NavigateResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &NavigateResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -1074,12 +1372,30 @@ func (t *NavigateToHistoryEntry) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.navigateToHistoryEntry", b)
+	m, err := devtools.SendAndWait(ctx, "Page.navigateToHistoryEntry", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the NavigateToHistoryEntry CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *NavigateToHistoryEntry) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.navigateToHistoryEntry", b)
+}
+
+// ParseResponse parses the browser's response
+// to the NavigateToHistoryEntry CDP command.
+func (t *NavigateToHistoryEntry) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1322,15 +1638,33 @@ func (t *PrintToPDF) Do(ctx context.Context) (*PrintToPDFResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.printToPDF", b)
+	m, err := devtools.SendAndWait(ctx, "Page.printToPDF", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the PrintToPDF CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *PrintToPDF) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.printToPDF", b)
+}
+
+// ParseResponse parses the browser's response
+// to the PrintToPDF CDP command.
+func (t *PrintToPDF) ParseResponse(m *devtools.Message) (*PrintToPDFResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &PrintToPDFResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -1385,12 +1719,30 @@ func (t *Reload) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.reload", b)
+	m, err := devtools.SendAndWait(ctx, "Page.reload", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Reload CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Reload) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.reload", b)
+}
+
+// ParseResponse parses the browser's response
+// to the Reload CDP command.
+func (t *Reload) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1429,12 +1781,30 @@ func (t *RemoveScriptToEvaluateOnLoad) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.removeScriptToEvaluateOnLoad", b)
+	m, err := devtools.SendAndWait(ctx, "Page.removeScriptToEvaluateOnLoad", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the RemoveScriptToEvaluateOnLoad CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *RemoveScriptToEvaluateOnLoad) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.removeScriptToEvaluateOnLoad", b)
+}
+
+// ParseResponse parses the browser's response
+// to the RemoveScriptToEvaluateOnLoad CDP command.
+func (t *RemoveScriptToEvaluateOnLoad) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1467,12 +1837,30 @@ func (t *RemoveScriptToEvaluateOnNewDocument) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.removeScriptToEvaluateOnNewDocument", b)
+	m, err := devtools.SendAndWait(ctx, "Page.removeScriptToEvaluateOnNewDocument", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the RemoveScriptToEvaluateOnNewDocument CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *RemoveScriptToEvaluateOnNewDocument) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.removeScriptToEvaluateOnNewDocument", b)
+}
+
+// ParseResponse parses the browser's response
+// to the RemoveScriptToEvaluateOnNewDocument CDP command.
+func (t *RemoveScriptToEvaluateOnNewDocument) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1510,12 +1898,30 @@ func (t *ScreencastFrameAck) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.screencastFrameAck", b)
+	m, err := devtools.SendAndWait(ctx, "Page.screencastFrameAck", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ScreencastFrameAck CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ScreencastFrameAck) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.screencastFrameAck", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ScreencastFrameAck CDP command.
+func (t *ScreencastFrameAck) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1588,15 +1994,33 @@ func (t *SearchInResource) Do(ctx context.Context) (*SearchInResourceResult, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.searchInResource", b)
+	m, err := devtools.SendAndWait(ctx, "Page.searchInResource", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SearchInResource CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SearchInResource) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.searchInResource", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SearchInResource CDP command.
+func (t *SearchInResource) ParseResponse(m *devtools.Message) (*SearchInResourceResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &SearchInResourceResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -1635,12 +2059,30 @@ func (t *SetAdBlockingEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.setAdBlockingEnabled", b)
+	m, err := devtools.SendAndWait(ctx, "Page.setAdBlockingEnabled", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetAdBlockingEnabled CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetAdBlockingEnabled) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.setAdBlockingEnabled", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetAdBlockingEnabled CDP command.
+func (t *SetAdBlockingEnabled) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1678,12 +2120,30 @@ func (t *SetBypassCSP) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.setBypassCSP", b)
+	m, err := devtools.SendAndWait(ctx, "Page.setBypassCSP", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetBypassCSP CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetBypassCSP) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.setBypassCSP", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetBypassCSP CDP command.
+func (t *SetBypassCSP) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1726,15 +2186,33 @@ func (t *GetPermissionsPolicyState) Do(ctx context.Context) (*GetPermissionsPoli
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.getPermissionsPolicyState", b)
+	m, err := devtools.SendAndWait(ctx, "Page.getPermissionsPolicyState", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetPermissionsPolicyState CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetPermissionsPolicyState) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.getPermissionsPolicyState", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetPermissionsPolicyState CDP command.
+func (t *GetPermissionsPolicyState) ParseResponse(m *devtools.Message) (*GetPermissionsPolicyStateResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetPermissionsPolicyStateResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -1773,12 +2251,30 @@ func (t *SetFontFamilies) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.setFontFamilies", b)
+	m, err := devtools.SendAndWait(ctx, "Page.setFontFamilies", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetFontFamilies CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetFontFamilies) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.setFontFamilies", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetFontFamilies CDP command.
+func (t *SetFontFamilies) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1816,12 +2312,30 @@ func (t *SetFontSizes) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.setFontSizes", b)
+	m, err := devtools.SendAndWait(ctx, "Page.setFontSizes", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetFontSizes CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetFontSizes) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.setFontSizes", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetFontSizes CDP command.
+func (t *SetFontSizes) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1858,12 +2372,30 @@ func (t *SetDocumentContent) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.setDocumentContent", b)
+	m, err := devtools.SendAndWait(ctx, "Page.setDocumentContent", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetDocumentContent CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetDocumentContent) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.setDocumentContent", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetDocumentContent CDP command.
+func (t *SetDocumentContent) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1915,12 +2447,30 @@ func (t *SetDownloadBehavior) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.setDownloadBehavior", b)
+	m, err := devtools.SendAndWait(ctx, "Page.setDownloadBehavior", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetDownloadBehavior CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetDownloadBehavior) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.setDownloadBehavior", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetDownloadBehavior CDP command.
+func (t *SetDownloadBehavior) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1958,12 +2508,30 @@ func (t *SetLifecycleEventsEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.setLifecycleEventsEnabled", b)
+	m, err := devtools.SendAndWait(ctx, "Page.setLifecycleEventsEnabled", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetLifecycleEventsEnabled CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetLifecycleEventsEnabled) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.setLifecycleEventsEnabled", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetLifecycleEventsEnabled CDP command.
+func (t *SetLifecycleEventsEnabled) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -2052,12 +2620,30 @@ func (t *StartScreencast) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.startScreencast", b)
+	m, err := devtools.SendAndWait(ctx, "Page.startScreencast", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the StartScreencast CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *StartScreencast) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.startScreencast", b)
+}
+
+// ParseResponse parses the browser's response
+// to the StartScreencast CDP command.
+func (t *StartScreencast) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -2082,12 +2668,26 @@ func NewStopLoading() *StopLoading {
 // Do sends the StopLoading CDP command to a browser,
 // and returns the browser's response.
 func (t *StopLoading) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Page.stopLoading", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.stopLoading", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the StopLoading CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *StopLoading) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.stopLoading", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the StopLoading CDP command.
+func (t *StopLoading) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -2116,12 +2716,26 @@ func NewCrash() *Crash {
 // Do sends the Crash CDP command to a browser,
 // and returns the browser's response.
 func (t *Crash) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Page.crash", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.crash", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Crash CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Crash) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.crash", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Crash CDP command.
+func (t *Crash) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -2150,12 +2764,26 @@ func NewClose() *Close {
 // Do sends the Close CDP command to a browser,
 // and returns the browser's response.
 func (t *Close) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Page.close", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.close", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Close CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Close) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.close", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Close CDP command.
+func (t *Close) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -2195,12 +2823,30 @@ func (t *SetWebLifecycleState) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.setWebLifecycleState", b)
+	m, err := devtools.SendAndWait(ctx, "Page.setWebLifecycleState", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetWebLifecycleState CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetWebLifecycleState) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.setWebLifecycleState", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetWebLifecycleState CDP command.
+func (t *SetWebLifecycleState) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -2229,12 +2875,26 @@ func NewStopScreencast() *StopScreencast {
 // Do sends the StopScreencast CDP command to a browser,
 // and returns the browser's response.
 func (t *StopScreencast) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Page.stopScreencast", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.stopScreencast", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the StopScreencast CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *StopScreencast) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.stopScreencast", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the StopScreencast CDP command.
+func (t *StopScreencast) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -2272,12 +2932,30 @@ func (t *SetProduceCompilationCache) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.setProduceCompilationCache", b)
+	m, err := devtools.SendAndWait(ctx, "Page.setProduceCompilationCache", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetProduceCompilationCache CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetProduceCompilationCache) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.setProduceCompilationCache", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetProduceCompilationCache CDP command.
+func (t *SetProduceCompilationCache) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -2322,12 +3000,30 @@ func (t *ProduceCompilationCache) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.produceCompilationCache", b)
+	m, err := devtools.SendAndWait(ctx, "Page.produceCompilationCache", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ProduceCompilationCache CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ProduceCompilationCache) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.produceCompilationCache", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ProduceCompilationCache CDP command.
+func (t *ProduceCompilationCache) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -2368,12 +3064,30 @@ func (t *AddCompilationCache) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.addCompilationCache", b)
+	m, err := devtools.SendAndWait(ctx, "Page.addCompilationCache", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the AddCompilationCache CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *AddCompilationCache) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.addCompilationCache", b)
+}
+
+// ParseResponse parses the browser's response
+// to the AddCompilationCache CDP command.
+func (t *AddCompilationCache) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -2402,12 +3116,26 @@ func NewClearCompilationCache() *ClearCompilationCache {
 // Do sends the ClearCompilationCache CDP command to a browser,
 // and returns the browser's response.
 func (t *ClearCompilationCache) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Page.clearCompilationCache", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.clearCompilationCache", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ClearCompilationCache CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ClearCompilationCache) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.clearCompilationCache", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the ClearCompilationCache CDP command.
+func (t *ClearCompilationCache) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -2456,12 +3184,30 @@ func (t *GenerateTestReport) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.generateTestReport", b)
+	m, err := devtools.SendAndWait(ctx, "Page.generateTestReport", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GenerateTestReport CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GenerateTestReport) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.generateTestReport", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GenerateTestReport CDP command.
+func (t *GenerateTestReport) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -2490,12 +3236,26 @@ func NewWaitForDebugger() *WaitForDebugger {
 // Do sends the WaitForDebugger CDP command to a browser,
 // and returns the browser's response.
 func (t *WaitForDebugger) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Page.waitForDebugger", nil)
+	m, err := devtools.SendAndWait(ctx, "Page.waitForDebugger", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the WaitForDebugger CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *WaitForDebugger) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.waitForDebugger", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the WaitForDebugger CDP command.
+func (t *WaitForDebugger) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -2534,12 +3294,30 @@ func (t *SetInterceptFileChooserDialog) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Page.setInterceptFileChooserDialog", b)
+	m, err := devtools.SendAndWait(ctx, "Page.setInterceptFileChooserDialog", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetInterceptFileChooserDialog CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetInterceptFileChooserDialog) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.setInterceptFileChooserDialog", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetInterceptFileChooserDialog CDP command.
+func (t *SetInterceptFileChooserDialog) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }

@@ -49,15 +49,33 @@ func (t *CompositingReasons) Do(ctx context.Context) (*CompositingReasonsResult,
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "LayerTree.compositingReasons", b)
+	m, err := devtools.SendAndWait(ctx, "LayerTree.compositingReasons", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the CompositingReasons CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *CompositingReasons) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "LayerTree.compositingReasons", b)
+}
+
+// ParseResponse parses the browser's response
+// to the CompositingReasons CDP command.
+func (t *CompositingReasons) ParseResponse(m *devtools.Message) (*CompositingReasonsResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &CompositingReasonsResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -83,12 +101,26 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "LayerTree.disable", nil)
+	m, err := devtools.SendAndWait(ctx, "LayerTree.disable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Disable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Disable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "LayerTree.disable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Disable CDP command.
+func (t *Disable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -113,12 +145,26 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "LayerTree.enable", nil)
+	m, err := devtools.SendAndWait(ctx, "LayerTree.enable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Enable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Enable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "LayerTree.enable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Enable CDP command.
+func (t *Enable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -159,15 +205,33 @@ func (t *LoadSnapshot) Do(ctx context.Context) (*LoadSnapshotResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "LayerTree.loadSnapshot", b)
+	m, err := devtools.SendAndWait(ctx, "LayerTree.loadSnapshot", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the LoadSnapshot CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *LoadSnapshot) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "LayerTree.loadSnapshot", b)
+}
+
+// ParseResponse parses the browser's response
+// to the LoadSnapshot CDP command.
+func (t *LoadSnapshot) ParseResponse(m *devtools.Message) (*LoadSnapshotResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &LoadSnapshotResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -209,15 +273,33 @@ func (t *MakeSnapshot) Do(ctx context.Context) (*MakeSnapshotResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "LayerTree.makeSnapshot", b)
+	m, err := devtools.SendAndWait(ctx, "LayerTree.makeSnapshot", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the MakeSnapshot CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *MakeSnapshot) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "LayerTree.makeSnapshot", b)
+}
+
+// ParseResponse parses the browser's response
+// to the MakeSnapshot CDP command.
+func (t *MakeSnapshot) ParseResponse(m *devtools.Message) (*MakeSnapshotResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &MakeSnapshotResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -290,15 +372,33 @@ func (t *ProfileSnapshot) Do(ctx context.Context) (*ProfileSnapshotResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "LayerTree.profileSnapshot", b)
+	m, err := devtools.SendAndWait(ctx, "LayerTree.profileSnapshot", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ProfileSnapshot CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ProfileSnapshot) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "LayerTree.profileSnapshot", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ProfileSnapshot CDP command.
+func (t *ProfileSnapshot) ParseResponse(m *devtools.Message) (*ProfileSnapshotResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &ProfileSnapshotResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -333,12 +433,30 @@ func (t *ReleaseSnapshot) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "LayerTree.releaseSnapshot", b)
+	m, err := devtools.SendAndWait(ctx, "LayerTree.releaseSnapshot", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ReleaseSnapshot CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ReleaseSnapshot) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "LayerTree.releaseSnapshot", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ReleaseSnapshot CDP command.
+func (t *ReleaseSnapshot) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -412,15 +530,33 @@ func (t *ReplaySnapshot) Do(ctx context.Context) (*ReplaySnapshotResult, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "LayerTree.replaySnapshot", b)
+	m, err := devtools.SendAndWait(ctx, "LayerTree.replaySnapshot", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ReplaySnapshot CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ReplaySnapshot) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "LayerTree.replaySnapshot", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ReplaySnapshot CDP command.
+func (t *ReplaySnapshot) ParseResponse(m *devtools.Message) (*ReplaySnapshotResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &ReplaySnapshotResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -462,15 +598,33 @@ func (t *SnapshotCommandLog) Do(ctx context.Context) (*SnapshotCommandLogResult,
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "LayerTree.snapshotCommandLog", b)
+	m, err := devtools.SendAndWait(ctx, "LayerTree.snapshotCommandLog", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SnapshotCommandLog CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SnapshotCommandLog) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "LayerTree.snapshotCommandLog", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SnapshotCommandLog CDP command.
+func (t *SnapshotCommandLog) ParseResponse(m *devtools.Message) (*SnapshotCommandLogResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &SnapshotCommandLogResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
