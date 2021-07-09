@@ -37,7 +37,7 @@ The first two are very popular, but only the last one offers integration with
     [`chromedp.RunResponse`](https://pkg.go.dev/github.com/chromedp/chromedp#RunResponse),
     [`chromedp.ActionFunc`](https://pkg.go.dev/github.com/chromedp/chromedp#ActionFunc))
   * No need to initialize executors, either with
-    [`chromedp.Run`](https://pkg.go.dev/github.com/chromedp/chromedp#Run), or with
+    [`chromedp.Run`](https://pkg.go.dev/github.com/chromedp/chromedp#Run) or with
     [`cdproto.cdp.WithExecutor`](https://pkg.go.dev/github.com/chromedp/cdproto/cdp#WithExecutor)
 * Communication with the browser:
   * Non-Windows OSs: using POSIX pipes instead of WebSockets (faster, more
