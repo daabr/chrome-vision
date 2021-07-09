@@ -16,7 +16,7 @@ products such as [Selenium WebDriver](https://www.selenium.dev/documentation),
 The first two are very popular, but only the last one offers integration with
 [Go](https://golang.org) without heavy non-Go dependencies.
 
-This project aims to:
+## Goals
 
 * Make the Chrome DevTools Protocol more accessible
 * Simplify the low-level API even more than ChromeDP
@@ -25,8 +25,25 @@ This project aims to:
 * Add Computer Vision (CV) and Optical Character Recognition (OCR) capabilities,\
   which are missing in all of the above
 
-## Main Differences From ChromeDP
+## Differences From ChromeDP
 
 * Simpler session initialization, and simpler customization of browser flags
   (see [example](https://github.com/daabr/chrome-vision/blob/main/examples/init/main.go>))
-* Simpler CDP command execution API
+* Simpler CDP command execution API:
+  * More idiomatic command execution: non-blocking `Start` (returns a channel)
+    and blocking `Do` (returns the command's result), instead of non-idiomaic
+    and sometimes confusing JavaScript-await-like wrapper functions
+    ([`chromedp.Run`](https://pkg.go.dev/github.com/chromedp/chromedp#Run),
+    [`chromedp.RunResponse`](https://pkg.go.dev/github.com/chromedp/chromedp#RunResponse),
+    [`chromedp.ActionFunc`](https://pkg.go.dev/github.com/chromedp/chromedp#ActionFunc))
+  * No need to initialize executors, either with
+    [`chromedp.Run`](https://pkg.go.dev/github.com/chromedp/chromedp#Run), or with
+    [`cdproto.cdp.WithExecutor`](https://pkg.go.dev/github.com/chromedp/cdproto/cdp#WithExecutor)
+* Communication with the browser:
+  * Non-Windows OSs: using POSIX pipes instead of WebSockets (faster, more
+    reliable and more secure)
+  * Windows: using an internal implementation of the WebSocket protocol
+    (optimized for Chrome DevTools, faster and more efficient - see
+    [documentation](https://pkg.go.dev/github.com/daabr/chrome-vision/pkg/websocket))
+* Stronger adherence to idiomatic Go coding style and
+  <https://github.com/golang-standards/project-layout>
