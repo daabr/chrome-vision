@@ -41,12 +41,30 @@ func (t *ClearDataForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Storage.clearDataForOrigin", b)
+	m, err := devtools.SendAndWait(ctx, "Storage.clearDataForOrigin", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ClearDataForOrigin CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ClearDataForOrigin) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Storage.clearDataForOrigin", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ClearDataForOrigin CDP command.
+func (t *ClearDataForOrigin) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -94,15 +112,33 @@ func (t *GetCookies) Do(ctx context.Context) (*GetCookiesResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Storage.getCookies", b)
+	m, err := devtools.SendAndWait(ctx, "Storage.getCookies", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetCookies CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetCookies) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Storage.getCookies", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetCookies CDP command.
+func (t *GetCookies) ParseResponse(m *devtools.Message) (*GetCookiesResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetCookiesResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -148,12 +184,30 @@ func (t *SetCookies) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Storage.setCookies", b)
+	m, err := devtools.SendAndWait(ctx, "Storage.setCookies", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetCookies CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetCookies) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Storage.setCookies", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetCookies CDP command.
+func (t *SetCookies) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -194,12 +248,30 @@ func (t *ClearCookies) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Storage.clearCookies", b)
+	m, err := devtools.SendAndWait(ctx, "Storage.clearCookies", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ClearCookies CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ClearCookies) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Storage.clearCookies", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ClearCookies CDP command.
+func (t *ClearCookies) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -246,15 +318,33 @@ func (t *GetUsageAndQuota) Do(ctx context.Context) (*GetUsageAndQuotaResult, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Storage.getUsageAndQuota", b)
+	m, err := devtools.SendAndWait(ctx, "Storage.getUsageAndQuota", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetUsageAndQuota CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetUsageAndQuota) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Storage.getUsageAndQuota", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetUsageAndQuota CDP command.
+func (t *GetUsageAndQuota) ParseResponse(m *devtools.Message) (*GetUsageAndQuotaResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetUsageAndQuotaResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -316,12 +406,30 @@ func (t *OverrideQuotaForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Storage.overrideQuotaForOrigin", b)
+	m, err := devtools.SendAndWait(ctx, "Storage.overrideQuotaForOrigin", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the OverrideQuotaForOrigin CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *OverrideQuotaForOrigin) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Storage.overrideQuotaForOrigin", b)
+}
+
+// ParseResponse parses the browser's response
+// to the OverrideQuotaForOrigin CDP command.
+func (t *OverrideQuotaForOrigin) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -355,12 +463,30 @@ func (t *TrackCacheStorageForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Storage.trackCacheStorageForOrigin", b)
+	m, err := devtools.SendAndWait(ctx, "Storage.trackCacheStorageForOrigin", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the TrackCacheStorageForOrigin CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *TrackCacheStorageForOrigin) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Storage.trackCacheStorageForOrigin", b)
+}
+
+// ParseResponse parses the browser's response
+// to the TrackCacheStorageForOrigin CDP command.
+func (t *TrackCacheStorageForOrigin) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -394,12 +520,30 @@ func (t *TrackIndexedDBForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Storage.trackIndexedDBForOrigin", b)
+	m, err := devtools.SendAndWait(ctx, "Storage.trackIndexedDBForOrigin", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the TrackIndexedDBForOrigin CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *TrackIndexedDBForOrigin) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Storage.trackIndexedDBForOrigin", b)
+}
+
+// ParseResponse parses the browser's response
+// to the TrackIndexedDBForOrigin CDP command.
+func (t *TrackIndexedDBForOrigin) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -433,12 +577,30 @@ func (t *UntrackCacheStorageForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Storage.untrackCacheStorageForOrigin", b)
+	m, err := devtools.SendAndWait(ctx, "Storage.untrackCacheStorageForOrigin", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the UntrackCacheStorageForOrigin CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *UntrackCacheStorageForOrigin) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Storage.untrackCacheStorageForOrigin", b)
+}
+
+// ParseResponse parses the browser's response
+// to the UntrackCacheStorageForOrigin CDP command.
+func (t *UntrackCacheStorageForOrigin) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -472,12 +634,30 @@ func (t *UntrackIndexedDBForOrigin) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Storage.untrackIndexedDBForOrigin", b)
+	m, err := devtools.SendAndWait(ctx, "Storage.untrackIndexedDBForOrigin", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the UntrackIndexedDBForOrigin CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *UntrackIndexedDBForOrigin) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Storage.untrackIndexedDBForOrigin", b)
+}
+
+// ParseResponse parses the browser's response
+// to the UntrackIndexedDBForOrigin CDP command.
+func (t *UntrackIndexedDBForOrigin) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -513,15 +693,29 @@ type GetTrustTokensResult struct {
 // Do sends the GetTrustTokens CDP command to a browser,
 // and returns the browser's response.
 func (t *GetTrustTokens) Do(ctx context.Context) (*GetTrustTokensResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Storage.getTrustTokens", nil)
+	m, err := devtools.SendAndWait(ctx, "Storage.getTrustTokens", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetTrustTokens CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetTrustTokens) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Storage.getTrustTokens", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetTrustTokens CDP command.
+func (t *GetTrustTokens) ParseResponse(m *devtools.Message) (*GetTrustTokensResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetTrustTokensResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -567,15 +761,33 @@ func (t *ClearTrustTokens) Do(ctx context.Context) (*ClearTrustTokensResult, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Storage.clearTrustTokens", b)
+	m, err := devtools.SendAndWait(ctx, "Storage.clearTrustTokens", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ClearTrustTokens CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ClearTrustTokens) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Storage.clearTrustTokens", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ClearTrustTokens CDP command.
+func (t *ClearTrustTokens) ParseResponse(m *devtools.Message) (*ClearTrustTokensResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &ClearTrustTokensResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil

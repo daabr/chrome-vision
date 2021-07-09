@@ -51,15 +51,33 @@ func (t *AddRule) Do(ctx context.Context) (*AddRuleResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.addRule", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.addRule", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the AddRule CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *AddRule) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.addRule", b)
+}
+
+// ParseResponse parses the browser's response
+// to the AddRule CDP command.
+func (t *AddRule) ParseResponse(m *devtools.Message) (*AddRuleResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &AddRuleResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -100,15 +118,33 @@ func (t *CollectClassNames) Do(ctx context.Context) (*CollectClassNamesResult, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.collectClassNames", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.collectClassNames", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the CollectClassNames CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *CollectClassNames) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.collectClassNames", b)
+}
+
+// ParseResponse parses the browser's response
+// to the CollectClassNames CDP command.
+func (t *CollectClassNames) ParseResponse(m *devtools.Message) (*CollectClassNamesResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &CollectClassNamesResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -150,15 +186,33 @@ func (t *CreateStyleSheet) Do(ctx context.Context) (*CreateStyleSheetResult, err
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.createStyleSheet", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.createStyleSheet", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the CreateStyleSheet CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *CreateStyleSheet) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.createStyleSheet", b)
+}
+
+// ParseResponse parses the browser's response
+// to the CreateStyleSheet CDP command.
+func (t *CreateStyleSheet) ParseResponse(m *devtools.Message) (*CreateStyleSheetResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &CreateStyleSheetResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -184,12 +238,26 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "CSS.disable", nil)
+	m, err := devtools.SendAndWait(ctx, "CSS.disable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Disable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Disable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "CSS.disable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Disable CDP command.
+func (t *Disable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -215,12 +283,26 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "CSS.enable", nil)
+	m, err := devtools.SendAndWait(ctx, "CSS.enable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Enable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Enable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "CSS.enable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Enable CDP command.
+func (t *Enable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -258,12 +340,30 @@ func (t *ForcePseudoState) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.forcePseudoState", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.forcePseudoState", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ForcePseudoState CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ForcePseudoState) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.forcePseudoState", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ForcePseudoState CDP command.
+func (t *ForcePseudoState) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -311,15 +411,33 @@ func (t *GetBackgroundColors) Do(ctx context.Context) (*GetBackgroundColorsResul
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.getBackgroundColors", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.getBackgroundColors", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetBackgroundColors CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetBackgroundColors) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.getBackgroundColors", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetBackgroundColors CDP command.
+func (t *GetBackgroundColors) ParseResponse(m *devtools.Message) (*GetBackgroundColorsResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetBackgroundColorsResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -360,15 +478,33 @@ func (t *GetComputedStyleForNode) Do(ctx context.Context) (*GetComputedStyleForN
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.getComputedStyleForNode", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.getComputedStyleForNode", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetComputedStyleForNode CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetComputedStyleForNode) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.getComputedStyleForNode", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetComputedStyleForNode CDP command.
+func (t *GetComputedStyleForNode) ParseResponse(m *devtools.Message) (*GetComputedStyleForNodeResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetComputedStyleForNodeResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -412,15 +548,33 @@ func (t *GetInlineStylesForNode) Do(ctx context.Context) (*GetInlineStylesForNod
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.getInlineStylesForNode", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.getInlineStylesForNode", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetInlineStylesForNode CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetInlineStylesForNode) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.getInlineStylesForNode", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetInlineStylesForNode CDP command.
+func (t *GetInlineStylesForNode) ParseResponse(m *devtools.Message) (*GetInlineStylesForNodeResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetInlineStylesForNodeResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -471,15 +625,33 @@ func (t *GetMatchedStylesForNode) Do(ctx context.Context) (*GetMatchedStylesForN
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.getMatchedStylesForNode", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.getMatchedStylesForNode", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetMatchedStylesForNode CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetMatchedStylesForNode) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.getMatchedStylesForNode", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetMatchedStylesForNode CDP command.
+func (t *GetMatchedStylesForNode) ParseResponse(m *devtools.Message) (*GetMatchedStylesForNodeResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetMatchedStylesForNodeResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -511,15 +683,29 @@ type GetMediaQueriesResult struct {
 // Do sends the GetMediaQueries CDP command to a browser,
 // and returns the browser's response.
 func (t *GetMediaQueries) Do(ctx context.Context) (*GetMediaQueriesResult, error) {
-	response, err := devtools.SendAndWait(ctx, "CSS.getMediaQueries", nil)
+	m, err := devtools.SendAndWait(ctx, "CSS.getMediaQueries", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetMediaQueries CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetMediaQueries) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "CSS.getMediaQueries", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetMediaQueries CDP command.
+func (t *GetMediaQueries) ParseResponse(m *devtools.Message) (*GetMediaQueriesResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetMediaQueriesResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -561,15 +747,33 @@ func (t *GetPlatformFontsForNode) Do(ctx context.Context) (*GetPlatformFontsForN
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.getPlatformFontsForNode", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.getPlatformFontsForNode", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetPlatformFontsForNode CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetPlatformFontsForNode) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.getPlatformFontsForNode", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetPlatformFontsForNode CDP command.
+func (t *GetPlatformFontsForNode) ParseResponse(m *devtools.Message) (*GetPlatformFontsForNodeResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetPlatformFontsForNodeResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -610,15 +814,33 @@ func (t *GetStyleSheetText) Do(ctx context.Context) (*GetStyleSheetTextResult, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.getStyleSheetText", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.getStyleSheetText", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetStyleSheetText CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetStyleSheetText) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.getStyleSheetText", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetStyleSheetText CDP command.
+func (t *GetStyleSheetText) ParseResponse(m *devtools.Message) (*GetStyleSheetTextResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetStyleSheetTextResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -661,12 +883,30 @@ func (t *TrackComputedStyleUpdates) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.trackComputedStyleUpdates", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.trackComputedStyleUpdates", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the TrackComputedStyleUpdates CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *TrackComputedStyleUpdates) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.trackComputedStyleUpdates", b)
+}
+
+// ParseResponse parses the browser's response
+// to the TrackComputedStyleUpdates CDP command.
+func (t *TrackComputedStyleUpdates) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -702,15 +942,29 @@ type TakeComputedStyleUpdatesResult struct {
 // Do sends the TakeComputedStyleUpdates CDP command to a browser,
 // and returns the browser's response.
 func (t *TakeComputedStyleUpdates) Do(ctx context.Context) (*TakeComputedStyleUpdatesResult, error) {
-	response, err := devtools.SendAndWait(ctx, "CSS.takeComputedStyleUpdates", nil)
+	m, err := devtools.SendAndWait(ctx, "CSS.takeComputedStyleUpdates", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the TakeComputedStyleUpdates CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *TakeComputedStyleUpdates) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "CSS.takeComputedStyleUpdates", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the TakeComputedStyleUpdates CDP command.
+func (t *TakeComputedStyleUpdates) ParseResponse(m *devtools.Message) (*TakeComputedStyleUpdatesResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &TakeComputedStyleUpdatesResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -750,12 +1004,30 @@ func (t *SetEffectivePropertyValueForNode) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.setEffectivePropertyValueForNode", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.setEffectivePropertyValueForNode", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetEffectivePropertyValueForNode CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetEffectivePropertyValueForNode) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.setEffectivePropertyValueForNode", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetEffectivePropertyValueForNode CDP command.
+func (t *SetEffectivePropertyValueForNode) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -799,15 +1071,33 @@ func (t *SetKeyframeKey) Do(ctx context.Context) (*SetKeyframeKeyResult, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.setKeyframeKey", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.setKeyframeKey", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetKeyframeKey CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetKeyframeKey) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.setKeyframeKey", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetKeyframeKey CDP command.
+func (t *SetKeyframeKey) ParseResponse(m *devtools.Message) (*SetKeyframeKeyResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &SetKeyframeKeyResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -852,15 +1142,33 @@ func (t *SetMediaText) Do(ctx context.Context) (*SetMediaTextResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.setMediaText", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.setMediaText", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetMediaText CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetMediaText) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.setMediaText", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetMediaText CDP command.
+func (t *SetMediaText) ParseResponse(m *devtools.Message) (*SetMediaTextResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &SetMediaTextResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -909,15 +1217,33 @@ func (t *SetContainerQueryText) Do(ctx context.Context) (*SetContainerQueryTextR
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.setContainerQueryText", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.setContainerQueryText", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetContainerQueryText CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetContainerQueryText) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.setContainerQueryText", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetContainerQueryText CDP command.
+func (t *SetContainerQueryText) ParseResponse(m *devtools.Message) (*SetContainerQueryTextResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &SetContainerQueryTextResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -962,15 +1288,33 @@ func (t *SetRuleSelector) Do(ctx context.Context) (*SetRuleSelectorResult, error
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.setRuleSelector", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.setRuleSelector", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetRuleSelector CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetRuleSelector) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.setRuleSelector", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetRuleSelector CDP command.
+func (t *SetRuleSelector) ParseResponse(m *devtools.Message) (*SetRuleSelectorResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &SetRuleSelectorResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -1013,15 +1357,33 @@ func (t *SetStyleSheetText) Do(ctx context.Context) (*SetStyleSheetTextResult, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.setStyleSheetText", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.setStyleSheetText", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetStyleSheetText CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetStyleSheetText) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.setStyleSheetText", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetStyleSheetText CDP command.
+func (t *SetStyleSheetText) ParseResponse(m *devtools.Message) (*SetStyleSheetTextResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &SetStyleSheetTextResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -1062,15 +1424,33 @@ func (t *SetStyleTexts) Do(ctx context.Context) (*SetStyleTextsResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.setStyleTexts", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.setStyleTexts", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetStyleTexts CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetStyleTexts) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.setStyleTexts", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetStyleTexts CDP command.
+func (t *SetStyleTexts) ParseResponse(m *devtools.Message) (*SetStyleTextsResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &SetStyleTextsResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -1096,12 +1476,26 @@ func NewStartRuleUsageTracking() *StartRuleUsageTracking {
 // Do sends the StartRuleUsageTracking CDP command to a browser,
 // and returns the browser's response.
 func (t *StartRuleUsageTracking) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "CSS.startRuleUsageTracking", nil)
+	m, err := devtools.SendAndWait(ctx, "CSS.startRuleUsageTracking", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the StartRuleUsageTracking CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *StartRuleUsageTracking) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "CSS.startRuleUsageTracking", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the StartRuleUsageTracking CDP command.
+func (t *StartRuleUsageTracking) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -1133,15 +1527,29 @@ type StopRuleUsageTrackingResult struct {
 // Do sends the StopRuleUsageTracking CDP command to a browser,
 // and returns the browser's response.
 func (t *StopRuleUsageTracking) Do(ctx context.Context) (*StopRuleUsageTrackingResult, error) {
-	response, err := devtools.SendAndWait(ctx, "CSS.stopRuleUsageTracking", nil)
+	m, err := devtools.SendAndWait(ctx, "CSS.stopRuleUsageTracking", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the StopRuleUsageTracking CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *StopRuleUsageTracking) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "CSS.stopRuleUsageTracking", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the StopRuleUsageTracking CDP command.
+func (t *StopRuleUsageTracking) ParseResponse(m *devtools.Message) (*StopRuleUsageTrackingResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &StopRuleUsageTrackingResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -1176,15 +1584,29 @@ type TakeCoverageDeltaResult struct {
 // Do sends the TakeCoverageDelta CDP command to a browser,
 // and returns the browser's response.
 func (t *TakeCoverageDelta) Do(ctx context.Context) (*TakeCoverageDeltaResult, error) {
-	response, err := devtools.SendAndWait(ctx, "CSS.takeCoverageDelta", nil)
+	m, err := devtools.SendAndWait(ctx, "CSS.takeCoverageDelta", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the TakeCoverageDelta CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *TakeCoverageDelta) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "CSS.takeCoverageDelta", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the TakeCoverageDelta CDP command.
+func (t *TakeCoverageDelta) ParseResponse(m *devtools.Message) (*TakeCoverageDeltaResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &TakeCoverageDeltaResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -1223,12 +1645,30 @@ func (t *SetLocalFontsEnabled) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "CSS.setLocalFontsEnabled", b)
+	m, err := devtools.SendAndWait(ctx, "CSS.setLocalFontsEnabled", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetLocalFontsEnabled CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetLocalFontsEnabled) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "CSS.setLocalFontsEnabled", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetLocalFontsEnabled CDP command.
+func (t *SetLocalFontsEnabled) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }

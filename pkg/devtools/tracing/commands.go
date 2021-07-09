@@ -28,12 +28,26 @@ func NewEnd() *End {
 // Do sends the End CDP command to a browser,
 // and returns the browser's response.
 func (t *End) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Tracing.end", nil)
+	m, err := devtools.SendAndWait(ctx, "Tracing.end", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the End CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *End) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Tracing.end", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the End CDP command.
+func (t *End) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -65,15 +79,29 @@ type GetCategoriesResult struct {
 // Do sends the GetCategories CDP command to a browser,
 // and returns the browser's response.
 func (t *GetCategories) Do(ctx context.Context) (*GetCategoriesResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Tracing.getCategories", nil)
+	m, err := devtools.SendAndWait(ctx, "Tracing.getCategories", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetCategories CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetCategories) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Tracing.getCategories", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetCategories CDP command.
+func (t *GetCategories) ParseResponse(m *devtools.Message) (*GetCategoriesResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetCategoriesResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -108,12 +136,30 @@ func (t *RecordClockSyncMarker) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Tracing.recordClockSyncMarker", b)
+	m, err := devtools.SendAndWait(ctx, "Tracing.recordClockSyncMarker", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the RecordClockSyncMarker CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *RecordClockSyncMarker) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Tracing.recordClockSyncMarker", b)
+}
+
+// ParseResponse parses the browser's response
+// to the RecordClockSyncMarker CDP command.
+func (t *RecordClockSyncMarker) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -174,15 +220,33 @@ func (t *RequestMemoryDump) Do(ctx context.Context) (*RequestMemoryDumpResult, e
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Tracing.requestMemoryDump", b)
+	m, err := devtools.SendAndWait(ctx, "Tracing.requestMemoryDump", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the RequestMemoryDump CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *RequestMemoryDump) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Tracing.requestMemoryDump", b)
+}
+
+// ParseResponse parses the browser's response
+// to the RequestMemoryDump CDP command.
+func (t *RequestMemoryDump) ParseResponse(m *devtools.Message) (*RequestMemoryDumpResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &RequestMemoryDumpResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -327,12 +391,30 @@ func (t *Start) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Tracing.start", b)
+	m, err := devtools.SendAndWait(ctx, "Tracing.start", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Start CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Start) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Tracing.start", b)
+}
+
+// ParseResponse parses the browser's response
+// to the Start CDP command.
+func (t *Start) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }

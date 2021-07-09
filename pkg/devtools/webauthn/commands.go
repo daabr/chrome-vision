@@ -29,12 +29,26 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "WebAuthn.enable", nil)
+	m, err := devtools.SendAndWait(ctx, "WebAuthn.enable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Enable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Enable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "WebAuthn.enable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Enable CDP command.
+func (t *Enable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -59,12 +73,26 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "WebAuthn.disable", nil)
+	m, err := devtools.SendAndWait(ctx, "WebAuthn.disable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Disable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Disable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "WebAuthn.disable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Disable CDP command.
+func (t *Disable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -103,15 +131,33 @@ func (t *AddVirtualAuthenticator) Do(ctx context.Context) (*AddVirtualAuthentica
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "WebAuthn.addVirtualAuthenticator", b)
+	m, err := devtools.SendAndWait(ctx, "WebAuthn.addVirtualAuthenticator", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the AddVirtualAuthenticator CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *AddVirtualAuthenticator) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "WebAuthn.addVirtualAuthenticator", b)
+}
+
+// ParseResponse parses the browser's response
+// to the AddVirtualAuthenticator CDP command.
+func (t *AddVirtualAuthenticator) ParseResponse(m *devtools.Message) (*AddVirtualAuthenticatorResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &AddVirtualAuthenticatorResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -145,12 +191,30 @@ func (t *RemoveVirtualAuthenticator) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "WebAuthn.removeVirtualAuthenticator", b)
+	m, err := devtools.SendAndWait(ctx, "WebAuthn.removeVirtualAuthenticator", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the RemoveVirtualAuthenticator CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *RemoveVirtualAuthenticator) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "WebAuthn.removeVirtualAuthenticator", b)
+}
+
+// ParseResponse parses the browser's response
+// to the RemoveVirtualAuthenticator CDP command.
+func (t *RemoveVirtualAuthenticator) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -185,12 +249,30 @@ func (t *AddCredential) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "WebAuthn.addCredential", b)
+	m, err := devtools.SendAndWait(ctx, "WebAuthn.addCredential", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the AddCredential CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *AddCredential) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "WebAuthn.addCredential", b)
+}
+
+// ParseResponse parses the browser's response
+// to the AddCredential CDP command.
+func (t *AddCredential) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -232,15 +314,33 @@ func (t *GetCredential) Do(ctx context.Context) (*GetCredentialResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "WebAuthn.getCredential", b)
+	m, err := devtools.SendAndWait(ctx, "WebAuthn.getCredential", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetCredential CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetCredential) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "WebAuthn.getCredential", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetCredential CDP command.
+func (t *GetCredential) ParseResponse(m *devtools.Message) (*GetCredentialResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetCredentialResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -280,15 +380,33 @@ func (t *GetCredentials) Do(ctx context.Context) (*GetCredentialsResult, error) 
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "WebAuthn.getCredentials", b)
+	m, err := devtools.SendAndWait(ctx, "WebAuthn.getCredentials", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetCredentials CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetCredentials) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "WebAuthn.getCredentials", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetCredentials CDP command.
+func (t *GetCredentials) ParseResponse(m *devtools.Message) (*GetCredentialsResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetCredentialsResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -324,12 +442,30 @@ func (t *RemoveCredential) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "WebAuthn.removeCredential", b)
+	m, err := devtools.SendAndWait(ctx, "WebAuthn.removeCredential", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the RemoveCredential CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *RemoveCredential) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "WebAuthn.removeCredential", b)
+}
+
+// ParseResponse parses the browser's response
+// to the RemoveCredential CDP command.
+func (t *RemoveCredential) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -362,12 +498,30 @@ func (t *ClearCredentials) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "WebAuthn.clearCredentials", b)
+	m, err := devtools.SendAndWait(ctx, "WebAuthn.clearCredentials", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the ClearCredentials CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ClearCredentials) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "WebAuthn.clearCredentials", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ClearCredentials CDP command.
+func (t *ClearCredentials) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -403,12 +557,30 @@ func (t *SetUserVerified) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "WebAuthn.setUserVerified", b)
+	m, err := devtools.SendAndWait(ctx, "WebAuthn.setUserVerified", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetUserVerified CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetUserVerified) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "WebAuthn.setUserVerified", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetUserVerified CDP command.
+func (t *SetUserVerified) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -444,12 +616,30 @@ func (t *SetAutomaticPresenceSimulation) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "WebAuthn.setAutomaticPresenceSimulation", b)
+	m, err := devtools.SendAndWait(ctx, "WebAuthn.setAutomaticPresenceSimulation", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetAutomaticPresenceSimulation CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetAutomaticPresenceSimulation) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "WebAuthn.setAutomaticPresenceSimulation", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetAutomaticPresenceSimulation CDP command.
+func (t *SetAutomaticPresenceSimulation) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }

@@ -26,12 +26,26 @@ func NewDisable() *Disable {
 // Do sends the Disable CDP command to a browser,
 // and returns the browser's response.
 func (t *Disable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Profiler.disable", nil)
+	m, err := devtools.SendAndWait(ctx, "Profiler.disable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Disable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Disable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Profiler.disable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Disable CDP command.
+func (t *Disable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -54,12 +68,26 @@ func NewEnable() *Enable {
 // Do sends the Enable CDP command to a browser,
 // and returns the browser's response.
 func (t *Enable) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Profiler.enable", nil)
+	m, err := devtools.SendAndWait(ctx, "Profiler.enable", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Enable CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Enable) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Profiler.enable", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Enable CDP command.
+func (t *Enable) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -92,15 +120,29 @@ type GetBestEffortCoverageResult struct {
 // Do sends the GetBestEffortCoverage CDP command to a browser,
 // and returns the browser's response.
 func (t *GetBestEffortCoverage) Do(ctx context.Context) (*GetBestEffortCoverageResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Profiler.getBestEffortCoverage", nil)
+	m, err := devtools.SendAndWait(ctx, "Profiler.getBestEffortCoverage", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetBestEffortCoverage CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetBestEffortCoverage) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Profiler.getBestEffortCoverage", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetBestEffortCoverage CDP command.
+func (t *GetBestEffortCoverage) ParseResponse(m *devtools.Message) (*GetBestEffortCoverageResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetBestEffortCoverageResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -135,12 +177,30 @@ func (t *SetSamplingInterval) Do(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	response, err := devtools.SendAndWait(ctx, "Profiler.setSamplingInterval", b)
+	m, err := devtools.SendAndWait(ctx, "Profiler.setSamplingInterval", b)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetSamplingInterval CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetSamplingInterval) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Profiler.setSamplingInterval", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetSamplingInterval CDP command.
+func (t *SetSamplingInterval) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -163,12 +223,26 @@ func NewStart() *Start {
 // Do sends the Start CDP command to a browser,
 // and returns the browser's response.
 func (t *Start) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Profiler.start", nil)
+	m, err := devtools.SendAndWait(ctx, "Profiler.start", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Start CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Start) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Profiler.start", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Start CDP command.
+func (t *Start) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -240,15 +314,33 @@ func (t *StartPreciseCoverage) Do(ctx context.Context) (*StartPreciseCoverageRes
 	if err != nil {
 		return nil, err
 	}
-	response, err := devtools.SendAndWait(ctx, "Profiler.startPreciseCoverage", b)
+	m, err := devtools.SendAndWait(ctx, "Profiler.startPreciseCoverage", b)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the StartPreciseCoverage CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *StartPreciseCoverage) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Profiler.startPreciseCoverage", b)
+}
+
+// ParseResponse parses the browser's response
+// to the StartPreciseCoverage CDP command.
+func (t *StartPreciseCoverage) ParseResponse(m *devtools.Message) (*StartPreciseCoverageResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &StartPreciseCoverageResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -278,12 +370,26 @@ func NewStartTypeProfile() *StartTypeProfile {
 // Do sends the StartTypeProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *StartTypeProfile) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Profiler.startTypeProfile", nil)
+	m, err := devtools.SendAndWait(ctx, "Profiler.startTypeProfile", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the StartTypeProfile CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *StartTypeProfile) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Profiler.startTypeProfile", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the StartTypeProfile CDP command.
+func (t *StartTypeProfile) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -313,15 +419,29 @@ type StopResult struct {
 // Do sends the Stop CDP command to a browser,
 // and returns the browser's response.
 func (t *Stop) Do(ctx context.Context) (*StopResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Profiler.stop", nil)
+	m, err := devtools.SendAndWait(ctx, "Profiler.stop", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the Stop CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *Stop) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Profiler.stop", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the Stop CDP command.
+func (t *Stop) ParseResponse(m *devtools.Message) (*StopResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &StopResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -348,12 +468,26 @@ func NewStopPreciseCoverage() *StopPreciseCoverage {
 // Do sends the StopPreciseCoverage CDP command to a browser,
 // and returns the browser's response.
 func (t *StopPreciseCoverage) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Profiler.stopPreciseCoverage", nil)
+	m, err := devtools.SendAndWait(ctx, "Profiler.stopPreciseCoverage", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the StopPreciseCoverage CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *StopPreciseCoverage) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Profiler.stopPreciseCoverage", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the StopPreciseCoverage CDP command.
+func (t *StopPreciseCoverage) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -382,12 +516,26 @@ func NewStopTypeProfile() *StopTypeProfile {
 // Do sends the StopTypeProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *StopTypeProfile) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Profiler.stopTypeProfile", nil)
+	m, err := devtools.SendAndWait(ctx, "Profiler.stopTypeProfile", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the StopTypeProfile CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *StopTypeProfile) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Profiler.stopTypeProfile", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the StopTypeProfile CDP command.
+func (t *StopTypeProfile) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -422,15 +570,29 @@ type TakePreciseCoverageResult struct {
 // Do sends the TakePreciseCoverage CDP command to a browser,
 // and returns the browser's response.
 func (t *TakePreciseCoverage) Do(ctx context.Context) (*TakePreciseCoverageResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Profiler.takePreciseCoverage", nil)
+	m, err := devtools.SendAndWait(ctx, "Profiler.takePreciseCoverage", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the TakePreciseCoverage CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *TakePreciseCoverage) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Profiler.takePreciseCoverage", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the TakePreciseCoverage CDP command.
+func (t *TakePreciseCoverage) ParseResponse(m *devtools.Message) (*TakePreciseCoverageResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &TakePreciseCoverageResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -467,15 +629,29 @@ type TakeTypeProfileResult struct {
 // Do sends the TakeTypeProfile CDP command to a browser,
 // and returns the browser's response.
 func (t *TakeTypeProfile) Do(ctx context.Context) (*TakeTypeProfileResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Profiler.takeTypeProfile", nil)
+	m, err := devtools.SendAndWait(ctx, "Profiler.takeTypeProfile", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the TakeTypeProfile CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *TakeTypeProfile) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Profiler.takeTypeProfile", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the TakeTypeProfile CDP command.
+func (t *TakeTypeProfile) ParseResponse(m *devtools.Message) (*TakeTypeProfileResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &TakeTypeProfileResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -505,12 +681,26 @@ func NewEnableCounters() *EnableCounters {
 // Do sends the EnableCounters CDP command to a browser,
 // and returns the browser's response.
 func (t *EnableCounters) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Profiler.enableCounters", nil)
+	m, err := devtools.SendAndWait(ctx, "Profiler.enableCounters", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the EnableCounters CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *EnableCounters) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Profiler.enableCounters", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the EnableCounters CDP command.
+func (t *EnableCounters) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -539,12 +729,26 @@ func NewDisableCounters() *DisableCounters {
 // Do sends the DisableCounters CDP command to a browser,
 // and returns the browser's response.
 func (t *DisableCounters) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Profiler.disableCounters", nil)
+	m, err := devtools.SendAndWait(ctx, "Profiler.disableCounters", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the DisableCounters CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *DisableCounters) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Profiler.disableCounters", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the DisableCounters CDP command.
+func (t *DisableCounters) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -580,15 +784,29 @@ type GetCountersResult struct {
 // Do sends the GetCounters CDP command to a browser,
 // and returns the browser's response.
 func (t *GetCounters) Do(ctx context.Context) (*GetCountersResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Profiler.getCounters", nil)
+	m, err := devtools.SendAndWait(ctx, "Profiler.getCounters", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetCounters CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetCounters) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Profiler.getCounters", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetCounters CDP command.
+func (t *GetCounters) ParseResponse(m *devtools.Message) (*GetCountersResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetCountersResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -618,12 +836,26 @@ func NewEnableRuntimeCallStats() *EnableRuntimeCallStats {
 // Do sends the EnableRuntimeCallStats CDP command to a browser,
 // and returns the browser's response.
 func (t *EnableRuntimeCallStats) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Profiler.enableRuntimeCallStats", nil)
+	m, err := devtools.SendAndWait(ctx, "Profiler.enableRuntimeCallStats", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the EnableRuntimeCallStats CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *EnableRuntimeCallStats) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Profiler.enableRuntimeCallStats", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the EnableRuntimeCallStats CDP command.
+func (t *EnableRuntimeCallStats) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -652,12 +884,26 @@ func NewDisableRuntimeCallStats() *DisableRuntimeCallStats {
 // Do sends the DisableRuntimeCallStats CDP command to a browser,
 // and returns the browser's response.
 func (t *DisableRuntimeCallStats) Do(ctx context.Context) error {
-	response, err := devtools.SendAndWait(ctx, "Profiler.disableRuntimeCallStats", nil)
+	m, err := devtools.SendAndWait(ctx, "Profiler.disableRuntimeCallStats", nil)
 	if err != nil {
 		return err
 	}
-	if response.Error != nil {
-		return errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the DisableRuntimeCallStats CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *DisableRuntimeCallStats) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Profiler.disableRuntimeCallStats", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the DisableRuntimeCallStats CDP command.
+func (t *DisableRuntimeCallStats) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
 	}
 	return nil
 }
@@ -693,15 +939,29 @@ type GetRuntimeCallStatsResult struct {
 // Do sends the GetRuntimeCallStats CDP command to a browser,
 // and returns the browser's response.
 func (t *GetRuntimeCallStats) Do(ctx context.Context) (*GetRuntimeCallStatsResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Profiler.getRuntimeCallStats", nil)
+	m, err := devtools.SendAndWait(ctx, "Profiler.getRuntimeCallStats", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetRuntimeCallStats CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetRuntimeCallStats) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Profiler.getRuntimeCallStats", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetRuntimeCallStats CDP command.
+func (t *GetRuntimeCallStats) ParseResponse(m *devtools.Message) (*GetRuntimeCallStatsResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetRuntimeCallStatsResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil

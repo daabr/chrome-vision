@@ -35,15 +35,29 @@ type GetDomainsResult struct {
 // Do sends the GetDomains CDP command to a browser,
 // and returns the browser's response.
 func (t *GetDomains) Do(ctx context.Context) (*GetDomainsResult, error) {
-	response, err := devtools.SendAndWait(ctx, "Schema.getDomains", nil)
+	m, err := devtools.SendAndWait(ctx, "Schema.getDomains", nil)
 	if err != nil {
 		return nil, err
 	}
-	if response.Error != nil {
-		return nil, errors.New(response.Error.Error())
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetDomains CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetDomains) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Schema.getDomains", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetDomains CDP command.
+func (t *GetDomains) ParseResponse(m *devtools.Message) (*GetDomainsResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetDomainsResult{}
-	if err := json.Unmarshal(response.Result, result); err != nil {
+	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
 	return result, nil

@@ -152,7 +152,7 @@ func start(ctx context.Context, s *Session) error {
 
 	// Wait in the background for the browser process to end, and clean-up
 	// any resources associated with it. See also the goroutine in the
-	// NewContext function in session.go.
+	// `NewContext` function in `session.go`.
 	go func(s *Session, c *exec.Cmd) {
 		log.Print("Waiting in the background for the browser process to end")
 		if err := c.Wait(); err != nil {

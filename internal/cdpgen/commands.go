@@ -110,14 +110,16 @@ func generateCommands(d Domain) string {
 		// Do() method to tie all of the above together.
 		fmt.Fprintf(b, "\n// Do sends the %s CDP command to a browser,\n", cmd)
 		fmt.Fprintln(b, "// and returns the browser's response.")
+
 		fmt.Fprintf(b, "func (t *%s) Do(ctx context.Context) ", cmd)
 		if len(c.Returns) == 0 {
 			fmt.Fprintln(b, "error {")
 		} else {
 			fmt.Fprintf(b, "(*%sResult, error) {\n", cmd)
 		}
+
 		if len(required)+len(optional) == 0 {
-			fmt.Fprint(b, "\tresponse, err := devtools.SendAndWait(ctx, ")
+			fmt.Fprint(b, "\tm, err := devtools.SendAndWait(ctx, ")
 			fmt.Fprintf(b, "\"%s.%s\", nil)\n", d.Domain, c.Name)
 		} else {
 			fmt.Fprintln(b, "\tb, err := json.Marshal(t)")
@@ -128,9 +130,10 @@ func generateCommands(d Domain) string {
 				fmt.Fprintln(b, "\t\treturn nil, err")
 			}
 			fmt.Fprintln(b, "\t}")
-			fmt.Fprint(b, "\tresponse, err := devtools.SendAndWait(ctx, ")
+			fmt.Fprint(b, "\tm, err := devtools.SendAndWait(ctx, ")
 			fmt.Fprintf(b, "\"%s.%s\", b)\n", d.Domain, c.Name)
 		}
+
 		fmt.Fprintln(b, "\tif err != nil {")
 		if len(c.Returns) == 0 {
 			fmt.Fprintln(b, "\t\treturn err")
@@ -138,18 +141,57 @@ func generateCommands(d Domain) string {
 			fmt.Fprintln(b, "\t\treturn nil, err")
 		}
 		fmt.Fprintln(b, "\t}")
-		fmt.Fprintln(b, "\tif response.Error != nil {")
+		fmt.Fprintln(b, "\treturn t.ParseResponse(m)")
+		fmt.Fprintln(b, "}")
+
+		// Start() and ParseResponse() methods - an asynchronous version of Do().
+		// Exception: debugger.GetPossibleBreakpoints (already has a `Start` field).
+		if cmd != "GetPossibleBreakpoints" {
+			fmt.Fprintf(b, "\n// Start sends the %s CDP command to a browser,\n", cmd)
+			fmt.Fprintln(b, "// and returns a channel to receive the browser's response.")
+			fmt.Fprintln(b, "// Callers should close the returned channel on their own,")
+			fmt.Fprintln(b, "// although closing unused channels isn't strictly required.")
+
+			fmt.Fprintf(b, "func (t *%s) Start(ctx context.Context) ", cmd)
+			fmt.Fprintln(b, "(chan *devtools.Message, error) {")
+
+			if len(required)+len(optional) == 0 {
+				fmt.Fprint(b, "\treturn devtools.Send(ctx, ")
+				fmt.Fprintf(b, "\"%s.%s\", nil)\n", d.Domain, c.Name)
+			} else {
+				fmt.Fprintln(b, "\tb, err := json.Marshal(t)")
+				fmt.Fprintln(b, "\tif err != nil {")
+				fmt.Fprintln(b, "\t\treturn nil, err")
+				fmt.Fprintln(b, "\t}")
+				fmt.Fprint(b, "\treturn devtools.Send(ctx, ")
+				fmt.Fprintf(b, "\"%s.%s\", b)\n", d.Domain, c.Name)
+			}
+			fmt.Fprintln(b, "}")
+		}
+
+		fmt.Fprintln(b, "\n// ParseResponse parses the browser's response ")
+		fmt.Fprintf(b, "// to the %s CDP command.\n", cmd)
+
+		fmt.Fprintf(b, "func (t *%s) ParseResponse(m *devtools.Message) ", cmd)
 		if len(c.Returns) == 0 {
-			fmt.Fprintln(b, "\t\treturn errors.New(response.Error.Error())")
+			fmt.Fprintln(b, "error {")
 		} else {
-			fmt.Fprintln(b, "\t\treturn nil, errors.New(response.Error.Error())")
+			fmt.Fprintf(b, "(*%sResult, error) {\n", cmd)
+		}
+
+		fmt.Fprintln(b, "\tif m.Error != nil {")
+		if len(c.Returns) == 0 {
+			fmt.Fprintln(b, "\t\treturn errors.New(m.Error.Error())")
+		} else {
+			fmt.Fprintln(b, "\t\treturn nil, errors.New(m.Error.Error())")
 		}
 		fmt.Fprintln(b, "\t}")
+
 		if len(c.Returns) == 0 {
 			fmt.Fprintln(b, "\treturn nil")
 		} else {
 			fmt.Fprintf(b, "\tresult := &%sResult{}\n", cmd)
-			fmt.Fprintln(b, "\tif err := json.Unmarshal(response.Result, result); err != nil {")
+			fmt.Fprintln(b, "\tif err := json.Unmarshal(m.Result, result); err != nil {")
 			fmt.Fprintln(b, "\t\treturn nil, err")
 			fmt.Fprintln(b, "\t}")
 			fmt.Fprintln(b, "\treturn result, nil")
