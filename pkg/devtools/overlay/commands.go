@@ -394,8 +394,13 @@ func (t *HideHighlight) ParseResponse(m *devtools.Message) error {
 // a Go receiver, for the CDP command `highlightFrame`.
 //
 // Highlights owner element of the frame with given id.
+// Deprecated: Doesn't work reliablity and cannot be fixed due to process
+// separatation (the owner node might be in a different process). Determine
+// the owner node in the client and use highlightNode.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightFrame
+//
+// This CDP method is deprecated.
 type HighlightFrame struct {
 	// Identifier of the frame to highlight.
 	FrameID string `json:"frameId"`
@@ -410,6 +415,8 @@ type HighlightFrame struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-highlightFrame
+//
+// This CDP method is deprecated.
 func NewHighlightFrame(frameID string) *HighlightFrame {
 	return &HighlightFrame{
 		FrameID: frameID,
