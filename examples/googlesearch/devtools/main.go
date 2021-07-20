@@ -1,4 +1,4 @@
-// The devtools program is an example of interacting with Google Search,
+// The devtools program is an example for interacting with Google Search,
 // using Chrome Vision's Chrome DevTools Protocol (CDP) API.
 package main
 
@@ -65,12 +65,8 @@ func main() {
 // Navigate to Google Search.
 func navigate(ctx context.Context) error {
 	nav := page.NewNavigate("https://google.com/webhp?hl=en&pws=0")
-	response, err := nav.Do(ctx)
-	if err != nil {
+	if _, err := nav.Do(ctx); err != nil {
 		return err
-	}
-	if response.ErrorText != "" {
-		return fmt.Errorf(response.ErrorText)
 	}
 	// TODO: wait for a "Page.lifecycleEvent" event (params["name"] = "networkIdle").
 	return nil
@@ -80,7 +76,7 @@ func navigate(ctx context.Context) error {
 //
 // Note that none of the `time.Sleep` function calls are "load-bearing",
 // i.e. they are not required for asynchronous event handling or safety,
-// they simply simulate human latency.
+// they simply simulate human latency - feel free to remove them.
 func search(ctx context.Context) error {
 	down := input.NewDispatchKeyEvent("keyDown")
 	up := input.NewDispatchKeyEvent("keyUp")
@@ -143,7 +139,7 @@ func imageResults(ctx context.Context) error {
 //
 // Note that none of the `time.Sleep` function calls are "load-bearing",
 // i.e. they are not required for asynchronous event handling or safety,
-// they simply simulate human latency.
+// they simply simulate human latency - feel free to remove them.
 func scrollDown(ctx context.Context) error {
 	doc, err := dom.NewGetDocument().Do(ctx)
 	if err != nil {

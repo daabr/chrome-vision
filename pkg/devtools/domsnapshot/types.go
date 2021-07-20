@@ -209,6 +209,8 @@ type NodeTreeSnapshot struct {
 	ParentIndex []int64 `json:"parentIndex,omitempty"`
 	// `Node`'s nodeType.
 	NodeType []int64 `json:"nodeType,omitempty"`
+	// Type of the shadow root the `Node` is in. String values are equal to the `ShadowRootType` enum.
+	ShadowRootType *RareStringData `json:"shadowRootType,omitempty"`
 	// `Node`'s nodeName.
 	NodeName []int64 `json:"nodeName,omitempty"`
 	// `Node`'s nodeValue.
