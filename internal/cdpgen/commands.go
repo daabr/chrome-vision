@@ -194,6 +194,12 @@ func generateCommands(d Domain) string {
 			fmt.Fprintln(b, "\tif err := json.Unmarshal(m.Result, result); err != nil {")
 			fmt.Fprintln(b, "\t\treturn nil, err")
 			fmt.Fprintln(b, "\t}")
+			// Additional error check for `Page.navigate`.
+			if d.Domain == "Page" && c.Name == "navigate" {
+				fmt.Fprintln(b, "\tif result.ErrorText != \"\" {")
+				fmt.Fprintln(b, "\t\treturn nil, errors.New(result.ErrorText)")
+				fmt.Fprintln(b, "\t}")
+			}
 			fmt.Fprintln(b, "\treturn result, nil")
 		}
 		fmt.Fprintln(b, "}")

@@ -1340,6 +1340,9 @@ func (t *Navigate) ParseResponse(m *devtools.Message) (*NavigateResult, error) {
 	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}
+	if result.ErrorText != "" {
+		return nil, errors.New(result.ErrorText)
+	}
 	return result, nil
 }
 
