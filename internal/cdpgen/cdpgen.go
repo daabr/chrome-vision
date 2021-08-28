@@ -132,14 +132,14 @@ func adjust(s string) string {
 
 	// See https://github.com/golang/go/wiki/CodeReviewComments#initialisms
 	// (and https://github.com/golang/lint/blob/master/lint.go#L770).
-	for _, initialism := range []string{"Api", "Guid", "Id"} {
+	for _, initialism := range []string{"Guid", "Id"} {
 		re := regexp.MustCompile(fmt.Sprintf(`(%s)$`, initialism))
 		s = re.ReplaceAllLiteralString(s, strings.ToUpper(initialism))
 	}
-	for _, initialism := range []string{"Css", "Cpu", "Dns", "Eof", "Html", "Http"} {
+	for _, initialism := range []string{"Api", "Css", "Cpu", "Dns", "Eof", "Html"} {
 		s = strings.ReplaceAll(s, initialism, strings.ToUpper(initialism))
 	}
-	for _, initialism := range []string{"Json", "Sql", "Url", "Uuid", "Xml"} {
+	for _, initialism := range []string{"Http", "Json", "Sql", "Url", "Uuid", "Xml"} {
 		s = strings.ReplaceAll(s, initialism, strings.ToUpper(initialism))
 	}
 

@@ -441,12 +441,12 @@ type SubresourceWebBundleInnerResponseError struct {
 	BundleRequestID string `json:"bundleRequestId,omitempty"`
 }
 
-// ReportingApiReportAdded asynchronous event. Is sent whenever a new report is added.
+// ReportingAPIReportAdded asynchronous event. Is sent whenever a new report is added.
 // And after 'enableReportingApi' for all existing reports.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-reportingApiReportAdded
 //
 // This CDP event is experimental.
-type ReportingApiReportAdded struct {
-	Report ReportingApiReport `json:"report"`
+type ReportingAPIReportAdded struct {
+	Report ReportingAPIReport `json:"report"`
 }
