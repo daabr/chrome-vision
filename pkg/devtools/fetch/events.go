@@ -23,6 +23,8 @@ type RequestPaused struct {
 	ResponseErrorReason *network.ErrorReason `json:"responseErrorReason,omitempty"`
 	// Response code if intercepted at response stage.
 	ResponseStatusCode int64 `json:"responseStatusCode,omitempty"`
+	// Response status text if intercepted at response stage.
+	ResponseStatusText string `json:"responseStatusText,omitempty"`
 	// Response headers if intercepted at the response stage.
 	ResponseHeaders []HeaderEntry `json:"responseHeaders,omitempty"`
 	// If the intercepted request had a corresponding Network.requestWillBeSent event fired for it,

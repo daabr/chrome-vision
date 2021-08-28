@@ -3341,3 +3341,76 @@ func (t *GetContainerForNode) ParseResponse(m *devtools.Message) (*GetContainerF
 	}
 	return result, nil
 }
+
+// GetQueryingDescendantsForContainer contains the parameters, and acts as
+// a Go receiver, for the CDP command `getQueryingDescendantsForContainer`.
+//
+// Returns the descendants of a container query container that have
+// container queries against this container.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getQueryingDescendantsForContainer
+//
+// This CDP method is experimental.
+type GetQueryingDescendantsForContainer struct {
+	// Id of the container node to find querying descendants from.
+	NodeID int64 `json:"nodeId"`
+}
+
+// NewGetQueryingDescendantsForContainer constructs a new GetQueryingDescendantsForContainer struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/DOM/#method-getQueryingDescendantsForContainer
+//
+// This CDP method is experimental.
+func NewGetQueryingDescendantsForContainer(nodeID int64) *GetQueryingDescendantsForContainer {
+	return &GetQueryingDescendantsForContainer{
+		NodeID: nodeID,
+	}
+}
+
+// GetQueryingDescendantsForContainerResult contains the browser's response
+// to calling the GetQueryingDescendantsForContainer CDP command with Do().
+type GetQueryingDescendantsForContainerResult struct {
+	// Descendant nodes with container queries against the given container.
+	NodeIds []int64 `json:"nodeIds"`
+}
+
+// Do sends the GetQueryingDescendantsForContainer CDP command to a browser,
+// and returns the browser's response.
+func (t *GetQueryingDescendantsForContainer) Do(ctx context.Context) (*GetQueryingDescendantsForContainerResult, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	m, err := devtools.SendAndWait(ctx, "DOM.getQueryingDescendantsForContainer", b)
+	if err != nil {
+		return nil, err
+	}
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetQueryingDescendantsForContainer CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetQueryingDescendantsForContainer) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "DOM.getQueryingDescendantsForContainer", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetQueryingDescendantsForContainer CDP command.
+func (t *GetQueryingDescendantsForContainer) ParseResponse(m *devtools.Message) (*GetQueryingDescendantsForContainerResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
+	}
+	result := &GetQueryingDescendantsForContainerResult{}
+	if err := json.Unmarshal(m.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}

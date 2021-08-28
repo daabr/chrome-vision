@@ -1019,6 +1019,8 @@ func (t *SendMessageToTarget) ParseResponse(m *devtools.Message) error {
 // Controls whether to automatically attach to new targets which are considered to be related to
 // this one. When turned on, attaches to all existing related targets as well. When turned off,
 // automatically detaches from all currently attached targets.
+// This also clears all targets added by `autoAttachRelated` from the list of targets to watch
+// for creation of related targets.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-setAutoAttach
 //
@@ -1089,6 +1091,74 @@ func (t *SetAutoAttach) Start(ctx context.Context) (chan *devtools.Message, erro
 // ParseResponse parses the browser's response
 // to the SetAutoAttach CDP command.
 func (t *SetAutoAttach) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
+	}
+	return nil
+}
+
+// AutoAttachRelated contains the parameters, and acts as
+// a Go receiver, for the CDP command `autoAttachRelated`.
+//
+// Adds the specified target to the list of targets that will be monitored for any related target
+// creation (such as child frames, child workers and new versions of service worker) and reported
+// through `attachedToTarget`. The specified target is also auto-attached.
+// This cancels the effect of any previous `setAutoAttach` and is also cancelled by subsequent
+// `setAutoAttach`. Only available at the Browser target.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-autoAttachRelated
+//
+// This CDP method is experimental.
+type AutoAttachRelated struct {
+	TargetID string `json:"targetId"`
+	// Whether to pause new targets when attaching to them. Use `Runtime.runIfWaitingForDebugger`
+	// to run paused targets.
+	WaitForDebuggerOnStart bool `json:"waitForDebuggerOnStart"`
+}
+
+// NewAutoAttachRelated constructs a new AutoAttachRelated struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Target/#method-autoAttachRelated
+//
+// This CDP method is experimental.
+func NewAutoAttachRelated(targetID string, waitForDebuggerOnStart bool) *AutoAttachRelated {
+	return &AutoAttachRelated{
+		TargetID:               targetID,
+		WaitForDebuggerOnStart: waitForDebuggerOnStart,
+	}
+}
+
+// Do sends the AutoAttachRelated CDP command to a browser,
+// and returns the browser's response.
+func (t *AutoAttachRelated) Do(ctx context.Context) error {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	m, err := devtools.SendAndWait(ctx, "Target.autoAttachRelated", b)
+	if err != nil {
+		return err
+	}
+	return t.ParseResponse(m)
+}
+
+// Start sends the AutoAttachRelated CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *AutoAttachRelated) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Target.autoAttachRelated", b)
+}
+
+// ParseResponse parses the browser's response
+// to the AutoAttachRelated CDP command.
+func (t *AutoAttachRelated) ParseResponse(m *devtools.Message) error {
 	if m.Error != nil {
 		return errors.New(m.Error.Error())
 	}

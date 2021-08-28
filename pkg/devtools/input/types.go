@@ -106,6 +106,8 @@ type DragDataItem struct {
 // This CDP type is experimental.
 type DragData struct {
 	Items []DragDataItem `json:"items"`
+	// List of filenames that should be included when dropping
+	Files []string `json:"files,omitempty"`
 	// Bit field representing allowed drag operations. Copy = 1, Link = 2, Move = 16
 	DragOperationsMask int64 `json:"dragOperationsMask"`
 }

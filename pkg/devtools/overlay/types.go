@@ -264,8 +264,10 @@ type ContainerQueryHighlightConfig struct {
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-ContainerQueryContainerHighlightConfig
 type ContainerQueryContainerHighlightConfig struct {
-	// The style of the container border
+	// The style of the container border.
 	ContainerBorder *LineStyle `json:"containerBorder,omitempty"`
+	// The style of the descendants' borders.
+	DescendantBorder *LineStyle `json:"descendantBorder,omitempty"`
 }
 
 // InspectMode data type.

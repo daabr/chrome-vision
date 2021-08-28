@@ -43,6 +43,7 @@ const (
 	SameSiteCookieExclusionReasonExcludeSameSiteLax                     SameSiteCookieExclusionReason = "ExcludeSameSiteLax"
 	SameSiteCookieExclusionReasonExcludeSameSiteStrict                  SameSiteCookieExclusionReason = "ExcludeSameSiteStrict"
 	SameSiteCookieExclusionReasonExcludeInvalidSameParty                SameSiteCookieExclusionReason = "ExcludeInvalidSameParty"
+	SameSiteCookieExclusionReasonExcludeSamePartyCrossPartyContext      SameSiteCookieExclusionReason = "ExcludeSamePartyCrossPartyContext"
 )
 
 // String returns the SameSiteCookieExclusionReason value as a built-in string.
@@ -408,6 +409,7 @@ const (
 	AttributionReportingIssueTypeInvalidAttributionData               AttributionReportingIssueType = "InvalidAttributionData"
 	AttributionReportingIssueTypeAttributionSourceUntrustworthyOrigin AttributionReportingIssueType = "AttributionSourceUntrustworthyOrigin"
 	AttributionReportingIssueTypeAttributionUntrustworthyOrigin       AttributionReportingIssueType = "AttributionUntrustworthyOrigin"
+	AttributionReportingIssueTypeAttributionTriggerDataTooLarge       AttributionReportingIssueType = "AttributionTriggerDataTooLarge"
 )
 
 // String returns the AttributionReportingIssueType value as a built-in string.

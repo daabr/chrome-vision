@@ -382,6 +382,97 @@ func (t *InsertText) ParseResponse(m *devtools.Message) error {
 	return nil
 }
 
+// ImeSetComposition contains the parameters, and acts as
+// a Go receiver, for the CDP command `imeSetComposition`.
+//
+// This method sets the current candidate text for ime.
+// Use imeCommitComposition to commit the final text.
+// Use imeSetComposition with empty string as text to cancel composition.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-imeSetComposition
+//
+// This CDP method is experimental.
+type ImeSetComposition struct {
+	// The text to insert
+	Text string `json:"text"`
+	// selection start
+	SelectionStart int64 `json:"selectionStart"`
+	// selection end
+	SelectionEnd int64 `json:"selectionEnd"`
+	// replacement start
+	ReplacementStart int64 `json:"replacementStart,omitempty"`
+	// replacement end
+	ReplacementEnd int64 `json:"replacementEnd,omitempty"`
+}
+
+// NewImeSetComposition constructs a new ImeSetComposition struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Input/#method-imeSetComposition
+//
+// This CDP method is experimental.
+func NewImeSetComposition(text string, selectionStart int64, selectionEnd int64) *ImeSetComposition {
+	return &ImeSetComposition{
+		Text:           text,
+		SelectionStart: selectionStart,
+		SelectionEnd:   selectionEnd,
+	}
+}
+
+// SetReplacementStart adds or modifies the value of the optional
+// parameter `replacementStart` in the ImeSetComposition CDP command.
+//
+// replacement start
+func (t *ImeSetComposition) SetReplacementStart(v int64) *ImeSetComposition {
+	t.ReplacementStart = v
+	return t
+}
+
+// SetReplacementEnd adds or modifies the value of the optional
+// parameter `replacementEnd` in the ImeSetComposition CDP command.
+//
+// replacement end
+func (t *ImeSetComposition) SetReplacementEnd(v int64) *ImeSetComposition {
+	t.ReplacementEnd = v
+	return t
+}
+
+// Do sends the ImeSetComposition CDP command to a browser,
+// and returns the browser's response.
+func (t *ImeSetComposition) Do(ctx context.Context) error {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	m, err := devtools.SendAndWait(ctx, "Input.imeSetComposition", b)
+	if err != nil {
+		return err
+	}
+	return t.ParseResponse(m)
+}
+
+// Start sends the ImeSetComposition CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ImeSetComposition) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Input.imeSetComposition", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ImeSetComposition CDP command.
+func (t *ImeSetComposition) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
+	}
+	return nil
+}
+
 // DispatchMouseEvent contains the parameters, and acts as
 // a Go receiver, for the CDP command `dispatchMouseEvent`.
 //

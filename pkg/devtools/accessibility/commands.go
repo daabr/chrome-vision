@@ -222,7 +222,14 @@ func (t *GetPartialAXTree) ParseResponse(m *devtools.Message) (*GetPartialAXTree
 type GetFullAXTree struct {
 	// The maximum depth at which descendants of the root node should be retrieved.
 	// If omitted, the full tree is returned.
+	Depth int64 `json:"depth,omitempty"`
+	// Deprecated. This parameter has been renamed to `depth`. If depth is not provided, max_depth will be used.
+	//
+	// This CDP parameter is deprecated.
 	MaxDepth int64 `json:"max_depth,omitempty"`
+	// The frame for whose document the AX tree should be retrieved.
+	// If omited, the root frame is used.
+	FrameID string `json:"frameId,omitempty"`
 }
 
 // NewGetFullAXTree constructs a new GetFullAXTree struct instance, with
@@ -236,13 +243,34 @@ func NewGetFullAXTree() *GetFullAXTree {
 	return &GetFullAXTree{}
 }
 
-// SetMaxDepth adds or modifies the value of the optional
-// parameter `max_depth` in the GetFullAXTree CDP command.
+// SetDepth adds or modifies the value of the optional
+// parameter `depth` in the GetFullAXTree CDP command.
 //
 // The maximum depth at which descendants of the root node should be retrieved.
 // If omitted, the full tree is returned.
+func (t *GetFullAXTree) SetDepth(v int64) *GetFullAXTree {
+	t.Depth = v
+	return t
+}
+
+// SetMaxDepth adds or modifies the value of the optional
+// parameter `max_depth` in the GetFullAXTree CDP command.
+//
+// Deprecated. This parameter has been renamed to `depth`. If depth is not provided, max_depth will be used.
+//
+// This CDP parameter is deprecated.
 func (t *GetFullAXTree) SetMaxDepth(v int64) *GetFullAXTree {
 	t.MaxDepth = v
+	return t
+}
+
+// SetFrameID adds or modifies the value of the optional
+// parameter `frameId` in the GetFullAXTree CDP command.
+//
+// The frame for whose document the AX tree should be retrieved.
+// If omited, the root frame is used.
+func (t *GetFullAXTree) SetFrameID(v string) *GetFullAXTree {
+	t.FrameID = v
 	return t
 }
 
@@ -302,6 +330,9 @@ func (t *GetFullAXTree) ParseResponse(m *devtools.Message) (*GetFullAXTreeResult
 // This CDP method is experimental.
 type GetChildAXNodes struct {
 	ID string `json:"id"`
+	// The frame in whose document the node resides.
+	// If omitted, the root frame is used.
+	FrameID string `json:"frameId,omitempty"`
 }
 
 // NewGetChildAXNodes constructs a new GetChildAXNodes struct instance, with
@@ -315,6 +346,16 @@ func NewGetChildAXNodes(id string) *GetChildAXNodes {
 	return &GetChildAXNodes{
 		ID: id,
 	}
+}
+
+// SetFrameID adds or modifies the value of the optional
+// parameter `frameId` in the GetChildAXNodes CDP command.
+//
+// The frame in whose document the node resides.
+// If omitted, the root frame is used.
+func (t *GetChildAXNodes) SetFrameID(v string) *GetChildAXNodes {
+	t.FrameID = v
+	return t
 }
 
 // GetChildAXNodesResult contains the browser's response
