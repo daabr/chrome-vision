@@ -213,7 +213,9 @@ type FulfillRequest struct {
 	// need to represent some non-UTF8 values that can't be transmitted
 	// over the protocol as text. (Encoded as a base64 string when passed over JSON)
 	BinaryResponseHeaders string `json:"binaryResponseHeaders,omitempty"`
-	// A response body. (Encoded as a base64 string when passed over JSON)
+	// A response body. If absent, original response body will be used if
+	// the request is intercepted at the response stage and empty body
+	// will be used if the request is intercepted at the request stage. (Encoded as a base64 string when passed over JSON)
 	Body string `json:"body,omitempty"`
 	// A textual representation of responseCode.
 	// If absent, a standard phrase matching responseCode is used.
@@ -256,7 +258,9 @@ func (t *FulfillRequest) SetBinaryResponseHeaders(v string) *FulfillRequest {
 // SetBody adds or modifies the value of the optional
 // parameter `body` in the FulfillRequest CDP command.
 //
-// A response body. (Encoded as a base64 string when passed over JSON)
+// A response body. If absent, original response body will be used if
+// the request is intercepted at the response stage and empty body
+// will be used if the request is intercepted at the request stage. (Encoded as a base64 string when passed over JSON)
 func (t *FulfillRequest) SetBody(v string) *FulfillRequest {
 	t.Body = v
 	return t
@@ -324,6 +328,10 @@ type ContinueRequest struct {
 	PostData string `json:"postData,omitempty"`
 	// If set, overrides the request headers.
 	Headers []HeaderEntry `json:"headers,omitempty"`
+	// If set, overrides response interception behavior for this request.
+	//
+	// This CDP parameter is experimental.
+	InterceptResponse bool `json:"interceptResponse,omitempty"`
 }
 
 // NewContinueRequest constructs a new ContinueRequest struct instance, with
@@ -370,6 +378,17 @@ func (t *ContinueRequest) SetPostData(v string) *ContinueRequest {
 // If set, overrides the request headers.
 func (t *ContinueRequest) SetHeaders(v []HeaderEntry) *ContinueRequest {
 	t.Headers = v
+	return t
+}
+
+// SetInterceptResponse adds or modifies the value of the optional
+// parameter `interceptResponse` in the ContinueRequest CDP command.
+//
+// If set, overrides response interception behavior for this request.
+//
+// This CDP parameter is experimental.
+func (t *ContinueRequest) SetInterceptResponse(v bool) *ContinueRequest {
+	t.InterceptResponse = v
 	return t
 }
 
@@ -462,6 +481,121 @@ func (t *ContinueWithAuth) Start(ctx context.Context) (chan *devtools.Message, e
 // ParseResponse parses the browser's response
 // to the ContinueWithAuth CDP command.
 func (t *ContinueWithAuth) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
+	}
+	return nil
+}
+
+// ContinueResponse contains the parameters, and acts as
+// a Go receiver, for the CDP command `continueResponse`.
+//
+// Continues loading of the paused response, optionally modifying the
+// response headers. If either responseCode or headers are modified, all of them
+// must be present.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-continueResponse
+//
+// This CDP method is experimental.
+type ContinueResponse struct {
+	// An id the client received in requestPaused event.
+	RequestID string `json:"requestId"`
+	// An HTTP response code. If absent, original response code will be used.
+	ResponseCode int64 `json:"responseCode,omitempty"`
+	// A textual representation of responseCode.
+	// If absent, a standard phrase matching responseCode is used.
+	ResponsePhrase string `json:"responsePhrase,omitempty"`
+	// Response headers. If absent, original response headers will be used.
+	ResponseHeaders []HeaderEntry `json:"responseHeaders,omitempty"`
+	// Alternative way of specifying response headers as a \0-separated
+	// series of name: value pairs. Prefer the above method unless you
+	// need to represent some non-UTF8 values that can't be transmitted
+	// over the protocol as text. (Encoded as a base64 string when passed over JSON)
+	BinaryResponseHeaders string `json:"binaryResponseHeaders,omitempty"`
+}
+
+// NewContinueResponse constructs a new ContinueResponse struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Fetch/#method-continueResponse
+//
+// This CDP method is experimental.
+func NewContinueResponse(requestID string) *ContinueResponse {
+	return &ContinueResponse{
+		RequestID: requestID,
+	}
+}
+
+// SetResponseCode adds or modifies the value of the optional
+// parameter `responseCode` in the ContinueResponse CDP command.
+//
+// An HTTP response code. If absent, original response code will be used.
+func (t *ContinueResponse) SetResponseCode(v int64) *ContinueResponse {
+	t.ResponseCode = v
+	return t
+}
+
+// SetResponsePhrase adds or modifies the value of the optional
+// parameter `responsePhrase` in the ContinueResponse CDP command.
+//
+// A textual representation of responseCode.
+// If absent, a standard phrase matching responseCode is used.
+func (t *ContinueResponse) SetResponsePhrase(v string) *ContinueResponse {
+	t.ResponsePhrase = v
+	return t
+}
+
+// SetResponseHeaders adds or modifies the value of the optional
+// parameter `responseHeaders` in the ContinueResponse CDP command.
+//
+// Response headers. If absent, original response headers will be used.
+func (t *ContinueResponse) SetResponseHeaders(v []HeaderEntry) *ContinueResponse {
+	t.ResponseHeaders = v
+	return t
+}
+
+// SetBinaryResponseHeaders adds or modifies the value of the optional
+// parameter `binaryResponseHeaders` in the ContinueResponse CDP command.
+//
+// Alternative way of specifying response headers as a \0-separated
+// series of name: value pairs. Prefer the above method unless you
+// need to represent some non-UTF8 values that can't be transmitted
+// over the protocol as text. (Encoded as a base64 string when passed over JSON)
+func (t *ContinueResponse) SetBinaryResponseHeaders(v string) *ContinueResponse {
+	t.BinaryResponseHeaders = v
+	return t
+}
+
+// Do sends the ContinueResponse CDP command to a browser,
+// and returns the browser's response.
+func (t *ContinueResponse) Do(ctx context.Context) error {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	m, err := devtools.SendAndWait(ctx, "Fetch.continueResponse", b)
+	if err != nil {
+		return err
+	}
+	return t.ParseResponse(m)
+}
+
+// Start sends the ContinueResponse CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *ContinueResponse) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Fetch.continueResponse", b)
+}
+
+// ParseResponse parses the browser's response
+// to the ContinueResponse CDP command.
+func (t *ContinueResponse) ParseResponse(m *devtools.Message) error {
 	if m.Error != nil {
 		return errors.New(m.Error.Error())
 	}

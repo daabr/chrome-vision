@@ -321,6 +321,10 @@ type RequestWillBeSentExtraInfo struct {
 	AssociatedCookies []BlockedCookieWithReason `json:"associatedCookies"`
 	// Raw request headers as they will be sent over the wire.
 	Headers Headers `json:"headers"`
+	// Connection timing information for the request.
+	//
+	// This CDP parameter is experimental.
+	ConnectTiming ConnectTiming `json:"connectTiming"`
 	// The client security state set for the request.
 	ClientSecurityState *ClientSecurityState `json:"clientSecurityState,omitempty"`
 }
@@ -344,6 +348,10 @@ type ResponseReceivedExtraInfo struct {
 	// The IP address space of the resource. The address space can only be determined once the transport
 	// established the connection, so we can't send it in `requestWillBeSentExtraInfo`.
 	ResourceIPAddressSpace IPAddressSpace `json:"resourceIPAddressSpace"`
+	// The status code of the response. This is useful in cases the request failed and no responseReceived
+	// event is triggered, which is the case for, e.g., CORS errors. This is also the correct status code
+	// for cached requests, where the status in responseReceived is a 200 and this will be 304.
+	StatusCode int64 `json:"statusCode"`
 	// Raw response header text as it was received over the wire. The raw text may not always be
 	// available, such as in the case of HTTP/2 or QUIC.
 	HeadersText string `json:"headersText,omitempty"`
@@ -431,4 +439,14 @@ type SubresourceWebBundleInnerResponseError struct {
 	// This made be absent in case when the instrumentation was enabled only
 	// after webbundle was parsed.
 	BundleRequestID string `json:"bundleRequestId,omitempty"`
+}
+
+// ReportingApiReportAdded asynchronous event. Is sent whenever a new report is added.
+// And after 'enableReportingApi' for all existing reports.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-reportingApiReportAdded
+//
+// This CDP event is experimental.
+type ReportingApiReportAdded struct {
+	Report ReportingApiReport `json:"report"`
 }

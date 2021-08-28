@@ -790,6 +790,65 @@ func (t *GetManifestIcons) ParseResponse(m *devtools.Message) (*GetManifestIcons
 	return result, nil
 }
 
+// GetAppID contains the parameters, and acts as
+// a Go receiver, for the CDP command `getAppId`.
+//
+// Returns the unique (PWA) app id.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getAppId
+//
+// This CDP method is experimental.
+type GetAppID struct{}
+
+// NewGetAppID constructs a new GetAppID struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getAppId
+//
+// This CDP method is experimental.
+func NewGetAppID() *GetAppID {
+	return &GetAppID{}
+}
+
+// GetAppIDResult contains the browser's response
+// to calling the GetAppID CDP command with Do().
+type GetAppIDResult struct {
+	// Only returns a value if the feature flag 'WebAppEnableManifestId' is enabled
+	AppID string `json:"appId,omitempty"`
+}
+
+// Do sends the GetAppID CDP command to a browser,
+// and returns the browser's response.
+func (t *GetAppID) Do(ctx context.Context) (*GetAppIDResult, error) {
+	m, err := devtools.SendAndWait(ctx, "Page.getAppId", nil)
+	if err != nil {
+		return nil, err
+	}
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetAppID CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetAppID) Start(ctx context.Context) (chan *devtools.Message, error) {
+	return devtools.Send(ctx, "Page.getAppId", nil)
+}
+
+// ParseResponse parses the browser's response
+// to the GetAppID CDP command.
+func (t *GetAppID) ParseResponse(m *devtools.Message) (*GetAppIDResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
+	}
+	result := &GetAppIDResult{}
+	if err := json.Unmarshal(m.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // GetFrameTree contains the parameters, and acts as
 // a Go receiver, for the CDP command `getFrameTree`.
 //
@@ -2215,6 +2274,76 @@ func (t *GetPermissionsPolicyState) ParseResponse(m *devtools.Message) (*GetPerm
 		return nil, errors.New(m.Error.Error())
 	}
 	result := &GetPermissionsPolicyStateResult{}
+	if err := json.Unmarshal(m.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetOriginTrials contains the parameters, and acts as
+// a Go receiver, for the CDP command `getOriginTrials`.
+//
+// Get Origin Trials on given frame.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getOriginTrials
+//
+// This CDP method is experimental.
+type GetOriginTrials struct {
+	FrameID string `json:"frameId"`
+}
+
+// NewGetOriginTrials constructs a new GetOriginTrials struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getOriginTrials
+//
+// This CDP method is experimental.
+func NewGetOriginTrials(frameID string) *GetOriginTrials {
+	return &GetOriginTrials{
+		FrameID: frameID,
+	}
+}
+
+// GetOriginTrialsResult contains the browser's response
+// to calling the GetOriginTrials CDP command with Do().
+type GetOriginTrialsResult struct {
+	OriginTrials []OriginTrial `json:"originTrials"`
+}
+
+// Do sends the GetOriginTrials CDP command to a browser,
+// and returns the browser's response.
+func (t *GetOriginTrials) Do(ctx context.Context) (*GetOriginTrialsResult, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	m, err := devtools.SendAndWait(ctx, "Page.getOriginTrials", b)
+	if err != nil {
+		return nil, err
+	}
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetOriginTrials CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetOriginTrials) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.getOriginTrials", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetOriginTrials CDP command.
+func (t *GetOriginTrials) ParseResponse(m *devtools.Message) (*GetOriginTrialsResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
+	}
+	result := &GetOriginTrialsResult{}
 	if err := json.Unmarshal(m.Result, result); err != nil {
 		return nil, err
 	}

@@ -11,7 +11,8 @@ type Entry struct {
 	// Log entry severity.
 	Level string `json:"level"`
 	// Logged text.
-	Text string `json:"text"`
+	Text     string `json:"text"`
+	Category string `json:"category,omitempty"`
 	// Timestamp when this entry was added.
 	Timestamp runtime.Timestamp `json:"timestamp"`
 	// URL of the resource if known.
