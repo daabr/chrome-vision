@@ -262,6 +262,76 @@ func (t *SetFocusEmulationEnabled) ParseResponse(m *devtools.Message) error {
 	return nil
 }
 
+// SetAutoDarkModeOverride contains the parameters, and acts as
+// a Go receiver, for the CDP command `setAutoDarkModeOverride`.
+//
+// Automatically render all web contents using a dark theme.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setAutoDarkModeOverride
+//
+// This CDP method is experimental.
+type SetAutoDarkModeOverride struct {
+	// Whether to enable or disable automatic dark mode.
+	// If not specified, any existing override will be cleared.
+	Enabled bool `json:"enabled,omitempty"`
+}
+
+// NewSetAutoDarkModeOverride constructs a new SetAutoDarkModeOverride struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Emulation/#method-setAutoDarkModeOverride
+//
+// This CDP method is experimental.
+func NewSetAutoDarkModeOverride() *SetAutoDarkModeOverride {
+	return &SetAutoDarkModeOverride{}
+}
+
+// SetEnabled adds or modifies the value of the optional
+// parameter `enabled` in the SetAutoDarkModeOverride CDP command.
+//
+// Whether to enable or disable automatic dark mode.
+// If not specified, any existing override will be cleared.
+func (t *SetAutoDarkModeOverride) SetEnabled(v bool) *SetAutoDarkModeOverride {
+	t.Enabled = v
+	return t
+}
+
+// Do sends the SetAutoDarkModeOverride CDP command to a browser,
+// and returns the browser's response.
+func (t *SetAutoDarkModeOverride) Do(ctx context.Context) error {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	m, err := devtools.SendAndWait(ctx, "Emulation.setAutoDarkModeOverride", b)
+	if err != nil {
+		return err
+	}
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetAutoDarkModeOverride CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetAutoDarkModeOverride) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Emulation.setAutoDarkModeOverride", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetAutoDarkModeOverride CDP command.
+func (t *SetAutoDarkModeOverride) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
+	}
+	return nil
+}
+
 // SetCPUThrottlingRate contains the parameters, and acts as
 // a Go receiver, for the CDP command `setCPUThrottlingRate`.
 //

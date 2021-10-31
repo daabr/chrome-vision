@@ -199,7 +199,7 @@ type ExecutionContextDescription struct {
 	Origin string `json:"origin"`
 	// Human readable name describing given context.
 	Name string `json:"name"`
-	// A system-unique execution context identifier. Unlike the id, this is unique accross
+	// A system-unique execution context identifier. Unlike the id, this is unique across
 	// multiple processes, so can be reliably used to identify specific context while backend
 	// performs a cross-process navigation.
 	//
@@ -232,6 +232,12 @@ type ExceptionDetails struct {
 	Exception *RemoteObject `json:"exception,omitempty"`
 	// Identifier of the context where exception happened.
 	ExecutionContextID int64 `json:"executionContextId,omitempty"`
+	// Dictionary with entries of meta data that the client associated
+	// with this exception, such as information about associated network
+	// requests, etc.
+	//
+	// This CDP property is experimental.
+	ExceptionMetaData json.RawMessage `json:"exceptionMetaData,omitempty"`
 }
 
 // Timestamp data type. Number of milliseconds since epoch.

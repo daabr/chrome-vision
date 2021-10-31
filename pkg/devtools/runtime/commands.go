@@ -136,6 +136,10 @@ type CallFunctionOn struct {
 	// Symbolic group name that can be used to release multiple objects. If objectGroup is not
 	// specified and objectId is, objectGroup will be inherited from object.
 	ObjectGroup string `json:"objectGroup,omitempty"`
+	// Whether to throw an exception if side effect cannot be ruled out during evaluation.
+	//
+	// This CDP parameter is experimental.
+	ThrowOnSideEffect bool `json:"throwOnSideEffect,omitempty"`
 }
 
 // NewCallFunctionOn constructs a new CallFunctionOn struct instance, with
@@ -235,6 +239,17 @@ func (t *CallFunctionOn) SetExecutionContextID(v int64) *CallFunctionOn {
 // specified and objectId is, objectGroup will be inherited from object.
 func (t *CallFunctionOn) SetObjectGroup(v string) *CallFunctionOn {
 	t.ObjectGroup = v
+	return t
+}
+
+// SetThrowOnSideEffect adds or modifies the value of the optional
+// parameter `throwOnSideEffect` in the CallFunctionOn CDP command.
+//
+// Whether to throw an exception if side effect cannot be ruled out during evaluation.
+//
+// This CDP parameter is experimental.
+func (t *CallFunctionOn) SetThrowOnSideEffect(v bool) *CallFunctionOn {
+	t.ThrowOnSideEffect = v
 	return t
 }
 
@@ -569,9 +584,9 @@ type Evaluate struct {
 	// This CDP parameter is experimental.
 	AllowUnsafeEvalBlockedByCSP bool `json:"allowUnsafeEvalBlockedByCSP,omitempty"`
 	// An alternative way to specify the execution context to evaluate in.
-	// Compared to contextId that may be reused accross processes, this is guaranteed to be
+	// Compared to contextId that may be reused across processes, this is guaranteed to be
 	// system-unique, so it can be used to prevent accidental evaluation of the expression
-	// in context different than intended (e.g. as a result of navigation accross process
+	// in context different than intended (e.g. as a result of navigation across process
 	// boundaries).
 	// This is mutually exclusive with `contextId`.
 	//
@@ -735,9 +750,9 @@ func (t *Evaluate) SetAllowUnsafeEvalBlockedByCSP(v bool) *Evaluate {
 // parameter `uniqueContextId` in the Evaluate CDP command.
 //
 // An alternative way to specify the execution context to evaluate in.
-// Compared to contextId that may be reused accross processes, this is guaranteed to be
+// Compared to contextId that may be reused across processes, this is guaranteed to be
 // system-unique, so it can be used to prevent accidental evaluation of the expression
-// in context different than intended (e.g. as a result of navigation accross process
+// in context different than intended (e.g. as a result of navigation across process
 // boundaries).
 // This is mutually exclusive with `contextId`.
 //
@@ -938,6 +953,10 @@ type GetProperties struct {
 	//
 	// This CDP parameter is experimental.
 	GeneratePreview bool `json:"generatePreview,omitempty"`
+	// If true, returns non-indexed properties only.
+	//
+	// This CDP parameter is experimental.
+	NonIndexedPropertiesOnly bool `json:"nonIndexedPropertiesOnly,omitempty"`
 }
 
 // NewGetProperties constructs a new GetProperties struct instance, with
@@ -981,6 +1000,17 @@ func (t *GetProperties) SetAccessorPropertiesOnly(v bool) *GetProperties {
 // This CDP parameter is experimental.
 func (t *GetProperties) SetGeneratePreview(v bool) *GetProperties {
 	t.GeneratePreview = v
+	return t
+}
+
+// SetNonIndexedPropertiesOnly adds or modifies the value of the optional
+// parameter `nonIndexedPropertiesOnly` in the GetProperties CDP command.
+//
+// If true, returns non-indexed properties only.
+//
+// This CDP parameter is experimental.
+func (t *GetProperties) SetNonIndexedPropertiesOnly(v bool) *GetProperties {
+	t.NonIndexedPropertiesOnly = v
 	return t
 }
 
@@ -1684,6 +1714,11 @@ type AddBinding struct {
 	// execution context. If omitted and `executionContextName` is not set,
 	// the binding is exposed to all execution contexts of the target.
 	// This parameter is mutually exclusive with `executionContextName`.
+	// Deprecated in favor of `executionContextName` due to an unclear use case
+	// and bugs in implementation (crbug.com/1169639). `executionContextId` will be
+	// removed in the future.
+	//
+	// This CDP parameter is deprecated.
 	ExecutionContextID int64 `json:"executionContextId,omitempty"`
 	// If specified, the binding is exposed to the executionContext with
 	// matching name, even for contexts created after the binding is added.
@@ -1715,6 +1750,11 @@ func NewAddBinding(name string) *AddBinding {
 // execution context. If omitted and `executionContextName` is not set,
 // the binding is exposed to all execution contexts of the target.
 // This parameter is mutually exclusive with `executionContextName`.
+// Deprecated in favor of `executionContextName` due to an unclear use case
+// and bugs in implementation (crbug.com/1169639). `executionContextId` will be
+// removed in the future.
+//
+// This CDP parameter is deprecated.
 func (t *AddBinding) SetExecutionContextID(v int64) *AddBinding {
 	t.ExecutionContextID = v
 	return t

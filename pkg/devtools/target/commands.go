@@ -527,6 +527,8 @@ type CreateTarget struct {
 	// Frame height in DIP (headless chrome only).
 	Height int64 `json:"height,omitempty"`
 	// The browser context to create the page in.
+	//
+	// This CDP parameter is experimental.
 	BrowserContextID string `json:"browserContextId,omitempty"`
 	// Whether BeginFrames for this target will be controlled via DevTools (headless chrome only,
 	// not supported on MacOS yet, false by default).
@@ -573,6 +575,8 @@ func (t *CreateTarget) SetHeight(v int64) *CreateTarget {
 // parameter `browserContextId` in the CreateTarget CDP command.
 //
 // The browser context to create the page in.
+//
+// This CDP parameter is experimental.
 func (t *CreateTarget) SetBrowserContextID(v string) *CreateTarget {
 	t.BrowserContextID = v
 	return t

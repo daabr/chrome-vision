@@ -1766,3 +1766,60 @@ func (t *SetShowHinge) ParseResponse(m *devtools.Message) error {
 	}
 	return nil
 }
+
+// SetShowIsolatedElements contains the parameters, and acts as
+// a Go receiver, for the CDP command `setShowIsolatedElements`.
+//
+// Show elements in isolation mode with overlays.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowIsolatedElements
+type SetShowIsolatedElements struct {
+	// An array of node identifiers and descriptors for the highlight appearance.
+	IsolatedElementHighlightConfigs []IsolatedElementHighlightConfig `json:"isolatedElementHighlightConfigs"`
+}
+
+// NewSetShowIsolatedElements constructs a new SetShowIsolatedElements struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#method-setShowIsolatedElements
+func NewSetShowIsolatedElements(isolatedElementHighlightConfigs []IsolatedElementHighlightConfig) *SetShowIsolatedElements {
+	return &SetShowIsolatedElements{
+		IsolatedElementHighlightConfigs: isolatedElementHighlightConfigs,
+	}
+}
+
+// Do sends the SetShowIsolatedElements CDP command to a browser,
+// and returns the browser's response.
+func (t *SetShowIsolatedElements) Do(ctx context.Context) error {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	m, err := devtools.SendAndWait(ctx, "Overlay.setShowIsolatedElements", b)
+	if err != nil {
+		return err
+	}
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetShowIsolatedElements CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetShowIsolatedElements) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Overlay.setShowIsolatedElements", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetShowIsolatedElements CDP command.
+func (t *SetShowIsolatedElements) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
+	}
+	return nil
+}

@@ -133,6 +133,12 @@ type RequestWillBeSent struct {
 	WallTime float64 `json:"wallTime"`
 	// Request initiator.
 	Initiator Initiator `json:"initiator"`
+	// In the case that redirectResponse is populated, this flag indicates whether
+	// requestWillBeSentExtraInfo and responseReceivedExtraInfo events will be or were emitted
+	// for the request which was just redirected.
+	//
+	// This CDP parameter is experimental.
+	RedirectHasExtraInfo bool `json:"redirectHasExtraInfo"`
 	// Redirect response data.
 	RedirectResponse *Response `json:"redirectResponse,omitempty"`
 	// Type of this resource.
@@ -183,6 +189,11 @@ type ResponseReceived struct {
 	Type ResourceType `json:"type"`
 	// Response data.
 	Response Response `json:"response"`
+	// Indicates whether requestWillBeSentExtraInfo and responseReceivedExtraInfo events will be
+	// or were emitted for this request.
+	//
+	// This CDP parameter is experimental.
+	HasExtraInfo bool `json:"hasExtraInfo"`
 	// Frame identifier.
 	FrameID string `json:"frameId,omitempty"`
 }
@@ -448,5 +459,14 @@ type SubresourceWebBundleInnerResponseError struct {
 //
 // This CDP event is experimental.
 type ReportingAPIReportAdded struct {
+	Report ReportingAPIReport `json:"report"`
+}
+
+// ReportingAPIReportUpdated asynchronous event.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-reportingApiReportUpdated
+//
+// This CDP event is experimental.
+type ReportingAPIReportUpdated struct {
 	Report ReportingAPIReport `json:"report"`
 }

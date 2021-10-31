@@ -65,6 +65,7 @@ type AXValueNativeSourceType string
 
 // AXValueNativeSourceType valid values.
 const (
+	AXValueNativeSourceTypeDescription    AXValueNativeSourceType = "description"
 	AXValueNativeSourceTypeFigcaption     AXValueNativeSourceType = "figcaption"
 	AXValueNativeSourceTypeLabel          AXValueNativeSourceType = "label"
 	AXValueNativeSourceTypeLabelfor       AXValueNativeSourceType = "labelfor"

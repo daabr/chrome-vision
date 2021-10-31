@@ -270,6 +270,28 @@ type ContainerQueryContainerHighlightConfig struct {
 	DescendantBorder *LineStyle `json:"descendantBorder,omitempty"`
 }
 
+// IsolatedElementHighlightConfig data type.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-IsolatedElementHighlightConfig
+type IsolatedElementHighlightConfig struct {
+	// A descriptor for the highlight appearance of an element in isolation mode.
+	IsolationModeHighlightConfig IsolationModeHighlightConfig `json:"isolationModeHighlightConfig"`
+	// Identifier of the isolated element to highlight.
+	NodeID int64 `json:"nodeId"`
+}
+
+// IsolationModeHighlightConfig data type.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-IsolationModeHighlightConfig
+type IsolationModeHighlightConfig struct {
+	// The fill color of the resizers (default: transparent).
+	ResizerColor *dom.RGBA `json:"resizerColor,omitempty"`
+	// The fill color for resizer handles (default: transparent).
+	ResizerHandleColor *dom.RGBA `json:"resizerHandleColor,omitempty"`
+	// The fill color for the mask covering non-isolated elements (default: transparent).
+	MaskColor *dom.RGBA `json:"maskColor,omitempty"`
+}
+
 // InspectMode data type.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Overlay/#type-InspectMode

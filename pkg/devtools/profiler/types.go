@@ -119,29 +119,3 @@ type ScriptTypeProfile struct {
 	// Type profile entries for parameters and return values of the functions in the script.
 	Entries []TypeProfileEntry `json:"entries"`
 }
-
-// CounterInfo data type. Collected counter information.
-//
-// https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-CounterInfo
-//
-// This CDP type is experimental.
-type CounterInfo struct {
-	// Counter name.
-	Name string `json:"name"`
-	// Counter value.
-	Value int64 `json:"value"`
-}
-
-// RuntimeCallCounterInfo data type. Runtime call counter information.
-//
-// https://chromedevtools.github.io/devtools-protocol/tot/Profiler/#type-RuntimeCallCounterInfo
-//
-// This CDP type is experimental.
-type RuntimeCallCounterInfo struct {
-	// Counter name.
-	Name string `json:"name"`
-	// Counter value.
-	Value float64 `json:"value"`
-	// Counter time in seconds.
-	Time float64 `json:"time"`
-}

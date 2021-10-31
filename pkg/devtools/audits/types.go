@@ -279,6 +279,7 @@ const (
 	ContentSecurityPolicyViolationTypeKURLViolation                ContentSecurityPolicyViolationType = "kURLViolation"
 	ContentSecurityPolicyViolationTypeKTrustedTypesSinkViolation   ContentSecurityPolicyViolationType = "kTrustedTypesSinkViolation"
 	ContentSecurityPolicyViolationTypeKTrustedTypesPolicyViolation ContentSecurityPolicyViolationType = "kTrustedTypesPolicyViolation"
+	ContentSecurityPolicyViolationTypeKWasmEvalViolation           ContentSecurityPolicyViolationType = "kWasmEvalViolation"
 )
 
 // String returns the ContentSecurityPolicyViolationType value as a built-in string.
@@ -404,12 +405,13 @@ type AttributionReportingIssueType string
 
 // AttributionReportingIssueType valid values.
 const (
-	AttributionReportingIssueTypePermissionPolicyDisabled             AttributionReportingIssueType = "PermissionPolicyDisabled"
-	AttributionReportingIssueTypeInvalidAttributionSourceEventID      AttributionReportingIssueType = "InvalidAttributionSourceEventId"
-	AttributionReportingIssueTypeInvalidAttributionData               AttributionReportingIssueType = "InvalidAttributionData"
-	AttributionReportingIssueTypeAttributionSourceUntrustworthyOrigin AttributionReportingIssueType = "AttributionSourceUntrustworthyOrigin"
-	AttributionReportingIssueTypeAttributionUntrustworthyOrigin       AttributionReportingIssueType = "AttributionUntrustworthyOrigin"
-	AttributionReportingIssueTypeAttributionTriggerDataTooLarge       AttributionReportingIssueType = "AttributionTriggerDataTooLarge"
+	AttributionReportingIssueTypePermissionPolicyDisabled                  AttributionReportingIssueType = "PermissionPolicyDisabled"
+	AttributionReportingIssueTypeInvalidAttributionSourceEventID           AttributionReportingIssueType = "InvalidAttributionSourceEventId"
+	AttributionReportingIssueTypeInvalidAttributionData                    AttributionReportingIssueType = "InvalidAttributionData"
+	AttributionReportingIssueTypeAttributionSourceUntrustworthyOrigin      AttributionReportingIssueType = "AttributionSourceUntrustworthyOrigin"
+	AttributionReportingIssueTypeAttributionUntrustworthyOrigin            AttributionReportingIssueType = "AttributionUntrustworthyOrigin"
+	AttributionReportingIssueTypeAttributionTriggerDataTooLarge            AttributionReportingIssueType = "AttributionTriggerDataTooLarge"
+	AttributionReportingIssueTypeAttributionEventSourceTriggerDataTooLarge AttributionReportingIssueType = "AttributionEventSourceTriggerDataTooLarge"
 )
 
 // String returns the AttributionReportingIssueType value as a built-in string.
@@ -461,6 +463,30 @@ type WasmCrossOriginModuleSharingIssueDetails struct {
 	IsWarning     bool   `json:"isWarning"`
 }
 
+// GenericIssueErrorType data type.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-GenericIssueErrorType
+type GenericIssueErrorType string
+
+// GenericIssueErrorType valid values.
+const (
+	GenericIssueErrorTypeCrossOriginPortalPostMessageError GenericIssueErrorType = "CrossOriginPortalPostMessageError"
+)
+
+// String returns the GenericIssueErrorType value as a built-in string.
+func (t GenericIssueErrorType) String() string {
+	return string(t)
+}
+
+// GenericIssueDetails data type. Depending on the concrete errorType, different properties are set.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-GenericIssueDetails
+type GenericIssueDetails struct {
+	// Issues with the same errorType are aggregated in the frontend.
+	ErrorType GenericIssueErrorType `json:"errorType"`
+	FrameID   string                `json:"frameId,omitempty"`
+}
+
 // InspectorIssueCode data type. A unique identifier for the type of issue. Each type may use one of the
 // optional fields in InspectorIssueDetails to convey more specific
 // information about the kind of issue.
@@ -483,6 +509,7 @@ const (
 	InspectorIssueCodeQuirksModeIssue                   InspectorIssueCode = "QuirksModeIssue"
 	InspectorIssueCodeNavigatorUserAgentIssue           InspectorIssueCode = "NavigatorUserAgentIssue"
 	InspectorIssueCodeWasmCrossOriginModuleSharingIssue InspectorIssueCode = "WasmCrossOriginModuleSharingIssue"
+	InspectorIssueCodeGenericIssue                      InspectorIssueCode = "GenericIssue"
 )
 
 // String returns the InspectorIssueCode value as a built-in string.
@@ -509,6 +536,7 @@ type InspectorIssueDetails struct {
 	QuirksModeIssueDetails            *QuirksModeIssueDetails                   `json:"quirksModeIssueDetails,omitempty"`
 	NavigatorUserAgentIssueDetails    *NavigatorUserAgentIssueDetails           `json:"navigatorUserAgentIssueDetails,omitempty"`
 	WasmCrossOriginModuleSharingIssue *WasmCrossOriginModuleSharingIssueDetails `json:"wasmCrossOriginModuleSharingIssue,omitempty"`
+	GenericIssueDetails               *GenericIssueDetails                      `json:"genericIssueDetails,omitempty"`
 }
 
 // IssueID data type. A unique id for a DevTools inspector issue. Allows other entities (e.g.

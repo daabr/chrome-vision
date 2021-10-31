@@ -85,4 +85,8 @@ type ExecutionContextsCleared struct{}
 type InspectRequested struct {
 	Object RemoteObject    `json:"object"`
 	Hints  json.RawMessage `json:"hints"`
+	// Identifier of the context where the call was made.
+	//
+	// This CDP parameter is experimental.
+	ExecutionContextID int64 `json:"executionContextId,omitempty"`
 }

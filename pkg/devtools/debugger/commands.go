@@ -127,7 +127,7 @@ func (t *Disable) ParseResponse(m *devtools.Message) error {
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-enable
 type Enable struct {
 	// The maximum size in bytes of collected scripts (not referenced by other heap objects)
-	// the debugger can hold. Puts no limit if paramter is omitted.
+	// the debugger can hold. Puts no limit if parameter is omitted.
 	//
 	// This CDP parameter is experimental.
 	MaxScriptsCacheSize float64 `json:"maxScriptsCacheSize,omitempty"`
@@ -146,7 +146,7 @@ func NewEnable() *Enable {
 // parameter `maxScriptsCacheSize` in the Enable CDP command.
 //
 // The maximum size in bytes of collected scripts (not referenced by other heap objects)
-// the debugger can hold. Puts no limit if paramter is omitted.
+// the debugger can hold. Puts no limit if parameter is omitted.
 //
 // This CDP parameter is experimental.
 func (t *Enable) SetMaxScriptsCacheSize(v float64) *Enable {
@@ -826,6 +826,8 @@ func (t *RemoveBreakpoint) ParseResponse(m *devtools.Message) error {
 // Restarts particular call frame from the beginning.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-restartFrame
+//
+// This CDP method is deprecated.
 type RestartFrame struct {
 	// Call frame identifier to evaluate on.
 	CallFrameID string `json:"callFrameId"`
@@ -836,6 +838,8 @@ type RestartFrame struct {
 // may be added using the builder-like methods below.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Debugger/#method-restartFrame
+//
+// This CDP method is deprecated.
 func NewRestartFrame(callFrameID string) *RestartFrame {
 	return &RestartFrame{
 		CallFrameID: callFrameID,

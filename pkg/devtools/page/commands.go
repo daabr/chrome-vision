@@ -794,6 +794,7 @@ func (t *GetManifestIcons) ParseResponse(m *devtools.Message) (*GetManifestIcons
 // a Go receiver, for the CDP command `getAppId`.
 //
 // Returns the unique (PWA) app id.
+// Only returns values if the feature flag 'WebAppEnableManifestId' is enabled
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-getAppId
 //
@@ -814,8 +815,10 @@ func NewGetAppID() *GetAppID {
 // GetAppIDResult contains the browser's response
 // to calling the GetAppID CDP command with Do().
 type GetAppIDResult struct {
-	// Only returns a value if the feature flag 'WebAppEnableManifestId' is enabled
+	// App id, either from manifest's id attribute or computed from start_url
 	AppID string `json:"appId,omitempty"`
+	// Recommendation for manifest's id attribute to match current id computed from start_url
+	RecommendedID string `json:"recommendedId,omitempty"`
 }
 
 // Do sends the GetAppID CDP command to a browser,
@@ -3031,76 +3034,12 @@ func (t *StopScreencast) ParseResponse(m *devtools.Message) error {
 	return nil
 }
 
-// SetProduceCompilationCache contains the parameters, and acts as
-// a Go receiver, for the CDP command `setProduceCompilationCache`.
-//
-// Forces compilation cache to be generated for every subresource script.
-// See also: `Page.produceCompilationCache`.
-//
-// https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setProduceCompilationCache
-//
-// This CDP method is experimental.
-type SetProduceCompilationCache struct {
-	Enabled bool `json:"enabled"`
-}
-
-// NewSetProduceCompilationCache constructs a new SetProduceCompilationCache struct instance, with
-// all (but only) the required parameters. Optional parameters
-// may be added using the builder-like methods below.
-//
-// https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setProduceCompilationCache
-//
-// This CDP method is experimental.
-func NewSetProduceCompilationCache(enabled bool) *SetProduceCompilationCache {
-	return &SetProduceCompilationCache{
-		Enabled: enabled,
-	}
-}
-
-// Do sends the SetProduceCompilationCache CDP command to a browser,
-// and returns the browser's response.
-func (t *SetProduceCompilationCache) Do(ctx context.Context) error {
-	b, err := json.Marshal(t)
-	if err != nil {
-		return err
-	}
-	m, err := devtools.SendAndWait(ctx, "Page.setProduceCompilationCache", b)
-	if err != nil {
-		return err
-	}
-	return t.ParseResponse(m)
-}
-
-// Start sends the SetProduceCompilationCache CDP command to a browser,
-// and returns a channel to receive the browser's response.
-// Callers should close the returned channel on their own,
-// although closing unused channels isn't strictly required.
-func (t *SetProduceCompilationCache) Start(ctx context.Context) (chan *devtools.Message, error) {
-	b, err := json.Marshal(t)
-	if err != nil {
-		return nil, err
-	}
-	return devtools.Send(ctx, "Page.setProduceCompilationCache", b)
-}
-
-// ParseResponse parses the browser's response
-// to the SetProduceCompilationCache CDP command.
-func (t *SetProduceCompilationCache) ParseResponse(m *devtools.Message) error {
-	if m.Error != nil {
-		return errors.New(m.Error.Error())
-	}
-	return nil
-}
-
 // ProduceCompilationCache contains the parameters, and acts as
 // a Go receiver, for the CDP command `produceCompilationCache`.
 //
 // Requests backend to produce compilation cache for the specified scripts.
-// Unlike setProduceCompilationCache, this allows client to only produce cache
-// for specific scripts. `scripts` are appeneded to the list of scripts
-// for which the cache for would produced. Disabling compilation cache with
-// `setProduceCompilationCache` would reset all pending cache requests.
-// The list may also be reset during page navigation.
+// `scripts` are appeneded to the list of scripts for which the cache
+// would be produced. The list may be reset during page navigation.
 // When script with a matching URL is encountered, the cache is optionally
 // produced upon backend discretion, based on internal heuristics.
 // See also: `Page.compilationCacheProduced`.
