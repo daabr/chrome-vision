@@ -573,6 +573,8 @@ type StopTrackingHeapObjects struct {
 	// when the tracking is stopped.
 	ReportProgress            bool `json:"reportProgress,omitempty"`
 	TreatGlobalObjectsAsRoots bool `json:"treatGlobalObjectsAsRoots,omitempty"`
+	// If true, numerical values are included in the snapshot
+	CaptureNumericValue bool `json:"captureNumericValue,omitempty"`
 }
 
 // NewStopTrackingHeapObjects constructs a new StopTrackingHeapObjects struct instance, with
@@ -598,6 +600,15 @@ func (t *StopTrackingHeapObjects) SetReportProgress(v bool) *StopTrackingHeapObj
 // parameter `treatGlobalObjectsAsRoots` in the StopTrackingHeapObjects CDP command.
 func (t *StopTrackingHeapObjects) SetTreatGlobalObjectsAsRoots(v bool) *StopTrackingHeapObjects {
 	t.TreatGlobalObjectsAsRoots = v
+	return t
+}
+
+// SetCaptureNumericValue adds or modifies the value of the optional
+// parameter `captureNumericValue` in the StopTrackingHeapObjects CDP command.
+//
+// If true, numerical values are included in the snapshot
+func (t *StopTrackingHeapObjects) SetCaptureNumericValue(v bool) *StopTrackingHeapObjects {
+	t.CaptureNumericValue = v
 	return t
 }
 
@@ -643,8 +654,10 @@ func (t *StopTrackingHeapObjects) ParseResponse(m *devtools.Message) error {
 type TakeHeapSnapshot struct {
 	// If true 'reportHeapSnapshotProgress' events will be generated while snapshot is being taken.
 	ReportProgress bool `json:"reportProgress,omitempty"`
-	// If true, a raw snapshot without artifical roots will be generated
+	// If true, a raw snapshot without artificial roots will be generated
 	TreatGlobalObjectsAsRoots bool `json:"treatGlobalObjectsAsRoots,omitempty"`
+	// If true, numerical values are included in the snapshot
+	CaptureNumericValue bool `json:"captureNumericValue,omitempty"`
 }
 
 // NewTakeHeapSnapshot constructs a new TakeHeapSnapshot struct instance, with
@@ -668,9 +681,18 @@ func (t *TakeHeapSnapshot) SetReportProgress(v bool) *TakeHeapSnapshot {
 // SetTreatGlobalObjectsAsRoots adds or modifies the value of the optional
 // parameter `treatGlobalObjectsAsRoots` in the TakeHeapSnapshot CDP command.
 //
-// If true, a raw snapshot without artifical roots will be generated
+// If true, a raw snapshot without artificial roots will be generated
 func (t *TakeHeapSnapshot) SetTreatGlobalObjectsAsRoots(v bool) *TakeHeapSnapshot {
 	t.TreatGlobalObjectsAsRoots = v
+	return t
+}
+
+// SetCaptureNumericValue adds or modifies the value of the optional
+// parameter `captureNumericValue` in the TakeHeapSnapshot CDP command.
+//
+// If true, numerical values are included in the snapshot
+func (t *TakeHeapSnapshot) SetCaptureNumericValue(v bool) *TakeHeapSnapshot {
+	t.CaptureNumericValue = v
 	return t
 }
 
