@@ -37,13 +37,17 @@ type StateChanged struct {
 	//
 	// This CDP parameter is deprecated.
 	SchemeIsCryptographic bool `json:"schemeIsCryptographic"`
-	// List of explanations for the security state. If the overall security state is `insecure` or
-	// `warning`, at least one corresponding explanation should be included.
+	// Previously a list of explanations for the security state. Now always
+	// empty.
+	//
+	// This CDP parameter is deprecated.
 	Explanations []StateExplanation `json:"explanations"`
 	// Information about insecure content on the page.
 	//
 	// This CDP parameter is deprecated.
 	InsecureContentStatus InsecureContentStatus `json:"insecureContentStatus"`
-	// Overrides user-visible description of the state.
+	// Overrides user-visible description of the state. Always omitted.
+	//
+	// This CDP parameter is deprecated.
 	Summary string `json:"summary,omitempty"`
 }
