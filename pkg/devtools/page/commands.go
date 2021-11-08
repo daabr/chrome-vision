@@ -3211,6 +3211,67 @@ func (t *ClearCompilationCache) ParseResponse(m *devtools.Message) error {
 	return nil
 }
 
+// SetSPCTransactionMode contains the parameters, and acts as
+// a Go receiver, for the CDP command `setSPCTransactionMode`.
+//
+// Sets the Secure Payment Confirmation transaction mode.
+// https://w3c.github.io/secure-payment-confirmation/#sctn-automation-set-spc-transaction-mode
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setSPCTransactionMode
+//
+// This CDP method is experimental.
+type SetSPCTransactionMode struct {
+	Mode string `json:"mode"`
+}
+
+// NewSetSPCTransactionMode constructs a new SetSPCTransactionMode struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-setSPCTransactionMode
+//
+// This CDP method is experimental.
+func NewSetSPCTransactionMode(mode string) *SetSPCTransactionMode {
+	return &SetSPCTransactionMode{
+		Mode: mode,
+	}
+}
+
+// Do sends the SetSPCTransactionMode CDP command to a browser,
+// and returns the browser's response.
+func (t *SetSPCTransactionMode) Do(ctx context.Context) error {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	m, err := devtools.SendAndWait(ctx, "Page.setSPCTransactionMode", b)
+	if err != nil {
+		return err
+	}
+	return t.ParseResponse(m)
+}
+
+// Start sends the SetSPCTransactionMode CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *SetSPCTransactionMode) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Page.setSPCTransactionMode", b)
+}
+
+// ParseResponse parses the browser's response
+// to the SetSPCTransactionMode CDP command.
+func (t *SetSPCTransactionMode) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
+	}
+	return nil
+}
+
 // GenerateTestReport contains the parameters, and acts as
 // a Go receiver, for the CDP command `generateTestReport`.
 //

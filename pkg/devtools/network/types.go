@@ -311,7 +311,8 @@ type SignedCertificateTimestamp struct {
 	LogDescription string `json:"logDescription"`
 	// Log ID.
 	LogID string `json:"logId"`
-	// Issuance date.
+	// Issuance date. Unlike TimeSinceEpoch, this contains the number of
+	// milliseconds since January 1, 1970, UTC, not the number of seconds.
 	Timestamp float64 `json:"timestamp"`
 	// Hash algorithm.
 	HashAlgorithm string `json:"hashAlgorithm"`
