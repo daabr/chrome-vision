@@ -1720,6 +1720,12 @@ type SetCookie struct {
 	//
 	// This CDP parameter is experimental.
 	SourcePort int64 `json:"sourcePort,omitempty"`
+	// Cookie partition key. The site of the top-level URL the browser was visiting at the start
+	// of the request to the endpoint that set the cookie.
+	// If not set, the cookie will be set as not partitioned.
+	//
+	// This CDP parameter is experimental.
+	PartitionKey string `json:"partitionKey,omitempty"`
 }
 
 // NewSetCookie constructs a new SetCookie struct instance, with
@@ -1841,6 +1847,19 @@ func (t *SetCookie) SetSourceScheme(v CookieSourceScheme) *SetCookie {
 // This CDP parameter is experimental.
 func (t *SetCookie) SetSourcePort(v int64) *SetCookie {
 	t.SourcePort = v
+	return t
+}
+
+// SetPartitionKey adds or modifies the value of the optional
+// parameter `partitionKey` in the SetCookie CDP command.
+//
+// Cookie partition key. The site of the top-level URL the browser was visiting at the start
+// of the request to the endpoint that set the cookie.
+// If not set, the cookie will be set as not partitioned.
+//
+// This CDP parameter is experimental.
+func (t *SetCookie) SetPartitionKey(v string) *SetCookie {
+	t.PartitionKey = v
 	return t
 }
 

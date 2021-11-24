@@ -220,8 +220,12 @@ type AXNode struct {
 	Value *AXValue `json:"value,omitempty"`
 	// All other properties
 	Properties []AXProperty `json:"properties,omitempty"`
+	// ID for this node's parent.
+	ParentID string `json:"parentId,omitempty"`
 	// IDs for each of this node's child nodes.
 	ChildIds []string `json:"childIds,omitempty"`
 	// The backend ID for the associated DOM node, if any.
 	BackendDOMNodeID int64 `json:"backendDOMNodeId,omitempty"`
+	// The frame ID for the frame associated with this nodes document.
+	FrameID string `json:"frameId,omitempty"`
 }

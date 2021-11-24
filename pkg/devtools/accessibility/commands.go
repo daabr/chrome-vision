@@ -319,6 +319,188 @@ func (t *GetFullAXTree) ParseResponse(m *devtools.Message) (*GetFullAXTreeResult
 	return result, nil
 }
 
+// GetRootAXNode contains the parameters, and acts as
+// a Go receiver, for the CDP command `getRootAXNode`.
+//
+// Fetches the root node.
+// Requires `enable()` to have been called previously.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#method-getRootAXNode
+//
+// This CDP method is experimental.
+type GetRootAXNode struct {
+	// The frame in whose document the node resides.
+	// If omitted, the root frame is used.
+	FrameID string `json:"frameId,omitempty"`
+}
+
+// NewGetRootAXNode constructs a new GetRootAXNode struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#method-getRootAXNode
+//
+// This CDP method is experimental.
+func NewGetRootAXNode() *GetRootAXNode {
+	return &GetRootAXNode{}
+}
+
+// SetFrameID adds or modifies the value of the optional
+// parameter `frameId` in the GetRootAXNode CDP command.
+//
+// The frame in whose document the node resides.
+// If omitted, the root frame is used.
+func (t *GetRootAXNode) SetFrameID(v string) *GetRootAXNode {
+	t.FrameID = v
+	return t
+}
+
+// GetRootAXNodeResult contains the browser's response
+// to calling the GetRootAXNode CDP command with Do().
+type GetRootAXNodeResult struct {
+	Node AXNode `json:"node"`
+}
+
+// Do sends the GetRootAXNode CDP command to a browser,
+// and returns the browser's response.
+func (t *GetRootAXNode) Do(ctx context.Context) (*GetRootAXNodeResult, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	m, err := devtools.SendAndWait(ctx, "Accessibility.getRootAXNode", b)
+	if err != nil {
+		return nil, err
+	}
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetRootAXNode CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetRootAXNode) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Accessibility.getRootAXNode", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetRootAXNode CDP command.
+func (t *GetRootAXNode) ParseResponse(m *devtools.Message) (*GetRootAXNodeResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
+	}
+	result := &GetRootAXNodeResult{}
+	if err := json.Unmarshal(m.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetAXNodeAndAncestors contains the parameters, and acts as
+// a Go receiver, for the CDP command `getAXNodeAndAncestors`.
+//
+// Fetches a node and all ancestors up to and including the root.
+// Requires `enable()` to have been called previously.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#method-getAXNodeAndAncestors
+//
+// This CDP method is experimental.
+type GetAXNodeAndAncestors struct {
+	// Identifier of the node to get.
+	NodeID int64 `json:"nodeId,omitempty"`
+	// Identifier of the backend node to get.
+	BackendNodeID int64 `json:"backendNodeId,omitempty"`
+	// JavaScript object id of the node wrapper to get.
+	ObjectID *runtime.RemoteObjectID `json:"objectId,omitempty"`
+}
+
+// NewGetAXNodeAndAncestors constructs a new GetAXNodeAndAncestors struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#method-getAXNodeAndAncestors
+//
+// This CDP method is experimental.
+func NewGetAXNodeAndAncestors() *GetAXNodeAndAncestors {
+	return &GetAXNodeAndAncestors{}
+}
+
+// SetNodeID adds or modifies the value of the optional
+// parameter `nodeId` in the GetAXNodeAndAncestors CDP command.
+//
+// Identifier of the node to get.
+func (t *GetAXNodeAndAncestors) SetNodeID(v int64) *GetAXNodeAndAncestors {
+	t.NodeID = v
+	return t
+}
+
+// SetBackendNodeID adds or modifies the value of the optional
+// parameter `backendNodeId` in the GetAXNodeAndAncestors CDP command.
+//
+// Identifier of the backend node to get.
+func (t *GetAXNodeAndAncestors) SetBackendNodeID(v int64) *GetAXNodeAndAncestors {
+	t.BackendNodeID = v
+	return t
+}
+
+// SetObjectID adds or modifies the value of the optional
+// parameter `objectId` in the GetAXNodeAndAncestors CDP command.
+//
+// JavaScript object id of the node wrapper to get.
+func (t *GetAXNodeAndAncestors) SetObjectID(v runtime.RemoteObjectID) *GetAXNodeAndAncestors {
+	t.ObjectID = &v
+	return t
+}
+
+// GetAXNodeAndAncestorsResult contains the browser's response
+// to calling the GetAXNodeAndAncestors CDP command with Do().
+type GetAXNodeAndAncestorsResult struct {
+	Nodes []AXNode `json:"nodes"`
+}
+
+// Do sends the GetAXNodeAndAncestors CDP command to a browser,
+// and returns the browser's response.
+func (t *GetAXNodeAndAncestors) Do(ctx context.Context) (*GetAXNodeAndAncestorsResult, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	m, err := devtools.SendAndWait(ctx, "Accessibility.getAXNodeAndAncestors", b)
+	if err != nil {
+		return nil, err
+	}
+	return t.ParseResponse(m)
+}
+
+// Start sends the GetAXNodeAndAncestors CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *GetAXNodeAndAncestors) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Accessibility.getAXNodeAndAncestors", b)
+}
+
+// ParseResponse parses the browser's response
+// to the GetAXNodeAndAncestors CDP command.
+func (t *GetAXNodeAndAncestors) ParseResponse(m *devtools.Message) (*GetAXNodeAndAncestorsResult, error) {
+	if m.Error != nil {
+		return nil, errors.New(m.Error.Error())
+	}
+	result := &GetAXNodeAndAncestorsResult{}
+	if err := json.Unmarshal(m.Result, result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // GetChildAXNodes contains the parameters, and acts as
 // a Go receiver, for the CDP command `getChildAXNodes`.
 //

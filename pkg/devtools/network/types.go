@@ -673,6 +673,15 @@ type Cookie struct {
 	//
 	// This CDP property is experimental.
 	SourcePort int64 `json:"sourcePort"`
+	// Cookie partition key. The site of the top-level URL the browser was visiting at the start
+	// of the request to the endpoint that set the cookie.
+	//
+	// This CDP property is experimental.
+	PartitionKey string `json:"partitionKey,omitempty"`
+	// True if cookie partition key is opaque.
+	//
+	// This CDP property is experimental.
+	PartitionKeyOpaque bool `json:"partitionKeyOpaque,omitempty"`
 }
 
 // SetCookieBlockedReason data type. Types of reasons why a cookie may not be stored from a response.
@@ -809,6 +818,12 @@ type CookieParam struct {
 	//
 	// This CDP property is experimental.
 	SourcePort int64 `json:"sourcePort,omitempty"`
+	// Cookie partition key. The site of the top-level URL the browser was visiting at the start
+	// of the request to the endpoint that set the cookie.
+	// If not set, the cookie will be set as not partitioned.
+	//
+	// This CDP property is experimental.
+	PartitionKey string `json:"partitionKey,omitempty"`
 }
 
 // AuthChallenge data type. Authorization challenge for HTTP status code 401 or 407.
@@ -1181,6 +1196,18 @@ type ReportingAPIReport struct {
 	CompletedAttempts int64           `json:"completedAttempts"`
 	Body              json.RawMessage `json:"body"`
 	Status            ReportStatus    `json:"status"`
+}
+
+// ReportingAPIEndpoint data type.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Network/#type-ReportingApiEndpoint
+//
+// This CDP type is experimental.
+type ReportingAPIEndpoint struct {
+	// The URL of the endpoint to which reports may be delivered.
+	URL string `json:"url"`
+	// Name of the endpoint group.
+	GroupName string `json:"groupName"`
 }
 
 // LoadNetworkResourcePageResult data type. An object providing the result of a network resource load.

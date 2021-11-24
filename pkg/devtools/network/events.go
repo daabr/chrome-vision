@@ -470,3 +470,14 @@ type ReportingAPIReportAdded struct {
 type ReportingAPIReportUpdated struct {
 	Report ReportingAPIReport `json:"report"`
 }
+
+// ReportingAPIEndpointsChangedForOrigin asynchronous event.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Network/#event-reportingApiEndpointsChangedForOrigin
+//
+// This CDP event is experimental.
+type ReportingAPIEndpointsChangedForOrigin struct {
+	// Origin of the document(s) which configured the endpoints.
+	Origin    string                 `json:"origin"`
+	Endpoints []ReportingAPIEndpoint `json:"endpoints"`
+}

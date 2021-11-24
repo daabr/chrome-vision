@@ -368,6 +368,9 @@ type CreateBrowserContext struct {
 	ProxyServer string `json:"proxyServer,omitempty"`
 	// Proxy bypass list, similar to the one passed to --proxy-bypass-list
 	ProxyBypassList string `json:"proxyBypassList,omitempty"`
+	// An optional list of origins to grant unlimited cross-origin access to.
+	// Parts of the URL other than those constituting origin are ignored.
+	OriginsWithUniversalNetworkAccess []string `json:"originsWithUniversalNetworkAccess,omitempty"`
 }
 
 // NewCreateBrowserContext constructs a new CreateBrowserContext struct instance, with
@@ -405,6 +408,16 @@ func (t *CreateBrowserContext) SetProxyServer(v string) *CreateBrowserContext {
 // Proxy bypass list, similar to the one passed to --proxy-bypass-list
 func (t *CreateBrowserContext) SetProxyBypassList(v string) *CreateBrowserContext {
 	t.ProxyBypassList = v
+	return t
+}
+
+// SetOriginsWithUniversalNetworkAccess adds or modifies the value of the optional
+// parameter `originsWithUniversalNetworkAccess` in the CreateBrowserContext CDP command.
+//
+// An optional list of origins to grant unlimited cross-origin access to.
+// Parts of the URL other than those constituting origin are ignored.
+func (t *CreateBrowserContext) SetOriginsWithUniversalNetworkAccess(v []string) *CreateBrowserContext {
+	t.OriginsWithUniversalNetworkAccess = v
 	return t
 }
 
