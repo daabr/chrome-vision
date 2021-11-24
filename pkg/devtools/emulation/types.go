@@ -73,12 +73,14 @@ type UserAgentBrandVersion struct {
 // This CDP type is experimental.
 type UserAgentMetadata struct {
 	Brands          []UserAgentBrandVersion `json:"brands,omitempty"`
-	FullVersion     string                  `json:"fullVersion,omitempty"`
-	Platform        string                  `json:"platform"`
-	PlatformVersion string                  `json:"platformVersion"`
-	Architecture    string                  `json:"architecture"`
-	Model           string                  `json:"model"`
-	Mobile          bool                    `json:"mobile"`
+	FullVersionList []UserAgentBrandVersion `json:"fullVersionList,omitempty"`
+	// This CDP property is deprecated.
+	FullVersion     string `json:"fullVersion,omitempty"`
+	Platform        string `json:"platform"`
+	PlatformVersion string `json:"platformVersion"`
+	Architecture    string `json:"architecture"`
+	Model           string `json:"model"`
+	Mobile          bool   `json:"mobile"`
 }
 
 // DisabledImageType data type. Enum of image types that can be disabled.

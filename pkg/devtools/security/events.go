@@ -27,9 +27,11 @@ type VisibleSecurityStateChanged struct {
 	VisibleSecurityState VisibleSecurityState `json:"visibleSecurityState"`
 }
 
-// StateChanged asynchronous event. The security state of the page changed.
+// StateChanged asynchronous event. The security state of the page changed. No longer being sent.
 //
 // https://chromedevtools.github.io/devtools-protocol/tot/Security/#event-securityStateChanged
+//
+// This CDP event is deprecated.
 type StateChanged struct {
 	// Security state.
 	SecurityState State `json:"securityState"`
