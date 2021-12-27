@@ -872,6 +872,7 @@ const (
 	BackForwardCacheNotRestoredReasonContentWebUSB                                            BackForwardCacheNotRestoredReason = "ContentWebUSB"
 	BackForwardCacheNotRestoredReasonContentMediaSession                                      BackForwardCacheNotRestoredReason = "ContentMediaSession"
 	BackForwardCacheNotRestoredReasonContentMediaSessionService                               BackForwardCacheNotRestoredReason = "ContentMediaSessionService"
+	BackForwardCacheNotRestoredReasonContentScreenReader                                      BackForwardCacheNotRestoredReason = "ContentScreenReader"
 	BackForwardCacheNotRestoredReasonEmbedderPopupBlockerTabHelper                            BackForwardCacheNotRestoredReason = "EmbedderPopupBlockerTabHelper"
 	BackForwardCacheNotRestoredReasonEmbedderSafeBrowsingTriggeredPopupBlocker                BackForwardCacheNotRestoredReason = "EmbedderSafeBrowsingTriggeredPopupBlocker"
 	BackForwardCacheNotRestoredReasonEmbedderSafeBrowsingThreatDetails                        BackForwardCacheNotRestoredReason = "EmbedderSafeBrowsingThreatDetails"
@@ -923,4 +924,18 @@ type BackForwardCacheNotRestoredExplanation struct {
 	Type BackForwardCacheNotRestoredReasonType `json:"type"`
 	// Not restored reason
 	Reason BackForwardCacheNotRestoredReason `json:"reason"`
+}
+
+// BackForwardCacheNotRestoredExplanationTree data type.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Page/#type-BackForwardCacheNotRestoredExplanationTree
+//
+// This CDP type is experimental.
+type BackForwardCacheNotRestoredExplanationTree struct {
+	// URL of each frame
+	URL string `json:"url"`
+	// Not restored reasons of each frame
+	Explanations []BackForwardCacheNotRestoredExplanation `json:"explanations"`
+	// Array of children frame
+	Children []BackForwardCacheNotRestoredExplanationTree `json:"children"`
 }

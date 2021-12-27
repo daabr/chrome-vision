@@ -412,6 +412,11 @@ const (
 	AttributionReportingIssueTypeAttributionUntrustworthyOrigin            AttributionReportingIssueType = "AttributionUntrustworthyOrigin"
 	AttributionReportingIssueTypeAttributionTriggerDataTooLarge            AttributionReportingIssueType = "AttributionTriggerDataTooLarge"
 	AttributionReportingIssueTypeAttributionEventSourceTriggerDataTooLarge AttributionReportingIssueType = "AttributionEventSourceTriggerDataTooLarge"
+	AttributionReportingIssueTypeInvalidAttributionSourceExpiry            AttributionReportingIssueType = "InvalidAttributionSourceExpiry"
+	AttributionReportingIssueTypeInvalidAttributionSourcePriority          AttributionReportingIssueType = "InvalidAttributionSourcePriority"
+	AttributionReportingIssueTypeInvalidEventSourceTriggerData             AttributionReportingIssueType = "InvalidEventSourceTriggerData"
+	AttributionReportingIssueTypeInvalidTriggerPriority                    AttributionReportingIssueType = "InvalidTriggerPriority"
+	AttributionReportingIssueTypeInvalidTriggerDedupKey                    AttributionReportingIssueType = "InvalidTriggerDedupKey"
 )
 
 // String returns the AttributionReportingIssueType value as a built-in string.
@@ -507,6 +512,31 @@ type DeprecationIssueDetails struct {
 	Message string `json:"message,omitempty"`
 }
 
+// ClientHintIssueReason data type.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-ClientHintIssueReason
+type ClientHintIssueReason string
+
+// ClientHintIssueReason valid values.
+const (
+	ClientHintIssueReasonMetaTagAllowListInvalidOrigin ClientHintIssueReason = "MetaTagAllowListInvalidOrigin"
+	ClientHintIssueReasonMetaTagModifiedHTML           ClientHintIssueReason = "MetaTagModifiedHTML"
+)
+
+// String returns the ClientHintIssueReason value as a built-in string.
+func (t ClientHintIssueReason) String() string {
+	return string(t)
+}
+
+// ClientHintIssueDetails data type. This issue tracks client hints related issues. It's used to deprecate old
+// features, encourage the use of new ones, and provide general guidance.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Audits/#type-ClientHintIssueDetails
+type ClientHintIssueDetails struct {
+	SourceCodeLocation    SourceCodeLocation    `json:"sourceCodeLocation"`
+	ClientHintIssueReason ClientHintIssueReason `json:"clientHintIssueReason"`
+}
+
 // InspectorIssueCode data type. A unique identifier for the type of issue. Each type may use one of the
 // optional fields in InspectorIssueDetails to convey more specific
 // information about the kind of issue.
@@ -531,6 +561,7 @@ const (
 	InspectorIssueCodeWasmCrossOriginModuleSharingIssue InspectorIssueCode = "WasmCrossOriginModuleSharingIssue"
 	InspectorIssueCodeGenericIssue                      InspectorIssueCode = "GenericIssue"
 	InspectorIssueCodeDeprecationIssue                  InspectorIssueCode = "DeprecationIssue"
+	InspectorIssueCodeClientHintIssue                   InspectorIssueCode = "ClientHintIssue"
 )
 
 // String returns the InspectorIssueCode value as a built-in string.
@@ -559,6 +590,7 @@ type InspectorIssueDetails struct {
 	WasmCrossOriginModuleSharingIssue *WasmCrossOriginModuleSharingIssueDetails `json:"wasmCrossOriginModuleSharingIssue,omitempty"`
 	GenericIssueDetails               *GenericIssueDetails                      `json:"genericIssueDetails,omitempty"`
 	DeprecationIssueDetails           *DeprecationIssueDetails                  `json:"deprecationIssueDetails,omitempty"`
+	ClientHintIssueDetails            *ClientHintIssueDetails                   `json:"clientHintIssueDetails,omitempty"`
 }
 
 // IssueID data type. A unique id for a DevTools inspector issue. Allows other entities (e.g.
