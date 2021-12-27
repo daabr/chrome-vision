@@ -174,6 +174,62 @@ func (t *SetSinkToUse) ParseResponse(m *devtools.Message) error {
 	return nil
 }
 
+// StartDesktopMirroring contains the parameters, and acts as
+// a Go receiver, for the CDP command `startDesktopMirroring`.
+//
+// Starts mirroring the desktop to the sink.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Cast/#method-startDesktopMirroring
+type StartDesktopMirroring struct {
+	SinkName string `json:"sinkName"`
+}
+
+// NewStartDesktopMirroring constructs a new StartDesktopMirroring struct instance, with
+// all (but only) the required parameters. Optional parameters
+// may be added using the builder-like methods below.
+//
+// https://chromedevtools.github.io/devtools-protocol/tot/Cast/#method-startDesktopMirroring
+func NewStartDesktopMirroring(sinkName string) *StartDesktopMirroring {
+	return &StartDesktopMirroring{
+		SinkName: sinkName,
+	}
+}
+
+// Do sends the StartDesktopMirroring CDP command to a browser,
+// and returns the browser's response.
+func (t *StartDesktopMirroring) Do(ctx context.Context) error {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+	m, err := devtools.SendAndWait(ctx, "Cast.startDesktopMirroring", b)
+	if err != nil {
+		return err
+	}
+	return t.ParseResponse(m)
+}
+
+// Start sends the StartDesktopMirroring CDP command to a browser,
+// and returns a channel to receive the browser's response.
+// Callers should close the returned channel on their own,
+// although closing unused channels isn't strictly required.
+func (t *StartDesktopMirroring) Start(ctx context.Context) (chan *devtools.Message, error) {
+	b, err := json.Marshal(t)
+	if err != nil {
+		return nil, err
+	}
+	return devtools.Send(ctx, "Cast.startDesktopMirroring", b)
+}
+
+// ParseResponse parses the browser's response
+// to the StartDesktopMirroring CDP command.
+func (t *StartDesktopMirroring) ParseResponse(m *devtools.Message) error {
+	if m.Error != nil {
+		return errors.New(m.Error.Error())
+	}
+	return nil
+}
+
 // StartTabMirroring contains the parameters, and acts as
 // a Go receiver, for the CDP command `startTabMirroring`.
 //

@@ -241,6 +241,8 @@ type BackForwardCacheNotUsed struct {
 	FrameID string `json:"frameId"`
 	// Array of reasons why the page could not be cached. This must not be empty.
 	NotRestoredExplanations []BackForwardCacheNotRestoredExplanation `json:"notRestoredExplanations"`
+	// Tree structure of reasons why the page could not be cached for each frame.
+	NotRestoredExplanationsTree *BackForwardCacheNotRestoredExplanationTree `json:"notRestoredExplanationsTree,omitempty"`
 }
 
 // LoadEventFired asynchronous event.
